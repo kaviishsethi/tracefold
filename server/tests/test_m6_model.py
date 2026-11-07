@@ -90,18 +90,18 @@ def _reviews(env, s):
             if f["latest"]["origin"] == "rule"}
 
 
-def test_unverifiable_dismissal_is_downgraded(make_env, ollama):
+def test_unverifiable_dismissal_does_not_stand(make_env, ollama):
     env = model_env(make_env, ollama("dismiss"))
     s = review_scan(env, {"risky_app.py": fx("risky_app.py")})
     by = _reviews(env, s)
     assert by[("password",)]["risk_review"] == "supported"
-    assert by[("session_token",)]["risk_review"] == "inconclusive"
-    assert by[("session_token",)]["counterevidence"].startswith("Model proposed dismissal without counterevidence")
+    assert by[("session_token",)]["risk_review"] == "supported"  # an unrefuted rule finding stands
+    assert by[("session_token",)]["counterevidence"].startswith("The skeptical review found no counterevidence")
     assert s["budget"]["model_dismissals_downgraded"] == 1
     # citing a line that does not show masking of the flagged value is not enough either
     env2 = model_env(make_env, ollama("dismiss_wrong_line"))
     s2 = review_scan(env2, {"risky_app.py": fx("risky_app.py")})
-    assert _reviews(env2, s2)[("session_token",)]["risk_review"] == "inconclusive"
+    assert _reviews(env2, s2)[("session_token",)]["risk_review"] == "supported"
 
 
 def test_checkable_dismissal_is_retained_not_deleted(make_env, ollama):
@@ -266,7 +266,7 @@ def test_real_ollama_review(make_env):
     # the two real issues must never end up dismissed
     rule = [f for f in fs if f["latest"]["origin"] == "rule"]
     assert len(rule) == 2 and all(f["path"] == "risky_app.py" for f in rule)
-    assert all(f["latest"]["risk_review"] != "dismissed" for f in rule)
+    assert all(f["latest"]["risk_review"] == "supported" for f in rule)
     # the corrected logging call in fixed_app.py must not be reported
     fixed_lines = fx("fixed_app.py").decode().splitlines()
     for f in fs:

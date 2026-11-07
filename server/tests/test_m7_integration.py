@@ -40,7 +40,7 @@ def check_flow(out: dict) -> None:
     assert out["recheck"] == {"outcome": "not_detected_in_checked_version", "status": "not_detected_in_checked_version"}
     assert out["public_still_open"] is True
     assert out["review"] == "acknowledged"
-    assert out["cancel"] in ("cancelled", "completed", "capture_capacity", "input_expired")
+    assert out["cancel"] in ("cancelled", "completed")
 
 
 def test_openapi_covers_contract_and_is_current(env):

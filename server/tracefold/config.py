@@ -13,7 +13,7 @@ class Limits:
     max_file_bytes: int = 5 * 1024 * 1024
     max_request_bytes: int = 20 * 1024 * 1024
     max_extracted_text_per_capture: int = 10 * 1024 * 1024
-    max_captures: int = 2
+    max_captures: int = 8  # plan pilot value was 2; raised so a full demo session never evicts live inputs
     max_captured_raw_bytes: int = 40 * 1024 * 1024
     capture_ttl_seconds: int = 15 * 60
     scan_deadline_seconds: int = 5 * 60

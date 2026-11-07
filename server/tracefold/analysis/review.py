@@ -274,7 +274,7 @@ class ModelReviewer:
         return False
 
     def _skeptic(self, ctx, client, budget, doc: "ParsedDoc", claim: str, evid: str, first_ev: int, last_ev: int,
-                 window: str, allowed: set[int], names: list[str]) -> tuple[str, str] | None:
+                 window: str, allowed: set[int], names: list[str], rule_backed: bool = False) -> tuple[str, str] | None:
         def v_skeptic(o):
             if o["evidence_id"] != evid:
                 raise InvalidOutput("wrong_evidence_id")
@@ -298,10 +298,15 @@ class ModelReviewer:
         note = (k["counterevidence"].strip() + (" — " + k["reason"].strip() if k["reason"].strip() else ""))[:700]
         if verdict == "dismissed" and not self._dismissal_holds(k["counterevidence_kind"], k["cited_lines"], doc, names,
                                                                  set(range(first_ev, last_ev + 1))):
-            verdict = RiskReview.inconclusive.value
             ctx.spend("model_dismissals_downgraded")
-            note = ("Model proposed dismissal without counterevidence the source confirms; kept as inconclusive. "
-                    "Model note: " + note)[:700]
+            if rule_backed:
+                # The skeptic tried and failed to refute deterministic evidence, so the rule finding stands.
+                verdict = RiskReview.supported.value
+                note = ("The skeptical review found no counterevidence in the source, such as masking before the "
+                        "sensitive value reaches the sink, so the rule finding stands.")
+            else:
+                verdict = RiskReview.inconclusive.value
+                note = "No counterevidence was confirmed in the source; this model-only concern still needs review."
         return verdict, note
 
     def _review_lead(self, ctx, client, budget, doc: "ParsedDoc", p: "Proposed", model_id: str) -> bool | None:
@@ -334,7 +339,8 @@ class ModelReviewer:
                 p.risk_review = RiskReview.unavailable.value
                 return None
             names = p.meta.get("names") or [w for w in re.findall(r"[A-Za-z_]\w+", doc.text[loc["start"]:loc["end"]])]
-            k = self._skeptic(ctx, client, budget, doc, p.claim or "", evid, first_ev, last_ev, window, allowed, names)
+            k = self._skeptic(ctx, client, budget, doc, p.claim or "", evid, first_ev, last_ev, window, allowed, names,
+                              rule_backed=True)
         except InvalidOutput:
             p.risk_review = RiskReview.unavailable.value
             p.meta["model_output_rejected"] = True

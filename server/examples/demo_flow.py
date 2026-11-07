@@ -93,8 +93,8 @@ def run(c: httpx.Client, ws: str, app_token: str, mcp_token: str, root: Path, ma
     out["review"] = rv["human_review"]
     acc3 = c.post(f"{base}/scans", headers=app, json={"input_id": up["input_id"], "checks": ["local_risk"]})
     if acc3.status_code == 202:
-        cs = c.post(f"{base}/scans/{acc3.json()['scan_id']}/cancel", headers=app).raise_for_status().json()
-        out["cancel"] = cs["state"]
+        c.post(f"{base}/scans/{acc3.json()['scan_id']}/cancel", headers=app).raise_for_status()
+        out["cancel"] = wait(c, acc3.json()["status_url"], app)["state"]  # cancellation is cooperative
     else:
         out["cancel"] = acc3.json()["error"]["code"]
     return out

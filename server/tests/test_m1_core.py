@@ -164,6 +164,7 @@ def test_single_runner_enforced(tmp_path, make_env):
 
 
 def test_capture_registry_capacity(env):
+    env.engine.settings.limits.max_captures = 2
     a = env.upload({"a.txt": b"one"})
     b = env.upload({"b.txt": b"two"})
     # both captures are unconsumed: a third is rejected rather than spilling to disk
