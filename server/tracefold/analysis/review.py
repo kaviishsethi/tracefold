@@ -8,6 +8,7 @@ model is unavailable or over budget, deterministic findings are published unchan
 from __future__ import annotations
 
 import json
+import re
 import time
 from typing import TYPE_CHECKING, Any
 
@@ -20,7 +21,7 @@ if TYPE_CHECKING:
     from ..jobs.pipeline import ScanContext
     from ..parsing.document import ParsedDoc
 
-PROMPT_VERSION = "context_v1+skeptic_v1+discovery_v1"
+PROMPT_VERSION = "context_v1+skeptic_v2+discovery_v1"
 WINDOW = 12
 DISCOVERY_CHUNK_LINES = 120
 CATEGORIES = ["secret_exposure", "sensitive_logging", "sensitive_data_in_document", "unsafe_sharing_configuration",
@@ -47,16 +48,22 @@ CONTEXT_SCHEMA = {
     "required": ["evidence_id", "conditions", "missing_context", "suggested_fix", "severity", "severity_rationale", "cited_lines"],
 }
 
+# Only the first three kinds can be checked against the source; anything else cannot support a dismissal.
+COUNTER_KINDS = ["none", "masked_before_sink", "placeholder_value", "test_or_example_code", "guarded_or_unreachable", "other"]
+_MASK_CALL = r"\b\w*(?:mask|redact|hash|sanitiz|scrub|obfuscat|sha256|digest|fingerprint)\w*\s*\("
+_TEST_PATH = re.compile(r"(^|/)(tests?|examples?|fixtures?|samples?)/|(^|/)test_[^/]*$|_test\.\w+$|\.(spec|test)\.\w+$", re.I)
+
 SKEPTIC_SCHEMA = {
     "type": "object",
     "properties": {
         "evidence_id": {"type": "string"},
         "verdict": {"type": "string", "enum": ["supported", "dismissed", "inconclusive"]},
+        "counterevidence_kind": {"type": "string", "enum": COUNTER_KINDS},
         "counterevidence": {"type": "string", "maxLength": 400},
         "reason": {"type": "string", "maxLength": 300},
         "cited_lines": {"type": "array", "items": {"type": "integer"}, "maxItems": 10},
     },
-    "required": ["evidence_id", "verdict", "counterevidence", "reason", "cited_lines"],
+    "required": ["evidence_id", "verdict", "counterevidence_kind", "counterevidence", "reason", "cited_lines"],
 }
 
 DISCOVERY_SCHEMA = {
@@ -247,6 +254,56 @@ class ModelReviewer:
                 prompt = user + f"\n\nYour previous answer was rejected ({str(ex)[:80]}). Reply again with valid JSON only."
         return None
 
+    @staticmethod
+    def _dismissal_holds(kind: str, cited: list[int], doc: "ParsedDoc", names: list[str], evidence_lines: set[int]) -> bool:
+        """A model may only dismiss with counterevidence the server can check in the immutable source."""
+        from ..checks.rules import _PLACEHOLDER
+        lines = {n: doc.text[slice(*doc.line_span(n))] for n in cited if 1 <= n <= doc.line_count}
+        if kind == "test_or_example_code":
+            return bool(_TEST_PATH.search(doc.file.path))
+        if kind == "placeholder_value":
+            return any(n in evidence_lines and _PLACEHOLDER.search(t) for n, t in lines.items())
+        if kind == "masked_before_sink":
+            for n, t in lines.items():
+                for name in names:
+                    wrapped = re.search(_MASK_CALL + r"[^)]*\b" + re.escape(name) + r"\b", t, re.I)
+                    reassigned = re.match(r"\s*" + re.escape(name) + r"\s*=", t)
+                    if wrapped and (n in evidence_lines or reassigned):
+                        return True
+            return False
+        return False
+
+    def _skeptic(self, ctx, client, budget, doc: "ParsedDoc", claim: str, evid: str, first_ev: int, last_ev: int,
+                 window: str, allowed: set[int], names: list[str]) -> tuple[str, str] | None:
+        def v_skeptic(o):
+            if o["evidence_id"] != evid:
+                raise InvalidOutput("wrong_evidence_id")
+            if not set(o["cited_lines"]) <= allowed:
+                raise InvalidOutput("cited_lines_outside_window")
+
+        user = (f"TASK: act as a skeptical second reviewer with no stake in the first answer. Decide whether the source "
+                f"shown contains specific counterevidence that the claim does not hold. Valid counterevidence kinds: "
+                f"masked_before_sink (the value is masked, hashed or redacted before it reaches the sink; cite that line), "
+                f"placeholder_value (the value is an obvious placeholder; cite it), test_or_example_code (the file is a "
+                f"test or example). These are NOT counterevidence: logging being 'informational', helper functions looking "
+                f"simplified, or deployment and log configuration being unknown — use 'inconclusive' for those. Verdict "
+                f"'supported' if the lines shown support the claim and no valid counterevidence is present; 'dismissed' "
+                f"only with a valid counterevidence kind and the line that shows it; otherwise 'inconclusive'.\n"
+                f"Claim under review: {claim}\nEvidence ID: {evid}. Evidence lines: {first_ev}-{last_ev}.\n"
+                f"<source lang=\"{doc.language or doc.kind}\">\n{window}\n</source>")
+        k = self._call(ctx, client, budget, user, SKEPTIC_SCHEMA, v_skeptic)
+        if k is None:
+            return None
+        verdict = k["verdict"]
+        note = (k["counterevidence"].strip() + (" — " + k["reason"].strip() if k["reason"].strip() else ""))[:700]
+        if verdict == "dismissed" and not self._dismissal_holds(k["counterevidence_kind"], k["cited_lines"], doc, names,
+                                                                 set(range(first_ev, last_ev + 1))):
+            verdict = RiskReview.inconclusive.value
+            ctx.spend("model_dismissals_downgraded")
+            note = ("Model proposed dismissal without counterevidence the source confirms; kept as inconclusive. "
+                    "Model note: " + note)[:700]
+        return verdict, note
+
     def _review_lead(self, ctx, client, budget, doc: "ParsedDoc", p: "Proposed", model_id: str) -> bool | None:
         ev = p.evidence[0]
         loc = ev["location"]
@@ -268,12 +325,6 @@ class ModelReviewer:
             if not set(o["cited_lines"]) <= allowed or not any(first_ev - 2 <= n <= last_ev + 2 for n in o["cited_lines"]):
                 raise InvalidOutput("cited_lines_outside_evidence")
 
-        def v_skeptic(o):
-            if o["evidence_id"] != evid:
-                raise InvalidOutput("wrong_evidence_id")
-            if not set(o["cited_lines"]) <= allowed:
-                raise InvalidOutput("cited_lines_outside_window")
-
         user1 = (f"TASK: investigate this lead. Explain under what conditions it is a real data-exposure risk, what "
                  f"context is missing, a concrete fix, and severity.\n{lead}\n<source lang=\"{doc.language or doc.kind}\">\n"
                  f"{window}\n</source>")
@@ -282,13 +333,8 @@ class ModelReviewer:
             if c is None:
                 p.risk_review = RiskReview.unavailable.value
                 return None
-            user2 = (f"TASK: act as a skeptical second reviewer with no stake in the first answer. Look for counterevidence "
-                     f"that the lead is not a real risk: masking or hashing before use, a guard, test-only or example code, "
-                     f"placeholder values, or deployment settings that are unknown. Verdict 'supported' only if the source "
-                     f"shown supports the concern; 'dismissed' if it shows the concern does not hold; otherwise "
-                     f"'inconclusive'.\nClaim under review: {p.claim}\nEvidence ID: {evid}. Evidence lines: {first_ev}-{last_ev}.\n"
-                     f"<source lang=\"{doc.language or doc.kind}\">\n{window}\n</source>")
-            k = self._call(ctx, client, budget, user2, SKEPTIC_SCHEMA, v_skeptic)
+            names = p.meta.get("names") or [w for w in re.findall(r"[A-Za-z_]\w+", doc.text[loc["start"]:loc["end"]])]
+            k = self._skeptic(ctx, client, budget, doc, p.claim or "", evid, first_ev, last_ev, window, allowed, names)
         except InvalidOutput:
             p.risk_review = RiskReview.unavailable.value
             p.meta["model_output_rejected"] = True
@@ -301,8 +347,8 @@ class ModelReviewer:
         p.suggested_fix = c["suggested_fix"].strip() or p.suggested_fix
         p.severity = c["severity"]
         p.severity_rationale = c["severity_rationale"].strip() or p.severity_rationale
-        p.risk_review = k["verdict"]
-        p.counterevidence = (k["counterevidence"].strip() + (" — " + k["reason"].strip() if k["reason"].strip() else ""))[:700] or None
+        p.risk_review, note = k
+        p.counterevidence = note or None
         p.model_id = model_id
         p.prompt_version = PROMPT_VERSION
         p.uncertainty = (p.uncertainty or "") + " Model review is a source reading, not runtime confirmation."
@@ -346,6 +392,20 @@ class ModelReviewer:
                 qe = qs + len(c["quote"].strip())
                 if any(v and v in c["quote"] for v in secrets):
                     continue
+                from ..checks.rules import is_sensitive_ident
+                idents = re.findall(r"[A-Za-z_]\w+", c["quote"])
+                names = [w for w in idents if is_sensitive_ident(w)] or idents
+                review, note = RiskReview.inconclusive.value, None
+                try:
+                    k = self._skeptic(ctx, client, budget, doc, c["claim"].strip(), "ev_" + sha256(c["quote"])[:10],
+                                      c["line"], c["line"], window, allowed, names)
+                except InvalidOutput:
+                    k = None
+                if k is not None:
+                    review, note = k
+                    if review == RiskReview.dismissed.value:
+                        ctx.spend("model_discoveries_dismissed")
+                        continue  # model-only concern refuted by checkable counterevidence: not published
                 ev = {"kind": "local_span", "location": doc.location(qs, qe), "file_sha256": doc.file.sha256,
                       "file_kind": doc.kind, "rule_id": None, "mask_spans": []}
                 ctx.candidates.append(Proposed(
@@ -356,7 +416,7 @@ class ModelReviewer:
                     conditions=None, missing_context="Suggested by the local model only; no deterministic rule supports it.",
                     uncertainty="Model-only suggestion. The cited line exists, but that does not prove the interpretation.",
                     suggested_fix=None, verification_step="Review the cited line manually before acting.",
-                    severity=None, severity_rationale=None, risk_review=RiskReview.inconclusive.value,
+                    severity=None, severity_rationale=None, risk_review=review, counterevidence=note,
                     model_id=model_id, prompt_version=PROMPT_VERSION, meta={"category": c["category"]},
                 ))
                 existing_lines.add((doc.file.file_id, c["line"]))

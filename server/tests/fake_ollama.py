@@ -78,19 +78,34 @@ class FakeOllama:
                                "severity": "high", "severity_rationale": "Credentials in logs are widely readable.",
                                "cited_lines": [first]})
         if user.startswith("TASK: act as a skeptical"):
-            verdict = "supported"
-            if sc == "dismiss" and "session_token" in user.split("Claim under review:")[1].split("\n")[0]:
-                verdict = "dismissed"
-            return json.dumps({"evidence_id": evid, "verdict": verdict,
-                               "counterevidence": "No masking step is visible before the call." if verdict == "supported"
-                               else "The token is a short-lived nonce in this code.",
-                               "reason": "Judged from the lines shown.", "cited_lines": [first]})
+            self.counts["skeptic"] = self.counts.get("skeptic", 0) + 1
+            claim = user.split("Claim under review:")[1].split("\n")[0]
+            rows = {int(m.group(1)): m.group(2) for m in re.finditer(r"^\s*(\d+) \| (.*)$", user, re.M)}
+            verdict, kind, cited, note = "supported", "none", [first], "No masking step is visible before the call."
+            if sc == "dismiss" and "session_token" in claim:
+                verdict, kind, note = "dismissed", "other", "Logging here is informational only."
+            if sc in ("dismiss_masked", "discover_masked") and ("session_token" in claim):
+                mask_line = next((n for n, t in rows.items() if "mask(session_token)" in t), None)
+                if mask_line:
+                    verdict, kind, cited, note = "dismissed", "masked_before_sink", [mask_line], "The token is masked first."
+            if sc == "dismiss_wrong_line" and "session_token" in claim:
+                verdict, kind, cited, note = "dismissed", "masked_before_sink", [1], "Masked somewhere."
+            return json.dumps({"evidence_id": evid, "verdict": verdict, "counterevidence_kind": kind,
+                               "counterevidence": note, "reason": "Judged from the lines shown.", "cited_lines": cited})
         if user.startswith("TASK: list up to 3"):
             if sc == "discover" and "DATABASE_URL" in user:
                 line = next(int(m.group(1)) for m in re.finditer(r"^\s*(\d+) \| (.*)$", user, re.M) if "DATABASE_URL" in m.group(2))
                 return json.dumps({"concerns": [{"line": line, "quote": "postgres://app@db.internal:5432/app",
                                                  "category": "unsafe_sharing_configuration",
                                                  "claim": "An internal database hostname is hardcoded in configuration."}]})
+            if sc == "discover_masked":
+                line = next((int(m.group(1)) for m in re.finditer(r"^\s*(\d+) \| (.*)$", user, re.M)
+                             if "mask(session_token)" in m.group(2)), None)
+                if line:
+                    return json.dumps({"concerns": [{"line": line, "quote": "mask(session_token)",
+                                                     "category": "sensitive_logging",
+                                                     "claim": "Logs the session_token in clear text."}]})
+                return json.dumps({"concerns": []})
             if sc == "discover_fabricated":
                 return json.dumps({"concerns": [{"line": 1, "quote": "this text is not in the file",
                                                  "category": "secret_exposure", "claim": "invented"}]})

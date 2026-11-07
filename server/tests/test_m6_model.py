@@ -64,7 +64,7 @@ def test_supported_review_is_structured_and_grounded(make_env, ollama):
         assert o["conditions"].startswith("If production logs") and o["severity"] == "high"
         assert "masking" in o["counterevidence"]
     # budgets and ledger: loopback model calls are accounted, with no prompt content
-    assert s["budget"]["model_requests"] == 2 * 2 + 1  # (context + skeptic) per lead + one discovery chunk
+    assert s["budget"]["model_requests"] == 2 * 2 + 1  # (context + skeptic) per lead + one discovery chunk (no concerns)
     assert s["budget"]["model_prompt_tokens"] > 0
     led = env.client.get(f"/v1/workspaces/ws_a/scans/{s['scan_id']}/ledger", headers=env.h()).json()["items"]
     assert led and all(e["destination_category"] == "local_model" and e["destination_host"] == "127.0.0.1" for e in led)
@@ -74,11 +74,50 @@ def test_supported_review_is_structured_and_grounded(make_env, ollama):
     assert req["model"] == MODEL and req["options"]["temperature"] == 0 and req["format"]["type"] == "object"
 
 
-def test_skeptic_dismissal_is_retained_not_deleted(make_env, ollama):
+MASKED_REASSIGN = b"""import logging
+
+logger = logging.getLogger(__name__)
+
+
+def refresh(session_token: str) -> None:
+    session_token = mask(session_token)
+    logger.warning("refreshing with token %s", session_token)
+"""
+
+
+def _reviews(env, s):
+    return {tuple(f["latest"]["claim"].split("'")[1:2]): f["latest"] for f in env.findings(s["scan_id"])
+            if f["latest"]["origin"] == "rule"}
+
+
+def test_unverifiable_dismissal_is_downgraded(make_env, ollama):
     env = model_env(make_env, ollama("dismiss"))
     s = review_scan(env, {"risky_app.py": fx("risky_app.py")})
-    by = {tuple(f["latest"]["claim"].split("'")[1:2]): f["latest"]["risk_review"] for f in env.findings(s["scan_id"])}
-    assert by == {("password",): "supported", ("session_token",): "dismissed"}
+    by = _reviews(env, s)
+    assert by[("password",)]["risk_review"] == "supported"
+    assert by[("session_token",)]["risk_review"] == "inconclusive"
+    assert by[("session_token",)]["counterevidence"].startswith("Model proposed dismissal without counterevidence")
+    assert s["budget"]["model_dismissals_downgraded"] == 1
+    # citing a line that does not show masking of the flagged value is not enough either
+    env2 = model_env(make_env, ollama("dismiss_wrong_line"))
+    s2 = review_scan(env2, {"risky_app.py": fx("risky_app.py")})
+    assert _reviews(env2, s2)[("session_token",)]["risk_review"] == "inconclusive"
+
+
+def test_checkable_dismissal_is_retained_not_deleted(make_env, ollama):
+    env = model_env(make_env, ollama("dismiss_masked"))
+    s = review_scan(env, {"refresh.py": MASKED_REASSIGN})
+    fs = env.findings(s["scan_id"])
+    assert len(fs) == 1 and fs[0]["latest"]["risk_review"] == "dismissed" and fs[0]["status"] == "open"
+    assert fs[0]["latest"]["origin"] == "rule"  # dismissal never erases rule provenance or evidence
+
+
+def test_discovered_concerns_get_a_skeptic_pass(make_env, ollama):
+    fake = ollama("discover_masked")
+    env = model_env(make_env, fake)
+    s = review_scan(env, {"fixed_app.py": fx("fixed_app.py")})
+    assert [f for f in env.findings(s["scan_id"]) if f["latest"]["origin"] == "model"] == []
+    assert s["budget"]["model_discoveries_dismissed"] == 1 and fake.counts["skeptic"] == 1
 
 
 def test_fabricated_evidence_is_rejected_and_rule_finding_survives(make_env, ollama):
@@ -172,7 +211,7 @@ def test_model_discovery_requires_real_quoted_lines(make_env, ollama):
     model = [f for f in fs if f["latest"]["origin"] == "model"]
     assert len(model) == 1
     o = model[0]["latest"]
-    assert o["title"] == "Model-suggested concern (requires review)" and o["risk_review"] == "inconclusive"
+    assert o["title"] == "Model-suggested concern (requires review)" and o["risk_review"] == "supported"
     assert o["evidence"][0]["location"]["line_start"] == 1
     env2 = model_env(make_env, ollama("discover_fabricated"))
     s2 = review_scan(env2, {"config_with_secret.py": fx("config_with_secret.py")})
@@ -223,4 +262,14 @@ def test_real_ollama_review(make_env):
     print(json.dumps({"coverage": cov[("stage", "model_review")], "budget": s["budget"],
                       "findings": [(f["path"], f["latest"]["risk_review"], f["latest"]["origin"]) for f in env.findings(s["scan_id"])]}, indent=1))
     assert cov[("stage", "model_review")]["status"] in ("complete", "partial")
-    assert all(f["path"] == "risky_app.py" or f["latest"]["origin"] == "model" for f in env.findings(s["scan_id"]))
+    fs = env.findings(s["scan_id"])
+    # the two real issues must never end up dismissed
+    rule = [f for f in fs if f["latest"]["origin"] == "rule"]
+    assert len(rule) == 2 and all(f["path"] == "risky_app.py" for f in rule)
+    assert all(f["latest"]["risk_review"] != "dismissed" for f in rule)
+    # the corrected logging call in fixed_app.py must not be reported
+    fixed_lines = fx("fixed_app.py").decode().splitlines()
+    for f in fs:
+        if f["path"] == "fixed_app.py":
+            line = fixed_lines[f["latest"]["evidence"][0]["location"]["line_start"] - 1]
+            assert "mask(session_token)" not in line, f["latest"]

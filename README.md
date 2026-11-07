@@ -9,7 +9,7 @@ Tracefold is a new HACK1984 project with two experiences sharing one private sca
 
 The strict-private deployment keeps the scan server and Ollama inside the trusted environment and uses a local-model MCP host. Uploading to a vendor server or returning private findings to a cloud-backed assistant changes that privacy boundary. GitHub is the first planned remote connector; Docs and sites follow later.
 
-**Status: the shared engine (milestones 1–7 of the [shared engine plan](docs/SHARED_ENGINE_PLAN.md)) is implemented in [`server/`](server/README.md) and passes its offline test suite. The upload app and MCP adapter are not built yet; their contract is in [docs/ENGINE_API.md](docs/ENGINE_API.md). Real-Ollama review and Exa/Tavily calls have not been run against live services yet.**
+**Status: the shared engine (milestones 1–7 of the [shared engine plan](docs/SHARED_ENGINE_PLAN.md)) is implemented in [`server/`](server/README.md) and passes its offline test suite. The upload app and MCP adapter are not built yet; their contract is in [docs/ENGINE_API.md](docs/ENGINE_API.md). Model review has been run against a real local `qwen2.5:7b-instruct`; Exa/Tavily calls have not been run against live services yet.**
 
 - [Shared engine implementation plan — build this first](docs/SHARED_ENGINE_PLAN.md)
 - [Engine API handoff for the app and MCP adapter](docs/ENGINE_API.md)
