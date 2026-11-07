@@ -1,0 +1,63 @@
+# Tracefold engine (server)
+
+The shared private scan engine behind the Tracefold upload app and MCP adapter. Both are thin HTTP clients
+of this server; neither parses files, calls the model or keeps its own findings. Design:
+[`docs/SHARED_ENGINE_PLAN.md`](../docs/SHARED_ENGINE_PLAN.md). Client guide: [`docs/ENGINE_API.md`](../docs/ENGINE_API.md).
+
+## Quickstart (local, loopback only)
+
+```bash
+cd server
+uv sync
+export TRACEFOLD_DATA=$PWD/data TRACEFOLD_FIXTURES=$PWD/fixtures
+uv run tracefold init
+uv run tracefold add-workspace ws_demo --name "Demo" --root /path/to/a/local/folder
+APP_TOKEN=$(uv run tracefold add-client upload-app --workspace ws_demo)
+MCP_TOKEN=$(uv run tracefold add-client mcp-adapter --workspace ws_demo --caps submit,read,read_evidence,recheck,cancel)
+uv run tracefold add-manifest ws_demo sources_demo examples/manifest.fixture.json
+uv run tracefold serve --port 8787
+```
+
+Then, in another shell, run the documented flow that exercises every endpoint:
+
+```bash
+uv run python examples/demo_flow.py --workspace ws_demo --app-token "$APP_TOKEN" --mcp-token "$MCP_TOKEN" --workspace-root /path/to/a/local/folder
+```
+
+Tokens are printed once; only their SHA-256 hashes are stored. The server binds 127.0.0.1 and rejects
+unexpected `Host`/`Origin` headers.
+
+## Optional services
+
+| Service | How to enable | Without it |
+|---|---|---|
+| Local model review | Install Ollama, pull a model, set `TRACEFOLD_OLLAMA_MODEL` (default `qwen2.5:7b-instruct`) and optionally `TRACEFOLD_OLLAMA_URL` (must be loopback). Set `OLLAMA_NO_CLOUD=1` for the Ollama service. | Rule findings are published with `risk_review: unavailable`. |
+| Exa / Tavily extraction | `EXA_API_KEY` / `TAVILY_API_KEY` in the server's environment; manifest entries with `"provider": "exa"` or `"tavily"`. | Those sources report `provider_not_configured`. `direct` and `fixture` providers still work. |
+
+## Tests
+
+```bash
+uv run pytest -q                                   # offline suite (fixtures, fake loopback model, mock transports)
+TRACEFOLD_LIVE=1 uv run pytest -q -m live          # real public fetch (+ Exa/Tavily if keys are set)
+TRACEFOLD_OLLAMA=1 uv run pytest -q -m ollama -s   # real local model
+```
+
+## Layout
+
+```text
+tracefold/
+  api/        routes, auth, host/origin checks, error envelope (no detection logic)
+  contracts/  Pydantic DTOs and enums (exported as openapi.json)
+  services/   inputs, scans, findings, rechecks, versioned findings store
+  jobs/       single runner, pipeline, stages
+  inputs/     upload parsing, safe filesystem reader, Git change capture, in-memory capture registry
+  parsing/    text/code and DOCX extraction with stable locations
+  checks/     exact matcher and deterministic rules
+  analysis/   Ollama client, model review, evidence validation, output scrubbing
+  retrieval/  isolated worker (direct/Exa/Tavily/fixture), snapshots, blob store
+  gateway/    the only outbound HTTP path, with a redacted ledger
+  storage/    SQLite migrations and repositories (the only SQL)
+  policy/     tokens, grants, workspace authorization
+fixtures/     synthetic public/private test material
+examples/     demo flow and example manifest
+```
