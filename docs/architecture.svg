@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1585" height="1121.4" viewBox="0 0 1585 1121.4">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10" fill="#47627e"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="50" y="74" fill="#243047" font-family="Arial, sans-serif" font-size="42">
+<tspan x="50" dy="0">Tracefold</tspan>
+</text>
+<text x="50" y="118" fill="#243047" font-family="Arial, sans-serif" font-size="24">
+<tspan x="50" dy="0">Public pages come in. Private document comparison stays local.</tspan>
+</text>
+<text x="1180" y="67" fill="#64748b" font-family="Arial, sans-serif" font-size="17">
+<tspan x="1180" dy="0">PROPOSED ARCHITECTURE</tspan>
+<tspan x="1180" dy="22.1">HACK1984 / NOV 2026</tspan>
+</text>
+<rect x="45" y="160" width="1500" height="330" rx="12" fill="#f1f5f9" stroke="#8aa1ba" stroke-width="2"/>
+<text x="66" y="195" fill="#47627e" font-family="Arial, sans-serif" font-size="20">
+<tspan x="66" dy="0">PUBLIC RETRIEVAL LANE  /  no private files or model context</tspan>
+</text>
+<rect x="70" y="240" width="265" height="126" rx="12" fill="#ffffff" stroke="#243047" stroke-width="2"/>
+<text x="88" y="278" fill="#243047" font-family="Arial, sans-serif" font-size="23">
+<tspan x="88" dy="0">Approved sources</tspan>
+</text>
+<text x="88" y="310" fill="#243047" font-family="Arial, sans-serif" font-size="18">
+<tspan x="88" dy="0">URLs + public keywords</tspan>
+<tspan x="88" dy="23.400000000000002">Seeded or discovered</tspan>
+</text>
+<rect x="385" y="240" width="310" height="126" rx="12" fill="#ffffff" stroke="#243047" stroke-width="2"/>
+<text x="403" y="278" fill="#243047" font-family="Arial, sans-serif" font-size="23">
+<tspan x="403" dy="0">Worker + gateway</tspan>
+</text>
+<text x="403" y="310" fill="#243047" font-family="Arial, sans-serif" font-size="18">
+<tspan x="403" dy="0">Allowlist, limits, redirects</tspan>
+<tspan x="403" dy="23.400000000000002">Log masked requests</tspan>
+</text>
+<rect x="795" y="240" width="285" height="126" rx="12" fill="#e4ecff" stroke="#315ba4" stroke-width="2"/>
+<text x="813" y="278" fill="#315ba4" font-family="Arial, sans-serif" font-size="23">
+<tspan x="813" dy="0">Exa / Tavily</tspan>
+</text>
+<text x="813" y="310" fill="#315ba4" font-family="Arial, sans-serif" font-size="18">
+<tspan x="813" dy="0">Search + fetch / extract</tspan>
+<tspan x="813" dy="23.400000000000002">Public URLs and queries</tspan>
+</text>
+<rect x="1170" y="240" width="345" height="126" rx="12" fill="#ffffff" stroke="#243047" stroke-width="2"/>
+<text x="1188" y="278" fill="#243047" font-family="Arial, sans-serif" font-size="23">
+<tspan x="1188" dy="0">Public websites</tspan>
+</text>
+<text x="1188" y="310" fill="#243047" font-family="Arial, sans-serif" font-size="18">
+<tspan x="1188" dy="0">Selected domains / pages</tspan>
+<tspan x="1188" dy="23.400000000000002">Freshness can vary</tspan>
+</text>
+<polyline points="337,300 380,300" fill="none" stroke="#52627a" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="697,300 790,300" fill="none" stroke="#52627a" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1082,300 1165,300" fill="none" stroke="#52627a" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="600" y="397" width="385" height="75" rx="12" fill="#ffffff" stroke="#243047" stroke-width="2"/>
+<text x="618" y="435" fill="#243047" font-family="Arial, sans-serif" font-size="23">
+<tspan x="618" dy="0">Public snapshot</tspan>
+</text>
+<text x="618" y="467" fill="#243047" font-family="Arial, sans-serif" font-size="18">
+<tspan x="618" dy="0">Text + URL + time + hash</tspan>
+</text>
+<polyline points="937,368 937,390" fill="none" stroke="#52627a" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1004" y="427" fill="#47627e" font-family="Arial, sans-serif" font-size="17">
+<tspan x="1004" dy="0">Responses return as public text.</tspan>
+<tspan x="1004" dy="22.1">One shared snapshot; no per-trial copies.</tspan>
+</text>
+<rect x="45" y="535" width="1500" height="320" rx="12" fill="#edf9f4" stroke="#309381" stroke-width="2"/>
+<text x="66" y="570" fill="#247461" font-family="Arial, sans-serif" font-size="20">
+<tspan x="66" dy="0">PRIVATE WORKSPACE  /  laptop or customer-controlled environment</tspan>
+</text>
+<rect x="70" y="625" width="220" height="135" rx="12" fill="#ffffff" stroke="#247461" stroke-width="2"/>
+<text x="88" y="663" fill="#247461" font-family="Arial, sans-serif" font-size="23">
+<tspan x="88" dy="0">Private input</tspan>
+</text>
+<text x="88" y="695" fill="#247461" font-family="Arial, sans-serif" font-size="18">
+<tspan x="88" dy="0">DOCX / TXT / MD</tspan>
+<tspan x="88" dy="23.400000000000002">Local code folder</tspan>
+</text>
+<rect x="340" y="625" width="230" height="135" rx="12" fill="#ffffff" stroke="#247461" stroke-width="2"/>
+<text x="358" y="663" fill="#247461" font-family="Arial, sans-serif" font-size="23">
+<tspan x="358" dy="0">Local parser</tspan>
+</text>
+<text x="358" y="695" fill="#247461" font-family="Arial, sans-serif" font-size="18">
+<tspan x="358" dy="0">Paragraphs + offsets</tspan>
+<tspan x="358" dy="23.400000000000002">Never execute input</tspan>
+</text>
+<rect x="620" y="625" width="265" height="135" rx="12" fill="#ffffff" stroke="#247461" stroke-width="2"/>
+<text x="638" y="663" fill="#247461" font-family="Arial, sans-serif" font-size="23">
+<tspan x="638" dy="0">Local matcher</tspan>
+</text>
+<text x="638" y="695" fill="#247461" font-family="Arial, sans-serif" font-size="18">
+<tspan x="638" dy="0">Exact / edited spans</tspan>
+<tspan x="638" dy="23.400000000000002">Evidence + coverage</tspan>
+</text>
+<rect x="935" y="625" width="260" height="135" rx="12" fill="#ffffff" stroke="#247461" stroke-width="2"/>
+<text x="953" y="663" fill="#247461" font-family="Arial, sans-serif" font-size="23">
+<tspan x="953" dy="0">Local Ollama</tspan>
+</text>
+<text x="953" y="695" fill="#247461" font-family="Arial, sans-serif" font-size="18">
+<tspan x="953" dy="0">Context classification</tspan>
+<tspan x="953" dy="23.400000000000002">Explain + next steps</tspan>
+</text>
+<rect x="1245" y="625" width="270" height="135" rx="12" fill="#ffffff" stroke="#247461" stroke-width="2"/>
+<text x="1263" y="663" fill="#247461" font-family="Arial, sans-serif" font-size="23">
+<tspan x="1263" dy="0">Findings UI</tspan>
+</text>
+<text x="1263" y="695" fill="#247461" font-family="Arial, sans-serif" font-size="18">
+<tspan x="1263" dy="0">Citations + matched spans</tspan>
+<tspan x="1263" dy="23.400000000000002">No match / inconclusive</tspan>
+</text>
+<polyline points="292,690 335,690" fill="none" stroke="#247461" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="572,690 615,690" fill="none" stroke="#247461" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="887,690 930,690" fill="none" stroke="#247461" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1197,690 1240,690" fill="none" stroke="#247461" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="790,474 790,620" fill="none" stroke="#247461" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="808" y="520" fill="#247461" font-family="Arial, sans-serif" font-size="17">
+<tspan x="808" dy="0">public text only</tspan>
+</text>
+<text x="70" y="818" fill="#247461" font-family="Arial, sans-serif" font-size="20">
+<tspan x="70" dy="0">Private text stays here. Local model has no network tools; no cloud fallback.</tspan>
+</text>
+<text x="50" y="918" fill="#64748b" font-family="Arial, sans-serif" font-size="18">
+<tspan x="50" dy="0">PROOF TO SHOW</tspan>
+</text>
+<text x="50" y="956" fill="#243047" font-family="Arial, sans-serif" font-size="21">
+<tspan x="50" dy="0">Outbound request ledger</tspan>
+<tspan x="50" dy="27.3">Private-runtime network isolation</tspan>
+<tspan x="50" dy="27.3">Positive + same-topic negative test</tspan>
+</text>
+<text x="620" y="918" fill="#64748b" font-family="Arial, sans-serif" font-size="18">
+<tspan x="620" dy="0">RESULT LANGUAGE</tspan>
+</text>
+<text x="620" y="956" fill="#243047" font-family="Arial, sans-serif" font-size="21">
+<tspan x="620" dy="0">Match at a cited source</tspan>
+<tspan x="620" dy="27.3">No match in checked sources</tspan>
+<tspan x="620" dy="27.3">Could not verify / cached evidence</tspan>
+</text>
+<text x="1180" y="918" fill="#64748b" font-family="Arial, sans-serif" font-size="18">
+<tspan x="1180" dy="0">DEMO SCOPE</tspan>
+</text>
+<text x="1180" y="955" fill="#243047" font-family="Arial, sans-serif" font-size="20">
+<tspan x="1180" dy="0">Retrospective or controlled</tspan>
+<tspan x="1180" dy="26.0">Known source set</tspan>
+<tspan x="1180" dy="26.0">CrowdSec files unverified</tspan>
+</text>
+<text x="50" y="1076" fill="#64748b" font-family="Arial, sans-serif" font-size="18">
+<tspan x="50" dy="0">Matching is evidence of overlap. Authorization, full-web coverage, and completed remediation require separate evidence.</tspan>
+</text>
+</svg>
