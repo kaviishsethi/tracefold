@@ -254,6 +254,8 @@ Acceptance criteria: positive evidence appears; negative result names coverage; 
 
 ## 10. Build order and proposed responsibilities
 
+**Implementation starts with the [shared engine plan](docs/SHARED_ENGINE_PLAN.md).** Build and verify the common server contracts, job lifecycle, evidence, findings and recheck behavior before the app or MCP adapter. Its milestone sequence is the concrete backend execution order; the list below describes the broader product work.
+
 Assignments are a proposal for Kaviish and Ahaan to agree on, not a claim that either has accepted a task.
 
 1. **Agree the demo pair and source manifest.** Kaviish: retrieval/provenance. Ahaan: input/results flow. Decide fixture labels before styling.

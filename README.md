@@ -11,6 +11,7 @@ The strict-private deployment keeps the scan server and Ollama inside the truste
 
 **Status: design and demo plan only. No application has been implemented or validated in this repository.**
 
+- [Shared engine implementation plan — build this first](docs/SHARED_ENGINE_PLAN.md)
 - [Complete product, architecture, demo, and track plan](PLAN.md)
 - [Original retrieval/privacy Excalidraw diagram (predates MCP)](docs/architecture.excalidraw) — download and open in [Excalidraw](https://excalidraw.com).
 - [Original architecture preview](docs/architecture.svg)
