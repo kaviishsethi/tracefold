@@ -18,10 +18,10 @@ Tracefold is a new HACK1984 project: import a document or a local source folder,
 1. Choose public sources and import a local reference document.
 2. Refresh the sources through Exa or Tavily without sending the reference document.
 3. Compute passage matches locally; show the source, matched span, coverage, and retrieval time.
-4. Use a local Ollama model to classify context and suggest next steps.
-5. Show an unpublished negative document and the outbound-request ledger.
+4. Use a local Ollama model to explain matches and review the files for potential vulnerabilities or data-exposure risks, with local evidence and suggested fixes.
+5. Show an unpublished document with no public match but a separately labeled potential risk, its suggested fix, and the outbound-request ledger.
 
-The result is **“matching content found publicly”** or **“no match in the sources checked,”** never a blanket assurance that a company is safe.
+The result is **“matching content found publicly”** or **“no match in the sources checked,”** never a blanket assurance that a company is safe. A separate **Potential risks in your files** section provides preventive feedback even when no public match is found. These are review findings, not proof of a leak or a comprehensive security audit.
 
 ## Isolation from Spillway
 

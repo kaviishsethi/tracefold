@@ -8,11 +8,12 @@ Decision record: November 7, 2026. Authors of the project: Kaviish Sethi and Aha
 
 The first user is a security or platform engineer at a small software business. They have a roadmap, proposal, internal engineering document, or code folder and want to know whether distinctive passages appear on public pages. The first supported workflow is an on-demand check with visible coverage. Continuous whole-web monitoring is a future hypothesis, not the demo promise.
 
-The product has three useful outputs:
+The product has four useful outputs:
 
 1. An evidence-backed match: local file and span, public URL and span, retrieval time, and matching method.
 2. An honest negative or incomplete result: which sources were checked, which failed, and what the comparison did not cover.
 3. A locally generated explanation and suggested remediation, grounded in those observations.
+4. A local preventive risk review of the submitted code or documents, including when no public match is found, with evidence locations and suggested fixes.
 
 The product does not establish who published the content, whether publication was authorized, or whether a credential works. A human supplies business context and makes the incident decision.
 
@@ -83,6 +84,26 @@ The matcher owns evidence. The model may recommend review or downgrade a candida
 
 Treat all document and web text as untrusted data. The model has no shell or arbitrary network tools. Its schema returns bounded classifications and references to supplied evidence IDs. Prompt-like text inside a retrieved page is not an instruction to the system.
 
+### Preventive review when no public match is found
+
+Addition agreed November 7: a no-match result must still offer useful feedback on potential vulnerabilities and data-exposure risks in the submitted material. Run this review locally through Ollama, supported by small deterministic checks where appropriate. It may also accompany a public match; public exposure and local risk are separate result dimensions.
+
+The review reads the parsed private input, not just match evidence. For the first build, focus on a bounded set of reviewable issues: apparent embedded secrets, sensitive personal or business data that may need redaction before sharing, sensitive values written to logs, and code/configuration patterns suggesting overly broad access or unsafe handling of input. A document's containing sensitive information is not by itself a vulnerability: explain the sharing or deployment condition that creates the risk. Do not claim a comprehensive security audit or infer runtime behavior from missing context.
+
+Each finding must include:
+
+- Category and status: rule-supported finding or model-suggested concern requiring review.
+- Local file/paragraph or line reference and the specific evidence behind the concern. Mask apparent secret values in results and omit them from logs.
+- What could go wrong, under what conditions, and what context is missing.
+- Suggested fix tied to that evidence, plus a concrete local recheck or manual verification step.
+- Severity rationale and uncertainty; avoid unsupported numerical confidence scores.
+
+Validate that cited locations exist before displaying a finding. A valid location does not prove the model's interpretation, so retain the review label for model-only concerns. Never invent a vulnerability, exploitability claim, or CVE. No code execution, credential testing, external scanning, or automated edits are required for this review. Treat embedded instructions as data and keep the review within the existing no-egress model boundary.
+
+The result screen has two sections: **Public exposure** and **Potential risks in your files**. For example: “No match in 12 checked sources” alongside “Potential sensitive-data logging at app.py:42 — redact the field before logging and verify the resulting log output.” This is an illustrative fixture, not a finding from a real scan.
+
+If no risks are identified, say “No potential risks identified by this review,” with the files/checks covered and limitations. If the model fails, say “Risk review unavailable”; preserve the independent public-match result. Do not use “safe” or “no vulnerabilities.” Suggested changes remain proposals until the user applies and verifies them.
+
 ### Why the proposed positive and negative demo should work
 
 If the local reference contains a distinctive passage also returned from a public source, normalization plus span matching can establish the overlap. If a second document contains no qualifying overlap in that same snapshot, the result can correctly report no match **within that snapshot**. A same-topic negative checks that the system isn't simply reporting topical similarity.
@@ -94,7 +115,7 @@ This reasoning depends on successful extraction, source coverage, and calibrated
 1. **Choose sources:** show URLs/domains, seeded versus discovery mode, limits, and expected external requests.
 2. **Import reference:** document or folder; local extraction preview and unsupported-file errors.
 3. **Check:** show extraction, retrieval, indexing, matching, and local analysis as real steps. No simulated progress disguised as execution.
-4. **Review:** source citations, side-by-side spans inside the local UI, matched coverage, freshness, and why the item needs review.
+4. **Review:** separate public-exposure evidence from potential risks in the local files. Show source citations, side-by-side spans, coverage and freshness for matches; show local locations, conditions, uncertainty and fixes for preventive findings. Offer the local review even when no public match exists.
 5. **Act:** a suggested checklist and recheck button. The system never silently sends takedown notices, rotates credentials, or marks work complete.
 6. **Inspect privacy:** show outbound destinations, approved query/URL payloads, purpose, timing, and masked authentication.
 
@@ -133,7 +154,7 @@ If no usable CrowdSec pair is verified before the demo freeze, present the confi
 - **0:00–0:20 — Problem:** introduce the need to check a private document without uploading it to another service. Label the case retrospective or controlled.
 - **0:20–0:45 — Scope:** show the source list and import the positive reference. Explain that these are monitored sources, not the entire web.
 - **0:45–1:30 — Evidence:** live-refresh at least one page, compute the match, open the side-by-side passage and citation, and show the retrieval time.
-- **1:30–2:00 — Contrast:** import the negative document against the same snapshot. Show no match and the number of sources checked. Prefer a same-topic negative over an obviously unrelated one.
+- **1:30–2:00 — Contrast:** import the negative document against the same snapshot. Show no match and the number of sources checked, then a separately labeled local risk and suggested fix in that unpublished fixture. Prefer a same-topic negative over an obviously unrelated one; use an intentionally risky synthetic fixture, not an actual credential.
 - **2:00–2:35 — Privacy and assistance:** inspect the outbound requests and local Ollama response. The document stayed in the private processing environment; the public source URLs did not.
 - **2:35–3:00 — Action and buyer:** show actionable next steps and one recheck. Name the initial customer and the coverage limitation.
 
@@ -152,6 +173,8 @@ Track descriptions checked November 7 against the [official HACK1984 page](https
 | Most Startup-able | Plausible, unvalidated | A named buyer segment, useful outcome, realistic source coverage, simple onboarding, and a reason to pay. Do not invent customers, revenue, or pricing validation. |
 | Signal-to-Dose — Within3 | Not targeted | This is a life-sciences launch-intelligence track; the current product does not address that workflow. |
 
+The preventive review adds practical value when monitored sources yield no match and strengthens the usefulness story for Privacy-First and Most Startup-able. It does not itself establish Surge fit; that still depends on the public retrieval workflow.
+
 The privacy track asks for evidence about data leaving the device and practical usefulness. Surge centers agentic web research with sources. The startup prize centers customer and company potential. We should prioritize a working private comparison over features added solely to mention sponsors.
 
 ## 9. Credibility and evaluation
@@ -163,11 +186,13 @@ Use one immutable public snapshot with distinct development and evaluation fixtu
 - 3 same-topic documents without distinctive copied passages.
 - 3 unrelated documents.
 
+For the preventive review, add a small labeled set covering an unpublished risky file, its corrected counterpart, benign lookalikes, missing deployment context, fabricated evidence locations, and model failure. Reuse tiny fixtures where suitable. Check finding relevance, location accuracy, useful fixes, and false alarms separately from public-match accuracy. A no-match result must not suppress risk findings; a risk finding must not change no-match into a confirmed leak.
+
 Keep the evaluation documents unseen during threshold tuning. Record expected versus actual matches, false positives, misses, matched-span quality, retrieval failures, model failures, scan time, provider calls, snapshot version, matcher version, and local model identity. Report exact counts, not inflated percentage claims. Duplicate copies of the same passage are not independent evaluation examples.
 
 Verify the privacy boundary with a unique synthetic private marker absent from public sources. Inspect request construction and the recorded outbound payloads, and test the private runtime under denied outbound networking. Include timeout/403 behavior, same-topic negatives, boilerplate, and a document containing an instruction to upload its contents. The latter must remain inert data.
 
-Acceptance criteria: positive evidence appears; negative result names coverage; failures remain inconclusive; private text never enters worker requests; local model failure doesn't erase matches; every citation maps to a stored retrieval observation. No performance or privacy test has been run in this new repo yet.
+Acceptance criteria: positive evidence appears; negative result names coverage; failures remain inconclusive; private text never enters worker requests; local model failure doesn't erase matches; every public citation maps to a stored retrieval observation; preventive findings cite valid local locations and retain uncertainty; review failures are visible and do not alter the public-match result. No performance or privacy test has been run in this new repo yet.
 
 ## 10. Build order and proposed responsibilities
 
@@ -176,7 +201,7 @@ Assignments are a proposal for Kaviish and Ahaan to agree on, not a claim that e
 1. **Agree the demo pair and source manifest.** Kaviish: retrieval/provenance. Ahaan: input/results flow. Decide fixture labels before styling.
 2. **Build a CLI vertical slice.** DOCX/text extraction, one public retrieval, local matching, evidence JSON. Start with a tiny source set.
 3. **Enforce the boundary.** Separate worker, gateway, request schema, local model configuration, bounded storage, failure states.
-4. **Add local analysis.** Classifications and remediation constrained to supplied evidence. Pin model after checking available RAM/disk and a small timing pilot.
+4. **Add local analysis.** Match explanations constrained to supplied evidence, plus a separate preventive review of private files with validated local references, bounded checks, uncertainty, and suggested fixes. Include the no-public-match path. Pin model after checking available RAM/disk and a small timing pilot.
 5. **Wire the UI.** Import → sources → scan → evidence → next steps → egress. Real state changes, no fake results.
 6. **Evaluate and rehearse.** Run the small frozen set once, fix meaningful failures, record backup. Avoid repeatedly broadening searches instead of validating the core.
 
