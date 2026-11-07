@@ -9,6 +9,7 @@ Tracefold is a new HACK1984 project: import a document or a local source folder,
 - [Complete product, architecture, demo, and track plan](PLAN.md)
 - [Editable Excalidraw architecture](docs/architecture.excalidraw) — download and open in [Excalidraw](https://excalidraw.com).
 - [Architecture preview](docs/architecture.svg)
+- [Risk-review workflow informed by 0sec](research/0sec-risk-review.md)
 - [Case-study research and CrowdSec fallback](research/case-study-research.json)
 
 ![Tracefold architecture](docs/architecture.svg)

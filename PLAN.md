@@ -104,6 +104,12 @@ The result screen has two sections: **Public exposure** and **Potential risks in
 
 If no risks are identified, say “No potential risks identified by this review,” with the files/checks covered and limitations. If the model fails, say “Risk review unavailable”; preserve the independent public-match result. Do not use “safe” or “no vulnerabilities.” Suggested changes remain proposals until the user applies and verifies them.
 
+### Workflow informed by 0sec
+
+The [0sec source review and adaptation](research/0sec-risk-review.md) specifies the preventive-review pipeline: scoped inventory → rule/model leads → contextual investigation → structural evidence validation → skeptical local review → grouped findings and suggested fixes. Its separate review pass may support or dismiss a concern but does not establish runtime exploitation. Use distinct document and code checks, retain inconclusive results, and recheck corrected synthetic fixtures. Start with data-exposure checks rather than a general-purpose pentester.
+
+The reference records pinned upstream sources, a proposed finding schema, evaluation cases and bounded model-call/context budgets. This is a design adaptation, not an installed dependency or tested implementation.
+
 ### Why the proposed positive and negative demo should work
 
 If the local reference contains a distinctive passage also returned from a public source, normalization plus span matching can establish the overlap. If a second document contains no qualifying overlap in that same snapshot, the result can correctly report no match **within that snapshot**. A same-topic negative checks that the system isn't simply reporting topical similarity.
