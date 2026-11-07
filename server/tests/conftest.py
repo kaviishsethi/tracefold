@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import time
 from pathlib import Path
 
@@ -12,6 +13,10 @@ from tracefold.contracts.enums import Capability
 from tracefold.engine import Engine
 
 FIXTURES = Path(__file__).resolve().parent.parent / "fixtures"
+
+if os.environ.get("TRACEFOLD_LIVE") == "1":  # opt-in live tests may use local provider keys from server/.env
+    from tracefold.envfile import load_env_file
+    load_env_file(Path(__file__).resolve().parent.parent / ".env")
 ALL = [c.value for c in Capability]
 
 

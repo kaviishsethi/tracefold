@@ -50,6 +50,10 @@ def main(argv: list[str] | None = None) -> int:
     o.add_argument("out")
 
     args = ap.parse_args(argv)
+    from .envfile import load_env_file
+    loaded = load_env_file()
+    if loaded and args.cmd == "serve":
+        print(f"loaded from .env: {', '.join(sorted(loaded))}", file=sys.stderr)
     if args.cmd == "serve":
         import uvicorn
         from .api.app import create_app
