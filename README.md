@@ -1,26 +1,33 @@
 # Tracefold
 
-Find public copies of private documents. Keep the comparison local.
+Review existing company material. Catch new risks while you work.
 
-Tracefold is a new HACK1984 project: import a document or a local source folder, check a defined set of public sources, and inspect cited passage matches plus locally generated next steps. Public pages come into the customer's environment; private document text is not sent to search providers or hosted models.
+Tracefold is a new HACK1984 project with two experiences sharing one private scan engine:
+
+- **Upload platform:** manually upload documents/code, or select planned connected sources, to check public exposure and potential risks.
+- **MCP integration:** check workspace changes through a coding assistant, inspect findings, propose corrections and recheck them.
+
+The strict-private deployment keeps the scan server and Ollama inside the trusted environment and uses a local-model MCP host. Uploading to a vendor server or returning private findings to a cloud-backed assistant changes that privacy boundary. GitHub is the first planned remote connector; Docs and sites follow later.
 
 **Status: design and demo plan only. No application has been implemented or validated in this repository.**
 
 - [Complete product, architecture, demo, and track plan](PLAN.md)
-- [Editable Excalidraw architecture](docs/architecture.excalidraw) — download and open in [Excalidraw](https://excalidraw.com).
-- [Architecture preview](docs/architecture.svg)
+- [Original retrieval/privacy Excalidraw diagram (predates MCP)](docs/architecture.excalidraw) — download and open in [Excalidraw](https://excalidraw.com).
+- [Original architecture preview](docs/architecture.svg)
 - [Risk-review workflow informed by 0sec](research/0sec-risk-review.md)
 - [Case-study research and CrowdSec fallback](research/case-study-research.json)
 
-![Tracefold architecture](docs/architecture.svg)
+The [current two-experience architecture](PLAN.md#3-proposed-architecture) is in the plan. The original Excalidraw assets remain a reference for the retrieval boundary.
 
 ## The first demo
 
-1. Choose public sources and import a local reference document.
-2. Refresh the sources through Exa or Tavily without sending the reference document.
-3. Compute passage matches locally; show the source, matched span, coverage, and retrieval time.
-4. Use a local Ollama model to explain matches and review the files for potential vulnerabilities or data-exposure risks, with local evidence and suggested fixes.
-5. Show an unpublished document with no public match but a separately labeled potential risk, its suggested fix, and the outbound-request ledger.
+1. Upload a reference file through the platform and choose monitored public sources.
+2. Refresh a source through Exa or Tavily and show computed matching passages with provenance.
+3. Use the MCP-connected assistant to scan an unpublished code change and flag a separate synthetic sensitive-logging risk.
+4. Review a suggested correction, apply it through the editor workflow, and recheck through MCP.
+5. Show the same updated finding in the platform, the still-open public exposure, and the outbound ledger.
+
+MCP is a first-class entry point. Automatic file watching and editor notifications are optional follow-ons; the first demo shows explicit assistant tool calls. Neither surface is implemented yet.
 
 The result is **“matching content found publicly”** or **“no match in the sources checked,”** never a blanket assurance that a company is safe. A separate **Potential risks in your files** section provides preventive feedback even when no public match is found. These are review findings, not proof of a leak or a comprehensive security audit.
 

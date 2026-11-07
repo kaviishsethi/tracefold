@@ -4,9 +4,9 @@ Decision record: November 7, 2026. Authors of the project: Kaviish Sethi and Aha
 
 ## 1. What we are building
 
-**Pitch:** Tracefold checks selected public sources for copies of your private documents, shows the evidence, and helps you decide what to do next—without sending your documents to a search provider or hosted model.
+**Pitch:** Review existing company material through an upload platform, and catch new risks while working through an MCP integration. Both use one private scan engine for public-exposure matching, preventive risk review, and evidence-backed next steps.
 
-The first user is a security or platform engineer at a small software business. They have a roadmap, proposal, internal engineering document, or code folder and want to know whether distinctive passages appear on public pages. The first supported workflow is an on-demand check with visible coverage. Continuous whole-web monitoring is a future hypothesis, not the demo promise.
+The first user is a security or platform engineer at a small software business. They have a roadmap, proposal, internal engineering document, or code folder and want to know whether distinctive passages appear on public pages. The product has two first-class experiences: an on-demand upload platform for existing material and an MCP integration for developers working in a connected workspace. Both report explicit scan coverage. Continuous whole-web monitoring is a future hypothesis, not the demo promise.
 
 The product has four useful outputs:
 
@@ -29,15 +29,60 @@ This repo starts clean. No encrypted public bucket service, decoys, manual API-k
 
 ## 3. Proposed architecture
 
-![Architecture](docs/architecture.svg)
+### Two experiences, one engine
 
-[Open the editable Excalidraw source](docs/architecture.excalidraw). The diagram depicts the intended system, including the privacy boundary; it is not a deployment inventory.
+| Experience | Entry point | Main task |
+|---|---|---|
+| Upload platform | Web interface backed by a scan server | Manually upload documents/code or select connected sources; inspect evidence, risks and suggested fixes. |
+| MCP integration | Tools available inside a compatible coding assistant | Check relevant workspace changes during development, explain findings, help propose a correction, and recheck it. |
 
-### Private workspace
+These are two product surfaces, not a dashboard with MCP hidden behind it. They share the parser, matcher, local Ollama review, scan queue, versioned evidence and findings store. Neither surface implements its own security verdicts. A finding opened through MCP must refer to the same scan and input version as the dashboard.
 
-A local web UI talks to a local backend. For a hosted deployment, both must remain inside the customer's explicitly trusted environment; uploading a document to a vendor-operated backend would change the privacy claim.
+```mermaid
+flowchart LR
+    U[Upload platform] --> E[Private scan engine]
+    A[Coding assistant] <--> M[MCP integration]
+    M <--> E
+    C[Scoped source connectors] --> E
+    E <--> F[Versioned findings store]
+    F --> U
+    O[Local Ollama] <--> E
+    P[Public retrieval worker] --> E
+    P <--> W[Approved public sources via Exa or Tavily]
+```
 
-Private input → local parser → local text/fingerprints → local matching → local Ollama explanation → local findings UI.
+This diagram is the current product architecture. The [original Excalidraw diagram](docs/architecture.excalidraw) and [preview](docs/architecture.svg) document the earlier retrieval/privacy design; they predate the two-surface decision and are not the complete current architecture.
+
+### Deployment and privacy
+
+For the hackathon, the upload UI, scan server, MCP server, private files and Ollama run on one machine, or inside the company's trusted environment. “Upload” means sending the file to that scan server. A vendor-hosted upload server would receive the private material and requires a different, explicitly disclosed privacy claim. A future hosted control dashboard can handle setup and status without automatically receiving document contents.
+
+MCP is also a data boundary: tool results returned to a cloud-backed coding assistant may be sent to its model provider. Running the MCP server locally does not prevent this. The strict-private demo must use a local-model host and inspect tool inputs/outputs. A future cloud-host mode must explicitly disclose what findings, filenames or snippets leave, default to minimal redacted results, and must not claim that private material never reaches a hosted model. Redaction alone is not proof of privacy.
+
+### Upload platform and connectors
+
+Manual DOCX/text/code upload is required for the first slice. A local repository selection provides the MCP workspace. GitHub is the first proposed remote connector, followed by Docs and company sites. These integrations are planned, not implemented. Fetch authorized source content directly into the trusted environment with read-only, scoped credentials; use an explicit source/file allowlist and support disconnect/revocation. Keep imported private sources separate from the public sites searched for exposures. Connection does not mean every repository or document has been scanned.
+
+Run an initial bounded scan of selected existing material. Later connector refreshes process changed versions and report unsupported, skipped and failed items. Provider requests use a separately scoped connector adapter through the gateway; the public-search worker never receives private connector credentials or documents. Authenticate access to the scan server and bind each MCP client to an allowed workspace; possession of an arbitrary path or finding ID must not grant access to another workspace.
+
+### MCP experience while working
+
+Proposed tools (design names, not frozen implemented interfaces):
+
+- `scan_changes`: inspect changes within the approved workspace against a specified baseline; return a scan ID and coverage. Include permitted untracked files and enough surrounding context to assess the change, within the scan budget.
+- `get_findings`: retrieve findings and review status for the permitted workspace/input version.
+- `explain_finding`: provide supporting evidence, conditions, uncertainty and a suggested correction under the host's data policy.
+- `recheck_fix`: rescan the current file version for the selected issue and report whether it remains, is no longer detected, or could not be checked.
+
+Configure the assistant's working instructions to call checks during work and before reporting completion. This is the required MCP interaction for the demo. It is not a guarantee that every edit is automatically scanned. An optional local watcher/editor hook can trigger checks on saved changes and support editor alerts; it is not required to define the MCP product experience. Do not claim proactive host notifications without demonstrating support in that host.
+
+The assistant proposes a patch and applies it only within the user's authorized editing workflow. Tracefold's scanner remains read-only. Store input hashes/baseline revisions with scan results; older in-flight scans must not clear findings for a newer revision. Rechecking a local fix does not close a separately observed public exposure. Share stable finding IDs and status between the two surfaces.
+
+Public exposure checks run on demand or a later scheduled refresh, not on every keystroke. Workspace checks focus on changed private material and can reuse a dated public snapshot with clear freshness labels.
+
+### Private processing
+
+Private input → parser → local matching and preventive review → versioned findings → upload platform or MCP response subject to host policy.
 
 Start with DOCX and UTF-8 TXT/Markdown. Support a local folder of selected text/code files next. A GitHub repository can be a source of reference files, but importing an already-public repository does not establish that it was private before. Do not run imported code, install its dependencies, follow symlinks outside the chosen folder, or execute document macros. Defer scanned PDF/OCR and large binary artifacts.
 
@@ -60,9 +105,9 @@ Run the public worker as a separate process with no private-document filesystem 
 
 All outbound application HTTP goes through one gateway. Enforce destination and redirect checks, request-size limits, purpose labels, and a request ledger. For direct fetches, reject private/reserved network addresses and unexpected redirect targets. Provider API keys remain local configuration and must be masked in logs.
 
-Use a downloaded Ollama model through a loopback endpoint with cloud features disabled. No hosted embeddings, cloud model fallback, or third-party document parser. For stronger proof, deny outbound network access from the private processing/model runtime and allow it only for the public worker. Treat this as a build acceptance check, not a security property established by merely installing Ollama.
+Use a downloaded Ollama model through a loopback endpoint with cloud features disabled. No hosted embeddings, cloud model fallback, or third-party document parser. For stronger proof, deny outbound network access from the private processing/model runtime and allow it only for the scoped public-retrieval and connector workers. Keep their permissions separate. Treat this as a build acceptance check, not a security property established by merely installing Ollama.
 
-**What may leave:** approved public queries, public URLs, provider authentication, normal network metadata, and request timing. Selected URLs may reveal which public material interests the user. **What must not leave:** private document text, identifying filenames, local snippets, embeddings, fingerprints, or document-derived search terms. Don't claim “nothing leaves the device.”
+**What may leave in strict-private mode:** approved public queries, public URLs, provider authentication, scoped connector resource identifiers, normal network metadata, and request timing. Selected URLs and connector resource identifiers may reveal which material interests the user. MCP output follows the separate host policy above; cloud-host mode cannot inherit the strict-private claim. **What must not leave:** private document text, identifying filenames, local snippets, embeddings, fingerprints, or document-derived search terms. Don't claim “nothing leaves the device.”
 
 Rewording or obfuscating a sensitive passage is not a privacy guarantee: its meaning may remain identifiable. The demo avoids that problem by defining retrieval inputs independently of private content. An exact-term blocking test and ledger can support inspection, but neither proves universal resistance to exfiltration.
 
@@ -118,12 +163,16 @@ This reasoning depends on successful extraction, source coverage, and calibrated
 
 ## 5. User flow and states
 
+**Upload platform:**
+
 1. **Choose sources:** show URLs/domains, seeded versus discovery mode, limits, and expected external requests.
 2. **Import reference:** document or folder; local extraction preview and unsupported-file errors.
 3. **Check:** show extraction, retrieval, indexing, matching, and local analysis as real steps. No simulated progress disguised as execution.
 4. **Review:** separate public-exposure evidence from potential risks in the local files. Show source citations, side-by-side spans, coverage and freshness for matches; show local locations, conditions, uncertainty and fixes for preventive findings. Offer the local review even when no public match exists.
 5. **Act:** a suggested checklist and recheck button. The system never silently sends takedown notices, rotates credentials, or marks work complete.
 6. **Inspect privacy:** show outbound destinations, approved query/URL payloads, purpose, timing, and masked authentication.
+
+**MCP integration:** select/authorize a workspace → request a change scan through the assistant → inspect the same versioned findings → review a proposed correction → apply through the authorized editor workflow → recheck. Open the platform to see the same finding and scan status. No upload-platform session is required to initiate an authorized MCP scan.
 
 Result vocabulary:
 
@@ -157,12 +206,11 @@ If no usable CrowdSec pair is verified before the demo freeze, present the confi
 
 ## 7. Three-minute demonstration
 
-- **0:00–0:20 — Problem:** introduce the need to check a private document without uploading it to another service. Label the case retrospective or controlled.
-- **0:20–0:45 — Scope:** show the source list and import the positive reference. Explain that these are monitored sources, not the entire web.
-- **0:45–1:30 — Evidence:** live-refresh at least one page, compute the match, open the side-by-side passage and citation, and show the retrieval time.
-- **1:30–2:00 — Contrast:** import the negative document against the same snapshot. Show no match and the number of sources checked, then a separately labeled local risk and suggested fix in that unpublished fixture. Prefer a same-topic negative over an obviously unrelated one; use an intentionally risky synthetic fixture, not an actual credential.
-- **2:00–2:35 — Privacy and assistance:** inspect the outbound requests and local Ollama response. The document stayed in the private processing environment; the public source URLs did not.
-- **2:35–3:00 — Action and buyer:** show actionable next steps and one recheck. Name the initial customer and the coverage limitation.
+- **0:00–0:20 — Problem and two entry points:** show the upload platform and coding assistant connected to the same trusted scan engine. Label the dataset retrospective or controlled.
+- **0:20–1:10 — Existing material:** upload the reference, live-refresh one monitored public page, and show computed matching spans, URL, scope and retrieval time.
+- **1:10–2:10 — Work in progress:** in the MCP-connected assistant, check an unpublished synthetic code change with a sensitive-logging issue. Show no public match in the checked snapshot plus the separate local risk, location and proposed correction. Make the tool call visible; do not pretend a watcher triggered it.
+- **2:10–2:40 — Fix and recheck:** apply the reviewed correction through the editor workflow and call `recheck_fix`. Show the updated finding in the platform. The earlier public-copy finding remains open.
+- **2:40–3:00 — Privacy and buyer:** show outbound requests and the local-model MCP host configuration. Name the initial customer, source coverage, and any unimplemented connectors.
 
 Optional memorable beat: publish two controlled copies, remove one, and demonstrate that the remaining occurrence prevents closing the incident. This is a stretch, not a requirement to delay the basic flow.
 
@@ -178,6 +226,8 @@ Track descriptions checked November 7 against the [official HACK1984 page](https
 | Surge — Tavily / Exa | Strong if retrieval and verification are central | Real provider retrieval, citations, freshness, and a bounded verification agent choosing from approved public source IDs. A static index alone is a weaker showing. |
 | Most Startup-able | Plausible, unvalidated | A named buyer segment, useful outcome, realistic source coverage, simple onboarding, and a reason to pay. Do not invent customers, revenue, or pricing validation. |
 | Signal-to-Dose — Within3 | Not targeted | This is a life-sciences launch-intelligence track; the current product does not address that workflow. |
+
+The two experiences connect periodic company reviews with everyday development. MCP is an access surface, not by itself evidence of privacy or agent quality; demonstrate a real scan/fix/recheck using the same engine.
 
 The preventive review adds practical value when monitored sources yield no match and strengthens the usefulness story for Privacy-First and Most Startup-able. It does not itself establish Surge fit; that still depends on the public retrieval workflow.
 
@@ -198,6 +248,8 @@ Keep the evaluation documents unseen during threshold tuning. Record expected ve
 
 Verify the privacy boundary with a unique synthetic private marker absent from public sources. Inspect request construction and the recorded outbound payloads, and test the private runtime under denied outbound networking. Include timeout/403 behavior, same-topic negatives, boilerplate, and a document containing an instruction to upload its contents. The latter must remain inert data.
 
+Additional two-surface checks: the same input/check versions produce consistent findings through upload and MCP; tool access stays within the approved workspace; stale scans cannot resolve newer findings; denied access and budget limits remain visible; no-hosted-model mode covers MCP responses as well as search requests; rechecking a local correction leaves public exposure status independent. Connector failures and revocation must not be shown as complete scans.
+
 Acceptance criteria: positive evidence appears; negative result names coverage; failures remain inconclusive; private text never enters worker requests; local model failure doesn't erase matches; every public citation maps to a stored retrieval observation; preventive findings cite valid local locations and retain uncertainty; review failures are visible and do not alter the public-match result. No performance or privacy test has been run in this new repo yet.
 
 ## 10. Build order and proposed responsibilities
@@ -208,14 +260,21 @@ Assignments are a proposal for Kaviish and Ahaan to agree on, not a claim that e
 2. **Build a CLI vertical slice.** DOCX/text extraction, one public retrieval, local matching, evidence JSON. Start with a tiny source set.
 3. **Enforce the boundary.** Separate worker, gateway, request schema, local model configuration, bounded storage, failure states.
 4. **Add local analysis.** Match explanations constrained to supplied evidence, plus a separate preventive review of private files with validated local references, bounded checks, uncertainty, and suggested fixes. Include the no-public-match path. Pin model after checking available RAM/disk and a small timing pilot.
-5. **Wire the UI.** Import → sources → scan → evidence → next steps → egress. Real state changes, no fake results.
-6. **Evaluate and rehearse.** Run the small frozen set once, fix meaningful failures, record backup. Avoid repeatedly broadening searches instead of validating the core.
+5. **Wire both experiences.** Upload platform: import → sources → scan → evidence → next steps → egress. MCP: workspace authorization → change scan → findings → explanation → recheck. Use one versioned findings store. Demonstrate with a local-model host; real state changes, no fake results.
+6. **Add the first connector if the core works.** GitHub read-only import with explicit scope, version tracking and revocation. Docs/sites, watcher hooks, scheduling, CVE remediation and takedown submission are later increments.
+7. **Evaluate and rehearse.** Run the small frozen set once, fix meaningful failures, record backup. Avoid repeatedly broadening searches instead of validating the core.
 
 Suggested stack: Python 3.11+ and FastAPI for local backend/worker; SQLite for provenance and result metadata; Next.js for the UI; Ollama for local inference; thin gateway-backed Exa/Tavily REST adapters. Exact dependencies and the local model are implementation choices, not installed by this planning task.
 
+### Follow-on company workflows
+
+The broader product can connect company sources, review existing material, and check new versions continuously. Known-vulnerability checks should resolve dependency manifests/lockfiles to exact package versions and advisory evidence, then assess applicability and propose testable updates. An LLM search for recent CVEs alone is insufficient. This is follow-on scope, not a current capability or required demo beat.
+
+For public exposures, prepare a host-specific removal request and supporting evidence. External submission requires the company's explicit authorization policy and is outside the first demo. Track drafted, approved, submitted and observed-removed separately. Likewise, patches or dependency updates remain proposed until applied and checked; neither a fix nor a takedown guarantees future breach prevention.
+
 ## 11. Storage, cost, and scope limits
 
-Initial proposed pilot: at most 20 public pages, 10 reference files, 200 KB extracted text per page, and a 50 MB combined text/index cache. Cap provider requests at 40 per run, concurrency at 2, and wall time at 5 minutes with explicit timeout results. These are limits to implement, not measured costs. Check provider billing before expansion.
+Initial proposed pilot: at most 20 public pages, 10 reference files, 200 KB extracted text per page, and a 50 MB combined text/index cache. Cap provider requests at 40 per run, concurrency at 2, and wall time at 5 minutes with explicit timeout results. Both entry points share this queue and budget; an MCP request cannot bypass upload scan limits. Coalesce duplicate scans of the same version and cancel superseded work where possible. These are limits to implement, not measured costs. Check provider billing before expansion.
 
 Keep one content-addressed public snapshot per data version. Store per-run results separately; no full database or application copy per trial. Keep at most the latest three disposable debug traces with private content omitted. Measure input size, free disk, and first-run growth before increasing any limit. Model weights require a separate measured budget and should be downloaded once, never per trial. Preserve original user files and unique evidence; clean only known agent-created disposable artifacts.
 
