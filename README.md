@@ -9,9 +9,10 @@ Tracefold is a new HACK1984 project with two experiences sharing one private sca
 
 The strict-private deployment keeps the scan server and Ollama inside the trusted environment and uses a local-model MCP host. Uploading to a vendor server or returning private findings to a cloud-backed assistant changes that privacy boundary. GitHub is the first planned remote connector; Docs and sites follow later.
 
-**Status: design and demo plan only. No application has been implemented or validated in this repository.**
+**Status: the shared engine (milestones 1–7 of the [shared engine plan](docs/SHARED_ENGINE_PLAN.md)) is implemented in [`server/`](server/README.md) and passes its offline test suite. The upload app and MCP adapter are not built yet; their contract is in [docs/ENGINE_API.md](docs/ENGINE_API.md). Model review has been run against a real local `qwen2.5:7b-instruct`; Exa/Tavily calls have not been run against live services yet.**
 
 - [Shared engine implementation plan — build this first](docs/SHARED_ENGINE_PLAN.md)
+- [Engine API handoff for the app and MCP adapter](docs/ENGINE_API.md)
 - [Complete product, architecture, demo, and track plan](PLAN.md)
 - [Original retrieval/privacy Excalidraw diagram (predates MCP)](docs/architecture.excalidraw) — download and open in [Excalidraw](https://excalidraw.com).
 - [Original architecture preview](docs/architecture.svg)
@@ -28,7 +29,7 @@ The [current two-experience architecture](PLAN.md#3-proposed-architecture) is in
 4. Review a suggested correction, apply it through the editor workflow, and recheck through MCP.
 5. Show the same updated finding in the platform, the still-open public exposure, and the outbound ledger.
 
-MCP is a first-class entry point. Automatic file watching and editor notifications are optional follow-ons; the first demo shows explicit assistant tool calls. Neither surface is implemented yet.
+MCP is a first-class entry point. Automatic file watching and editor notifications are optional follow-ons; the first demo shows explicit assistant tool calls. Neither client surface is implemented yet; the engine they share is.
 
 The result is **“matching content found publicly”** or **“no match in the sources checked,”** never a blanket assurance that a company is safe. A separate **Potential risks in your files** section provides preventive feedback even when no public match is found. These are review findings, not proof of a leak or a comprehensive security audit.
 

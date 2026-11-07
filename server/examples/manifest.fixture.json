@@ -1,0 +1,4 @@
+[
+  {"source_id": "forum", "url": "https://forum.example/t/123", "provider": "fixture", "fixture_path": "public/forum_post.html"},
+  {"source_id": "vendor_blog", "url": "https://vendor.example/blog/streaming", "provider": "fixture", "fixture_path": "public/vendor_blog.html"}
+]
