@@ -1,46 +1,87 @@
 # Tracefold
 
-Review existing company material. Catch new risks while you work.
+Tracefold finds where private company material has been copied to public sites, flags risky content in files before it ships, and drafts the remediation for a person to approve.
 
-Tracefold is a new HACK1984 project with two experiences sharing one private scan engine:
+It runs inside your own environment. Files are parsed and reviewed locally, model review uses a local Ollama model, and every outbound request (search, page fetch, email, cloud API) goes through one gateway and is recorded per scan.
 
-- **Upload platform:** manually upload documents/code, or select planned connected sources, to check public exposure and potential risks.
-- **MCP integration:** check workspace changes through a coding assistant, inspect findings, propose corrections and recheck them.
+## What it does
 
-The strict-private deployment keeps the scan server and Ollama inside the trusted environment and uses a local-model MCP host. Uploading to a vendor server or returning private findings to a cloud-backed assistant changes that privacy boundary. GitHub is the first planned remote connector; Docs and sites follow later.
+- **Public exposure.** Compares uploaded documents and code against public pages, found either by searching on the company's approved name (Exa or Tavily) or from an explicit list of URLs. Results show the matching passages with their source and retrieval time.
+- **Potential risks in files.** Checks the same files for embedded secrets (built-in rules plus optional [Gitleaks](docs/GITLEAKS.md)), sensitive values written to logs, confidentiality markers, personal identifiers and regulated data for the company's industry. A local model reviews each rule hit against the cited lines.
+- **Fix and recheck.** A finding can be rechecked against a new version of the file. The result is `still_detected`, `not_detected_in_checked_version` or `inconclusive`.
+- **Approval-gated remediation.** For a public copy, Tracefold drafts a takedown request to the host. For a leaked GitHub token or AWS access key, it drafts a revocation. Nothing is sent or changed until a named person approves it.
+- **Coding assistants.** An [MCP server](adapters/mcp/README.md) lets assistants such as Claude Code scan their changes, read findings and recheck fixes before reporting work as done. Assistants cannot approve remediation.
+- **Scheduled checks.** Re-run a scan's files or a workspace's uncommitted changes hourly, daily or weekly.
 
-**Status: the shared engine (milestones 1–7 of the [shared engine plan](docs/SHARED_ENGINE_PLAN.md)) is implemented in [`server/`](server/README.md) and passes its offline test suite. The MCP adapter is implemented in [`adapters/mcp/`](adapters/mcp/README.md) (eight tools over the engine API, tested against a real engine process), and the upload platform is in [`frontend/`](frontend/README.md) (Next.js, talks to the engine through a token-holding proxy). The client contract is in [docs/ENGINE_API.md](docs/ENGINE_API.md). Model review has been run against a real local `qwen2.5:7b-instruct`, and live Exa and Tavily extraction calls pass through the isolated worker.**
+Results are reported in exact terms: "matching content found publicly" or "no match in the sources checked". Tracefold does not claim whole-web coverage or declare a file safe.
 
-- [Set up Tracefold (people and coding agents): one command, then two servers](SETUP.md)
-- [Shared engine implementation plan — build this first](docs/SHARED_ENGINE_PLAN.md)
-- [Company-name discovery: search, fetch, and local comparison](docs/COMPANY_DISCOVERY_PLAN.md)
-- [Engine API handoff for the app and MCP adapter](docs/ENGINE_API.md)
-- [Complete product, architecture, walkthrough, and track plan](PLAN.md)
-- [Original retrieval/privacy Excalidraw diagram (predates MCP)](docs/architecture.excalidraw) — download and open in [Excalidraw](https://excalidraw.com).
-- [Original architecture preview](docs/architecture.svg)
-- [Risk-review workflow informed by 0sec](research/0sec-risk-review.md)
-- [Case-study research and CrowdSec fallback](research/case-study-research.json)
+## Architecture
 
-The [current two-experience architecture](PLAN.md#3-proposed-architecture) is in the plan. The original Excalidraw assets remain a reference for the retrieval boundary.
+```mermaid
+flowchart LR
+  web["Web app<br/>(Next.js)"] -->|token held server-side| engine
+  mcp["MCP adapter"] --> engine
+  engine["Engine<br/>(FastAPI, SQLite)"] --> ollama["Ollama<br/>(local model)"]
+  engine --> gateway["Outbound gateway<br/>+ request ledger"]
+  gateway --> worker["Isolated retrieval worker"]
+  worker --> public["Exa / Tavily / approved URLs"]
+  gateway --> remediation["Email, GitHub, AWS IAM<br/>(after approval)"]
+```
 
-## The first walkthrough
+The web app and MCP adapter are thin HTTP clients. Parsing, detection, model calls and findings all live in the engine. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
-1. Upload a reference file through the platform and choose monitored public sources.
-2. Refresh a source through Exa or Tavily and show computed matching passages with provenance.
-3. Use the MCP-connected assistant to scan an unpublished code change and flag a separate synthetic sensitive-logging risk.
-4. Review a suggested correction, apply it through the editor workflow, and recheck through MCP.
-5. Show the same updated finding in the platform, the still-open public exposure, and the outbound ledger.
+| Path | Contents |
+|---|---|
+| [`server/`](server/README.md) | Engine: API, scan pipeline, checks, discovery, retrieval, remediation |
+| [`frontend/`](frontend/README.md) | Web app for uploads, findings, approvals and settings |
+| [`adapters/mcp/`](adapters/mcp/README.md) | MCP server for coding assistants |
+| [`docs/`](docs) | Architecture, API reference, discovery, deployment, benchmark results |
 
-MCP is a first-class entry point. Automatic file watching and editor notifications are optional follow-ons; the first walkthrough shows explicit assistant tool calls. The engine, the MCP adapter and the upload platform are implemented. The adapter has not yet been run inside a local-model MCP host, which the strict-private walkthrough requires.
+## Getting started
 
-The result is **“matching content found publicly”** or **“no match in the sources checked,”** never a blanket assurance that a company is safe. A separate **Potential risks in your files** section provides preventive feedback even when no public match is found. These are review findings, not proof of a leak or a comprehensive security audit.
+Requirements: Python 3.11+ with [uv](https://docs.astral.sh/uv/), Node 20+ and Git. Ollama is optional but recommended.
 
-## Remediation (approval required)
+```bash
+cd server && uv sync && uv run tracefold quickstart --root /path/to/folder \
+  --company "Your Company, Inc." --domain yourcompany.com --reply-to legal@yourcompany.com
+```
 
-When a scan finds a public copy, the engine drafts a takedown request; when it finds a long-term AWS access key, it drafts an action to disable that key. A named person approves each one. Approved takedowns are emailed to the host's configured contact (or prepared for the host's own form), and approved keys are set Inactive in IAM. By default emails go to a local outbox and nothing is sent. "Submitted" is tracked separately from "removed". See [docs/ENGINE_API.md](docs/ENGINE_API.md#remediation-actions-approval-required).
+```bash
+cd server && uv run tracefold serve --port 8787
+```
 
-## Isolation from Spillway
+```bash
+cd frontend && npm install && npm run dev
+```
 
-This is a standalone repository and a new implementation plan. It does not copy Spillway's application, databases, credentials, Git history, or frozen interfaces. Only the case-study decision record is carried forward as small research metadata. Any future code reuse must be selected and reviewed explicitly.
+Then open http://localhost:3000. [SETUP.md](SETUP.md) covers each step, connecting a coding assistant, and configuring takedowns and key revocation. To run everything in your own network with Docker, see [docs/DEPLOY.md](docs/DEPLOY.md).
 
-Working name: Tracefold; no trademark or domain-availability claim is made.
+## Documentation
+
+- [Setup](SETUP.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Engine API](docs/ENGINE_API.md) (machine-readable: [`server/openapi.json`](server/openapi.json))
+- [Company-name discovery](docs/DISCOVERY.md)
+- [Gitleaks integration](docs/GITLEAKS.md)
+- [Deployment](docs/DEPLOY.md)
+- [Discovery benchmark](docs/benchmark/README.md)
+
+## Tests
+
+```bash
+cd server && uv run pytest -q
+```
+
+```bash
+cd adapters/mcp && uv run pytest -q
+```
+
+The engine suite runs offline. Live provider and local-model tests are opt-in; see [server/README.md](server/README.md#tests).
+
+## Privacy model
+
+- The engine binds to loopback by default, requires a client token on every request and checks `Host` and `Origin` headers.
+- File text goes to a model only if that model is on 127.0.0.1.
+- Public retrieval runs in a separate worker. Search queries fill fixed templates with an approved company name, or with names inferred locally when automatic discovery is on. File text is not sent to search providers.
+- Each client grant has a disclosure level. A `minimal` grant (for cloud-backed assistants) withholds paths, explanations and evidence text.
+- Tool results returned to a cloud-backed assistant reach that assistant's model provider. For a fully private setup, use an MCP host that runs a local model.

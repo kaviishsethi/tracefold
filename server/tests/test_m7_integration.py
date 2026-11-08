@@ -18,7 +18,7 @@ from .conftest import FIXTURES, fx
 
 SERVER = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(SERVER / "examples"))
-import walkthrough_flow  # noqa: E402
+import api_flow  # noqa: E402
 
 ROUTES = {
     ("get", "/v1/health"), ("get", "/v1/capabilities"), ("get", "/v1/workspaces"),
@@ -60,7 +60,7 @@ def test_openapi_covers_contract_and_is_current(env):
 
 def test_documented_flow_in_process(make_env):
     env = make_env(start_runner=True)
-    out = walkthrough_flow.run(env.client, "ws_a", env.tokens["app"], env.tokens["mcp"], env.root)
+    out = api_flow.run(env.client, "ws_a", env.tokens["app"], env.tokens["mcp"], env.root)
     check_flow(out)
     assert out["workspaces"] == ["ws_a"]
     # fixture provider makes no network requests; only the (failed) loopback model probe is recorded
@@ -119,7 +119,7 @@ def test_cli_provisioning_and_real_server(tmp_path):
             except httpx.HTTPError:
                 time.sleep(0.1)
         with httpx.Client(base_url=base, timeout=30) as c:
-            out = walkthrough_flow.run(c, "ws_main", app_token, mcp_token, root)
+            out = api_flow.run(c, "ws_main", app_token, mcp_token, root)
             check_flow(out)
             # the MCP client was provisioned without 'review': review is denied for it
             r = c.patch(f"/v1/workspaces/ws_main/findings/{out['public_finding']['id']}/review",

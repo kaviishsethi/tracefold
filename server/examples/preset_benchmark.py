@@ -1,4 +1,4 @@
-"""Preset benchmark (docs/PRESET_PLAN.md §5–6): record live runs once, score offline.
+"""Preset benchmark (docs/DISCOVERY.md, "Benchmarking"): record live runs once, score offline.
 
     cd server
     uv run python examples/preset_benchmark.py record --cases ../docs/benchmark/cases.json --out ../docs/benchmark/v3

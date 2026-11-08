@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
-  Tracefold design tokens (carried over from Spillway): neutral near-black surfaces, white/10 hairlines, 14px card radius,
+  Tracefold design tokens: neutral near-black surfaces, white/10 hairlines, 14px card radius,
   10px control radius, Geist at 500 with tight tracking, warm off-white "paper" sections,
   and a muted teal accent reserved for focus, primary actions and step marks.
   Meaning colors: red/amber/sky = severity, soft green = "stayed local" / no longer found.
@@ -151,7 +151,7 @@ table {
   background-size: 9px 9px;
 }
 
-/* Placeholder for imagery we don't have yet: a dusk-toned field with a label. */
+/* Image slot: a dusk-toned fallback field with a label, shown when no image is set. */
 /* --slot-img is set by <ImageSlot src>; if the file is missing, the placeholder gradient below shows through. */
 .image-slot {
   background:

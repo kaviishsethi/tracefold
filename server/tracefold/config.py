@@ -1,4 +1,4 @@
-"""Engine settings. Values are proposed pilot limits from docs/SHARED_ENGINE_PLAN.md §10."""
+"""Engine settings and resource limits. See docs/ARCHITECTURE.md."""
 from __future__ import annotations
 
 import os
@@ -13,7 +13,7 @@ class Limits:
     max_file_bytes: int = 5 * 1024 * 1024
     max_request_bytes: int = 20 * 1024 * 1024
     max_extracted_text_per_capture: int = 10 * 1024 * 1024
-    max_captures: int = 8  # plan pilot value was 2; raised so a full walkthrough session never evicts live inputs
+    max_captures: int = 8  # room for several pending uploads and rechecks without evicting inputs still in use
     max_captured_raw_bytes: int = 40 * 1024 * 1024
     capture_ttl_seconds: int = 15 * 60
     scan_deadline_seconds: int = 5 * 60

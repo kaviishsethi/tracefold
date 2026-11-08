@@ -2,7 +2,7 @@
 
 A thin stdio MCP server that maps tool calls to the [engine HTTP API](../../docs/ENGINE_API.md). It holds no
 findings, parses no files and calls no model: everything it returns comes from the engine, under the engine's
-per-client disclosure policy. Design: [shared engine plan §8](../../docs/SHARED_ENGINE_PLAN.md#8-proposed-http-contracts-and-mcp-mappings).
+per-client disclosure policy. Architecture: [HTTP API and MCP mapping](../../docs/ARCHITECTURE.md#http-api-and-mcp-mapping).
 
 ## Tools
 

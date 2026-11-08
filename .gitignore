@@ -14,10 +14,3 @@ data/
 cache/
 models/
 debug-traces/
-
-# Disposable design QA captures
-.impeccable/review/
-
-# Recording plan and sample documents (kept local)
-docs/RECORDING_PLAN.md
-docs/sample-documents/

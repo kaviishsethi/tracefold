@@ -1,6 +1,6 @@
 # Set up Tracefold
 
-For a person or a coding agent. Run these from the repository root, in order. Each step says how to check it worked.
+Run these from the repository root, in order. Each step says how to check it worked.
 Needs Python 3.11+ with [uv](https://docs.astral.sh/uv/), Node 20+, and Git.
 
 ## 1. Configure everything

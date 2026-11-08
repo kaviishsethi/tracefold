@@ -1,8 +1,7 @@
 # Tracefold web app
 
-The upload platform and marketing site for Tracefold. It's a thin client of the engine in [`server/`](../server/README.md):
-it never parses files, calls a model or keeps its own findings. The UI was carried over from Spillway (same components
-and design tokens) with Tracefold content.
+The Tracefold web app and product site. It's a thin client of the engine in [`server/`](../server/README.md):
+it never parses files, calls a model or keeps its own findings.
 
 ## Run it
 
@@ -45,7 +44,3 @@ engine endpoint are in `lib/api.ts`.
   `/settings` (company name, website and takedown reply-to; needs the `configure` capability). Saved search plans and
   packs are API/MCP only.
 
-## Known gaps
-
-- The engine has no list-scans endpoint, so recent scans are remembered per browser.
-- Pricing figures were carried over from Spillway and need confirming.
