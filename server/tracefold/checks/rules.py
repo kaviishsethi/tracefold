@@ -28,6 +28,23 @@ RULES: dict[str, RuleInfo] = {
     "gitleaks_secret": RuleInfo("gitleaks_secret", "1", "text, code, docx", "Apparent embedded secret (Gitleaks rule)"),
     "doc_confidential_marker": RuleInfo("doc_confidential_marker", "1", "text, docx", "Document marked confidential"),
     "doc_personal_identifier": RuleInfo("doc_personal_identifier", "1", "text, docx", "Apparent personal identifier"),
+    "industry_identifier": RuleInfo("industry_identifier", "1", "text, code, docx", "Regulated data for your industry"),
+}
+
+# Industry packs: extra checks switched on by the company's industry (Settings). Technology uses the base checks.
+INDUSTRIES = {
+    "financial": "Financial services",
+    "healthcare": "Healthcare",
+    "government": "Government and public sector",
+    "retail": "Retail and e-commerce",
+    "technology": "Technology",
+}
+INDUSTRY_PACKS: dict[str, list[str]] = {
+    "financial": ["card", "iban", "routing"],
+    "healthcare": ["mrn", "npi", "dob"],
+    "government": ["cui", "passport"],
+    "retail": ["card"],
+    "technology": [],
 }
 
 
@@ -373,7 +390,101 @@ def document_checks(doc: ParsedDoc) -> list[Hit]:
     return hits
 
 
-def run_rules(doc: ParsedDoc) -> tuple[list[Hit], dict[str, str]]:
+def _luhn(digits: str) -> bool:
+    total, alt = 0, False
+    for ch in reversed(digits):
+        d = int(ch)
+        if alt:
+            d = d * 2 - 9 if d > 4 else d * 2
+        total += d
+        alt = not alt
+    return total % 10 == 0
+
+
+def _iban_ok(v: str) -> bool:
+    v = v.replace(" ", "").upper()
+    if not 15 <= len(v) <= 34:
+        return False
+    n = "".join(str(int(ch, 36)) for ch in v[4:] + v[:4])
+    return int(n) % 97 == 1
+
+
+def _aba_ok(v: str) -> bool:
+    d = [int(c) for c in v]
+    return len(d) == 9 and (3 * (d[0] + d[3] + d[6]) + 7 * (d[1] + d[4] + d[7]) + (d[2] + d[5] + d[8])) % 10 == 0
+
+
+_CARD = re.compile(r"\b\d(?:[ -]?\d){12,18}\b")
+_IBAN = re.compile(r"\b[A-Z]{2}\d{2}(?: ?[A-Z0-9]{4}){2,7}(?: ?[A-Z0-9]{1,4})?\b")
+_ROUTING = re.compile(r"(?i)\b(?:routing|aba|rtn)(?: number| no\.?| #)?\s*[:#=]?\s*(\d{9})\b")
+_MRN = re.compile(r"(?i)\b(?:mrn|medical record(?: number| no\.?| #)?)\s*[:#=]?\s*([A-Z0-9-]{5,15})\b")
+_NPI = re.compile(r"(?i)\bnpi(?: number| no\.?| #)?\s*[:#=]?\s*(\d{10})\b")
+_DOB = re.compile(r"(?i)\b(?:dob|date of birth|birth ?date)\s*[:#=]?\s*(\d{1,4}[/.-]\d{1,2}[/.-]\d{1,4})\b")
+_CUI = re.compile(r"\b(CONTROLLED UNCLASSIFIED INFORMATION|CUI//[A-Z-]+|FOR OFFICIAL USE ONLY|FOUO|LAW ENFORCEMENT SENSITIVE)\b")
+_PASSPORT = re.compile(r"(?i)\bpassport(?: number| no\.?| #)?\s*[:#=]?\s*([A-Z0-9]{6,9})\b")
+
+_PACK_INFO = {  # key: (title, claim, severity, mask the value?)
+    "card": ("Apparent payment card number", "A number that passes the card checksum appears here [masked].", "high", True),
+    "iban": ("Apparent bank account (IBAN)", "A value that passes the IBAN checksum appears here [masked].", "high", True),
+    "routing": ("Apparent bank routing number", "A labeled US routing number that passes the ABA checksum appears here [masked].", "medium", True),
+    "mrn": ("Apparent medical record number", "A labeled medical record number appears here [masked].", "high", True),
+    "npi": ("Apparent provider NPI", "A labeled National Provider Identifier that passes its checksum appears here [masked].", "medium", True),
+    "dob": ("Apparent date of birth", "A labeled date of birth appears here [masked].", "medium", True),
+    "cui": ("Government handling marking", "The document carries a government handling marking.", "medium", False),
+    "passport": ("Apparent passport number", "A labeled passport number appears here [masked].", "high", True),
+}
+
+
+def industry_checks(doc: ParsedDoc, industry: str | None) -> list[Hit]:
+    hits: list[Hit] = []
+    seen: set[tuple[int, int]] = set()
+
+    def add(key: str, start: int, end: int, value: str):
+        if (start, end) in seen:
+            return
+        seen.add((start, end))
+        title, claim, severity, mask = _PACK_INFO[key]
+        hits.append(Hit(
+            rule_id="industry_identifier", start=start, end=end,
+            anchor=f"{key}|" + _norm_anchor(doc.text[max(0, start - 40):start]),
+            title=title, claim=claim,
+            conditions="Risk arises if this file is shared beyond people allowed to see regulated data.",
+            missing_context="Whether the value is real, and who is allowed to see this file, are unknown.",
+            suggested_fix="Remove or redact the value, or keep the file only where regulated data is allowed.",
+            verification_step="Re-run the recheck for this finding after redaction.",
+            severity=severity,
+            severity_rationale=f"Checked because the company's industry is {INDUSTRIES.get(industry or '', industry)}.",
+            uncertainty="Pattern and checksum detection; test data and look-alike numbers can match.",
+            mask_spans=[[start, end]] if mask else [], secret_values=[value] if mask else [],
+            meta={"pack": key, "industry": industry},
+        ))
+
+    for key in INDUSTRY_PACKS.get(industry or "", []):
+        if key == "card":
+            for m in _CARD.finditer(doc.text):
+                digits = re.sub(r"\D", "", m.group())
+                if 13 <= len(digits) <= 19 and digits[0] in "3456" and _luhn(digits) and len(set(digits)) > 1:
+                    add(key, m.start(), m.end(), m.group())
+        elif key == "iban":
+            for m in _IBAN.finditer(doc.text):
+                if _iban_ok(m.group()):
+                    add(key, m.start(), m.end(), m.group())
+        elif key == "routing":
+            for m in _ROUTING.finditer(doc.text):
+                if _aba_ok(m.group(1)):
+                    add(key, m.start(1), m.end(1), m.group(1))
+        elif key == "npi":
+            for m in _NPI.finditer(doc.text):
+                if _luhn("80840" + m.group(1)):
+                    add(key, m.start(1), m.end(1), m.group(1))
+        else:
+            rx = {"mrn": _MRN, "dob": _DOB, "cui": _CUI, "passport": _PASSPORT}[key]
+            for m in rx.finditer(doc.text):
+                add(key, m.start(1), m.end(1), m.group(1))
+    return hits
+
+
+def run_rules(doc: ParsedDoc, industry: str | None = None) -> tuple[list[Hit], dict[str, str]]:
     """Returns hits and per-rule coverage notes for this document ({rule_id: reason}) where a rule did not apply fully."""
     notes: dict[str, str] = {}
     hits = secret_literals(doc)
@@ -387,4 +498,5 @@ def run_rules(doc: ParsedDoc) -> tuple[list[Hit], dict[str, str]]:
             notes["py_sensitive_logging"] = "unsupported_language"
     else:
         hits += document_checks(doc)
+    hits += industry_checks(doc, industry)
     return hits, notes

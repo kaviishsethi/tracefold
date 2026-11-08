@@ -210,9 +210,10 @@ def local_rules_stage(ctx: "ScanContext") -> None:
     gl_failed = False      # Gitleaks was expected (configured or required) but did not complete for a file
     gl_counts = {"files": 0, "leads": 0, "unlocated": 0}
     gl_skipped: set[str] = set()   # Gitleaks off or not installed in a mode where it is optional
+    industry = (ctx.engine.repo.get_workspace(ctx.scan["workspace_id"]) or {}).get("industry")
     for doc in ctx.docs:
         ctx.checkpoint()
-        hits, notes = run_rules(doc)
+        hits, notes = run_rules(doc, industry)
         res = scanner.scan_text(doc.text)
         if res.status == "ok":
             gl_counts["files"] += 1

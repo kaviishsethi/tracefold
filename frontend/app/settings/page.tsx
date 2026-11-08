@@ -6,16 +6,28 @@ import { AgentPrompt } from "@/components/agent-prompt";
 import { CONNECT_AWS, CONNECT_AWS_PROMPT, CopyCommand } from "@/components/copy-command";
 import { useCurrentWorkspace } from "@/components/shell";
 import { H1 } from "@/components/bits";
+import { Select } from "@/components/select";
 import { Button, ErrorNote, Field, inputClass } from "@/components/ui";
 
 interface Company {
   name: string | null;
   website: string | null;
   reply_to: string | null;
+  industry: string | null;
 }
 
-const EMPTY = { name: "", website: "", reply_to: "" };
-const toForm = (c: Company) => ({ name: c.name ?? "", website: c.website ?? "", reply_to: c.reply_to ?? "" });
+/** Each industry switches on extra checks for the regulated data it handles. */
+const INDUSTRIES: { value: string; label: string; checks: string }[] = [
+  { value: "financial", label: "Financial services", checks: "Card numbers, IBANs and bank routing numbers" },
+  { value: "healthcare", label: "Healthcare", checks: "Medical record numbers, provider NPIs and dates of birth" },
+  { value: "government", label: "Government and public sector", checks: "CUI and FOUO markings and passport numbers" },
+  { value: "retail", label: "Retail and e-commerce", checks: "Card numbers" },
+  { value: "technology", label: "Technology", checks: "Secrets and personal identifiers (the standard checks)" },
+];
+const industryLabel = (v: string) => INDUSTRIES.find((i) => i.value === v)?.label ?? "";
+
+const EMPTY = { name: "", website: "", reply_to: "", industry: "" };
+const toForm = (c: Company) => ({ name: c.name ?? "", website: c.website ?? "", reply_to: c.reply_to ?? "", industry: c.industry ?? "" });
 
 /** The company, set once: searched for in every public check and used to sign takedown requests.
  *  Shows the saved values; Edit opens the form, Save or Cancel closes it. */
@@ -61,7 +73,7 @@ export default function SettingsPage() {
     try {
       const c = await api<Company>(ws(workspace.id, "/company"), {
         method: "PUT",
-        json: { name: form.name.trim(), website: form.website.trim() || null, reply_to: form.reply_to.trim() },
+        json: { name: form.name.trim(), website: form.website.trim() || null, reply_to: form.reply_to.trim(), industry: form.industry || null },
       });
       const f = toForm(c);
       setSaved(f);
@@ -78,6 +90,7 @@ export default function SettingsPage() {
   const rows: [string, string][] = [
     ["Company name", saved.name],
     ["Website", saved.website],
+    ["Industry", industryLabel(saved.industry)],
     ["Reply-to email", saved.reply_to],
   ];
 
@@ -112,6 +125,21 @@ export default function SettingsPage() {
           <Field label="Website">
             <input className={inputClass} value={form.website} onChange={set("website")} disabled={!canEdit} placeholder="yourcompany.com" />
           </Field>
+          <div>
+            <span className="mb-1.5 block text-[13px] text-mute">Industry</span>
+            <Select
+              label="Industry"
+              size="md"
+              className="w-full"
+              disabled={!canEdit}
+              value={form.industry || "__none"}
+              onChange={(v) => setForm({ ...form, industry: v === "__none" ? "" : v })}
+              options={[{ value: "__none", label: "Choose your industry" }, ...INDUSTRIES.map((i) => ({ value: i.value, label: i.label }))]}
+            />
+            <span className="mt-1.5 block text-xs text-faint">
+              {form.industry ? `Also checks for: ${INDUSTRIES.find((i) => i.value === form.industry)?.checks}.` : "Adds checks for the regulated data your industry handles."}
+            </span>
+          </div>
           <Field label="Reply-to email" hint="Takedown requests are signed with the company name and ask hosts to reply here.">
             <input type="email" className={inputClass} value={form.reply_to} onChange={set("reply_to")} disabled={!canEdit} placeholder="legal@yourcompany.com" required />
           </Field>

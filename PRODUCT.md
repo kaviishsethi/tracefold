@@ -9,7 +9,7 @@ web
 User-approved interactive HTML/CSS mockups, with plain JavaScript for prototype behavior. The planned application uses the existing Python engine; Next.js remains a future implementation choice.
 
 ## Users
-Security and platform engineers at small software businesses reviewing existing company material and developers checking workspace changes through an MCP-connected assistant.
+Security engineers at companies, in industries such as financial services, healthcare, government and retail, reviewing existing company material, and developers checking workspace changes through an MCP-connected assistant. The company's industry decides which regulated data the local checks look for.
 
 ## Product Purpose
 Compare private material against explicitly selected public sources; inspect matching passages, preventive risks, coverage, and evidence-backed next steps.

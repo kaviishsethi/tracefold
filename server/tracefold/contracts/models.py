@@ -132,6 +132,7 @@ class CompanyIn(Strict):
     name: str = Field(min_length=2, max_length=80)
     website: str | None = Field(default=None, max_length=253)
     reply_to: str = Field(min_length=3, max_length=200, pattern=r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+    industry: Literal["financial", "healthcare", "government", "retail", "technology"] | None = None
 
 
 class SitesIn(Strict):
@@ -149,6 +150,7 @@ class CompanyOut(BaseModel):
     name: str | None = None
     website: str | None = None
     reply_to: str | None = None
+    industry: str | None = None
 
 
 class CompanyProfileOut(BaseModel):
