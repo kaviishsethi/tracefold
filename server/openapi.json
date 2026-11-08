@@ -8772,14 +8772,47 @@
             "title": "Scan Id"
           },
           "every": {
-            "type": "string",
-            "enum": [
-              "hour",
-              "day",
-              "week"
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "hour",
+                  "day",
+                  "week"
+                ]
+              },
+              {
+                "type": "null"
+              }
             ],
-            "title": "Every",
-            "default": "day"
+            "title": "Every"
+          },
+          "interval_seconds": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 31536000.0,
+                "minimum": 10.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interval Seconds",
+            "description": "Exact interval; overrides every."
+          },
+          "start_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start At",
+            "description": "ISO 8601 time of the first run; default one interval from now."
           },
           "public": {
             "type": "boolean",
@@ -8832,6 +8865,31 @@
               }
             ],
             "title": "Every"
+          },
+          "interval_seconds": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 31536000.0,
+                "minimum": 10.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interval Seconds"
+          },
+          "start_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start At"
           },
           "run_now": {
             "type": "boolean",

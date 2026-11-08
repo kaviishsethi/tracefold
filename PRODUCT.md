@@ -9,7 +9,11 @@ web
 User-approved interactive HTML/CSS mockups, with plain JavaScript for prototype behavior. The planned application uses the existing Python engine; Next.js remains a future implementation choice.
 
 ## Users
-Security engineers at companies, in industries such as financial services, healthcare, government and retail, reviewing existing company material, and developers checking workspace changes through an MCP-connected assistant. The company's industry decides which regulated data the local checks look for.
+- **Buyer:** the head of security (CISO or head of information security) at companies in industries such as financial services, healthcare, government and retail.
+- **Users who approve:** senior security leaders below the CISO (VP, director or manager of security) who have authority to approve takedown requests and key shut-offs on the company's behalf.
+- **Users who scan:** security engineers and developers, including coding assistants over MCP. They run scans and fix code but can't approve takedowns or key changes.
+- Today the approve permission belongs to the web app's token and is never given to coding assistants; per-person roles would come with single sign-on.
+- The company's industry decides which regulated data the local checks look for.
 
 ## Product Purpose
 Compare private material against explicitly selected public sources; inspect matching passages, preventive risks, coverage, and evidence-backed next steps.

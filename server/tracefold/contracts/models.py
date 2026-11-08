@@ -139,7 +139,9 @@ class ScheduleIn(Strict):
     """Re-run a scan on a schedule. ``scan_id`` re-checks that scan's uploaded files; omit it to re-check the
     registered folder's uncommitted changes."""
     scan_id: str | None = Field(default=None, max_length=100)
-    every: Literal["hour", "day", "week"] = "day"
+    every: Literal["hour", "day", "week"] | None = None
+    interval_seconds: int | None = Field(default=None, ge=10, le=31_536_000, description="Exact interval; overrides every.")
+    start_at: str | None = Field(default=None, max_length=40, description="ISO 8601 time of the first run; default one interval from now.")
     public: bool = True
     name: str | None = Field(default=None, max_length=120)
 
@@ -147,6 +149,8 @@ class ScheduleIn(Strict):
 class SchedulePatch(Strict):
     enabled: bool | None = None
     every: Literal["hour", "day", "week"] | None = None
+    interval_seconds: int | None = Field(default=None, ge=10, le=31_536_000)
+    start_at: str | None = Field(default=None, max_length=40)
     run_now: bool = False
 
 

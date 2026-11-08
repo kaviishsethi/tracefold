@@ -79,7 +79,7 @@ class Runner:
         last_schedule_check = 0.0
         while not self._stop.is_set():
             try:
-                if time.monotonic() - last_schedule_check >= 30:  # scheduled checks: start any that are due
+                if time.monotonic() - last_schedule_check >= 5:  # scheduled checks: start any that are due
                     last_schedule_check = time.monotonic()
                     self.e.schedules.run_due()
                 self.run_pending()
