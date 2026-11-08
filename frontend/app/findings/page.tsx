@@ -79,10 +79,10 @@ export default function Findings() {
             <table className="w-full min-w-[760px] table-fixed text-left text-sm">
               <colgroup>
                 <col />
-                <col className="w-[220px]" />
+                <col className="w-[190px]" />
                 <col className="w-[120px]" />
-                <col className="w-[120px]" />
-                <col className="w-[100px]" />
+                <col className="w-[225px]" />
+                <col className="w-[110px]" />
               </colgroup>
               <thead className="text-xs text-faint">
                 <tr className="border-b border-line">
@@ -110,11 +110,11 @@ export default function Findings() {
                         </a>
                       </td>
                       <td className="truncate px-5 py-3 font-mono text-xs text-mute" title={findingPlace(item)}>{findingPlace(item) || "Withheld"}</td>
-                      <td className="px-5 py-3 text-mute">Your files</td>
+                      <td className="whitespace-nowrap px-5 py-3 text-mute">Your files</td>
                       <td className="px-5 py-3">
                         <StatusPill status={item.status} />
                       </td>
-                      <td className="px-5 py-3 text-right text-faint">{relativeTime(item.latest?.created_at)}</td>
+                      <td className="whitespace-nowrap px-5 py-3 text-right text-faint">{relativeTime(item.latest?.created_at)}</td>
                     </tr>
                   ),
                 )}
@@ -142,11 +142,11 @@ function PageGroupRows({ g, open, onToggle, onOpen }: { g: PageMatch; open: bool
           </span>
         </td>
         <td className="truncate px-5 py-3 font-mono text-xs text-mute" title={g.path}>{g.path || "Withheld"}</td>
-        <td className="px-5 py-3 text-mute">Public page</td>
+        <td className="whitespace-nowrap px-5 py-3 text-mute">Public page</td>
         <td className="px-5 py-3">
           <StatusPill status={allClosed ? first.status : "open"} />
         </td>
-        <td className="px-5 py-3 text-right text-faint">{relativeTime(g.latestAt)}</td>
+        <td className="whitespace-nowrap px-5 py-3 text-right text-faint">{relativeTime(g.latestAt)}</td>
       </tr>
       {open &&
         g.items.map((f) => (
