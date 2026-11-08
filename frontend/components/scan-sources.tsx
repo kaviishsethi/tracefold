@@ -30,7 +30,7 @@ export function SourcesPanel({ workspaceId, scan }: { workspaceId: string; scan:
     >
       {d && (
         <div className="space-y-2 border-b border-line px-4 py-3">
-          <p className={cx("text-[13px]", d.outcome === "search_failed" || d.outcome === "no_candidates" ? "text-med" : "text-ink-2")}>
+          <p className={cx("text-[13px]", d.outcome === "search_failed" || d.outcome === "no_candidates" || d.outcome === "budget_exhausted" ? "text-med" : "text-ink-2")}>
             {DISCOVERY_OUTCOME[d.outcome ?? ""] ?? d.outcome}
           </p>
           <ul className="space-y-0.5 text-xs">

@@ -301,6 +301,7 @@ export async function allSources(workspaceId: string, scanId: string): Promise<S
 }
 
 export const DISCOVERY_OUTCOME: Record<string, string> = {
+  budget_exhausted: "No searches ran: this scan's request budget was already used. Nothing was checked, so this isn't a result.",
   candidates_found: "Search returned candidate pages; each was fetched and compared on this machine.",
   partial_search: "Some searches failed. Pages that were returned were fetched and compared.",
   no_candidates: "Search returned no candidate pages. That's not a \"no leak\" result.",

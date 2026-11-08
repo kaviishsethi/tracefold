@@ -15,6 +15,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -234,14 +235,22 @@ class SearchWorker:
         self.env = env
         self.lim = req["limits"]
         self.deadline = time.monotonic() + float(req.get("deadline_seconds") or 60)
+        self._budget_lock = threading.Lock()
+        self._reserved = 0
+
+    def _reserve(self) -> None:
+        """Claim one request slot atomically; two search threads must never both take the last slot."""
+        with self._budget_lock:
+            if self._reserved >= self.lim["max_requests"]:
+                raise GatewayDenied("request_budget_exhausted")
+            self._reserved += 1
 
     def _call(self, q: dict) -> tuple[int, bytes, bool] | dict:
         prov = q["provider"]
         key = self.env.get("EXA_API_KEY" if prov == "exa" else "TAVILY_API_KEY")
         if not key:
             return {"status": "failed", "error": "provider_not_configured"}
-        if self.gw.requests >= self.lim["max_requests"]:
-            raise GatewayDenied("request_budget_exhausted")
+        self._reserve()
         if prov == "exa":
             body = {"query": q["query"], "numResults": q["num_results"], "type": "auto"}
             if q["include_domains"]:

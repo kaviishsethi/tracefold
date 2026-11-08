@@ -243,7 +243,9 @@ class DiscoveryService:
         data["unique_count"] = len(fetchable)
         ran = [q for q in data["provider_queries"] if q["status"] in ("ok", "failed")]
         ok = [q for q in ran if q["status"] == "ok"]
-        if not ok:
+        if not ran and data["provider_queries"]:
+            data["outcome"] = "budget_exhausted"   # nothing was searched, so nothing failed either
+        elif not ok:
             data["outcome"] = "search_failed"
         elif not fetchable:
             data["outcome"] = "no_candidates"
@@ -383,7 +385,6 @@ class DiscoveryService:
         ctx.public_snapshot = {"id": snap_id, "sources": entries}
         self.e.repo.update_scan(ctx.scan_id, public_snapshot_id=snap_id)
         ctx.summary["public_freshness"] = FRESHNESS_NOTE
-        self.e.retrieval.blobs.gc(self.e.repo.referenced_blob_hashes())
         self._load_texts(ctx)
 
     def _load_texts(self, ctx: "ScanContext") -> None:
@@ -413,6 +414,8 @@ class DiscoveryService:
         outcome = ctx.discovery["run"]["data"]["outcome"] if ctx.discovery else None
         if outcome == "search_failed":
             return CoverageStatus.failed, "discovery_search_failed"
+        if outcome == "budget_exhausted":
+            return CoverageStatus.failed, "discovery_budget_exhausted"
         if outcome == "no_candidates":
             return CoverageStatus.partial, "no_candidate_sources_found"
         if outcome == "partial_search" and status == CoverageStatus.complete:

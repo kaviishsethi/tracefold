@@ -77,6 +77,10 @@ class RemediationService:
 
     def _takedown_record(self, ws: str, finding_id: str, ev: dict) -> dict | None:
         pub = ev.get("public") or {}
+        if pub.get("mode") == "discovered":
+            # Found by searching a company name, which may not be this workspace's company. A takedown asserts
+            # ownership, so it is only drafted for operator-approved sources, never for search results.
+            return None
         url = pub.get("url")
         host = (urlsplit(url or "").hostname or "").lower()
         if not url or not host:

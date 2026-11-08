@@ -165,6 +165,7 @@ def local_rules_stage(ctx: "ScanContext") -> None:
     gl_version = scanner.check_version()
     gl_failed = False      # Gitleaks was expected (configured or required) but did not complete for a file
     gl_counts = {"files": 0, "leads": 0, "unlocated": 0}
+    gl_skipped: set[str] = set()   # Gitleaks off or not installed in a mode where it is optional
     for doc in ctx.docs:
         ctx.checkpoint()
         hits, notes = run_rules(doc)
@@ -177,6 +178,8 @@ def local_rules_stage(ctx: "ScanContext") -> None:
             hits += extra
             if unlocated:
                 notes["gitleaks_secret"] = "gitleaks_lead_not_located"
+        elif res.status in ("off", "unavailable") and scanner.mode != "required":
+            gl_skipped.add(res.reason or res.status)
         else:
             notes["gitleaks_secret"] = res.reason or res.status
             if res.status == "failed" or scanner.mode == "required":
@@ -198,10 +201,9 @@ def local_rules_stage(ctx: "ScanContext") -> None:
                 risk_review=RiskReview.not_requested.value, meta={**h.meta, "start": h.start, "end": h.end},
             ))
     for rid, whys in rule_notes.items():
-        if rid == "gitleaks_secret" and set(whys) == {"disabled"}:
-            ctx.cover("rule", rid, CoverageStatus.not_requested, "disabled")
-        else:
-            ctx.cover("rule", rid, CoverageStatus.partial, ",".join(sorted(set(whys))), files=len(whys))
+        ctx.cover("rule", rid, CoverageStatus.partial, ",".join(sorted(set(whys))), files=len(whys))
+    if gl_skipped and "gitleaks_secret" not in rule_notes:
+        ctx.cover("rule", "gitleaks_secret", CoverageStatus.not_requested, ",".join(sorted(gl_skipped)))
     ctx.summary["secret_scanner"] = {"mode": scanner.mode, "version": gl_version, **gl_counts}
     file_failed = any(c["scope"] == "file" and c["status"] == "failed" for c in ctx.coverage)
     syntax = any("python_syntax_error" in w for w in rule_notes.get("py_sensitive_logging", []))

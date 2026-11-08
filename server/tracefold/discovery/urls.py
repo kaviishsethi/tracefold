@@ -10,7 +10,13 @@ from urllib.parse import urlsplit, urlunsplit
 
 from ..util import sha256
 
-_BAD_SUFFIXES = (".local", ".internal", ".localhost", ".lan", ".home", ".corp", ".intranet", ".arpa")
+_BAD_SUFFIXES = (".local", ".internal", ".localhost", ".lan", ".home", ".corp", ".intranet", ".arpa", ".test", ".invalid")
+_HEX = set("0123456789abcdef")
+
+
+def _numeric_host(host: str) -> bool:
+    """Shorthand IPv4 forms that ipaddress rejects but resolvers accept: 127.1, 2130706433, 0x7f.0.0.1."""
+    return all(l.isdigit() or (l.startswith("0x") and len(l) > 2 and set(l[2:]) <= _HEX) for l in host.split("."))
 MAX_URL_LEN = 2048
 
 
@@ -37,7 +43,7 @@ def check_url(url: object) -> str | None:
         ip = ipaddress.ip_address(host.strip("[]"))
     except ValueError:
         ip = None
-    if ip is not None:
+    if ip is not None or _numeric_host(host):
         return "ip_literal_not_allowed"
     if host == "localhost" or host.endswith(_BAD_SUFFIXES) or "." not in host:
         return "private_destination"

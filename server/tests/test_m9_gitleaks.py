@@ -176,7 +176,9 @@ def test_auto_mode_without_binary_keeps_builtin_rules_complete(make_env, tmp_pat
     s = env.scan(env.capture(["config.py"])["input_id"], model_review=False)
     cov = {(c["scope"], c["id"]): c for c in s["coverage"]}
     assert cov[("check", "local_risk")]["status"] == "complete"
-    assert cov[("rule", "gitleaks_secret")]["status"] == "partial"      # visible, not silent
+    # optional scanner not installed: shown, but not as an incomplete check
+    assert cov[("rule", "gitleaks_secret")]["status"] == "not_requested"
+    assert cov[("rule", "gitleaks_secret")]["reason"] == "gitleaks_not_installed"
 
 
 def test_fix_and_recheck_gitleaks_finding(make_env, tmp_path):

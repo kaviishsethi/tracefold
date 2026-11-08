@@ -267,6 +267,9 @@ def test_discovery_end_to_end_provenance_and_sources(env):
     assert ev["mode"] == "discovered" and ev["url"] == FORUM_CANON and ev["provider"] == "exa"
     assert {(o["query_id"], o["rank"]) for o in ev["discovery_origins"]} == {("q1", 1), ("q2", 1)}
     assert "Matching content found publicly" == pub[0]["latest"]["title"]
+    # a takedown asserts ownership; search results for a company name never get one drafted
+    acts = env.engine.repo.list_actions("ws_a", None, None, None, 100)
+    assert not [a for a in acts if a["kind"] == "takedown_request"]
 
     page = sources(env, s["scan_id"])
     by = {x["original_url"]: x for x in page["items"]}
@@ -550,3 +553,36 @@ def test_v3_fields_reach_providers_and_are_identical_across_uploads(env):
     code = next(b for b in first if "max_results" in b and "config" in b["query"])
     assert code["include_domains"] == ["bitbucket.org", "gist.github.com", "github.com", "gitlab.com"]
     assert "exclude_domains" not in code and "exact_match" not in code
+
+
+def test_budget_exhausted_before_search_is_not_a_search_failure(make_env):
+    env = make_env()
+    env.engine.settings.limits.max_provider_requests = 20                # all 20 reserved for pages → no search
+    prov = Providers(results=default_results()).install(env)
+    p = approved_plan(env)
+    s = discover(env, env.upload({"roadmap.md": fx("roadmap.md")})["input_id"], p["query_plan_id"])
+    assert s["public_discovery"]["outcome"] == "budget_exhausted" and prov.searches() == []
+    cov = {(c["scope"], c["id"]): c for c in s["coverage"]}
+    assert cov[("check", "public_match")]["reason"] == "discovery_budget_exhausted"
+
+
+def test_search_budget_is_claimed_atomically():
+    seen = []
+
+    def handler(r):
+        seen.append(r)
+        return httpx.Response(200, json={"results": []})
+    req = {"op": "search", "searches": [{"query_id": f"q{i}", "provider": "exa", "query": f"Acme {i}", "num_results": 1,
+                                          "include_domains": None} for i in range(4)],
+           "limits": {"max_results": 5, "max_requests": 1, "concurrency": 2, "max_raw": 65536}, "deadline_seconds": 10}
+    out = run_request(req, transport=httpx.MockTransport(handler), resolver=PUBLIC_IP, env=dict(KEYS))
+    assert len(seen) == 1
+    assert sorted(x["error"] or "ok" for x in out["searches"]).count("request_budget_exhausted") == 3
+
+
+@pytest.mark.parametrize("url", ["http://127.1/", "http://2130706433/", "http://0x7f.0.0.1/", "https://wiki.test/a",
+                                 "https://nope.invalid/"])
+def test_candidate_url_blocklist_covers_shorthand_ips_and_reserved_names(url):
+    from tracefold.discovery.urls import check_url
+    assert check_url(url) in ("ip_literal_not_allowed", "private_destination")
+    assert check_url("https://123.example.com/page") is None              # digits in a real hostname are fine
