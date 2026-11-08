@@ -173,6 +173,13 @@ class ScanOut(BaseModel):
     started_at: str | None
     finished_at: str | None
     deadline_at: str | None
+    initiated_by: str | None = None          # name of the client that started the scan
+    started_from: Literal["assistant", "app", "other"] = "other"
+
+
+class ScanList(BaseModel):
+    items: list[ScanOut]
+    next_cursor: str | None
 
 
 # ---------- findings / evidence ----------

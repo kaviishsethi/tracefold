@@ -3,35 +3,35 @@
 /*
   Tracefold design tokens (carried over from Spillway): neutral near-black surfaces, white/10 hairlines, 14px card radius,
   10px control radius, Geist at 500 with tight tracking, warm off-white "paper" sections,
-  and orange reserved for focus + step marks.
-  Meaning colors: red/amber/sky = severity, teal = "stayed local".
+  and a muted teal accent reserved for focus, primary actions and step marks.
+  Meaning colors: red/amber/sky = severity, soft green = "stayed local" / no longer found.
 */
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  --color-bg: #0a0a0a;
-  --color-panel: #141413;
-  --color-panel-2: #1b1c1c;
-  --color-raised: #232323;
+  --color-bg: #0a0c0c;
+  --color-panel: #131615;
+  --color-panel-2: #181c1b;
+  --color-raised: #212625;
   --color-line: rgb(255 255 255 / 0.1);
   --color-line-strong: rgb(255 255 255 / 0.16);
-  --color-ink: #f5f4f2;
-  --color-ink-2: #d4d3cf;
-  --color-mute: #a7a8ad;
-  --color-faint: #7c7d82;
+  --color-ink: #eef2f1;
+  --color-ink-2: #cfd6d4;
+  --color-mute: #9aa3a1;
+  --color-faint: #737b79;
 
-  --color-paper: #f7f5f2;
+  --color-paper: #f3f6f5;
   --color-paper-card: #ffffff;
-  --color-paper-line: #e5e3de;
-  --color-paper-ink: #1a1815;
-  --color-paper-mute: #5d5a55;
+  --color-paper-line: #dde4e2;
+  --color-paper-ink: #121a19;
+  --color-paper-mute: #55605e;
 
-  --color-accent: #fd802e;
-  --color-rust: #a6491b;
-  --color-local: #5eead4;
-  --color-local-bg: rgb(94 234 212 / 0.09);
-  --color-local-line: rgb(94 234 212 / 0.28);
+  --color-accent: #4fb8a6;
+  --color-rust: #1f6f66;
+  --color-local: #86c79a;
+  --color-local-bg: rgb(134 199 154 / 0.09);
+  --color-local-line: rgb(134 199 154 / 0.28);
   --color-crit: #f87171;
   --color-med: #fbbf24;
   --color-low: #7dd3fc;
@@ -74,7 +74,7 @@ p {
 }
 
 ::selection {
-  background: rgb(253 128 46 / 0.32);
+  background: rgb(79 184 166 / 0.32);
   color: #fff;
 }
 
@@ -123,15 +123,17 @@ table {
 
 /* Dotted grain used behind section transitions. */
 .grain {
-  background-image: radial-gradient(circle, rgb(167 78 36 / 0.45) 0.8px, transparent 1px);
+  background-image: radial-gradient(circle, rgb(47 127 118 / 0.45) 0.8px, transparent 1px);
   background-size: 9px 9px;
 }
 
 /* Placeholder for imagery we don't have yet: a dusk-toned field with a label. */
+/* --slot-img is set by <ImageSlot src>; if the file is missing, the placeholder gradient below shows through. */
 .image-slot {
   background:
+    var(--slot-img, none) var(--slot-pos, center) / cover no-repeat,
     linear-gradient(180deg, rgb(10 10 10 / 0) 40%, rgb(10 10 10 / 0.85) 100%),
-    radial-gradient(120% 90% at 50% 105%, #f39a5b 0%, #b8573a 22%, #4a2a33 48%, #1d1a22 72%, #121214 100%);
+    radial-gradient(120% 90% at 50% 105%, #6fc3b5 0%, #2e7f76 22%, #173a3a 48%, #101818 72%, #0c1010 100%);
 }
 
 @keyframes menu-in {
@@ -186,7 +188,7 @@ table {
 }
 .dot-field__atmosphere i {
   opacity: 0.3;
-  background-image: radial-gradient(circle, #fd802e 1px, transparent 1.5px);
+  background-image: radial-gradient(circle, #4fb8a6 1px, transparent 1.5px);
   background-size: 18px 18px;
   mask-image: radial-gradient(at 0%, #000, transparent 58%);
   animation: dot-drift 12s ease-in-out infinite alternate;
@@ -198,7 +200,7 @@ table {
 }
 .dot-field__atmosphere b {
   opacity: 0;
-  background: radial-gradient(circle, #fd802e 1.5px, transparent 2px) 0 0 / 18px 18px;
+  background: radial-gradient(circle, #4fb8a6 1.5px, transparent 2px) 0 0 / 18px 18px;
   mask-image: radial-gradient(circle 180px at calc(var(--dot-x, 50%) + 30px) calc(var(--dot-y, 50%) + 30px), #000, transparent);
   transition: opacity 0.65s;
   animation: dot-hover-drift 12s ease-in-out infinite alternate;

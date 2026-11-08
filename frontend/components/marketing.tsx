@@ -11,7 +11,7 @@ export function MarketingPage({ title, lead, children, aside }: { title: ReactNo
     <div className="bg-bg">
       <SiteHeader />
       <header className={cx("relative isolate overflow-hidden pb-[clamp(56px,7vw,96px)] pt-[clamp(140px,16vw,200px)]", EDGE)}>
-        <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(70%_120%_at_80%_0%,rgb(253_128_46/0.10),transparent_60%)]" />
+        <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(70%_120%_at_80%_0%,rgb(79_184_166/0.10),transparent_60%)]" />
         <div className="mx-auto flex max-w-[1400px] flex-wrap items-end justify-between gap-10">
           <div className="max-w-[56rem]">
             <h1 className="rise text-[clamp(40px,5vw,72px)] font-semibold leading-[1.02] tracking-[-0.045em] text-white">{title}</h1>

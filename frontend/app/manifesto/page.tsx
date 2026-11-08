@@ -83,7 +83,7 @@ export default function Manifesto() {
               <LinkButton href="/security" variant="secondary">
                 Read the security model
               </LinkButton>
-              <LinkButton href="/onboarding">
+              <LinkButton href="/setup">
                 Get started <ArrowRight className="size-4" aria-hidden />
               </LinkButton>
             </div>

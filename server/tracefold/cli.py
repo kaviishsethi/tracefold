@@ -55,6 +55,16 @@ def main(argv: list[str] | None = None) -> int:
     g.add_argument("--email", help="the host's abuse/legal address (sent automatically on approval)")
     g.add_argument("--form-url", help="the host's own removal form (prefilled request, submitted by a person)")
 
+    q = sub.add_parser("quickstart", help="set everything up for a local folder in one step (safe to re-run)")
+    q.add_argument("--root", required=True, help="the folder to protect (a Git repo works best)")
+    q.add_argument("--workspace", help="workspace id (default: derived from the folder name)")
+    q.add_argument("--name", help="display name (default: the folder name)")
+    q.add_argument("--port", type=int, default=8787, help="port the engine will serve on")
+    q.add_argument("--public-url", action="append", default=[], help="a public page to check for copies (repeatable)")
+    q.add_argument("--frontend-env", help="where to write the web app config (default: frontend/.env.local)")
+    q.add_argument("--mcp-config", help="where to write the MCP adapter config (default: ~/.config/tracefold/mcp.json)")
+    q.add_argument("--json", action="store_true", help="print the result as JSON")
+
     sv = sub.add_parser("serve")
     sv.add_argument("--port", type=int, default=8787)
 
@@ -91,6 +101,11 @@ def main(argv: list[str] | None = None) -> int:
         sources = json.loads(Path(args.file).read_text())
         v = e.add_manifest(args.workspace, args.manifest_id, sources)
         print(f"manifest {args.manifest_id} v{v}")
+    elif args.cmd == "quickstart":
+        from . import quickstart
+        r = quickstart.run(e, args.root, args.workspace, args.name, args.port, args.public_url, args.frontend_env,
+                           args.mcp_config)
+        print(json.dumps(r, indent=2) if args.json else quickstart.describe(r))
     elif args.cmd == "set-remediation-profile":
         e.set_remediation_profile(args.workspace, args.company, args.reply_to)
         print(f"remediation profile set for {args.workspace}")

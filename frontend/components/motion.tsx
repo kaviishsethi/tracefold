@@ -98,7 +98,7 @@ export function CloudTransition({ reverse = false, height = 400 }: { reverse?: b
     <div
       aria-hidden
       className={cx("relative z-[1] w-full overflow-hidden", reverse ? "-mt-0.5" : "-mb-0.5")}
-      style={{ height, background: reverse ? "linear-gradient(#f7f5f2, transparent)" : "linear-gradient(transparent, #f7f5f2)" }}
+      style={{ height, background: reverse ? "linear-gradient(#f3f6f5, transparent)" : "linear-gradient(transparent, #f3f6f5)" }}
     >
       <canvas ref={ref} className="absolute inset-0 h-full w-full bg-bg" />
     </div>
