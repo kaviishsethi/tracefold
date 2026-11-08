@@ -155,7 +155,10 @@ def prepare(ctx) -> bool:
                                               "plan": plan, "created_by": ctx.scan["initiator"], "created_at": iso(now())})
         ctx.scan["public_discovery"] = {"mode": "live", "automatic": True, "query_plan_id": qid}
         ctx.engine.repo.update_scan(ctx.scan_id, public_discovery=ctx.scan["public_discovery"])
+        own_name = own["display_name"] if own else None
         ctx.summary["automatic_discovery"] = {"status": "ready", "companies": names, "kind": kind,
+                                               "own_company": own_name,
+                                               "found_in_files": [n for n in names if n != own_name],
                                                "privacy_notice": NOTICE, "sampled_chars": len(text),
                                                "configured_attribution": bool(attributions)}
         return True

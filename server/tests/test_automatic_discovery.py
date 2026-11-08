@@ -106,6 +106,8 @@ def test_own_company_is_always_searched(env, monkeypatch):
     inp = env.upload({'memo.md': b'Apple staff memo about leaks'})
     scan = env.scan(inp['input_id'], checks=['public_match'], automatic_discovery=True, model_review=False)
     assert scan['summary']['automatic_discovery']['companies'] == ['Northwind Relay', 'Apple']
+    assert scan['summary']['automatic_discovery']['own_company'] == 'Northwind Relay'
+    assert scan['summary']['automatic_discovery']['found_in_files'] == ['Apple']
     # Files with no recognizable company still search for the company itself.
     fake_model(env, monkeypatch, [])
     inp = env.upload({'notes.md': b'An anonymous document without a company.'})
