@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { CheckCircle2, Globe, LayoutGrid, ScanSearch, ShieldAlert, type LucideIcon } from "lucide-react";
 import { api, useWorkspace, ws, type Action, type ApiError, type Finding, type Page, type Workspace } from "@/lib/api";
+import { Select } from "./select";
 import { Spinner, Wordmark, cx } from "./ui";
 
 /** Marketing pages: no engine needed, no app chrome. */
@@ -114,26 +115,17 @@ function AppShell({ path, children }: { path: string; children: ReactNode }) {
               </p>
             ) : (
               <>
-                <p className="flex items-center gap-2 text-mute">
-                  <span className="size-1.5 rounded-full bg-accent" /> Local engine connected
-                </p>
                 {state.list.length > 1 ? (
-                  <select
-                    aria-label="Workspace"
-                    value={state.current?.id}
-                    onChange={(e) => state.select(e.target.value)}
-                    className="-ml-1 mt-1 w-full bg-transparent text-[13px] text-ink-2 outline-none"
-                  >
-                    {state.list.map((w) => (
-                      <option key={w.id} value={w.id}>
-                        {w.name}
-                      </option>
-                    ))}
-                  </select>
+                  <Select
+                    label="Workspace"
+                    className="w-full"
+                    value={state.current?.id ?? ""}
+                    onChange={(v) => state.select(v)}
+                    options={state.list.map((w) => ({ value: w.id, label: w.name }))}
+                  />
                 ) : (
-                  <p className="mt-1 truncate text-[13px] text-ink-2">{state.current?.name}</p>
+                  <p className="truncate text-[13px] text-ink-2">{state.current?.name}</p>
                 )}
-                <p className="mt-0.5 text-faint">Shared with your coding assistant</p>
               </>
             )}
           </div>

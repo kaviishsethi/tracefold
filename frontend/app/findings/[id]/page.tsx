@@ -12,6 +12,7 @@ import { useCurrentWorkspace } from "@/components/shell";
 import { ActionCard } from "@/components/action-card";
 import { Crumbs, Disclosure, Dot, findingPlace } from "@/components/bits";
 import { AgentPrompt, findingPrompt } from "@/components/agent-prompt";
+import { Upload } from "lucide-react";
 import { Button, ErrorNote, Spinner } from "@/components/ui";
 
 function Text({ label, meta, text }: { label: string; meta?: string; text: string | null }) {
@@ -27,7 +28,7 @@ function Text({ label, meta, text }: { label: string; meta?: string; text: strin
 }
 
 /** The facts behind a finding: how much matched, how the page was found and retrieved, and which scan saw it. */
-function EvidenceFacts({ ev, scanId }: { ev: Evidence; scanId?: string }) {
+function EvidenceFacts({ ev }: { ev: Evidence }) {
   const p = ev.public;
   const origin = p?.discovery_origins?.[0];
   const facts: [string, ReactNode][] = [];
@@ -47,16 +48,7 @@ function EvidenceFacts({ ev, scanId }: { ev: Evidence; scanId?: string }) {
         "Retrieved",
         `${p.retrieved_at ? relativeTime(p.retrieved_at) : "time unknown"}${p.provider ? ` via ${p.provider}` : ""} · ${p.freshness === "cached" ? "saved snapshot" : "live request during the scan"}`,
       ]);
-  } else if (ev.rule_id) {
-    facts.push(["Rule", ev.rule_id.replaceAll("_", " ")]);
   }
-  if (scanId)
-    facts.push([
-      "Scan",
-      <Link key="scan" href={`/scan/${scanId}`} className="text-ink underline underline-offset-4">
-        View scan and what left this machine
-      </Link>,
-    ]);
   if (!facts.length) return null;
   return (
     <div className="mt-4">
@@ -69,7 +61,7 @@ function EvidenceFacts({ ev, scanId }: { ev: Evidence; scanId?: string }) {
         ))}
       </dl>
       {ev.kind === "public_match" && (
-        <p className="mt-3 text-xs text-faint">A match shows this text is publicly available on that page. It doesn&apos;t show the publication was unauthorized.</p>
+        <p className="mt-3 text-xs text-faint">A match shows the text is public, not that it was published without permission.</p>
       )}
     </div>
   );
@@ -136,46 +128,43 @@ export default function FindingPage() {
 
   return (
     <div>
-      <Crumbs trail={[["/findings", "Findings"]]} current={o?.title ?? "Finding"} />
+      <Crumbs trail={[["/findings", "Findings"]]} />
 
       <div className="mb-8">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <h1 className="flex items-center gap-3 text-2xl tracking-[-0.03em] text-ink">
-            <Dot severity={o?.severity} />
-            {o?.title ?? "Finding"}
-          </h1>
-          {f.status === "open" && <AgentPrompt text={findingPrompt(f, ev?.public?.url)} />}
-        </div>
-        <p className="mt-1 text-sm text-mute">
-          {findingPlace(f) || "Location withheld"}
+        <h1 className="flex items-center gap-3 text-2xl tracking-[-0.03em] text-ink">
+          <Dot severity={o?.severity} />
+          {o?.title ?? "Finding"}
+        </h1>
+        <p className="mt-1.5 text-sm text-mute">
+          <span className="font-mono text-[13px]">{findingPlace(f) || "Location withheld"}</span>
+          {o?.scan_id && (
+            <>
+              {" · "}
+              <Link href={`/scan/${o.scan_id}`} className="hover:text-ink">
+                {relativeTime(o.created_at)}
+              </Link>
+            </>
+          )}
           {f.status !== "open" && <span className="text-local"> · {f.status === "no_longer_observed" ? "No longer found on the page" : "Not found after the fix"}</span>}
         </p>
-        {o?.claim && <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-ink-2">{o.claim}</p>}
       </div>
 
       <ErrorNote error={error} />
 
       {ev && (
         <div className={isPublic ? "grid gap-3 md:grid-cols-2" : ""}>
-          <Text label={`Your file${ev.location.path ? ` · ${ev.location.path}` : ""}`} text={
+          <Text label={isPublic ? "Your file" : (ev.location.path ?? "Your file")} text={
               ev.availability === "withheld_by_policy"
                 ? "Hidden for this client."
                 : ev.availability === "evidence_unavailable"
                   ? "Uploaded text is held only in the engine's memory and isn't kept on disk. The engine has restarted since this scan, so the text is gone. Scan the file again to compare side by side."
                   : ev.local_text
             } />
-          {isPublic && ev.public && <Text label={ev.public.url} meta={`fetched ${relativeTime(ev.public.retrieved_at)}`} text={ev.public_text} />}
+          {isPublic && ev.public && <Text label={ev.public.url} text={ev.public_text} />}
         </div>
       )}
 
-      {ev && <EvidenceFacts ev={ev} scanId={o?.scan_id} />}
-
-      {o?.suggested_fix && (
-        <section className="mt-8">
-          <h2 className="mb-2 text-sm font-medium text-ink">How to fix</h2>
-          <p className="max-w-2xl text-[15px] leading-relaxed text-ink-2">{o.suggested_fix}</p>
-        </section>
-      )}
+      {ev && <EvidenceFacts ev={ev} />}
 
       {actions.length > 0 && (
         <section className="mt-8 space-y-4">
@@ -193,19 +182,22 @@ export default function FindingPage() {
       )}
 
       {f.status === "open" && (
-        <section className="mt-8">
-          <h2 className="mb-2 text-sm font-medium text-ink">Fixed it?</h2>
-          <p className="mb-3 text-sm text-mute">
-            {isPublic ? "Public copies are rechecked by scanning the page again." : "Upload the edited file and Tracefold checks this one problem again."}
+        <section className="mt-8 rounded-card border border-line bg-panel p-5">
+          <h2 className="text-sm font-medium text-ink">Fix</h2>
+          <p className="mt-1.5 max-w-2xl text-[15px] leading-relaxed text-ink-2">
+            {o?.suggested_fix ?? (isPublic ? "Check whether this was meant to be public. Any takedown drafted for it is above." : o?.claim)}
           </p>
-          {!isPublic && (
-            <>
-              <input ref={file} type="file" hidden onChange={(e) => checkAgain(e.target.files)} />
-              <Button variant="secondary" size="sm" loading={checking} onClick={() => file.current?.click()}>
-                Upload the fixed file
-              </Button>
-            </>
-          )}
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            <AgentPrompt text={findingPrompt(f, ev?.public?.url)} />
+            {!isPublic && (
+              <>
+                <input ref={file} type="file" hidden onChange={(e) => checkAgain(e.target.files)} />
+                <Button variant="secondary" size="sm" loading={checking} onClick={() => file.current?.click()}>
+                  <Upload className="size-3.5" aria-hidden /> Recheck fixed file
+                </Button>
+              </>
+            )}
+          </div>
           {recheck?.outcome && (
             <p className="mt-3 text-sm text-ink">
               {RECHECK_LABEL[recheck.outcome]}
@@ -215,9 +207,10 @@ export default function FindingPage() {
         </section>
       )}
 
-      {(o?.conditions || o?.uncertainty) && (
+      {(o?.conditions || o?.uncertainty || (o?.suggested_fix && o?.claim)) && (
         <Disclosure label="More detail" className="mt-10">
           <div className="mt-3 max-w-2xl space-y-2 leading-relaxed">
+            {o?.suggested_fix && o?.claim && <p className="text-ink-2">{o.claim}</p>}
             {o?.conditions && <p>{o.conditions}</p>}
             {o?.uncertainty && <p>{o.uncertainty}</p>}
             {o?.verification_step && <p>{o.verification_step}</p>}

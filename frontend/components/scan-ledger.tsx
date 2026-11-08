@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { api, ws, type ApiError, type LedgerEvent, type Page } from "@/lib/api";
-import { ErrorNote, Loading, Panel, cx } from "./ui";
+import { Disclosure } from "./bits";
+import { ErrorNote, cx } from "./ui";
 
 type Kind = "search" | "fetch" | "model" | "other";
 
@@ -50,11 +51,10 @@ async function allEvents(workspaceId: string, scanId: string): Promise<LedgerEve
   return out;
 }
 
-/** The outbound ledger for one scan: every request the engine made, as its gateway recorded it. */
+/** The outbound ledger for one scan, folded into one line: where requests went, with the full list on demand. */
 export function LedgerPanel({ workspaceId, scanId }: { workspaceId: string; scanId: string }) {
   const [rows, setRows] = useState<LedgerEvent[] | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [kind, setKind] = useState<Kind | "">("");
 
   useEffect(() => {
     let alive = true;
@@ -67,87 +67,50 @@ export function LedgerPanel({ workspaceId, scanId }: { workspaceId: string; scan
   }, [workspaceId, scanId]);
 
   if (error) return <ErrorNote error={error} />;
-  if (!rows) return <Loading />;
+  if (!rows) return null;
 
-  const counts = (Object.keys(KIND) as Kind[]).map((k) => [k, rows.filter((r) => kindOf(r) === k).length] as const).filter(([, n]) => n > 0);
   const external = rows.filter((r) => kindOf(r) !== "model");
   const hosts = [...new Set(external.map((r) => r.destination_host))].sort();
-  const shown = rows.filter((r) => !kind || kindOf(r) === kind).sort((a, b) => a.at.localeCompare(b.at));
+  const shown = [...rows].sort((a, b) => a.at.localeCompare(b.at));
+  const label = (
+    <span className="flex min-w-0 items-center gap-2.5">
+      <span className={cx("size-1.5 shrink-0 rounded-full", external.length ? "bg-med" : "bg-local")} />
+      <span className="truncate">
+        {external.length === 0 ? "Nothing left this machine" : `Sent to ${hosts.length === 1 ? hosts[0] : `${hosts.length} sites`}`}
+      </span>
+      <span className="shrink-0 text-faint">
+        {rows.length} {rows.length === 1 ? "request" : "requests"}
+      </span>
+    </span>
+  );
+  if (rows.length === 0) return <p className="flex items-center gap-2.5 px-1 text-sm text-ink-2"><span className="size-1.5 rounded-full bg-local" />Nothing left this machine</p>;
 
   return (
-    <Panel title="What left this machine" meta={`${rows.length} ${rows.length === 1 ? "request" : "requests"}`}>
-      <div className="space-y-1.5 border-b border-line px-4 py-3 text-[13px] text-ink-2">
-        {rows.length === 0 ? (
-          <p>No outbound requests. Local rules and the local model make no outside requests.</p>
-        ) : (
-          <>
-            <p>
-              {external.length === 0
-                ? "Nothing was sent outside this machine."
-                : `${external.length} ${external.length === 1 ? "request" : "requests"} went to ${hosts.join(", ")}.`}{" "}
-              {counts.some(([k]) => k === "model") && "Local model calls stayed on this machine."}
-            </p>
-            <p className="text-xs text-faint">
-              Each row is what the engine&apos;s outbound gateway recorded: search queries are the fixed queries shown above, fetches are public URLs. Provider keys are masked.
-            </p>
-          </>
-        )}
-      </div>
-      {rows.length > 0 && (
-        <>
-          <div role="group" aria-label="Request type" className="flex flex-wrap gap-1 border-b border-line px-3 py-2">
-            {([["", rows.length] as const, ...counts]).map(([k, n]) => (
-              <button
-                key={k || "all"}
-                aria-pressed={kind === k}
-                onClick={() => setKind(k)}
-                className={cx(
-                  "inline-flex h-8 items-center gap-2 rounded-ctl px-3 text-[13px] transition-colors",
-                  kind === k ? "bg-raised text-ink" : "text-mute hover:bg-panel-2 hover:text-ink",
-                )}
-              >
-                {k ? KIND[k] : "All"}
-                <span className="font-mono text-[11px] text-faint">{n}</span>
-              </button>
+    <Disclosure label={label}>
+      <div className="-mx-4 -my-3 max-h-[420px] overflow-auto">
+        <table className="w-full min-w-[560px] table-fixed text-left text-[13px]">
+          <colgroup>
+            <col className="w-[84px]" />
+            <col className="w-[104px]" />
+            <col />
+            <col className="w-[56px]" />
+          </colgroup>
+          <tbody>
+            {shown.map((r) => (
+              <tr key={r.event_id} className={cx("border-b border-line last:border-0", failed(r.status) && "bg-crit/[0.05]")}>
+                <td className="whitespace-nowrap px-4 py-2 font-mono text-xs text-faint" title={r.at}>
+                  {time(r.at)}
+                </td>
+                <td className="whitespace-nowrap px-4 py-2 text-xs text-mute">{KIND[kindOf(r)]}</td>
+                <td className="truncate px-4 py-2 text-xs text-ink-2" title={`${r.destination_host} ${sent(r)}`}>
+                  {sent(r)}
+                </td>
+                <td className={cx("whitespace-nowrap px-4 py-2 text-right font-mono text-xs", failed(r.status) ? "text-crit" : "text-faint")}>{r.status}</td>
+              </tr>
             ))}
-          </div>
-          <div className="max-h-[420px] overflow-auto">
-            <table className="w-full min-w-[640px] table-fixed text-left text-[13px]">
-              <colgroup>
-                <col className="w-[88px]" />
-                <col className="w-[110px]" />
-                <col className="w-[150px]" />
-                <col />
-                <col className="w-[64px]" />
-              </colgroup>
-              <thead className="sticky top-0 bg-panel text-xs text-faint">
-                <tr className="border-b border-line">
-                  {["Time", "Type", "Destination", "Sent", "Status"].map((h) => (
-                    <th key={h} className="px-4 py-2.5 font-normal">
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {shown.map((r) => (
-                  <tr key={r.event_id} className={cx("border-b border-line align-top last:border-0", failed(r.status) && "bg-crit/[0.05]")}>
-                    <td className="whitespace-nowrap px-4 py-2 font-mono text-xs text-faint" title={r.at}>
-                      {time(r.at)}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-2 text-xs text-mute">{KIND[kindOf(r)]}</td>
-                    <td className="truncate px-4 py-2 font-mono text-xs text-ink-2">{r.destination_host}</td>
-                    <td className="truncate px-4 py-2 text-xs text-ink" title={sent(r)}>
-                      {sent(r)}
-                    </td>
-                    <td className={cx("whitespace-nowrap px-4 py-2 font-mono text-xs", failed(r.status) ? "text-crit" : "text-faint")}>{r.status}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </>
-      )}
-    </Panel>
+          </tbody>
+        </table>
+      </div>
+    </Disclosure>
   );
 }

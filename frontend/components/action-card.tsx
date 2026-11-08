@@ -4,6 +4,7 @@ import { useState } from "react";
 import { api, ws, type Action, type ApiError } from "@/lib/api";
 import { relativeTime } from "@/lib/format";
 import { Disclosure } from "./bits";
+import { Checkbox } from "./checkbox";
 import { Button, cx, inputClass } from "./ui";
 
 const ME_KEY = "tracefold.approver";
@@ -128,10 +129,9 @@ export function ActionCard({ action, workspaceId, workspaceName, onChange }: { a
             <input aria-label="Your name" placeholder="Your name" className={inputClass} value={me.name} onChange={(e) => setMe({ ...me, name: e.target.value })} />
             <input aria-label="Your email" placeholder="you@company.com" type="email" className={inputClass} value={me.email} onChange={(e) => setMe({ ...me, email: e.target.value })} />
           </div>
-          <label className="flex items-start gap-2 text-sm text-ink-2">
-            <input type="checkbox" className="mt-0.5" checked={attest} onChange={(e) => setAttest(e.target.checked)} />
+          <Checkbox checked={attest} onChange={setAttest}>
             I&apos;m authorized to approve this for {workspaceName}.
-          </label>
+          </Checkbox>
           <div className="flex gap-2">
             <Button size="sm" type="submit" loading={busy} className="!bg-accent !text-[#0a0c0c]">
               {a.kind === "disable_aws_key" ? "Turn off the key" : "Approve and send"}

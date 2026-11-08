@@ -301,7 +301,7 @@ export default function Landing() {
       <section className={EDGE} aria-labelledby="problem">
         <div className="mx-auto max-w-[1760px]">
           <Reveal className="pt-[clamp(48px,6vw,88px)]">
-            <h2 id="problem" className={cx(H2, "max-w-3xl text-ink")}>
+            <h2 id="problem" className={cx(H2, "max-w-3xl scroll-mt-28 text-ink")}>
               Internal material ends up in public every day. Most teams hear about it from someone else.
             </h2>
           </Reveal>
