@@ -20,7 +20,7 @@ export type RiskReview = "supported" | "inconclusive" | "dismissed" | "unavailab
 export type Origin = "rule" | "model" | "matcher";
 export type RecheckOutcome = "still_detected" | "not_detected_in_checked_version" | "inconclusive";
 export type Severity = "high" | "medium" | "low";
-export type ActionKind = "takedown_request" | "disable_aws_key";
+export type ActionKind = "takedown_request" | "disable_aws_key" | "revoke_github_token";
 export type ActionStatus =
   | "drafted"
   | "awaiting_manual_submission"
@@ -48,7 +48,7 @@ export interface Capabilities {
   model: { available?: boolean; model?: string; reason?: string; [k: string]: unknown };
   limits: Record<string, number>;
   client_capabilities: Record<string, Capability[]>;
-  remediation?: { takedown_delivery?: string; aws_key_disable?: string };
+  remediation?: { takedown_delivery?: string; aws_key_disable?: string; github_token_revoke?: string };
 }
 
 export interface Workspace {
@@ -431,7 +431,7 @@ export interface Action {
   status: ActionStatus;
   version: number;
   summary: string;
-  target: { url?: string; host?: string; source_id?: string; excerpt?: string; retrieved_at?: string; access_key_id?: string };
+  target: { url?: string; host?: string; source_id?: string; excerpt?: string; retrieved_at?: string; access_key_id?: string; token?: string; ready?: boolean };
   delivery: { method: "email" | "form" | "none"; address: string | null; form_url: string | null; transport: string | null } | null;
   subject: string | null;
   /** Rendered letter preview (company and signature filled in). */
@@ -585,14 +585,25 @@ export function useScan(workspaceId: string | null, scanId: string | null) {
   useEffect(() => {
     if (!workspaceId || !scanId) return;
     let alive = true;
+    let failures = 0;
+    let seen = false;
+    // A brand-new scan can 404 for a moment, and the engine can blip during a restart: retry quietly and only
+    // show an error after repeated failures. Once a scan has loaded, keep showing it while retrying.
     const tick = async () => {
       try {
         const s = await api<Scan>(ws(workspaceId, `/scans/${scanId}`));
         if (!alive) return;
+        failures = 0;
+        seen = true;
         setScan(s);
+        setError(null);
         if (!isTerminal(s.state)) timer.current = setTimeout(tick, 1000);
       } catch (e) {
-        if (alive) setError(e as ApiError);
+        if (!alive) return;
+        failures += 1;
+        const limit = seen ? 30 : (e as ApiError).status === 404 ? 10 : 5;
+        if (failures < limit) timer.current = setTimeout(tick, Math.min(1000 * failures, 3000));
+        else if (!seen) setError(e as ApiError);
       }
     };
     tick();

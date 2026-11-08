@@ -58,8 +58,15 @@ uv run tracefold set-remediation-profile <workspace> --company "Your Company, In
 uv run tracefold add-takedown-contact <workspace> pastebin.com --email abuse@pastebin.com
 ```
 
-To disable leaked AWS keys after approval, put credentials for an IAM user allowed only `iam:GetAccessKeyLastUsed` and
-`iam:UpdateAccessKey` in `server/.env` as `TRACEFOLD_AWS_REMEDIATION_ACCESS_KEY_ID` and
-`TRACEFOLD_AWS_REMEDIATION_SECRET_ACCESS_KEY`, then restart the engine.
+Leaked GitHub tokens are revoked through GitHub's public revoke API after approval. Nothing to set up.
+
+To turn off leaked AWS keys after approval, run this once (it uses your AWS CLI login, creates an IAM user that can only
+look up and turn off access keys, and writes its key to `server/.env` without printing it):
+
+```bash
+cd server && uv run tracefold connect-aws
+```
+
+No engine restart is needed.
 
 The workspace id is printed by step 1.

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -68,6 +69,11 @@ def main(argv: list[str] | None = None) -> int:
     q.add_argument("--reply-to", help="email takedown recipients should reply to (sets the takedown signer)")
     q.add_argument("--json", action="store_true", help="print the result as JSON")
 
+    ca = sub.add_parser("connect-aws", help="let Tracefold turn off leaked AWS keys (uses your AWS CLI login)")
+    ca.add_argument("--profile", help="AWS CLI profile to use (default: your default profile)")
+    ca.add_argument("--user", default="tracefold-remediation", help="IAM user to create or reuse")
+    ca.add_argument("--rotate", action="store_true", help="replace the key already in server/.env")
+
     sv = sub.add_parser("serve")
     sv.add_argument("--port", type=int, default=8787)
 
@@ -79,6 +85,17 @@ def main(argv: list[str] | None = None) -> int:
     loaded = load_env_file()
     if loaded and args.cmd == "serve":
         print(f"loaded from .env: {', '.join(sorted(loaded))}", file=sys.stderr)
+    if args.cmd == "connect-aws":
+        from . import connect_aws
+        env_path = Path(os.environ.get("TRACEFOLD_ENV_FILE", Path.cwd() / ".env"))
+        try:
+            for step in connect_aws.run(env_path, args.profile, args.user, args.rotate):
+                print(step)
+        except connect_aws.ConnectError as ex:
+            print(f"tracefold connect-aws: {ex}", file=sys.stderr)
+            return 1
+        print("Done. Approve a key shut-off in the app; the engine picks up the key without a restart.")
+        return 0
     if args.cmd == "serve":
         import uvicorn
         from .api.app import create_app

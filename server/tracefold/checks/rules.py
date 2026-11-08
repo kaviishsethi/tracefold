@@ -212,6 +212,7 @@ def python_logging(doc: ParsedDoc) -> tuple[list[Hit], str | None]:
 _PROVIDER_PATTERNS = [
     ("aws_access_key_id", re.compile(r"\b((?:AKIA|ASIA)[0-9A-Z]{16})\b")),
     ("github_token", re.compile(r"\b(gh[pousr]_[A-Za-z0-9]{36,255})\b")),
+    ("github_token", re.compile(r"\b(github_pat_[A-Za-z0-9_]{22,255})\b")),
     ("slack_token", re.compile(r"\b(xox[baprs]-[A-Za-z0-9-]{10,})\b")),
     ("stripe_live_key", re.compile(r"\b((?:sk|rk)_live_[0-9A-Za-z]{24,})\b")),
     ("private_key_block", re.compile(r"(-----BEGIN (?:RSA |EC |OPENSSH |DSA |ENCRYPTED )?PRIVATE KEY-----)")),

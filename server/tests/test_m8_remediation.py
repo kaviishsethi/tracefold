@@ -251,7 +251,7 @@ def test_aws_key_drafted_masked_and_needs_credentials(env):
     r = approve(env, a)
     assert r.status_code == 409 and r.json()["error"]["code"] == "aws_remediation_not_configured"
     status = env.client.get("/v1/capabilities", headers=env.h()).json()["remediation"]
-    assert status == {"takedown_delivery": "outbox", "aws_key_disable": "not_configured"}
+    assert status == {"takedown_delivery": "outbox", "aws_key_disable": "not_configured", "github_token_revoke": "available"}
 
 
 def test_aws_key_disabled_with_remediation_credentials_only(env):
@@ -286,3 +286,62 @@ def test_clients_without_approve_cannot_disable_keys(env, who):
     iam(env)
     assert approve(env, key_action(env), who=who).status_code == 403
     assert key_action(env)["status"] == "drafted"
+
+
+
+# ---------------- GitHub tokens ----------------
+GH_TOKEN = "ghp_" + "Tf0ldDemo9" * 3 + "abcdef"
+
+
+def gh_scan(env):
+    inp = env.upload({"deploy.py": f'GITHUB_TOKEN = "{GH_TOKEN}"\n'.encode()})
+    return env.scan(inp["input_id"], model_review=False)
+
+
+def gh_action(env):
+    return next(a for a in actions(env) if a["kind"] == "revoke_github_token")
+
+
+def github_api(env, status=202):
+    calls = []
+
+    def handler(req: httpx.Request) -> httpx.Response:
+        calls.append(req)
+        return httpx.Response(status, json={})
+
+    env.engine.remediation.gateway = Gateway(transport=httpx.MockTransport(handler), resolver=lambda h, p: ["140.82.112.6"])
+    return calls
+
+
+def test_github_token_revoked_with_no_setup_and_never_stored(env):
+    gh_scan(env)
+    a = gh_action(env)
+    assert a["summary"] == "Revoke GitHub token ****" + GH_TOKEN[-4:] and a["target"]["ready"] is True
+    assert GH_TOKEN not in json.dumps(actions(env))
+    row = env.engine.repo.get_action(a["action_id"])
+    assert GH_TOKEN not in json.dumps(row)                       # only a fingerprint and a masked form are saved
+    calls = github_api(env)
+    done = approve(env, a).json()
+    assert done["status"] == "completed" and done["result"] == {"revoked": True}
+    (req,) = calls
+    assert str(req.url) == "https://api.github.com/credentials/revoke" and "authorization" not in req.headers
+    assert json.loads(req.content) == {"credentials": [GH_TOKEN]}
+    assert GH_TOKEN not in json.dumps(env.engine.repo.all_ledger())
+
+
+def test_github_revoke_after_restart_needs_a_rescan(env):
+    gh_scan(env)
+    env.engine.remediation.tokens.clear()                        # what an engine restart does
+    a = gh_action(env)
+    assert a["target"]["ready"] is False
+    r = approve(env, a)
+    assert r.status_code == 409 and r.json()["error"]["code"] == "token_not_in_memory"
+    gh_scan(env)                                                 # scanning again restores it for the same action
+    assert gh_action(env)["target"]["ready"] is True and gh_action(env)["action_id"] == a["action_id"]
+
+
+def test_github_rejection_is_a_failed_action(env):
+    gh_scan(env)
+    github_api(env, status=422)
+    done = approve(env, gh_action(env)).json()
+    assert done["status"] == "failed" and done["result"]["error"]["code"] == "github_rejected"

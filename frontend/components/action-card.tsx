@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { api, ws, type Action, type ApiError, type Capabilities } from "@/lib/api";
 import { relativeTime } from "@/lib/format";
 import { Disclosure } from "./bits";
+import { AgentPrompt } from "./agent-prompt";
+import { CONNECT_AWS, CONNECT_AWS_PROMPT, CopyCommand } from "./copy-command";
 import { Button, cx, inputClass } from "./ui";
 
 let caps: Promise<Capabilities | null> | null = null;
@@ -20,12 +22,13 @@ function useAwsConnected(): boolean | null {
 const HINTS: Record<string, string> = {
   no_takedown_contact: "Add a contact for this site first: uv run tracefold add-takedown-contact <workspace> <host> --email abuse@<host>",
   remediation_profile_missing: "Add your company name and reply-to email in Settings first.",
-  aws_remediation_not_configured: "Add AWS remediation credentials to server/.env and restart the engine (see SETUP.md).",
+  aws_remediation_not_configured: "AWS isn't connected yet. Run: cd server && uv run tracefold connect-aws",
   forbidden: "This app's token can't approve. Re-run tracefold quickstart.",
 };
 
 /** What will happen if you approve, in one sentence. */
 function plan(a: Action): string {
+  if (a.kind === "revoke_github_token") return `Send token ${a.target.token} to GitHub to revoke it. Anything using it stops working, and GitHub can't restore it.`;
   if (a.kind === "disable_aws_key") return `Turn off AWS key ${a.target.access_key_id} in IAM. Anything still using it will stop working. No new key is created.`;
   const d = a.delivery;
   if (d?.method === "email") return `Email ${d.address} asking them to remove the copy at ${a.target.url}.${d.transport === "outbox" ? " (Saved to the outbox, not sent.)" : ""}`;
@@ -42,6 +45,7 @@ function outcome(a: Action): string {
     case "awaiting_manual_submission":
       return "Approved. Submit the letter on the site's form, then mark it sent.";
     case "completed":
+      if (a.kind === "revoke_github_token") return "Revoked by GitHub. The owner gets an email about it.";
       return `Key turned off${r.iam_user ? ` for ${r.iam_user}` : ""}.`;
     case "rejected":
       return `Rejected${r.reason ? `: ${r.reason}` : ""}.`;
@@ -63,7 +67,9 @@ export function ActionCard({ action, workspaceId, onChange }: { action: Action; 
   const path = (s: string) => ws(workspaceId, `/actions/${a.action_id}${s}`);
   const open = a.status === "drafted" || a.status === "failed";
   const awsConnected = useAwsConnected();
-  const blocked = a.kind === "disable_aws_key" && awsConnected === false;
+  const awsBlocked = a.kind === "disable_aws_key" && awsConnected === false;
+  const tokenGone = a.kind === "revoke_github_token" && a.target.ready === false;
+  const blocked = awsBlocked || tokenGone;
 
   async function call(s: string, method: "POST" | "PATCH", json: unknown) {
     setBusy(true);
@@ -103,16 +109,23 @@ export function ActionCard({ action, workspaceId, onChange }: { action: Action; 
 
       {error && <p className="mt-3 text-sm text-crit">{error}</p>}
 
-      {open && blocked && (
-        <p className="mt-3 text-sm text-med">
-          AWS isn&apos;t connected, so Tracefold can&apos;t turn this key off. Turn it off in the AWS console, or connect AWS (see SETUP.md) and approve it here.
-        </p>
+      {open && awsBlocked && (
+        <div className="mt-4 space-y-2">
+          <p className="text-sm text-mute">AWS isn&apos;t connected yet. Run this once, then approve here:</p>
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="min-w-[280px] flex-1">
+              <CopyCommand command={CONNECT_AWS} />
+            </div>
+            <AgentPrompt text={CONNECT_AWS_PROMPT} />
+          </div>
+        </div>
       )}
+      {open && tokenGone && <p className="mt-3 text-sm text-mute">Tracefold doesn&apos;t keep tokens on disk. Scan the file again, then revoke.</p>}
 
       {open && mode === "idle" && (
         <div className="mt-4 flex gap-2">
           {!blocked && <Button size="sm" className="!bg-accent !text-[#0a0c0c]" loading={busy} onClick={() => call("/approve", "POST", { expected_version: a.version })}>
-            {a.status === "failed" ? "Try again" : a.kind === "disable_aws_key" ? "Turn off key" : a.delivery?.method === "form" ? "Approve" : "Send request"}
+            {a.status === "failed" ? "Try again" : a.kind === "revoke_github_token" ? "Revoke token" : a.kind === "disable_aws_key" ? "Turn off key" : a.delivery?.method === "form" ? "Approve" : "Send request"}
           </Button>}
           <Button size="sm" variant="ghost" onClick={() => setMode("reject")}>
             Reject

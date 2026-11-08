@@ -26,7 +26,7 @@ export default function Approvals() {
 
   return (
     <div>
-      <H1 sub="Takedown requests and key shut-offs Tracefold has drafted. Nothing happens until you approve.">Approvals</H1>
+      <H1 sub="Takedowns and leaked-key fixes Tracefold has drafted. Nothing happens until you approve.">Approvals</H1>
       <ErrorNote error={error} />
       {actions === null && !error && <p className="text-sm text-mute">Loading…</p>}
       {actions && pending.length === 0 && <p className="text-sm text-mute">Nothing needs your approval.</p>}
