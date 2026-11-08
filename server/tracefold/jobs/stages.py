@@ -87,7 +87,8 @@ def public_match_stage(ctx: "ScanContext") -> None:
                     "kind": "public_match", "location": loc, "file_sha256": doc.file.sha256, "file_kind": doc.kind,
                     "public": {"source_id": sid, "url": src["url"], "start": m.public_start, "end": m.public_end,
                                "retrieved_at": src.get("retrieved_at"), "freshness": src.get("freshness", "fresh"),
-                               "snapshot_id": snap["id"]},
+                               "snapshot_id": snap["id"], "mode": src.get("mode", "seeded"),
+                               "provider": src.get("provider")},
                     "public_blob": src.get("content_hash"), "matched_tokens": m.tokens, "segment_coverage": cov,
                     "normalization": policy,
                 }

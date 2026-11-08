@@ -32,7 +32,7 @@ unexpected `Host`/`Origin` headers.
 | Service | How to enable | Without it |
 |---|---|---|
 | Local model review | Install Ollama, pull a model, set `TRACEFOLD_OLLAMA_MODEL` (default `qwen2.5:7b-instruct`) and optionally `TRACEFOLD_OLLAMA_URL` (must be loopback). Set `OLLAMA_NO_CLOUD=1` for the Ollama service. | Rule findings are published with `risk_review: unavailable`. |
-| Exa / Tavily extraction | `EXA_API_KEY` / `TAVILY_API_KEY` in the server's environment; manifest entries with `"provider": "exa"` or `"tavily"`. | Those sources report `provider_not_configured`. `direct` and `fixture` providers still work. |
+| Exa / Tavily extraction | `EXA_API_KEY` / `TAVILY_API_KEY` in the environment or in `server/.env` (gitignored, loaded by `tracefold` commands); manifest entries with `"provider": "exa"` or `"tavily"` — see `examples/manifest.live.example.json`. | Those sources report `provider_not_configured`. `direct` and `fixture` providers still work. |
 | Takedown email | Default `TRACEFOLD_MAIL_TRANSPORT=outbox` writes approved requests to `$TRACEFOLD_DATA/outbox/*.eml` and sends nothing. For real sending set `TRACEFOLD_MAIL_TRANSPORT=resend`, `RESEND_API_KEY` and `TRACEFOLD_MAIL_FROM` (a sender on a domain verified with Resend). | Approved takedowns land in the outbox. |
 | AWS key disabling | `TRACEFOLD_AWS_REMEDIATION_ACCESS_KEY_ID` / `TRACEFOLD_AWS_REMEDIATION_SECRET_ACCESS_KEY` (optional `TRACEFOLD_AWS_REMEDIATION_SESSION_TOKEN`) for an IAM principal allowed only `iam:GetAccessKeyLastUsed` and `iam:UpdateAccessKey`. | Approving `disable_aws_key` returns 409 `aws_remediation_not_configured`. |
 

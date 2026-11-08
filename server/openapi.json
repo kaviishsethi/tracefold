@@ -254,6 +254,140 @@
         }
       }
     },
+    "/v1/workspaces/{ws_id}/manifests/{manifest_id}": {
+      "get": {
+        "summary": "Get Manifest",
+        "operationId": "get_manifest_v1_workspaces__ws_id__manifests__manifest_id__get",
+        "parameters": [
+          {
+            "name": "ws_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Ws Id"
+            }
+          },
+          {
+            "name": "manifest_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Manifest Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManifestOut"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "410": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Gone"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Content Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          }
+        }
+      }
+    },
     "/v1/workspaces/{ws_id}/uploads": {
       "post": {
         "summary": "Upload",
@@ -4040,6 +4174,74 @@
         ],
         "title": "LocationOut"
       },
+      "ManifestOut": {
+        "properties": {
+          "schema_version": {
+            "type": "integer",
+            "title": "Schema Version",
+            "default": 1
+          },
+          "manifest_id": {
+            "type": "string",
+            "title": "Manifest Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/ManifestSourceOut"
+            },
+            "type": "array",
+            "title": "Sources"
+          },
+          "outbound_note": {
+            "type": "string",
+            "title": "Outbound Note"
+          }
+        },
+        "type": "object",
+        "required": [
+          "manifest_id",
+          "version",
+          "sources",
+          "outbound_note"
+        ],
+        "title": "ManifestOut"
+      },
+      "ManifestSourceOut": {
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "title": "Source Id"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "provider": {
+            "type": "string",
+            "title": "Provider"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "seeded",
+              "discovered"
+            ],
+            "title": "Mode"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_id",
+          "url",
+          "provider",
+          "mode"
+        ],
+        "title": "ManifestSourceOut"
+      },
       "MarkSubmittedRequest": {
         "properties": {
           "note": {
@@ -4382,6 +4584,26 @@
           "snapshot_id": {
             "type": "string",
             "title": "Snapshot Id"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "seeded",
+              "discovered"
+            ],
+            "title": "Mode",
+            "default": "seeded"
+          },
+          "provider": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Provider"
           }
         },
         "type": "object",

@@ -14,3 +14,10 @@ data/
 cache/
 models/
 debug-traces/
+
+# Disposable design QA captures
+.impeccable/review/
+
+# Demo plan and demo source pairs (kept local)
+docs/DEMO_PLAN.md
+docs/demo-pairs/

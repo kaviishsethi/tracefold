@@ -257,10 +257,15 @@ def test_live_direct_fetch_through_isolated_worker():
 
 
 @pytest.mark.live
-@pytest.mark.skipif(os.environ.get("TRACEFOLD_LIVE") != "1" or not (os.environ.get("EXA_API_KEY") or os.environ.get("TAVILY_API_KEY")),
-                    reason="needs TRACEFOLD_LIVE=1 and EXA_API_KEY or TAVILY_API_KEY")
-def test_live_provider_extract():
-    provider = "exa" if os.environ.get("EXA_API_KEY") else "tavily"
+@pytest.mark.parametrize("provider,key", [("exa", "EXA_API_KEY"), ("tavily", "TAVILY_API_KEY")])
+def test_live_provider_extract(provider, key):
+    if os.environ.get("TRACEFOLD_LIVE") != "1" or not os.environ.get(key):
+        pytest.skip(f"needs TRACEFOLD_LIVE=1 and {key} (env or server/.env)")
     out = run_subprocess({"sources": [{"source_id": "example", "url": "https://example.com/", "provider": provider}],
                           "limits": LIMITS, "deadline_seconds": 45}, timeout=90, deny_read=[])
-    assert out["results"][0]["status"] == "ok", out["results"][0]
+    r = out["results"][0]
+    assert r["status"] == "ok", r
+    assert "documentation examples" in r["text"]
+    ev = out["ledger"][0]
+    assert ev["destination_host"] == {"exa": "api.exa.ai", "tavily": "api.tavily.com"}[provider]
+    assert os.environ[key] not in json.dumps(out["ledger"])  # key masked in the ledger
