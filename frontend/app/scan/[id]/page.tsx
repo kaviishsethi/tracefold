@@ -92,6 +92,8 @@ function Progress({ scan }: { scan: Scan }) {
 interface AutoDiscovery {
   status: "ready" | "unavailable";
   companies?: string[];
+  own_company?: string | null;
+  found_in_files?: string[];
   privacy_notice?: string;
   reason?: string;
 }
@@ -102,7 +104,24 @@ function Identified({ auto }: { auto: AutoDiscovery }) {
     <p className="mb-8 text-sm text-mute" title={auto.privacy_notice}>
       {auto.status === "ready" ? (
         <>
-          Company in these files: <span className="text-ink">{(auto.companies ?? []).join(", ")}</span>
+          {auto.found_in_files ? (
+            auto.found_in_files.length ? (
+              <>
+                Company in these files: <span className="text-ink">{auto.found_in_files.join(", ")}</span>
+              </>
+            ) : (
+              "No other company named in these files"
+            )
+          ) : (
+            <>
+              Company in these files: <span className="text-ink">{(auto.companies ?? []).join(", ")}</span>
+            </>
+          )}
+          {auto.own_company && (
+            <>
+              {" · "}Also searched for your company, <span className="text-ink">{auto.own_company}</span>
+            </>
+          )}
         </>
       ) : (
         <span className="text-med">
