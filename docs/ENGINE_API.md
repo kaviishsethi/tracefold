@@ -113,7 +113,7 @@ credentials ([PLAN.md](../PLAN.md) §"Act").
 | `GET /workspaces/{ws}/actions?status=&finding_id=&cursor=&limit=` | List actions | `read` |
 | `GET /workspaces/{ws}/actions/{id}` | One action, with the rendered letter (full disclosure only) | `read` |
 | `PATCH /workspaces/{ws}/actions/{id}` | `{subject?, body?, expected_version}`: edit a takedown before it's sent. `body` replaces the **draft** text: edit `draft_body`, not `body` | `approve` |
-| `POST /workspaces/{ws}/actions/{id}/approve` | `{approver: {name, email, title?}, attest_authorized: true, expected_version}`: sign and execute | `approve` |
+| `POST /workspaces/{ws}/actions/{id}/approve` | `{expected_version, approver?: {name, email, title?}}`: execute. Without `approver`, it is recorded against the client and takedowns are signed as the company | `approve` |
 | `POST /workspaces/{ws}/actions/{id}/reject` | `{reason, expected_version}` | `approve` |
 | `POST /workspaces/{ws}/actions/{id}/mark-submitted` | `{note?, expected_version}` after filing a host's web form | `approve` |
 
@@ -133,7 +133,7 @@ include the private file's name or other private text. Under `minimal` disclosur
 withheld and AWS key IDs are always shown masked.
 
 Approval errors (409): `remediation_profile_missing`, `no_takedown_contact`, `aws_remediation_not_configured`,
-`invalid_state`, `version_conflict`. Missing attestation is 422 `attestation_required`.
+`invalid_state`, `version_conflict`. Sending `attest_authorized: false` is 422 `attestation_required`.
 
 Operator setup (CLI only):
 

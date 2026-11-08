@@ -204,7 +204,7 @@ class RemediationService:
         if not req.attest_authorized:
             raise ApiError(422, "attestation_required",
                            "Confirm that you're authorized to act for the company before approving.")
-        approver = {**req.approver.model_dump(), "client": p.name}
+        approver = {**(req.approver.model_dump() if req.approver else {}), "client": p.name}
         if a["kind"] == ActionKind.takedown_request.value:
             self._approve_takedown(ws_id, a, approver)
         else:

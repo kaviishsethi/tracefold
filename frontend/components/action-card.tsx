@@ -4,18 +4,7 @@ import { useState } from "react";
 import { api, ws, type Action, type ApiError } from "@/lib/api";
 import { relativeTime } from "@/lib/format";
 import { Disclosure } from "./bits";
-import { Checkbox } from "./checkbox";
 import { Button, cx, inputClass } from "./ui";
-
-const ME_KEY = "tracefold.approver";
-
-function remembered(): { name: string; email: string } {
-  try {
-    return JSON.parse(localStorage.getItem(ME_KEY) ?? "") as { name: string; email: string };
-  } catch {
-    return { name: "", email: "" };
-  }
-}
 
 const HINTS: Record<string, string> = {
   no_takedown_contact: "Add a contact for this site first: uv run tracefold add-takedown-contact <workspace> <host> --email abuse@<host>",
@@ -52,11 +41,10 @@ function outcome(a: Action): string {
   }
 }
 
-export function ActionCard({ action, workspaceId, workspaceName, onChange }: { action: Action; workspaceId: string; workspaceName: string; onChange: (a: Action) => void }) {
+/** One drafted fix. Approving runs it right away; the app's token is the company's, so no per-person sign-off is asked for. */
+export function ActionCard({ action, workspaceId, onChange }: { action: Action; workspaceId: string; workspaceName?: string; onChange: (a: Action) => void }) {
   const a = action;
-  const [mode, setMode] = useState<"idle" | "approve" | "reject">("idle");
-  const [me, setMe] = useState(remembered);
-  const [attest, setAttest] = useState(false);
+  const [mode, setMode] = useState<"idle" | "reject">("idle");
   const [reason, setReason] = useState("");
   const [letter, setLetter] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -104,43 +92,13 @@ export function ActionCard({ action, workspaceId, workspaceName, onChange }: { a
 
       {open && mode === "idle" && (
         <div className="mt-4 flex gap-2">
-          <Button size="sm" className="!bg-accent !text-[#0a0c0c]" onClick={() => setMode("approve")}>
-            {a.status === "failed" ? "Try again" : "Approve"}
+          <Button size="sm" className="!bg-accent !text-[#0a0c0c]" loading={busy} onClick={() => call("/approve", "POST", { expected_version: a.version })}>
+            {a.status === "failed" ? "Try again" : a.kind === "disable_aws_key" ? "Turn off key" : a.delivery?.method === "form" ? "Approve" : "Send request"}
           </Button>
           <Button size="sm" variant="ghost" onClick={() => setMode("reject")}>
             Reject
           </Button>
         </div>
-      )}
-
-      {open && mode === "approve" && (
-        <form
-          className="mt-4 space-y-3"
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (!me.name.trim() || !me.email.includes("@") || !attest) return setError("Add your name and email, and tick the box.");
-            try {
-              localStorage.setItem(ME_KEY, JSON.stringify(me));
-            } catch {}
-            call("/approve", "POST", { approver: { name: me.name.trim(), email: me.email.trim() }, attest_authorized: true, expected_version: a.version });
-          }}
-        >
-          <div className="grid gap-3 sm:grid-cols-2">
-            <input aria-label="Your name" placeholder="Your name" className={inputClass} value={me.name} onChange={(e) => setMe({ ...me, name: e.target.value })} />
-            <input aria-label="Your email" placeholder="you@company.com" type="email" className={inputClass} value={me.email} onChange={(e) => setMe({ ...me, email: e.target.value })} />
-          </div>
-          <Checkbox checked={attest} onChange={setAttest}>
-            I&apos;m authorized to approve this for {workspaceName}.
-          </Checkbox>
-          <div className="flex gap-2">
-            <Button size="sm" type="submit" loading={busy} className="!bg-accent !text-[#0a0c0c]">
-              {a.kind === "disable_aws_key" ? "Turn off the key" : "Approve and send"}
-            </Button>
-            <Button size="sm" variant="ghost" type="button" onClick={() => setMode("idle")}>
-              Cancel
-            </Button>
-          </div>
-        </form>
       )}
 
       {open && mode === "reject" && (

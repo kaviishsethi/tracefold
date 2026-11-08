@@ -58,7 +58,7 @@ def test_public_match_drafts_takedown_with_public_content_only(env):
     assert "https://forum.example/t/123" in a["body"] and "Harbor ingestion cluster" in a["body"]
     for private in ("roadmap.md", "forty minutes", "41,000"):  # filename and private-only text never appear
         assert private not in a["body"] and private not in a["subject"]
-    assert "[Signed by the approver" in a["body"]
+    assert a["body"].rstrip().endswith("Reply to: [reply-to not set]")  # signed as the company, no personal signer
     assert a["delivery"] == {"method": "none", "address": None, "form_url": None, "transport": None}
 
 
@@ -75,6 +75,18 @@ def test_approve_needs_profile_contact_attestation_and_capability(env):
     assert approve(env, a, who="reader").status_code == 403  # read-only client
     assert approve(env, a, version=a["version"] + 5).json()["error"]["code"] == "version_conflict"
     assert takedown(env)["status"] == "drafted"
+
+
+def test_one_click_approval_signs_as_the_company(env):
+    public_scan(env)
+    setup_takedown(env, email="abuse@forum.example")
+    a = takedown(env)
+    r = env.client.post(f"{WS}/actions/{a['action_id']}/approve", headers=env.h("app"), json={"expected_version": a["version"]})
+    assert r.status_code == 200, r.text
+    done = r.json()
+    assert done["status"] == "submitted" and done["approver"]["client"] and "name" not in done["approver"]
+    eml = (env.engine.settings.data_dir / "outbox" / f"{a['action_id']}.eml").read_text()
+    assert "Northwind Relay, Inc.\nReply to: legal@northwind.example" in eml.replace("\r\n", "\n")
 
 
 def test_email_approval_sends_once_through_outbox(env):

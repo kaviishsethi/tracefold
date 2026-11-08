@@ -11,7 +11,6 @@ import re
 from ..checks.rules import _ASSIGN, _PROVIDER_PATTERNS
 
 MAX_EXCERPT = 600
-SIGNATURE_PLACEHOLDER = "[Signed by the approver when this request is approved]"
 
 
 def mask_secrets(text: str) -> str:
@@ -54,9 +53,9 @@ def render(body: str, company: str, reply_to: str, approver: dict | None) -> str
     """Fill company details and append the signature block."""
     # "Northwind Relay, Inc." at a sentence end must not become "Inc.."
     text = body.replace("{company}.", company if company.endswith(".") else company + ".").replace("{company}", company)
-    if approver:
+    if approver and approver.get("name"):
         title = f"{approver['title']}, " if approver.get("title") else ""
         sig = f"{approver['name']}\n{title}{company}\nReply to: {reply_to}\n"
-    else:
-        sig = f"{SIGNATURE_PLACEHOLDER}\n{company}\nReply to: {reply_to}\n"
+    else:  # signed as the company itself
+        sig = f"{company}\nReply to: {reply_to}\n"
     return text.rstrip() + "\n\n" + sig
