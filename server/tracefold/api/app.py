@@ -12,7 +12,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from ..contracts.enums import Check
 from ..contracts.models import (
     ActionOut, ActionPage, ApproveRequest, EditActionRequest, MarkSubmittedRequest, RejectRequest,
-    CompanyProfileIn, CompanyProfileList, CompanyProfileOut, QueryPlanIn, QueryPlanOut, QueryPlanPage, QueryPresetCatalog, SourcePage,
+    CompanyIn, CompanyOut, CompanyProfileIn, CompanyProfileList, CompanyProfileOut, QueryPlanIn, QueryPlanOut, QueryPlanPage, QueryPresetCatalog, SourcePage,
     CapabilitiesOut, CaptureRequest, ErrorEnvelope, EvidenceOut, FindingDetail, FindingOut, FindingPage, InputOut,
     LedgerPage, ManifestOut, RecheckAccepted, RecheckRequest, ReviewRequest, ScanAccepted, ScanList, ScanOut, ScanRequest, WorkspaceList,
     WorkspaceOut,
@@ -228,6 +228,17 @@ def create_app(engine: Engine) -> FastAPI:
         return engine.remediation.mark_submitted(p, ws_id, action_id, body)
 
     # ---------------- company discovery ----------------
+    @app.get("/v1/workspaces/{ws_id}/company", response_model=CompanyOut, responses=ERRORS)
+    def get_company(ws_id: str, p: Principal = Depends(principal)):
+        """The workspace's own company: name, website and takedown reply-to."""
+        return engine.discovery.get_company(p, ws_id)
+
+    @app.put("/v1/workspaces/{ws_id}/company", response_model=CompanyOut, responses=ERRORS)
+    def put_company(ws_id: str, body: CompanyIn, p: Principal = Depends(principal)):
+        """Set the company (requires `configure`). Its name is searched in every public check alongside names found in
+        the files, and takedown requests are signed with it."""
+        return engine.discovery.put_company(p, ws_id, body)
+
     @app.post("/v1/workspaces/{ws_id}/company-profiles", response_model=CompanyProfileOut, status_code=201, responses=ERRORS)
     def create_company_profile(ws_id: str, body: CompanyProfileIn, p: Principal = Depends(principal)):
         """Approve a public company identity (requires the `configure` capability). Creates a new immutable version

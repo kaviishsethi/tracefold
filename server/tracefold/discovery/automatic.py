@@ -82,17 +82,34 @@ def prepare(ctx) -> bool:
         text = text.encode("utf-8")[:max_bytes].decode("utf-8", errors="ignore")
         ctx.spend("model_input_bytes_bound", len((SYSTEM + text).encode("utf-8")) + 32)
         attributions = configured_attribution(ctx)
-        client = ctx.engine.reviewer.client()
-        ctx.versions["identity_model"] = client.identify(timeout=min(5, ctx.remaining_seconds()))
-        client.max_output = 256
-        ctx.spend("model_requests")
-        result = client.chat(SYSTEM, "<source>\n" + text + "\n</source>", SCHEMA,
-                             time.monotonic() + min(60, ctx.remaining_seconds()))
-        ctx.spend("model_prompt_tokens", result.prompt_tokens)
-        ctx.spend("model_output_tokens", result.output_tokens)
-        data = json.loads(result.content)
+        own = None if attributions else ctx.engine.discovery.own_profile(ctx.scan["workspace_id"])
+        data: dict = {}
+        try:
+            client = ctx.engine.reviewer.client()
+            ctx.versions["identity_model"] = client.identify(timeout=min(5, ctx.remaining_seconds()))
+            client.max_output = 256
+            for attempt in range(2):  # a small local model occasionally returns malformed JSON; ask once more
+                ctx.spend("model_requests")
+                result = client.chat(SYSTEM, "<source>\n" + text + "\n</source>", SCHEMA,
+                                     time.monotonic() + min(60, ctx.remaining_seconds()))
+                ctx.spend("model_prompt_tokens", result.prompt_tokens)
+                ctx.spend("model_output_tokens", result.output_tokens)
+                try:
+                    data = json.loads(result.content)
+                    if isinstance(data, dict):
+                        break
+                except ValueError:
+                    pass
+                if attempt or ctx.engine.settings.limits.max_model_requests < 2:
+                    raise ValueError("invalid identity output")
+        except (ModelUnavailable, ValueError):
+            if not own:  # without the company's own name there is nothing safe to search
+                raise
+            data = {}  # still search for the company itself
         inferred = grounded_names(data, text)
         names = [p["display_name"] for p in attributions] if attributions else inferred
+        if own:  # the workspace's own company is always searched, first, alongside names found in the files
+            names = [own["display_name"], *(n for n in names if n.casefold() != own["display_name"].casefold())][:2]
         if not names:
             return unavailable(ctx, "company_not_identified")
         kind = data.get("kind", "other")

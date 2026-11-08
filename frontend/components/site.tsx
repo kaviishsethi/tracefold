@@ -42,7 +42,7 @@ export function SiteHeader() {
         )}
       >
         <Link href="/" aria-label="Tracefold home">
-          <Wordmark className="text-[15px]" />
+          <Wordmark className="wordmark--header" />
         </Link>
         <nav className="flex items-center gap-1">
           {NAV.map((n) => (

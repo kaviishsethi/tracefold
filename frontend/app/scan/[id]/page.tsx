@@ -7,7 +7,7 @@ import { Check, Loader2, X } from "lucide-react";
 import { api, coverageNote, isTerminal, useScan, ws, type Finding, type FindingKind, type Page, type Scan, type Stage } from "@/lib/api";
 import { relativeTime } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
-import { Box, Disclosure, FindingRow, H1, Note, scanState, source } from "@/components/bits";
+import { Box, Crumbs, Disclosure, FindingRow, H1, Note, scanState, source } from "@/components/bits";
 import { AgentPrompt, scanPrompt } from "@/components/agent-prompt";
 import { SourcesPanel } from "@/components/scan-sources";
 import { LedgerPanel } from "@/components/scan-ledger";
@@ -105,7 +105,17 @@ function Identified({ auto }: { auto: AutoDiscovery }) {
           Company in these files: <span className="text-ink">{(auto.companies ?? []).join(", ")}</span>
         </>
       ) : (
-        <span className="text-med">No company name found in the files, so public pages weren&apos;t searched.</span>
+        <span className="text-med">
+          {auto.reason === "company_not_identified"
+            ? "No company name found in the files, so public pages weren't searched."
+            : auto.reason === "invalid_identity_output"
+              ? "The local model's answer couldn't be read, so public pages weren't searched."
+              : "The local model isn't running, so public pages weren't searched."}{" "}
+          <Link href="/settings" className="underline underline-offset-4">
+            Add your company
+          </Link>{" "}
+          to always search for it.
+        </span>
       )}
     </p>
   );
@@ -148,6 +158,7 @@ export default function ScanDetail() {
 
   return (
     <div>
+      <Crumbs trail={[["/scan", "Scans"]]} />
       <div>
         <H1
           sub={`${source(scan)} · ${relativeTime(scan.created_at)}${scan.recheck_of ? " · recheck" : ""}${scan.state === "partial" ? " · some checks didn't finish" : ""}`}
@@ -177,7 +188,7 @@ export default function ScanDetail() {
           const items = (findings ?? []).filter((f) => f.kind === kind);
           const note = coverageNote(scan, kind, items.length);
           const searchFailed = scan.coverage.some((c) => c.scope === "check" && c.id === "public_match" && c.reason === "discovery_search_failed");
-          if (kind === "public_exposure" && items.length === 0 && searchFailed) return null; // the sources panel explains why
+          if (kind === "public_exposure" && items.length === 0 && (searchFailed || auto?.status === "unavailable")) return null; // explained elsewhere
           return (
             <section key={kind} className="mb-8">
               <h2 className="mb-3 text-sm font-medium text-ink">{label}</h2>
@@ -189,7 +200,7 @@ export default function ScanDetail() {
           );
         })}
 
-      {done && workspace && scan.checks.includes("public_match") && <div className="mb-8"><SourcesPanel workspaceId={workspace.id} scan={scan} /></div>}
+      {done && workspace && scan.checks.includes("public_match") && auto?.status !== "unavailable" && <div className="mb-8"><SourcesPanel workspaceId={workspace.id} scan={scan} /></div>}
 
       {done && workspace && (
         <div className="mb-8">
