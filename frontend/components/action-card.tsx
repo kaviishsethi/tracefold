@@ -31,7 +31,10 @@ function plan(a: Action): string {
   if (a.kind === "revoke_github_token") return `Send token ${a.target.token} to GitHub to revoke it. Anything using it stops working, and GitHub can't restore it.`;
   if (a.kind === "disable_aws_key") return `Turn off AWS key ${a.target.access_key_id} in IAM. Anything still using it will stop working. No new key is created.`;
   const d = a.delivery;
-  if (d?.method === "email") return `Email ${d.address} asking them to remove the copy at ${a.target.url}.${d.transport === "outbox" ? " (Saved to the outbox, not sent.)" : ""}`;
+  if (d?.method === "email")
+    return d.transport === "outbox"
+      ? `Write an email to ${d.address} asking them to remove the copy at ${a.target.url}. Email sending is off, so it's saved as a file, not sent.`
+      : `Email ${d.address} asking them to remove the copy at ${a.target.url}.`;
   if (d?.method === "form") return `${a.target.host} only takes requests through its own form. You'll get the letter to paste there.`;
   return `Ask ${a.target.host} to remove the copy at ${a.target.url}. No contact is set up for this site yet.`;
 }
@@ -41,6 +44,7 @@ function outcome(a: Action): string {
   const r = a.result;
   switch (a.status) {
     case "submitted":
+      if (r.transport === "outbox") return `Not sent. Email sending is off, so the request to ${r.sent_to ?? "the host"} was saved as a file (data/outbox/${r.outbox_file ?? ""}).`;
       return a.removal_observed ? "Removed. A later scan no longer finds the text." : `Sent${r.sent_to ? ` to ${r.sent_to}` : ""}. Not confirmed removed yet.`;
     case "awaiting_manual_submission":
       return "Approved. Submit the letter on the site's form, then mark it sent.";
@@ -125,7 +129,7 @@ export function ActionCard({ action, workspaceId, onChange }: { action: Action; 
       {open && mode === "idle" && (
         <div className="mt-4 flex gap-2">
           {!blocked && <Button size="sm" className="!bg-accent !text-[#0a0c0c]" loading={busy} onClick={() => call("/approve", "POST", { expected_version: a.version })}>
-            {a.status === "failed" ? "Try again" : a.kind === "revoke_github_token" ? "Revoke token" : a.kind === "disable_aws_key" ? "Turn off key" : a.delivery?.method === "form" ? "Approve" : "Send request"}
+            {a.status === "failed" ? "Try again" : a.kind === "revoke_github_token" ? "Revoke token" : a.kind === "disable_aws_key" ? "Turn off key" : a.delivery?.method === "form" ? "Approve" : a.delivery?.transport === "outbox" ? "Save email" : "Send request"}
           </Button>}
           <Button size="sm" variant="ghost" onClick={() => setMode("reject")}>
             Reject
