@@ -1,0 +1,707 @@
+{
+  "case_id": "gsa_tts",
+  "label": "public_policy",
+  "pack": "broad_triage",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Technology Transformation Services",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" leaked internal memo",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Technology Transformation Services employees",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" email to employees full text",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "Technology Transformation Services employee handbook or company policy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" policy handbook procedure",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from Technology Transformation Services",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\"",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 5.6,
+  "provider_requests": 28,
+  "response_bytes": 710582,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Technology Transformation Services",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:51.174366Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:49.850391Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Technology Transformation Services employees",
+      "status": "ok",
+      "error": null,
+      "returned": 2,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:51.330912Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" email to employees full text",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:52.649217Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "Technology Transformation Services employee handbook or company policy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:51.505114Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" policy handbook procedure",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:51.613132Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from Technology Transformation Services",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:51.789915Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:51.932345Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_9093f39ad174adbd7fb2",
+      "url": "https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Dozens of Government Technology Specialists Fired",
+          "returned_url": "https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6acd0c0de97e8263bfde",
+      "url": "https://federalnewsnetwork.com/reorganization/2025/03/after-rocky-history-gsa-shuts-down-18f-office/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "After rocky history, GSA shuts down 18F office | Federal News Network",
+          "returned_url": "https://federalnewsnetwork.com/reorganization/2025/03/after-rocky-history-gsa-shuts-down-18f-office/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_14ec2bddccf5c89b177d",
+      "url": "https://www.nextgov.com/digital-government/2025/04/gsa-preps-layoffs-tts/404467/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "GSA preps for layoffs at TTS - Nextgov/FCW",
+          "returned_url": "https://www.nextgov.com/digital-government/2025/04/gsa-preps-layoffs-tts/404467/"
+        },
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "GSA preps for layoffs at TTS - Nextgov/FCW",
+          "returned_url": "https://www.nextgov.com/digital-government/2025/04/gsa-preps-layoffs-tts/404467/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_33629c4715f8f24ce6b7",
+      "url": "https://www.reddit.com/r/UnderReportedNews/comments/1xqceb2/stephen_millers_breitbart_pipeline_over_900",
+      "fetch_status": "failed",
+      "failure_reason": "provider_no_content",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Stephen Miller's Breitbart Pipeline: Over 900 Leaked ...",
+          "returned_url": "https://www.reddit.com/r/UnderReportedNews/comments/1xqceb2/stephen_millers_breitbart_pipeline_over_900"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_e4768373235c2fa083a9",
+      "url": "https://unbreaking.org/issues/data-security",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Data Security \u2014 Unbreaking",
+          "returned_url": "https://unbreaking.org/issues/data-security"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_cc45861ec3bd6d617d2c",
+      "url": "https://www.cbpp.org/research/federal-budget/executive-action-watch?item=29713",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Executive Order Moves to Dismantle Several Small Agencies | Center on Budget and Policy Priorities",
+          "returned_url": "https://www.cbpp.org/research/federal-budget/executive-action-watch?item=29713"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_9a2b3c0840c2c2515768",
+      "url": "https://fedscoop.com/some-gsa-tech-workers-may-be-reassigned-given-option-to-leave-agency-email-shows/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Some GSA tech workers may be reassigned, given option to leave agency, email shows | FedScoop",
+          "returned_url": "https://fedscoop.com/some-gsa-tech-workers-may-be-reassigned-given-option-to-leave-agency-email-shows/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d6a1e172d066cbd091fd",
+      "url": "https://www.gsaig.gov/sites/default/files/audit-reports/A240037-1%20Final%20Report.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "GSA's Technology Transformation Services Violated Hiring ...",
+          "returned_url": "https://www.gsaig.gov/sites/default/files/audit-reports/A240037-1%20Final%20Report.pdf"
+        },
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "GSA's Technology Transformation Services Violated Hiring ...",
+          "returned_url": "https://www.gsaig.gov/sites/default/files/audit-reports/A240037-1%20Final%20Report.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_38630a8feeb15b7d2c82",
+      "url": "https://fedscoop.com/gsa-names-new-technology-transformation-services-deputy-director",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GSA names new Technology Transformation Services deputy director | FedScoop",
+          "returned_url": "https://fedscoop.com/gsa-names-new-technology-transformation-services-deputy-director"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e287c3384f2d43f69add",
+      "url": "https://www.executivegov.com/articles/gsa-gregory-barbaccia-acting-tts-director",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GSA Appoints Gregory Barbaccia as Acting TTS Director",
+          "returned_url": "https://www.executivegov.com/articles/gsa-gregory-barbaccia-acting-tts-director"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_cafd2ae341afd3937b84",
+      "url": "https://github.com/gsa-tts",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "GSA-TTS - Technology Transformation Services",
+          "returned_url": "https://github.com/gsa-tts"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_945e952b0fd50f19e9d5",
+      "url": "https://exa.ai/library/organization/brcr0ws9ppm",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Technology Transformation Services (TTS)",
+          "returned_url": "https://exa.ai/library/organization/brcr0ws9ppm"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_5bb08dafb231139a4953",
+      "url": "https://go.govloop.com/rs/231-DWB-776/images/Tech-Transformation-Strategies-Ideas-implementation.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Technology Transformation Strategies: From Idea to ...",
+          "returned_url": "https://go.govloop.com/rs/231-DWB-776/images/Tech-Transformation-Strategies-Ideas-implementation.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_a5633188520ae2bdce3c",
+      "url": "https://www.michigan.gov/dtmb/-/media/Project/Websites/dtmb/Law-and-Policies/Admin-Guide/1300/POLICY-1365-Information-Technology-Standards-Adoption-Procurement-Development-and-Implementation-Pol.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "POLICY 1365.00 Information Technology (IT) Adoption, ...",
+          "returned_url": "https://www.michigan.gov/dtmb/-/media/Project/Websites/dtmb/Law-and-Policies/Admin-Guide/1300/POLICY-1365-Information-Technology-Standards-Adoption-Procurement-Development-and-Implementation-Pol.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c3f9c72ec8f9b2170aa2",
+      "url": "https://digitalgovernmenthub.org/wp-content/uploads/2022/07/federal-field-guide-4dccc06e01cd56773eb140ff6e6b2805cc517a460d6bff6689e7edd0ef349598.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Federal Agency Field Guide Government Technology",
+          "returned_url": "https://digitalgovernmenthub.org/wp-content/uploads/2022/07/federal-field-guide-4dccc06e01cd56773eb140ff6e6b2805cc517a460d6bff6689e7edd0ef349598.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_9af2f0b6798bfc9646fb",
+      "url": "https://github.com/GSA/site-scanning",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "The central repository for the Site Scanning program",
+          "returned_url": "https://github.com/GSA/site-scanning"
+        },
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitHub - GSA/site-scanning: The central repository for the Site Scanning program \u00b7 GitHub",
+          "returned_url": "https://github.com/GSA/site-scanning"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c5d60cc84ef4013e3cfc",
+      "url": "https://github.com/orgs/GSA-TTS/repositories",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Repositories - GSA-TTS",
+          "returned_url": "https://github.com/orgs/GSA-TTS/repositories"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_33404f267c80822bbdf8",
+      "url": "https://github.com/GSA-TTS/forms",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "GSA-TTS/forms",
+          "returned_url": "https://github.com/GSA-TTS/forms"
+        },
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitHub - GSA-TTS/forms: Friendly government forms for everyone. \u00b7 GitHub",
+          "returned_url": "https://github.com/GSA-TTS/forms"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_9518c7f884a65e6d7c0d",
+      "url": "https://github.com/cloud-gov",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Cloud.gov \u00b7 GitHub",
+          "returned_url": "https://github.com/cloud-gov"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:41:55.038418Z"
+}

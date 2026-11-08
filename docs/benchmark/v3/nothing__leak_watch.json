@@ -1,0 +1,471 @@
+{
+  "case_id": "nothing",
+  "label": "reported_leak_excerpt",
+  "pack": "leak_watch",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Nothing Technology",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" leaked internal memo",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leak_news_alias",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Nothing Phone",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leak_news_alias",
+      "provider": "tavily",
+      "query": "\"Nothing Phone\" leaked internal memo",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 20.8,
+  "provider_requests": 19,
+  "response_bytes": 710742,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Nothing Technology",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:11.065776Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 2,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:13.483587Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leak_news_alias",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Nothing Phone",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:12.383604Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leak_news_alias",
+      "provider": "tavily",
+      "query": "\"Nothing Phone\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:15.869922Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_727ef7f75584119163db",
+      "url": "https://www.phonearena.com/news/nothings-first-flagship-phone-coming-this-quarter_id166566",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "matched",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Leaked internal memo reveals that Nothing's first true flagship phone is coming this quarter - PhoneArena",
+          "returned_url": "https://www.phonearena.com/news/nothings-first-flagship-phone-coming-this-quarter_id166566"
+        },
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Leaked internal memo reveals that Nothing's first true flagship phone is coming this quarter - PhoneArena",
+          "returned_url": "https://www.phonearena.com/news/nothings-first-flagship-phone-coming-this-quarter_id166566"
+        }
+      ],
+      "mentions_company": true,
+      "matches": [
+        {
+          "upload": "upload-reference.txt",
+          "role": "reference",
+          "tokens": 22
+        }
+      ]
+    },
+    {
+      "source_id": "d_c5f93cbeed60d129388c",
+      "url": "https://www.techradar.com/phones/does-every-phone-maker-need-a-flagship",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Does every phone maker need a flagship? | TechRadar",
+          "returned_url": "https://www.techradar.com/phones/does-every-phone-maker-need-a-flagship"
+        },
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Does every phone maker need a flagship? | TechRadar",
+          "returned_url": "https://www.techradar.com/phones/does-every-phone-maker-need-a-flagship"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6bbaa3b65c5012ed5d46",
+      "url": "https://www.phonearena.com/news/a-new-nothing-phone-3-leak-gives-away-pricing-and-a-possible-new-product_id170942",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "A new Nothing Phone (3) leak gives away pricing and a possible new product - PhoneArena",
+          "returned_url": "https://www.phonearena.com/news/a-new-nothing-phone-3-leak-gives-away-pricing-and-a-possible-new-product_id170942"
+        },
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 5,
+          "title": "A new Nothing Phone (3) leak gives away pricing and a possible new product - PhoneArena",
+          "returned_url": "https://www.phonearena.com/news/a-new-nothing-phone-3-leak-gives-away-pricing-and-a-possible-new-product_id170942"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_74b313fd51488f7d693b",
+      "url": "https://www.thestar.com.my/tech/tech-news/2024/08/20/iphone-challenger-nothing-calls-staff-back-in-five-days-a-week-threatening-dissenters-with-dismissal",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 4,
+          "title": "iPhone challenger Nothing calls staff back in five days a week, threatening dissenters with dismissal | The Star",
+          "returned_url": "https://www.thestar.com.my/tech/tech-news/2024/08/20/iphone-challenger-nothing-calls-staff-back-in-five-days-a-week-threatening-dissenters-with-dismissal"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_692ed85530e0a3cb4a19",
+      "url": "https://www.gizbot.com/news/nothing-is-reorganising-itself-around-ai-and-its-phones-are-no-longer-the-main-event-127663.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 5,
+          "title": "Nothing Is Reorganising Itself Around AI, And Its Phones Might No Longer Be The Main Event -\n        Gizbot News",
+          "returned_url": "https://www.gizbot.com/news/nothing-is-reorganising-itself-around-ai-and-its-phones-are-no-longer-the-main-event-127663.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_503f1dca9a53cbc04805",
+      "url": "https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Assigned_Numbers/out/en/Assigned_Numbers.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "incomplete",
+      "truncated": true,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Assigned Numbers",
+          "returned_url": "https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Assigned_Numbers/out/en/Assigned_Numbers.pdf"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_da5852f6efd848cffe6c",
+      "url": "https://www.tiktok.com/discover/%D1%87%D1%82%D0%BE-%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE-%D0%B4%D0%B5%D0%BB%D0%B0%D1%82%D1%8C-%D1%81-mi-unlock",
+      "fetch_status": "failed",
+      "failure_reason": "provider_no_content",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "\u0427\u0442\u043e \u041c\u043e\u0436\u043d\u043e \u0414\u0435\u043b\u0430\u0442\u044c \u0421 Mi Unlock",
+          "returned_url": "https://www.tiktok.com/discover/%D1%87%D1%82%D0%BE-%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE-%D0%B4%D0%B5%D0%BB%D0%B0%D1%82%D1%8C-%D1%81-mi-unlock"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_a8388c8721f78aec58f3",
+      "url": "https://www.gadgetbridge.com/nothings-new-phone-arriving-on-march-4-likely-nothing-phone-3/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Nothing's new phone arriving on March 4, likely Nothing Phone 3",
+          "returned_url": "https://www.gadgetbridge.com/nothings-new-phone-arriving-on-march-4-likely-nothing-phone-3/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_89e76fbca9cc7d642627",
+      "url": "https://www.businesstoday.in/technology/news/story/this-is-a-company-for-grown-ups-nothing-ceo-carl-pei-ends-work-from-home-announces-return-to-five-day-in-office-442160-2024-08-20",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 4,
+          "title": "'This is a company for grown ups': Nothing CEO Carl Pei ends work from home, announces return to five day in office - BusinessToday",
+          "returned_url": "https://www.businesstoday.in/technology/news/story/this-is-a-company-for-grown-ups-nothing-ceo-carl-pei-ends-work-from-home-announces-return-to-five-day-in-office-442160-2024-08-20"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_4ac0a6a98e0b44a77248",
+      "url": "https://smartphones.gadgethacks.com/news/nothing-phone-3a-camera-tuning-controls-explained",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Nothing Phone (3a) Camera Tuning Controls Explained",
+          "returned_url": "https://smartphones.gadgethacks.com/news/nothing-phone-3a-camera-tuning-controls-explained"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c5e953abc70fc17ab434",
+      "url": "https://shattered.io/nothing-ai-native-product-seven-open-questions-december-2026",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Nothing AI-Native Product: 7 Open Questions [2026]",
+          "returned_url": "https://shattered.io/nothing-ai-native-product-seven-open-questions-december-2026"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ada0a8489540fa624119",
+      "url": "https://www.stuff.tv/features/most-anticipated-upcoming-phones",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Best upcoming phones in 2026: find your next phone",
+          "returned_url": "https://www.stuff.tv/features/most-anticipated-upcoming-phones"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_9c76c37194ddd53fafdb",
+      "url": "https://www.wired.com/story/best-cheap-phones",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 4,
+          "title": "7 Best Cheap Phones (2026), Tested and Reviewed | WIRED",
+          "returned_url": "https://www.wired.com/story/best-cheap-phones"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_128d7a50a04d8331f187",
+      "url": "https://www.tomsguide.com/phones/samsung-phones/whats-the-difference-between-galaxy-s27-ultra-and-s27-pro-5-key-differences-and-3-similarities-based-on-the-leaks",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 5,
+          "title": "What's the difference between Galaxy S27 Ultra and S27 Pro? \u2014 5 key differences (and 3 similarities) based on the leaks | Tom's Guide",
+          "returned_url": "https://www.tomsguide.com/phones/samsung-phones/whats-the-difference-between-galaxy-s27-ultra-and-s27-pro-5-key-differences-and-3-similarities-based-on-the-leaks"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:31:29.426931Z"
+}

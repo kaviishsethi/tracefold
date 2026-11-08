@@ -13,6 +13,7 @@ The strict-private deployment keeps the scan server and Ollama inside the truste
 
 - [Set up Tracefold (people and coding agents): one command, then two servers](SETUP.md)
 - [Shared engine implementation plan — build this first](docs/SHARED_ENGINE_PLAN.md)
+- [Company-name discovery: search, fetch, and local comparison](docs/COMPANY_DISCOVERY_PLAN.md)
 - [Engine API handoff for the app and MCP adapter](docs/ENGINE_API.md)
 - [Complete product, architecture, demo, and track plan](PLAN.md)
 - [Original retrieval/privacy Excalidraw diagram (predates MCP)](docs/architecture.excalidraw) — download and open in [Excalidraw](https://excalidraw.com).

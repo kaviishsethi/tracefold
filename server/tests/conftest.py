@@ -82,6 +82,7 @@ def make_settings(tmp_path: Path, **kw) -> Settings:
     s.retrieval_in_process = True
     s.ollama_url = "http://127.0.0.1:9"  # nothing listens: model unavailable unless a test sets a fake
     s.fixture_root = FIXTURES
+    s.gitleaks = "off"  # deterministic by default; Gitleaks tests opt in
     for k, v in kw.items():
         setattr(s, k, v)
     return s

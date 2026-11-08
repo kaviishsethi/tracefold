@@ -1,0 +1,698 @@
+{
+  "case_id": "gsa_tts",
+  "label": "public_policy",
+  "pack": "code_exposure",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from Technology Transformation Services",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\"",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "code_hosts_domain",
+      "provider": "exa",
+      "query": "configuration file referencing gsa.gov",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "code_hosts_domain",
+      "provider": "tavily",
+      "query": "\"gsa.gov\" config",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": false,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "paste_sites",
+      "provider": "exa",
+      "query": "Technology Transformation Services gsa.gov",
+      "num_results": 3,
+      "include_domains": [
+        "ghostbin.cloud",
+        "paste.ee",
+        "pastebin.com",
+        "rentry.co"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "paste_sites",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" gsa.gov",
+      "num_results": 3,
+      "include_domains": [
+        "ghostbin.cloud",
+        "paste.ee",
+        "pastebin.com",
+        "rentry.co"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": false,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "breach_coverage",
+      "provider": "exa",
+      "query": "report on a data breach or source code leak at Technology Transformation Services",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "breach_coverage",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" breach source code leak",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 12.0,
+  "provider_requests": 28,
+  "response_bytes": 855639,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from Technology Transformation Services",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:39.201207Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:39.434773Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "code_hosts_domain",
+      "provider": "exa",
+      "query": "configuration file referencing gsa.gov",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:40.583248Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "code_hosts_domain",
+      "provider": "tavily",
+      "query": "\"gsa.gov\" config",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:41.505630Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "paste_sites",
+      "provider": "exa",
+      "query": "Technology Transformation Services gsa.gov",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:41.280897Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "paste_sites",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" gsa.gov",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:42.496524Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "breach_coverage",
+      "provider": "exa",
+      "query": "report on a data breach or source code leak at Technology Transformation Services",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:43.042093Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "breach_coverage",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" breach source code leak",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:46.776048Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_9af2f0b6798bfc9646fb",
+      "url": "https://github.com/GSA/site-scanning",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "The central repository for the Site Scanning program",
+          "returned_url": "https://github.com/GSA/site-scanning"
+        },
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitHub - GSA/site-scanning: The central repository for the Site Scanning program \u00b7 GitHub",
+          "returned_url": "https://github.com/GSA/site-scanning"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c5d60cc84ef4013e3cfc",
+      "url": "https://github.com/orgs/GSA-TTS/repositories",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Repositories - GSA-TTS",
+          "returned_url": "https://github.com/orgs/GSA-TTS/repositories"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_33404f267c80822bbdf8",
+      "url": "https://github.com/GSA-TTS/forms",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "GSA-TTS/forms",
+          "returned_url": "https://github.com/GSA-TTS/forms"
+        },
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitHub - GSA-TTS/forms: Friendly government forms for everyone. \u00b7 GitHub",
+          "returned_url": "https://github.com/GSA-TTS/forms"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitHub - GSA-TTS/forms: Friendly government forms for everyone. \u00b7 GitHub",
+          "returned_url": "https://github.com/GSA-TTS/forms"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_9518c7f884a65e6d7c0d",
+      "url": "https://github.com/cloud-gov",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Cloud.gov \u00b7 GitHub",
+          "returned_url": "https://github.com/cloud-gov"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_f9e4c243a95e9fa561cf",
+      "url": "https://github.com/GSA-TTS/searchgov-spider/blob/main/.env.development",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": ".env.development",
+          "returned_url": "https://github.com/GSA-TTS/searchgov-spider/blob/main/.env.development"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_455d6278858a0cbc4957",
+      "url": "https://github.com/18F/identity-idp/blob/6279b794443a76df455c55f0bf5bcc6dcbdbaee9/config/application.yml.default",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "config/application.yml.default",
+          "returned_url": "https://github.com/18F/identity-idp/blob/6279b794443a76df455c55f0bf5bcc6dcbdbaee9/config/application.yml.default"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_cbc5aabfed56a7cc0654",
+      "url": "https://github.com/GSA/catalog.data.gov/blob/main/.env",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": ".env at main \u00b7 GSA/catalog.data.gov",
+          "returned_url": "https://github.com/GSA/catalog.data.gov/blob/main/.env"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_1e4700225e774cbee164",
+      "url": "https://github.com/GSA/plainlanguage.gov/blob/main/_config.yml",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "plainlanguage.gov/_config.yml at main \u00b7 GSA/plainlanguage.gov \u00b7 GitHub",
+          "returned_url": "https://github.com/GSA/plainlanguage.gov/blob/main/_config.yml"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_1eb800b99c8f6756f48e",
+      "url": "https://github.com/GSA/open-gsa-redesign",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitHub - GSA/open-gsa-redesign: A fresh start for open.gsa.gov. \u00b7 GitHub",
+          "returned_url": "https://github.com/GSA/open-gsa-redesign"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_11797656bdbd2ae6dde1",
+      "url": "https://pastebin.com/5zm908P0",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "all U.S. government sites - Pastebin.com",
+          "returned_url": "https://pastebin.com/5zm908P0"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_520392947a5209e58477",
+      "url": "https://pastebin.com/tWDC0PXy",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "WSP5 - Pastebin.com",
+          "returned_url": "https://pastebin.com/tWDC0PXy"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8985109923af6a57d252",
+      "url": "https://pastebin.com/Lg7zfHd9",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Transcript: The Book I Wish Every Policymaker Would Read",
+          "returned_url": "https://pastebin.com/Lg7zfHd9"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_bf20cfafe9e8be1f367c",
+      "url": "https://pastebin.com/DKDD8Le3",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "The Ultimate Guide to Cloud Managed Services: Empowering Your Digital Transformation - Pastebin.com",
+          "returned_url": "https://pastebin.com/DKDD8Le3"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_db506582915fc76145b1",
+      "url": "https://pastebin.com/ywbEgzGb",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Empowering Modern Enterprises with Proactive Technology: HVR Cloud Managed IT Se - Pastebin.com",
+          "returned_url": "https://pastebin.com/ywbEgzGb"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_987e0862129f2f92c7d5",
+      "url": "https://pastebin.com/nMz35SxH",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Cloud Transformation Consulting Company for Scalable Digital Infrastructure - Pastebin.com",
+          "returned_url": "https://pastebin.com/nMz35SxH"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_e125561afe3f8f9010d0",
+      "url": "https://www.theregister.com/security/2017/06/12/ta-ta-security-bungling-tata-devs-leaked-banks-code-on-public-github-repo-says-it-bloke/941576",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Ta-ta, security: Bungling Tata devs leaked banks' code on public GitHub repo, says IT bloke",
+          "returned_url": "https://www.theregister.com/security/2017/06/12/ta-ta-security-bungling-tata-devs-leaked-banks-code-on-public-github-repo-says-it-bloke/941576"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_a21f60bc51511f8ee7dd",
+      "url": "https://www.crn.com/news/security/2026/accenture-confirms-security-incident-after-hacker-claims-data-haul",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Accenture Confirms Security Incident After Hacker Claims Data Haul",
+          "returned_url": "https://www.crn.com/news/security/2026/accenture-confirms-security-incident-after-hacker-claims-data-haul"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_1ecfc45a95c368912c3d",
+      "url": "https://techcrunch.com/2022/03/30/lapsus-globant-breach/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Lapsus$ claims Globant as its latest breach victim",
+          "returned_url": "https://techcrunch.com/2022/03/30/lapsus-globant-breach/"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_4cbf67f14ead5d22a899",
+      "url": "https://www.cbpp.org/research/federal-budget/executive-action-watch?item=30489",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "New Court Filing Reveals Secret Social Security Data Sharing Agreement with Election Denier Group",
+          "returned_url": "https://www.cbpp.org/research/federal-budget/executive-action-watch?item=30489"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e4768373235c2fa083a9",
+      "url": "https://unbreaking.org/issues/data-security",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Data Security \u2014 Unbreaking",
+          "returned_url": "https://unbreaking.org/issues/data-security"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_60b7bd7abcd41e699a53",
+      "url": "https://catalog.data.gov",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Catalog - Data.gov",
+          "returned_url": "https://catalog.data.gov"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:41:49.118966Z"
+}

@@ -1,0 +1,698 @@
+{
+  "case_id": "posthog",
+  "label": "public_policy",
+  "pack": "code_exposure",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from PostHog",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"PostHog\"",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "code_hosts_domain",
+      "provider": "exa",
+      "query": "configuration file referencing posthog.com",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "code_hosts_domain",
+      "provider": "tavily",
+      "query": "\"posthog.com\" config",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": false,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "paste_sites",
+      "provider": "exa",
+      "query": "PostHog posthog.com",
+      "num_results": 3,
+      "include_domains": [
+        "ghostbin.cloud",
+        "paste.ee",
+        "pastebin.com",
+        "rentry.co"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "paste_sites",
+      "provider": "tavily",
+      "query": "\"PostHog\" posthog.com",
+      "num_results": 3,
+      "include_domains": [
+        "ghostbin.cloud",
+        "paste.ee",
+        "pastebin.com",
+        "rentry.co"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": false,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "breach_coverage",
+      "provider": "exa",
+      "query": "report on a data breach or source code leak at PostHog",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "posthog.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "breach_coverage",
+      "provider": "tavily",
+      "query": "\"PostHog\" breach source code leak",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "posthog.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 11.7,
+  "provider_requests": 29,
+  "response_bytes": 203523,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from PostHog",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:30.825891Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"PostHog\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:31.699782Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "code_hosts_domain",
+      "provider": "exa",
+      "query": "configuration file referencing posthog.com",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:32.450594Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "code_hosts_domain",
+      "provider": "tavily",
+      "query": "\"posthog.com\" config",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:33.668446Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "paste_sites",
+      "provider": "exa",
+      "query": "PostHog posthog.com",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:33.963915Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "paste_sites",
+      "provider": "tavily",
+      "query": "\"PostHog\" posthog.com",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:35.019203Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "breach_coverage",
+      "provider": "exa",
+      "query": "report on a data breach or source code leak at PostHog",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:35.293206Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "breach_coverage",
+      "provider": "tavily",
+      "query": "\"PostHog\" breach source code leak",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:38.214005Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_8125bd0428077068a978",
+      "url": "https://github.com/PostHog/posthog/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "PostHog/posthog",
+          "returned_url": "https://github.com/PostHog/posthog/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ff875f0769b30cc0e055",
+      "url": "https://github.com/PostHog/code/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "PostHog/code",
+          "returned_url": "https://github.com/PostHog/code/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_4ce8aa9ac35704459d64",
+      "url": "https://github.com/posthog",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "PostHog",
+          "returned_url": "https://github.com/posthog"
+        },
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "PostHog \u00b7 GitHub",
+          "returned_url": "https://github.com/posthog"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ec8829d681f1b169f921",
+      "url": "https://github.com/posthog/posthog",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "GitHub - PostHog/posthog: :hedgehog: PostHog is the leading platform for building self-driving products. Our developer tools \u2013 AI observability, analytics, session replay, flags, experiments, error tracking, logs, and more \u2013 capture all the context agents need to diagnose problems, uncover opportuni",
+          "returned_url": "https://github.com/posthog/posthog"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitHub - PostHog/posthog: :hedgehog: PostHog is the leading platform for building self-driving products. Our developer tools \u2013 AI observability, analytics, session replay, flags, experiments, error tracking, logs, and more \u2013 capture all the context agents need to diagnose problems, uncover opportuni",
+          "returned_url": "https://github.com/posthog/posthog"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_313d8417ebef1baab9da",
+      "url": "https://github.com/PostHog/posthog-flutter",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitHub - PostHog/posthog-flutter: PostHog Flutter SDK \u00b7 GitHub",
+          "returned_url": "https://github.com/PostHog/posthog-flutter"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e6bc21d895d15e54e11c",
+      "url": "https://github.com/PostHog/posthog-php/blob/main/.env.example",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": ".env.example",
+          "returned_url": "https://github.com/PostHog/posthog-php/blob/main/.env.example"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_3555beacb9cc33c71741",
+      "url": "https://github.com/dudasaus/godot-posthog-analytics",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "dudasaus/godot-posthog-analytics",
+          "returned_url": "https://github.com/dudasaus/godot-posthog-analytics"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_bd3605fcf5c669c8a5fd",
+      "url": "https://github.com/PostHog/posthog-dotnet/blob/main/src/PostHog.AspNetCore/README.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "src/PostHog.AspNetCore/README.md at main \u00b7 PostHog/posthog-dotnet",
+          "returned_url": "https://github.com/PostHog/posthog-dotnet/blob/main/src/PostHog.AspNetCore/README.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8847526c0f44beb01afd",
+      "url": "https://github.com/PostHog/posthog.com/blob/master/contents/docs/data-pipelines/sources/clerk.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "posthog.com/contents/docs/data-pipelines/sources/clerk.md at master \u00b7 PostHog/posthog.com \u00b7 GitHub",
+          "returned_url": "https://github.com/PostHog/posthog.com/blob/master/contents/docs/data-pipelines/sources/clerk.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_01a984bac25086a16a47",
+      "url": "https://github.com/PostHog/posthog.com-og",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitHub - PostHog/posthog.com-og \u00b7 GitHub",
+          "returned_url": "https://github.com/PostHog/posthog.com-og"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_130a80ecc5e8d9454a40",
+      "url": "https://pastebin.com/J6jckF6z",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Data broker opt-out service comparison - Pastebin.com",
+          "returned_url": "https://pastebin.com/J6jckF6z"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_aed0207e0a388ac5742f",
+      "url": "https://pastebin.com/Yz1LqAzU",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "asdf - Pastebin.com",
+          "returned_url": "https://pastebin.com/Yz1LqAzU"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_a3962df81c30e8fe13a0",
+      "url": "https://rentry.co/xrok3",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Extima Net Growth And Digital Marketing Agency",
+          "returned_url": "https://rentry.co/xrok3"
+        },
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Extima Net Growth And Digital Marketing Agency - Rentry.co",
+          "returned_url": "https://rentry.co/xrok3"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ba572205b95344f32fb7",
+      "url": "https://pastebin.com/nw4wyShs",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "version: \"3.3\"services: db: image: elestio/postgres:15 restart: - Pastebin.com",
+          "returned_url": "https://pastebin.com/nw4wyShs"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_84b11dc0b0cb435575ef",
+      "url": "https://pastebin.com/BbDKVgay",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Collecting crewai Downloading crewai-0.30.11-py3-none-any.whl.metadata (13 kB - Pastebin.com",
+          "returned_url": "https://pastebin.com/BbDKVgay"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_7d459565a72f0175c66e",
+      "url": "https://github.com/PostHog/post-mortems/blob/main/2025-11-26-shai-hulud-attack.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "2025-11-26-shai-hulud-attack.md",
+          "returned_url": "https://github.com/PostHog/post-mortems/blob/main/2025-11-26-shai-hulud-attack.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_fd284eaef85e3d38b554",
+      "url": "https://www.theregister.com/software/2025/11/28/posthog-admits-shai-hulud-20-was-its-biggest-security-scare/1817272",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "PostHog admits Shai-Hulud 2.0 was its biggest security scare",
+          "returned_url": "https://www.theregister.com/software/2025/11/28/posthog-admits-shai-hulud-20-was-its-biggest-security-scare/1817272"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e9a8eaa7cef2f2531764",
+      "url": "https://socket.dev/blog/shai-hulud-strikes-again-v2",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Shai Hulud Strikes Again (v2)",
+          "returned_url": "https://socket.dev/blog/shai-hulud-strikes-again-v2"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_35e75ff00d9a3947e1d8",
+      "url": "https://www.finextra.com/newsarticle/47564/ai-fintech-startup-round-raises-6-million",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "AI fintech startup Round raises $6 million - Finextra Research",
+          "returned_url": "https://www.finextra.com/newsarticle/47564/ai-fintech-startup-round-raises-6-million"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ef5354d9a86f75ceb582",
+      "url": "https://www.darkreading.com/cloud-security/tidb-breach-flawed-cloud-security",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "TiDB Breach Exposes Flawed Cloud Security Assumptions - Dark Reading",
+          "returned_url": "https://www.darkreading.com/cloud-security/tidb-breach-flawed-cloud-security"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_f0e57e7b47c06988fc1d",
+      "url": "https://thenextweb.com/news/round-6m-seed-ai-finance-automation-treasury-payroll",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "London fintech Round closes $6M seed to run payroll - The Next Web",
+          "returned_url": "https://thenextweb.com/news/round-6m-seed-ai-finance-automation-treasury-payroll"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:42:40.715694Z"
+}

@@ -55,13 +55,18 @@ class ScanService:
 
     def submit(self, p: Principal, ws_id: str, req: ScanRequest, idem_key: str | None,
                recheck_of: str | None = None, recheck_id: str | None = None,
-               scope_paths: list[str] | None = None) -> ScanAccepted:
+               scope_paths: list[str] | None = None, explicit_sources: list[dict] | None = None) -> ScanAccepted:
         p.require(ws_id, Capability.submit)
         if self.e.repo.get_workspace(ws_id) is None:
             raise not_found()
         checks = sorted(set(req.checks), key=lambda c: c.value)
+        public_sources = req.public_sources.model_dump(mode="json") if req.public_sources else None
+        if explicit_sources:  # internal: recheck of a discovered exposure fetches the cited URL explicitly
+            public_sources = {"manifest_id": None, "mode": PublicMode.refresh.value, "snapshot_id": None,
+                              "source_ids": None, "explicit_sources": explicit_sources}
+        public_discovery = req.public_discovery.model_dump(mode="json") if req.public_discovery else None
         payload = {"input_id": req.input_id, "checks": [c.value for c in checks],
-                   "public_sources": req.public_sources.model_dump(mode="json") if req.public_sources else None,
+                   "public_sources": public_sources, "public_discovery": public_discovery,
                    "review_profile": req.review_profile, "model_review": req.model_review, "recheck_of": recheck_of,
                    "scope_paths": scope_paths}
         digest = sha256(canonical(payload))
@@ -75,10 +80,17 @@ class ScanService:
                 return ScanAccepted(scan_id=prior["id"], state=ScanState(prior["state"]), input_id=prior["input_id"],
                                     status_url=status_url(ws_id, prior["id"]))
         meta, _cap = self.resolve_input(ws_id, req.input_id)
-        if Check.public_match in checks:
+        if Check.public_match in checks and explicit_sources:
+            pass
+        elif Check.public_match in checks and req.public_discovery is not None:
+            if req.public_sources is not None:
+                raise ApiError(422, "public_input_conflict", "Use exactly one of public_sources or public_discovery.")
+            self.e.discovery.validate_scan_request(ws_id, req.public_discovery)
+        elif Check.public_match in checks:
             ps = req.public_sources
             if ps is None:
-                raise ApiError(422, "public_sources_required", "public_match requires public_sources.manifest_id.")
+                raise ApiError(422, "public_sources_required",
+                               "public_match requires public_sources.manifest_id or public_discovery.query_plan_id.")
             manifest = self.e.repo.get_manifest(ws_id, ps.manifest_id)
             if manifest is None:
                 raise not_found()
@@ -89,8 +101,9 @@ class ScanService:
                 snap = self.e.repo.get_snapshot(ps.snapshot_id or "") if ps.snapshot_id else None
                 if snap is None or snap["workspace_id"] != ws_id or snap["manifest_id"] != ps.manifest_id:
                     raise ApiError(422, "snapshot_required", "snapshot mode requires a known snapshot_id for this manifest.")
-        elif req.public_sources is not None:
-            raise ApiError(422, "public_sources_unexpected", "public_sources is only valid with the public_match check.")
+        elif req.public_sources is not None or req.public_discovery is not None:
+            raise ApiError(422, "public_sources_unexpected",
+                           "public_sources and public_discovery are only valid with the public_match check.")
         if self.e.repo.count_queued() >= self.e.settings.limits.max_queued_scans:
             raise ApiError(429, "queue_full", "The scan queue is full; retry after current scans finish.", True)
         if self.e.registry.pin(req.input_id) is None:
@@ -101,7 +114,8 @@ class ScanService:
             self.e.repo.insert_scan({
                 "id": scan_id, "workspace_id": ws_id, "input_id": req.input_id, "revision": meta["revision"],
                 "checks": [c.value for c in checks],
-                "public_sources": payload["public_sources"], "review_profile": req.review_profile,
+                "public_sources": payload["public_sources"], "public_discovery": public_discovery,
+                "review_profile": req.review_profile,
                 "model_review": int(req.model_review), "recheck_of": recheck_of, "recheck_id": recheck_id,
                 "state": ScanState.queued.value, "initiator": p.client_id, "idempotency_key": idem_key,
                 "request_digest": digest, "created_at": iso(t),
@@ -126,6 +140,8 @@ class ScanService:
             scan_id=s["id"], workspace_id=s["workspace_id"], input_id=s["input_id"], state=ScanState(s["state"]),
             checks=[Check(c) for c in s["checks"]], recheck_of=s["recheck_of"],
             public_snapshot_id=s["public_snapshot_id"], public_freshness=(s["summary"] or {}).get("public_freshness"),
+            public_discovery=({**s["public_discovery"], **((s["summary"] or {}).get("discovery") or {})}
+                              if s.get("public_discovery") else None),
             stages=[StageOut(**x) for x in s["stages"]], coverage=[CoverageEntry(**x) for x in s["coverage"]],
             budget=s["budget"], versions=s["versions"], errors=[ErrorBody(**x) for x in s["errors"]],
             summary=s["summary"], created_at=s["created_at"], started_at=s["started_at"],

@@ -8,7 +8,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export const ENGINE = "/api/engine";
 
 // ---------- vocabulary (mirrors server/tracefold/contracts/enums.py) ----------
-export type Capability = "submit" | "read" | "read_evidence" | "recheck" | "cancel" | "review" | "approve";
+export type Capability = "submit" | "read" | "read_evidence" | "recheck" | "cancel" | "review" | "approve" | "configure";
 export type Disclosure = "full" | "minimal";
 export type Check = "public_match" | "local_risk";
 export type ScanState = "queued" | "running" | "completed" | "partial" | "failed" | "cancelled" | "interrupted";
@@ -117,6 +117,8 @@ export interface Scan {
   versions: Record<string, string>;
   errors: EngineErrorBody[];
   summary: Record<string, unknown>;
+  /** Present when the scan searched with an approved query plan instead of a fixed source list. */
+  public_discovery?: DiscoveryStatus | null;
   created_at: string;
   started_at: string | null;
   finished_at: string | null;
@@ -144,7 +146,183 @@ export interface PublicSpan {
   retrieved_at: string | null;
   freshness: "fresh" | "cached";
   snapshot_id: string;
+  mode?: "seeded" | "discovered";
+  provider?: string | null;
+  discovery_run_id?: string | null;
+  discovery_origins?: DiscoveryOrigin[] | null;
 }
+
+// ---------- company discovery (docs/ENGINE_API.md "Company-name discovery") ----------
+export interface CompanyProfile {
+  profile_id: string;
+  workspace_id: string;
+  version: number;
+  display_name: string;
+  official_domain: string | null;
+  public_aliases: string[];
+  approved_by: string;
+  approved_at: string;
+  privacy_notice_version: string;
+  privacy_notice: string;
+}
+
+export interface PlannedSearch {
+  query_id: string;
+  template_id: string;
+  provider: "exa" | "tavily" | string;
+  query: string;
+  num_results: number;
+  include_domains: string[] | null;
+  include_domains_mode?: string | null;
+  exclude_domains?: string[] | null;
+  category?: string | null;
+  topic?: string | null;
+  exact_match?: boolean | null;
+  preset_status?: "benchmarked" | "experimental" | "legacy" | string | null;
+}
+
+export interface QueryPlan {
+  query_plan_id: string;
+  workspace_id: string;
+  profile_id: string;
+  profile_version: number;
+  display_name: string;
+  official_domain: string | null;
+  template_version: string;
+  pack: string | null;
+  omitted_presets: { preset: string; reason: string }[];
+  searches: PlannedSearch[];
+  scope: { mode: "broad" | "selected"; site_groups: string[]; exclude_official_domain?: boolean; exclude_noise?: boolean };
+  budget: Record<string, number | string>;
+  privacy_notice: string;
+  created_by: string;
+  created_at: string;
+}
+
+export interface PresetInfo {
+  preset_id: string;
+  description: string;
+  status: "benchmarked" | "experimental" | "legacy";
+  needs: string[];
+  benchmark: { cases_hit: string[]; providers_hit: string[] } | null;
+  site_groups: string[];
+}
+
+export interface PresetCatalog {
+  template_version: string;
+  benchmark_version: string;
+  noise_domains: string[];
+  site_groups: Record<string, string[]>;
+  presets: PresetInfo[];
+  packs: { pack_id: string; description: string; shape: string; presets: string[] }[];
+  shapes: Record<string, { max_searches: number; max_results_per_search: number }>;
+}
+
+export interface DiscoveryOrigin {
+  query_id: string;
+  provider: string;
+  rank: number;
+  title: string | null;
+  returned_url: string;
+}
+
+export interface DiscoveryStatus {
+  query_plan_id: string;
+  mode: "live" | "snapshot";
+  run_id?: string;
+  state?: "searching" | "fetching" | "comparing" | "done" | "failed";
+  outcome?: "candidates_found" | "partial_search" | "no_candidates" | "search_failed" | "snapshot_replay" | string | null;
+  searches?: number;
+  searches_ok?: number;
+  returned_count?: number;
+  unique_count?: number;
+  fetch_attempted_count?: number;
+  fetched_count?: number;
+  skipped_count?: number;
+  truncated?: boolean;
+}
+
+export type FetchStatus = "pending" | "fetched" | "failed" | "blocked" | "skipped_limit";
+export type ComparisonStatus = "matched" | "no_match" | "incomplete" | "not_compared";
+
+export interface SourceRow {
+  source_id: string;
+  original_url: string;
+  final_url: string | null;
+  title: string | null;
+  mode: "seeded" | "discovered";
+  discovery_origins: DiscoveryOrigin[];
+  discovery_provider: string | null;
+  extraction_provider: string | null;
+  search_rank: number | null;
+  fetch_status: FetchStatus;
+  failure_reason: string | null;
+  retrieved_at: string | null;
+  retrieval_note: string | null;
+  provider_content_timestamp: string | null;
+  truncated: boolean;
+  comparison_status: ComparisonStatus;
+  match_count: number;
+  freshness: "fresh" | "cached" | null;
+}
+
+export interface DiscoveryRun {
+  run_id: string;
+  query_plan_id: string;
+  mode: "live" | "snapshot";
+  state: string;
+  outcome: string | null;
+  provider_queries: { query_id: string; provider: string; query: string; status: string; error: string | null; returned: number; truncated: boolean }[];
+  search_errors: string[];
+  returned_count: number;
+  unique_count: number;
+  fetched_count: number;
+  skipped_count: number;
+  truncated: boolean;
+  note: string;
+}
+
+export interface SourcePage {
+  scan_id: string;
+  discovery: DiscoveryRun | null;
+  items: SourceRow[];
+  next_cursor: string | null;
+}
+
+/** Every source for a scan (all pages), including no-match, failed, blocked and skipped ones. */
+export async function allSources(workspaceId: string, scanId: string): Promise<SourcePage> {
+  let page = await api<SourcePage>(ws(workspaceId, `/scans/${encodeURIComponent(scanId)}/sources?limit=100`));
+  const items = [...page.items];
+  for (let i = 0; i < 10 && page.next_cursor; i++) {
+    page = await api<SourcePage>(ws(workspaceId, `/scans/${encodeURIComponent(scanId)}/sources?limit=100&cursor=${encodeURIComponent(page.next_cursor)}`));
+    items.push(...page.items);
+  }
+  return { ...page, items };
+}
+
+export const DISCOVERY_OUTCOME: Record<string, string> = {
+  budget_exhausted: "No searches ran: this scan's request budget was already used. Nothing was checked, so this isn't a result.",
+  candidates_found: "Search returned candidate pages; each was fetched and compared on this machine.",
+  partial_search: "Some searches failed. Pages that were returned were fetched and compared.",
+  no_candidates: "Search returned no candidate pages. That's not a \"no leak\" result.",
+  search_failed: "Search failed, so discovery is inconclusive.",
+  snapshot_replay: "Replayed from a saved snapshot: no search or fetch ran in this scan.",
+};
+
+export const FETCH_LABEL: Record<FetchStatus, string> = {
+  pending: "Pending",
+  fetched: "Fetched",
+  failed: "Fetch failed",
+  blocked: "Blocked (unsafe URL)",
+  skipped_limit: "Skipped (limit)",
+};
+
+export const COMPARISON_LABEL: Record<ComparisonStatus, string> = {
+  matched: "Matched",
+  no_match: "No match",
+  incomplete: "No match in the retrieved part",
+  not_compared: "Not compared",
+};
 
 export interface Evidence {
   evidence_id: string;
@@ -384,7 +562,13 @@ export async function uploadFiles(workspaceId: string, files: File[]): Promise<I
 
 export async function startScan(
   workspaceId: string,
-  body: { input_id: string; checks: Check[]; public_sources?: { manifest_id: string; mode?: "refresh" | "snapshot" }; model_review?: boolean },
+  body: {
+    input_id: string;
+    checks: Check[];
+    public_sources?: { manifest_id: string; mode?: "refresh" | "snapshot" };
+    public_discovery?: { query_plan_id: string; mode?: "live" | "snapshot"; snapshot_id?: string };
+    model_review?: boolean;
+  },
   label: string,
 ): Promise<ScanAccepted> {
   const acc = await api<ScanAccepted>(ws(workspaceId, "/scans"), { method: "POST", json: body });
@@ -459,6 +643,9 @@ export function coverageNote(scan: Scan, kind: FindingKind, count: number): stri
   const check = scan.coverage.find((c) => c.scope === "check" && c.id === (kind === "public_exposure" ? "public_match" : "local_risk"));
   if (!check || check.status === "not_requested")
     return kind === "public_exposure" ? "Public matching wasn't requested for this scan. That's not a 'no match' result." : "Risk review wasn't requested.";
+  if (kind === "public_exposure" && check.reason === "no_candidate_sources_found")
+    return "Search returned no candidate pages for the approved queries. That's not a \"no leak\" result.";
+  if (kind === "public_exposure" && check.reason === "discovery_search_failed") return "Search failed, so public matching is inconclusive.";
   if (check.status !== "complete") return `${kind === "public_exposure" ? "Public matching" : "Risk review"} ${check.status}: ${check.reason ?? "see coverage"}.`;
   if (count > 0) return null;
   if (kind === "public_exposure") return `No match in ${check.counts.sources_ok ?? 0} checked sources.`;

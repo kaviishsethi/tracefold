@@ -1,0 +1,486 @@
+{
+  "case_id": "mock_samsung_memo",
+  "label": "mock_leak_reconstruction",
+  "pack": "leak_watch",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Samsung Electronics",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "samsung.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Samsung Electronics\" leaked internal memo",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "samsung.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leak_news_alias",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Samsung",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "samsung.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leak_news_alias",
+      "provider": "tavily",
+      "query": "\"Samsung\" leaked internal memo",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "samsung.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "completed",
+  "elapsed_seconds": 6.1,
+  "provider_requests": 18,
+  "response_bytes": 154826,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Samsung Electronics",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:53:42.119141Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Samsung Electronics\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:53:42.079411Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leak_news_alias",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Samsung",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:53:44.909509Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leak_news_alias",
+      "provider": "tavily",
+      "query": "\"Samsung\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:53:45.885992Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_eb611d99a650d8a5d8a7",
+      "url": "https://www.businesstimes.com.sg/companies-markets/samsung-bans-use-chatgpt-mobile-appliances-staff",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Samsung bans use of ChatGPT for mobile, appliances staff - The Business Times",
+          "returned_url": "https://www.businesstimes.com.sg/companies-markets/samsung-bans-use-chatgpt-mobile-appliances-staff"
+        },
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Samsung bans use of ChatGPT for mobile, appliances staff - The Business Times",
+          "returned_url": "https://www.businesstimes.com.sg/companies-markets/samsung-bans-use-chatgpt-mobile-appliances-staff"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_94ff9288a45e8ab09bae",
+      "url": "https://www.theverge.com/2023/5/2/23707796/samsung-ban-chatgpt-generative-ai-bing-bard-employees-security-concerns",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Samsung tells employees not to use AI tools like ChatGPT, citing security concerns | The Verge",
+          "returned_url": "https://www.theverge.com/2023/5/2/23707796/samsung-ban-chatgpt-generative-ai-bing-bard-employees-security-concerns"
+        },
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Samsung tells employees not to use AI tools like ChatGPT, citing security concerns | The Verge",
+          "returned_url": "https://www.theverge.com/2023/5/2/23707796/samsung-ban-chatgpt-generative-ai-bing-bard-employees-security-concerns"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_fe09c7155a22147defe8",
+      "url": "https://m.koreaherald.com/article/3118116",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Samsung bans AI chatbots after leak - The Korea Herald",
+          "returned_url": "https://m.koreaherald.com/article/3118116"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c3ba4852bca67aa8012b",
+      "url": "https://www.theregister.com/software/2023/05/02/samsung-to-ban-staff-from-using-chatgpt-after-code-leak/655856",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 4,
+          "title": "Samsung to ban staff from using ChatGPT after 'code leak'",
+          "returned_url": "https://www.theregister.com/software/2023/05/02/samsung-to-ban-staff-from-using-chatgpt-after-code-leak/655856"
+        },
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 5,
+          "title": "Samsung to ban staff from using ChatGPT after 'code leak'",
+          "returned_url": "https://www.theregister.com/software/2023/05/02/samsung-to-ban-staff-from-using-chatgpt-after-code-leak/655856"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_71a6fcb3581acbdd5149",
+      "url": "https://www.smartcompany.com.au/technology/samsung-staff-memo-leaks-ahead-of-weak-second-quarter-results/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 5,
+          "title": "Samsung staff memo leaks ahead of weak second quarter results - SmartCompany",
+          "returned_url": "https://www.smartcompany.com.au/technology/samsung-staff-memo-leaks-ahead-of-weak-second-quarter-results/"
+        },
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 4,
+          "title": "Samsung staff memo leaks ahead of weak second quarter results - SmartCompany",
+          "returned_url": "https://www.smartcompany.com.au/technology/samsung-staff-memo-leaks-ahead-of-weak-second-quarter-results/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_1610b0330fee8ae5a07a",
+      "url": "https://nhimg.org/samsung-chatgpt-source-code-leak-2023-shadow-ai",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Samsung ChatGPT Source Code Leak 2023: Shadow AI",
+          "returned_url": "https://nhimg.org/samsung-chatgpt-source-code-leak-2023-shadow-ai"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Samsung ChatGPT Source Code Leak 2023: Shadow AI",
+          "returned_url": "https://nhimg.org/samsung-chatgpt-source-code-leak-2023-shadow-ai"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ee3824a8f1022d761154",
+      "url": "https://jazz.security/dlp-explained/dlp-basics/real-examples-of-ai-data-leaks",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Real AI data leak examples and what would have stopped them",
+          "returned_url": "https://jazz.security/dlp-explained/dlp-basics/real-examples-of-ai-data-leaks"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Real AI data leak examples and what would have stopped them",
+          "returned_url": "https://jazz.security/dlp-explained/dlp-basics/real-examples-of-ai-data-leaks"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_5eb5773a0a2e0ff09ff9",
+      "url": "https://news.sbs.co.kr/english/article.do?news_id=N1008817557",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Ex-Samsung VP Ahn Seung-ho Sentenced to 3 Years in Prison in Appeal Trial over Trade Secret Leaks",
+          "returned_url": "https://news.sbs.co.kr/english/article.do?news_id=N1008817557"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6df2a6db559b5163bb39",
+      "url": "https://simplywall.st/stocks/kr/tech/kose-a005930/samsung-electronics-shares/news/what-does-samsung-electronics-kosea005930-dram-leak-case-mea",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 4,
+          "title": "What Does Samsung Electronics (KOSE:A005930) DRAM Leak Case Mean For Investors? - Simply Wall St News",
+          "returned_url": "https://simplywall.st/stocks/kr/tech/kose-a005930/samsung-electronics-shares/news/what-does-samsung-electronics-kosea005930-dram-leak-case-mea"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d828ac644698eb302080",
+      "url": "https://www.cnbc.com/2026/11/05/semiconductor-china-korea-talents-rivalry.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 5,
+          "title": "Inside the chip talent war: Trade secrets and rising Chinese rivals",
+          "returned_url": "https://www.cnbc.com/2026/11/05/semiconductor-china-korea-talents-rivalry.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_9951db159aeb8c2bad11",
+      "url": "https://www.bloomberg.com/news/articles/2023-05-02/samsung-bans-chatgpt-and-other-generative-ai-use-by-staff-after-leak?srnd=technology-vp",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Samsung Bans ChatGPT, Google Bard, Other Generative AI Use by Staff After Leak - Bloomberg",
+          "returned_url": "https://www.bloomberg.com/news/articles/2023-05-02/samsung-bans-chatgpt-and-other-generative-ai-use-by-staff-after-leak?srnd=technology-vp"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ab8c46cf6895c6748b97",
+      "url": "https://www.echomark.com/post/this-week-in-leaks-october-26-2026",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "This Week in Leaks: October 26, 2026",
+          "returned_url": "https://www.echomark.com/post/this-week-in-leaks-october-26-2026"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_9ba9757461a84a4388ca",
+      "url": "https://superwise.ai/learn/stop-data-leaking-into-ai",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 4,
+          "title": "AI data leakage: how to stop company data leaks | SUPERWISE",
+          "returned_url": "https://superwise.ai/learn/stop-data-leaking-into-ai"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_31f1eca5f5d6cb2988cb",
+      "url": "https://english.aawsat.com/technology/5331067-samsung-use-tsmc-technology-nvidias-next-generation-memory-chips",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 5,
+          "title": "Samsung to Use TSMC Technology for Nvidia's Next-generation Memory Chips",
+          "returned_url": "https://english.aawsat.com/technology/5331067-samsung-use-tsmc-technology-nvidias-next-generation-memory-chips"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:53:47.601789Z"
+}

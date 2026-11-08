@@ -1,0 +1,663 @@
+[
+  {
+    "case_id": "nothing",
+    "label": "reported_leak_excerpt",
+    "note": "Short attributed excerpt of a reported leaked memo; not the original document.",
+    "identity": {
+      "display_name": "Nothing Technology",
+      "official_domain": "nothing.tech",
+      "public_aliases": [
+        "Nothing Phone"
+      ]
+    },
+    "references": [
+      "docs/demo-pairs/nothing-memo/upload-reference.txt"
+    ],
+    "negatives": [
+      "docs/demo-pairs/nothing-memo/negative-control.txt"
+    ],
+    "known_copies": [
+      {
+        "url": "https://www.phonearena.com/news/nothings-first-flagship-phone-coming-this-quarter_id166566",
+        "first_party": false
+      }
+    ],
+    "packs": [
+      "leak_watch",
+      "document_copies",
+      "code_exposure",
+      "broad_triage",
+      {
+        "name": "untested",
+        "presets": [
+          "leaked_email",
+          "leaked_roadmap",
+          "employee_forums",
+          "financial_filings"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "civicactions",
+    "label": "public_policy",
+    "note": "Openly published security policy (CC BY 4.0). Proves public availability, not a leak.",
+    "identity": {
+      "display_name": "CivicActions",
+      "official_domain": "civicactions.com",
+      "public_aliases": []
+    },
+    "references": [
+      "docs/demo-pairs/civicactions-policy/security-policy.md"
+    ],
+    "negatives": [
+      "docs/demo-pairs/civicactions-policy/negative-control.txt"
+    ],
+    "known_copies": [
+      {
+        "url": "https://guidebook.civicactions.com/en/latest/company-policies/security/",
+        "first_party": true
+      },
+      {
+        "url": "https://github.com/CivicActions/security-policy",
+        "prefix": true,
+        "first_party": false
+      }
+    ],
+    "packs": [
+      "leak_watch",
+      "document_copies",
+      "code_exposure",
+      "broad_triage"
+    ]
+  },
+  {
+    "case_id": "gitlab",
+    "label": "public_policy",
+    "note": "Openly published handbook page. Proves public availability, not a leak.",
+    "identity": {
+      "display_name": "GitLab",
+      "official_domain": "gitlab.com",
+      "public_aliases": []
+    },
+    "references": [
+      "docs/demo-pairs/gitlab-handbook/security-handbook.md"
+    ],
+    "negatives": [
+      "docs/demo-pairs/gitlab-handbook/negative-control.txt"
+    ],
+    "known_copies": [
+      {
+        "url": "https://handbook.gitlab.com/handbook/security/",
+        "first_party": true
+      },
+      {
+        "url": "https://gitlab.com/gitlab-com/content-sites/handbook/-/blob/",
+        "prefix": true,
+        "suffix": "content/handbook/security/_index.md",
+        "first_party": true
+      }
+    ],
+    "packs": [
+      "leak_watch",
+      "document_copies",
+      "code_exposure",
+      "broad_triage"
+    ]
+  },
+  {
+    "case_id": "twitch",
+    "label": "discovery_only",
+    "note": "No reference document; measures noise only. Zero matches is expected and says nothing about exposure.",
+    "identity": {
+      "display_name": "Twitch",
+      "official_domain": "twitch.tv",
+      "public_aliases": []
+    },
+    "references": [],
+    "negatives": [
+      "docs/demo-pairs/gitlab-handbook/negative-control.txt"
+    ],
+    "known_copies": [],
+    "packs": [
+      "broad_triage",
+      "code_exposure"
+    ]
+  },
+  {
+    "case_id": "sourcegraph",
+    "label": "public_policy",
+    "note": "Apache-2.0 handbook page; public availability, not a leak.",
+    "identity": {
+      "display_name": "Sourcegraph",
+      "official_domain": "sourcegraph.com",
+      "public_aliases": []
+    },
+    "references": [
+      "docs/demo-pairs/sourcegraph-handbook/security-incident-response.md"
+    ],
+    "negatives": [
+      "docs/demo-pairs/sourcegraph-handbook/negative-control.txt"
+    ],
+    "known_copies": [
+      {
+        "url": "https://handbook.sourcegraph.com/departments/security/security-incident-response/",
+        "first_party": true
+      },
+      {
+        "url_regex": "^https://github\\.com/[^/]+/handbook/blob/[^/]+/content/departments/security/security\\-incident\\-response\\.md$",
+        "first_party": false,
+        "note": "the company's repository or any fork"
+      }
+    ],
+    "packs": [
+      "leak_watch",
+      "document_copies",
+      "code_exposure",
+      "broad_triage",
+      {
+        "name": "untested",
+        "presets": [
+          "leaked_email",
+          "leaked_roadmap",
+          "employee_forums",
+          "financial_filings"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "gsa_tts",
+    "label": "public_policy",
+    "note": "Public-domain government handbook page; public availability, not a leak.",
+    "identity": {
+      "display_name": "Technology Transformation Services",
+      "official_domain": "gsa.gov",
+      "public_aliases": [
+        "18F"
+      ]
+    },
+    "references": [
+      "docs/demo-pairs/gsa-tts-handbook/security-incidents.md"
+    ],
+    "negatives": [
+      "docs/demo-pairs/gsa-tts-handbook/negative-control.txt"
+    ],
+    "known_copies": [
+      {
+        "url": "https://handbook.tts.gsa.gov/general-information-and-resources/tech-policies/security-incidents/",
+        "first_party": true
+      },
+      {
+        "url_regex": "^https://github\\.com/[^/]+/handbook/blob/[^/]+/pages/general\\-information\\-and\\-resources/tech\\-policies/security\\-incidents\\.md$",
+        "first_party": false,
+        "note": "the company's repository or any fork"
+      }
+    ],
+    "packs": [
+      "leak_watch",
+      "document_copies",
+      "code_exposure",
+      "broad_triage",
+      {
+        "name": "untested",
+        "presets": [
+          "leaked_email",
+          "leaked_roadmap",
+          "employee_forums",
+          "financial_filings"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "posthog",
+    "label": "public_policy",
+    "note": "MIT-licensed handbook page; public availability, not a leak.",
+    "identity": {
+      "display_name": "PostHog",
+      "official_domain": "posthog.com",
+      "public_aliases": []
+    },
+    "references": [
+      "docs/demo-pairs/posthog-handbook/security.md"
+    ],
+    "negatives": [
+      "docs/demo-pairs/posthog-handbook/negative-control.txt"
+    ],
+    "known_copies": [
+      {
+        "url": "https://posthog.com/handbook/company/security",
+        "first_party": true
+      },
+      {
+        "url_regex": "^https://github\\.com/[^/]+/posthog\\.com/blob/[^/]+/contents/handbook/company/security\\.md$",
+        "first_party": false,
+        "note": "the company's repository or any fork"
+      }
+    ],
+    "packs": [
+      "leak_watch",
+      "document_copies",
+      "code_exposure",
+      "broad_triage",
+      {
+        "name": "untested",
+        "presets": [
+          "leaked_email",
+          "leaked_roadmap",
+          "employee_forums",
+          "financial_filings"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "northstar_planted",
+    "label": "planted_demo",
+    "note": "SYNTHETIC: fictional company; the public copy was deliberately published by us as a gist on 2026-11-08. Proves the pipeline can find a known planted page, not that it found a leak. Recorded separately under docs/benchmark/planted/<date>/ (not part of preset scoring); re-check with: record --only northstar_planted --out ../docs/benchmark/planted/<date>.",
+    "identity": {
+      "display_name": "Northstar Demo",
+      "official_domain": null,
+      "public_aliases": []
+    },
+    "references": [
+      "server/fixtures/northstar/partner-guide.paragraphs.txt"
+    ],
+    "negatives": [
+      "server/fixtures/northstar/partner-guide-unpublished.md"
+    ],
+    "known_copies": [
+      {
+        "url": "https://gist.github.com/kaviishsethi/a899f787988efa1f16cbb1fdb6303889",
+        "first_party": false
+      }
+    ],
+    "packs": [
+      "code_exposure",
+      "broad_triage"
+    ]
+  },
+  {
+    "case_id": "mock_apple",
+    "label": "mock_leak_reconstruction",
+    "note": "SIMULATED: invented internal-style doc with short quoted passages from public leak coverage (sources chosen by independent web search before discovery). Not real company material.",
+    "identity": {
+      "display_name": "Apple",
+      "official_domain": "apple.com",
+      "public_aliases": [
+        "iPhone"
+      ]
+    },
+    "references": [
+      "docs/demo-pairs/mock-leaks/apple/mock-internal-review.md"
+    ],
+    "negatives": [
+      "docs/demo-pairs/mock-leaks/apple/negative-control.md"
+    ],
+    "known_copies": [
+      {
+        "url": "https://www.phonearena.com/news/massive-iphone-18-pro-leak-reveals-internals-schematics_id181497",
+        "first_party": false
+      },
+      {
+        "url": "https://www.techrepublic.com/article/news-iphone-18-pro-design-leak-tata-breach/",
+        "first_party": false
+      },
+      {
+        "url": "https://www.tomsguide.com/phones/iphones/iphone-18-pro-tipped-for-major-upgrades-inside-and-out-heres-whats-rumored-for-the-next-gen-iphones-cameras-performance-and-more",
+        "first_party": false
+      }
+    ],
+    "packs": [
+      "leak_watch",
+      {
+        "name": "product_leaks_group",
+        "presets": [
+          "product_leaks",
+          "leak_news",
+          "leak_news_alias",
+          "leaked_roadmap"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "mock_samsung",
+    "label": "mock_leak_reconstruction",
+    "note": "SIMULATED: invented internal-style doc with short quoted passages from public leak coverage (sources chosen by independent web search before discovery). Not real company material.",
+    "identity": {
+      "display_name": "Samsung Electronics",
+      "official_domain": "samsung.com",
+      "public_aliases": [
+        "Galaxy"
+      ]
+    },
+    "references": [
+      "docs/demo-pairs/mock-leaks/samsung/mock-internal-review.md"
+    ],
+    "negatives": [
+      "docs/demo-pairs/mock-leaks/samsung/negative-control.md"
+    ],
+    "known_copies": [
+      {
+        "url": "https://tomsguide.com/phones/samsung-phones/leaked-galaxy-s27-ultra-specs-reveal-a-long-overdue-major-upgrade",
+        "first_party": false
+      },
+      {
+        "url": "https://www.mysmartprice.com/personal-tech/mobiles/mobiles-news/samsung-galaxy-s27-ultra-leaks-what-we-know-so-far-about-design-cameras-and-specifications/",
+        "first_party": false
+      }
+    ],
+    "packs": [
+      "leak_watch",
+      {
+        "name": "product_leaks_group",
+        "presets": [
+          "product_leaks",
+          "leak_news",
+          "leak_news_alias",
+          "leaked_roadmap"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "mock_google",
+    "label": "mock_leak_reconstruction",
+    "note": "SIMULATED: invented internal-style doc with short quoted passages from public leak coverage (sources chosen by independent web search before discovery). Not real company material.",
+    "identity": {
+      "display_name": "Google",
+      "official_domain": "google.com",
+      "public_aliases": [
+        "Pixel"
+      ]
+    },
+    "references": [
+      "docs/demo-pairs/mock-leaks/google/mock-internal-review.md"
+    ],
+    "negatives": [
+      "docs/demo-pairs/mock-leaks/google/negative-control.md"
+    ],
+    "known_copies": [
+      {
+        "url": "https://www.androidauthority.com/google-pixel-11-specs-leak-3663219/",
+        "first_party": false
+      },
+      {
+        "url": "https://www.tomsguide.com/phones/google-pixel-phones/pixel-11-specs-leak-reveals-what-upgrades-to-expect-and-some-concerning-downgrades",
+        "first_party": false
+      }
+    ],
+    "packs": [
+      "leak_watch",
+      {
+        "name": "product_leaks_group",
+        "presets": [
+          "product_leaks",
+          "leak_news",
+          "leak_news_alias",
+          "leaked_roadmap"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "mock_apple_product_alias",
+    "label": "mock_leak_reconstruction",
+    "note": "SIMULATED: invented internal-style doc with short quoted passages from public leak coverage (sources chosen by independent web search before discovery). Not real company material. Run 2: profile revised before the run to use the public product name 'iPhone 18 Pro' as the alias (run 1 used the brand alias and matched nothing).",
+    "identity": {
+      "display_name": "Apple",
+      "official_domain": "apple.com",
+      "public_aliases": [
+        "iPhone 18 Pro"
+      ]
+    },
+    "references": [
+      "docs/demo-pairs/mock-leaks/apple/mock-internal-review.md"
+    ],
+    "negatives": [
+      "docs/demo-pairs/mock-leaks/apple/negative-control.md"
+    ],
+    "known_copies": [
+      {
+        "url": "https://www.phonearena.com/news/massive-iphone-18-pro-leak-reveals-internals-schematics_id181497",
+        "first_party": false
+      },
+      {
+        "url": "https://www.techrepublic.com/article/news-iphone-18-pro-design-leak-tata-breach/",
+        "first_party": false
+      },
+      {
+        "url": "https://www.tomsguide.com/phones/iphones/iphone-18-pro-tipped-for-major-upgrades-inside-and-out-heres-whats-rumored-for-the-next-gen-iphones-cameras-performance-and-more",
+        "first_party": false
+      }
+    ],
+    "packs": [
+      "leak_watch",
+      {
+        "name": "product_leaks_group",
+        "presets": [
+          "product_leaks",
+          "leak_news",
+          "leak_news_alias",
+          "leaked_roadmap"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "mock_samsung_product_alias",
+    "label": "mock_leak_reconstruction",
+    "note": "SIMULATED: invented internal-style doc with short quoted passages from public leak coverage (sources chosen by independent web search before discovery). Not real company material. Run 2: profile revised before the run to use the public product name 'Galaxy S27 Ultra' as the alias (run 1 used the brand alias and matched nothing).",
+    "identity": {
+      "display_name": "Samsung Electronics",
+      "official_domain": "samsung.com",
+      "public_aliases": [
+        "Galaxy S27 Ultra"
+      ]
+    },
+    "references": [
+      "docs/demo-pairs/mock-leaks/samsung/mock-internal-review.md"
+    ],
+    "negatives": [
+      "docs/demo-pairs/mock-leaks/samsung/negative-control.md"
+    ],
+    "known_copies": [
+      {
+        "url": "https://tomsguide.com/phones/samsung-phones/leaked-galaxy-s27-ultra-specs-reveal-a-long-overdue-major-upgrade",
+        "first_party": false
+      },
+      {
+        "url": "https://www.mysmartprice.com/personal-tech/mobiles/mobiles-news/samsung-galaxy-s27-ultra-leaks-what-we-know-so-far-about-design-cameras-and-specifications/",
+        "first_party": false
+      }
+    ],
+    "packs": [
+      "leak_watch",
+      {
+        "name": "product_leaks_group",
+        "presets": [
+          "product_leaks",
+          "leak_news",
+          "leak_news_alias",
+          "leaked_roadmap"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "mock_google_product_alias",
+    "label": "mock_leak_reconstruction",
+    "note": "SIMULATED: invented internal-style doc with short quoted passages from public leak coverage (sources chosen by independent web search before discovery). Not real company material. Run 2: profile revised before the run to use the public product name 'Pixel 11' as the alias (run 1 used the brand alias and matched nothing).",
+    "identity": {
+      "display_name": "Google",
+      "official_domain": "google.com",
+      "public_aliases": [
+        "Pixel 11"
+      ]
+    },
+    "references": [
+      "docs/demo-pairs/mock-leaks/google/mock-internal-review.md"
+    ],
+    "negatives": [
+      "docs/demo-pairs/mock-leaks/google/negative-control.md"
+    ],
+    "known_copies": [
+      {
+        "url": "https://www.androidauthority.com/google-pixel-11-specs-leak-3663219/",
+        "first_party": false
+      },
+      {
+        "url": "https://www.tomsguide.com/phones/google-pixel-phones/pixel-11-specs-leak-reveals-what-upgrades-to-expect-and-some-concerning-downgrades",
+        "first_party": false
+      }
+    ],
+    "packs": [
+      "leak_watch",
+      {
+        "name": "product_leaks_group",
+        "presets": [
+          "product_leaks",
+          "leak_news",
+          "leak_news_alias",
+          "leaked_roadmap"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "mock_apple_memo",
+    "label": "mock_leak_reconstruction",
+    "note": "SIMULATED: invented memo containing two short verbatim passages from Tim Cook's September 2021 staff memo about leaks (reported leak, quoted by several outlets). Not real company material.",
+    "identity": {
+      "display_name": "Apple",
+      "official_domain": "apple.com",
+      "public_aliases": []
+    },
+    "references": [
+      "docs/demo-pairs/mock-leaks/apple_memo/mock-internal-memo.md"
+    ],
+    "negatives": [
+      "docs/demo-pairs/mock-leaks/apple_memo/negative-control.md"
+    ],
+    "known_copies": [
+      {
+        "url": "https://theweek.com/news/1005194/apple-ceo-tim-cook-chastises-leakers-in-leaked-memo",
+        "first_party": false
+      },
+      {
+        "url": "https://www.macworld.com/article/677804/tim-cook-in-leaked-memo-stop-leaking-memos.html",
+        "first_party": false
+      },
+      {
+        "url": "https://imore.com/tim-cook-slams-leakers-internal-information-leaked-memo",
+        "first_party": false
+      },
+      {
+        "url": "https://www.ithinkdiff.com/tim-cook-frustrated-employee-leakers/",
+        "first_party": false
+      },
+      {
+        "url": "https://www.techtimes.com/articles/265708/20210922/apple-ceo-tim-cook-company-currently-looking-employee-who-leaked.htm",
+        "first_party": false
+      }
+    ],
+    "packs": [
+      "leak_watch",
+      {
+        "name": "memo_group",
+        "presets": [
+          "leak_news",
+          "leaked_email"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "mock_google_memo",
+    "label": "mock_leak_reconstruction",
+    "note": "SIMULATED: invented memo containing two short verbatim passages from Sundar Pichai's January 2024 company-goals memo (reported leak, quoted by several outlets). Not real company material.",
+    "identity": {
+      "display_name": "Google",
+      "official_domain": "google.com",
+      "public_aliases": [
+        "Alphabet"
+      ]
+    },
+    "references": [
+      "docs/demo-pairs/mock-leaks/google_memo/mock-internal-memo.md"
+    ],
+    "negatives": [
+      "docs/demo-pairs/mock-leaks/google_memo/negative-control.md"
+    ],
+    "known_copies": [
+      {
+        "url": "https://news.yahoo.com/googles-2024-goals-leaked-heres-062849133.html",
+        "first_party": false
+      },
+      {
+        "url": "https://www.inkl.com/news/google-s-2024-goals-have-leaked-and-here-s-where-the-company-is-headed",
+        "first_party": false
+      },
+      {
+        "url": "https://thestar.com.my/tech/tech-news/2024/01/29/opinion-a-leaked-memo-from-google-ceo-sundar-pichai-comes-amid-employee-discontent-no-ceo-wants-this-for-their-company",
+        "first_party": false
+      }
+    ],
+    "packs": [
+      "leak_watch",
+      {
+        "name": "memo_group",
+        "presets": [
+          "leak_news",
+          "leak_news_alias",
+          "leaked_email"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "mock_samsung_memo",
+    "label": "mock_leak_reconstruction",
+    "note": "SIMULATED: invented memo containing two short verbatim passages from semiconductor chief Jun Young-hyun's August 2024 staff memo (reported leak, quoted by several outlets). Not real company material.",
+    "identity": {
+      "display_name": "Samsung Electronics",
+      "official_domain": "samsung.com",
+      "public_aliases": [
+        "Samsung"
+      ]
+    },
+    "references": [
+      "docs/demo-pairs/mock-leaks/samsung_memo/mock-internal-memo.md"
+    ],
+    "negatives": [
+      "docs/demo-pairs/mock-leaks/samsung_memo/negative-control.md"
+    ],
+    "known_copies": [
+      {
+        "url": "https://sammobile.com/news/samsungs-chip-boss-tore-employees-a-new-one-in-unusually-harsh-memo",
+        "first_party": false
+      },
+      {
+        "url": "https://fortune.com/asia/2024/08/01/samsung-chips-boss-jun-young-hyun-warns-firm-risks-vicious-cycle/",
+        "first_party": false
+      },
+      {
+        "url": "https://www.tipranks.com/news/the-fly/samsung-exec-warns-of-vicious-cycle-unless-changes-made-bloomberg-reports",
+        "first_party": false
+      }
+    ],
+    "packs": [
+      "leak_watch",
+      {
+        "name": "memo_group",
+        "presets": [
+          "leak_news",
+          "leak_news_alias",
+          "leaked_email"
+        ]
+      }
+    ]
+  }
+]

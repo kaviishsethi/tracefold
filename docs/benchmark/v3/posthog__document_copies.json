@@ -1,0 +1,761 @@
+{
+  "case_id": "posthog",
+  "label": "public_policy",
+  "pack": "document_copies",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_deck",
+      "provider": "exa",
+      "query": "internal presentation slides from PostHog",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "posthog.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_deck",
+      "provider": "tavily",
+      "query": "\"PostHog\" internal presentation slides",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": "prefer",
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "posthog.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "doc_sharing",
+      "provider": "exa",
+      "query": "document published by PostHog",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "doc_sharing",
+      "provider": "tavily",
+      "query": "\"PostHog\"",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "PostHog employee handbook or company policy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "posthog.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"PostHog\" policy handbook procedure",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "posthog.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "security_docs",
+      "provider": "exa",
+      "query": "PostHog security policy or incident response plan document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "posthog.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "security_docs",
+      "provider": "tavily",
+      "query": "\"PostHog\" security policy incident response",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "posthog.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 9.7,
+  "provider_requests": 28,
+  "response_bytes": 210571,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_deck",
+      "provider": "exa",
+      "query": "internal presentation slides from PostHog",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:21.341153Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_deck",
+      "provider": "tavily",
+      "query": "\"PostHog\" internal presentation slides",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:21.218792Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "doc_sharing",
+      "provider": "exa",
+      "query": "document published by PostHog",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:22.830219Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "doc_sharing",
+      "provider": "tavily",
+      "query": "\"PostHog\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:23.186230Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "PostHog employee handbook or company policy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:24.064700Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"PostHog\" policy handbook procedure",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:24.802682Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "security_docs",
+      "provider": "exa",
+      "query": "PostHog security policy or incident response plan document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:26.088552Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "security_docs",
+      "provider": "tavily",
+      "query": "\"PostHog\" security policy incident response",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:26.064579Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_778a25f5170745238fe5",
+      "url": "https://github.com/PostHog/presentations",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "PostHog/presentations",
+          "returned_url": "https://github.com/PostHog/presentations"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_188345655e366095a704",
+      "url": "https://posthog.github.io/presentations/self-driving-beat-me-to-my-bug/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "The self-driving loop beat me to my own bug",
+          "returned_url": "https://posthog.github.io/presentations/self-driving-beat-me-to-my-bug/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_b1241549eb4b9b4acf20",
+      "url": "https://prezi.com/page/9f242181-f7b4-4d58-a059-35e9cd55a1d8/self-driving-with-posthog",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Self-driving with PostHog",
+          "returned_url": "https://prezi.com/page/9f242181-f7b4-4d58-a059-35e9cd55a1d8/self-driving-with-posthog"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_2017a11997b1aee29250",
+      "url": "https://www.slideshare.net/slideshow/cybersecurity-incident-response-planningpdf/266146026",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Cybersecurity Incident Response Planning.pdf",
+          "returned_url": "https://www.slideshare.net/slideshow/cybersecurity-incident-response-planningpdf/266146026"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_b9d345446f3e0dc2dde4",
+      "url": "https://www.slideshare.net/slideshow/what-is-a-digital-assets-management-systempdf/262151104",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "What is a digital assets management system.pdf",
+          "returned_url": "https://www.slideshare.net/slideshow/what-is-a-digital-assets-management-systempdf/262151104"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_98c82ee0d7c184ee903a",
+      "url": "https://visionlabs.com/academy/posthog/data-warehouse",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "PostHog Data Warehouse: 3 Architectures and When to Use Each",
+          "returned_url": "https://visionlabs.com/academy/posthog/data-warehouse"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_2931e415d9b6871fdfc2",
+      "url": "https://www.scribd.com/document/926871536/Front-End",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "PostHog Distinct ID Integration | PDF | Software | Computing",
+          "returned_url": "https://www.scribd.com/document/926871536/Front-End"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_22e51ef694efe2f52e37",
+      "url": "https://www.slideshare.net/slideshow/what-is-posthogpdf/266037999",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "What is PostHog.pdf",
+          "returned_url": "https://www.slideshare.net/slideshow/what-is-posthogpdf/266037999"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "What is PostHog.pdf",
+          "returned_url": "https://www.slideshare.net/slideshow/what-is-posthogpdf/266037999"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_7f8fc9106369d2ea6ca9",
+      "url": "https://www.scribd.com/document/988357639/Copy-of-Posthog-Web-Analytics-FINAL-2",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Client Challenge",
+          "returned_url": "https://www.scribd.com/document/988357639/Copy-of-Posthog-Web-Analytics-FINAL-2"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Posthog Web Analytics - FINAL | PDF",
+          "returned_url": "https://www.scribd.com/document/988357639/Copy-of-Posthog-Web-Analytics-FINAL-2"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_bf1fe6aa724dc7df1998",
+      "url": "https://www.scribd.com/document/977213002/Wbs-Quotes",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Python & Django Analytics Implementation | PDF | Computing",
+          "returned_url": "https://www.scribd.com/document/977213002/Wbs-Quotes"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_c07c2ae18f8b6f9c39f0",
+      "url": "https://github.com/PostHog/handbook",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "PostHog/handbook",
+          "returned_url": "https://github.com/PostHog/handbook"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8773b76eb5040634bc21",
+      "url": "https://dantrapp.github.io/posthog-handbook/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "PostHog Handbook Library",
+          "returned_url": "https://dantrapp.github.io/posthog-handbook/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_fe0b131a45f8a41da020",
+      "url": "https://seeto.ai/blog/posthog-handbook-teardown",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "PostHog publishes its org chart. Go read it. | Seeto",
+          "returned_url": "https://seeto.ai/blog/posthog-handbook-teardown"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_3b384ea990824e1e1ddf",
+      "url": "https://slack.com/marketplace/A03M3FN0RSQ-posthog",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "PostHog & Slack Integration | Slack Marketplace",
+          "returned_url": "https://slack.com/marketplace/A03M3FN0RSQ-posthog"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_affe0d8edad3c5219739",
+      "url": "https://redokun.com/privacy",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Privacy Policy | Redokun",
+          "returned_url": "https://redokun.com/privacy"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_cb2f9a783035df860e84",
+      "url": "https://doozy.live/blog/best-remote-employee-handbook-examples",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Employee Handbook for Remote Employees: 10 Real Examples | Doozy",
+          "returned_url": "https://doozy.live/blog/best-remote-employee-handbook-examples"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_7d459565a72f0175c66e",
+      "url": "https://github.com/PostHog/post-mortems/blob/main/2025-11-26-shai-hulud-attack.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "2025-11-26-shai-hulud-attack.md",
+          "returned_url": "https://github.com/PostHog/post-mortems/blob/main/2025-11-26-shai-hulud-attack.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_1cbd3055194e88523294",
+      "url": "https://github.com/posthog/posthog/blob/HEAD/.agents/security.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": ".agents/security.md",
+          "returned_url": "https://github.com/posthog/posthog/blob/HEAD/.agents/security.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_2dd673e6d3c0670b1992",
+      "url": "https://github.com/PostHog/post-mortems/blob/main/2026-02-20-posthog-us-logs-data-loss.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "2026-02-20-posthog-us-logs-data-loss.md at main \u00b7 PostHog/post-mortems",
+          "returned_url": "https://github.com/PostHog/post-mortems/blob/main/2026-02-20-posthog-us-logs-data-loss.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_1912c983cca08cd8edfc",
+      "url": "https://github.com/PostHog/post-mortems",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "GitHub - PostHog/post-mortems: When something goes wrong, we talk about it here. Unless it's confidential. \u00b7 GitHub",
+          "returned_url": "https://github.com/PostHog/post-mortems"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c80c7a14c5303d4897fc",
+      "url": "https://www.posthogstatus.com/incidents/01KSV6HJYKG5QJAP8HVTSQVSM1",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Unplanned maintenance",
+          "returned_url": "https://www.posthogstatus.com/incidents/01KSV6HJYKG5QJAP8HVTSQVSM1"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_6d9ec4c7a6e906aa23e5",
+      "url": "https://oneclickcomply.com/integrations/posthog",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "PostHog Compliance: SOC 2, ISO 27001 & GDPR | OneClickComply",
+          "returned_url": "https://oneclickcomply.com/integrations/posthog"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:42:29.224395Z"
+}

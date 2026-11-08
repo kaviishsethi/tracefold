@@ -1,0 +1,725 @@
+{
+  "case_id": "gsa_tts",
+  "label": "public_policy",
+  "pack": "document_copies",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_deck",
+      "provider": "exa",
+      "query": "internal presentation slides from Technology Transformation Services",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_deck",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" internal presentation slides",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": "prefer",
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "doc_sharing",
+      "provider": "exa",
+      "query": "document published by Technology Transformation Services",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "doc_sharing",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\"",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "Technology Transformation Services employee handbook or company policy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" policy handbook procedure",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "security_docs",
+      "provider": "exa",
+      "query": "Technology Transformation Services security policy or incident response plan document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "security_docs",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" security policy incident response",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "completed",
+  "elapsed_seconds": 10.7,
+  "provider_requests": 27,
+  "response_bytes": 602221,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_deck",
+      "provider": "exa",
+      "query": "internal presentation slides from Technology Transformation Services",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:28.428799Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_deck",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" internal presentation slides",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:28.520685Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "doc_sharing",
+      "provider": "exa",
+      "query": "document published by Technology Transformation Services",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:29.712979Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "doc_sharing",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:30.621767Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "Technology Transformation Services employee handbook or company policy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:31.065469Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" policy handbook procedure",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:33.035108Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "security_docs",
+      "provider": "exa",
+      "query": "Technology Transformation Services security policy or incident response plan document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:32.364003Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "security_docs",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" security policy incident response",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:34.247400Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_700a742a93c8c1581398",
+      "url": "https://www.slideshare.net/slideshow/technology-transformation-services/53011254",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Technology Transformation Services | PDF",
+          "returned_url": "https://www.slideshare.net/slideshow/technology-transformation-services/53011254"
+        },
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Technology Transformation Services | PDF",
+          "returned_url": "https://www.slideshare.net/slideshow/technology-transformation-services/53011254"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Technology Transformation Services | PDF - Slideshare",
+          "returned_url": "https://www.slideshare.net/slideshow/technology-transformation-services/53011254"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_945e952b0fd50f19e9d5",
+      "url": "https://exa.ai/library/organization/brcr0ws9ppm",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Technology Transformation Services (TTS)",
+          "returned_url": "https://exa.ai/library/organization/brcr0ws9ppm"
+        },
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Technology Transformation Services (TTS)",
+          "returned_url": "https://exa.ai/library/organization/brcr0ws9ppm"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_9e2af048351cb6783b32",
+      "url": "https://exa.ai/library/organization/kjx88mwcyc8",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Technology Transformation Services",
+          "returned_url": "https://exa.ai/library/organization/kjx88mwcyc8"
+        },
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Technology Transformation Services",
+          "returned_url": "https://exa.ai/library/organization/kjx88mwcyc8"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_32d86583b2c15126681b",
+      "url": "https://digital.gov/event/2024/09/19/uswds-monthly-call-september-2024",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "USWDS Monthly Call - September 2024 | Digital.gov",
+          "returned_url": "https://digital.gov/event/2024/09/19/uswds-monthly-call-september-2024"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_f578f893f6d893ac0d25",
+      "url": "https://kpmg.com/us/en/capabilities-services/technology.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Technology Transformation & AI Innovation| KPMG Business Technology Solutions",
+          "returned_url": "https://kpmg.com/us/en/capabilities-services/technology.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_525c0f97bdd6597578a4",
+      "url": "https://www.slideshare.net/slideshow/cloud-watch-on-hrms-solutions-q42013-final-global/30584482",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Cloud watch on hrms solutions | PDF",
+          "returned_url": "https://www.slideshare.net/slideshow/cloud-watch-on-hrms-solutions-q42013-final-global/30584482"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_d31323d4acee6c22032d",
+      "url": "https://www.slideshare.net/slideshow/devsecops-at-the-gsa/245346721",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "DevSecOps at the GSA | PDF",
+          "returned_url": "https://www.slideshare.net/slideshow/devsecops-at-the-gsa/245346721"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "DevSecOps at the GSA | PDF - Slideshare",
+          "returned_url": "https://www.slideshare.net/slideshow/devsecops-at-the-gsa/245346721"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e03e0535b939732ff486",
+      "url": "https://issuu.com/ltts/docs/economizing_og_capital_projects_with_plm_based_dig",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Issuu",
+          "returned_url": "https://issuu.com/ltts/docs/economizing_og_capital_projects_with_plm_based_dig"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_eda3d60d23d62d62a6fc",
+      "url": "https://www.scribd.com/doc/147066523/HP-Company-Profile",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "HP Company Overview and Services | PDF | Career & Growth | Business",
+          "returned_url": "https://www.scribd.com/doc/147066523/HP-Company-Profile"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_cafd2ae341afd3937b84",
+      "url": "https://github.com/gsa-tts",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "GSA-TTS - Technology Transformation Services",
+          "returned_url": "https://github.com/gsa-tts"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d6a1e172d066cbd091fd",
+      "url": "https://www.gsaig.gov/sites/default/files/audit-reports/A240037-1%20Final%20Report.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "GSA's Technology Transformation Services Violated Hiring ...",
+          "returned_url": "https://www.gsaig.gov/sites/default/files/audit-reports/A240037-1%20Final%20Report.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_5bb08dafb231139a4953",
+      "url": "https://go.govloop.com/rs/231-DWB-776/images/Tech-Transformation-Strategies-Ideas-implementation.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Technology Transformation Strategies: From Idea to ...",
+          "returned_url": "https://go.govloop.com/rs/231-DWB-776/images/Tech-Transformation-Strategies-Ideas-implementation.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_a5633188520ae2bdce3c",
+      "url": "https://www.michigan.gov/dtmb/-/media/Project/Websites/dtmb/Law-and-Policies/Admin-Guide/1300/POLICY-1365-Information-Technology-Standards-Adoption-Procurement-Development-and-Implementation-Pol.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "POLICY 1365.00 Information Technology (IT) Adoption, ...",
+          "returned_url": "https://www.michigan.gov/dtmb/-/media/Project/Websites/dtmb/Law-and-Policies/Admin-Guide/1300/POLICY-1365-Information-Technology-Standards-Adoption-Procurement-Development-and-Implementation-Pol.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c3f9c72ec8f9b2170aa2",
+      "url": "https://digitalgovernmenthub.org/wp-content/uploads/2022/07/federal-field-guide-4dccc06e01cd56773eb140ff6e6b2805cc517a460d6bff6689e7edd0ef349598.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Federal Agency Field Guide Government Technology",
+          "returned_url": "https://digitalgovernmenthub.org/wp-content/uploads/2022/07/federal-field-guide-4dccc06e01cd56773eb140ff6e6b2805cc517a460d6bff6689e7edd0ef349598.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c7ddfe7629d95cd4c1c0",
+      "url": "https://www.tcs.com/who-we-are/legal/security-policy",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "TCS Security Policy",
+          "returned_url": "https://www.tcs.com/who-we-are/legal/security-policy"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_05df1f77724249d47232",
+      "url": "https://dts-wireless.com/wp-content/uploads/2025/05/Incident-Response-Plan.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "\u201cIncident Response Plan (IRP)\u201d",
+          "returned_url": "https://dts-wireless.com/wp-content/uploads/2025/05/Incident-Response-Plan.pdf"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_fa1e20c61fcf734d472c",
+      "url": "https://www.upguard.com/blog/tprm-for-government-contractors-gsa-policies",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "TPRM for Government Contractors: General Services Administration Policies | UpGuard",
+          "returned_url": "https://www.upguard.com/blog/tprm-for-government-contractors-gsa-policies"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_4ce7c4b358a99ee271d4",
+      "url": "https://www.motorolasolutions.com/content/dam/msi/docs/dt/services/cybersecurity/federal_cybersecurity_advisory_services_solution_brief.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "For nearly a century, Motorola Solutions has engineered ...",
+          "returned_url": "https://www.motorolasolutions.com/content/dam/msi/docs/dt/services/cybersecurity/federal_cybersecurity_advisory_services_solution_brief.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_2f6a9820e98ffbcfbbe6",
+      "url": "https://www.govinfo.gov/content/pkg/CHRG-118hhrg51722/html/CHRG-118hhrg51722.htm",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "- LOGIN.GOV DOESN'T MEET THE STANDARD",
+          "returned_url": "https://www.govinfo.gov/content/pkg/CHRG-118hhrg51722/html/CHRG-118hhrg51722.htm"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:41:37.341697Z"
+}

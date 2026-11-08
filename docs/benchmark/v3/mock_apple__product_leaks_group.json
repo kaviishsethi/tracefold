@@ -1,0 +1,770 @@
+{
+  "case_id": "mock_apple",
+  "label": "mock_leak_reconstruction",
+  "pack": "product_leaks_group",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "product_leaks",
+      "provider": "exa",
+      "query": "leaked specifications of an upcoming iPhone product",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "apple.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "product_leaks",
+      "provider": "tavily",
+      "query": "\"iPhone\" leaked specs",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "apple.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Apple",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "apple.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Apple\" leaked internal memo",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "apple.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "leak_news_alias",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from iPhone",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "apple.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "leak_news_alias",
+      "provider": "tavily",
+      "query": "\"iPhone\" leaked internal memo",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "apple.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "leaked_roadmap",
+      "provider": "exa",
+      "query": "leaked Apple product roadmap or strategy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "apple.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "leaked_roadmap",
+      "provider": "tavily",
+      "query": "\"Apple\" leaked roadmap",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "apple.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 10.7,
+  "provider_requests": 28,
+  "response_bytes": 148951,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "product_leaks",
+      "provider": "exa",
+      "query": "leaked specifications of an upcoming iPhone product",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:49:38.058429Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "product_leaks",
+      "provider": "tavily",
+      "query": "\"iPhone\" leaked specs",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:49:40.713697Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Apple",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:49:41.247560Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Apple\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:49:40.851628Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "leak_news_alias",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from iPhone",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:49:43.280765Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "leak_news_alias",
+      "provider": "tavily",
+      "query": "\"iPhone\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:49:41.377202Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "leaked_roadmap",
+      "provider": "exa",
+      "query": "leaked Apple product roadmap or strategy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:49:42.729805Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "leaked_roadmap",
+      "provider": "tavily",
+      "query": "\"Apple\" leaked roadmap",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:49:44.163507Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_a9f397a4e627854d4ef0",
+      "url": "https://www.macrumors.com/2026/11/03/iphone-18-rumored-to-get-larger-battery/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "iPhone 18 Rumored to Get Larger Battery and Potential Price Increase - MacRumors",
+          "returned_url": "https://www.macrumors.com/2026/11/03/iphone-18-rumored-to-get-larger-battery/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_63194124635806da0bfd",
+      "url": "https://9to5mac.com/2026/11/03/iphone-18-will-have-two-upgrades-inspired-by-pro-models-per-leak/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "iPhone 18 will have two upgrades inspired by \u2018Pro\u2019 models, per leak - 9to5Mac",
+          "returned_url": "https://9to5mac.com/2026/11/03/iphone-18-will-have-two-upgrades-inspired-by-pro-models-per-leak/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_74b8d1afa10f0ce7cf5f",
+      "url": "https://www.macrumors.com/2026/08/17/iphone-18-pro-and-iphone-ultra-rumors/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "iPhone 18 Pro and iPhone Ultra: New Details Leak as Apple Event Nears - MacRumors",
+          "returned_url": "https://www.macrumors.com/2026/08/17/iphone-18-pro-and-iphone-ultra-rumors/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d69665b574a25f8e046a",
+      "url": "https://www.tomsguide.com/phones/iphones/first-iphone-18e-specs-leak-point-towards-a-disappointing-upgrade-for-apples-next-low-cost-iphone",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "First iPhone 18e specs leak point towards a disappointing upgrade for Apple's next low-cost iPhone | Tom's Guide",
+          "returned_url": "https://www.tomsguide.com/phones/iphones/first-iphone-18e-specs-leak-point-towards-a-disappointing-upgrade-for-apples-next-low-cost-iphone"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_fd3616409c713570cdb4",
+      "url": "https://www.gsmarena.com/iphone_air_2_specs_surface_again_in_new_leak-news-75274.php",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "iPhone Air 2 specs surface again in new leak - GSMArena.com news",
+          "returned_url": "https://www.gsmarena.com/iphone_air_2_specs_surface_again_in_new_leak-news-75274.php"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_a86fbe2adb5e555ece23",
+      "url": "https://www.techadvisor.com/article/3273167/iphone-air-2-specs-leak-battery-and-camera-upgrades.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "iPhone Air 2 Specs Leak: Battery and Camera Upgrades \u2013 Tech Advisor",
+          "returned_url": "https://www.techadvisor.com/article/3273167/iphone-air-2-specs-leak-battery-and-camera-upgrades.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_20381d53f392f97ce0ed",
+      "url": "https://www.theverge.com/2018/4/13/17235366/apple-arrests-leak-memo",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Apple has had 12 people arrested for leaks, it says in a leaked memo | The Verge",
+          "returned_url": "https://www.theverge.com/2018/4/13/17235366/apple-arrests-leak-memo"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_423a9e2d09dd8008e85c",
+      "url": "https://www.macrumors.com/2018/04/13/apple-warns-employees-about-leaking-to-media/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Leaked Apple Memo Warns Employees About Leaking Info to Media - MacRumors",
+          "returned_url": "https://www.macrumors.com/2018/04/13/apple-warns-employees-about-leaking-to-media/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_27b90366396e545cfa1f",
+      "url": "https://9to5mac.com/2021/09/22/leaked-memo-tim-cook-says-apple-is-cracking-down-on-leakers/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Leaked memo: Tim Cook says Apple is cracking down on leakers - 9to5Mac",
+          "returned_url": "https://9to5mac.com/2021/09/22/leaked-memo-tim-cook-says-apple-is-cracking-down-on-leakers/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_87f12cfdd90b45fa0f6d",
+      "url": "https://www.switchingtomac.com/apple-iphone-duo-inner-display-cracking-repair-guidance",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Apple reportedly tells stores how to handle iPhone Duo inner display cracking",
+          "returned_url": "https://www.switchingtomac.com/apple-iphone-duo-inner-display-cracking-repair-guidance"
+        },
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Apple reportedly tells stores how to handle iPhone Duo inner display cracking",
+          "returned_url": "https://www.switchingtomac.com/apple-iphone-duo-inner-display-cracking-repair-guidance"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_261e33f7c5b005ee595c",
+      "url": "https://nypost.com/2026/11/06/us-news/sensitive-man-cries-himself-to-sleep-because-nyt-wont-call-israel-hamas-war-a-genocide",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Sensitive man 'cries himself to sleep' because NYT won't call Israel-Hamas war a 'genocide'",
+          "returned_url": "https://nypost.com/2026/11/06/us-news/sensitive-man-cries-himself-to-sleep-because-nyt-wont-call-israel-hamas-war-a-genocide"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_279f53e0b2a198736a5f",
+      "url": "https://www.cnbc.com/2026/10/20/qualcomm-performance-focused-layoffs-reuters.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Qualcomm to cut jobs worldwide in performance-focused layoffs, internal memo shows",
+          "returned_url": "https://www.cnbc.com/2026/10/20/qualcomm-performance-focused-layoffs-reuters.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_1dcb8f68181e343bc508",
+      "url": "https://9to5mac.com/2024/10/21/iphone-roadmap-is-most-ambitious-in-the-products-history-per-john-ternus/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "iPhone roadmap is \u2018most ambitious in the product\u2019s history,\u2019 per John Ternus - 9to5Mac",
+          "returned_url": "https://9to5mac.com/2024/10/21/iphone-roadmap-is-most-ambitious-in-the-products-history-per-john-ternus/"
+        },
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "iPhone roadmap is \u2018most ambitious in the product\u2019s history,\u2019 per John Ternus - 9to5Mac",
+          "returned_url": "https://9to5mac.com/2024/10/21/iphone-roadmap-is-most-ambitious-in-the-products-history-per-john-ternus/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_98e45ad77cc293ad5b54",
+      "url": "https://9to5mac.com/2018/04/13/apple-memo-on-leaks-leaks/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Apple ramping up effort to stop leaks with legal action, according to leaked memo - 9to5Mac",
+          "returned_url": "https://9to5mac.com/2018/04/13/apple-memo-on-leaks-leaks/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_43bc38cede05cfbf4e73",
+      "url": "https://www.independent.co.uk/tech/apple-iphone-x-leaks-release-date-mac-latest-next-new-products-a8307541.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Apple cracks down on leaks that have revealed future of iPhone and more, leaked memo reveals | The Independent | The Independent",
+          "returned_url": "https://www.independent.co.uk/tech/apple-iphone-x-leaks-release-date-mac-latest-next-new-products-a8307541.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_feef7f0777cc83612d1b",
+      "url": "https://www.redmondpie.com/apple-confirms-iphone-duo-display-cracking-issue-in-memo-to-its-retail-stores",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Apple Confirms iPhone Duo Display Cracking Issue In Memo To Its Retail Stores",
+          "returned_url": "https://www.redmondpie.com/apple-confirms-iphone-duo-display-cracking-issue-in-memo-to-its-retail-stores"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6109509658b63c64f8c5",
+      "url": "https://www.theapplepost.com/2026/10/31/73764/apple-sends-stores-repair-guidance-for-iphone-duo-display-cracking-issue",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Apple Issues iPhone Duo Display Cracking Repair Guidance | The Apple Post",
+          "returned_url": "https://www.theapplepost.com/2026/10/31/73764/apple-sends-stores-repair-guidance-for-iphone-duo-display-cracking-issue"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_56703018134e8459f682",
+      "url": "https://www.techtimes.com/articles/326259/20260901/ternus-bets-apple-wins-ai-through-hardware-not-models-day-one-sets-strategy.htm",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Ternus Bets Apple Wins AI Through Hardware, Not Models: Day One Sets Strategy",
+          "returned_url": "https://www.techtimes.com/articles/326259/20260901/ternus-bets-apple-wins-ai-through-hardware-not-models-day-one-sets-strategy.htm"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_95940a56bba75c5a0b19",
+      "url": "https://www.techspot.com/news/112792-apple-ai-hardware-roadmap-includes-camera-eqipped-airpods.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Apple's AI hardware roadmap: camera-equipped AirPods, smart glasses, and foldable iPhones | TechSpot",
+          "returned_url": "https://www.techspot.com/news/112792-apple-ai-hardware-roadmap-includes-camera-eqipped-airpods.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_263bd6516db82e1323f5",
+      "url": "https://basic-tutorials.com/news/apple-roadmap-leaked-11-new-macs-from-macbook-neo-to-macbook-ultra",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Apple Roadmap Leaked: 11 New Macs, from MacBook Neo to MacBook Ultra - Basic Tutorials",
+          "returned_url": "https://basic-tutorials.com/news/apple-roadmap-leaked-11-new-macs-from-macbook-neo-to-macbook-ultra"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_2fd14a94a4092e7b04cb",
+      "url": "https://tech.yahoo.com/ai/apple-intelligence/articles/apple-leaked-iphone-roadmap-foldable-193932446.html",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Apple\u2019s Leaked iPhone Roadmap: Foldable, Full Overhaul, and a 2027 Wait",
+          "returned_url": "https://tech.yahoo.com/ai/apple-intelligence/articles/apple-leaked-iphone-roadmap-foldable-193932446.html"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_3c8cf896f5a8d63c856e",
+      "url": "https://9to5mac.com/2026/09/04/leaked-iphone-roadmap-reveals-plans-for-larger-foldable-biggest-overhaul-more",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Leaked iPhone roadmap reveals plans for larger foldable, \u2018biggest overhaul,\u2019 more - 9to5Mac",
+          "returned_url": "https://9to5mac.com/2026/09/04/leaked-iphone-roadmap-reveals-plans-for-larger-foldable-biggest-overhaul-more"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:49:47.143018Z"
+}

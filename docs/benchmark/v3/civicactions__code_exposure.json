@@ -1,0 +1,610 @@
+{
+  "case_id": "civicactions",
+  "label": "public_policy",
+  "pack": "code_exposure",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from CivicActions",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"CivicActions\"",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "code_hosts_domain",
+      "provider": "exa",
+      "query": "configuration file referencing civicactions.com",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "code_hosts_domain",
+      "provider": "tavily",
+      "query": "\"civicactions.com\" config",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": false,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "paste_sites",
+      "provider": "exa",
+      "query": "CivicActions civicactions.com",
+      "num_results": 3,
+      "include_domains": [
+        "ghostbin.cloud",
+        "paste.ee",
+        "pastebin.com",
+        "rentry.co"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "paste_sites",
+      "provider": "tavily",
+      "query": "\"CivicActions\" civicactions.com",
+      "num_results": 3,
+      "include_domains": [
+        "ghostbin.cloud",
+        "paste.ee",
+        "pastebin.com",
+        "rentry.co"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": false,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "breach_coverage",
+      "provider": "exa",
+      "query": "report on a data breach or source code leak at CivicActions",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "civicactions.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "breach_coverage",
+      "provider": "tavily",
+      "query": "\"CivicActions\" breach source code leak",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "civicactions.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "completed",
+  "elapsed_seconds": 13.3,
+  "provider_requests": 24,
+  "response_bytes": 110938,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from CivicActions",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:26.244795Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"CivicActions\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:26.838829Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "code_hosts_domain",
+      "provider": "exa",
+      "query": "configuration file referencing civicactions.com",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:27.377410Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "code_hosts_domain",
+      "provider": "tavily",
+      "query": "\"civicactions.com\" config",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:28.508853Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "paste_sites",
+      "provider": "exa",
+      "query": "CivicActions civicactions.com",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:28.381469Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "paste_sites",
+      "provider": "tavily",
+      "query": "\"CivicActions\" civicactions.com",
+      "status": "ok",
+      "error": null,
+      "returned": 1,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:29.482494Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "breach_coverage",
+      "provider": "exa",
+      "query": "report on a data breach or source code leak at CivicActions",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:29.918493Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "breach_coverage",
+      "provider": "tavily",
+      "query": "\"CivicActions\" breach source code leak",
+      "status": "ok",
+      "error": null,
+      "returned": 1,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:32.436907Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_9d84e75de5d1cf0f8725",
+      "url": "https://github.com/orgs/CivicActions/repositories",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "CivicActions repositories",
+          "returned_url": "https://github.com/orgs/CivicActions/repositories"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_796248b50714859059a3",
+      "url": "https://github.com/civicactions",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "CivicActions",
+          "returned_url": "https://github.com/civicactions"
+        },
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "CivicActions \u00b7 GitHub",
+          "returned_url": "https://github.com/civicactions"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_0d6241a0ee6889a421cb",
+      "url": "https://github.com/civicactions/accessibility",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "CivicActions/accessibility",
+          "returned_url": "https://github.com/civicactions/accessibility"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "CivicActions Accessibility Site: A collection of resources about digital ...",
+          "returned_url": "https://github.com/civicactions/accessibility"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6d1db2fb7ccea062061f",
+      "url": "https://github.com/CivicActions/guidebook",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "CivicActions/guidebook: The home of policies and ...",
+          "returned_url": "https://github.com/CivicActions/guidebook"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitHub - CivicActions/guidebook: The home of policies and ...",
+          "returned_url": "https://github.com/CivicActions/guidebook"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_09ea0e070350dfe56bdd",
+      "url": "https://github.com/CivicActions/open-practice",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "CivicActions/open-practice: Our list of ...",
+          "returned_url": "https://github.com/CivicActions/open-practice"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e9e1dfe98a6d78d56456",
+      "url": "https://github.com/jhoude5/cahomesite",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "jhoude5/cahomesite",
+          "returned_url": "https://github.com/jhoude5/cahomesite"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_61b7104de5dfc82c9d79",
+      "url": "https://github.com/CivicActions/civicactions.com",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "CivicActions/civicactions.com",
+          "returned_url": "https://github.com/CivicActions/civicactions.com"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_5b63fc5db7c7aa977508",
+      "url": "https://github.com/CivicActions/project-settings",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "CivicActions/project-settings",
+          "returned_url": "https://github.com/CivicActions/project-settings"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ed587a12309600af1520",
+      "url": "https://github.com/CivicActions/civicactions",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Alpha: CivicActions content hub and home site - GitHub",
+          "returned_url": "https://github.com/CivicActions/civicactions"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_223c125913fa102e17ba",
+      "url": "https://pastebin.com/5kxwbpaX",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "#from http://www.civicactions.com/blog/2010/may/25 ...",
+          "returned_url": "https://pastebin.com/5kxwbpaX"
+        },
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "#from http://www.civicactions.com/blog/2010/may/25 ... - Pastebin",
+          "returned_url": "https://pastebin.com/5kxwbpaX"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_53c2f9781af5330104da",
+      "url": "https://pastebin.com/MFGh1xuY",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "partners - Pastebin.com",
+          "returned_url": "https://pastebin.com/MFGh1xuY"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_7d27f2a2d4c370d37b58",
+      "url": "https://pastebin.com/PkfAnPnL",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "GRASSROOTS RESISTANCE GROUPS - Pastebin.com",
+          "returned_url": "https://pastebin.com/PkfAnPnL"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_41a0a0be59eff8b1d578",
+      "url": "https://orangeslices.ai/civicactions-embracing-collaboration-through-open-source-resources-to-better-serve-government/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "CivicActions \u2013 Embracing Collaboration Through Open Source Resources to Better Serve Government | OrangeSlices AI",
+          "returned_url": "https://orangeslices.ai/civicactions-embracing-collaboration-through-open-source-resources-to-better-serve-government/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c07f013b988fc7faf74a",
+      "url": "https://insider.govtech.com/california/www-techwire-net/will-agile-encourage-vendors-to-collaborate-and-share.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Will Agile Encourage Vendors to Collaborate and Share?",
+          "returned_url": "https://insider.govtech.com/california/www-techwire-net/will-agile-encourage-vendors-to-collaborate-and-share.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_a9672d9147a6566a2286",
+      "url": "https://gregoryheller.com/2008/henry-poole-quoted-on-web-security-for-political-campaigns/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Henry Poole Quoted on Web Security For Political Campaigns \u2013 Gregory Heller",
+          "returned_url": "https://gregoryheller.com/2008/henry-poole-quoted-on-web-security-for-political-campaigns/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d2aafda4b107c86d9455",
+      "url": "https://goodcodereview.com/codebase",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Repository Audit Checklist",
+          "returned_url": "https://goodcodereview.com/codebase"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:32:37.171461Z"
+}

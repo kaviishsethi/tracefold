@@ -195,6 +195,54 @@ MIGRATIONS: list[str] = [
     );
     CREATE INDEX actions_ws ON actions(workspace_id, status, created_at);
     """,
+    # 3: company-name discovery (approved public identity, immutable query plans, per-scan discovery runs)
+    """
+    CREATE TABLE company_profiles (
+        id TEXT NOT NULL,
+        workspace_id TEXT NOT NULL REFERENCES workspaces(id),
+        version INTEGER NOT NULL,
+        display_name TEXT NOT NULL,
+        official_domain TEXT,
+        public_aliases TEXT NOT NULL DEFAULT '[]',
+        approved_by TEXT NOT NULL,
+        approved_at TEXT NOT NULL,
+        privacy_notice_version TEXT NOT NULL,
+        PRIMARY KEY (id, version)
+    );
+    CREATE INDEX company_profiles_ws ON company_profiles(workspace_id, id, version);
+    CREATE TABLE query_plans (
+        id TEXT PRIMARY KEY,
+        workspace_id TEXT NOT NULL REFERENCES workspaces(id),
+        profile_id TEXT NOT NULL,
+        profile_version INTEGER NOT NULL,
+        profile TEXT NOT NULL,                -- immutable copy of the approved profile version
+        plan TEXT NOT NULL,                   -- rendered searches, template version, scope, limits
+        created_by TEXT NOT NULL,
+        created_at TEXT NOT NULL
+    );
+    CREATE INDEX query_plans_ws ON query_plans(workspace_id, created_at);
+    CREATE TABLE discovery_runs (
+        id TEXT PRIMARY KEY,
+        workspace_id TEXT NOT NULL,
+        scan_id TEXT NOT NULL,
+        query_plan_id TEXT NOT NULL,
+        profile_version INTEGER NOT NULL,
+        data TEXT NOT NULL,                   -- provider queries, errors, counts, candidates
+        started_at TEXT NOT NULL,
+        finished_at TEXT
+    );
+    CREATE UNIQUE INDEX discovery_runs_scan ON discovery_runs(scan_id);
+    CREATE TABLE discovery_sources (
+        run_id TEXT NOT NULL,
+        scan_id TEXT NOT NULL,
+        ordinal INTEGER NOT NULL,
+        source_id TEXT NOT NULL,
+        data TEXT NOT NULL,
+        PRIMARY KEY (run_id, ordinal)
+    );
+    CREATE INDEX discovery_sources_scan ON discovery_sources(scan_id, ordinal);
+    ALTER TABLE scans ADD COLUMN public_discovery TEXT
+    """,
 ]
 
 

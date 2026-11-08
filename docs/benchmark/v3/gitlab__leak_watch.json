@@ -1,0 +1,293 @@
+{
+  "case_id": "gitlab",
+  "label": "public_policy",
+  "pack": "leak_watch",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from GitLab",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "gitlab.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"GitLab\" leaked internal memo",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "gitlab.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [
+    {
+      "preset": "leak_news_alias",
+      "reason": "needs a public alias"
+    }
+  ],
+  "scan_state": "partial",
+  "elapsed_seconds": 4.6,
+  "provider_requests": 12,
+  "response_bytes": 439202,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from GitLab",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:46.202395Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"GitLab\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:47.220151Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_462405d102249db12884",
+      "url": "https://www.businessinsider.com/gitlab-layoffs-memo-2026-5",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "GitLab Employees Face Layoffs Limbo. Read the Memo. - Business Insider",
+          "returned_url": "https://www.businessinsider.com/gitlab-layoffs-memo-2026-5"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_4885509739844b7da597",
+      "url": "https://www.ragan.com/the-week-in-comms-linkedin-gm-gitlab/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "LinkedIn CEO cites need for strategy shift in layoff memo; GM employees decry how their layoffs were communicated - Ragan Communications",
+          "returned_url": "https://www.ragan.com/the-week-in-comms-linkedin-gm-gitlab/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ceacc919be1ce25339d8",
+      "url": "https://www.thestack.technology/gitlab-layoffs-architecture-overhaul-agents-ai/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "AI agents spur GitLab layoffs and architecture overhaul",
+          "returned_url": "https://www.thestack.technology/gitlab-layoffs-architecture-overhaul-agents-ai/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_bef3fd24f792082a186c",
+      "url": "https://www.bloomberg.com/news/articles/2026-05-11/gitlab-says-will-cut-jobs-to-spend-on-growth-in-agentic-era",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 4,
+          "title": "GitLab to Cut Jobs, Reinvest Savings in AI Agent Growth Strategy - Bloomberg",
+          "returned_url": "https://www.bloomberg.com/news/articles/2026-05-11/gitlab-says-will-cut-jobs-to-spend-on-growth-in-agentic-era"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_372fdee3701c052fd94a",
+      "url": "https://thenextweb.com/news/gitlab-cuts-7-of-workforce-and-flattens-management-in-sweeping-agentic-era-restructuring",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 5,
+          "title": "GitLab cuts 7% of workforce and flattens management in sweeping \u2018agentic era\u2019 restructuring",
+          "returned_url": "https://thenextweb.com/news/gitlab-cuts-7-of-workforce-and-flattens-management-in-sweeping-agentic-era-restructuring"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_cd6cbce66c7e21215ff4",
+      "url": "https://securityonline.info/cve-watchtower/cve-2026-97229",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "CVE-2026-97229 - Critical Severity Vulnerability (Actively Exploited) | CVE Watchtower",
+          "returned_url": "https://securityonline.info/cve-watchtower/cve-2026-97229"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_609b906e7c3e167f377d",
+      "url": "https://www.cloudzero.com/blog/ai-tokens",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "What are AI tokens? The unit your AI bill is written in",
+          "returned_url": "https://www.cloudzero.com/blog/ai-tokens"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_e685d7a1909c18dbc355",
+      "url": "https://github.com/bigbodycobain/shadowbroker",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitHub - BigBodyCobain/Shadowbroker: Open-source intelligence for the global theater. Track everything from the corporate/private jets of the wealthy, and spy satellites, to seismic events in one unified interface. Hook an AI agent up to have it parse through data and find previously unseen correlat",
+          "returned_url": "https://github.com/bigbodycobain/shadowbroker"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_bc258641f04763fb230f",
+      "url": "https://docs.n8n.io/changelog/release-notes",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "incomplete",
+      "truncated": true,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 4,
+          "title": "Release notes | Changelog | n8n Docs",
+          "returned_url": "https://docs.n8n.io/changelog/release-notes"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_68e548382726c730407a",
+      "url": "https://hbr.org/case-selections",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 5,
+          "title": "Case Selections",
+          "returned_url": "https://hbr.org/case-selections"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:32:48.301921Z"
+}

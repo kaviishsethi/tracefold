@@ -1,0 +1,484 @@
+{
+  "case_id": "gsa_tts",
+  "label": "public_policy",
+  "pack": "leak_watch",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Technology Transformation Services",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" leaked internal memo",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leak_news_alias",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from 18F",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leak_news_alias",
+      "provider": "tavily",
+      "query": "\"18F\" leaked internal memo",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 8.7,
+  "provider_requests": 20,
+  "response_bytes": 1929937,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Technology Transformation Services",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:20.078436Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:21.866339Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leak_news_alias",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from 18F",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:21.167538Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leak_news_alias",
+      "provider": "tavily",
+      "query": "\"18F\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:24.145776Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_9093f39ad174adbd7fb2",
+      "url": "https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Dozens of Government Technology Specialists Fired",
+          "returned_url": "https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html"
+        },
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 4,
+          "title": "Dozens of Government Technology Specialists Fired",
+          "returned_url": "https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6acd0c0de97e8263bfde",
+      "url": "https://federalnewsnetwork.com/reorganization/2025/03/after-rocky-history-gsa-shuts-down-18f-office/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "After rocky history, GSA shuts down 18F office | Federal News Network",
+          "returned_url": "https://federalnewsnetwork.com/reorganization/2025/03/after-rocky-history-gsa-shuts-down-18f-office/"
+        },
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "After rocky history, GSA shuts down 18F office | Federal News Network",
+          "returned_url": "https://federalnewsnetwork.com/reorganization/2025/03/after-rocky-history-gsa-shuts-down-18f-office/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_14ec2bddccf5c89b177d",
+      "url": "https://www.nextgov.com/digital-government/2025/04/gsa-preps-layoffs-tts/404467/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "GSA preps for layoffs at TTS - Nextgov/FCW",
+          "returned_url": "https://www.nextgov.com/digital-government/2025/04/gsa-preps-layoffs-tts/404467/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_43051344b86ebd0cb027",
+      "url": "https://www.wired.com/story/elon-musk-government-tech-workers-gsa-tts/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 4,
+          "title": "Government Tech Workers Forced to Defend Projects to Random Elon Musk Bros | WIRED",
+          "returned_url": "https://www.wired.com/story/elon-musk-government-tech-workers-gsa-tts/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8764365362899257ad5f",
+      "url": "https://www.fastcompany.com/91301389/doge-demanding-wins-technology-transformation-services",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 5,
+          "title": "DOGE is demanding \u2018wins\u2019 from this elite government tech group\u2014while promising major layoffs - Fast Company",
+          "returned_url": "https://www.fastcompany.com/91301389/doge-demanding-wins-technology-transformation-services"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_33629c4715f8f24ce6b7",
+      "url": "https://www.reddit.com/r/UnderReportedNews/comments/1xqceb2/stephen_millers_breitbart_pipeline_over_900",
+      "fetch_status": "failed",
+      "failure_reason": "provider_no_content",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Stephen Miller's Breitbart Pipeline: Over 900 Leaked ...",
+          "returned_url": "https://www.reddit.com/r/UnderReportedNews/comments/1xqceb2/stephen_millers_breitbart_pipeline_over_900"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_e4768373235c2fa083a9",
+      "url": "https://unbreaking.org/issues/data-security",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Data Security \u2014 Unbreaking",
+          "returned_url": "https://unbreaking.org/issues/data-security"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Data Security \u2014 Unbreaking",
+          "returned_url": "https://unbreaking.org/issues/data-security"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_cc45861ec3bd6d617d2c",
+      "url": "https://www.cbpp.org/research/federal-budget/executive-action-watch?item=29713",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Executive Order Moves to Dismantle Several Small Agencies | Center on Budget and Policy Priorities",
+          "returned_url": "https://www.cbpp.org/research/federal-budget/executive-action-watch?item=29713"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ac74595f7b9618af6871",
+      "url": "https://au.pcmag.com/news/109916/doge-deletes-agency-behind-logingov-irs-direct-file-other-tech-projects",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "DOGE Deletes Agency Behind Login.gov, IRS Direct File, Other Tech Projects",
+          "returned_url": "https://au.pcmag.com/news/109916/doge-deletes-agency-behind-logingov-irs-direct-file-other-tech-projects"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_24f1dea2bbdf430d9ee3",
+      "url": "https://www.cbsnews.com/news/general-services-administration-shutters-technology-unit-trump-doge/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "General Services Administration shutters its technology unit - CBS News",
+          "returned_url": "https://www.cbsnews.com/news/general-services-administration-shutters-technology-unit-trump-doge/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_39e9ae7760b15fad83fa",
+      "url": "https://www.theatlantic.com/technology/archive/2025/03/doge-elon-musk-18f-elimination-efficiency/681894/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 5,
+          "title": "DOGE Killed a Government-Efficiency Team - The Atlantic",
+          "returned_url": "https://www.theatlantic.com/technology/archive/2025/03/doge-elon-musk-18f-elimination-efficiency/681894/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8c06c327af1252709456",
+      "url": "https://www.med.fau.de/files/2026/10/Research-Report-2011-Medical-Faculty-FAU-Forschungsbericht-2011-englisch-FAU-Med-Fak_26.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "incomplete",
+      "truncated": true,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Research-Report-2011-Medical-Faculty-FAU- ...",
+          "returned_url": "https://www.med.fau.de/files/2026/10/Research-Report-2011-Medical-Faculty-FAU-Forschungsbericht-2011-englisch-FAU-Med-Fak_26.pdf"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_cb57b984c51ba233fd25",
+      "url": "https://zu.edu.pk/office-of-research-innovation-and-commercialization-oric",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "incomplete",
+      "truncated": true,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Office of Research, Innovation and Commercialization (ORIC) - Ziauddin University",
+          "returned_url": "https://zu.edu.pk/office-of-research-innovation-and-commercialization-oric"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_883680f2cad9f65cc0f2",
+      "url": "https://www.scribd.com/document/509740320/Scramble-473-Oct18-c",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 4,
+          "title": "Scramble 473 Oct18 (C) | PDF | Airlines | Transport Companies",
+          "returned_url": "https://www.scribd.com/document/509740320/Scramble-473-Oct18-c"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_2488681da697fa3121fd",
+      "url": "https://www.cpapracticeadvisor.com/latest/page/2785",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 5,
+          "title": "Latest - Page 2785 of 2785 - CPA Practice Advisor",
+          "returned_url": "https://www.cpapracticeadvisor.com/latest/page/2785"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:41:26.792619Z"
+}

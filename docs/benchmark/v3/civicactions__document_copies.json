@@ -1,0 +1,760 @@
+{
+  "case_id": "civicactions",
+  "label": "public_policy",
+  "pack": "document_copies",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_deck",
+      "provider": "exa",
+      "query": "internal presentation slides from CivicActions",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "civicactions.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_deck",
+      "provider": "tavily",
+      "query": "\"CivicActions\" internal presentation slides",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": "prefer",
+      "exclude_domains": [
+        "civicactions.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "doc_sharing",
+      "provider": "exa",
+      "query": "document published by CivicActions",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "doc_sharing",
+      "provider": "tavily",
+      "query": "\"CivicActions\"",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "CivicActions employee handbook or company policy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "civicactions.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"CivicActions\" policy handbook procedure",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "civicactions.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "security_docs",
+      "provider": "exa",
+      "query": "CivicActions security policy or incident response plan document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "civicactions.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "security_docs",
+      "provider": "tavily",
+      "query": "\"CivicActions\" security policy incident response",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "civicactions.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 11.5,
+  "provider_requests": 28,
+  "response_bytes": 2170210,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_deck",
+      "provider": "exa",
+      "query": "internal presentation slides from CivicActions",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:13.776358Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_deck",
+      "provider": "tavily",
+      "query": "\"CivicActions\" internal presentation slides",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:14.773768Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "doc_sharing",
+      "provider": "exa",
+      "query": "document published by CivicActions",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:14.952527Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "doc_sharing",
+      "provider": "tavily",
+      "query": "\"CivicActions\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:17.191721Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "CivicActions employee handbook or company policy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:16.921824Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"CivicActions\" policy handbook procedure",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:19.503960Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "security_docs",
+      "provider": "exa",
+      "query": "CivicActions security policy or incident response plan document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:18.218022Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "security_docs",
+      "provider": "tavily",
+      "query": "\"CivicActions\" security policy incident response",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:20.600266Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_e9fc048a2da5162f67ad",
+      "url": "https://speakerdeck.com/civicactions",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "CivicActions (@civicactions) on Speaker Deck",
+          "returned_url": "https://speakerdeck.com/civicactions"
+        },
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "CivicActions (@civicactions) on Speaker Deck",
+          "returned_url": "https://speakerdeck.com/civicactions"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "CivicActions - Speaker Deck",
+          "returned_url": "https://speakerdeck.com/civicactions"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e1fe9e8d747e1b39896f",
+      "url": "https://media.libreplanet.org/mgoblin_media/media_entries/2355/Libreplanet_2020_FreeSoftwareOpenData_KarenJohnson_FenLabalme.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Transparent code, secure data",
+          "returned_url": "https://media.libreplanet.org/mgoblin_media/media_entries/2355/Libreplanet_2020_FreeSoftwareOpenData_KarenJohnson_FenLabalme.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ad391321432b202737de",
+      "url": "https://doi.org/10.5281/zenodo.2716499",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Preparing Clients for Open Source Contributions",
+          "returned_url": "https://doi.org/10.5281/zenodo.2716499"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_773328e479634c03bf5d",
+      "url": "https://www.slideshare.net/slideshow/900-startup-companies-listpdf/254906083",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "incomplete",
+      "truncated": true,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "900 + Startup Companies List.pdf",
+          "returned_url": "https://www.slideshare.net/slideshow/900-startup-companies-listpdf/254906083"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_3a03fd46bff64b24da83",
+      "url": "https://www.figma.com/blog/whats-happening-at-config-2024",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "What\u2019s Happening at Config 2024? | Figma Blog",
+          "returned_url": "https://www.figma.com/blog/whats-happening-at-config-2024"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8654530e2b3f594e8983",
+      "url": "https://www.unicef.org/esa/media/6726/file/grp-a-toolkit-for-teachers-and-schools-2020.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "incomplete",
+      "truncated": true,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "A TOOLKIT FOR TEACHERS AND SCHOOLS",
+          "returned_url": "https://www.unicef.org/esa/media/6726/file/grp-a-toolkit-for-teachers-and-schools-2020.pdf"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_f05c4352a3c13996752d",
+      "url": "https://speakerdeck.com/aaronpava/agile-white-house-how-the-techfar-and-digital-services-playbook-are-transforming-government",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Agile White House: How the TechFAR & Digital Services Playbook are Transforming Government - Speaker Deck",
+          "returned_url": "https://speakerdeck.com/aaronpava/agile-white-house-how-the-techfar-and-digital-services-playbook-are-transforming-government"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6f8e9e352d20af339a91",
+      "url": "https://www.scribd.com/document/913959108/Civic-Actions",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Community Safety Civic Actions Program | PDF",
+          "returned_url": "https://www.scribd.com/document/913959108/Civic-Actions"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_d819f81836a16170007b",
+      "url": "https://www.scribd.com/document/581718578/TAC-APBI-Attendee-Summary",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Key Contacts for 2025 Growth Strategy | PDF",
+          "returned_url": "https://www.scribd.com/document/581718578/TAC-APBI-Attendee-Summary"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_a4bd3f3af52c03815b49",
+      "url": "https://www.scribd.com/document/1039597845/900-Startups-Hiring-Remotely-in-2026-Nitin-Singh",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "900+ Startups Hiring Remotely in 2026 - Nitin Singh | PDF",
+          "returned_url": "https://www.scribd.com/document/1039597845/900-Startups-Hiring-Remotely-in-2026-Nitin-Singh"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_6d1db2fb7ccea062061f",
+      "url": "https://github.com/CivicActions/guidebook",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "CivicActions/guidebook",
+          "returned_url": "https://github.com/CivicActions/guidebook"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d27685202945853e504e",
+      "url": "https://github.com/CivicActions/guidebook/blob/master/company-policies/expenses.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "company-policies/expenses.md",
+          "returned_url": "https://github.com/CivicActions/guidebook/blob/master/company-policies/expenses.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_edd551b3b17f6547e3b8",
+      "url": "https://github.com/CivicActions/guidebook/blob/master/employee-benefits/professional-development.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "employee-benefits/professional-development.md",
+          "returned_url": "https://github.com/CivicActions/guidebook/blob/master/employee-benefits/professional-development.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_48c4d7a72e70c0bfe5a0",
+      "url": "https://techbook.bixal.com",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Bixal Techbook",
+          "returned_url": "https://techbook.bixal.com"
+        },
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Bixal Techbook",
+          "returned_url": "https://techbook.bixal.com"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_aaa9382dbdec0726f71e",
+      "url": "https://www.ohchr.org/sites/default/files/NHRIHandbook.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "incomplete",
+      "truncated": true,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "REPRODUCTIVE RIGHTS ARE HUMAN RIGHTS",
+          "returned_url": "https://www.ohchr.org/sites/default/files/NHRIHandbook.pdf"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_4a4f679732e14e5a2ca1",
+      "url": "https://www.ice.gov/sites/default/files/documents/Report/2016/ACFRC-sc-16093.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "incomplete",
+      "truncated": true,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Report of the DHS Advisory Committee on Family ...",
+          "returned_url": "https://www.ice.gov/sites/default/files/documents/Report/2016/ACFRC-sc-16093.pdf"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_86e66b1e20190f09199d",
+      "url": "https://github.com/CivicActions/security-policy",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "matched",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "CivicActions/security-policy",
+          "returned_url": "https://github.com/CivicActions/security-policy"
+        }
+      ],
+      "mentions_company": true,
+      "matches": [
+        {
+          "upload": "security-policy.md",
+          "role": "reference",
+          "tokens": 13
+        },
+        {
+          "upload": "security-policy.md",
+          "role": "reference",
+          "tokens": 35
+        }
+      ]
+    },
+    {
+      "source_id": "d_10d520357deb00bb2bb0",
+      "url": "https://github.com/CivicActions/training",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "CivicActions/training",
+          "returned_url": "https://github.com/CivicActions/training"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d08e82baf130b13216e8",
+      "url": "https://github.com/CivicActions/.github/blob/main/SECURITY.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "SECURITY.md",
+          "returned_url": "https://github.com/CivicActions/.github/blob/main/SECURITY.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_de351280ad60795818a0",
+      "url": "https://govfresh.com/site-index",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Site index - GovFresh",
+          "returned_url": "https://govfresh.com/site-index"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8fcdc5352066fa0692ae",
+      "url": "https://www.pghtech.org/events/2021Cyburgh_1",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "2021 Cyburgh, PA Initiative",
+          "returned_url": "https://www.pghtech.org/events/2021Cyburgh_1"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:32:23.776024Z"
+}

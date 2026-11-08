@@ -90,6 +90,8 @@ The parser extracts paragraphs and source offsets. Keep raw private text in memo
 
 ### Public retrieval worker
 
+**Next feature:** [company-name discovery plan](docs/COMPANY_DISCOVERY_PLAN.md). Search from an explicitly approved public company identity, fetch the returned sources, and compare locally. Queries stay independent of uploaded content; results and findings are calculated at runtime.
+
 The network-enabled worker receives a public source manifest: approved domains/URLs, public company identity where useful, generic queries, page limits, freshness policy, and provider choice. Its job is to retrieve candidate pages using Exa and/or Tavily and return bounded text with provenance.
 
 There are two source modes:

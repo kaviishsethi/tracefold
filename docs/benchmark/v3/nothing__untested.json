@@ -1,0 +1,715 @@
+{
+  "case_id": "nothing",
+  "label": "reported_leak_excerpt",
+  "pack": "untested",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Nothing Technology employees",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" email to employees full text",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_roadmap",
+      "provider": "exa",
+      "query": "leaked Nothing Technology product roadmap or strategy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_roadmap",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" leaked roadmap",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "employee_forums",
+      "provider": "exa",
+      "query": "Nothing Technology employee discussion about internal documents",
+      "num_results": 3,
+      "include_domains": [
+        "news.ycombinator.com",
+        "reddit.com",
+        "teamblind.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "employee_forums",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" employees internal",
+      "num_results": 3,
+      "include_domains": [
+        "news.ycombinator.com",
+        "reddit.com",
+        "teamblind.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "financial_filings",
+      "provider": "exa",
+      "query": "Nothing Technology financial report",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "financial report",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "financial_filings",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" annual report internal",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "finance",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 8.8,
+  "provider_requests": 30,
+  "response_bytes": 1018801,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Nothing Technology employees",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:23.383966Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" email to employees full text",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:23.356238Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_roadmap",
+      "provider": "exa",
+      "query": "leaked Nothing Technology product roadmap or strategy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:24.828772Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_roadmap",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" leaked roadmap",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:25.051214Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "employee_forums",
+      "provider": "exa",
+      "query": "Nothing Technology employee discussion about internal documents",
+      "status": "ok",
+      "error": null,
+      "returned": 0,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:26.295174Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "employee_forums",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" employees internal",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:26.378921Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "financial_filings",
+      "provider": "exa",
+      "query": "Nothing Technology financial report",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:28.429830Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "financial_filings",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" annual report internal",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:27.477524Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_b0e33da964616d0fb307",
+      "url": "https://www.gizmochina.com/2025/01/15/leaked-carl-pei-email-reveals-nothings-ambitious-plans-for-2025-nothing-phone-3-and-a-mysterious-phone-landmark/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Leaked Carl Pei email reveals Nothing's ambitious plans for 2025: Nothing Phone (3) and a mysterious phone \"landmark\" - Gizmochina",
+          "returned_url": "https://www.gizmochina.com/2025/01/15/leaked-carl-pei-email-reveals-nothings-ambitious-plans-for-2025-nothing-phone-3-and-a-mysterious-phone-landmark/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_f2541d45a4061c2ebb19",
+      "url": "https://timesofindia.indiatimes.com/technology/tech-news/nothing-announces-5-day-in-person-office-read-ceos-message-giving-three-reasons-for-change/articleshow/112626159.cms",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Nothing makes 5-day work-from-office compulsory: Read CEOs message giving \u201cthree reasons\u201d for change - Times of India",
+          "returned_url": "https://timesofindia.indiatimes.com/technology/tech-news/nothing-announces-5-day-in-person-office-read-ceos-message-giving-three-reasons-for-change/articleshow/112626159.cms"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_74b313fd51488f7d693b",
+      "url": "https://www.thestar.com.my/tech/tech-news/2024/08/20/iphone-challenger-nothing-calls-staff-back-in-five-days-a-week-threatening-dissenters-with-dismissal",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "iPhone challenger Nothing calls staff back in five days a week, threatening dissenters with dismissal | The Star",
+          "returned_url": "https://www.thestar.com.my/tech/tech-news/2024/08/20/iphone-challenger-nothing-calls-staff-back-in-five-days-a-week-threatening-dissenters-with-dismissal"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_aa5c235f669d647d5987",
+      "url": "https://careers.kula.ai/nothing/59085-senior-product-strategist",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Senior Product Strategist | Nothing Technology Careers",
+          "returned_url": "https://careers.kula.ai/nothing/59085-senior-product-strategist"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_144cc5c2d5e86f10f704",
+      "url": "https://tracxn.com/d/companies/nothing/__zxa9DB7ttmZAM4BSGdvCAOn8Qq8uLzt9uYZz-i2UD5E",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Nothing - 2026 Company Profile, Team, Funding, Competitors & Financials - Tracxn",
+          "returned_url": "https://tracxn.com/d/companies/nothing/__zxa9DB7ttmZAM4BSGdvCAOn8Qq8uLzt9uYZz-i2UD5E"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_f5c9b928b46b37593202",
+      "url": "https://www.sfbar.org/wp-content/uploads/2021/03/new-model-law-practice-q4.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "O F PRACTICING LAW",
+          "returned_url": "https://www.sfbar.org/wp-content/uploads/2021/03/new-model-law-practice-q4.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_212f741eab37902fc559",
+      "url": "https://www.androidauthority.com/nothing-2025-plans-carl-pei-email-3516033/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Nothing shares big 2025 plans including the Phone 3 and a 'landmark' launch - Android Authority",
+          "returned_url": "https://www.androidauthority.com/nothing-2025-plans-carl-pei-email-3516033/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_0da2c9647102dc495e0d",
+      "url": "https://9to5google.com/2026/07/31/nothing-smartwatch-audio-devices-leak-with-ai-focus/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Leaked Nothing Smartwatch is the first step in company's AI shift",
+          "returned_url": "https://9to5google.com/2026/07/31/nothing-smartwatch-audio-devices-leak-with-ai-focus/"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_9878b1ae09f47b274f22",
+      "url": "https://nothingtec.com/en/2026/01/29/estrategia-nothing-2026-phone-4a-analisis/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Nothing's roadmap for 2026: no Phone (4) but big news in the (a) Series - NothingTec",
+          "returned_url": "https://nothingtec.com/en/2026/01/29/estrategia-nothing-2026-phone-4a-analisis/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_7b51faf4f4779ed8ddbf",
+      "url": "https://www.notebookcheck.com/Nothing-Phone-Serie.735182.0.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Nothing Phone Serie - Notebookcheck Specs und Testsammlung",
+          "returned_url": "https://www.notebookcheck.com/Nothing-Phone-Serie.735182.0.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d0b85877f55e973d3a24",
+      "url": "https://www.semiconductors.org/wp-content/uploads/2018/06/6_2015-ITRS-2.0-Beyond-CMOS.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "incomplete",
+      "truncated": true,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Beyond CMOS",
+          "returned_url": "https://www.semiconductors.org/wp-content/uploads/2018/06/6_2015-ITRS-2.0-Beyond-CMOS.pdf"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_4201b47367fb1ae7c0ef",
+      "url": "https://www.nature.com/articles/s41378-023-00620-1",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Advances in high-performance MEMS pressure sensors: design, fabrication, and packaging | Microsystems & Nanoengineering",
+          "returned_url": "https://www.nature.com/articles/s41378-023-00620-1"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_449513246ac223961c9e",
+      "url": "https://www.reddit.com/r/aiwars/comments/1sr6ail/what_will_happen_after_this",
+      "fetch_status": "failed",
+      "failure_reason": "provider_no_content",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "What will happen after this? : r/aiwars",
+          "returned_url": "https://www.reddit.com/r/aiwars/comments/1sr6ail/what_will_happen_after_this"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_cb08832f36738ed3be1e",
+      "url": "https://news.ycombinator.com/item?id=45129267",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "incomplete",
+      "truncated": true,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "AI not affecting job market much so far, New York Fed says | Hacker News",
+          "returned_url": "https://news.ycombinator.com/item?id=45129267"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_daa962ebdbee1991b531",
+      "url": "https://www.reddit.com/r/Columbus/comments/vtldbj/ohiohealth_laying_off_560_in_it_outsourcing_to",
+      "fetch_status": "failed",
+      "failure_reason": "provider_no_content",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "OhioHealth laying off 560 in IT, outsourcing to Accenture",
+          "returned_url": "https://www.reddit.com/r/Columbus/comments/vtldbj/ohiohealth_laying_off_560_in_it_outsourcing_to"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_389cb20dceaaef3d7a83",
+      "url": "https://www.sec.gov/Archives/edgar/data/1103976/000107704801500188/nothing10qsb-9302001.txt",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Nothing10qsb 9302001",
+          "returned_url": "https://www.sec.gov/Archives/edgar/data/1103976/000107704801500188/nothing10qsb-9302001.txt"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_8848d47457088b44fd71",
+      "url": "https://www.sec.gov/Archives/edgar/data/1103976/000107704806000599/nothing-ex32.htm",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Nothing ex32.htm",
+          "returned_url": "https://www.sec.gov/Archives/edgar/data/1103976/000107704806000599/nothing-ex32.htm"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_2f47ed125cdb970d664a",
+      "url": "https://www.sec.gov/Archives/edgar/data/1784970/000121390025097321/ea0260504-10q_nexttech.htm",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Next Technology Holding Inc. Form 10-Q for the period ended September 30, 2025",
+          "returned_url": "https://www.sec.gov/Archives/edgar/data/1784970/000121390025097321/ea0260504-10q_nexttech.htm"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_a57c9c1729e169e77006",
+      "url": "https://www.bloomberg.com/news/features/2023-07-11/switching-from-iphone-to-android-is-a-data-transfer-hell",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Switching From iPhone to Android Is a Data Transfer Hell - Bloomberg",
+          "returned_url": "https://www.bloomberg.com/news/features/2023-07-11/switching-from-iphone-to-android-is-a-data-transfer-hell"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_b4526714d4efc73fa49e",
+      "url": "https://www.bloomberg.com/news/features/2026-08-12/google-s-pixel-11-pro-tries-to-reinvent-the-camera-flash",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Google\u2019s Pixel 11 Pro Tries to Reinvent the Camera Flash - Bloomberg",
+          "returned_url": "https://www.bloomberg.com/news/features/2026-08-12/google-s-pixel-11-pro-tries-to-reinvent-the-camera-flash"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_f810478b71ea2692213e",
+      "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2026/09/11/how-fuel-volatility-is-triggering-a-supply-crunch-on-trailers",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "How Fuel Volatility Is Triggering A Supply Crunch On Trailers",
+          "returned_url": "https://www.forbes.com/councils/forbesbusinesscouncil/2026/09/11/how-fuel-volatility-is-triggering-a-supply-crunch-on-trailers"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:40:31.350512Z"
+}

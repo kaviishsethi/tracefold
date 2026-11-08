@@ -1,0 +1,772 @@
+{
+  "case_id": "posthog",
+  "label": "public_policy",
+  "pack": "untested",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to PostHog employees",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "posthog.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"PostHog\" email to employees full text",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "posthog.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_roadmap",
+      "provider": "exa",
+      "query": "leaked PostHog product roadmap or strategy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "posthog.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_roadmap",
+      "provider": "tavily",
+      "query": "\"PostHog\" leaked roadmap",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "posthog.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "employee_forums",
+      "provider": "exa",
+      "query": "PostHog employee discussion about internal documents",
+      "num_results": 3,
+      "include_domains": [
+        "news.ycombinator.com",
+        "reddit.com",
+        "teamblind.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "employee_forums",
+      "provider": "tavily",
+      "query": "\"PostHog\" employees internal",
+      "num_results": 3,
+      "include_domains": [
+        "news.ycombinator.com",
+        "reddit.com",
+        "teamblind.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "financial_filings",
+      "provider": "exa",
+      "query": "PostHog financial report",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "posthog.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "financial report",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "financial_filings",
+      "provider": "tavily",
+      "query": "\"PostHog\" annual report internal",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "posthog.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "finance",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 8.4,
+  "provider_requests": 28,
+  "response_bytes": 859285,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to PostHog employees",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:47.189382Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"PostHog\" email to employees full text",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:46.854902Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_roadmap",
+      "provider": "exa",
+      "query": "leaked PostHog product roadmap or strategy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:48.638702Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_roadmap",
+      "provider": "tavily",
+      "query": "\"PostHog\" leaked roadmap",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:48.395695Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "employee_forums",
+      "provider": "exa",
+      "query": "PostHog employee discussion about internal documents",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:50.105865Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "employee_forums",
+      "provider": "tavily",
+      "query": "\"PostHog\" employees internal",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:51.282160Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "financial_filings",
+      "provider": "exa",
+      "query": "PostHog financial report",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:52.168999Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "financial_filings",
+      "provider": "tavily",
+      "query": "\"PostHog\" annual report internal",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:52.083131Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_f2f99da874610be72747",
+      "url": "https://theproductengineerspodcast.beehiiv.com/podcast/s/the_product_engineers_podcast/why_engineers_should_make_the_final_call_not_pms_posthog_executive",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Why Engineers Should Make the Final Call \u2014 Not PMs (PostHog Executive)",
+          "returned_url": "https://theproductengineerspodcast.beehiiv.com/podcast/s/the_product_engineers_podcast/why_engineers_should_make_the_final_call_not_pms_posthog_executive"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e30c73e04ed47bbb3f2a",
+      "url": "https://news.ycombinator.com/item?id=46305321",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Inside PostHog: SSRF, ClickHouse SQL Escape and Default Postgres Creds to RCE | Hacker News",
+          "returned_url": "https://news.ycombinator.com/item?id=46305321"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8fecd7f28dd4fcf434bf",
+      "url": "https://newsletter.lowercaseb2b.com/p/posthog-boldest-b2b-company",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "PostHog - The boldest b2b company",
+          "returned_url": "https://newsletter.lowercaseb2b.com/p/posthog-boldest-b2b-company"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_bd8e78b29b06b62ad4f1",
+      "url": "https://reallygoodemails.com/school/blog/posthog-marketing-weird-brand-strategy",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Keep marketing weird: how PostHog refuses to market like everyone else. | Really Good Emails",
+          "returned_url": "https://reallygoodemails.com/school/blog/posthog-marketing-weird-brand-strategy"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_f536b6e0f5f19d79e291",
+      "url": "https://viktor.com/integrations/posthog",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "PostHog AI employee in Slack and Teams | Viktor",
+          "returned_url": "https://viktor.com/integrations/posthog"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_642b5ae5dd1839c1e845",
+      "url": "https://slack.com/customer-stories/posthog-story",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "How PostHog Makes Products Self-Driving With Slack | Slack",
+          "returned_url": "https://slack.com/customer-stories/posthog-story"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_99d32498568599758d8e",
+      "url": "https://sacra.com/research/58m-year-hedgehog-of-product-analytics/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "$58M/year hedgehog of product analytics | Sacra",
+          "returned_url": "https://sacra.com/research/58m-year-hedgehog-of-product-analytics/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_630e08daad188ba44ae4",
+      "url": "https://www.businessinsider.com/google-posthog-analytics-pitch-deck-technology-funding-2021-8",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Google Invested in Analytics Firm PostHog After Seeing This Pitch - Business Insider",
+          "returned_url": "https://www.businessinsider.com/google-posthog-analytics-pitch-deck-technology-funding-2021-8"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_f4eb3be05a69eb499051",
+      "url": "https://sacra.com/research/posthog-anti-modern-data-stack/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "PostHog: the $9.5M/year anti modern data stack company | Sacra",
+          "returned_url": "https://sacra.com/research/posthog-anti-modern-data-stack/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_aaffdaabb6c6d5018abf",
+      "url": "https://www.productgrowth.blog/p/posthog-branding-playbook",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "PostHog Branding Playbook: B2B's Coolest Dev Brand",
+          "returned_url": "https://www.productgrowth.blog/p/posthog-branding-playbook"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_7b06662e4e384fd70d46",
+      "url": "https://blog.mean.ceo/posthog-news-june-2026",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Posthog News | June, 2026 (STARTUP EDITION)",
+          "returned_url": "https://blog.mean.ceo/posthog-news-june-2026"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e4aee8c02ea73a324ca9",
+      "url": "https://userorbit.com/blog/posthog-pricing-guide",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "PostHog Pricing 2026: Free Tier, Real Costs at Scale",
+          "returned_url": "https://userorbit.com/blog/posthog-pricing-guide"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8b5548586ade2cd7926b",
+      "url": "https://news.ycombinator.com/item?id=37747343",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "PostHog Company Handbook | Hacker News",
+          "returned_url": "https://news.ycombinator.com/item?id=37747343"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_2362ee712de7de5297a9",
+      "url": "https://news.ycombinator.com/item?id=45218865",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "This must have taken them a really long time. That worries me, don't they have o... | Hacker News",
+          "returned_url": "https://news.ycombinator.com/item?id=45218865"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8983368121f839dde66a",
+      "url": "https://news.ycombinator.com/item?id=41373354",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Ask HN: How does your team keep informal documentation? | Hacker News",
+          "returned_url": "https://news.ycombinator.com/item?id=41373354"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_c19219714ebd93046ab2",
+      "url": "https://news.ycombinator.com/item?id=43267095",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "incomplete",
+      "truncated": true,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Things we've learned about building products | Hacker News",
+          "returned_url": "https://news.ycombinator.com/item?id=43267095"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_dfd96cd9a640aacf898b",
+      "url": "https://news.ycombinator.com/item?id=27042417",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Ask HN: Employee Handbook for Startups? | Hacker News",
+          "returned_url": "https://news.ycombinator.com/item?id=27042417"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_bcec23601b521028bbc6",
+      "url": "https://news.ycombinator.com/item?id=23426662",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "How we raised $3M for an open source project | Hacker News",
+          "returned_url": "https://news.ycombinator.com/item?id=23426662"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c8752409dc211dd26364",
+      "url": "https://www.sec.gov/Archives/edgar/data/1866692/000119312526057847/ampl-20251231.htm",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "10-K",
+          "returned_url": "https://www.sec.gov/Archives/edgar/data/1866692/000119312526057847/ampl-20251231.htm"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_af9daa10ffefde0f2772",
+      "url": "https://www.sec.gov/Archives/edgar/data/793952/000079395226000070/0000793952-26-000070-index.htm",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "EDGAR Filing Documents for 0000793952-26-000070",
+          "returned_url": "https://www.sec.gov/Archives/edgar/data/793952/000079395226000070/0000793952-26-000070-index.htm"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_896eb8cd4588381d0c7b",
+      "url": "https://www.sec.gov/Archives/edgar/data/793952/000079395224000165",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Directory List of /Archives/edgar/data/793952/000079395224000165",
+          "returned_url": "https://www.sec.gov/Archives/edgar/data/793952/000079395224000165"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_703a3e48259a10dd41a9",
+      "url": "https://finance.yahoo.com/quote/8FS.HA/earnings/8FS.HA-H2-2025-earnings_call-382284.html",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "SOFINA S.A. A (8FS.HA) H2 FY2025 earnings call transcript",
+          "returned_url": "https://finance.yahoo.com/quote/8FS.HA/earnings/8FS.HA-H2-2025-earnings_call-382284.html"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_9d722b4647ebea944f97",
+      "url": "https://finance.yahoo.com/news/fondo-wants-mitigate-us-accountant-195900628.html",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Fondo wants to mitigate the American accountant shortage with its AI bookkeeping service",
+          "returned_url": "https://finance.yahoo.com/news/fondo-wants-mitigate-us-accountant-195900628.html"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_09f7ecf646432ea2dd02",
+      "url": "https://links.message.bloomberg.com/s/c/CMPKzpRyWih6jeNi8XeqffFYWQUC8vs3y3HPvs96vwSPQgSJ2kpjuGIH_8ccrE3EHe6T32Pi5vyDqi356c3vkH5tWQ-ka3OFwkzYjFRMwFFs_Ha5vq769-7a2mJ3dt6K4e1fFV05aQWQizXbnGZDUKzmcSVTWDkvBx5-aIvBOwcXv1BuF-9Zg_qqeY42tGbvTDbD9-sbiR70AbtmaEcoGMY4f_bEZeFancYSzztW-ucKlhNO84UGxcMcQkuwhKxLOdCjeLn7HmU5NTGDrO7T-xhYNbmqyNk57ktUDQcJBzQxBBiZ-2bCJu2Okx8zYIhIQBsjMMMmLCP_coxuqRiHjoUvIp9HcdHHzvUP0b6Y6UzihAsWvpj9qFz5oZQy4ttBqS0NH4_xf0HmMwcYdVcMkQeD5oTQqfRpvIPkvHs-cCzLJg/zDiaCmS5AMNtYhphvf5_tnxV7hT5d3v3/7",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "March Madness",
+          "returned_url": "https://links.message.bloomberg.com/s/c/CMPKzpRyWih6jeNi8XeqffFYWQUC8vs3y3HPvs96vwSPQgSJ2kpjuGIH_8ccrE3EHe6T32Pi5vyDqi356c3vkH5tWQ-ka3OFwkzYjFRMwFFs_Ha5vq769-7a2mJ3dt6K4e1fFV05aQWQizXbnGZDUKzmcSVTWDkvBx5-aIvBOwcXv1BuF-9Zg_qqeY42tGbvTDbD9-sbiR70AbtmaEcoGMY4f_bEZeFancYSzztW-ucKlhNO84UGxcMcQkuwhKxLOdCjeLn7HmU5NTGDrO7T-xhYNbmqyNk57ktUDQcJBzQxBBiZ-2bCJu2Okx8zYIhIQBsjMMMmLCP_coxuqRiHjoUvIp9HcdHHzvUP0b6Y6UzihAsWvpj9qFz5oZQy4ttBqS0NH4_xf0HmMwcYdVcMkQeD5oTQqfRpvIPkvHs-cCzLJg/zDiaCmS5AMNtYhphvf5_tnxV7hT5d3v3/7"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:42:54.521930Z"
+}

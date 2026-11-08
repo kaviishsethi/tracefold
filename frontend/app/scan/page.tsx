@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { listScans, startScan, uploadFiles, type ApiError, type Check, type Scan } from "@/lib/api";
+import { api, ws, type Page, type QueryPlan, listScans, startScan, uploadFiles, type ApiError, type Check, type Scan } from "@/lib/api";
 import { bytes, relativeTime } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
 import { Box, H1, Note, scanState, source } from "@/components/bits";
@@ -21,6 +21,24 @@ export default function ScanPage() {
   const [scans, setScans] = useState<Scan[] | null>(null);
 
   const manifest = workspace?.manifests[0];
+  const [plans, setPlans] = useState<QueryPlan[]>([]);
+  const [planId, setPlanId] = useState("");
+  useEffect(() => {
+    if (!workspace) return;
+    let alive = true;
+    setPlans([]);
+    setPlanId("");
+    api<Page<QueryPlan>>(ws(workspace.id, "/query-plans?limit=100")).then((p) => {
+      if (!alive) return;
+      setPlans(p.items);
+      const requested = new URLSearchParams(window.location.search).get("plan");
+      const chosen = p.items.find((x) => x.query_plan_id === requested);
+      if (chosen) setPlanId(chosen.query_plan_id);
+      else if (!workspace.manifests.length && p.items[0]) setPlanId(p.items[0].query_plan_id);
+    }).catch(() => {});
+    return () => { alive = false; };
+  }, [workspace]);
+  const plan = plans.find((p) => p.query_plan_id === planId);
 
   // Every scan from every client, refreshed so coding-assistant scans show up as they happen.
   useEffect(() => {
@@ -48,10 +66,10 @@ export default function ScanPage() {
       const inp = await uploadFiles(workspace.id, files);
       const accepted = inp.files.filter((f) => f.status === "captured");
       if (!accepted.length) throw new Error(inp.files.map((f) => `${f.path}: ${f.reason}`).join("; ") || "No files could be read.");
-      const checks: Check[] = manifest && publicToo ? ["public_match", "local_risk"] : ["local_risk"];
+      const checks: Check[] = (manifest || plan) && publicToo ? ["public_match", "local_risk"] : ["local_risk"];
       const acc = await startScan(
         workspace.id,
-        { input_id: inp.input_id, checks, ...(checks.includes("public_match") ? { public_sources: { manifest_id: manifest!, mode: "refresh" as const } } : {}) },
+        { input_id: inp.input_id, checks, ...(checks.includes("public_match") ? (plan ? { public_discovery: { query_plan_id: plan.query_plan_id, mode: "live" as const } } : { public_sources: { manifest_id: manifest!, mode: "refresh" as const } }) : {}) },
         files.map((f) => f.name).join(", "),
       );
       router.push(`/scan/${acc.scan_id}`);
@@ -101,8 +119,15 @@ export default function ScanPage() {
               </div>
             ))}
           </Box>
+          {plans.length > 0 && <label className="my-4 block text-sm text-mute">Public sources
+            <select className="mt-2 block w-full rounded-ctl border border-line bg-panel px-3 py-3 text-ink" value={planId} onChange={(e) => setPlanId(e.target.value)}>
+              {manifest && <option value="">Registered source list</option>}
+              {plans.map((p) => <option key={p.query_plan_id} value={p.query_plan_id}>{p.display_name} — {p.pack ?? "discovery"}</option>)}
+            </select>
+          </label>}
+          {plan && publicToo && <details className="my-4 text-sm text-mute"><summary className="cursor-pointer">Preview public searches</summary><ul className="mt-3 space-y-2">{plan.searches.map((q) => <li key={q.query_id}>{q.provider}: <span className="text-ink">{q.query}</span></li>)}</ul><p className="mt-3">Only these approved queries are sent to search providers. Search is not exhaustive.</p></details>}
           <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
-            {manifest ? (
+            {manifest || plans.length ? (
               <label className="flex items-center gap-2 text-sm text-ink-2">
                 <input type="checkbox" checked={publicToo} onChange={(e) => setPublicToo(e.target.checked)} />
                 Also look for copies on public pages

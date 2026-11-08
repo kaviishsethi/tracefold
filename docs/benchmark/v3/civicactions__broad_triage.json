@@ -1,0 +1,750 @@
+{
+  "case_id": "civicactions",
+  "label": "public_policy",
+  "pack": "broad_triage",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from CivicActions",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "civicactions.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"CivicActions\" leaked internal memo",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "civicactions.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to CivicActions employees",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "civicactions.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"CivicActions\" email to employees full text",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "civicactions.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "CivicActions employee handbook or company policy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "civicactions.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"CivicActions\" policy handbook procedure",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "civicactions.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from CivicActions",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"CivicActions\"",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 6.3,
+  "provider_requests": 29,
+  "response_bytes": 1200101,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from CivicActions",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:38.751847Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"CivicActions\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:37.671047Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to CivicActions employees",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:39.133021Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"CivicActions\" email to employees full text",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:40.515865Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "CivicActions employee handbook or company policy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:39.322836Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"CivicActions\" policy handbook procedure",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:39.443975Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from CivicActions",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:39.653083Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"CivicActions\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:39.801879Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_53eb060571eeb6224989",
+      "url": "https://www.theglobeandmail.com/news/toronto/civicaction-a-look-back-at-decade-of-city-shaping-in-toronto/article5859545/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "CivicAction: A look back at decade of city-shaping in Toronto",
+          "returned_url": "https://www.theglobeandmail.com/news/toronto/civicaction-a-look-back-at-decade-of-city-shaping-in-toronto/article5859545/"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_725cb23e284605a398c6",
+      "url": "https://www.buzzfeednews.com/article/zahrahirji/sunrise-movement-climate-change-black-activists",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Sunrise Movement Black Activists Allege Being \"Tokenized\"",
+          "returned_url": "https://www.buzzfeednews.com/article/zahrahirji/sunrise-movement-climate-change-black-activists"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_c205a8dbee6bcfaec77e",
+      "url": "https://www.axios.com/2018/06/21/aclu-leaked-memo-free-speech-civil-rights",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Leaked memo reveals ACLU debate on defense of free speech",
+          "returned_url": "https://www.axios.com/2018/06/21/aclu-leaked-memo-free-speech-civil-rights"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_198e787899075b79bb40",
+      "url": "https://www.govexec.com/management/2026/03/interior-renews-campaign-employees-snitch-dei-discrimination-department/412255/?oref=ge-featured-river-top",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Interior renews campaign for employees to snitch on \u2018DEI discrimination\u2019 in the department - Government Executive",
+          "returned_url": "https://www.govexec.com/management/2026/03/interior-renews-campaign-employees-snitch-dei-discrimination-department/412255/?oref=ge-featured-river-top"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_937a0a2616d301b3251f",
+      "url": "https://sources.news/p/metamates-become-training-data",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Meta employees freak out at training their replacements - Sources | Alex Heath",
+          "returned_url": "https://sources.news/p/metamates-become-training-data"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_50ff5603b901074a2aed",
+      "url": "https://nypost.com/2026/04/17/business/anthropic-ceo-dario-amodei-set-to-meet-white-house-chief-of-staff-susie-wiles-amid-ai-fight-reports/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Anthropic CEO Dario Amodei set to meet White House Chief of Staff Susie Wiles amid AI fight: reports - New York Post",
+          "returned_url": "https://nypost.com/2026/04/17/business/anthropic-ceo-dario-amodei-set-to-meet-white-house-chief-of-staff-susie-wiles-amid-ai-fight-reports/"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_97be753c1a86022dfe8c",
+      "url": "https://civicaction.ca/press-release/civicaction-statement-regarding-racism-and-violence-against-the-black-community/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "CivicAction Statement Regarding Racism and Violence Against the Black Community | CivicAction",
+          "returned_url": "https://civicaction.ca/press-release/civicaction-statement-regarding-racism-and-violence-against-the-black-community/"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_4cc71fe6cbf6e0d8753e",
+      "url": "https://politicalemails.org/messages/1593723",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "that\u2019s not centrism, that\u2019s defending the status quo \u2014 Civic Action - Archive of Political Emails",
+          "returned_url": "https://politicalemails.org/messages/1593723"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_4818ab022ff62c2844da",
+      "url": "https://oldleadership.civicaction.ca/eln-spotlight/real-talk-on-reconciliation-allyship-in-action/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Real Talk on Reconciliation: Allyship in Action - The CivicAction Leadership Foundation",
+          "returned_url": "https://oldleadership.civicaction.ca/eln-spotlight/real-talk-on-reconciliation-allyship-in-action/"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_c0f5836a809a4d792f60",
+      "url": "https://aeroleads.com/in/suzanne-gray-952a064",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Suzanne Gray Email & Phone Number @ CivicActions",
+          "returned_url": "https://aeroleads.com/in/suzanne-gray-952a064"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_fd07b52a779c5b6a3968",
+      "url": "https://www.workgrounds.com/customers",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Customer Stories | Workgrounds",
+          "returned_url": "https://www.workgrounds.com/customers"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6c44262669c7a2cf515d",
+      "url": "https://www.businessinsider.com/25-best-paying-small-companies-2017-11",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Comparably Names the 25 Best Paying Small Companies - Business Insider",
+          "returned_url": "https://www.businessinsider.com/25-best-paying-small-companies-2017-11"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6d1db2fb7ccea062061f",
+      "url": "https://github.com/CivicActions/guidebook",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "CivicActions/guidebook",
+          "returned_url": "https://github.com/CivicActions/guidebook"
+        },
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "CivicActions/guidebook: The home of policies and ...",
+          "returned_url": "https://github.com/CivicActions/guidebook"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d27685202945853e504e",
+      "url": "https://github.com/CivicActions/guidebook/blob/master/company-policies/expenses.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "company-policies/expenses.md",
+          "returned_url": "https://github.com/CivicActions/guidebook/blob/master/company-policies/expenses.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_edd551b3b17f6547e3b8",
+      "url": "https://github.com/CivicActions/guidebook/blob/master/employee-benefits/professional-development.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "employee-benefits/professional-development.md",
+          "returned_url": "https://github.com/CivicActions/guidebook/blob/master/employee-benefits/professional-development.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_48c4d7a72e70c0bfe5a0",
+      "url": "https://techbook.bixal.com",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Bixal Techbook",
+          "returned_url": "https://techbook.bixal.com"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_aaa9382dbdec0726f71e",
+      "url": "https://www.ohchr.org/sites/default/files/NHRIHandbook.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "incomplete",
+      "truncated": true,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "REPRODUCTIVE RIGHTS ARE HUMAN RIGHTS",
+          "returned_url": "https://www.ohchr.org/sites/default/files/NHRIHandbook.pdf"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_4a4f679732e14e5a2ca1",
+      "url": "https://www.ice.gov/sites/default/files/documents/Report/2016/ACFRC-sc-16093.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "incomplete",
+      "truncated": true,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Report of the DHS Advisory Committee on Family ...",
+          "returned_url": "https://www.ice.gov/sites/default/files/documents/Report/2016/ACFRC-sc-16093.pdf"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_9d84e75de5d1cf0f8725",
+      "url": "https://github.com/orgs/CivicActions/repositories",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "CivicActions repositories",
+          "returned_url": "https://github.com/orgs/CivicActions/repositories"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_796248b50714859059a3",
+      "url": "https://github.com/civicactions",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "CivicActions",
+          "returned_url": "https://github.com/civicactions"
+        },
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "CivicActions \u00b7 GitHub",
+          "returned_url": "https://github.com/civicactions"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_0d6241a0ee6889a421cb",
+      "url": "https://github.com/civicactions/accessibility",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "CivicActions/accessibility",
+          "returned_url": "https://github.com/civicactions/accessibility"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_09ea0e070350dfe56bdd",
+      "url": "https://github.com/CivicActions/open-practice",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "CivicActions/open-practice: Our list of ...",
+          "returned_url": "https://github.com/CivicActions/open-practice"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:32:43.217817Z"
+}

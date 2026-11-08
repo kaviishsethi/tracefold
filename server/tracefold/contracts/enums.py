@@ -34,6 +34,7 @@ class Capability(StrEnum):
     cancel = "cancel"
     review = "review"
     approve = "approve"  # approve or reject remediation actions (takedowns, credential disabling)
+    configure = "configure"  # approve public company identity and query plans (never granted to MCP by default)
 
 
 class Disclosure(StrEnum):
@@ -103,3 +104,18 @@ class ActionStatus(StrEnum):
     completed = "completed"                                # credential disabled
     failed = "failed"                                      # may be approved again
     rejected = "rejected"
+
+
+class FetchStatus(StrEnum):
+    pending = "pending"
+    fetched = "fetched"
+    failed = "failed"
+    blocked = "blocked"
+    skipped_limit = "skipped_limit"
+
+
+class ComparisonStatus(StrEnum):
+    matched = "matched"
+    no_match = "no_match"
+    incomplete = "incomplete"
+    not_compared = "not_compared"

@@ -1,0 +1,742 @@
+{
+  "case_id": "nothing",
+  "label": "reported_leak_excerpt",
+  "pack": "broad_triage",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Nothing Technology",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" leaked internal memo",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Nothing Technology employees",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" email to employees full text",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "Nothing Technology employee handbook or company policy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" policy handbook procedure",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from Nothing Technology",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\"",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 7.1,
+  "provider_requests": 28,
+  "response_bytes": 769572,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Nothing Technology",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:58.604044Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 1,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:00.201007Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Nothing Technology employees",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:01.061403Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" email to employees full text",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:01.369590Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "Nothing Technology employee handbook or company policy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:01.225272Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" policy handbook procedure",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:01.327660Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from Nothing Technology",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:01.503317Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:01.464657Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_727ef7f75584119163db",
+      "url": "https://www.phonearena.com/news/nothings-first-flagship-phone-coming-this-quarter_id166566",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "matched",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Leaked internal memo reveals that Nothing's first true flagship phone is coming this quarter - PhoneArena",
+          "returned_url": "https://www.phonearena.com/news/nothings-first-flagship-phone-coming-this-quarter_id166566"
+        }
+      ],
+      "mentions_company": true,
+      "matches": [
+        {
+          "upload": "upload-reference.txt",
+          "role": "reference",
+          "tokens": 22
+        }
+      ]
+    },
+    {
+      "source_id": "d_c5f93cbeed60d129388c",
+      "url": "https://www.techradar.com/phones/does-every-phone-maker-need-a-flagship",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Does every phone maker need a flagship? | TechRadar",
+          "returned_url": "https://www.techradar.com/phones/does-every-phone-maker-need-a-flagship"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6bbaa3b65c5012ed5d46",
+      "url": "https://www.phonearena.com/news/a-new-nothing-phone-3-leak-gives-away-pricing-and-a-possible-new-product_id170942",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "A new Nothing Phone (3) leak gives away pricing and a possible new product - PhoneArena",
+          "returned_url": "https://www.phonearena.com/news/a-new-nothing-phone-3-leak-gives-away-pricing-and-a-possible-new-product_id170942"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_503f1dca9a53cbc04805",
+      "url": "https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Assigned_Numbers/out/en/Assigned_Numbers.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "incomplete",
+      "truncated": true,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Assigned Numbers",
+          "returned_url": "https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Assigned_Numbers/out/en/Assigned_Numbers.pdf"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_b0e33da964616d0fb307",
+      "url": "https://www.gizmochina.com/2025/01/15/leaked-carl-pei-email-reveals-nothings-ambitious-plans-for-2025-nothing-phone-3-and-a-mysterious-phone-landmark/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Leaked Carl Pei email reveals Nothing's ambitious plans for 2025: Nothing Phone (3) and a mysterious phone \"landmark\" - Gizmochina",
+          "returned_url": "https://www.gizmochina.com/2025/01/15/leaked-carl-pei-email-reveals-nothings-ambitious-plans-for-2025-nothing-phone-3-and-a-mysterious-phone-landmark/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_f2541d45a4061c2ebb19",
+      "url": "https://timesofindia.indiatimes.com/technology/tech-news/nothing-announces-5-day-in-person-office-read-ceos-message-giving-three-reasons-for-change/articleshow/112626159.cms",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Nothing makes 5-day work-from-office compulsory: Read CEOs message giving \u201cthree reasons\u201d for change - Times of India",
+          "returned_url": "https://timesofindia.indiatimes.com/technology/tech-news/nothing-announces-5-day-in-person-office-read-ceos-message-giving-three-reasons-for-change/articleshow/112626159.cms"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_74b313fd51488f7d693b",
+      "url": "https://www.thestar.com.my/tech/tech-news/2024/08/20/iphone-challenger-nothing-calls-staff-back-in-five-days-a-week-threatening-dissenters-with-dismissal",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "iPhone challenger Nothing calls staff back in five days a week, threatening dissenters with dismissal | The Star",
+          "returned_url": "https://www.thestar.com.my/tech/tech-news/2024/08/20/iphone-challenger-nothing-calls-staff-back-in-five-days-a-week-threatening-dissenters-with-dismissal"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_aa5c235f669d647d5987",
+      "url": "https://careers.kula.ai/nothing/59085-senior-product-strategist",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Senior Product Strategist | Nothing Technology Careers",
+          "returned_url": "https://careers.kula.ai/nothing/59085-senior-product-strategist"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_144cc5c2d5e86f10f704",
+      "url": "https://tracxn.com/d/companies/nothing/__zxa9DB7ttmZAM4BSGdvCAOn8Qq8uLzt9uYZz-i2UD5E",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Nothing - 2026 Company Profile, Team, Funding, Competitors & Financials - Tracxn",
+          "returned_url": "https://tracxn.com/d/companies/nothing/__zxa9DB7ttmZAM4BSGdvCAOn8Qq8uLzt9uYZz-i2UD5E"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_f5c9b928b46b37593202",
+      "url": "https://www.sfbar.org/wp-content/uploads/2021/03/new-model-law-practice-q4.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "O F PRACTICING LAW",
+          "returned_url": "https://www.sfbar.org/wp-content/uploads/2021/03/new-model-law-practice-q4.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_21103a55193f6b766be3",
+      "url": "https://careers.kula.ai/nothing",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Nothing Technology Careers | Open Jobs",
+          "returned_url": "https://careers.kula.ai/nothing"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_31b7e0294388cccc25ed",
+      "url": "https://fortune.com/europe/2024/08/19/british-iphone-challenger-nothing-calls-staff-back-into-the-office-5-days-a-week-suggesting-those-who-disagree-should-leave/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "iPhone challenger Nothing calls staff back in 5 days a week, threatening dissenters with dismissal | Fortune",
+          "returned_url": "https://fortune.com/europe/2024/08/19/british-iphone-challenger-nothing-calls-staff-back-into-the-office-5-days-a-week-suggesting-those-who-disagree-should-leave/"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_deb7f4232a48aee011cc",
+      "url": "https://careers.quiet.com/companies/nothing/jobs/70822712-people-operations-manager",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "People Operations Manager @ Nothing | Quiet Job Board",
+          "returned_url": "https://careers.quiet.com/companies/nothing/jobs/70822712-people-operations-manager"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_26563ea14f38dd92ff5f",
+      "url": "https://nothingtools.github.io",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Nothing Space - Built Together",
+          "returned_url": "https://nothingtools.github.io"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_badd859ab78e4e16f851",
+      "url": "https://www.govinfo.gov/content/pkg/FR-2026-05-14/pdf/2026-09664.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Federal Register/Vol. 91, No. 93/Thursday, May 14, 2026/ ...",
+          "returned_url": "https://www.govinfo.gov/content/pkg/FR-2026-05-14/pdf/2026-09664.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_4e061cae4c674a9b4b79",
+      "url": "https://www.ncsc.org/sites/default/files/media/document/AI_UPL_WhitePaper.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Modernizing Unauthorized Practice of Law Regulations to ...",
+          "returned_url": "https://www.ncsc.org/sites/default/files/media/document/AI_UPL_WhitePaper.pdf"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_5f9b0c8f616cb116652a",
+      "url": "https://github.com/NothingOSS/android_kernel_msm-6.1_nothing_sm7635",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "NothingOSS/android_kernel_msm-6.1_nothing_sm7635",
+          "returned_url": "https://github.com/NothingOSS/android_kernel_msm-6.1_nothing_sm7635"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_7157f1b71523d469179f",
+      "url": "https://github.com/nothingoss/android_kernel_msm-6.6_nothing_sm8735",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "NothingOSS/android_kernel_msm-6.6_nothing_sm8735",
+          "returned_url": "https://github.com/nothingoss/android_kernel_msm-6.6_nothing_sm8735"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_b89e2e9c652b40a60fc5",
+      "url": "https://github.com/NothingOSS/android_kernel_msm-6.6_nothing_sm7750",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "NothingOSS/android_kernel_msm-6.6_nothing_sm7750",
+          "returned_url": "https://github.com/NothingOSS/android_kernel_msm-6.6_nothing_sm7750"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8d9b33c890bdd62967a1",
+      "url": "https://github.com/radiance-project/ear-web",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "GitHub - radiance-project/ear-web \u00b7 GitHub",
+          "returned_url": "https://github.com/radiance-project/ear-web"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_4e8581b013f3ca0346f4",
+      "url": "https://github.com/nk8bnj/nothing-technology",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitHub - nk8bnj/nothing-technology: Landing page for Nothing corp. \u00b7 GitHub",
+          "returned_url": "https://github.com/nk8bnj/nothing-technology"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_dc0e147b53cab8cb550b",
+      "url": "https://github.com/bestK1ngArthur/nothing-bar",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitHub - bestK1ngArthur/nothing-bar: Native macOS menu bar app to control Nothing headphones \u00b7 GitHub",
+          "returned_url": "https://github.com/bestK1ngArthur/nothing-bar"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:32:03.510697Z"
+}

@@ -13,6 +13,7 @@ const NAV = [
   { href: "/scan", label: "Scan" },
   { href: "/findings", label: "Findings" },
   { href: "/actions", label: "Approvals" },
+  { href: "/discovery", label: "Discovery" },
 ];
 
 interface WorkspaceState {

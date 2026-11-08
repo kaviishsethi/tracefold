@@ -7,6 +7,7 @@ import { api, coverageNote, isTerminal, useScan, ws, type Finding, type FindingK
 import { relativeTime } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
 import { Box, FindingRow, H1, Note, scanState, source } from "@/components/bits";
+import { SourcesPanel } from "@/components/scan-sources";
 import { ErrorNote, Spinner } from "@/components/ui";
 
 const GROUPS: [FindingKind, string][] = [
@@ -75,6 +76,8 @@ export default function ScanDetail() {
             </section>
           );
         })}
+
+      {done && workspace && scan.checks.includes("public_match") && <div className="mb-8"><SourcesPanel workspaceId={workspace.id} scan={scan} /></div>}
 
       {(problems.length > 0 || scan.errors.length > 0) && (
         <details className="text-sm text-mute">

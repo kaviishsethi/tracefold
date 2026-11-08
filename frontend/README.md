@@ -42,7 +42,9 @@ engine endpoint are in `lib/api.ts`.
 - Site: `/`, `/manifesto`, `/pricing`, `/enterprise`, `/security`, `/contact`
 - App: `/overview`, `/scan` (upload or capture, then scan), `/scan/[id]`, `/findings`, `/findings/[id]` (evidence,
   recheck, review), `/actions` (approve takedowns and AWS key disables), `/egress` (outbound ledger per scan),
-  `/sources`, `/settings`, `/onboarding`
+  `/discovery` (approve a public company identity, create query plans and preview the exact searches; needs the
+  `configure` capability), `/sources`, `/settings`, `/onboarding`. `/scan` can use a source list or a discovery plan;
+  `/scan/[id]` lists every page found, fetched and compared.
 
 ## Known gaps
 

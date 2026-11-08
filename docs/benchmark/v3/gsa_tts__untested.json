@@ -1,0 +1,696 @@
+{
+  "case_id": "gsa_tts",
+  "label": "public_policy",
+  "pack": "untested",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Technology Transformation Services employees",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" email to employees full text",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_roadmap",
+      "provider": "exa",
+      "query": "leaked Technology Transformation Services product roadmap or strategy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_roadmap",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" leaked roadmap",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "employee_forums",
+      "provider": "exa",
+      "query": "Technology Transformation Services employee discussion about internal documents",
+      "num_results": 3,
+      "include_domains": [
+        "news.ycombinator.com",
+        "reddit.com",
+        "teamblind.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "employee_forums",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" employees internal",
+      "num_results": 3,
+      "include_domains": [
+        "news.ycombinator.com",
+        "reddit.com",
+        "teamblind.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "financial_filings",
+      "provider": "exa",
+      "query": "Technology Transformation Services financial report",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "financial report",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "financial_filings",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" annual report internal",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "gsa.gov",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "finance",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "completed",
+  "elapsed_seconds": 18.1,
+  "provider_requests": 32,
+  "response_bytes": 9843106,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Technology Transformation Services employees",
+      "status": "ok",
+      "error": null,
+      "returned": 2,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:55.573526Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" email to employees full text",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:55.481420Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_roadmap",
+      "provider": "exa",
+      "query": "leaked Technology Transformation Services product roadmap or strategy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:57.007806Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_roadmap",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" leaked roadmap",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:57.033066Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "employee_forums",
+      "provider": "exa",
+      "query": "Technology Transformation Services employee discussion about internal documents",
+      "status": "ok",
+      "error": null,
+      "returned": 0,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:58.355926Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "employee_forums",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" employees internal",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:00.917353Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "financial_filings",
+      "provider": "exa",
+      "query": "Technology Transformation Services financial report",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:59.441591Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "financial_filings",
+      "provider": "tavily",
+      "query": "\"Technology Transformation Services\" annual report internal",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:00.489920Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_9a2b3c0840c2c2515768",
+      "url": "https://fedscoop.com/some-gsa-tech-workers-may-be-reassigned-given-option-to-leave-agency-email-shows/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Some GSA tech workers may be reassigned, given option to leave agency, email shows | FedScoop",
+          "returned_url": "https://fedscoop.com/some-gsa-tech-workers-may-be-reassigned-given-option-to-leave-agency-email-shows/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_14ec2bddccf5c89b177d",
+      "url": "https://www.nextgov.com/digital-government/2025/04/gsa-preps-layoffs-tts/404467/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "GSA preps for layoffs at TTS - Nextgov/FCW",
+          "returned_url": "https://www.nextgov.com/digital-government/2025/04/gsa-preps-layoffs-tts/404467/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d6a1e172d066cbd091fd",
+      "url": "https://www.gsaig.gov/sites/default/files/audit-reports/A240037-1%20Final%20Report.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "GSA's Technology Transformation Services Violated Hiring ...",
+          "returned_url": "https://www.gsaig.gov/sites/default/files/audit-reports/A240037-1%20Final%20Report.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_38630a8feeb15b7d2c82",
+      "url": "https://fedscoop.com/gsa-names-new-technology-transformation-services-deputy-director",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GSA names new Technology Transformation Services deputy director | FedScoop",
+          "returned_url": "https://fedscoop.com/gsa-names-new-technology-transformation-services-deputy-director"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e287c3384f2d43f69add",
+      "url": "https://www.executivegov.com/articles/gsa-gregory-barbaccia-acting-tts-director",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GSA Appoints Gregory Barbaccia as Acting TTS Director",
+          "returned_url": "https://www.executivegov.com/articles/gsa-gregory-barbaccia-acting-tts-director"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_5d1d490cb96a079f2b1f",
+      "url": "https://github.com/GSA-TTS/FAC/blob/main/docs/product/roadmap.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "FAC/docs/product/roadmap.md at main \u00b7 GSA-TTS/FAC - GitHub",
+          "returned_url": "https://github.com/GSA-TTS/FAC/blob/main/docs/product/roadmap.md"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_04efd22196a8dd9eb518",
+      "url": "https://www.prnewswire.com/news-releases/tata-communications-transformation-services-delivers-network-assessment-services-to-microsoft-channel-partners-and-unveils-the-digital-transformation-roadmap-for-telcos-616608804.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Tata Communications Transformation Services Delivers Network Assessment Services to Microsoft Channel Partners and Unveils the Digital Transformation Roadmap for Telcos",
+          "returned_url": "https://www.prnewswire.com/news-releases/tata-communications-transformation-services-delivers-network-assessment-services-to-microsoft-channel-partners-and-unveils-the-digital-transformation-roadmap-for-telcos-616608804.html"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_a1be3346cad16788ca2a",
+      "url": "https://www.ltts.com/press-release/LTTS-unveils-strategic-reorganization",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "L&T Technology Services Unveils Strategic Reorganization - Press Release",
+          "returned_url": "https://www.ltts.com/press-release/LTTS-unveils-strategic-reorganization"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_0ff3728cc06cb0b54e8a",
+      "url": "https://fedscoop.com/fda-ninth-coe-partner",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "FDA becomes ninth Centers of Excellence partner, hot on the heels of NIH | FedScoop",
+          "returned_url": "https://fedscoop.com/fda-ninth-coe-partner"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_03503dcc3ad3015d89ae",
+      "url": "https://www.whitehouse.gov/presidential-actions/2025/04/updating-permitting-technology-for-the-21st-century",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Updating Permitting Technology for the 21st Century \u2013 The White House",
+          "returned_url": "https://www.whitehouse.gov/presidential-actions/2025/04/updating-permitting-technology-for-the-21st-century"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8a1a3e9b1d1ff4dea1cd",
+      "url": "https://hbkcpa.com/insights/content-type/article",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Article - HBK",
+          "returned_url": "https://hbkcpa.com/insights/content-type/article"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e536460f357a27e93660",
+      "url": "https://news.ycombinator.com/item?id=43093970",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "For anyone (like me) who doesn\u2019t know what 18F is: > 18F is a digital services a... | Hacker News",
+          "returned_url": "https://news.ycombinator.com/item?id=43093970"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_87a2a8baeb2ca91c3d4e",
+      "url": "https://news.ycombinator.com/item?id=19797594",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Ask HN: Who is hiring? (May 2019) | Hacker News",
+          "returned_url": "https://news.ycombinator.com/item?id=19797594"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_bf00b730d42fbfa15138",
+      "url": "https://news.ycombinator.com/item?id=19543940",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Ask HN: Who is hiring? (April 2019) | Hacker News",
+          "returned_url": "https://news.ycombinator.com/item?id=19543940"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_92d658f8b15198e6f504",
+      "url": "https://www.sec.gov/Archives/edgar/data/1320760/000165495425004295/tssi_10k.htm",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "tssi_10k.htm",
+          "returned_url": "https://www.sec.gov/Archives/edgar/data/1320760/000165495425004295/tssi_10k.htm"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_5e3f75f731d2cf67a19e",
+      "url": "https://www.sec.gov/Archives/edgar/data/1013880/000110465926042080/tm269728d10_ars.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": null,
+          "returned_url": "https://www.sec.gov/Archives/edgar/data/1013880/000110465926042080/tm269728d10_ars.pdf"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_e398d2713b6d4bae9585",
+      "url": "https://www.sec.gov/Archives/edgar/data/1867072/000155837024008788/kd-20240331x10k.htm",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "10-K",
+          "returned_url": "https://www.sec.gov/Archives/edgar/data/1867072/000155837024008788/kd-20240331x10k.htm"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_f0413ed71dd581cf2b94",
+      "url": "https://finance.yahoo.com/quote/E3M.F/earnings/E3M.F-Q3-2026-earnings_call-726144.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "EPAM Systems Inc. R (E3M.F) Q3 FY2026 earnings call transcript",
+          "returned_url": "https://finance.yahoo.com/quote/E3M.F/earnings/E3M.F-Q3-2026-earnings_call-726144.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_21fd4b1e16a24396607e",
+      "url": "https://www.forbes.com/sites/taxnotes/2022/03/14/what-can-the-irs-do-better-for-taxpayer-privacy-instead-of-facial-recognition",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "What Can The IRS Do Better For Taxpayer Privacy Instead Of ...",
+          "returned_url": "https://www.forbes.com/sites/taxnotes/2022/03/14/what-can-the-irs-do-better-for-taxpayer-privacy-instead-of-facial-recognition"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_2b87c08c7385cdd87bfa",
+      "url": "https://www.forbes.com/sites/davidjeans/2025/02/12/pentagon-doge-elon-musk",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "A Mad Scramble Inside The Pentagon Ahead Of DOGE's ...",
+          "returned_url": "https://www.forbes.com/sites/davidjeans/2025/02/12/pentagon-doge-elon-musk"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:42:12.863900Z"
+}

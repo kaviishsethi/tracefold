@@ -1,0 +1,393 @@
+{
+  "case_id": "northstar_planted",
+  "label": "planted_demo",
+  "pack": "code_exposure",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from Northstar Demo",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"Northstar Demo\"",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "breach_coverage",
+      "provider": "exa",
+      "query": "report on a data breach or source code leak at Northstar Demo",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "breach_coverage",
+      "provider": "tavily",
+      "query": "\"Northstar Demo\" breach source code leak",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [
+    {
+      "preset": "code_hosts_domain",
+      "reason": "needs an official domain"
+    },
+    {
+      "preset": "paste_sites",
+      "reason": "needs an official domain"
+    }
+  ],
+  "scan_state": "completed",
+  "elapsed_seconds": 8.1,
+  "provider_requests": 16,
+  "response_bytes": 92182,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from Northstar Demo",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:43:20.143439Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"Northstar Demo\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:43:20.679423Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "breach_coverage",
+      "provider": "exa",
+      "query": "report on a data breach or source code leak at Northstar Demo",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:43:21.745477Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "breach_coverage",
+      "provider": "tavily",
+      "query": "\"Northstar Demo\" breach source code leak",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:43:23.429459Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_8d331dd2b6094052ca93",
+      "url": "https://github.com/tolwiz/northstar-demo",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "northstar-demo - tolwiz",
+          "returned_url": "https://github.com/tolwiz/northstar-demo"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_ffc3bafc7c751b8b0cf8",
+      "url": "https://github.com/therealparmesh/ui-north-star-demo",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "therealparmesh/ui-north-star-demo",
+          "returned_url": "https://github.com/therealparmesh/ui-north-star-demo"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_7d3c3a48ec8fb99c8c21",
+      "url": "https://github.com/manyworldss/Project-North-Star",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "manyworldss/Project-North-Star",
+          "returned_url": "https://github.com/manyworldss/Project-North-Star"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_1ccb8b721e3bba2e751c",
+      "url": "https://github.com/powerfooI/roamgate",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "GitHub - powerfooI/roamgate: A Herdr client for any screen. Control terminals, monitor coding agents, and review files and diffs from desktop or mobile. \u00b7 GitHub",
+          "returned_url": "https://github.com/powerfooI/roamgate"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_5f947133858452a71b08",
+      "url": "https://github.com/veithly/vibeshell",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitHub - veithly/vibeshell: Local-first SSH/SFTP workspace for humans and coding agents: visible operations, shared sessions, integrated files and discoverable plugins. \u00b7 GitHub",
+          "returned_url": "https://github.com/veithly/vibeshell"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_932a05f6b8fb11c07954",
+      "url": "https://github.com/giltotherescue/slashbooks",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitHub - giltotherescue/slashbooks: Replace QuickBooks and your outsourced bookkeeper with an AI agent you control. \u00b7 GitHub",
+          "returned_url": "https://github.com/giltotherescue/slashbooks"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_c33e53a3ff9d10f3d2f8",
+      "url": "https://mcshanebradylaw.com/terra-holdings-northstar-fertility-announce-breaches/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Terra Holdings, Northstar Fertility Announce Breaches - McShane & Brady",
+          "returned_url": "https://mcshanebradylaw.com/terra-holdings-northstar-fertility-announce-breaches/"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_521971925c201cc11b20",
+      "url": "https://www.bleepingcomputer.com/news/security/nordvpn-denies-breach-claims-says-attackers-have-dummy-data/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "NordVPN denies breach claims, says attackers have \"dummy data\"",
+          "returned_url": "https://www.bleepingcomputer.com/news/security/nordvpn-denies-breach-claims-says-attackers-have-dummy-data/"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_17550edb998aa662da9f",
+      "url": "https://www.sonarsource.com/blog/public-response-code-leaks/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "About the recent code leaks from SonarQube instances | Sonar",
+          "returned_url": "https://www.sonarsource.com/blog/public-response-code-leaks/"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_be70021b8e3129b62cdb",
+      "url": "https://www.axios.com/2026/03/31/anthropic-leaked-source-code-ai",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Anthropic leaked 500,000 lines of its own source code - Axios",
+          "returned_url": "https://www.axios.com/2026/03/31/anthropic-leaked-source-code-ai"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_36dceef7eeacb2cf9b2a",
+      "url": "https://www.rescana.com/post/github-internal-repositories-breached-via-compromised-nx-console-vs-code-extension-2026-supply-chain-cybersecurity-incid",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitHub Internal Repositories Breached via Compromised Nx Console VS Code Extension: 2026 Supply Chain Cybersecurity Incident Analysis - Rescana",
+          "returned_url": "https://www.rescana.com/post/github-internal-repositories-breached-via-compromised-nx-console-vs-code-extension-2026-supply-chain-cybersecurity-incid"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_3e692650e878fdc35f4c",
+      "url": "https://letsdatascience.com/news/vs-code-extension-breach-exposes-3800-github-repositories-24a515b6",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "VS Code Extension Breach Exposes 3,800 GitHub Repositories - Let's Data Science",
+          "returned_url": "https://letsdatascience.com/news/vs-code-extension-breach-exposes-3800-github-repositories-24a515b6"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:43:26.483342Z"
+}

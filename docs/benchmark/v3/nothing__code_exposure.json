@@ -1,0 +1,710 @@
+{
+  "case_id": "nothing",
+  "label": "reported_leak_excerpt",
+  "pack": "code_exposure",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from Nothing Technology",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\"",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "code_hosts_domain",
+      "provider": "exa",
+      "query": "configuration file referencing nothing.tech",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "code_hosts_domain",
+      "provider": "tavily",
+      "query": "\"nothing.tech\" config",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": false,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "paste_sites",
+      "provider": "exa",
+      "query": "Nothing Technology nothing.tech",
+      "num_results": 3,
+      "include_domains": [
+        "ghostbin.cloud",
+        "paste.ee",
+        "pastebin.com",
+        "rentry.co"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "paste_sites",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" nothing.tech",
+      "num_results": 3,
+      "include_domains": [
+        "ghostbin.cloud",
+        "paste.ee",
+        "pastebin.com",
+        "rentry.co"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": false,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "breach_coverage",
+      "provider": "exa",
+      "query": "report on a data breach or source code leak at Nothing Technology",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "breach_coverage",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" breach source code leak",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 13.2,
+  "provider_requests": 28,
+  "response_bytes": 296595,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from Nothing Technology",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:45.100626Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:45.443095Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "code_hosts_domain",
+      "provider": "exa",
+      "query": "configuration file referencing nothing.tech",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:47.917969Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "code_hosts_domain",
+      "provider": "tavily",
+      "query": "\"nothing.tech\" config",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:47.823741Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "paste_sites",
+      "provider": "exa",
+      "query": "Nothing Technology nothing.tech",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:50.421561Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "paste_sites",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" nothing.tech",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:49.931885Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "breach_coverage",
+      "provider": "exa",
+      "query": "report on a data breach or source code leak at Nothing Technology",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:51.615262Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "breach_coverage",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" breach source code leak",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:54.188537Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_5f9b0c8f616cb116652a",
+      "url": "https://github.com/NothingOSS/android_kernel_msm-6.1_nothing_sm7635",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "NothingOSS/android_kernel_msm-6.1_nothing_sm7635",
+          "returned_url": "https://github.com/NothingOSS/android_kernel_msm-6.1_nothing_sm7635"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_7157f1b71523d469179f",
+      "url": "https://github.com/nothingoss/android_kernel_msm-6.6_nothing_sm8735",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "NothingOSS/android_kernel_msm-6.6_nothing_sm8735",
+          "returned_url": "https://github.com/nothingoss/android_kernel_msm-6.6_nothing_sm8735"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_b89e2e9c652b40a60fc5",
+      "url": "https://github.com/NothingOSS/android_kernel_msm-6.6_nothing_sm7750",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "NothingOSS/android_kernel_msm-6.6_nothing_sm7750",
+          "returned_url": "https://github.com/NothingOSS/android_kernel_msm-6.6_nothing_sm7750"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8d9b33c890bdd62967a1",
+      "url": "https://github.com/radiance-project/ear-web",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "GitHub - radiance-project/ear-web \u00b7 GitHub",
+          "returned_url": "https://github.com/radiance-project/ear-web"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitHub - radiance-project/ear-web \u00b7 GitHub",
+          "returned_url": "https://github.com/radiance-project/ear-web"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_4e8581b013f3ca0346f4",
+      "url": "https://github.com/nk8bnj/nothing-technology",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitHub - nk8bnj/nothing-technology: Landing page for Nothing corp. \u00b7 GitHub",
+          "returned_url": "https://github.com/nk8bnj/nothing-technology"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_dc0e147b53cab8cb550b",
+      "url": "https://github.com/bestK1ngArthur/nothing-bar",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitHub - bestK1ngArthur/nothing-bar: Native macOS menu bar app to control Nothing headphones \u00b7 GitHub",
+          "returned_url": "https://github.com/bestK1ngArthur/nothing-bar"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_2e6f143923e070c1d7c1",
+      "url": "https://github.com/xeji01/nothingfont",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "xeji01/nothingfont: nothing.tech typeface",
+          "returned_url": "https://github.com/xeji01/nothingfont"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_2d80ce87b7728a5d3518",
+      "url": "https://github.com/shahriaravi/nothing-vscode-theme",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "shahriaravi/nothing-vscode-theme",
+          "returned_url": "https://github.com/shahriaravi/nothing-vscode-theme"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d1909a36b24c709a3b37",
+      "url": "https://github.com/spike0en/nothing_archive",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "spike0en/nothing_archive: Nothing Community Apps & ...",
+          "returned_url": "https://github.com/spike0en/nothing_archive"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "GitHub - spike0en/nothing_archive: Nothing Community Apps & Projects Index \u2022 Nothing OS Firmware Archive \u2022 OTA Updates & Changelogs for Nothing Phones & CMF By Nothing Phones \u2022 Tools for Nothing Glyph LED & Glyph Matrix \u2022 Windows, macOS & Linux Tools \u2022 Nothing Phone Unbrick \u2022 Nothing Ear & CMF Buds ",
+          "returned_url": "https://github.com/spike0en/nothing_archive"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_5e798e093acba7109ef1",
+      "url": "https://github.com/Bert-Proesmans/nothing-phone",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitHub - Bert-Proesmans/nothing-phone \u00b7 GitHub",
+          "returned_url": "https://github.com/Bert-Proesmans/nothing-phone"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_9cfb21b88edb7df22743",
+      "url": "https://pastebin.com/2RLnchjG",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "How to remap the \"Essential\" button on Nothing Phone (3a) / (3a) Pro - Pastebin.com",
+          "returned_url": "https://pastebin.com/2RLnchjG"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_fc1c9869385d855aad36",
+      "url": "https://pastebin.com/GT9X2Ga6",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Nameless AOSP - Nothing Phone (2)By Chandu DyavanapelliDevice Group - t.me/N - Pastebin.com",
+          "returned_url": "https://pastebin.com/GT9X2Ga6"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c56d58ca47257b73b900",
+      "url": "https://pastebin.com/791LKiDi",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "nothing phone(1) fastboot flash by @sh4ttereddDON'T flash a nothingOS versio - Pastebin.com",
+          "returned_url": "https://pastebin.com/791LKiDi"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_3e21858e324e58135d0a",
+      "url": "https://pastebin.com/QBhUCH3E",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Technology - Pastebin.com",
+          "returned_url": "https://pastebin.com/QBhUCH3E"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_141302fa379dad3fef82",
+      "url": "https://pastebin.com/36uweL5U?source=public_pastes",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "FB2600 User Handbook v0.91 - Pastebin.com",
+          "returned_url": "https://pastebin.com/36uweL5U?source=public_pastes"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_3b783bcf04fe60c845e9",
+      "url": "https://pastebin.com/7h64ZqUf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Dancho Danchev Open Letter - Pastebin.com",
+          "returned_url": "https://pastebin.com/7h64ZqUf"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_a098ac261b1e0157e1be",
+      "url": "https://www.androidauthority.com/nothing-community-alleged-data-breach-3436010/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "We found a database of Nothing community members' emails from 2022 (Update: Nothing statement)",
+          "returned_url": "https://www.androidauthority.com/nothing-community-alleged-data-breach-3436010/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_132a6aa7858f08588a7c",
+      "url": "https://www.livemint.com/technology/tech-news/nothing-data-leak-carl-pei-led-company-confirms-a-vulnerability-says-it-impacted-11713856750348.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Nothing data leak: Smartphone maker says \u2018vulnerability\u2019 hit community members' data. Here's what was compromised | Mint",
+          "returned_url": "https://www.livemint.com/technology/tech-news/nothing-data-leak-carl-pei-led-company-confirms-a-vulnerability-says-it-impacted-11713856750348.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_94702a7b71bc6b5a151c",
+      "url": "https://www.chip.de/news/Daten-von-Nothing-Nutzern-im-Netz-gelandet-Wie-es-jetzt-weitergeht_185246375.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Datenpanne bei Nothing: \u00dcber 2.000 E-Mail-Adressen von Nutzern ver\u00f6ffentlicht - CHIP",
+          "returned_url": "https://www.chip.de/news/Daten-von-Nothing-Nutzern-im-Netz-gelandet-Wie-es-jetzt-weitergeht_185246375.html"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_63c2dbeb3c37ef39525d",
+      "url": "https://www.bloomberg.com/news/articles/2026-03-31/device-startup-nothing-technology-plans-to-release-ai-glasses-next-year",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Device Startup Nothing Technology Plans to Release AI Glasses Next Year - Bloomberg.com",
+          "returned_url": "https://www.bloomberg.com/news/articles/2026-03-31/device-startup-nothing-technology-plans-to-release-ai-glasses-next-year"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e308d765684667af7370",
+      "url": "https://www.securityweek.com/trellix-source-code-repository-breached/",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Trellix Source Code Repository Breached - SecurityWeek",
+          "returned_url": "https://www.securityweek.com/trellix-source-code-repository-breached/"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_48ca60765716d0859bcd",
+      "url": "https://thehackernews.com/2026/04/claude-code-tleaked-via-npm-packaging.html",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Claude Code Source Leaked via npm Packaging Error, Anthropic Confirms - thehackernews.com",
+          "returned_url": "https://thehackernews.com/2026/04/claude-code-tleaked-via-npm-packaging.html"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:31:56.270833Z"
+}

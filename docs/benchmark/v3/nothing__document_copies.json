@@ -1,0 +1,785 @@
+{
+  "case_id": "nothing",
+  "label": "reported_leak_excerpt",
+  "pack": "document_copies",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_deck",
+      "provider": "exa",
+      "query": "internal presentation slides from Nothing Technology",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_deck",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" internal presentation slides",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": "prefer",
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "doc_sharing",
+      "provider": "exa",
+      "query": "document published by Nothing Technology",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "doc_sharing",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\"",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "Nothing Technology employee handbook or company policy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" policy handbook procedure",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "security_docs",
+      "provider": "exa",
+      "query": "Nothing Technology security policy or incident response plan document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "security_docs",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" security policy incident response",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "nothing.tech",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 13.2,
+  "provider_requests": 28,
+  "response_bytes": 470882,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_deck",
+      "provider": "exa",
+      "query": "internal presentation slides from Nothing Technology",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:31.704880Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_deck",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" internal presentation slides",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:31.648186Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "doc_sharing",
+      "provider": "exa",
+      "query": "document published by Nothing Technology",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:33.418109Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "doc_sharing",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:34.289888Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "Nothing Technology employee handbook or company policy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:34.761449Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" policy handbook procedure",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:35.850368Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "security_docs",
+      "provider": "exa",
+      "query": "Nothing Technology security policy or incident response plan document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:41.008971Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "security_docs",
+      "provider": "tavily",
+      "query": "\"Nothing Technology\" security policy incident response",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:31:37.700323Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_6851600a9da4e7f7ebd8",
+      "url": "https://media.dandad.org/documents/NBA2026-Nothing-220126.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Nothing - Artworked Brief 2026",
+          "returned_url": "https://media.dandad.org/documents/NBA2026-Nothing-220126.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d39d0b743343e114851a",
+      "url": "https://youtu.be/QiFMkIeWUEA",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Nothing Event: Fresh Eyes",
+          "returned_url": "https://youtu.be/QiFMkIeWUEA"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_1fba268227a23af48ae5",
+      "url": "https://mt.today/pora_smiritsa_slajdy_prezentacii_nothing_slity_v_set_ranshe_vremeni!jubpys",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "\u041f\u043e\u0440\u0430 \u0441\u043c\u0438\u0440\u0438\u0442\u044c\u0441\u044f: \u0441\u043b\u0430\u0439\u0434\u044b \u043f\u0440\u0435\u0437\u0435\u043d\u0442\u0430\u0446\u0438\u0438 Nothing \u0441\u043b\u0438\u0442\u044b \u0432 \u0421\u0435\u0442\u044c \u0440\u0430\u043d\u044c\u0448\u0435 \u0432\u0440\u0435\u043c\u0435\u043d\u0438 - MT Today",
+          "returned_url": "https://mt.today/pora_smiritsa_slajdy_prezentacii_nothing_slity_v_set_ranshe_vremeni!jubpys"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6428f3a2d9c76446a8d4",
+      "url": "https://www.fastcompany.com/91488755/why-your-smartphone-is-about-to-turn-you-into-a-vibe-coder",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Nothing's tiny phone feature might be vibe coding's breakout moment - Fast Company",
+          "returned_url": "https://www.fastcompany.com/91488755/why-your-smartphone-is-about-to-turn-you-into-a-vibe-coder"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_4201b47367fb1ae7c0ef",
+      "url": "https://www.nature.com/articles/s41378-023-00620-1",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Advances in high-performance MEMS pressure sensors: design, fabrication, and packaging | Microsystems & Nanoengineering",
+          "returned_url": "https://www.nature.com/articles/s41378-023-00620-1"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e6efebede6235832cd12",
+      "url": "https://issuu.com/latitudebrasil/docs/artnexus_englis_1",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Issuu",
+          "returned_url": "https://issuu.com/latitudebrasil/docs/artnexus_englis_1"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_5e3a17289e259aef3a11",
+      "url": "https://www.scribd.com/document/851266171/User-Manual-Nothing-Phone-1-English-35-Pages",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Phone User Guide Version 1.0.0 | PDF",
+          "returned_url": "https://www.scribd.com/document/851266171/User-Manual-Nothing-Phone-1-English-35-Pages"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_644118f1a0375875eb29",
+      "url": "https://www.scribd.com/document/1018517584/Nothing-Ear-3-Quick-Start-Guide-Safety-Warranty-Information",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Nothing Ear 3 Quick Start Guide Safety Warranty Information | PDF",
+          "returned_url": "https://www.scribd.com/document/1018517584/Nothing-Ear-3-Quick-Start-Guide-Safety-Warranty-Information"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_38b71c4fc0f2281c7e60",
+      "url": "https://www.scribd.com/document/1017478803/Nothing-Technology-Investment-Analysis",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Nothing Technology Investment Analysis | PDF",
+          "returned_url": "https://www.scribd.com/document/1017478803/Nothing-Technology-Investment-Analysis"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c71e383bf8dfb2d36d4d",
+      "url": "https://www.scribd.com/document/1064608524/4",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Nothing (Company) : History | PDF | Smartphone | Headphones",
+          "returned_url": "https://www.scribd.com/document/1064608524/4"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8c4323996f478cc4c9c4",
+      "url": "https://www.scribd.com/document/866427507/Nothing-is-a-UK",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Nothing Technology: Brand Overview and SWOT | PDF",
+          "returned_url": "https://www.scribd.com/document/866427507/Nothing-is-a-UK"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_30436ce5e1ed607f4637",
+      "url": "https://www.scribd.com/document/1038315849/Report-on-the-History-of-the-Nothing-Phone-Brand",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Report On The History of The Nothing Phone Brand | PDF | Smartphone | Mobile Phones",
+          "returned_url": "https://www.scribd.com/document/1038315849/Report-on-the-History-of-the-Nothing-Phone-Brand"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_21103a55193f6b766be3",
+      "url": "https://careers.kula.ai/nothing",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Nothing Technology Careers | Open Jobs",
+          "returned_url": "https://careers.kula.ai/nothing"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_31b7e0294388cccc25ed",
+      "url": "https://fortune.com/europe/2024/08/19/british-iphone-challenger-nothing-calls-staff-back-into-the-office-5-days-a-week-suggesting-those-who-disagree-should-leave/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "iPhone challenger Nothing calls staff back in 5 days a week, threatening dissenters with dismissal | Fortune",
+          "returned_url": "https://fortune.com/europe/2024/08/19/british-iphone-challenger-nothing-calls-staff-back-into-the-office-5-days-a-week-suggesting-those-who-disagree-should-leave/"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_deb7f4232a48aee011cc",
+      "url": "https://careers.quiet.com/companies/nothing/jobs/70822712-people-operations-manager",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "People Operations Manager @ Nothing | Quiet Job Board",
+          "returned_url": "https://careers.quiet.com/companies/nothing/jobs/70822712-people-operations-manager"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_26563ea14f38dd92ff5f",
+      "url": "https://nothingtools.github.io",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Nothing Space - Built Together",
+          "returned_url": "https://nothingtools.github.io"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_badd859ab78e4e16f851",
+      "url": "https://www.govinfo.gov/content/pkg/FR-2026-05-14/pdf/2026-09664.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Federal Register/Vol. 91, No. 93/Thursday, May 14, 2026/ ...",
+          "returned_url": "https://www.govinfo.gov/content/pkg/FR-2026-05-14/pdf/2026-09664.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_4e061cae4c674a9b4b79",
+      "url": "https://www.ncsc.org/sites/default/files/media/document/AI_UPL_WhitePaper.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Modernizing Unauthorized Practice of Law Regulations to ...",
+          "returned_url": "https://www.ncsc.org/sites/default/files/media/document/AI_UPL_WhitePaper.pdf"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_f0c542943b1e3f3b8cc4",
+      "url": "https://simplify.jobs/p/65e60d5e-49d4-4dd8-885f-9d303f094402/Head-of-Privacy",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Head of Privacy @ Nothing | Simplify Jobs",
+          "returned_url": "https://simplify.jobs/p/65e60d5e-49d4-4dd8-885f-9d303f094402/Head-of-Privacy"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_438780cc70f84618a59f",
+      "url": "https://careers.kula.ai/nothing/59060-senior-engineer-software-security",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Senior Engineer, Software Security | Nothing Technology Careers",
+          "returned_url": "https://careers.kula.ai/nothing/59060-senior-engineer-software-security"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_132a6aa7858f08588a7c",
+      "url": "https://www.livemint.com/technology/tech-news/nothing-data-leak-carl-pei-led-company-confirms-a-vulnerability-says-it-impacted-11713856750348.html",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Nothing data leak: Smartphone maker says \u2018vulnerability\u2019 hit community members' data. Here's what was compromised | Mint",
+          "returned_url": "https://www.livemint.com/technology/tech-news/nothing-data-leak-carl-pei-led-company-confirms-a-vulnerability-says-it-impacted-11713856750348.html"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_72b9fb8c23f903679aad",
+      "url": "https://rpxcorp.com/blog_post/q3-in-review-ptab-institution-gets-another-revamp-as-courts-weigh-pool-only-sep-offers",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Q3 in Review: PTAB Institution Gets Another Revamp as Courts Weigh Pool\u2011Only SEP Offers - RPX",
+          "returned_url": "https://rpxcorp.com/blog_post/q3-in-review-ptab-institution-gets-another-revamp-as-courts-weigh-pool-only-sep-offers"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_add6586822383d44c910",
+      "url": "https://www.fundacionbankinter.org/wp-content/uploads/2021/09/Publicacion-PDF-IN-FTF_Ciberseguridad.pdf",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Cybersecurity, a worldwide challenge",
+          "returned_url": "https://www.fundacionbankinter.org/wp-content/uploads/2021/09/Publicacion-PDF-IN-FTF_Ciberseguridad.pdf"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_d191daaef5b949fcddc4",
+      "url": "https://activecyber.net/tag/verodin",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Verodin Archives - ActiveCyber",
+          "returned_url": "https://activecyber.net/tag/verodin"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:31:43.070208Z"
+}
