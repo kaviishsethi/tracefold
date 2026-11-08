@@ -678,7 +678,7 @@ export default function Landing() {
                   Run it in your own environment, review every finding with its evidence, and approve each takedown or key change yourself.
                 </p>
               </div>
-              <LinkButton href="/scan" variant="secondary" className="border-white/20 bg-black/30 backdrop-blur">
+              <LinkButton href="/overview" variant="secondary" className="border-white/20 bg-black/30 backdrop-blur">
                 Open the app <ArrowRight className="size-4" aria-hidden />
               </LinkButton>
             </div>

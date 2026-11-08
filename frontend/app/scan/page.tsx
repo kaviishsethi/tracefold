@@ -1,12 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { api, ws, type Page, type QueryPlan, listScans, startScan, uploadFiles, type ApiError, type Check, type Scan } from "@/lib/api";
-import { bytes, relativeTime } from "@/lib/format";
+import { bytes } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
-import { Box, H1, Note, scanState, source } from "@/components/bits";
+import { Box, Card, H1 } from "@/components/bits";
+import { ScansTable } from "@/components/scans-table";
 import { Button, ErrorNote, cx } from "@/components/ui";
 
 export default function ScanPage() {
@@ -142,30 +142,9 @@ export default function ScanPage() {
         </div>
       )}
 
-      <h2 className="mb-3 mt-14 text-sm font-medium text-ink">Recent scans</h2>
-      <Box>
-        {scans === null ? (
-          <Note>Loading…</Note>
-        ) : scans.length === 0 ? (
-          <Note>No scans yet. Scans from your coding assistant show up here too.</Note>
-        ) : (
-          scans.map((s) => {
-            const st = scanState(s);
-            const n = typeof s.summary.observations === "number" ? s.summary.observations : null;
-            return (
-              <Link key={s.scan_id} href={`/scan/${s.scan_id}`} className="flex items-center gap-3 border-t border-line px-4 py-3 text-sm first:border-t-0 hover:bg-panel-2">
-                <span className={cx("size-2 rounded-full", st.tone === "busy" ? "animate-pulse bg-accent" : st.tone === "done" ? "bg-local" : "bg-med")} />
-                <span className="w-36 shrink-0 text-ink">{source(s)}</span>
-                <span className="min-w-0 flex-1 truncate text-mute">
-                  {s.recheck_of ? "Recheck · " : ""}
-                  {st.tone === "busy" ? st.text : n === null ? st.text : n === 0 ? "Nothing found" : `${n} found`}
-                </span>
-                <span className="shrink-0 text-faint">{relativeTime(s.created_at)}</span>
-              </Link>
-            );
-          })
-        )}
-      </Box>
+      <Card title="Recent scans" className="mt-10" right={<span className="text-xs text-faint">From this app and your coding assistant</span>}>
+        <ScansTable scans={scans} empty="No scans yet. Scans from your coding assistant show up here too." />
+      </Card>
     </div>
   );
 }

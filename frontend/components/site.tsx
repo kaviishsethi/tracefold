@@ -55,7 +55,7 @@ export function SiteHeader() {
             </Link>
           ))}
           <span className="ml-3 hidden sm:block">
-            <LinkButton href="/scan" variant="secondary">
+            <LinkButton href="/overview" variant="secondary">
               Open the app
             </LinkButton>
           </span>
@@ -156,7 +156,7 @@ const FOOTER_NAV = [
     title: "Get started",
     links: [
       ["Set up Tracefold", "/setup"],
-      ["Open the app", "/scan"],
+      ["Open the app", "/overview"],
     ],
   },
 ];
