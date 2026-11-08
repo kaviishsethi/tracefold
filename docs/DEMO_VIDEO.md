@@ -32,6 +32,21 @@ Target length **about 2:45**. The rules say projects without a video are not jud
 - [ ] Claude Code terminal: 18pt+ font, cleared.
 - [ ] Recorder: Screen Studio or Cap (auto-zoom on clicks), or QuickTime (⌘⇧5) with zooms added in the editor.
 
+## Recording the web clips automatically
+
+`demo/record.mjs` drives the real app and saves the web shots as 1080p clips in `demo/out/` (01 intro, 02 industry,
+03 public copies, 04 risks and takedown, 05 schedule, 06 end card). Record the Claude Code and Wi-Fi-off shots by hand.
+
+```bash
+cd demo && npm install && npx playwright install chromium
+```
+
+```bash
+node record.mjs --fresh
+```
+
+`--fresh` deletes finished scans first so clip 03 runs a real search. Re-record one clip with `node record.mjs 03`.
+
 ## Shot list and voiceover
 
 About 2.5 words per second, in plain spoken English. Word counts are in brackets.
@@ -40,7 +55,7 @@ About 2.5 words per second, in plain spoken English. Word counts are in brackets
 
 [SCREEN] Tracefold Scan page.
 
-[VO] "This is Tracefold. It checks if your company's documents or code have ended up on public websites. It also finds secrets, like API keys, inside your files. It can draft takedowns and turn off leaked keys, once someone approves. You can run it on your own computer or in your company's VPC, so your private files and data stay with you." [61]
+[VO] "This is Tracefold. It helps you catch, fix and prevent security leaks. It checks if your company's documents or code have ended up on public websites, finds secrets like API keys, and drafts takedowns and turns off leaked keys once approved. Enterprises can run it in their own VPC or on their own machines, to keep their proprietary data private." [60]
 
 ### 0:22–0:35 Who it's for
 
@@ -54,7 +69,7 @@ for: medical record numbers, provider NPIs and dates of birth". Cancel.
 [SCREEN] Sample files → Duolingo memo → progress card (sped up) → "3 public sites show text from your documents" →
 timeline. Zoom on "Searched for Duolingo". Open a site's passages, then Open page; zoom on the highlighted sentence.
 
-[VO] "This is a sample memo from Duolingo. Parts of it were quoted in news articles. Tracefold searches the web for the company name, using Exa or Tavily. Your files are never sent anywhere. It downloads the pages it finds and compares them with the file on this computer. It found the memo's text on three sites. If I open one, you can see the same sentence highlighted." [67]
+[VO] "This is a sample memo from Duolingo. Parts of it were quoted in news articles. Tracefold searches the web for the company name using Exa or Tavily, then downloads the pages it finds and compares them locally with your documents and code. It found the memo's text on several sites. If I open one, you can see the same sentence highlighted." [61]
 
 ### 1:10–1:35 Risks in the file, and approving a takedown
 
