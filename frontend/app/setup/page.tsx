@@ -1,14 +1,13 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { api, type ApiError, type Workspace } from "@/lib/api";
 import { cx } from "@/components/ui";
 
-const AGENT_PROMPT = "Set up Tracefold by following SETUP.md in the Tracefold repository. Protect this folder: <path to your project>";
+const AGENT_PROMPT = "Set up Tracefold by following SETUP.md in the Tracefold repository. Protect this folder: <path to your project>. Our company is <company name>, <domain>; takedown replies go to <email>.";
 
 const COMMANDS = [
-  "cd server && uv sync && uv run tracefold quickstart --root <path to your project>",
+  "cd server && uv sync && uv run tracefold quickstart --root <path to your project> --company \"<company>\" --reply-to <email>",
   "cd server && uv run tracefold serve --port 8787",
   "cd frontend && npm install && npm run dev",
 ];
@@ -45,32 +44,14 @@ export default function Setup() {
     <div className="mx-auto max-w-2xl">
       <h1 className="text-2xl tracking-[-0.03em] text-ink">Set up Tracefold</h1>
 
-      <div
-        className={cx(
-          "mt-6 flex items-center justify-between gap-4 rounded-card border px-4 py-3 text-sm",
-          status?.ok ? "border-local-line bg-local-bg text-local" : "border-line text-mute",
-        )}
-      >
-        {status?.ok ? (
-          <span className="flex items-center gap-3">
-            <span className="flex items-center gap-2 font-medium">
-              <span className="size-2 rounded-full bg-local" /> Connected
-            </span>
-            <span className="text-mute">{status.ws?.name}</span>
-          </span>
-        ) : (
-          <span>{status === null ? "Checking…" : status.err?.message ?? "The engine has no workspace yet. Run step 1."}</span>
-        )}
-        {status?.ok ? (
-          <Link href="/scan" className="font-medium text-ink underline underline-offset-4">
-            Start scanning
-          </Link>
-        ) : (
-          <button onClick={check} className="text-ink underline underline-offset-4">
+      {status && !status.ok && (
+        <div className="mt-6 flex items-center justify-between gap-4 rounded-card border border-line px-4 py-3 text-sm text-mute">
+          <span>{status.err?.message ?? "The engine has no workspace yet. Run step 1."}</span>
+          <button onClick={check} className="shrink-0 text-ink underline underline-offset-4">
             Check again
           </button>
-        )}
-      </div>
+        </div>
+      )}
 
       <h2 className="mt-10 text-sm font-medium text-ink">With a coding agent</h2>
       <p className="mt-1 text-sm text-mute">Paste this into Claude Code, Codex or Copilot, opened in the Tracefold repository.</p>

@@ -48,8 +48,49 @@ def _slug(text: str) -> str:
     return ("ws_" + s)[:40] or "ws_main"
 
 
+def _company(engine, ws_id: str, company: str, domain: str | None, reply_to: str | None) -> dict:
+    """Sign takedowns as this company, approve it as the public identity for discovery, and create a first plan.
+    Re-running reuses a matching identity and plan instead of adding duplicates."""
+    from .discovery import identity, presets
+
+    out: dict = {}
+    if reply_to:
+        engine.set_remediation_profile(ws_id, company, reply_to)
+        out["takedown_signer"] = company
+    clean = identity.validate_profile(company, domain, [])
+    prof = next((p for p in engine.repo.list_profiles(ws_id)
+                 if p["display_name"] == clean["display_name"] and p["official_domain"] == clean["official_domain"]), None)
+    if prof is None:
+        from .util import new_id
+        pid = new_id("cprof")
+        version = engine.repo.insert_profile_version({"id": pid, "workspace_id": ws_id, **clean, "approved_by": "operator:quickstart",
+                                                      "approved_at": iso(now()), "privacy_notice_version": identity.PRIVACY_NOTICE_VERSION})
+        prof = engine.repo.get_profile(ws_id, pid, version)
+    out["identity"] = {"profile_id": prof["id"], "version": prof["version"], "display_name": prof["display_name"]}
+    providers = [p for p, key in (("exa", "EXA_API_KEY"), ("tavily", "TAVILY_API_KEY")) if os.environ.get(key)]
+    if not providers:
+        out["plan"] = None
+        out["plan_note"] = "No EXA_API_KEY or TAVILY_API_KEY set, so no discovery plan yet. Add one to server/.env and re-run."
+        return out
+    existing = next((r for r in engine.repo.list_query_plans(ws_id, None, 100)
+                     if r["profile_id"] == prof["id"] and r["profile_version"] == prof["version"]
+                     and r["plan"].get("pack") == "broad_triage"
+                     and sorted({s["provider"] for s in r["plan"]["searches"]}) == sorted(providers)), None)
+    if existing is None:
+        from .util import new_id
+        profile = {k: prof[k] for k in ("display_name", "official_domain", "public_aliases")}
+        plan = presets.build_plan(profile, None, "broad_triage", providers, {"mode": "broad"}, None)
+        existing = {"id": new_id("qplan"), "workspace_id": ws_id, "profile_id": prof["id"], "profile_version": prof["version"],
+                    "profile": profile, "plan": plan, "created_by": "operator:quickstart", "created_at": iso(now())}
+        engine.repo.insert_query_plan(existing)
+    out["plan"] = {"query_plan_id": existing["id"], "pack": "broad_triage", "searches": len(existing["plan"]["searches"]),
+                   "providers": providers}
+    return out
+
+
 def run(engine, root: str, workspace: str | None, name: str | None, port: int, public_urls: list[str],
-        frontend_env: str | None, mcp_config: str | None) -> dict:
+        frontend_env: str | None, mcp_config: str | None, company: str | None = None, domain: str | None = None,
+        reply_to: str | None = None) -> dict:
     root_path = Path(root).expanduser().resolve()
     if not root_path.is_dir():
         raise SystemExit(f"tracefold quickstart: {root_path} is not a folder")
@@ -68,6 +109,8 @@ def run(engine, root: str, workspace: str | None, name: str | None, port: int, p
         version = engine.add_manifest(ws_id, "public", entries)
         sources = {"manifest_id": "public", "version": version, "count": len(entries)}
 
+    company_out = _company(engine, ws_id, company, domain, reply_to) if company else None
+
     app_token = _rotate(engine, APP_PREFIX, ws_id, list(Capability))
     mcp_token = _rotate(engine, MCP_PREFIX, ws_id, MCP_CAPS)
     base = f"http://127.0.0.1:{port}"
@@ -80,6 +123,7 @@ def run(engine, root: str, workspace: str | None, name: str | None, port: int, p
     _write_private(mcp_path, json.dumps({"base_url": base, "token": mcp_token, "workspace_id": ws_id}, indent=2) + "\n")
 
     return {"workspace": ws_id, "workspace_created": created, "root": str(root_path), "public_sources": sources,
+            "company": company_out,
             "engine_url": base, "frontend_env": str(env_path), "mcp_config": str(mcp_path),
             "adapter_dir": str(REPO / "adapters" / "mcp"), "frontend_dir": str(REPO / "frontend"),
             "server_dir": str(REPO / "server")}
@@ -88,9 +132,18 @@ def run(engine, root: str, workspace: str | None, name: str | None, port: int, p
 def describe(r: dict) -> str:
     src = (f"{r['public_sources']['count']} public URL(s) registered as source list 'public'"
            if r["public_sources"] else "No public URLs yet. Add them with --public-url to check for public copies.")
+    c = r.get("company")
+    lines = []
+    if c:
+        lines.append(f"Company {c['identity']['display_name']} approved for discovery")
+        if c.get("takedown_signer"):
+            lines.append(f"Takedown requests will be signed as {c['takedown_signer']}")
+        lines.append(f"Discovery plan {c['plan']['query_plan_id']} ({c['plan']['searches']} searches) is ready"
+                     if c.get("plan") else c.get("plan_note", ""))
     return "\n".join([
         f"Workspace {r['workspace']} {'created' if r['workspace_created'] else 'reused'} for {r['root']}",
         src,
+        *lines,
         f"Web app config written: {r['frontend_env']}",
         f"Coding assistant config written: {r['mcp_config']}",
         "Tokens were rotated; they are in those files and are not shown here.",
@@ -100,5 +153,5 @@ def describe(r: dict) -> str:
         f"  cd {r['frontend_dir']} && npm install && npm run dev",
         "Connect your coding assistant (Claude Code shown):",
         f"  claude mcp add tracefold -- uv run --directory {r['adapter_dir']} tracefold-mcp",
-        "Then open http://localhost:3000/scan",
+        "Then open http://localhost:3000/overview",
     ])

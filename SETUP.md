@@ -6,11 +6,14 @@ Needs Python 3.11+ with [uv](https://docs.astral.sh/uv/), Node 20+, and Git.
 ## 1. Configure everything
 
 ```bash
-cd server && uv sync && uv run tracefold quickstart --root /path/to/the/folder/to/protect
+cd server && uv sync && uv run tracefold quickstart --root /path/to/the/folder/to/protect \
+  --company "Your Company, Inc." --domain yourcompany.com --reply-to legal@yourcompany.com
 ```
 
-Add `--public-url https://...` (repeatable) for public pages where copies might appear. Re-running is safe: it keeps
-the workspace and issues new tokens.
+`--company` signs takedown requests (with `--reply-to`) and approves the company's public name for discovery; with an
+`EXA_API_KEY` or `TAVILY_API_KEY` in `server/.env` it also creates a first discovery plan. Add `--public-url https://...`
+(repeatable) for specific public pages to check. Re-running is safe: it keeps the workspace, identity and plan, and
+issues new tokens.
 
 Check: the output ends with "Next, each in its own terminal". It wrote `frontend/.env.local` and
 `~/.config/tracefold/mcp.json`. It never prints tokens; don't print those files.
@@ -40,8 +43,9 @@ claude mcp add tracefold -- uv run --directory "$PWD" tracefold-mcp
 ```
 
 Check: `tracefold-mcp check` prints "engine reachable". In the assistant, the `tracefold` tools appear
-(`scan_changes`, `get_findings`, `explain_finding`, `recheck_fix`). The assistant can scan and recheck but can't approve
-takedowns or key changes; people do that in the web app.
+(`scan_changes`, `get_findings`, `explain_finding`, `recheck_fix`, `list_scans`, `list_approvals`). The assistant can
+scan, fix and recheck, and see what's waiting for approval, but can't approve takedowns or key changes; people do that
+in the web app.
 
 ## Optional: takedowns and leaked keys
 

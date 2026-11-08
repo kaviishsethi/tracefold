@@ -16,6 +16,8 @@ per-client disclosure policy. Design: [shared engine plan §8](../../docs/SHARED
 | `get_findings` | `GET /findings?scan_id=` (+ `GET /scans/{id}`) | Split into `public_exposure` / `local_risk`; `coverage_notes` states empty or incomplete sections in the engine's terms ("No match in N checked sources", "not requested", …) |
 | `explain_finding` | `GET /findings/{id}` (+ `GET /evidence/{id}`) | Returns the stored explanation, never a new one. Evidence only if the grant allows it |
 | `recheck_fix` | `GET /findings/{id}` + `POST /captures` + `POST /findings/{id}/rechecks` | Captures the finding's file (or `paths` when the path is withheld) and returns `still_detected` / `not_detected_in_checked_version` / `inconclusive` |
+| `list_scans` | `GET /scans` | Read-only. Recent scans from every client, with where each came from |
+| `list_approvals` | `GET /actions` | Read-only. Drafted takedowns and key shut-offs; a person approves them in the web app |
 
 Engine errors pass through as tool errors carrying the engine's `{code, message, retryable}` plus
 `http_status`. If the engine can't be reached, the tool error code is `engine_unreachable` or `engine_timeout`.

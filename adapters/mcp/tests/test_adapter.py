@@ -18,7 +18,7 @@ from .conftest import FIXED, RISKY, Engine, _git
 pytestmark = pytest.mark.anyio
 
 TOOLS = {"get_capabilities", "list_workspaces", "scan_changes", "get_scan", "cancel_scan", "get_findings",
-         "explain_finding", "recheck_fix"}
+         "explain_finding", "recheck_fix", "list_scans", "list_approvals"}
 
 
 @pytest.fixture
@@ -180,3 +180,17 @@ def test_config_requires_loopback_and_private_file(tmp_path):
         load_config(p)
     with pytest.raises(ConfigError):
         write_config(tmp_path / "x.json", "http://127.0.0.1:1", "not-a-token", "ws")
+
+
+async def test_list_scans_and_approvals_are_read_only(engine):
+    (engine.root / "keys.py").write_text('AWS_ACCESS_KEY_ID = "AKIAQX7TFOLDDEMO2K4Z"\n')
+    async with Client(build_server(cfg(engine))) as c:
+        scan = await until_done(c, await call(c, "scan_changes", {"mode": "files", "paths": ["keys.py"], "model_review": False}))
+        listed = await call(c, "list_scans", {"limit": 5})
+        mine = next(s for s in listed["scans"] if s["scan_id"] == scan["scan"]["scan_id"])
+        assert mine["started_from"] == "assistant"
+        appr = await call(c, "list_approvals", {})
+        assert any(a["kind"] == "disable_aws_key" for a in appr["approvals"]) and "web app" in appr["note"]
+        tools = {t.name: t for t in (await c.list_tools()).tools}
+        assert tools["list_approvals"].annotations.read_only_hint is True
+    (engine.root / "keys.py").unlink()

@@ -63,6 +63,9 @@ def main(argv: list[str] | None = None) -> int:
     q.add_argument("--public-url", action="append", default=[], help="a public page to check for copies (repeatable)")
     q.add_argument("--frontend-env", help="where to write the web app config (default: frontend/.env.local)")
     q.add_argument("--mcp-config", help="where to write the MCP adapter config (default: ~/.config/tracefold/mcp.json)")
+    q.add_argument("--company", help="your company's public name: signs takedowns and seeds a discovery plan")
+    q.add_argument("--domain", help="your company's public domain, left out of discovery results (optional)")
+    q.add_argument("--reply-to", help="email takedown recipients should reply to (sets the takedown signer)")
     q.add_argument("--json", action="store_true", help="print the result as JSON")
 
     sv = sub.add_parser("serve")
@@ -104,7 +107,7 @@ def main(argv: list[str] | None = None) -> int:
     elif args.cmd == "quickstart":
         from . import quickstart
         r = quickstart.run(e, args.root, args.workspace, args.name, args.port, args.public_url, args.frontend_env,
-                           args.mcp_config)
+                           args.mcp_config, company=args.company, domain=args.domain, reply_to=args.reply_to)
         print(json.dumps(r, indent=2) if args.json else quickstart.describe(r))
     elif args.cmd == "set-remediation-profile":
         e.set_remediation_profile(args.workspace, args.company, args.reply_to)

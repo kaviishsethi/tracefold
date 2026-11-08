@@ -70,3 +70,22 @@ def test_refuses_to_repoint_an_existing_workspace(tmp_path, capsys):
     with pytest.raises(SystemExit, match="already points at"):
         main(["--data", str(tmp_path / "data"), "quickstart", "--root", str(other),
               "--frontend-env", str(tmp_path / "fe2"), "--mcp-config", str(tmp_path / "m2.json")])
+
+
+def test_company_sets_signer_identity_and_plan_once(tmp_path, capsys, monkeypatch):
+    monkeypatch.setenv("EXA_API_KEY", "exa-test-key-123456")
+    extra = ("--company", "Northwind Relay, Inc.", "--domain", "northwind.example.com", "--reply-to", "legal@northwind.example.com", "--json")
+    first = json.loads(_run(tmp_path, capsys, *extra))["company"]
+    again = json.loads(_run(tmp_path, capsys, *extra))["company"]
+    assert first["identity"] == again["identity"] and first["plan"]["query_plan_id"] == again["plan"]["query_plan_id"]
+    assert first["plan"]["providers"] == ["exa"] and first["plan"]["pack"] == "broad_triage"
+    e = _engine(tmp_path)
+    assert e.repo.get_remediation_profile("ws_project")["company_name"] == "Northwind Relay, Inc."
+    assert len(e.repo.list_profiles("ws_project")) == 1 and len(e.repo.list_query_plans("ws_project", None, 100)) == 1
+
+
+def test_company_without_search_keys_explains_missing_plan(tmp_path, capsys, monkeypatch):
+    monkeypatch.delenv("EXA_API_KEY", raising=False)
+    monkeypatch.delenv("TAVILY_API_KEY", raising=False)
+    out = json.loads(_run(tmp_path, capsys, "--company", "Northwind Relay", "--json"))["company"]
+    assert out["plan"] is None and "EXA_API_KEY" in out["plan_note"]
