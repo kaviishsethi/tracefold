@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { allSources, COMPARISON_LABEL, DISCOVERY_OUTCOME, FETCH_LABEL, type ApiError, type Scan, type SourcePage } from "@/lib/api";
+import { Disclosure } from "./bits";
 import { ErrorNote, Loading, Panel, cx } from "./ui";
 const hostOf = (url: string) => { try { return new URL(url).host; } catch { return url; } };
 const COMPARISON_TONE: Record<string, string> = { matched: "text-accent", no_match: "text-mute", not_compared: "text-faint", failed: "text-med" };
@@ -35,10 +36,15 @@ export function SourcesPanel({ workspaceId, scan }: { workspaceId: string; scan:
   );
   const matched = rows.filter((r) => r.comparison_status === "matched").length;
   return (
-    <Panel
-      title={d ? "Pages found by search" : "Public pages checked"}
-      meta={`${rows.length} ${rows.length === 1 ? "page" : "pages"} · ${matched} matched`}
+    <Disclosure
+      label={
+        <span>
+          All pages checked <span className="text-faint">· {rows.length} {rows.length === 1 ? "page" : "pages"}, {matched} matched</span>
+        </span>
+      }
     >
+      <div className="-mx-4 -my-3">
+    <Panel className="!rounded-none !border-0 !bg-transparent !shadow-none">
       {d && (
         <div className="space-y-2 border-b border-line px-4 py-3">
           <p className={cx("text-[13px]", d.outcome === "search_failed" || d.outcome === "no_candidates" || d.outcome === "budget_exhausted" ? "text-med" : "text-ink-2")}>
@@ -115,6 +121,8 @@ export function SourcesPanel({ workspaceId, scan }: { workspaceId: string; scan:
         </div>
       )}
     </Panel>
+      </div>
+    </Disclosure>
   );
 }
 

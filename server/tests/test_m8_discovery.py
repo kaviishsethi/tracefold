@@ -379,7 +379,9 @@ def test_request_budget_reserves_extraction_capacity(make_env):
     assert s["budget"]["provider_requests"] <= 21
 
 
-def test_search_omission_never_resolves_exposure_only_explicit_recheck(env):
+def test_search_omission_never_resolves_exposure_only_explicit_recheck(env, monkeypatch):
+    from tracefold.discovery import service
+    monkeypatch.setattr(service, "REUSE_HOURS", 0)  # every scan here must search again
     prov = Providers(results=default_results()).install(env)
     p = approved_plan(env)
     inp = env.upload({"roadmap.md": fx("roadmap.md")})
@@ -410,7 +412,9 @@ def test_search_omission_never_resolves_exposure_only_explicit_recheck(env):
     rs = env.get_scan(r.json()["scan_id"])
     assert "public_discovery" not in [st["name"] for st in rs["stages"]]
     led = env.client.get(f"/v1/workspaces/ws_a/scans/{rs['scan_id']}/ledger", headers=env.h()).json()["items"]
-    assert [e["purpose"] for e in led if e["destination_category"] == "provider_api"] == ["extract_approved_public_url"]
+    # one fetch of the cited URL: directly when page memory last saw it that way, otherwise through the provider
+    assert [e["purpose"] for e in led if e["destination_category"] in ("provider_api", "public_retrieval")] in (
+        ["extract_approved_public_url"], ["fetch_approved_public_url"])
     page = sources(env, rs["scan_id"])
     assert page["discovery"] is None and page["items"][0]["mode"] == "discovered"
 
@@ -637,3 +641,46 @@ def test_always_check_pages_are_compared_even_when_search_fails(env):
     assert by[FORUM_CANON]["fetch_status"] == "fetched" and by[FORUM_CANON]["comparison_status"] == "matched"
     assert any(r.method == "GET" and r.url.host == "forum.example" for r in prov.rec.seen)
     assert [f for f in env.findings(s["scan_id"]) if f["kind"] == "public_exposure"]
+
+
+
+# ---------------- page memory ----------------
+def test_same_files_soon_after_reuse_results_without_searching(env):
+    prov = Providers(results=default_results()).install(env)
+    p = approved_plan(env)
+    s1 = discover(env, env.upload({"roadmap.md": fx("roadmap.md")})["input_id"], p["query_plan_id"])
+    n = len(prov.searches())
+    assert n > 0
+    s2 = discover(env, env.upload({"roadmap.md": fx("roadmap.md")})["input_id"], p["query_plan_id"])
+    assert len(prov.searches()) == n                                  # no new search calls
+    assert s2["public_discovery"]["outcome"] == "reused_recent_results"
+    by = {x["original_url"]: x for x in sources(env, s2["scan_id"])["items"]}
+    assert by[FORUM_CANON]["comparison_status"] == "matched"
+    assert by[FORUM_CANON]["discovery_origins"][0]["query_id"] == "remembered"
+    assert any(r.method == "GET" and r.url.host == "forum.example" for r in prov.rec.seen)   # fetched directly
+    assert [f for f in env.findings(s2["scan_id"]) if f["kind"] == "public_exposure"]
+    cov = {(c["scope"], c["id"]): c for c in s2["coverage"]}
+    assert cov[("stage", "public_discovery")]["status"] == "complete"
+
+
+def test_previous_matches_are_rechecked_after_the_reuse_window(env, monkeypatch):
+    from tracefold.discovery import service
+    prov = Providers(results=default_results()).install(env)
+    p = approved_plan(env)
+    discover(env, env.upload({"roadmap.md": fx("roadmap.md")})["input_id"], p["query_plan_id"])
+    monkeypatch.setattr(service, "REUSE_HOURS", 0)
+    prov.results = {}                                                 # search no longer finds the page
+    s2 = discover(env, env.upload({"roadmap.md": fx("roadmap.md")})["input_id"], p["query_plan_id"])
+    by = {x["original_url"]: x for x in sources(env, s2["scan_id"])["items"]}
+    assert by[FORUM_CANON]["comparison_status"] == "matched"          # still checked because it matched before
+    assert VENDOR not in by                                           # pages that never matched aren't carried over
+
+
+def test_clear_all_forgets_remembered_pages(env):
+    prov = Providers(results=default_results()).install(env)
+    p = approved_plan(env)
+    discover(env, env.upload({"roadmap.md": fx("roadmap.md")})["input_id"], p["query_plan_id"])
+    env.client.delete("/v1/workspaces/ws_a/scans", headers=env.h())
+    n = len(prov.searches())
+    discover(env, env.upload({"roadmap.md": fx("roadmap.md")})["input_id"], p["query_plan_id"])
+    assert len(prov.searches()) > n

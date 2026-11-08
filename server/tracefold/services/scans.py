@@ -179,6 +179,7 @@ class ScanService:
             if len(rows) < 200:
                 break
             cursor = rows[-1]["created_at"]
+        self.e.repo.forget_pages(ws_id)  # a fresh start searches fresh
         return self.e.repo.delete_scans(ws_id, ids)
 
     def get(self, p: Principal, ws_id: str, scan_id: str) -> ScanOut:

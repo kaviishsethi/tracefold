@@ -173,7 +173,14 @@ export default function ScanDetail() {
   const openFindings = (findings ?? []).filter((f) => f.status === "open");
   // A page that copies a file counts once, however many passages match.
   const open = openFindings.filter((f) => f.kind !== "public_exposure").length + groupByPage(openFindings.filter((f) => f.kind === "public_exposure")).length;
-  const title = !done ? st.text : st.tone === "bad" && scan.state !== "partial" ? st.text : findings === null ? "Done" : open === 0 ? "Nothing found" : `${open} ${open === 1 ? "problem" : "problems"} found`;
+  const sites = new Set(groupByPage(openFindings.filter((f) => f.kind === "public_exposure")).map((g) => g.url)).size;
+  const risks = openFindings.filter((f) => f.kind !== "public_exposure").length;
+  const result = [
+    sites ? `Likely leaked on ${sites} ${sites === 1 ? "site" : "sites"}` : "",
+    risks ? `${risks} ${risks === 1 ? "risk" : "risks"} in your files` : "",
+  ].filter(Boolean).join(" · ");
+  const title = !done ? st.text : st.tone === "bad" && scan.state !== "partial" ? st.text : findings === null ? "Done" : result || "Nothing found";
+  const reused = (scan.public_discovery as { outcome?: string } | null | undefined)?.outcome === "reused_recent_results";
   const requested = (check: string) => scan.coverage.some((c) => c.scope === "check" && c.id === check && c.status !== "not_requested");
   const drafted = typeof scan.summary.actions_drafted === "number" ? scan.summary.actions_drafted : 0;
   const auto = scan.summary.automatic_discovery as AutoDiscovery | undefined;
@@ -184,7 +191,7 @@ export default function ScanDetail() {
       <Crumbs trail={[["/scan", "Scans"]]} />
       <div>
         <H1
-          sub={`${source(scan)} · ${relativeTime(scan.created_at)}${scan.recheck_of ? " · recheck" : ""}${scan.state === "partial" ? " · some checks didn't finish" : ""}`}
+          sub={`${source(scan)} · ${relativeTime(scan.created_at)}${scan.recheck_of ? " · recheck" : ""}${reused ? " · reused recent search results" : ""}${scan.state === "partial" ? " · some checks didn't finish" : ""}`}
           right={
             done ? (
               <>
@@ -247,7 +254,11 @@ export default function ScanDetail() {
           );
         })}
 
-      {done && workspace && scan.checks.includes("public_match") && auto?.status !== "unavailable" && <div className="mb-8"><SourcesPanel workspaceId={workspace.id} scan={scan} /></div>}
+      {done && workspace && scan.checks.includes("public_match") && auto?.status !== "unavailable" && (
+        <div className="mb-4">
+          <SourcesPanel workspaceId={workspace.id} scan={scan} />
+        </div>
+      )}
 
       {done && workspace && (
         <div className="mb-8">

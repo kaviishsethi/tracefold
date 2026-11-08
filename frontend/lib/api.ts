@@ -307,6 +307,7 @@ export const DISCOVERY_OUTCOME: Record<string, string> = {
   no_candidates: "Search returned no candidate pages. That's not a \"no leak\" result.",
   search_failed: "Search failed, so discovery is inconclusive.",
   snapshot_replay: "Replayed from a saved snapshot: no search or fetch ran in this scan.",
+  reused_recent_results: "These files were scanned recently, so their pages were checked again without new searches.",
 };
 
 export const FETCH_LABEL: Record<FetchStatus, string> = {
@@ -664,7 +665,11 @@ export function coverageNote(scan: Scan, kind: FindingKind, count: number): stri
     return "Automatic public search couldn't finish. See the incomplete checks below for the cause.";
   if (kind === "local_risk" && check.reason === "some_files_not_reviewed")
     return "Some files couldn't be read, so risk review is incomplete. See the skipped files below.";
-  if (check.status !== "complete") return `${kind === "public_exposure" ? "Public matching" : "Risk review"} ${check.status}: ${check.reason ?? "see coverage"}.`;
+  if (check.status !== "complete") {
+    if (count > 0) return null; // results are shown; the details live in "What didn't finish"
+    if (check.reason === "some_sources_failed_or_truncated") return "Some pages couldn't be read in full, and nothing matched in what was read.";
+    return `${kind === "public_exposure" ? "Public check" : "Risk review"} didn't finish (${(check.reason ?? "unknown").replaceAll("_", " ")}).`;
+  }
   if (count > 0) return null;
   if (kind === "public_exposure") return `No match in ${check.counts.sources_ok ?? 0} pages checked.`;
   return `No risks found in ${check.counts.files ?? 0} ${check.counts.files === 1 ? "file" : "files"}.`;

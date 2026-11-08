@@ -48,7 +48,15 @@ def validate_candidates(ctx: "ScanContext") -> tuple[list, dict[str, int]]:
                     rejected["invalid_public_span"] += 1
                     break
                 pol = ev.get("normalization", "text_v1")
-                lt = [t.norm for t in matcher.tokenize(doc.text[ev["location"]["start"]:ev["location"]["end"]], pol)]
+                local_span = doc.text[ev["location"]["start"]:ev["location"]["end"]]
+                if ev.get("similarity") is not None:
+                    # Edited copy: re-measure the overlap between the two cited spans instead of requiring identity.
+                    if matcher.containment(local_span, text[pub["start"]:pub["end"]]) < matcher.SIMILAR.min_containment:
+                        ok = False
+                        rejected["public_span_mismatch"] += 1
+                        break
+                    continue
+                lt = [t.norm for t in matcher.tokenize(local_span, pol)]
                 pt = [t.norm for t in matcher.tokenize(text[pub["start"]:pub["end"]], pol)]
                 if lt != pt or len(lt) != ev.get("matched_tokens"):
                     ok = False

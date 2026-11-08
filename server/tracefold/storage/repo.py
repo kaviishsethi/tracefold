@@ -475,6 +475,24 @@ class Repo:
             c.executemany("INSERT INTO site_rules(workspace_id,kind,value,created_at) VALUES (?,?,?,?)",
                           [(ws_id, "always", v, ts) for v in always] + [(ws_id, "never", v, ts) for v in never])
 
+    def remember_pages(self, ws_id: str, doc_key: str, rows: list[dict]) -> None:
+        ts = iso(now())
+        with self.db.tx() as c:
+            c.executemany(
+                "INSERT INTO page_memory(workspace_id,doc_key,url,provider,title,matched,last_seen_at) VALUES (?,?,?,?,?,?,?) "
+                "ON CONFLICT(workspace_id,doc_key,url) DO UPDATE SET provider=excluded.provider, title=excluded.title, "
+                "matched=excluded.matched, last_seen_at=excluded.last_seen_at",
+                [(ws_id, doc_key, r["url"], r.get("provider"), r.get("title"), int(bool(r.get("matched"))), ts) for r in rows])
+
+    def recall_pages(self, ws_id: str, doc_key: str) -> list[dict]:
+        return [dict(r) for r in self.db.conn().execute(
+            "SELECT url, provider, title, matched, last_seen_at FROM page_memory WHERE workspace_id=? AND doc_key=? "
+            "ORDER BY matched DESC, last_seen_at DESC", (ws_id, doc_key))]
+
+    def forget_pages(self, ws_id: str) -> None:
+        with self.db.tx() as c:
+            c.execute("DELETE FROM page_memory WHERE workspace_id=?", (ws_id,))
+
     def get_remediation_profile(self, ws_id: str) -> dict | None:
         return _row(self.db.conn().execute("SELECT * FROM remediation_profiles WHERE workspace_id=?", (ws_id,)).fetchone())
 
