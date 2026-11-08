@@ -2,5 +2,5 @@
 import os
 
 AWS_REGION = "us-east-1"
-aws_access_key_id = "AKIAQX7TFOLDDEMO2K4Z"
+aws_access_key_id = "AKIAQX7TFOLDRUNX2K4Z"
 BUCKET = os.environ.get("EXPORT_BUCKET", "northwind-exports")

@@ -1,6 +1,6 @@
-MOCK INTERNAL MEMO (fictional, for Tracefold testing). This is NOT a real Apple document. It is original filler plus two short passages from Tim Cook's September 2021 staff memo about leaks, as quoted verbatim in public news coverage; sources are listed in README.md.
+Written for Tracefold: original text around two short passages quoted verbatim in public news coverage of Tim Cook's September 2021 staff memo about leaks. Not an Apple document.
 
-# All-hands follow-up (mock)
+# All-hands follow-up
 
 Team,
 

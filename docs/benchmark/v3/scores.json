@@ -188,7 +188,7 @@
       "omitted_presets": []
     },
     {
-      "case_id": "mock_apple",
+      "case_id": "apple",
       "pack": "leak_watch",
       "scan_state": "completed",
       "third_party_found": "0/3",
@@ -202,7 +202,7 @@
       "omitted_presets": []
     },
     {
-      "case_id": "mock_apple",
+      "case_id": "apple",
       "pack": "product_leaks_group",
       "scan_state": "partial",
       "third_party_found": "0/3",
@@ -216,7 +216,7 @@
       "omitted_presets": []
     },
     {
-      "case_id": "mock_apple_memo",
+      "case_id": "apple_memo",
       "pack": "leak_watch",
       "scan_state": "completed",
       "third_party_found": "0/5",
@@ -232,7 +232,7 @@
       ]
     },
     {
-      "case_id": "mock_apple_memo",
+      "case_id": "apple_memo",
       "pack": "memo_group",
       "scan_state": "completed",
       "third_party_found": "0/5",
@@ -246,7 +246,7 @@
       "omitted_presets": []
     },
     {
-      "case_id": "mock_apple_product_alias",
+      "case_id": "apple_product_alias",
       "pack": "leak_watch",
       "scan_state": "completed",
       "third_party_found": "0/3",
@@ -260,7 +260,7 @@
       "omitted_presets": []
     },
     {
-      "case_id": "mock_apple_product_alias",
+      "case_id": "apple_product_alias",
       "pack": "product_leaks_group",
       "scan_state": "partial",
       "third_party_found": "0/3",
@@ -274,7 +274,7 @@
       "omitted_presets": []
     },
     {
-      "case_id": "mock_google",
+      "case_id": "google",
       "pack": "leak_watch",
       "scan_state": "partial",
       "third_party_found": "0/2",
@@ -288,7 +288,7 @@
       "omitted_presets": []
     },
     {
-      "case_id": "mock_google",
+      "case_id": "google",
       "pack": "product_leaks_group",
       "scan_state": "partial",
       "third_party_found": "0/2",
@@ -302,7 +302,7 @@
       "omitted_presets": []
     },
     {
-      "case_id": "mock_google_memo",
+      "case_id": "google_memo",
       "pack": "leak_watch",
       "scan_state": "partial",
       "third_party_found": "0/3",
@@ -316,7 +316,7 @@
       "omitted_presets": []
     },
     {
-      "case_id": "mock_google_memo",
+      "case_id": "google_memo",
       "pack": "memo_group",
       "scan_state": "completed",
       "third_party_found": "0/3",
@@ -330,7 +330,7 @@
       "omitted_presets": []
     },
     {
-      "case_id": "mock_google_product_alias",
+      "case_id": "google_product_alias",
       "pack": "leak_watch",
       "scan_state": "completed",
       "third_party_found": "0/2",
@@ -344,7 +344,7 @@
       "omitted_presets": []
     },
     {
-      "case_id": "mock_google_product_alias",
+      "case_id": "google_product_alias",
       "pack": "product_leaks_group",
       "scan_state": "partial",
       "third_party_found": "0/2",
@@ -358,7 +358,7 @@
       "omitted_presets": []
     },
     {
-      "case_id": "mock_samsung",
+      "case_id": "samsung",
       "pack": "leak_watch",
       "scan_state": "completed",
       "third_party_found": "0/2",
@@ -372,7 +372,7 @@
       "omitted_presets": []
     },
     {
-      "case_id": "mock_samsung",
+      "case_id": "samsung",
       "pack": "product_leaks_group",
       "scan_state": "partial",
       "third_party_found": "0/2",
@@ -386,7 +386,7 @@
       "omitted_presets": []
     },
     {
-      "case_id": "mock_samsung_memo",
+      "case_id": "samsung_memo",
       "pack": "leak_watch",
       "scan_state": "completed",
       "third_party_found": "0/3",
@@ -400,7 +400,7 @@
       "omitted_presets": []
     },
     {
-      "case_id": "mock_samsung_memo",
+      "case_id": "samsung_memo",
       "pack": "memo_group",
       "scan_state": "completed",
       "third_party_found": "0/3",
@@ -414,7 +414,7 @@
       "omitted_presets": []
     },
     {
-      "case_id": "mock_samsung_product_alias",
+      "case_id": "samsung_product_alias",
       "pack": "leak_watch",
       "scan_state": "completed",
       "third_party_found": "0/2",
@@ -428,7 +428,7 @@
       "omitted_presets": []
     },
     {
-      "case_id": "mock_samsung_product_alias",
+      "case_id": "samsung_product_alias",
       "pack": "product_leaks_group",
       "scan_state": "partial",
       "third_party_found": "0/2",

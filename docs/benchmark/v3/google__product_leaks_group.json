@@ -1,6 +1,6 @@
 {
-  "case_id": "mock_google",
-  "label": "mock_leak_reconstruction",
+  "case_id": "google",
+  "label": "leak_reconstruction",
   "pack": "product_leaks_group",
   "template_version": "company_queries_v3",
   "searches": [

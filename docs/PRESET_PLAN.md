@@ -1,7 +1,7 @@
 # Discovery presets v3: plan
 
 Status: steps 1–6 implemented (`server/tracefold/discovery/presets.py`, benchmark in `docs/benchmark/`). Live benchmark (7 cases, 30 scans): 4 of 14 presets benchmarked; see docs/benchmark/README.md. Builds on [COMPANY_DISCOVERY_PLAN.md](COMPANY_DISCOVERY_PLAN.md) and the five live runs in
-[demo-pairs/DISCOVERY_RESULTS.md](demo-pairs/DISCOVERY_RESULTS.md).
+[sample-documents/DISCOVERY_RESULTS.md](sample-documents/DISCOVERY_RESULTS.md).
 
 Goal: at least 10 fixed presets that reliably return third-party public copies of a company's material, measured
 against a benchmark, without weakening the privacy rule that queries come only from the approved public identity.

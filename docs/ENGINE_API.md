@@ -2,7 +2,7 @@
 
 For whoever builds the upload app or the MCP adapter. The MCP adapter now exists in [`adapters/mcp/`](../adapters/mcp/README.md) and follows the tool mapping below. The engine is implemented in [`server/`](../server/README.md);
 the machine-readable contract is [`server/openapi.json`](../server/openapi.json) (regenerate with
-`uv run tracefold export-openapi openapi.json`). [`server/examples/demo_flow.py`](../server/examples/demo_flow.py)
+`uv run tracefold export-openapi openapi.json`). [`server/examples/walkthrough_flow.py`](../server/examples/walkthrough_flow.py)
 calls every endpoint and is exercised by the test suite against a real `tracefold serve` process.
 
 Clients must not parse files, call a model, assign severity, or keep their own findings. Render what the engine
@@ -138,9 +138,9 @@ Approval errors (409): `remediation_profile_missing`, `no_takedown_contact`, `aw
 Operator setup (CLI only):
 
 ```bash
-uv run tracefold set-remediation-profile ws_demo --company "Northwind Relay, Inc." --reply-to legal@northwind.example
-uv run tracefold add-takedown-contact ws_demo forum.example --email abuse@forum.example
-uv run tracefold add-takedown-contact ws_demo pastes.example --form-url https://pastes.example/legal/removal
+uv run tracefold set-remediation-profile ws_main --company "Northwind Relay, Inc." --reply-to legal@northwind.example
+uv run tracefold add-takedown-contact ws_main forum.example --email abuse@forum.example
+uv run tracefold add-takedown-contact ws_main pastes.example --form-url https://pastes.example/legal/removal
 ```
 
 There is no built-in directory of host contacts: an operator adds each one. `GET /capabilities` reports

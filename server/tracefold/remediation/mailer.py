@@ -2,7 +2,7 @@
 
 Two transports:
 - ``outbox`` (default): writes the message as an .eml file under ``<data>/outbox``. Nothing leaves the machine.
-  Use it for demos and tests, or to send from your own mail client.
+  Use it for walkthroughs and tests, or to send from your own mail client.
 - ``resend``: sends through the Resend HTTP API via the engine gateway. Needs ``RESEND_API_KEY`` and
   ``TRACEFOLD_MAIL_FROM`` (a sender on a domain verified with Resend).
 """

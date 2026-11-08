@@ -3,7 +3,7 @@
 It plays both clients against one engine: the upload app (existing material + public sources) and the
 MCP-style assistant (workspace change → findings → fix → recheck). Usage against a running server:
 
-    uv run python examples/demo_flow.py --base http://127.0.0.1:8787 --workspace ws_demo \
+    uv run python examples/walkthrough_flow.py --base http://127.0.0.1:8787 --workspace ws_main \
         --app-token "$APP_TOKEN" --mcp-token "$MCP_TOKEN" --workspace-root /path/to/registered/root
 
 Everything it writes is synthetic fixture content.
@@ -41,7 +41,7 @@ def wait(c: httpx.Client, url: str, h: dict, timeout: float = 60) -> dict:
     raise TimeoutError(url)
 
 
-def run(c: httpx.Client, ws: str, app_token: str, mcp_token: str, root: Path, manifest: str = "sources_demo") -> dict:
+def run(c: httpx.Client, ws: str, app_token: str, mcp_token: str, root: Path, manifest: str = "sources_main") -> dict:
     app = {"Authorization": f"Bearer {app_token}"}
     mcp = {"Authorization": f"Bearer {mcp_token}"}
     out: dict = {}
@@ -55,7 +55,7 @@ def run(c: httpx.Client, ws: str, app_token: str, mcp_token: str, root: Path, ma
     files = [("file", ("roadmap.md", (FIXTURES / "roadmap.md").read_bytes(), "text/markdown")),
              ("file", ("same_topic.md", (FIXTURES / "same_topic.md").read_bytes(), "text/markdown"))]
     up = c.post(f"{base}/uploads", headers=app, files=files).raise_for_status().json()
-    acc = c.post(f"{base}/scans", headers={**app, "Idempotency-Key": "demo-upload-1"}, json={
+    acc = c.post(f"{base}/scans", headers={**app, "Idempotency-Key": "upload-1"}, json={
         "input_id": up["input_id"], "checks": ["public_match", "local_risk"],
         "public_sources": {"manifest_id": manifest, "mode": "refresh"}}).raise_for_status().json()
     s1 = wait(c, acc["status_url"], app)
@@ -107,7 +107,7 @@ def main() -> None:
     ap.add_argument("--app-token", required=True)
     ap.add_argument("--mcp-token", required=True)
     ap.add_argument("--workspace-root", required=True)
-    ap.add_argument("--manifest", default="sources_demo")
+    ap.add_argument("--manifest", default="sources_main")
     a = ap.parse_args()
     with httpx.Client(base_url=a.base, timeout=30) as c:
         print(json.dumps(run(c, a.workspace, a.app_token, a.mcp_token, Path(a.workspace_root), a.manifest), indent=2))

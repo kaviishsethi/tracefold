@@ -54,7 +54,7 @@ def engine(tmp_path_factory) -> Engine:
     data, root = tmp / "data", tmp / "ws"
     root.mkdir()
     _git(root, "init", "-q")
-    (root / "README.md").write_text("demo workspace\n")
+    (root / "README.md").write_text("test workspace\n")
     _git(root, "add", "README.md")
     _git(root, "commit", "-qm", "init")
     env = {**os.environ, "TRACEFOLD_DATA": str(data), "TRACEFOLD_FIXTURES": str(FIXTURES),
@@ -65,18 +65,18 @@ def engine(tmp_path_factory) -> Engine:
         return subprocess.run([*cli, *a], env=env, capture_output=True, text=True, check=True, cwd=SERVER).stdout.strip()
 
     run("init")
-    run("add-workspace", "ws_demo", "--name", "Demo", "--root", str(root))
+    run("add-workspace", "ws_main", "--name", "Main", "--root", str(root))
     run("add-workspace", "ws_other", "--name", "Other")
     tokens = {
-        "mcp": run("add-client", "mcp-adapter", "--workspace", "ws_demo", "--caps", "submit,read,read_evidence,recheck,cancel"),
-        "cloud": run("add-client", "cloud-host", "--workspace", "ws_demo", "--caps", "submit,read,recheck",
+        "mcp": run("add-client", "mcp-adapter", "--workspace", "ws_main", "--caps", "submit,read,read_evidence,recheck,cancel"),
+        "cloud": run("add-client", "cloud-host", "--workspace", "ws_main", "--caps", "submit,read,recheck",
                      "--disclosure", "minimal"),
-        "app": run("add-client", "upload-app", "--workspace", "ws_demo"),
+        "app": run("add-client", "upload-app", "--workspace", "ws_main"),
     }
     manifest = tmp / "m.json"
     manifest.write_text(json.dumps([{"source_id": "forum", "url": "https://forum.example/t/123", "provider": "fixture",
                                      "fixture_path": "public/forum_post.html"}]))
-    run("add-manifest", "ws_demo", "sources_demo", str(manifest))
+    run("add-manifest", "ws_main", "sources_main", str(manifest))
 
     port = _free_port()
     proc = subprocess.Popen([*cli, "serve", "--port", str(port)], env=env, cwd=SERVER,

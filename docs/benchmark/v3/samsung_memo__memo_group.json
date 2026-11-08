@@ -1,7 +1,7 @@
 {
-  "case_id": "mock_samsung_product_alias",
-  "label": "mock_leak_reconstruction",
-  "pack": "leak_watch",
+  "case_id": "samsung_memo",
+  "label": "leak_reconstruction",
+  "pack": "memo_group",
   "template_version": "company_queries_v3",
   "searches": [
     {
@@ -9,7 +9,7 @@
       "template_id": "leak_news",
       "provider": "exa",
       "query": "news article quoting a leaked internal memo from Samsung Electronics",
-      "num_results": 5,
+      "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
@@ -38,7 +38,7 @@
       "template_id": "leak_news",
       "provider": "tavily",
       "query": "\"Samsung Electronics\" leaked internal memo",
-      "num_results": 5,
+      "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
@@ -66,8 +66,8 @@
       "query_id": "q3",
       "template_id": "leak_news_alias",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Galaxy S27 Ultra",
-      "num_results": 5,
+      "query": "news article quoting a leaked internal memo from Samsung",
+      "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
@@ -95,8 +95,8 @@
       "query_id": "q4",
       "template_id": "leak_news_alias",
       "provider": "tavily",
-      "query": "\"Galaxy S27 Ultra\" leaked internal memo",
-      "num_results": 5,
+      "query": "\"Samsung\" leaked internal memo",
+      "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
@@ -119,13 +119,71 @@
       "topic": "news",
       "exact_match": true,
       "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Samsung Electronics employees",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "samsung.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Samsung Electronics\" email to employees full text",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "samsung.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
     }
   ],
   "omitted_presets": [],
   "scan_state": "completed",
-  "elapsed_seconds": 5.1,
-  "provider_requests": 24,
-  "response_bytes": 197977,
+  "elapsed_seconds": 5.6,
+  "provider_requests": 21,
+  "response_bytes": 134310,
   "provider_queries": [
     {
       "query_id": "q1",
@@ -134,9 +192,9 @@
       "query": "news article quoting a leaked internal memo from Samsung Electronics",
       "status": "ok",
       "error": null,
-      "returned": 5,
+      "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:50:55.333872Z"
+      "searched_at": "2026-11-08T01:53:48.223870Z"
     },
     {
       "query_id": "q2",
@@ -145,31 +203,53 @@
       "query": "\"Samsung Electronics\" leaked internal memo",
       "status": "ok",
       "error": null,
-      "returned": 5,
+      "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:50:55.273753Z"
+      "searched_at": "2026-11-08T01:53:48.223435Z"
     },
     {
       "query_id": "q3",
       "template_id": "leak_news_alias",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Galaxy S27 Ultra",
+      "query": "news article quoting a leaked internal memo from Samsung",
       "status": "ok",
       "error": null,
-      "returned": 5,
+      "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:50:57.080238Z"
+      "searched_at": "2026-11-08T01:53:51.918844Z"
     },
     {
       "query_id": "q4",
       "template_id": "leak_news_alias",
       "provider": "tavily",
-      "query": "\"Galaxy S27 Ultra\" leaked internal memo",
+      "query": "\"Samsung\" leaked internal memo",
       "status": "ok",
       "error": null,
-      "returned": 5,
+      "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:50:57.822973Z"
+      "searched_at": "2026-11-08T01:53:48.347491Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Samsung Electronics employees",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:53:50.364274Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Samsung Electronics\" email to employees full text",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:53:51.538346Z"
     }
   ],
   "sources": [
@@ -185,6 +265,13 @@
           "query_id": "q1",
           "provider": "exa",
           "rank": 1,
+          "title": "Samsung bans use of ChatGPT for mobile, appliances staff - The Business Times",
+          "returned_url": "https://www.businesstimes.com.sg/companies-markets/samsung-bans-use-chatgpt-mobile-appliances-staff"
+        },
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
           "title": "Samsung bans use of ChatGPT for mobile, appliances staff - The Business Times",
           "returned_url": "https://www.businesstimes.com.sg/companies-markets/samsung-bans-use-chatgpt-mobile-appliances-staff"
         }
@@ -208,12 +295,12 @@
           "returned_url": "https://www.theverge.com/2023/5/2/23707796/samsung-ban-chatgpt-generative-ai-bing-bard-employees-security-concerns"
         }
       ],
-      "mentions_company": false,
+      "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_fe09c7155a22147defe8",
-      "url": "https://m.koreaherald.com/article/3118116",
+      "source_id": "d_c090c477d9a1f1973a47",
+      "url": "https://www.businessinsider.com/samsung-chatgpt-bard-data-leak-bans-employee-use-report-2023-5",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -223,46 +310,8 @@
           "query_id": "q1",
           "provider": "exa",
           "rank": 3,
-          "title": "Samsung bans AI chatbots after leak - The Korea Herald",
-          "returned_url": "https://m.koreaherald.com/article/3118116"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_c3ba4852bca67aa8012b",
-      "url": "https://www.theregister.com/software/2023/05/02/samsung-to-ban-staff-from-using-chatgpt-after-code-leak/655856",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q1",
-          "provider": "exa",
-          "rank": 4,
-          "title": "Samsung to ban staff from using ChatGPT after 'code leak'",
-          "returned_url": "https://www.theregister.com/software/2023/05/02/samsung-to-ban-staff-from-using-chatgpt-after-code-leak/655856"
-        }
-      ],
-      "mentions_company": false,
-      "matches": []
-    },
-    {
-      "source_id": "d_71a6fcb3581acbdd5149",
-      "url": "https://www.smartcompany.com.au/technology/samsung-staff-memo-leaks-ahead-of-weak-second-quarter-results/",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q1",
-          "provider": "exa",
-          "rank": 5,
-          "title": "Samsung staff memo leaks ahead of weak second quarter results - SmartCompany",
-          "returned_url": "https://www.smartcompany.com.au/technology/samsung-staff-memo-leaks-ahead-of-weak-second-quarter-results/"
+          "title": "Samsung Bans Staff From Using AI Like ChatGPT, Bard After Data Leak - Business Insider",
+          "returned_url": "https://www.businessinsider.com/samsung-chatgpt-bard-data-leak-bans-employee-use-report-2023-5"
         }
       ],
       "mentions_company": true,
@@ -282,6 +331,13 @@
           "rank": 1,
           "title": "Samsung ChatGPT Source Code Leak 2023: Shadow AI",
           "returned_url": "https://nhimg.org/samsung-chatgpt-source-code-leak-2023-shadow-ai"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Samsung ChatGPT Source Code Leak 2023: Shadow AI",
+          "returned_url": "https://nhimg.org/samsung-chatgpt-source-code-leak-2023-shadow-ai"
         }
       ],
       "mentions_company": true,
@@ -297,6 +353,13 @@
       "origins": [
         {
           "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Real AI data leak examples and what would have stopped them",
+          "returned_url": "https://jazz.security/dlp-explained/dlp-basics/real-examples-of-ai-data-leaks"
+        },
+        {
+          "query_id": "q4",
           "provider": "tavily",
           "rank": 2,
           "title": "Real AI data leak examples and what would have stopped them",
@@ -326,46 +389,8 @@
       "matches": []
     },
     {
-      "source_id": "d_6df2a6db559b5163bb39",
-      "url": "https://simplywall.st/stocks/kr/tech/kose-a005930/samsung-electronics-shares/news/what-does-samsung-electronics-kosea005930-dram-leak-case-mea",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q2",
-          "provider": "tavily",
-          "rank": 4,
-          "title": "What Does Samsung Electronics (KOSE:A005930) DRAM Leak Case Mean For Investors? - Simply Wall St News",
-          "returned_url": "https://simplywall.st/stocks/kr/tech/kose-a005930/samsung-electronics-shares/news/what-does-samsung-electronics-kosea005930-dram-leak-case-mea"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_d828ac644698eb302080",
-      "url": "https://www.cnbc.com/2026/11/05/semiconductor-china-korea-talents-rivalry.html",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q2",
-          "provider": "tavily",
-          "rank": 5,
-          "title": "Inside the chip talent war: Trade secrets and rising Chinese rivals",
-          "returned_url": "https://www.cnbc.com/2026/11/05/semiconductor-china-korea-talents-rivalry.html"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_662e72b18f4333d94dd3",
-      "url": "https://www.notebookcheck.net/Samsung-moves-to-prevent-leaks-for-Galaxy-S27-lineup.1230141.0.html",
+      "source_id": "d_9951db159aeb8c2bad11",
+      "url": "https://www.bloomberg.com/news/articles/2023-05-02/samsung-bans-chatgpt-and-other-generative-ai-use-by-staff-after-leak?srnd=technology-vp",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -375,16 +400,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 1,
-          "title": "Samsung moves to prevent leaks for Galaxy S27 lineup",
-          "returned_url": "https://www.notebookcheck.net/Samsung-moves-to-prevent-leaks-for-Galaxy-S27-lineup.1230141.0.html"
+          "title": "Samsung Bans ChatGPT, Google Bard, Other Generative AI Use by Staff After Leak - Bloomberg",
+          "returned_url": "https://www.bloomberg.com/news/articles/2023-05-02/samsung-bans-chatgpt-and-other-generative-ai-use-by-staff-after-leak?srnd=technology-vp"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_935a01b260eec62e7c85",
-      "url": "https://www.androidauthority.com/samsung-secure-chat-internal-leaks-3642032/",
+      "source_id": "d_71a6fcb3581acbdd5149",
+      "url": "https://www.smartcompany.com.au/technology/samsung-staff-memo-leaks-ahead-of-weak-second-quarter-results/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -394,73 +419,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 2,
-          "title": "Love Samsung leaks? They may dry up with the Galaxy S27",
-          "returned_url": "https://www.androidauthority.com/samsung-secure-chat-internal-leaks-3642032/"
+          "title": "Samsung staff memo leaks ahead of weak second quarter results - SmartCompany",
+          "returned_url": "https://www.smartcompany.com.au/technology/samsung-staff-memo-leaks-ahead-of-weak-second-quarter-results/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_fd2bc7c14a8dcb7c12af",
-      "url": "https://www.trustedreviews.com/news/samsungs-cracking-down-on-galaxy-leaks-ahead-of-foldable-launch-later-this-year",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q3",
-          "provider": "exa",
-          "rank": 3,
-          "title": "Samsung\u2019s cracking down on Galaxy leaks ahead of foldable launch later this year - Trusted Reviews",
-          "returned_url": "https://www.trustedreviews.com/news/samsungs-cracking-down-on-galaxy-leaks-ahead-of-foldable-launch-later-this-year"
-        }
-      ],
-      "mentions_company": false,
-      "matches": []
-    },
-    {
-      "source_id": "d_848f9ea5038db8db3276",
-      "url": "https://www.gsmarena.com/samsung_is_building_exynos_2700powered_galaxy_s27_ultras_insiders_claim-news-74450.php",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q3",
-          "provider": "exa",
-          "rank": 4,
-          "title": "Samsung is building Exynos 2700-powered Galaxy S27 Ultras, insiders claim - GSMArena.com news",
-          "returned_url": "https://www.gsmarena.com/samsung_is_building_exynos_2700powered_galaxy_s27_ultras_insiders_claim-news-74450.php"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_5f81c970d125fa8303d5",
-      "url": "https://en.etnews.com/20260803200005",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q3",
-          "provider": "exa",
-          "rank": 5,
-          "title": "Galaxy S27 Series to Feature Triple Rear Cameras Across All Models - Electronic Times",
-          "returned_url": "https://en.etnews.com/20260803200005"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_a79eee84906206d02824",
-      "url": "https://hothardware.com/news/samsung-galaxy-s27-ultra-rumor-roundup-all-the-renders-specs-and-leaks",
+      "source_id": "d_ab8c46cf6895c6748b97",
+      "url": "https://www.echomark.com/post/this-week-in-leaks-october-26-2026",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -468,91 +436,129 @@
       "origins": [
         {
           "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "This Week in Leaks: October 26, 2026",
+          "returned_url": "https://www.echomark.com/post/this-week-in-leaks-october-26-2026"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8969c7b96fc7f8198cdc",
+      "url": "https://www.engadget.com/2012-08-27-samsung-issues-memo-to-employees-after-loss-to-apple.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Samsung issues memo to employees after loss to Apple",
+          "returned_url": "https://www.engadget.com/2012-08-27-samsung-issues-memo-to-employees-after-loss-to-apple.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c6e73957319a6f4d973a",
+      "url": "https://www.koreajoongangdaily.com/business/samsungs-koh-warns-employees-about-leaks/10750463",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Samsung\u2019s Koh warns employees about leaks",
+          "returned_url": "https://www.koreajoongangdaily.com/business/samsungs-koh-warns-employees-about-leaks/10750463"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_06ac2d4e9dbef2be2625",
+      "url": "https://en.fnnews.com/news/202605271441154096",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "\"We Apologize Again to the Public, Shareholders and Customers\": Samsung Executives Pledge 5 Trillion Won in Social Investment Over Five Years [Full Text] - First-Class Business Newspaper Financial News",
+          "returned_url": "https://en.fnnews.com/news/202605271441154096"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_51ec870cc0d3c5044ab6",
+      "url": "https://samsung-electronics.pissedconsumer.com/customer-service.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
           "provider": "tavily",
           "rank": 1,
-          "title": "Samsung Galaxy S27 Ultra Rumor Roundup: All The Renders, Specs And Leaks",
-          "returned_url": "https://hothardware.com/news/samsung-galaxy-s27-ultra-rumor-roundup-all-the-renders-specs-and-leaks"
+          "title": "Samsung Electronics Customer Service Phone Number 1-800-726-7864, Email, Help Center",
+          "returned_url": "https://samsung-electronics.pissedconsumer.com/customer-service.html"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_9513b7bd466be2a5e353",
-      "url": "https://mashable.com/tech/samsung-galaxy-s27-ultra-all-we-know",
+      "source_id": "d_0432cf351044b15e56f5",
+      "url": "https://openai.com/index/samsung-electronics-chatgpt-codex-deployment",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
       "truncated": false,
       "origins": [
         {
-          "query_id": "q4",
+          "query_id": "q6",
           "provider": "tavily",
           "rank": 2,
-          "title": "Samsung Galaxy S27 Ultra rumors: Pricing, features, and leaks | Mashable",
-          "returned_url": "https://mashable.com/tech/samsung-galaxy-s27-ultra-all-we-know"
+          "title": "Samsung Electronics brings ChatGPT and Codex to employees | OpenAI",
+          "returned_url": "https://openai.com/index/samsung-electronics-chatgpt-codex-deployment"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_31273713dfed74551f64",
-      "url": "https://samsung.gadgethacks.com/news/samsung-galaxy-s27-ultra-rumors-battery-camera-chip",
+      "source_id": "d_cf6ab07c5aa776a342b5",
+      "url": "https://www.legistorm.com/organization/summary/58419/Samsung_Electronics_America_Inc_.html",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
       "truncated": false,
       "origins": [
         {
-          "query_id": "q4",
+          "query_id": "q6",
           "provider": "tavily",
           "rank": 3,
-          "title": "Samsung Galaxy S27 Ultra Rumors: Battery, Camera, Chip << Samsung :: Gadget Hacks",
-          "returned_url": "https://samsung.gadgethacks.com/news/samsung-galaxy-s27-ultra-rumors-battery-camera-chip"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_30a3940a3c0f94dd968d",
-      "url": "https://tech.yahoo.com/phones/articles/whats-difference-between-galaxy-s27-083000155.html",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q4",
-          "provider": "tavily",
-          "rank": 4,
-          "title": "What's the difference between Galaxy S27 Ultra and S27 Pro? \u2014 5 key differences (and 3 similarities) based on the leaks",
-          "returned_url": "https://tech.yahoo.com/phones/articles/whats-difference-between-galaxy-s27-083000155.html"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_007f6482674fcae9f4ee",
-      "url": "https://nokiapoweruser.com/galaxy-s27-ultra-redesign-horizontal-camera-bar-leak",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q4",
-          "provider": "tavily",
-          "rank": 5,
-          "title": "Samsung Galaxy S27 Ultra Redesign Leaks: New Camera Bar & Specs- NPowerUser",
-          "returned_url": "https://nokiapoweruser.com/galaxy-s27-ultra-redesign-horizontal-camera-bar-leak"
+          "title": "Samsung Electronics America Inc. - Summary from LegiStorm",
+          "returned_url": "https://www.legistorm.com/organization/summary/58419/Samsung_Electronics_America_Inc_.html"
         }
       ],
       "mentions_company": true,
       "matches": []
     }
   ],
-  "recorded_at": "2026-11-08T01:50:59.890410Z"
+  "recorded_at": "2026-11-08T01:53:53.564731Z"
 }

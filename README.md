@@ -15,7 +15,7 @@ The strict-private deployment keeps the scan server and Ollama inside the truste
 - [Shared engine implementation plan — build this first](docs/SHARED_ENGINE_PLAN.md)
 - [Company-name discovery: search, fetch, and local comparison](docs/COMPANY_DISCOVERY_PLAN.md)
 - [Engine API handoff for the app and MCP adapter](docs/ENGINE_API.md)
-- [Complete product, architecture, demo, and track plan](PLAN.md)
+- [Complete product, architecture, walkthrough, and track plan](PLAN.md)
 - [Original retrieval/privacy Excalidraw diagram (predates MCP)](docs/architecture.excalidraw) — download and open in [Excalidraw](https://excalidraw.com).
 - [Original architecture preview](docs/architecture.svg)
 - [Risk-review workflow informed by 0sec](research/0sec-risk-review.md)
@@ -23,7 +23,7 @@ The strict-private deployment keeps the scan server and Ollama inside the truste
 
 The [current two-experience architecture](PLAN.md#3-proposed-architecture) is in the plan. The original Excalidraw assets remain a reference for the retrieval boundary.
 
-## The first demo
+## The first walkthrough
 
 1. Upload a reference file through the platform and choose monitored public sources.
 2. Refresh a source through Exa or Tavily and show computed matching passages with provenance.
@@ -31,7 +31,7 @@ The [current two-experience architecture](PLAN.md#3-proposed-architecture) is in
 4. Review a suggested correction, apply it through the editor workflow, and recheck through MCP.
 5. Show the same updated finding in the platform, the still-open public exposure, and the outbound ledger.
 
-MCP is a first-class entry point. Automatic file watching and editor notifications are optional follow-ons; the first demo shows explicit assistant tool calls. The engine, the MCP adapter and the upload platform are implemented. The adapter has not yet been run inside a local-model MCP host, which the strict-private demo requires.
+MCP is a first-class entry point. Automatic file watching and editor notifications are optional follow-ons; the first walkthrough shows explicit assistant tool calls. The engine, the MCP adapter and the upload platform are implemented. The adapter has not yet been run inside a local-model MCP host, which the strict-private walkthrough requires.
 
 The result is **“matching content found publicly”** or **“no match in the sources checked,”** never a blanket assurance that a company is safe. A separate **Potential risks in your files** section provides preventive feedback even when no public match is found. These are review findings, not proof of a leak or a comprehensive security audit.
 

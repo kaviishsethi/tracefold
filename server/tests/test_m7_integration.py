@@ -18,7 +18,7 @@ from .conftest import FIXTURES, fx
 
 SERVER = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(SERVER / "examples"))
-import demo_flow  # noqa: E402
+import walkthrough_flow  # noqa: E402
 
 ROUTES = {
     ("get", "/v1/health"), ("get", "/v1/capabilities"), ("get", "/v1/workspaces"),
@@ -60,7 +60,7 @@ def test_openapi_covers_contract_and_is_current(env):
 
 def test_documented_flow_in_process(make_env):
     env = make_env(start_runner=True)
-    out = demo_flow.run(env.client, "ws_a", env.tokens["app"], env.tokens["mcp"], env.root)
+    out = walkthrough_flow.run(env.client, "ws_a", env.tokens["app"], env.tokens["mcp"], env.root)
     check_flow(out)
     assert out["workspaces"] == ["ws_a"]
     # fixture provider makes no network requests; only the (failed) loopback model probe is recorded
@@ -96,14 +96,14 @@ def test_cli_provisioning_and_real_server(tmp_path):
     def run(*args):
         return subprocess.run([*cli, *args], env=env, capture_output=True, text=True, check=True, cwd=SERVER).stdout.strip()
     run("init")
-    run("add-workspace", "ws_demo", "--name", "Demo", "--root", str(root))
-    app_token = run("add-client", "upload-app", "--workspace", "ws_demo")
-    mcp_token = run("add-client", "mcp-adapter", "--workspace", "ws_demo",
+    run("add-workspace", "ws_main", "--name", "Main", "--root", str(root))
+    app_token = run("add-client", "upload-app", "--workspace", "ws_main")
+    mcp_token = run("add-client", "mcp-adapter", "--workspace", "ws_main",
                     "--caps", "submit,read,read_evidence,recheck,cancel")
     manifest = tmp_path / "m.json"
     manifest.write_text(json.dumps([{"source_id": "forum", "url": "https://forum.example/t/123", "provider": "fixture",
                                      "fixture_path": "public/forum_post.html"}]))
-    run("add-manifest", "ws_demo", "sources_demo", str(manifest))
+    run("add-manifest", "ws_main", "sources_main", str(manifest))
     assert app_token.startswith("tf_") and app_token != mcp_token
     assert app_token not in (data / "tracefold.db").read_bytes().decode("latin-1")  # only hashes are stored
 
@@ -119,10 +119,10 @@ def test_cli_provisioning_and_real_server(tmp_path):
             except httpx.HTTPError:
                 time.sleep(0.1)
         with httpx.Client(base_url=base, timeout=30) as c:
-            out = demo_flow.run(c, "ws_demo", app_token, mcp_token, root)
+            out = walkthrough_flow.run(c, "ws_main", app_token, mcp_token, root)
             check_flow(out)
             # the MCP client was provisioned without 'review': review is denied for it
-            r = c.patch(f"/v1/workspaces/ws_demo/findings/{out['public_finding']['id']}/review",
+            r = c.patch(f"/v1/workspaces/ws_main/findings/{out['public_finding']['id']}/review",
                         headers={"Authorization": f"Bearer {mcp_token}"}, json={"state": "acknowledged", "expected_version": 2})
             assert r.status_code == 403
             # Host header outside the loopback allowlist is rejected (DNS-rebinding guard)

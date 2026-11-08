@@ -45,7 +45,7 @@ code,.mono{font-family:var(--mono)}
 .sb-item{display:flex;align-items:center;gap:8px}
 .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 var(--green);animation:pulse 2.4s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(63,220,152,.5)}70%{box-shadow:0 0 0 7px rgba(63,220,152,0)}100%{box-shadow:0 0 0 0 rgba(63,220,152,0)}}
-.demo{padding:3px 8px;border:1px solid var(--amber);color:var(--amber);border-radius:3px;font-size:11px;letter-spacing:.08em}
+.proto{padding:3px 8px;border:1px solid var(--amber);color:var(--amber);border-radius:3px;font-size:11px;letter-spacing:.08em}
 main{flex:1;width:100%;max-width:1320px;margin:0 auto;padding:28px;outline:none;
 background-image:linear-gradient(rgba(79,214,232,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(79,214,232,.025) 1px,transparent 1px);background-size:32px 32px}
 

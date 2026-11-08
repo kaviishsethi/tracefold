@@ -14,14 +14,14 @@ import { Button, ErrorNote, cx } from "@/components/ui";
 const AGENT_SCAN =
   "Call the tracefold tool scan_changes for this repository (changes since HEAD, including untracked files). When it finishes, call get_findings with its scan_id, fix each local risk and call recheck_fix for it, and summarize the outcome. Don't print or test any secret value you see.";
 
-/** Ready-made documents from docs/demo-pairs, served from public/examples, one per company. Each was checked end to end with automatic search. */
+/** Ready-made documents from docs/sample-documents, served from public/examples, one per company. Each was checked end to end with automatic search. */
 const EXAMPLES = [
   {
     company: "Apple",
-    file: "apple-mock-internal-memo.md",
-    doc: "Mock internal memo",
-    kind: "Simulated leak",
-    shows: "Invented memo around two sentences from Apple's real 2021 leaked memo. Search finds the press coverage that quoted them.",
+    file: "apple-internal-memo.md",
+    doc: "Staff memo on leaks",
+    kind: "Internal memo",
+    shows: "Includes two sentences from Apple's 2021 staff memo that the press quoted word for word. Search finds that coverage.",
   },
   {
     company: "CivicActions",
@@ -340,7 +340,7 @@ export default function ScanPage() {
           })}
         </div>
         <p className="mt-2 text-xs text-faint">
-          The CivicActions and PostHog documents are unchanged public company documents, used under their licenses; neither company endorses Tracefold. The Apple memo is a simulation, not an Apple document.
+          The CivicActions and PostHog documents are unchanged public company documents, used under their licenses; neither company endorses Tracefold.
         </p>
       </section>
 

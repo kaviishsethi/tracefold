@@ -24,7 +24,7 @@ def fx(name: str) -> bytes:
     return (FIXTURES / "private" / name).read_bytes()
 
 
-PUBLIC = {"manifest_id": "sources_demo", "mode": "refresh"}
+PUBLIC = {"manifest_id": "sources_main", "mode": "refresh"}
 
 
 class Env:
@@ -99,9 +99,9 @@ def make_env(tmp_path):
             kw["data_dir"] = tmp_path / f"data{len(made)}"
         eng = Engine(make_settings(tmp_path, **kw))
         if eng.repo.get_workspace("ws_a") is None:
-            eng.add_workspace("ws_a", "Demo workspace", str(root))
+            eng.add_workspace("ws_a", "Test workspace", str(root))
             eng.add_workspace("ws_b", "Other workspace", None)
-            eng.add_manifest("ws_a", "sources_demo", [
+            eng.add_manifest("ws_a", "sources_main", [
                 {"source_id": "forum", "url": "https://forum.example/t/123", "provider": "fixture",
                  "fixture_path": "public/forum_post.html"},
                 {"source_id": "vendor_blog", "url": "https://vendor.example/blog/streaming", "provider": "fixture",

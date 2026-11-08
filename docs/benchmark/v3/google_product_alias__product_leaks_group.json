@@ -1,6 +1,6 @@
 {
-  "case_id": "mock_samsung_product_alias",
-  "label": "mock_leak_reconstruction",
+  "case_id": "google_product_alias",
+  "label": "leak_reconstruction",
   "pack": "product_leaks_group",
   "template_version": "company_queries_v3",
   "searches": [
@@ -8,7 +8,7 @@
       "query_id": "q1",
       "template_id": "product_leaks",
       "provider": "exa",
-      "query": "leaked specifications of an upcoming Galaxy S27 Ultra product",
+      "query": "leaked specifications of an upcoming Pixel 11 product",
       "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
@@ -17,10 +17,10 @@
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
+        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
-        "samsung.com",
         "tavily.com",
         "trustpilot.com",
         "twitter.com",
@@ -37,7 +37,7 @@
       "query_id": "q2",
       "template_id": "product_leaks",
       "provider": "tavily",
-      "query": "\"Galaxy S27 Ultra\" leaked specs",
+      "query": "\"Pixel 11\" leaked specs",
       "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
@@ -46,10 +46,10 @@
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
+        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
-        "samsung.com",
         "tavily.com",
         "trustpilot.com",
         "twitter.com",
@@ -66,7 +66,7 @@
       "query_id": "q3",
       "template_id": "leak_news",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Samsung Electronics",
+      "query": "news article quoting a leaked internal memo from Google",
       "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
@@ -75,10 +75,10 @@
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
+        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
-        "samsung.com",
         "tavily.com",
         "trustpilot.com",
         "twitter.com",
@@ -95,7 +95,7 @@
       "query_id": "q4",
       "template_id": "leak_news",
       "provider": "tavily",
-      "query": "\"Samsung Electronics\" leaked internal memo",
+      "query": "\"Google\" leaked internal memo",
       "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
@@ -104,10 +104,10 @@
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
+        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
-        "samsung.com",
         "tavily.com",
         "trustpilot.com",
         "twitter.com",
@@ -124,7 +124,7 @@
       "query_id": "q5",
       "template_id": "leak_news_alias",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Galaxy S27 Ultra",
+      "query": "news article quoting a leaked internal memo from Pixel 11",
       "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
@@ -133,10 +133,10 @@
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
+        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
-        "samsung.com",
         "tavily.com",
         "trustpilot.com",
         "twitter.com",
@@ -153,7 +153,7 @@
       "query_id": "q6",
       "template_id": "leak_news_alias",
       "provider": "tavily",
-      "query": "\"Galaxy S27 Ultra\" leaked internal memo",
+      "query": "\"Pixel 11\" leaked internal memo",
       "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
@@ -162,10 +162,10 @@
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
+        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
-        "samsung.com",
         "tavily.com",
         "trustpilot.com",
         "twitter.com",
@@ -182,7 +182,7 @@
       "query_id": "q7",
       "template_id": "leaked_roadmap",
       "provider": "exa",
-      "query": "leaked Samsung Electronics product roadmap or strategy document",
+      "query": "leaked Google product roadmap or strategy document",
       "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
@@ -191,10 +191,10 @@
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
+        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
-        "samsung.com",
         "tavily.com",
         "trustpilot.com",
         "twitter.com",
@@ -211,7 +211,7 @@
       "query_id": "q8",
       "template_id": "leaked_roadmap",
       "provider": "tavily",
-      "query": "\"Samsung Electronics\" leaked roadmap",
+      "query": "\"Google\" leaked roadmap",
       "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
@@ -220,10 +220,10 @@
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
+        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
-        "samsung.com",
         "tavily.com",
         "trustpilot.com",
         "twitter.com",
@@ -241,101 +241,101 @@
   "scan_state": "partial",
   "elapsed_seconds": 6.6,
   "provider_requests": 28,
-  "response_bytes": 212534,
+  "response_bytes": 164449,
   "provider_queries": [
     {
       "query_id": "q1",
       "template_id": "product_leaks",
       "provider": "exa",
-      "query": "leaked specifications of an upcoming Galaxy S27 Ultra product",
+      "query": "leaked specifications of an upcoming Pixel 11 product",
       "status": "ok",
       "error": null,
       "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:51:01.621664Z"
+      "searched_at": "2026-11-08T01:51:15.325712Z"
     },
     {
       "query_id": "q2",
       "template_id": "product_leaks",
       "provider": "tavily",
-      "query": "\"Galaxy S27 Ultra\" leaked specs",
+      "query": "\"Pixel 11\" leaked specs",
       "status": "ok",
       "error": null,
       "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:51:04.181603Z"
+      "searched_at": "2026-11-08T01:51:16.604470Z"
     },
     {
       "query_id": "q3",
       "template_id": "leak_news",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Samsung Electronics",
+      "query": "news article quoting a leaked internal memo from Google",
       "status": "ok",
       "error": null,
       "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:51:01.805861Z"
+      "searched_at": "2026-11-08T01:51:15.504496Z"
     },
     {
       "query_id": "q4",
       "template_id": "leak_news",
       "provider": "tavily",
-      "query": "\"Samsung Electronics\" leaked internal memo",
+      "query": "\"Google\" leaked internal memo",
       "status": "ok",
       "error": null,
       "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:51:01.933969Z"
+      "searched_at": "2026-11-08T01:51:15.612008Z"
     },
     {
       "query_id": "q5",
       "template_id": "leak_news_alias",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Galaxy S27 Ultra",
+      "query": "news article quoting a leaked internal memo from Pixel 11",
       "status": "ok",
       "error": null,
       "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:51:03.407128Z"
+      "searched_at": "2026-11-08T01:51:18.198940Z"
     },
     {
       "query_id": "q6",
       "template_id": "leak_news_alias",
       "provider": "tavily",
-      "query": "\"Galaxy S27 Ultra\" leaked internal memo",
+      "query": "\"Pixel 11\" leaked internal memo",
       "status": "ok",
       "error": null,
       "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:51:03.518130Z"
+      "searched_at": "2026-11-08T01:51:16.725213Z"
     },
     {
       "query_id": "q7",
       "template_id": "leaked_roadmap",
       "provider": "exa",
-      "query": "leaked Samsung Electronics product roadmap or strategy document",
+      "query": "leaked Google product roadmap or strategy document",
       "status": "ok",
       "error": null,
       "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:51:03.707694Z"
+      "searched_at": "2026-11-08T01:51:16.893554Z"
     },
     {
       "query_id": "q8",
       "template_id": "leaked_roadmap",
       "provider": "tavily",
-      "query": "\"Samsung Electronics\" leaked roadmap",
+      "query": "\"Google\" leaked roadmap",
       "status": "ok",
       "error": null,
       "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:51:03.828786Z"
+      "searched_at": "2026-11-08T01:51:17.000050Z"
     }
   ],
   "sources": [
     {
-      "source_id": "d_9bd487b4a377cb4fb2e2",
-      "url": "https://www.tomsguide.com/phones/samsung-phones/samsung-galaxy-s27-ultra-rumors-release-display-upgrades-and-everything-we-know-so-far",
+      "source_id": "d_b1b8123fe4ca83607e84",
+      "url": "https://www.theverge.com/tech/974238/pixel-11-specs-and-price-leak",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -345,23 +345,16 @@
           "query_id": "q1",
           "provider": "exa",
           "rank": 1,
-          "title": "Samsung Galaxy S27 Ultra rumors \u2014 release, display upgrades and everything we know so far | Tom's Guide",
-          "returned_url": "https://www.tomsguide.com/phones/samsung-phones/samsung-galaxy-s27-ultra-rumors-release-display-upgrades-and-everything-we-know-so-far"
-        },
-        {
-          "query_id": "q2",
-          "provider": "tavily",
-          "rank": 3,
-          "title": "Samsung Galaxy S27 Ultra rumors \u2014 release, display upgrades and everything we know so far | Tom's Guide",
-          "returned_url": "https://www.tomsguide.com/phones/samsung-phones/samsung-galaxy-s27-ultra-rumors-release-display-upgrades-and-everything-we-know-so-far"
+          "title": "Google\u2019s Pixel 11 specs and price leak showing the impact of RAMageddon | The Verge",
+          "returned_url": "https://www.theverge.com/tech/974238/pixel-11-specs-and-price-leak"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_d1c2954c44a8f64e8776",
-      "url": "https://www.androidauthority.com/samsung-galaxy-s27-pro-ultra-charging-speed-battery-3712786/",
+      "source_id": "d_721e3739986fca06c4c0",
+      "url": "https://bestforandroid.com/radar/all-four-pixel-11-series-phones-leaked-full-specs-pricing/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -371,16 +364,16 @@
           "query_id": "q1",
           "provider": "exa",
           "rank": 2,
-          "title": "Galaxy S27 Pro, S27 Ultra charging and battery specs just leaked, and it's good news",
-          "returned_url": "https://www.androidauthority.com/samsung-galaxy-s27-pro-ultra-charging-speed-battery-3712786/"
+          "title": "All four Pixel 11 series phones leaked in full, specs and pricing included \u2013 BestForAndroid",
+          "returned_url": "https://bestforandroid.com/radar/all-four-pixel-11-series-phones-leaked-full-specs-pricing/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_13f8ac2731b7cd0e166f",
-      "url": "https://www.androidauthority.com/samsung-galaxy-s27-ultra-camera-processing-hp6-leak-3716533/",
+      "source_id": "d_4eb8325c51ce80583002",
+      "url": "https://www.androidcentral.com/phones/google-pixel/massive-pixel-11-leak-just-revealed-almost-everything-about-googles-next-phones",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -390,16 +383,16 @@
           "query_id": "q1",
           "provider": "exa",
           "rank": 3,
-          "title": "Galaxy S27 Ultra camera leak reveals major upgrades",
-          "returned_url": "https://www.androidauthority.com/samsung-galaxy-s27-ultra-camera-processing-hp6-leak-3716533/"
+          "title": "Massive Pixel 11 leak just revealed almost everything about Google's next phones | Android Central",
+          "returned_url": "https://www.androidcentral.com/phones/google-pixel/massive-pixel-11-leak-just-revealed-almost-everything-about-googles-next-phones"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_8272dbface3db6770ddb",
-      "url": "https://www.ndtvprofit.com/technology/galaxy-s27-ultra-s27-pro-s27-and-s27-specs-tipped-bigger-batteries-upgraded-cameras-magnetic-charging-12191969",
+      "source_id": "d_19a540a45f387b6dc712",
+      "url": "https://www.tiktok.com/@tttechnologyuk/video/7702939893323926816",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -409,42 +402,61 @@
           "query_id": "q2",
           "provider": "tavily",
           "rank": 1,
-          "title": "Galaxy S27 Ultra, S27 Pro, S27+ And S27 Specs Tipped: Bigger Batteries, Upgraded Cameras, Magnetic Charging",
-          "returned_url": "https://www.ndtvprofit.com/technology/galaxy-s27-ultra-s27-pro-s27-and-s27-specs-tipped-bigger-batteries-upgraded-cameras-magnetic-charging-12191969"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_9513b7bd466be2a5e353",
-      "url": "https://mashable.com/tech/samsung-galaxy-s27-ultra-all-we-know",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q2",
-          "provider": "tavily",
-          "rank": 2,
-          "title": "Samsung Galaxy S27 Ultra rumors: Pricing, features, and leaks | Mashable",
-          "returned_url": "https://mashable.com/tech/samsung-galaxy-s27-ultra-all-we-know"
+          "title": "Andy Bowyer on TikTok",
+          "returned_url": "https://www.tiktok.com/@tttechnologyuk/video/7702939893323926816"
         },
         {
           "query_id": "q6",
           "provider": "tavily",
           "rank": 2,
-          "title": "Samsung Galaxy S27 Ultra rumors: Pricing, features, and leaks | Mashable",
-          "returned_url": "https://mashable.com/tech/samsung-galaxy-s27-ultra-all-we-know"
+          "title": "Andy Bowyer on TikTok",
+          "returned_url": "https://www.tiktok.com/@tttechnologyuk/video/7702939893323926816"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_eb611d99a650d8a5d8a7",
-      "url": "https://www.businesstimes.com.sg/companies-markets/samsung-bans-use-chatgpt-mobile-appliances-staff",
+      "source_id": "d_9eadfe5cf2f00041f82c",
+      "url": "https://thedaycurrent.com/phones/pixel-11-pro",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Google Pixel 11 Pro: Specs, Price, and Worth It?",
+          "returned_url": "https://thedaycurrent.com/phones/pixel-11-pro"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_b371492dd2e1312d3277",
+      "url": "https://www.gsmarena.com/google_pixel_11_pro_5g-14801.php",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Google Pixel 11 Pro - Full phone specifications",
+          "returned_url": "https://www.gsmarena.com/google_pixel_11_pro_5g-14801.php"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_7ea156b4e0ca1b5c1f3b",
+      "url": "https://www.businessinsider.com/google-return-office-buyouts-employees-leaked-memo-2025-6",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -454,16 +466,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 1,
-          "title": "Samsung bans use of ChatGPT for mobile, appliances staff - The Business Times",
-          "returned_url": "https://www.businesstimes.com.sg/companies-markets/samsung-bans-use-chatgpt-mobile-appliances-staff"
+          "title": "Google Offers Buyouts to US-Based Employees on Marketing, Comms Teams  - Business Insider",
+          "returned_url": "https://www.businessinsider.com/google-return-office-buyouts-employees-leaked-memo-2025-6"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_94ff9288a45e8ab09bae",
-      "url": "https://www.theverge.com/2023/5/2/23707796/samsung-ban-chatgpt-generative-ai-bing-bard-employees-security-concerns",
+      "source_id": "d_585b79fc0e14c6109896",
+      "url": "https://www.cnn.com/2024/01/18/tech/google-ceo-sundar-pichai-further-layoffs",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -473,16 +485,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 2,
-          "title": "Samsung tells employees not to use AI tools like ChatGPT, citing security concerns | The Verge",
-          "returned_url": "https://www.theverge.com/2023/5/2/23707796/samsung-ban-chatgpt-generative-ai-bing-bard-employees-security-concerns"
+          "title": "Google CEO\u2019s internal memo warns of further layoffs ahead | CNN Business",
+          "returned_url": "https://www.cnn.com/2024/01/18/tech/google-ceo-sundar-pichai-further-layoffs"
         }
       ],
-      "mentions_company": false,
+      "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_c090c477d9a1f1973a47",
-      "url": "https://www.businessinsider.com/samsung-chatgpt-bard-data-leak-bans-employee-use-report-2023-5",
+      "source_id": "d_8bc9fcf9a9612c80b90c",
+      "url": "https://www.businessinsider.com/google-ends-diversity-hiring-goals-reviews-dei-programs-2025-2",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -492,16 +504,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 3,
-          "title": "Samsung Bans Staff From Using AI Like ChatGPT, Bard After Data Leak - Business Insider",
-          "returned_url": "https://www.businessinsider.com/samsung-chatgpt-bard-data-leak-bans-employee-use-report-2023-5"
+          "title": "Google Just Ended Diversity Hiring Goals. Read the Memo. - Business Insider",
+          "returned_url": "https://www.businessinsider.com/google-ends-diversity-hiring-goals-reviews-dei-programs-2025-2"
         }
       ],
-      "mentions_company": false,
+      "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_1610b0330fee8ae5a07a",
-      "url": "https://nhimg.org/samsung-chatgpt-source-code-leak-2023-shadow-ai",
+      "source_id": "d_3e00253f8a18dea4b255",
+      "url": "https://dev.to/leojulieta/deepminds-ai-ban-insider-leak-sparks-global-whistle-blower-wave-2i91",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -511,16 +523,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 1,
-          "title": "Samsung ChatGPT Source Code Leak 2023: Shadow AI",
-          "returned_url": "https://nhimg.org/samsung-chatgpt-source-code-leak-2023-shadow-ai"
+          "title": "DeepMind\u2019s AI Ban: Insider Leak Sparks Global Whistle\u2011Blower Wave - DEV Community",
+          "returned_url": "https://dev.to/leojulieta/deepminds-ai-ban-insider-leak-sparks-global-whistle-blower-wave-2i91"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_ee3824a8f1022d761154",
-      "url": "https://jazz.security/dlp-explained/dlp-basics/real-examples-of-ai-data-leaks",
+      "source_id": "d_7d412d0029f201970fc6",
+      "url": "https://penchan.co/en/market/ai/google/google-ai-leadership",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -530,16 +542,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 2,
-          "title": "Real AI data leak examples and what would have stopped them",
-          "returned_url": "https://jazz.security/dlp-explained/dlp-basics/real-examples-of-ai-data-leaks"
+          "title": "Who Actually Runs Google's AI? From a Nobel Laureate to Two Invisible Founders | Penchan",
+          "returned_url": "https://penchan.co/en/market/ai/google/google-ai-leadership"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_5eb5773a0a2e0ff09ff9",
-      "url": "https://news.sbs.co.kr/english/article.do?news_id=N1008817557",
+      "source_id": "d_171ae308afb3aabd8382",
+      "url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -549,16 +561,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 3,
-          "title": "Ex-Samsung VP Ahn Seung-ho Sentenced to 3 Years in Prison in Appeal Trial over Trade Secret Leaks",
-          "returned_url": "https://news.sbs.co.kr/english/article.do?news_id=N1008817557"
+          "title": "Proton apologizes to community after internal memo shows force behind proposed AI use in building its privacy products | TechRadar",
+          "returned_url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_662e72b18f4333d94dd3",
-      "url": "https://www.notebookcheck.net/Samsung-moves-to-prevent-leaks-for-Galaxy-S27-lineup.1230141.0.html",
+      "source_id": "d_ceeb61d5357b991548a7",
+      "url": "https://www.notebookcheck.net/Leaked-documents-show-Google-planned-and-then-cut-a-key-Pixel-11-security-feature-for-GrapheneOS.1382732.0.html",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -568,16 +580,16 @@
           "query_id": "q5",
           "provider": "exa",
           "rank": 1,
-          "title": "Samsung moves to prevent leaks for Galaxy S27 lineup",
-          "returned_url": "https://www.notebookcheck.net/Samsung-moves-to-prevent-leaks-for-Galaxy-S27-lineup.1230141.0.html"
+          "title": "Leaked documents show Google planned and then cut a key Pixel 11 security feature for GrapheneOS",
+          "returned_url": "https://www.notebookcheck.net/Leaked-documents-show-Google-planned-and-then-cut-a-key-Pixel-11-security-feature-for-GrapheneOS.1382732.0.html"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_935a01b260eec62e7c85",
-      "url": "https://www.androidauthority.com/samsung-secure-chat-internal-leaks-3642032/",
+      "source_id": "d_a331800a680562342185",
+      "url": "https://techcrunch.com/2025/01/30/google-issues-voluntary-exit-program-for-android-chrome-and-pixel-employees/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -587,16 +599,16 @@
           "query_id": "q5",
           "provider": "exa",
           "rank": 2,
-          "title": "Love Samsung leaks? They may dry up with the Galaxy S27",
-          "returned_url": "https://www.androidauthority.com/samsung-secure-chat-internal-leaks-3642032/"
+          "title": "Google issues \u2018voluntary exit\u2019 program for Android, Chrome, and Pixel employees | TechCrunch",
+          "returned_url": "https://techcrunch.com/2025/01/30/google-issues-voluntary-exit-program-for-android-chrome-and-pixel-employees/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_fd2bc7c14a8dcb7c12af",
-      "url": "https://www.trustedreviews.com/news/samsungs-cracking-down-on-galaxy-leaks-ahead-of-foldable-launch-later-this-year",
+      "source_id": "d_471614df7318f3099f96",
+      "url": "https://www.techspot.com/news/106592-google-offers-voluntary-exit-plan-severance-pay-pixel.html",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -606,16 +618,16 @@
           "query_id": "q5",
           "provider": "exa",
           "rank": 3,
-          "title": "Samsung\u2019s cracking down on Galaxy leaks ahead of foldable launch later this year - Trusted Reviews",
-          "returned_url": "https://www.trustedreviews.com/news/samsungs-cracking-down-on-galaxy-leaks-ahead-of-foldable-launch-later-this-year"
+          "title": "Google offers \"voluntary exit\" plan with severance pay for Pixel and Android employees | TechSpot",
+          "returned_url": "https://www.techspot.com/news/106592-google-offers-voluntary-exit-plan-severance-pay-pixel.html"
         }
       ],
-      "mentions_company": false,
+      "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_a79eee84906206d02824",
-      "url": "https://hothardware.com/news/samsung-galaxy-s27-ultra-rumor-roundup-all-the-renders-specs-and-leaks",
+      "source_id": "d_a0281ce2b69f2f614f9c",
+      "url": "https://www.cashify.in/news/google-pixel-11-pro-fold-teaser-launched-officially-on-x",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -625,16 +637,16 @@
           "query_id": "q6",
           "provider": "tavily",
           "rank": 1,
-          "title": "Samsung Galaxy S27 Ultra Rumor Roundup: All The Renders, Specs And Leaks",
-          "returned_url": "https://hothardware.com/news/samsung-galaxy-s27-ultra-rumor-roundup-all-the-renders-specs-and-leaks"
+          "title": "Google Pixel 11 Pro Fold Teaser Launched Officially On X",
+          "returned_url": "https://www.cashify.in/news/google-pixel-11-pro-fold-teaser-launched-officially-on-x"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_31273713dfed74551f64",
-      "url": "https://samsung.gadgethacks.com/news/samsung-galaxy-s27-ultra-rumors-battery-camera-chip",
+      "source_id": "d_a4d965eeb6b741b35a03",
+      "url": "https://android.gadgethacks.com/news/pixel-11-launch-event-bold-ai-claims-still-need-proof",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -644,16 +656,16 @@
           "query_id": "q6",
           "provider": "tavily",
           "rank": 3,
-          "title": "Samsung Galaxy S27 Ultra Rumors: Battery, Camera, Chip << Samsung :: Gadget Hacks",
-          "returned_url": "https://samsung.gadgethacks.com/news/samsung-galaxy-s27-ultra-rumors-battery-camera-chip"
+          "title": "Pixel 11 Launch Event: Bold AI Claims Still Need Proof << Android :: Gadget Hacks",
+          "returned_url": "https://android.gadgethacks.com/news/pixel-11-launch-event-bold-ai-claims-still-need-proof"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_c90d904782a3f0dbd609",
-      "url": "https://www.notebookcheck.net/Samsung-Galaxy-Tab-S8-Series-Galaxy-Watch5-Buds-Pro2-and-Buds-Live2-tipped-to-launch-next-year-in-2022-roadmap-leak.581061.0.html",
+      "source_id": "d_d0829ceac1c34fc3f47e",
+      "url": "https://www.androidcentral.com/apps-software/google-leaked-2024-goals",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -663,16 +675,16 @@
           "query_id": "q7",
           "provider": "exa",
           "rank": 1,
-          "title": "Samsung Galaxy Tab S8 Series, Galaxy Watch5, Buds Pro2, and Buds Live2 tipped to launch next year in 2022 roadmap leak",
-          "returned_url": "https://www.notebookcheck.net/Samsung-Galaxy-Tab-S8-Series-Galaxy-Watch5-Buds-Pro2-and-Buds-Live2-tipped-to-launch-next-year-in-2022-roadmap-leak.581061.0.html"
+          "title": "Google's 2024 goals have leaked, and here's where the company is headed | Android Central",
+          "returned_url": "https://www.androidcentral.com/apps-software/google-leaked-2024-goals"
         }
       ],
-      "mentions_company": false,
+      "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_93e50f90f3d662ed1fdb",
-      "url": "https://www.notebookcheck.net/Samsung-s-new-4-4-plan-for-2027-expected-to-bring-8-Galaxy-flagships-including-the-TriFold-2.1352368.0.html",
+      "source_id": "d_76e78d29470708d10df7",
+      "url": "https://www.androidauthority.com/google-pixel-11a-pixel-tablet-3-3495273/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -682,16 +694,16 @@
           "query_id": "q7",
           "provider": "exa",
           "rank": 2,
-          "title": null,
-          "returned_url": "https://www.notebookcheck.net/Samsung-s-new-4-4-plan-for-2027-expected-to-bring-8-Galaxy-flagships-including-the-TriFold-2.1352368.0.html"
+          "title": "Google considers hobbled Tensor chips for 2027 Pixel 11a and Pixel Tablet 3",
+          "returned_url": "https://www.androidauthority.com/google-pixel-11a-pixel-tablet-3-3495273/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_b87af535eb35bfebc643",
-      "url": "https://www.newmobile.com/news/rumors/samsung-galaxy-roadmap-for-2022-leaked",
+      "source_id": "d_957b70f1e63dff50cbc7",
+      "url": "https://www.androidauthority.com/google-assistant-llm-3351414/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -701,35 +713,16 @@
           "query_id": "q7",
           "provider": "exa",
           "rank": 3,
-          "title": "Samsung Galaxy roadmap for 2022 leaked - NewMobile",
-          "returned_url": "https://www.newmobile.com/news/rumors/samsung-galaxy-roadmap-for-2022-leaked"
-        }
-      ],
-      "mentions_company": false,
-      "matches": []
-    },
-    {
-      "source_id": "d_beb2f7df9d2cfda7e504",
-      "url": "https://www.thelec.net/news/articleView.html?idxno=11849",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q8",
-          "provider": "tavily",
-          "rank": 1,
-          "title": "\u200bSamsung Reaffirms 1.4nm Mass Production in 2029, Sets SF1.4+ for 2030 < Semiconductor < \uae30\uc0ac\ubcf8\ubb38 - The Elec Inc.",
-          "returned_url": "https://www.thelec.net/news/articleView.html?idxno=11849"
+          "title": "Leaked memo shows Google Assistant still a top priority - Android Authority",
+          "returned_url": "https://www.androidauthority.com/google-assistant-llm-3351414/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_9e6c7a101eb8670c793c",
-      "url": "https://finance.biggo.com/news/aef68f7b-3fed-4321-8a4b-631a0d6d947b",
+      "source_id": "d_9d541f07244f82909b3b",
+      "url": "https://www.zdnet.com/article/googles-leaked-product-roadmap-looks-strikingly-familiar",
       "fetch_status": "skipped_limit",
       "failure_reason": "page_limit",
       "comparison_status": "not_compared",
@@ -738,17 +731,36 @@
         {
           "query_id": "q8",
           "provider": "tavily",
-          "rank": 2,
-          "title": "Samsung Galaxy S27 Leak Hints at Three-Model Lineup, No Pro Variant, and a 2027 Roadmap Crowded With Foldables \u2014 BigGo Finance",
-          "returned_url": "https://finance.biggo.com/news/aef68f7b-3fed-4321-8a4b-631a0d6d947b"
+          "rank": 1,
+          "title": "Google's leaked product roadmap looks strikingly familiar",
+          "returned_url": "https://www.zdnet.com/article/googles-leaked-product-roadmap-looks-strikingly-familiar"
         }
       ],
       "mentions_company": null,
       "matches": []
     },
     {
-      "source_id": "d_8dd7685bd0403f9bf861",
-      "url": "https://tech-insider.org/samsung-cxmt-chip-leak-five-years-chip-talent-war-2026",
+      "source_id": "d_a45fe62979b6ecd7f9e2",
+      "url": "https://www.laptopmag.com/news/google-pixel-2025-roadmap-leak",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Google Pixel 2025 roadmap leak: Pixel 8, Pixel Fold, and more | Laptop Mag",
+          "returned_url": "https://www.laptopmag.com/news/google-pixel-2025-roadmap-leak"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_9d7d742a950435cbadea",
+      "url": "https://www.reddit.com/r/gadgets/comments/zsy0xi/leak_exclusive_heres_googles_entire_20232025",
       "fetch_status": "skipped_limit",
       "failure_reason": "page_limit",
       "comparison_status": "not_compared",
@@ -758,13 +770,13 @@
           "query_id": "q8",
           "provider": "tavily",
           "rank": 3,
-          "title": "Chip Talent War: Samsung Leaker Gets 5 Years [2026]",
-          "returned_url": "https://tech-insider.org/samsung-cxmt-chip-leak-five-years-chip-talent-war-2026"
+          "title": "Here's Google's entire 2023-2025 roadmap for Pixel ...",
+          "returned_url": "https://www.reddit.com/r/gadgets/comments/zsy0xi/leak_exclusive_heres_googles_entire_20232025"
         }
       ],
       "mentions_company": null,
       "matches": []
     }
   ],
-  "recorded_at": "2026-11-08T01:51:06.358060Z"
+  "recorded_at": "2026-11-08T01:51:20.054692Z"
 }

@@ -18,6 +18,6 @@ debug-traces/
 # Disposable design QA captures
 .impeccable/review/
 
-# Demo plan and demo source pairs (kept local)
-docs/DEMO_PLAN.md
-docs/demo-pairs/
+# Recording plan and sample documents (kept local)
+docs/RECORDING_PLAN.md
+docs/sample-documents/

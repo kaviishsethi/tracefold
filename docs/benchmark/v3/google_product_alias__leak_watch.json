@@ -1,6 +1,6 @@
 {
-  "case_id": "mock_samsung",
-  "label": "mock_leak_reconstruction",
+  "case_id": "google_product_alias",
+  "label": "leak_reconstruction",
   "pack": "leak_watch",
   "template_version": "company_queries_v3",
   "searches": [
@@ -8,7 +8,7 @@
       "query_id": "q1",
       "template_id": "leak_news",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Samsung Electronics",
+      "query": "news article quoting a leaked internal memo from Google",
       "num_results": 5,
       "include_domains": null,
       "include_domains_mode": null,
@@ -17,10 +17,10 @@
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
+        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
-        "samsung.com",
         "tavily.com",
         "trustpilot.com",
         "twitter.com",
@@ -37,7 +37,7 @@
       "query_id": "q2",
       "template_id": "leak_news",
       "provider": "tavily",
-      "query": "\"Samsung Electronics\" leaked internal memo",
+      "query": "\"Google\" leaked internal memo",
       "num_results": 5,
       "include_domains": null,
       "include_domains_mode": null,
@@ -46,10 +46,10 @@
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
+        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
-        "samsung.com",
         "tavily.com",
         "trustpilot.com",
         "twitter.com",
@@ -66,7 +66,7 @@
       "query_id": "q3",
       "template_id": "leak_news_alias",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Galaxy",
+      "query": "news article quoting a leaked internal memo from Pixel 11",
       "num_results": 5,
       "include_domains": null,
       "include_domains_mode": null,
@@ -75,10 +75,10 @@
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
+        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
-        "samsung.com",
         "tavily.com",
         "trustpilot.com",
         "twitter.com",
@@ -95,7 +95,7 @@
       "query_id": "q4",
       "template_id": "leak_news_alias",
       "provider": "tavily",
-      "query": "\"Galaxy\" leaked internal memo",
+      "query": "\"Pixel 11\" leaked internal memo",
       "num_results": 5,
       "include_domains": null,
       "include_domains_mode": null,
@@ -104,10 +104,10 @@
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
+        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
-        "samsung.com",
         "tavily.com",
         "trustpilot.com",
         "twitter.com",
@@ -123,59 +123,59 @@
   ],
   "omitted_presets": [],
   "scan_state": "completed",
-  "elapsed_seconds": 9.7,
+  "elapsed_seconds": 6.6,
   "provider_requests": 24,
-  "response_bytes": 227593,
+  "response_bytes": 212511,
   "provider_queries": [
     {
       "query_id": "q1",
       "template_id": "leak_news",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Samsung Electronics",
+      "query": "news article quoting a leaked internal memo from Google",
       "status": "ok",
       "error": null,
       "returned": 5,
       "truncated": false,
-      "searched_at": "2026-11-08T01:49:49.032204Z"
+      "searched_at": "2026-11-08T01:51:07.132697Z"
     },
     {
       "query_id": "q2",
       "template_id": "leak_news",
       "provider": "tavily",
-      "query": "\"Samsung Electronics\" leaked internal memo",
+      "query": "\"Google\" leaked internal memo",
       "status": "ok",
       "error": null,
       "returned": 5,
       "truncated": false,
-      "searched_at": "2026-11-08T01:49:51.467831Z"
+      "searched_at": "2026-11-08T01:51:07.066609Z"
     },
     {
       "query_id": "q3",
       "template_id": "leak_news_alias",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Galaxy",
+      "query": "news article quoting a leaked internal memo from Pixel 11",
       "status": "ok",
       "error": null,
       "returned": 5,
       "truncated": false,
-      "searched_at": "2026-11-08T01:49:50.793972Z"
+      "searched_at": "2026-11-08T01:51:08.740991Z"
     },
     {
       "query_id": "q4",
       "template_id": "leak_news_alias",
       "provider": "tavily",
-      "query": "\"Galaxy\" leaked internal memo",
+      "query": "\"Pixel 11\" leaked internal memo",
       "status": "ok",
       "error": null,
       "returned": 5,
       "truncated": false,
-      "searched_at": "2026-11-08T01:49:54.640144Z"
+      "searched_at": "2026-11-08T01:51:11.436271Z"
     }
   ],
   "sources": [
     {
-      "source_id": "d_eb611d99a650d8a5d8a7",
-      "url": "https://www.businesstimes.com.sg/companies-markets/samsung-bans-use-chatgpt-mobile-appliances-staff",
+      "source_id": "d_7ea156b4e0ca1b5c1f3b",
+      "url": "https://www.businessinsider.com/google-return-office-buyouts-employees-leaked-memo-2025-6",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -185,16 +185,16 @@
           "query_id": "q1",
           "provider": "exa",
           "rank": 1,
-          "title": "Samsung bans use of ChatGPT for mobile, appliances staff - The Business Times",
-          "returned_url": "https://www.businesstimes.com.sg/companies-markets/samsung-bans-use-chatgpt-mobile-appliances-staff"
+          "title": "Google Offers Buyouts to US-Based Employees on Marketing, Comms Teams  - Business Insider",
+          "returned_url": "https://www.businessinsider.com/google-return-office-buyouts-employees-leaked-memo-2025-6"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_94ff9288a45e8ab09bae",
-      "url": "https://www.theverge.com/2023/5/2/23707796/samsung-ban-chatgpt-generative-ai-bing-bard-employees-security-concerns",
+      "source_id": "d_585b79fc0e14c6109896",
+      "url": "https://www.cnn.com/2024/01/18/tech/google-ceo-sundar-pichai-further-layoffs",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -204,16 +204,16 @@
           "query_id": "q1",
           "provider": "exa",
           "rank": 2,
-          "title": "Samsung tells employees not to use AI tools like ChatGPT, citing security concerns | The Verge",
-          "returned_url": "https://www.theverge.com/2023/5/2/23707796/samsung-ban-chatgpt-generative-ai-bing-bard-employees-security-concerns"
+          "title": "Google CEO\u2019s internal memo warns of further layoffs ahead | CNN Business",
+          "returned_url": "https://www.cnn.com/2024/01/18/tech/google-ceo-sundar-pichai-further-layoffs"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_fe09c7155a22147defe8",
-      "url": "https://m.koreaherald.com/article/3118116",
+      "source_id": "d_8bc9fcf9a9612c80b90c",
+      "url": "https://www.businessinsider.com/google-ends-diversity-hiring-goals-reviews-dei-programs-2025-2",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -223,16 +223,16 @@
           "query_id": "q1",
           "provider": "exa",
           "rank": 3,
-          "title": "Samsung bans AI chatbots after leak - The Korea Herald",
-          "returned_url": "https://m.koreaherald.com/article/3118116"
+          "title": "Google Just Ended Diversity Hiring Goals. Read the Memo. - Business Insider",
+          "returned_url": "https://www.businessinsider.com/google-ends-diversity-hiring-goals-reviews-dei-programs-2025-2"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_c3ba4852bca67aa8012b",
-      "url": "https://www.theregister.com/software/2023/05/02/samsung-to-ban-staff-from-using-chatgpt-after-code-leak/655856",
+      "source_id": "d_18d5836f522ea1ca3b43",
+      "url": "https://www.businessinsider.com/google-memo-that-meant-google-was-kept-quiet-2018-10",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -242,16 +242,16 @@
           "query_id": "q1",
           "provider": "exa",
           "rank": 4,
-          "title": "Samsung to ban staff from using ChatGPT after 'code leak'",
-          "returned_url": "https://www.theregister.com/software/2023/05/02/samsung-to-ban-staff-from-using-chatgpt-after-code-leak/655856"
+          "title": "Google Memo That Meant Google+ Was Kept Quiet - Business Insider",
+          "returned_url": "https://www.businessinsider.com/google-memo-that-meant-google-was-kept-quiet-2018-10"
         }
       ],
-      "mentions_company": false,
+      "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_71a6fcb3581acbdd5149",
-      "url": "https://www.smartcompany.com.au/technology/samsung-staff-memo-leaks-ahead-of-weak-second-quarter-results/",
+      "source_id": "d_56b9cabf9fe22568fe7a",
+      "url": "https://www.nbcnews.com/tech/tech-news/leaked-google-engineer-memo-warns-big-tech-lose-ai-race-little-guys-rcna83146",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -261,16 +261,16 @@
           "query_id": "q1",
           "provider": "exa",
           "rank": 5,
-          "title": "Samsung staff memo leaks ahead of weak second quarter results - SmartCompany",
-          "returned_url": "https://www.smartcompany.com.au/technology/samsung-staff-memo-leaks-ahead-of-weak-second-quarter-results/"
+          "title": "Leaked Google engineer memo warns that Big Tech could lose AI race to the little guys",
+          "returned_url": "https://www.nbcnews.com/tech/tech-news/leaked-google-engineer-memo-warns-big-tech-lose-ai-race-little-guys-rcna83146"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_1610b0330fee8ae5a07a",
-      "url": "https://nhimg.org/samsung-chatgpt-source-code-leak-2023-shadow-ai",
+      "source_id": "d_3e00253f8a18dea4b255",
+      "url": "https://dev.to/leojulieta/deepminds-ai-ban-insider-leak-sparks-global-whistle-blower-wave-2i91",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -280,8 +280,65 @@
           "query_id": "q2",
           "provider": "tavily",
           "rank": 1,
-          "title": "Samsung ChatGPT Source Code Leak 2023: Shadow AI",
-          "returned_url": "https://nhimg.org/samsung-chatgpt-source-code-leak-2023-shadow-ai"
+          "title": "DeepMind\u2019s AI Ban: Insider Leak Sparks Global Whistle\u2011Blower Wave - DEV Community",
+          "returned_url": "https://dev.to/leojulieta/deepminds-ai-ban-insider-leak-sparks-global-whistle-blower-wave-2i91"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_7d412d0029f201970fc6",
+      "url": "https://penchan.co/en/market/ai/google/google-ai-leadership",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Who Actually Runs Google's AI? From a Nobel Laureate to Two Invisible Founders | Penchan",
+          "returned_url": "https://penchan.co/en/market/ai/google/google-ai-leadership"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_171ae308afb3aabd8382",
+      "url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Proton apologizes to community after internal memo shows force behind proposed AI use in building its privacy products | TechRadar",
+          "returned_url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6439f9a040e636c97749",
+      "url": "https://mezha.net/eng/news/mezha-9bd1175d294b8f70f4ae5455_proton_apologizes_after",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 4,
+          "title": "Proton apologizes after internal memo spells out AI expectations for engineers | \u041c\u0435\u0436\u0430",
+          "returned_url": "https://mezha.net/eng/news/mezha-9bd1175d294b8f70f4ae5455_proton_apologizes_after"
         }
       ],
       "mentions_company": true,
@@ -298,7 +355,7 @@
         {
           "query_id": "q2",
           "provider": "tavily",
-          "rank": 2,
+          "rank": 5,
           "title": "Real AI data leak examples and what would have stopped them",
           "returned_url": "https://jazz.security/dlp-explained/dlp-basics/real-examples-of-ai-data-leaks"
         }
@@ -307,65 +364,8 @@
       "matches": []
     },
     {
-      "source_id": "d_5eb5773a0a2e0ff09ff9",
-      "url": "https://news.sbs.co.kr/english/article.do?news_id=N1008817557",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q2",
-          "provider": "tavily",
-          "rank": 3,
-          "title": "Ex-Samsung VP Ahn Seung-ho Sentenced to 3 Years in Prison in Appeal Trial over Trade Secret Leaks",
-          "returned_url": "https://news.sbs.co.kr/english/article.do?news_id=N1008817557"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_6df2a6db559b5163bb39",
-      "url": "https://simplywall.st/stocks/kr/tech/kose-a005930/samsung-electronics-shares/news/what-does-samsung-electronics-kosea005930-dram-leak-case-mea",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q2",
-          "provider": "tavily",
-          "rank": 4,
-          "title": "What Does Samsung Electronics (KOSE:A005930) DRAM Leak Case Mean For Investors? - Simply Wall St News",
-          "returned_url": "https://simplywall.st/stocks/kr/tech/kose-a005930/samsung-electronics-shares/news/what-does-samsung-electronics-kosea005930-dram-leak-case-mea"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_d828ac644698eb302080",
-      "url": "https://www.cnbc.com/2026/11/05/semiconductor-china-korea-talents-rivalry.html",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q2",
-          "provider": "tavily",
-          "rank": 5,
-          "title": "Inside the chip talent war: Trade secrets and rising Chinese rivals",
-          "returned_url": "https://www.cnbc.com/2026/11/05/semiconductor-china-korea-talents-rivalry.html"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_5c30290b2ad511138fae",
-      "url": "https://www.coindesk.com/business/2025/02/25/michael-novogratz-s-galaxy-hires-zac-prince-former-ceo-and-co-founder-of-blockfi",
+      "source_id": "d_ceeb61d5357b991548a7",
+      "url": "https://www.notebookcheck.net/Leaked-documents-show-Google-planned-and-then-cut-a-key-Pixel-11-security-feature-for-GrapheneOS.1382732.0.html",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -375,16 +375,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 1,
-          "title": "Michael Novogratz's Galaxy Hires Zac Prince, Former CEO and Co-Founder of BlockFi",
-          "returned_url": "https://www.coindesk.com/business/2025/02/25/michael-novogratz-s-galaxy-hires-zac-prince-former-ceo-and-co-founder-of-blockfi"
+          "title": "Leaked documents show Google planned and then cut a key Pixel 11 security feature for GrapheneOS",
+          "returned_url": "https://www.notebookcheck.net/Leaked-documents-show-Google-planned-and-then-cut-a-key-Pixel-11-security-feature-for-GrapheneOS.1382732.0.html"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_3c24ce51eba5aaf40172",
-      "url": "https://beincrypto.com/galaxy-executive-denies-spx-sale-murad/",
+      "source_id": "d_a331800a680562342185",
+      "url": "https://techcrunch.com/2025/01/30/google-issues-voluntary-exit-program-for-android-chrome-and-pixel-employees/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -394,16 +394,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 2,
-          "title": "Galaxy Executive Denies SPX Token\u2019s Alleged Sale by Murad",
-          "returned_url": "https://beincrypto.com/galaxy-executive-denies-spx-sale-murad/"
+          "title": "Google issues \u2018voluntary exit\u2019 program for Android, Chrome, and Pixel employees | TechCrunch",
+          "returned_url": "https://techcrunch.com/2025/01/30/google-issues-voluntary-exit-program-for-android-chrome-and-pixel-employees/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_d9574f00be1fcdad48b5",
-      "url": "https://www.pymnts.com/cryptocurrency/2022/report-crypto-firm-galaxy-digital-to-reduce-headcount-20-pct/",
+      "source_id": "d_471614df7318f3099f96",
+      "url": "https://www.techspot.com/news/106592-google-offers-voluntary-exit-plan-severance-pay-pixel.html",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -413,16 +413,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 3,
-          "title": "PYMNTS | Crypto Firm Galaxy Digital to Cut Staff by 20%",
-          "returned_url": "https://www.pymnts.com/cryptocurrency/2022/report-crypto-firm-galaxy-digital-to-reduce-headcount-20-pct/"
+          "title": "Google offers \"voluntary exit\" plan with severance pay for Pixel and Android employees | TechSpot",
+          "returned_url": "https://www.techspot.com/news/106592-google-offers-voluntary-exit-plan-severance-pay-pixel.html"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_899550a46b5c5c9cb02c",
-      "url": "https://www.forbes.com/sites/williambennett/2023/08/02/galaxys-us-move-risks-new-delay-from-lawsuit-linked-to-luna/",
+      "source_id": "d_c61644f81e0c0819a338",
+      "url": "https://www.androidpolice.com/internal-memo-suggests-google-wants-to-cut-back-on-its-combined-android-and-pixel-division/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -432,16 +432,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 4,
-          "title": "Galaxy\u2019s U.S. Move Risks New Delay From Lawsuit Linked To Luna",
-          "returned_url": "https://www.forbes.com/sites/williambennett/2023/08/02/galaxys-us-move-risks-new-delay-from-lawsuit-linked-to-luna/"
+          "title": "Google is giving US hardware and software staff the choice to bow out",
+          "returned_url": "https://www.androidpolice.com/internal-memo-suggests-google-wants-to-cut-back-on-its-combined-android-and-pixel-division/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_f904115d9e5d3ac2f66c",
-      "url": "https://www.forbes.com/sites/stevenehrlich/2023/02/01/galaxy-global-head-of-trading-shares-tips-on-how-to-avoid-the-next-ftx/",
+      "source_id": "d_6a10fea1f8cd533c23ac",
+      "url": "https://www.theverge.com/news/603432/google-voluntary-exit-platforms-devices-team",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -451,16 +451,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 5,
-          "title": "Galaxy Global Head Of Trading Shares Tips On How To Avoid The Next FTX",
-          "returned_url": "https://www.forbes.com/sites/stevenehrlich/2023/02/01/galaxy-global-head-of-trading-shares-tips-on-how-to-avoid-the-next-ftx/"
+          "title": "Google offers \u2018voluntary exit\u2019 to all US platforms and devices employees | The Verge",
+          "returned_url": "https://www.theverge.com/news/603432/google-voluntary-exit-platforms-devices-team"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_ab8c46cf6895c6748b97",
-      "url": "https://www.echomark.com/post/this-week-in-leaks-october-26-2026",
+      "source_id": "d_a0281ce2b69f2f614f9c",
+      "url": "https://www.cashify.in/news/google-pixel-11-pro-fold-teaser-launched-officially-on-x",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -470,16 +470,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 1,
-          "title": "This Week in Leaks: October 26, 2026",
-          "returned_url": "https://www.echomark.com/post/this-week-in-leaks-october-26-2026"
+          "title": "Google Pixel 11 Pro Fold Teaser Launched Officially On X",
+          "returned_url": "https://www.cashify.in/news/google-pixel-11-pro-fold-teaser-launched-officially-on-x"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_41529e11b2105361d491",
-      "url": "https://shattered.io/rocket-report-new-glenn-january-2027-china-mini-falcon-heavy-2026",
+      "source_id": "d_19a540a45f387b6dc712",
+      "url": "https://www.tiktok.com/@tttechnologyuk/video/7702939893323926816",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -489,16 +489,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 2,
-          "title": "Rocket Report: New Glenn Slips to Jan. 2027 [2026]",
-          "returned_url": "https://shattered.io/rocket-report-new-glenn-january-2027-china-mini-falcon-heavy-2026"
+          "title": "Andy Bowyer on TikTok",
+          "returned_url": "https://www.tiktok.com/@tttechnologyuk/video/7702939893323926816"
         }
       ],
-      "mentions_company": false,
+      "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_171ae308afb3aabd8382",
-      "url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products",
+      "source_id": "d_a4d965eeb6b741b35a03",
+      "url": "https://android.gadgethacks.com/news/pixel-11-launch-event-bold-ai-claims-still-need-proof",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -508,16 +508,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 3,
-          "title": "Proton apologizes to community after internal memo shows force behind proposed AI use in building its privacy products | TechRadar",
-          "returned_url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products"
+          "title": "Pixel 11 Launch Event: Bold AI Claims Still Need Proof << Android :: Gadget Hacks",
+          "returned_url": "https://android.gadgethacks.com/news/pixel-11-launch-event-bold-ai-claims-still-need-proof"
         }
       ],
-      "mentions_company": false,
+      "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_f1e0e239084860b67245",
-      "url": "https://www.utrgvrider.com/wp-content/uploads/2026/10/UT_101926_01.pdf",
+      "source_id": "d_379fca63aafe8f7750bc",
+      "url": "https://www.uswitch.com/mobiles/reviews/google-pixel-11-pro-fold",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -527,16 +527,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 4,
-          "title": "New class schedule coming to Fall 2027",
-          "returned_url": "https://www.utrgvrider.com/wp-content/uploads/2026/10/UT_101926_01.pdf"
+          "title": "Google Pixel 11 Pro Fold Review - Uswitch",
+          "returned_url": "https://www.uswitch.com/mobiles/reviews/google-pixel-11-pro-fold"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_267f77b399b5f7045b03",
-      "url": "https://www.ign.com/articles/mass-effect-5-trailer-leaks-online-with-mass-effect-universe-title-reveals-returning-characters-and-much-more",
+      "source_id": "d_743db48c9162670efed1",
+      "url": "https://www.softbank.jp/en/mobile/products/google-pixel/google-pixel-11-pro",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -546,13 +546,13 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 5,
-          "title": "Mass Effect 5 Trailer Leaks Online With 'Mass Effect: Universe' Title",
-          "returned_url": "https://www.ign.com/articles/mass-effect-5-trailer-leaks-online-with-mass-effect-universe-title-reveals-returning-characters-and-much-more"
+          "title": "Google Pixel 11 Pro | Mobile | SoftBank",
+          "returned_url": "https://www.softbank.jp/en/mobile/products/google-pixel/google-pixel-11-pro"
         }
       ],
       "mentions_company": true,
       "matches": []
     }
   ],
-  "recorded_at": "2026-11-08T01:49:56.848232Z"
+  "recorded_at": "2026-11-08T01:51:13.434746Z"
 }

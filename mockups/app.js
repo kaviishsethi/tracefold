@@ -60,7 +60,7 @@ ${state.expanded?detail():''}
 /* ---------- New scan ---------- */
 function scan(){
 const sel=SOURCES.filter(([id])=>state.sources.includes(id));
-main.innerHTML=head('New scan',`<span>Demo · file names only, nothing uploaded</span>`,`<a class="btn ghost" href="#evidence">Cancel</a>`)+
+main.innerHTML=head('New scan',`<span>Prototype · file names only, nothing uploaded</span>`,`<a class="btn ghost" href="#evidence">Cancel</a>`)+
 `<form id="scan-form"><div class="steps">
 <section class="pane"><div class="pane-head"><span><span class="step-n">01</span><strong>Inputs</strong></span><small class="mono">${state.files.length}/10</small></div><div class="pane-body">
 <label class="drop" for="files" id="dropzone">${ic('upload')}<span>Drop files or <u>browse</u></span><small>.md .txt .docx · code</small></label>
@@ -106,7 +106,7 @@ main.innerHTML=head(`Session token written to logs`,`<span class="sev ${r?'low':
 <section class="pane"><div class="pane-head"><span class="label">Verification</span><span class="st ${r?'ok':'review'}">${r?'NOT DETECTED':'NEEDS FIX'}</span></div><div class="pane-body">
 <div class="chain">${`<span class="v bad">${ic('git-commit')}a82c</span><span class="arrow"></span>`}<span class="v ${r?'good':'pending'}">${ic('git-commit')}${r?'b917':'next'}</span></div>
 <dl class="kv"><dt>Source</dt><dd>MCP · scan_changes</dd><dt>Host</dt><dd>local model</dd><dt>Scanner</dt><dd>read-only</dd></dl>
-<div style="margin-top:16px"><button class="btn primary" data-action="recheck" ${state.rechecking?'disabled':''} style="width:100%">${ic('rotate-ccw')}${state.rechecking?'Rechecking…':r?'Replay recheck':'Simulate recheck'}</button></div>
+<div style="margin-top:16px"><button class="btn primary" data-action="recheck" ${state.rechecking?'disabled':''} style="width:100%">${ic('rotate-ccw')}${state.rechecking?'Rechecking…':r?'Replay recheck':'Run recheck'}</button></div>
 ${r?`<div class="verdict" role="status">${ic('check')}Not detected in b917</div>`:''}</div></section>
 <section class="pane"><div class="pane-head"><span class="label">Check log</span></div><div class="pane-body log">
 <div><time>14:35</time><code>scan_changes</code><span>hit · a82c</span></div><div><time>14:36</time><code>explain_finding</code><span>patch proposed</span></div>${r?'<div><time>14:39</time><code>recheck_fix</code><span style="color:var(--green)">clear · b917</span></div>':''}</div></section>

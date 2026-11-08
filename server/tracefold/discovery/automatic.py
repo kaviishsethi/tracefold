@@ -1,4 +1,4 @@
-"""Bounded local identity extraction for upload-and-scan; no demo registry or private-text searches."""
+"""Bounded local identity extraction for upload-and-scan; no preset registry or private-text searches."""
 from __future__ import annotations
 
 import json

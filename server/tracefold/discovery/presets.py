@@ -120,7 +120,7 @@ PRESETS: dict[str, dict] = {
 # Evidence behind each status, from docs/benchmark/v3 (live runs 2026-11-08, 7 cases / 30 scans, scored by
 # examples/preset_benchmark.py). A preset is "benchmarked" when, on at least one provider, it returned a page outside the
 # company's own domain that matched a benchmark reference document locally (≥ 12 normalized tokens), with no
-# negative-control match. Known copies are used for recall; any verified match counts as evidence. Mock-leak cases count:
+# negative-control match. Known copies are used for recall; any verified match counts as evidence. Composed-memo cases count:
 # their references contain verbatim passages of a real reported leak, and the matched pages are real public pages.
 BENCHMARK_VERSION = "v3-2026-11-08c"
 BENCHMARK = {
@@ -128,7 +128,7 @@ BENCHMARK = {
     "leak_news_alias": {"cases_hit": ["nothing"], "providers_hit": ["exa"]},
     "security_docs": {"cases_hit": ["civicactions", "sourcegraph"], "providers_hit": ["exa", "tavily"]},
     "policy_copies": {"cases_hit": ["sourcegraph"], "providers_hit": ["tavily"]},
-    "leaked_email": {"cases_hit": ["mock_apple_memo"], "providers_hit": ["exa"]},
+    "leaked_email": {"cases_hit": ["apple_memo"], "providers_hit": ["exa"]},
 }
 
 PACKS: dict[str, dict] = {

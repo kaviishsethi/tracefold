@@ -4,7 +4,7 @@ Run from this folder with `python3 -m http.server 4318 --bind 127.0.0.1`, then o
 
 Routes: `#evidence`, `#scan`, `#recheck`, `#activity`. This is a self-contained HTML/CSS/JavaScript prototype, not the upload application. All content and operations are illustrative. File selection reads names only; no private content is read or sent. Review notes and recheck state last only for the current page session. Reload resets them.
 
-Try selecting Coverage, adding a review note, removing all files to see the empty state, submitting without files to see validation, or running the simulated fix/recheck and returning to Findings. Public exposure stays open after a local recheck.
+Try selecting Coverage, adding a review note, removing all files to see the empty state, submitting without files to see validation, or running the sample fix/recheck and returning to Findings. Public exposure stays open after a local recheck.
 
 The Northwind Relay roadmap derives from the synthetic fixture in `server/fixtures/private/roadmap.md`. Public source text, times, IDs, code and observations are illustrative. The completed-scan preview reflects selected options, then explicitly opens the fixed example; it never pretends to scan selected files.
 

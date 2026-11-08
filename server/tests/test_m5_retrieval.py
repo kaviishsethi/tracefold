@@ -164,7 +164,7 @@ def test_request_budget_enforced():
 
 # ---------------- engine integration ----------------
 def direct_manifest(env, html=FORUM_HTML, status=200):
-    env.engine.add_manifest("ws_a", "live_demo", [
+    env.engine.add_manifest("ws_a", "live_sources", [
         {"source_id": "forum", "url": "https://forum.example/t/123", "provider": "direct"}])
     rec = Recorder(lambda r: httpx.Response(status, content=html, headers={"content-type": "text/html"}))
     env.engine.test_transport = rec.transport()
@@ -178,7 +178,7 @@ def test_private_marker_never_leaves(env):
     private = fx("roadmap.md").decode() + f"\n\nInternal tracking marker: {MARKER}\n"
     risky = fx("risky_app.py").decode() + f"\n# {MARKER}\n"
     inp = env.upload({f"{MARKER}.md": private.encode(), "risky_app.py": risky.encode()})
-    s = env.scan(inp["input_id"], checks=["public_match", "local_risk"], public_sources={"manifest_id": "live_demo"},
+    s = env.scan(inp["input_id"], checks=["public_match", "local_risk"], public_sources={"manifest_id": "live_sources"},
                  model_review=False)
     assert s["state"] == "completed", s
     assert rec.seen and MARKER not in rec.dump()
@@ -193,7 +193,7 @@ def test_private_marker_never_leaves(env):
 def test_retrieval_failure_preserves_local_checks(env):
     direct_manifest(env, html=b"forbidden", status=403)
     inp = env.upload({"risky_app.py": fx("risky_app.py"), "roadmap.md": fx("roadmap.md")})
-    s = env.scan(inp["input_id"], checks=["public_match", "local_risk"], public_sources={"manifest_id": "live_demo"},
+    s = env.scan(inp["input_id"], checks=["public_match", "local_risk"], public_sources={"manifest_id": "live_sources"},
                  model_review=False)
     cov = {(c["scope"], c["id"]): c for c in s["coverage"]}
     assert cov[("source", "forum")]["status"] == "failed" and cov[("source", "forum")]["reason"] == "http_403"
@@ -218,7 +218,7 @@ def test_redirect_to_private_address_rejected_in_scan(env):
 def test_real_subprocess_worker(make_env):
     env = make_env(retrieval_in_process=False)
     inp = env.upload({"roadmap.md": fx("roadmap.md")})
-    s = env.scan(inp["input_id"], checks=["public_match"], public_sources={"manifest_id": "sources_demo"})
+    s = env.scan(inp["input_id"], checks=["public_match"], public_sources={"manifest_id": "sources_main"})
     assert s["state"] == "completed", s
     assert s["summary"]["retrieval_isolation"].startswith("separate_process")
     assert len(env.findings(s["scan_id"])) == 1

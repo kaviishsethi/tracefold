@@ -1,11 +1,11 @@
 {
   "recorded_on": "2026-11-07",
-  "purpose": "Choose a retrospective Spillway demo using attributable company material and a publicly retrievable matching copy.",
+  "purpose": "Choose a retrospective Spillway walkthrough using attributable company material and a publicly retrievable matching copy.",
   "user_preferences": {
     "company": "Smaller business; exclude obvious giants such as Google and Anthropic.",
     "recency": "Prefer recent incidents.",
     "fallback": "CrowdSec if this bounded research iteration finds no stronger usable case.",
-    "demo": "Local reference folder or document compared against selected public sources; retrospective presentation is acceptable."
+    "walkthrough": "Local reference folder or document compared against selected public sources; retrospective presentation is acceptable."
   },
   "iteration": {
     "status": "complete",
@@ -15,7 +15,7 @@
   },
   "fallback": {
     "company": "CrowdSec",
-    "status": "User-selected fallback; confirmed incident, NOT demo-ready file pair.",
+    "status": "User-selected fallback; confirmed incident, NOT walkthrough-ready file pair.",
     "incident": "Private repositories copied in May 2026; archive publicly reported in September 2026.",
     "source": "https://www.crowdsec.net/blog/tanstack-supply-chain-attack-analysis",
     "caveats": [
@@ -23,7 +23,7 @@
       "Normal open-source CrowdSec repositories are not evidence of this exposure.",
       "The follow-up report confirms personal information in the archive; do not describe the archive as containing no personal data."
     ],
-    "next_gate": "Verify a small attributable non-personal file sample and a separate retrievable matching location before promising a live CrowdSec demo. Otherwise use the incident as context for a clearly labeled controlled reconstruction."
+    "next_gate": "Verify a small attributable non-personal file sample and a separate retrievable matching location before promising a live CrowdSec walkthrough. Otherwise use the incident as context for a clearly labeled controlled reconstruction."
   },
   "candidates_checked": [
     {
@@ -43,7 +43,7 @@
       "source": "https://geedge.report/resources/",
       "artifact": "https://zenodo.org/records/20274003",
       "result": "Researchers substantiate a September 2025 company exposure. The checked accessible artifact lists measurement results, anonymized captures, and research tools rather than a verified original-file matching pair.",
-      "decision": "Not promoted to demo candidate; no large archive downloaded."
+      "decision": "Not promoted to walkthrough candidate; no large archive downloaded."
     }
   ]
 }

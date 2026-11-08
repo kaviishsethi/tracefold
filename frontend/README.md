@@ -10,7 +10,7 @@ and design tokens) with Tracefold content.
 
    ```bash
    cd server
-   uv run tracefold add-client upload-app --workspace ws_demo
+   uv run tracefold add-client upload-app --workspace ws_main
    uv run tracefold serve --port 8787
    ```
 

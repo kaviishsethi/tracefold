@@ -32,9 +32,9 @@ the owner can read.
 
    ```bash
    cd server
-   MCP_TOKEN=$(uv run tracefold add-client mcp-adapter --workspace ws_demo --caps submit,read,read_evidence,recheck,cancel)
+   MCP_TOKEN=$(uv run tracefold add-client mcp-adapter --workspace ws_main --caps submit,read,read_evidence,recheck,cancel)
    # For a cloud-backed assistant, use minimal disclosure instead (no paths, explanations or evidence text):
-   # MCP_TOKEN=$(uv run tracefold add-client cloud-assistant --workspace ws_demo --caps submit,read,recheck --disclosure minimal)
+   # MCP_TOKEN=$(uv run tracefold add-client cloud-assistant --workspace ws_main --caps submit,read,recheck --disclosure minimal)
    uv run tracefold serve --port 8787
    ```
 
@@ -44,7 +44,7 @@ the owner can read.
    ```bash
    cd adapters/mcp
    uv sync
-   echo "$MCP_TOKEN" | uv run tracefold-mcp configure --workspace ws_demo --base-url http://127.0.0.1:8787
+   echo "$MCP_TOKEN" | uv run tracefold-mcp configure --workspace ws_main --base-url http://127.0.0.1:8787
    uv run tracefold-mcp check
    ```
 

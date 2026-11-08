@@ -176,7 +176,7 @@ def test_scan_request_needs_exactly_one_public_input(env):
     p = approved_plan(env)
     inp = env.upload({"roadmap.md": fx("roadmap.md")})
     base = {"input_id": inp["input_id"], "checks": ["public_match"]}
-    for body, code in [({**base, "public_sources": {"manifest_id": "sources_demo"},
+    for body, code in [({**base, "public_sources": {"manifest_id": "sources_main"},
                          "public_discovery": {"query_plan_id": p["query_plan_id"]}}, 422),
                        ({**base, "public_discovery": {"query_plan_id": p["query_plan_id"], "query": "roadmap"}}, 422),
                        ({**base, "public_discovery": {"query_plan_id": p["query_plan_id"], "company_name": "x"}}, 422),
