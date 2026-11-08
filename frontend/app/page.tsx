@@ -51,9 +51,9 @@ const FACTS = [
 
 // Shaped like the engine's outbound ledger: every request, its purpose and what happened.
 const EGRESS = [
-  ["GET", "forum.example/t/123", "public page fetch", "200"],
+  ["GET", "pastebin.com/raw/x8Fq2LmA", "public page fetch", "200"],
   ["POST", "127.0.0.1:11434/api/chat", "local model review", "200"],
-  ["GET", "tracker.example/r?u=…", "redirect off the approved list", "DENIED"],
+  ["GET", "bit.ly/3xRk9Qe", "redirect off the approved list", "DENIED"],
   ["WRITE", "outbox/act_4c2e.eml", "takedown request (approved)", "SAVED"],
   ["POST", "iam.amazonaws.com", "disable key (approved)", "200"],
 ];
@@ -98,7 +98,7 @@ const LOOP = [
     win: (
       <Win title="Findings">
         <div className="space-y-2">
-          <SevRow sev="critical" label="Matching content found publicly" meta="roadmap.md · lines 5–7 · forum.example" tag="Public" />
+          <SevRow sev="critical" label="Matching content found publicly" meta="roadmap.md · lines 5–7 · pastebin.com" tag="Public" />
           <SevRow sev="medium" label="Sensitive value written to logs" meta="billing.py · line 7" tag="Your files" />
         </div>
       </Win>
@@ -114,7 +114,7 @@ const LOOP = [
           <p>
             …we will <span className="rounded border border-local-line bg-local-bg px-1 text-local">retire the Harbor ingestion cluster</span>…
           </p>
-          <p className="text-faint">forum.example/t/123 · fetched 14:02 UTC</p>
+          <p className="text-faint">pastebin.com/raw/x8Fq2LmA · fetched 14:02 UTC</p>
         </div>
       </Win>
     ),
@@ -139,7 +139,7 @@ const LOOP = [
     win: (
       <Win title="Approvals">
         <ol className="space-y-2">
-          {["Removal request for forum.example", "Disable AWS key ****4K4Z", "Recheck after the fix"].map((t, i) => (
+          {["Removal request to Pastebin", "Disable AWS key ****4K4Z", "Recheck after the fix"].map((t, i) => (
             <li key={t} className="flex items-center gap-2.5 text-ink-2">
               <span className="font-mono text-[11px] text-accent">{String(i + 1).padStart(2, "0")}</span>
               {t}
@@ -236,7 +236,7 @@ const STEPS = [
       <Win title="Recheck" center>
         <div className="space-y-2">
           <SevRow sev="medium" label="billing.py" meta="Not detected in the checked version" tag="Recheck" />
-          <SevRow sev="critical" label="forum.example" meta="Takedown submitted · awaiting removal" tag="Public" />
+          <SevRow sev="critical" label="pastebin.com" meta="Takedown submitted · awaiting removal" tag="Public" />
         </div>
       </Win>
     ),
@@ -447,7 +447,7 @@ export default function Landing() {
               <div className="grid grid-cols-[minmax(0,0.65fr)_minmax(0,1fr)] items-end pb-4 text-sm">
                 <p className="px-5 text-paper-mute sm:px-9">Your AI assistant</p>
                 <div className="px-5 text-paper-ink sm:px-9">
-                  <Wordmark className="text-[13px] !text-paper-ink" />
+                  <Wordmark className="text-[16px] !text-paper-ink" />
                 </div>
               </div>
               <div className="overflow-hidden rounded-[24px] border border-paper-line">
@@ -580,7 +580,7 @@ export default function Landing() {
                   </tbody>
                 </table>
                 <p className="border-t border-[#262b2a] px-4 py-3 text-xs text-mute">
-                  Denied: the page redirected to <span className="text-ink">tracker.example</span>, which isn&apos;t on the approved list. Nothing was fetched from it.
+                  Denied: the page redirected to <span className="text-ink">bit.ly</span>, which isn&apos;t on the approved list. Nothing was fetched from it.
                 </p>
               </div>
             </ImageSlot>

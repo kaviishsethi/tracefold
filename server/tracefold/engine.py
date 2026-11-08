@@ -116,7 +116,7 @@ class Engine:
             raise ValueError("give exactly one of email or form_url")
         host = host.strip().lower()
         if not host or "/" in host or ":" in host:
-            raise ValueError("host must be a bare hostname like forum.example")
+            raise ValueError("host must be a bare hostname like pastebin.com")
         if email:
             if "@" not in email or any(c.isspace() for c in email):
                 raise ValueError("invalid email")

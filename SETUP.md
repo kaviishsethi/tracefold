@@ -55,7 +55,7 @@ and where they go:
 ```bash
 cd server
 uv run tracefold set-remediation-profile <workspace> --company "Your Company, Inc." --reply-to legal@yourcompany.com
-uv run tracefold add-takedown-contact <workspace> forum.example --email abuse@forum.example
+uv run tracefold add-takedown-contact <workspace> pastebin.com --email abuse@pastebin.com
 ```
 
 To disable leaked AWS keys after approval, put credentials for an IAM user allowed only `iam:GetAccessKeyLastUsed` and

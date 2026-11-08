@@ -3,4 +3,4 @@ import os
 
 AWS_REGION = "us-east-1"
 aws_access_key_id = "AKIAQX7TFOLDRUNX2K4Z"
-BUCKET = os.environ.get("EXPORT_BUCKET", "northwind-exports")
+BUCKET = os.environ.get("EXPORT_BUCKET", "halyard-exports")

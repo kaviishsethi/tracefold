@@ -51,7 +51,7 @@ def draft(host: str, url: str, quoted: str, retrieved_at: str | None) -> dict:
 
 def render(body: str, company: str, reply_to: str, approver: dict | None) -> str:
     """Fill company details and append the signature block."""
-    # "Northwind Relay, Inc." at a sentence end must not become "Inc.."
+    # "Halyard Freight, Inc." at a sentence end must not become "Inc.."
     text = body.replace("{company}.", company if company.endswith(".") else company + ".").replace("{company}", company)
     if approver and approver.get("name"):
         title = f"{approver['title']}, " if approver.get("title") else ""

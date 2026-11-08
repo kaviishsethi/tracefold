@@ -104,7 +104,7 @@ export function Reveal({ children, delay = 0, className }: { children: ReactNode
 export function Mission() {
   return (
     <section className="px-[max(32px,4vw)] pb-[88px] pt-10">
-      <div className="mx-auto grid max-w-[1760px] grid-cols-1 items-center gap-12 lg:grid-cols-[1.85fr_1fr] [&>*]:min-w-0">
+      <div className="mx-auto grid max-w-[1760px] grid-cols-1 items-center gap-12 lg:grid-cols-[1fr_1.15fr] [&>*]:min-w-0">
         <Reveal className="py-4">
           <h2 className="max-w-[22ch] text-[clamp(32px,3vw,44px)] leading-[1.12] tracking-[-0.045em]">
             <span className="block text-mute">Your team writes code and docs every day.</span>
@@ -118,7 +118,7 @@ export function Mission() {
         </Reveal>
 
         <Reveal delay={120}>
-          <ImageSlot label="Closing art" src={LANDING_ART.pointillist} position="35% center" className="flex aspect-[446/398] items-end justify-center rounded-[24px] border border-line pb-[9%]">
+          <ImageSlot label="Closing art" src={LANDING_ART.pointillist} position="center" className="flex aspect-[16/9] items-center justify-center rounded-[24px] border border-line">
             <LinkButton href="/scan">Run your first check</LinkButton>
           </ImageSlot>
         </Reveal>
@@ -145,7 +145,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-12 xl:flex-row xl:justify-between">
           <div className="min-w-0 xl:max-w-[300px]">
             <Link href="/" aria-label="Tracefold home" className="inline-flex py-1">
-              <Wordmark className="text-[15px]" />
+              <Wordmark className="text-[22px]" />
             </Link>
             <p className="mt-3 text-sm leading-relaxed text-[#92959c]">
               Finds company documents and code on public pages, and flags risks in your own files.
@@ -177,7 +177,7 @@ export function SiteFooter() {
             <p className="min-w-0 flex-1 text-[clamp(26px,4.6vw,64px)] font-semibold leading-[1.05] tracking-[-0.055em] text-ink">
               <span className="inline-block whitespace-nowrap">Match / Review /</span> <span className="inline-block whitespace-nowrap">Approve / Recheck</span>
             </p>
-            <Wordmark className="hidden shrink-0 text-[clamp(13px,1.35vw,19px)] sm:inline-flex" />
+            <Wordmark className="hidden shrink-0 text-[clamp(20px,2vw,30px)] sm:inline-flex" />
           </div>
         </DotField>
 
