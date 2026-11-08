@@ -113,19 +113,34 @@ async function record(browser, name, fn) {
   }
 }
 
+// A plain title card: the Tracefold mark and name in bold, centered, with one line under it.
+const TITLE_CARD = `<!doctype html><html><head>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700&family=Inter:wght@400&display=swap" rel="stylesheet">
+  </head><body style="margin:0;height:100vh;background:#0a0c0c;display:flex;align-items:center;justify-content:center">
+  <div style="text-align:center;color:#eef2f1">
+    <div style="display:inline-flex;align-items:center;gap:18px;font-family:Manrope,-apple-system,Arial,sans-serif;
+      font-weight:700;font-size:72px;letter-spacing:-0.035em;line-height:1">
+      <svg viewBox="0 0 256 256" width="80" height="80" fill="none" stroke="#eef2f1" stroke-width="16"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M32 32H224V184L168 224V184H88V224L32 184Z"/><path d="M32 32L88 80V184M224 32L168 80V184"/>
+      </svg>
+      Tracefold
+    </div>
+    <div style="margin-top:26px;font-family:Inter,-apple-system,Arial,sans-serif;font-size:26px;color:#9aa3a1">
+      Catch, fix and prevent security leaks.</div>
+  </div></body></html>`;
+
+async function titleCard(page, mark, seconds) {
+  await page.setContent(TITLE_CARD, { waitUntil: "domcontentloaded", timeout: 15_000 });
+  await page.evaluate(() => Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 4000))])).catch(() => {});
+  await sleep(300);
+  mark();
+  await sleep(seconds * 1000);
+}
+
 const CLIPS = {
   // 0:00–0:22 What Tracefold is
-  "01-intro": async (page, mark) => {
-    await page.goto(`${APP}/scan`);
-    await ready(page);
-    mark();
-    await moveTo(page, page.getByRole("button", { name: /upload files/i }), { pause: 2500 });
-    await moveTo(page, page.getByText("Sample files"), { pause: 2500 });
-    await moveTo(page, page.getByRole("link", { name: "Findings" }), { pause: 2500 });
-    await moveTo(page, page.getByRole("link", { name: "Approvals" }), { pause: 2500 });
-    await moveTo(page, page.getByRole("link", { name: "Settings" }), { pause: 3000 });
-    await moveTo(page, page.locator("main h1").first(), { pause: 6000 });
-  },
+  "01-intro": (page, mark) => titleCard(page, mark, 22),
 
   // 0:22–0:35 Who it's for: industry checks
   "02-industry": async (page, mark) => {
@@ -240,24 +255,7 @@ const CLIPS = {
   },
 
   // 2:30–2:45 End card
-  "06-end-card": async (page, mark) => {
-    await page.setContent(`<!doctype html><html><body style="margin:0;background:#0a0c0c;color:#eef2f1;font-family:-apple-system,
-      'Helvetica Neue',Arial,sans-serif;height:100vh;display:flex;align-items:center;justify-content:center">
-      <div style="width:1100px">
-        <div style="font-size:36px;font-weight:700;letter-spacing:-0.03em">Tracefold</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:48px;font-size:20px;line-height:1.55">
-          <div><div style="color:#86c79a;font-weight:600;margin-bottom:12px">Working, shown live</div>
-            File scans · Exa or Tavily search · local matching · Ollama review · industry checks · scheduled checks ·
-            MCP scan, fix and recheck · takedowns saved to a local folder</div>
-          <div><div style="color:#9aa3a1;font-weight:600;margin-bottom:12px">Not built yet</div>
-            Takedown drafts for pages found by search · a local-model coding assistant</div>
-        </div>
-        <div style="margin-top:56px;font-size:17px;color:#9aa3a1;line-height:1.55">Runs on your computer or in your VPC.
-          Claude Code is a cloud assistant, so results it reads go to Anthropic. Sample files are public company documents.</div>
-      </div></body></html>`);
-    mark();
-    await sleep(15_000);
-  },
+  "06-end-card": (page, mark) => titleCard(page, mark, 15),
 };
 
 const FRESH = process.argv.includes("--fresh");
