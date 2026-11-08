@@ -133,6 +133,9 @@ def test_editing_draft_body_round_trip_signs_once(env):
     assert "Please promptly remove" in eml and "{company}" not in eml and "[Signed by" not in eml
     assert eml.count("Reply to: legal@northwind.example") == 1 and eml.count("Dana Ruiz") == 1
     assert "on behalf of Northwind Relay, Inc." in eml
+    # the template ends sentences with "{company}."; a name ending in "." must not double the period
+    assert ".." not in a["body"] and "Inc.." not in eml
+    assert "Northwind Relay, Inc. The page below" in a["body"]
 
 
 def test_form_host_then_removal_observed_after_fresh_scan(env):
