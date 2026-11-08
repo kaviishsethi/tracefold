@@ -12,7 +12,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from ..contracts.enums import Check
 from ..contracts.models import (
     ActionOut, ActionPage, ApproveRequest, EditActionRequest, MarkSubmittedRequest, RejectRequest,
-    CompanyIn, CompanyOut, CompanyProfileIn, CompanyProfileList, CompanyProfileOut, QueryPlanIn, QueryPlanOut, QueryPlanPage, QueryPresetCatalog, SourcePage,
+    CompanyIn, CompanyOut, CompanyProfileIn, SitesIn, SitesOut, CompanyProfileList, CompanyProfileOut, QueryPlanIn, QueryPlanOut, QueryPlanPage, QueryPresetCatalog, SourcePage,
     CapabilitiesOut, CaptureRequest, ErrorEnvelope, EvidenceOut, FindingDetail, FindingOut, FindingPage, InputOut,
     LedgerPage, ManifestOut, RecheckAccepted, RecheckRequest, ReviewRequest, ScanAccepted, ScanList, ScanOut, ScanRequest, WorkspaceList,
     WorkspaceOut,
@@ -228,6 +228,16 @@ def create_app(engine: Engine) -> FastAPI:
         return engine.remediation.mark_submitted(p, ws_id, action_id, body)
 
     # ---------------- company discovery ----------------
+    @app.get("/v1/workspaces/{ws_id}/sites", response_model=SitesOut, responses=ERRORS)
+    def get_sites(ws_id: str, p: Principal = Depends(principal)):
+        """Pages checked in every public scan, and hosts never fetched."""
+        return engine.discovery.get_sites(p, ws_id)
+
+    @app.put("/v1/workspaces/{ws_id}/sites", response_model=SitesOut, responses=ERRORS)
+    def put_sites(ws_id: str, body: SitesIn, p: Principal = Depends(principal)):
+        """Replace both lists (requires `configure`). Never-fetch hosts include their subdomains."""
+        return engine.discovery.put_sites(p, ws_id, body)
+
     @app.get("/v1/workspaces/{ws_id}/company", response_model=CompanyOut, responses=ERRORS)
     def get_company(ws_id: str, p: Principal = Depends(principal)):
         """The workspace's own company: name, website and takedown reply-to."""

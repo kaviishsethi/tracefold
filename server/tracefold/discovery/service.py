@@ -8,10 +8,11 @@ search is never evidence that a public copy disappeared.
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+from urllib.parse import urlsplit
 
 from ..contracts.enums import Capability, ComparisonStatus, CoverageStatus, FetchStatus
 from ..contracts.models import (
-    CompanyIn, CompanyOut, CompanyProfileIn, CompanyProfileList, CompanyProfileOut, DiscoveryRunOut, QueryPlanIn, QueryPlanOut, QueryPlanPage, QueryPresetCatalog,
+    CompanyIn, CompanyOut, CompanyProfileIn, SitesIn, SitesOut, CompanyProfileList, CompanyProfileOut, DiscoveryRunOut, QueryPlanIn, QueryPlanOut, QueryPlanPage, QueryPresetCatalog,
     SourceOut, SourcePage,
 )
 from ..errors import ApiError, not_found
@@ -34,7 +35,7 @@ SEARCH_RESPONSE_BYTES = 1024 * 1024
 
 
 def _other(provider: str) -> str:
-    return "tavily" if provider == "exa" else "exa"
+    return "tavily" if provider == "exa" else "exa" if provider == "tavily" else provider
 
 
 class DiscoveryService:
@@ -97,6 +98,45 @@ class DiscoveryService:
                 "approved_by": p.client_id, "approved_at": iso(now()), "privacy_notice_version": identity.PRIVACY_NOTICE_VERSION})
         self.e.set_remediation_profile(ws_id, body.name.strip(), body.reply_to.strip())
         return self.get_company(p, ws_id)
+
+    # ---------------- site lists ----------------
+    def get_sites(self, p: Principal, ws_id: str) -> SitesOut:
+        p.require(ws_id, Capability.read)
+        r = self.e.repo.get_site_rules(ws_id)
+        return SitesOut(always_check=r["always"], never_fetch=r["never"])
+
+    def put_sites(self, p: Principal, ws_id: str, body: SitesIn) -> SitesOut:
+        p.require(ws_id, Capability.configure)
+        if self.e.repo.get_workspace(ws_id) is None:
+            raise not_found()
+        always: list[str] = []
+        for raw in body.always_check:
+            url = raw.strip()
+            if url and "://" not in url:
+                url = "https://" + url
+            if not url:
+                continue
+            reason = check_url(url)
+            if reason:
+                raise ApiError(422, "invalid_site", f"{raw.strip()} can't be checked ({reason.replace('_', ' ')}).")
+            canon = canonicalize(url)
+            if canon not in always:
+                always.append(canon)
+        never: list[str] = []
+        for raw in body.never_fetch:
+            host = raw.strip().lower().split("://", 1)[-1].split("/", 1)[0].split(":", 1)[0].removeprefix("www.")
+            if not host:
+                continue
+            if "." not in host or not all(part and all(ch.isalnum() or ch == "-" for ch in part) for part in host.split(".")):
+                raise ApiError(422, "invalid_site", f"{raw.strip()} isn't a site name like pastebin.com.")
+            if host not in never:
+                never.append(host)
+        self.e.repo.put_site_rules(ws_id, always, never)
+        return self.get_sites(p, ws_id)
+
+    @staticmethod
+    def _never(host: str, never: list[str]) -> bool:
+        return any(host == n or host.endswith("." + n) for n in never)
 
     def list_profiles(self, p: Principal, ws_id: str) -> CompanyProfileList:
         p.require(ws_id, Capability.read)
@@ -217,6 +257,7 @@ class DiscoveryService:
         d = self._start(ctx, "live")
         data, plan, ws_id = d["run"]["data"], d["plan"], ctx.scan["workspace_id"]
         lim = self.e.settings.limits
+        rules = self.e.repo.get_site_rules(ws_id)
         # Reserve extraction capacity before issuing searches.
         remaining = lim.max_provider_requests - ctx.budget.get("provider_requests", 0)
         allowed = max(0, remaining - lim.max_public_pages)
@@ -262,6 +303,14 @@ class DiscoveryService:
                         by_sid[sid]["discovery_origins"].append(origin)
                     continue
                 canon = canonicalize(item["url"])
+                if self._never((urlsplit(canon).hostname or "").removeprefix("www."), rules["never"]):
+                    sid = source_id_for(ws_id, "skipped:" + canon)
+                    cand.update(disposition="blocked", reason="never_fetch", source_id=sid)
+                    data["candidates"].append(cand)
+                    if sid not in by_sid:
+                        by_sid[sid] = self._new_source(sid, item, origin, q["provider"], canon)
+                        by_sid[sid].update(fetch_status=FetchStatus.blocked.value, failure_reason="never_fetch")
+                    continue
                 sid = source_id_for(ws_id, canon)
                 if sid in by_sid:
                     by_sid[sid]["discovery_origins"].append(origin)
@@ -271,6 +320,17 @@ class DiscoveryService:
                     by_sid[sid] = self._new_source(sid, item, origin, q["provider"], canon)
                     cand.update(disposition="source", source_id=sid)
                 data["candidates"].append(cand)
+        # Pages the company asked to check every time, fetched directly even when search found nothing or failed.
+        for i, url in enumerate(rules["always"], 1):
+            if self._never((urlsplit(url).hostname or "").removeprefix("www."), rules["never"]):
+                continue
+            sid = source_id_for(ws_id, url)
+            origin = {"query_id": "always_check", "provider": "direct", "rank": i, "title": None, "returned_url": url}
+            if sid in by_sid:
+                by_sid[sid]["discovery_origins"].append(origin)
+                continue
+            by_sid[sid] = self._new_source(sid, {"url": url}, origin, "direct", url)
+            data["always_count"] = data.get("always_count", 0) + 1
         d["sources"] = list(by_sid.values())
         fetchable = [s for s in d["sources"] if s["fetch_status"] == FetchStatus.pending.value]
         data["unique_count"] = len(fetchable)
@@ -446,7 +506,8 @@ class DiscoveryService:
     def coverage_override(self, ctx: "ScanContext", status: CoverageStatus, reason: str | None):
         outcome = ctx.discovery["run"]["data"]["outcome"] if ctx.discovery else None
         if outcome == "search_failed":
-            return CoverageStatus.failed, "discovery_search_failed"
+            listed = (ctx.discovery["run"]["data"].get("always_count") or 0) > 0
+            return (CoverageStatus.partial if listed else CoverageStatus.failed), "discovery_search_failed"
         if outcome == "budget_exhausted":
             return CoverageStatus.failed, "discovery_budget_exhausted"
         if outcome == "no_candidates":

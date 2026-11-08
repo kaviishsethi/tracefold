@@ -127,6 +127,117 @@ export default function SettingsPage() {
           )}
         </form>
       )}
+      {loaded && workspace && <SitesCard workspaceId={workspace.id} canEdit={canEdit} />}
     </div>
+  );
+}
+
+interface Sites {
+  always_check: string[];
+  never_fetch: string[];
+}
+
+const lines = (t: string) => t.split(/[\n,]/).map((x) => x.trim()).filter(Boolean);
+
+/** Pages checked in every public scan, and sites never fetched. Same view/edit pattern as the company card. */
+function SitesCard({ workspaceId, canEdit }: { workspaceId: string; canEdit: boolean }) {
+  const [sites, setSites] = useState<Sites>({ always_check: [], never_fetch: [] });
+  const [form, setForm] = useState({ always: "", never: "" });
+  const [editing, setEditing] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    api<Sites>(ws(workspaceId, "/sites")).then(setSites).catch(() => {});
+  }, [workspaceId]);
+
+  function edit() {
+    setForm({ always: sites.always_check.join("\n"), never: sites.never_fetch.join("\n") });
+    setError(null);
+    setEditing(true);
+  }
+
+  async function save(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    setError(null);
+    try {
+      const next = await api<Sites>(ws(workspaceId, "/sites"), {
+        method: "PUT",
+        json: { always_check: lines(form.always), never_fetch: lines(form.never) },
+      });
+      setSites(next);
+      setEditing(false);
+    } catch (err) {
+      setError((err as ApiError).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  const list = (items: string[]) =>
+    items.length ? (
+      <ul className="space-y-1 text-right">
+        {items.map((x) => (
+          <li key={x} className="truncate font-mono text-[13px] text-ink">
+            {x}
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <span className="text-faint">None</span>
+    );
+
+  return (
+    <section className="mt-6 rounded-card border border-line bg-panel">
+      <header className="flex min-h-14 items-center justify-between gap-3 border-b border-line pl-5 pr-3">
+        <h2 className="text-sm font-medium text-ink">Sites</h2>
+        {canEdit && !editing && (
+          <Button size="sm" variant="secondary" onClick={edit}>
+            Edit
+          </Button>
+        )}
+      </header>
+      {!editing ? (
+        <dl>
+          {([["Always check", sites.always_check], ["Never fetch", sites.never_fetch]] as const).map(([label, items]) => (
+            <div key={label} className="flex items-start justify-between gap-6 border-t border-line px-5 py-3.5 text-sm first:border-t-0">
+              <dt className="shrink-0 text-mute">{label}</dt>
+              <dd className="min-w-0">{list(items)}</dd>
+            </div>
+          ))}
+        </dl>
+      ) : (
+        <form onSubmit={save} className="space-y-5 p-5">
+          <ErrorNote error={error} />
+          <Field label="Always check" hint="Pages compared in every public check, even when search finds nothing. One per line.">
+            <textarea
+              rows={4}
+              className={`${inputClass} h-auto py-2 font-mono text-[13px]`}
+              value={form.always}
+              onChange={(e) => setForm({ ...form, always: e.target.value })}
+              placeholder="https://community.yourcompany.com/forum"
+            />
+          </Field>
+          <Field label="Never fetch" hint="Sites Tracefold won't download, including their subdomains. One per line.">
+            <textarea
+              rows={3}
+              className={`${inputClass} h-auto py-2 font-mono text-[13px]`}
+              value={form.never}
+              onChange={(e) => setForm({ ...form, never: e.target.value })}
+              placeholder="yourcompany.com"
+            />
+          </Field>
+          <div className="flex items-center gap-2">
+            <Button type="submit" size="sm" loading={busy} className="!bg-accent !text-[#0a0c0c]">
+              Save
+            </Button>
+            <Button type="button" size="sm" variant="ghost" onClick={() => setEditing(false)}>
+              Cancel
+            </Button>
+          </div>
+        </form>
+      )}
+    </section>
   );
 }

@@ -134,6 +134,17 @@ class CompanyIn(Strict):
     reply_to: str = Field(min_length=3, max_length=200, pattern=r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
 
+class SitesIn(Strict):
+    """Pages checked in every public scan, and hosts that are never fetched (subdomains included)."""
+    always_check: list[str] = Field(default_factory=list, max_length=20)
+    never_fetch: list[str] = Field(default_factory=list, max_length=50)
+
+
+class SitesOut(BaseModel):
+    always_check: list[str] = Field(default_factory=list)
+    never_fetch: list[str] = Field(default_factory=list)
+
+
 class CompanyOut(BaseModel):
     name: str | None = None
     website: str | None = None

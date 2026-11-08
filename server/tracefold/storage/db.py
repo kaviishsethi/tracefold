@@ -243,6 +243,16 @@ MIGRATIONS: list[str] = [
     CREATE INDEX discovery_sources_scan ON discovery_sources(scan_id, ordinal);
     ALTER TABLE scans ADD COLUMN public_discovery TEXT
     """,
+    # 4: per-workspace site lists: pages checked in every public scan, hosts never fetched
+    """
+    CREATE TABLE site_rules (
+        workspace_id TEXT NOT NULL REFERENCES workspaces(id),
+        kind TEXT NOT NULL CHECK (kind IN ('always', 'never')),
+        value TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        PRIMARY KEY (workspace_id, kind, value)
+    )
+    """,
 ]
 
 

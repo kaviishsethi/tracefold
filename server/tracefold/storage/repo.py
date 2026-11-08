@@ -429,6 +429,19 @@ class Repo:
                       "ON CONFLICT(workspace_id) DO UPDATE SET company_name=excluded.company_name, "
                       "reply_to=excluded.reply_to, updated_at=excluded.updated_at", (ws_id, company_name, reply_to, iso(now())))
 
+    def get_site_rules(self, ws_id: str) -> dict[str, list[str]]:
+        out: dict[str, list[str]] = {"always": [], "never": []}
+        for r in self.db.conn().execute("SELECT kind, value FROM site_rules WHERE workspace_id=? ORDER BY created_at, value", (ws_id,)):
+            out[r["kind"]].append(r["value"])
+        return out
+
+    def put_site_rules(self, ws_id: str, always: list[str], never: list[str]) -> None:
+        with self.db.tx() as c:
+            c.execute("DELETE FROM site_rules WHERE workspace_id=?", (ws_id,))
+            ts = iso(now())
+            c.executemany("INSERT INTO site_rules(workspace_id,kind,value,created_at) VALUES (?,?,?,?)",
+                          [(ws_id, "always", v, ts) for v in always] + [(ws_id, "never", v, ts) for v in never])
+
     def get_remediation_profile(self, ws_id: str) -> dict | None:
         return _row(self.db.conn().execute("SELECT * FROM remediation_profiles WHERE workspace_id=?", (ws_id,)).fetchone())
 
