@@ -2,11 +2,12 @@
 // directly or through Exa/Tavily; these logos are illustrative, not a fixed integration list.
 import {
   siAirtable, siAmazons3, siAtlassian, siBitbucket, siCoda, siCodeberg, siCodepen, siDocker, siFigma, siGitbook, siGithub,
-  siGitlab, siGooglecloudstorage, siGoogledocs, siGoogledrive, siHuggingface, siInternetarchive, siJsfiddle, siMiro, siNotion,
+  siGitlab, siGooglecloudstorage, siGoogledocs, siGoogledrive, siHuggingface, siInternetarchive, siMiro, siNotion,
   siNpm, siPastebin, siPostman, siPypi, siReplit, siTelegram, siTrello,
 } from "simple-icons";
 import { cx } from "./ui";
 
+// Two even rows of 13: code, packages and pastes on top; docs, workspaces and storage below.
 const PLATFORMS = [
   { icon: siGithub, name: "GitHub & Gist" },
   { icon: siGitlab, name: "GitLab" },
@@ -17,7 +18,11 @@ const PLATFORMS = [
   { icon: siNpm, name: "npm" },
   { icon: siDocker, name: "Docker Hub" },
   { icon: siPostman, name: "Postman" },
+  { icon: siReplit, name: "Replit" },
+  { icon: siCodepen, name: "CodePen" },
   { icon: siPastebin, name: "Pastebin" },
+  { icon: siTelegram, name: "Telegram" },
+
   { icon: siNotion, name: "Notion" },
   { icon: siAtlassian, name: "Confluence & Jira" },
   { icon: siGitbook, name: "GitBook" },
@@ -28,21 +33,17 @@ const PLATFORMS = [
   { icon: siAirtable, name: "Airtable" },
   { icon: siMiro, name: "Miro" },
   { icon: siFigma, name: "Figma" },
-  { icon: siReplit, name: "Replit" },
-  { icon: siCodepen, name: "CodePen" },
-  { icon: siJsfiddle, name: "JSFiddle" },
   { icon: siAmazons3, name: "Amazon S3" },
   { icon: siGooglecloudstorage, name: "Cloud Storage" },
   { icon: siInternetarchive, name: "Wayback Machine" },
-  { icon: siTelegram, name: "Telegram" },
 ];
 
 export function PlatformLogos({ className }: { className?: string }) {
   return (
-    <ul aria-label="Public places Tracefold can check" className={cx("flex flex-wrap items-center justify-center gap-x-[clamp(22px,3vw,40px)] gap-y-6", className)}>
+    <ul aria-label="Public places Tracefold can check" className={cx("mx-auto grid w-fit grid-cols-13 place-items-center gap-x-[6px] gap-y-4 sm:gap-x-[clamp(14px,3vw,40px)] sm:gap-y-6", className)}>
       {PLATFORMS.map(({ icon, name }) => (
         <li key={name} title={name} className="text-[#d9dadd] opacity-70 transition-opacity duration-200 hover:opacity-100">
-          <svg viewBox="0 0 24 24" className="size-[28px]" fill="currentColor" role="img" aria-label={name}>
+          <svg viewBox="0 0 24 24" className="size-[20px] sm:size-[28px]" fill="currentColor" role="img" aria-label={name}>
             <path d={icon.path} />
           </svg>
         </li>
