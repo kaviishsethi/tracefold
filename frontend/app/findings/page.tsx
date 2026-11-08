@@ -42,7 +42,7 @@ export default function Findings() {
 
   return (
     <div>
-      <H1 sub="From every scan, whether it came from this app or your coding assistant.">Findings</H1>
+      <H1>Findings</H1>
       <ErrorNote error={error} />
 
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">

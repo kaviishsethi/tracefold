@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import "./app-polish.css";
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { CheckCircle2, Globe, LayoutGrid, ScanSearch, ShieldAlert, type LucideIcon } from "lucide-react";
@@ -69,19 +68,16 @@ function NavLink({ href, label, icon: Icon, count, active }: { href: string; lab
       href={href}
       aria-current={active ? "page" : undefined}
       className={cx(
-        "flex h-9 items-center gap-3 rounded-ctl px-3 text-sm transition-colors",
-        active ? "bg-panel-2 text-ink" : "text-mute hover:bg-panel hover:text-ink",
+        "flex h-9 items-center rounded-[6px] pr-2 text-sm font-medium transition-colors duration-100",
+        active ? "bg-raised text-ink" : "text-mute hover:bg-panel-2 hover:text-ink",
       )}
     >
-      <Icon className={cx("size-4 shrink-0", active ? "text-accent" : "text-faint")} aria-hidden />
-      <span className="flex-1">{label}</span>
+      <span className="grid size-9 shrink-0 place-content-center">
+        <Icon className="size-4" aria-hidden />
+      </span>
+      <span className="flex-1 truncate">{label}</span>
       {!!count && (
-        <span
-          className={cx(
-            "min-w-6 rounded-md px-1.5 text-center text-[11px] font-medium leading-5",
-            href === "/actions" ? "bg-accent text-[#0a0c0c]" : "bg-raised text-ink-2",
-          )}
-        >
+        <span className={cx("min-w-5 rounded-full px-1.5 text-center text-xs leading-5", href === "/actions" ? "bg-accent text-[#0a0c0c]" : "bg-raised text-ink-2")}>
           {count}
         </span>
       )}
@@ -93,46 +89,56 @@ function AppShell({ path, children }: { path: string; children: ReactNode }) {
   const state = useWorkspace();
   const counts = useCounts(state.current?.id ?? null);
   const active = (href: string) => path === href || path.startsWith(href + "/");
+  const section = NAV.find((n) => active(n.href));
 
   return (
     <WorkspaceCtx.Provider value={state}>
-      <div className="flex min-h-screen">
-        <aside className="sticky top-0 hidden h-screen w-[248px] shrink-0 flex-col border-r border-line bg-[#0c0f0f] px-3 py-5 md:flex">
-          <Link href="/" className="px-3">
-            <Wordmark className="text-[12px]" />
-          </Link>
+      <div className="app flex min-h-screen">
+        <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-line bg-bg md:flex">
+          <div className="flex h-14 shrink-0 items-center px-5">
+            <Link href="/" aria-label="Tracefold home">
+              <Wordmark className="text-[12px]" />
+            </Link>
+          </div>
 
-          <nav className="mt-6 flex flex-col gap-0.5" aria-label="Main">
+          <nav className="flex flex-col gap-px px-2 pt-2.5" aria-label="Main">
             {NAV.map((n) => (
               <NavLink key={n.href} {...n} count={n.count ? counts[n.count] : undefined} active={active(n.href)} />
             ))}
           </nav>
 
-          <div className="mt-auto border-t border-line px-3 pt-3 text-xs">
-            {state.error ? (
-              <p className="flex items-center gap-2 text-crit">
-                <span className="size-1.5 rounded-full bg-crit" /> Engine not reachable
-              </p>
-            ) : (
-              <>
-                {state.list.length > 1 ? (
-                  <Select
-                    label="Workspace"
-                    className="w-full"
-                    value={state.current?.id ?? ""}
-                    onChange={(v) => state.select(v)}
-                    options={state.list.map((w) => ({ value: w.id, label: w.name }))}
-                  />
-                ) : (
-                  <p className="truncate text-[13px] text-ink-2">{state.current?.name}</p>
-                )}
-              </>
-            )}
-          </div>
+          {state.error && (
+            <p className="mt-auto flex items-center gap-2 px-5 py-4 text-xs text-crit">
+              <span className="size-1.5 rounded-full bg-crit" /> Engine not reachable
+            </p>
+          )}
         </aside>
 
         <div className="min-w-0 flex-1">
-          <header className="sticky top-0 z-30 flex items-center gap-1 overflow-x-auto border-b border-line bg-bg/90 px-4 py-2.5 backdrop-blur md:hidden">
+          <header className="sticky top-0 z-30 hidden h-14 items-center gap-2 border-b border-line bg-bg px-4 text-sm md:flex">
+            {state.list.length > 1 ? (
+              <Select
+                label="Workspace"
+                value={state.current?.id ?? ""}
+                onChange={(v) => state.select(v)}
+                options={state.list.map((w) => ({ value: w.id, label: w.name }))}
+                className="[&>button]:border-transparent [&>button]:bg-transparent [&>button]:font-medium"
+              />
+            ) : (
+              <span className="truncate px-1 font-medium text-ink">{state.current?.name}</span>
+            )}
+            {section && path !== section.href && (
+              <>
+                <span className="text-faint" aria-hidden>
+                  /
+                </span>
+                <Link href={section.href} className="truncate text-mute hover:text-ink">
+                  {section.label}
+                </Link>
+              </>
+            )}
+          </header>
+          <header className="sticky top-0 z-30 flex h-14 items-center gap-1 overflow-x-auto border-b border-line bg-bg px-4 md:hidden">
             <Link href="/" className="mr-2 shrink-0">
               <Wordmark className="text-[11px]" />
             </Link>
@@ -140,13 +146,13 @@ function AppShell({ path, children }: { path: string; children: ReactNode }) {
               <Link
                 key={href}
                 href={href}
-                className={cx("shrink-0 rounded-ctl px-2.5 py-1.5 text-[13px]", active(href) ? "bg-panel-2 text-ink" : "text-mute")}
+                className={cx("shrink-0 rounded-[6px] px-2.5 py-1.5 text-[13px] font-medium", active(href) ? "bg-raised text-ink" : "text-mute")}
               >
                 {label}
               </Link>
             ))}
           </header>
-          <main className="mx-auto w-full max-w-[1200px] px-5 py-8 lg:px-10 lg:py-10">
+          <main className="mx-auto w-full max-w-[1248px] px-6 pb-16 pt-8">
             {!state.ready ? (
               <div className="flex justify-center py-24">
                 <Spinner />

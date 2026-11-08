@@ -8,9 +8,9 @@ import { cx } from "./ui";
 
 export function H1({ children, sub, right }: { children: ReactNode; sub?: ReactNode; right?: ReactNode }) {
   return (
-    <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+    <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
       <div className="min-w-0">
-        <h1 className="text-[30px] font-medium leading-tight tracking-[-0.035em] text-ink">{children}</h1>
+        <h1 className="text-2xl font-semibold leading-8 tracking-[-0.02em] text-ink">{children}</h1>
         {sub && <p className="mt-1.5 text-sm text-mute">{sub}</p>}
       </div>
       {right && <div className="flex shrink-0 items-center gap-2">{right}</div>}
@@ -91,7 +91,7 @@ export function Chips<T extends string>({ value, options, onChange }: { value: T
 export function Card({ title, right, children, className }: { title: ReactNode; right?: ReactNode; children: ReactNode; className?: string }) {
   return (
     <section className={cx("overflow-hidden rounded-card border border-line bg-panel", className)}>
-      <header className="flex min-h-12 items-center justify-between gap-3 border-b border-line px-5">
+      <header className="flex min-h-14 items-center justify-between gap-3 border-b border-line pl-4 pr-3">
         <h2 className="text-sm font-medium text-ink">{title}</h2>
         {right}
       </header>
