@@ -475,6 +475,10 @@ class Repo:
             c.executemany("INSERT INTO site_rules(workspace_id,kind,value,created_at) VALUES (?,?,?,?)",
                           [(ws_id, "always", v, ts) for v in always] + [(ws_id, "never", v, ts) for v in never])
 
+    def set_industry(self, ws_id: str, industry: str | None) -> None:
+        with self.db.tx() as c:
+            c.execute("UPDATE workspaces SET industry=? WHERE id=?", (industry, ws_id))
+
     def remember_pages(self, ws_id: str, doc_key: str, rows: list[dict]) -> None:
         ts = iso(now())
         with self.db.tx() as c:

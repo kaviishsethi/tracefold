@@ -101,7 +101,7 @@ def test_own_company_is_always_searched(env, monkeypatch):
     r = env.client.put('/v1/workspaces/ws_a/company', headers=env.h(), json={
         'name': 'Northwind Relay', 'website': 'https://www.northwindrelay.com/', 'reply_to': 'legal@northwind.example'})
     assert r.status_code == 200, r.text
-    assert r.json() == {'name': 'Northwind Relay', 'website': 'northwindrelay.com', 'reply_to': 'legal@northwind.example'}
+    assert r.json() == {'name': 'Northwind Relay', 'website': 'northwindrelay.com', 'reply_to': 'legal@northwind.example', 'industry': None}
     assert env.client.get('/v1/workspaces/ws_a/company', headers=env.h()).json()['website'] == 'northwindrelay.com'
     inp = env.upload({'memo.md': b'Apple staff memo about leaks'})
     scan = env.scan(inp['input_id'], checks=['public_match'], automatic_discovery=True, model_review=False)

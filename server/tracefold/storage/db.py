@@ -266,6 +266,10 @@ MIGRATIONS: list[str] = [
         PRIMARY KEY (workspace_id, doc_key, url)
     )
     """,
+    # 6: the company's industry, which switches on industry-specific checks (financial, healthcare, ...)
+    """
+    ALTER TABLE workspaces ADD COLUMN industry TEXT
+    """,
 ]
 
 

@@ -91,8 +91,9 @@ class DiscoveryService:
         p.require(ws_id, Capability.read)
         rem = self.e.repo.get_remediation_profile(ws_id)
         own = self.own_profile(ws_id)
+        ws = self.e.repo.get_workspace(ws_id) or {}
         return CompanyOut(name=rem["company_name"] if rem else None, website=own["official_domain"] if own else None,
-                          reply_to=rem["reply_to"] if rem else None)
+                          reply_to=rem["reply_to"] if rem else None, industry=ws.get("industry"))
 
     def put_company(self, p: Principal, ws_id: str, body: CompanyIn) -> CompanyOut:
         """Set the company once: approves its public name for search and signs takedowns with it."""
@@ -109,6 +110,7 @@ class DiscoveryService:
                 "id": existing["id"] if existing else new_id("cprof"), "workspace_id": ws_id, **clean,
                 "approved_by": p.client_id, "approved_at": iso(now()), "privacy_notice_version": identity.PRIVACY_NOTICE_VERSION})
         self.e.set_remediation_profile(ws_id, body.name.strip(), body.reply_to.strip())
+        self.e.repo.set_industry(ws_id, body.industry)
         return self.get_company(p, ws_id)
 
     # ---------------- site lists ----------------

@@ -5473,6 +5473,24 @@
             "minLength": 3,
             "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$",
             "title": "Reply To"
+          },
+          "industry": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "financial",
+                  "healthcare",
+                  "government",
+                  "retail",
+                  "technology"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Industry"
           }
         },
         "additionalProperties": false,
@@ -5518,6 +5536,17 @@
               }
             ],
             "title": "Reply To"
+          },
+          "industry": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Industry"
           }
         },
         "type": "object",

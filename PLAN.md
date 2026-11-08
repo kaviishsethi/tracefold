@@ -6,7 +6,7 @@ Decision record: November 7, 2026. Authors of the project: Kaviish Sethi and Aha
 
 **Pitch:** Review existing company material through an upload platform, and catch new risks while working through an MCP integration. Both use one private scan engine for public-exposure matching, preventive risk review, and evidence-backed next steps.
 
-The first user is a security or platform engineer at a small software business. They have a roadmap, proposal, internal engineering document, or code folder and want to know whether distinctive passages appear on public pages. The product has two first-class experiences: an on-demand upload platform for existing material and an MCP integration for developers working in a connected workspace. Both report explicit scan coverage. Continuous whole-web monitoring is a future hypothesis, not the walkthrough promise.
+The first user is a security engineer at a company, in an industry such as financial services, healthcare, government or retail, where the industry decides which regulated data the local checks look for. They have a roadmap, proposal, internal engineering document, or code folder and want to know whether distinctive passages appear on public pages. The product has two first-class experiences: an on-demand upload platform for existing material and an MCP integration for developers working in a connected workspace. Both report explicit scan coverage. Continuous whole-web monitoring is a future hypothesis, not the walkthrough promise.
 
 The product has four useful outputs:
 
