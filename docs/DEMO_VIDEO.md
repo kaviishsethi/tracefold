@@ -49,61 +49,62 @@ node record.mjs --fresh
 
 ## Shot list and voiceover
 
-About 2.5 words per second, in plain spoken English. Word counts are in brackets.
+Timed to the recorded clips in `demo/out/`. Times in brackets are seconds into each clip, so you can line the voice up
+in the editor. About 2.5 words per second, plain spoken English.
 
-### 0:00–0:22 What Tracefold is
+### 0:00–0:22 · Clip 01 · Title card
 
-[SCREEN] Title card: the Tracefold logo and name in bold, centered, with "Catch, fix and prevent security leaks."
-underneath (clip 01).
+[VO] "This is Tracefold. It helps you catch, fix and prevent security leaks. It checks if your company's documents or
+code have ended up on public websites, finds secrets like API keys, and drafts takedowns and turns off leaked keys once
+approved. Enterprises can run it in their own VPC or on their own machines, to keep their proprietary data private."
 
-[VO] "This is Tracefold. It helps you catch, fix and prevent security leaks. It checks if your company's documents or code have ended up on public websites, finds secrets like API keys, and drafts takedowns and turns off leaked keys once approved. Enterprises can run it in their own VPC or on their own machines, to keep their proprietary data private." [60]
+### 0:22–0:39 · Clip 02 · Choosing an industry
 
-### 0:22–0:35 Who it's for
+- [0s] "It's meant for a company's security team. Senior leads approve takedowns, and engineers can run scans."
+- [4s, menu opens] "You pick your industry, and Tracefold adds checks for it."
+- [8s, Healthcare chosen] "For healthcare, that's medical record numbers, provider IDs and dates of birth."
 
-[SCREEN] Settings → Company → Edit → open the Industry menu. Hover Healthcare so the line under it reads "Also checks
-for: medical record numbers, provider NPIs and dates of birth". Cancel.
+### 0:39–1:11 · Clip 03 · Finding public copies
 
-[VO] "It's meant for a company's security team. Senior leads approve takedowns. Engineers can run scans, but they can't approve them. You pick your industry, and Tracefold adds checks for it, like medical record numbers for healthcare." [36]
+Speed up 6s–19s (the scan running) to about 4 seconds and put "sped up" on screen.
 
-### 0:35–1:10 Finding public copies
+- [0s] "Here's a sample memo from Duolingo. Parts of it were quoted in news articles."
+- [3s, scan starts] "Tracefold searches the web for the company name using Exa or Tavily, then downloads the pages it finds and
+  compares them locally with your documents and code."
+- [21s, results] "It found the memo's text on four sites."
+- [27s, timeline] "Each site shows which passages match."
+- [33s, comparison] "Here's one: the same sentence, highlighted in the memo and on The Verge."
 
-[SCREEN] Sample files → Duolingo memo → progress card (sped up) → "3 public sites show text from your documents" →
-timeline. Zoom on "Searched for Duolingo". Open a site's passages, then Open page; zoom on the highlighted sentence.
+### 1:11–1:37 · Clip 04 · Risks in a file, and a takedown
 
-[VO] "This is a sample memo from Duolingo. Parts of it were quoted in news articles. Tracefold searches the web for the company name using Exa or Tavily, then downloads the pages it finds and compares them locally with your documents and code. It found the memo's text on several sites. If I open one, you can see the same sentence highlighted." [61]
+- [0s] "It also flags risky content inside your files. This one is marked confidential."
+- [6s, Approvals] "When a public page copies your file, Tracefold drafts a takedown request to that site."
+- [11s, letter opens] "You can read the letter before it goes out."
+- [16s, Save email] "One click approves it. In this demo, email sending is off, so it's saved as a file instead of sent."
 
-### 1:10–1:35 Risks in the file, and approving a takedown
+### 1:37–1:48 · Clip 05 · Scheduled checks
 
-[SCREEN] "In your files" section. Then Approvals → the pastebin.com takedown (from the sample page list; search-found
-pages don't get takedown drafts yet) → See the letter → the approve button reads "Save email" because sending is off.
+[VO] "You can also set any scan to run again on a schedule, starting whenever you want."
 
-[VO] "It also checks the file for risky content, using an AI model that runs on this computer. When a page copies your file, Tracefold writes a takedown request. Someone on the security team approves it with one click. In this demo, the request is saved as a file instead of being emailed." [52]
+### 1:48–2:08 · Claude Code over MCP (to record)
 
-### 1:35–1:45 Scheduled checks
+[SCREEN] Claude Code in a terminal, running the app's scan prompt: `scan_changes` → `get_findings` → edits the file →
+`recheck_fix`. Cut to Findings showing "Not detected in checked version".
 
-[SCREEN] Finished scan → Schedule → "every 1 days", start time → Schedule. Cut to Settings → Scheduled checks.
+[VO] "Tracefold also works inside coding tools through MCP. Here, Claude Code checks my code changes, finds an AWS key,
+moves it out of the code, and checks again. Claude Code can fix code, but it can't approve takedowns."
 
-[VO] "You can also set any scan to run again on a schedule, as often as you need." [17]
+### 2:08–2:33 · Wi-Fi off (to record)
 
-### 1:45–2:05 Claude Code over MCP
+[SCREEN] Turn Wi-Fi off (zoom on the icon). Scan a sample file with "Also check public pages" ticked. Local checks
+finish; "What didn't finish" lists the public check.
 
-[SCREEN] Claude Code terminal. Paste the scan prompt. Tool calls: `scan_changes` → `get_findings` → edit →
-`recheck_fix`. Cut to the web app showing the finding fixed.
+[VO] "Now Wi-Fi is off. The scan still finishes, because the matching and the AI model run on this computer. The web
+search needs internet, so Tracefold says that part didn't finish. It doesn't call the file clean."
 
-[VO] "Tracefold also works inside coding tools, through MCP. Here, Claude Code checks my code changes, finds a secret, removes it, and checks again. The app shows it as fixed. Claude Code can fix code, but it can't approve takedowns." [39]
+### 2:33–2:48 · Clip 06 · Title card
 
-### 2:05–2:30 Wi-Fi off
-
-[SCREEN] Turn Wi-Fi off (zoom on the icon). Run a scan. Local checks finish; "What didn't finish" lists the public
-check.
-
-[VO] "Now I'll turn Wi-Fi off and scan another file. The scan still finishes, because the matching and the AI model run on this computer. The web search needs internet, so Tracefold says that part didn't finish. It doesn't call the file clean." [42]
-
-### 2:30–2:45 What's real
-
-[SCREEN] The same title card as the intro (clip 06).
-
-[VO] "Everything in this video ran live. The sample files are public company documents." [13]
+[VO] "Everything in this video ran live. The sample files are public company documents."
 
 ## Voiceover recording
 
