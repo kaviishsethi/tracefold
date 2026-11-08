@@ -8,7 +8,7 @@ Target length **about 2:45**. The rules say projects without a video are not jud
 |---|---|
 | Privacy (Privacy-First) | Wifi off on camera. Local review still runs. Show what is sent out (search terms only). |
 | Search done right (Surge) | Exa/Tavily finds the pages. Click a citation and the live page has the same text. |
-| Real user, real problem | Say who uses it: security engineers at companies, with checks set by industry (financial services, healthcare, government, retail). |
+| Real user, real problem | Say who buys and uses it: bought by the head of security (CISO); used by senior security leaders who can approve takedowns; engineers and coding assistants scan but can't approve. Checks set by industry. |
 | Execution and demo | Say what is real and what isn't built yet. |
 
 ## Rules for the edit
@@ -52,9 +52,11 @@ Takedowns and key changes go out after one click of approval. Your files never l
 sector, Retail and e-commerce, Technology). Hover Healthcare so the line under it reads "Also checks for: medical
 record numbers, provider NPIs and dates of birth". Cancel.
 
-[VO] "It's built for security engineers at companies: the people who have to find out when internal documents or code
-end up public, and get them taken down. Each company picks its industry, like financial services or healthcare, and
-Tracefold adds checks for the regulated data that industry handles, like card numbers or medical record numbers."
+[VO] "It's bought by the head of security, the CISO. Day to day it's used by senior security leaders, like a VP or
+director of security, who are allowed to approve takedowns and key shut-offs for the company. Engineers and coding
+assistants can run scans, but they can't approve anything. Each company picks its industry, like financial services or
+healthcare, and Tracefold adds checks for the regulated data that industry handles, like card numbers or medical
+record numbers."
 
 ### 0:30–1:10 Uploading a file and finding public copies
 

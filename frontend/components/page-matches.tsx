@@ -18,9 +18,19 @@ export interface PageMatch {
   latestAt: string | undefined;
 }
 
+/** "content/handbook/x/controlled-document-procedure.md · 7c8f… · GitLab.com / … · GitLab" -> "controlled-document-procedure.md · GitLab". */
+function shorten(title: string): string {
+  const parts = title.split(" · ").map((p) => p.trim()).filter(Boolean);
+  if (parts.length > 1 && parts[0].includes("/")) {
+    const file = parts[0].split("/").filter(Boolean).pop() ?? parts[0];
+    return `${file} · ${parts[parts.length - 1]}`;
+  }
+  return title;
+}
+
 function pageTitle(f: Finding, url: string): string {
   const t = f.latest?.evidence[0]?.public?.discovery_origins?.[0]?.title;
-  if (t) return t;
+  if (t) return shorten(t);
   try {
     const u = new URL(url);
     return u.host.replace(/^www\./, "") + (u.pathname === "/" ? "" : u.pathname);

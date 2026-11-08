@@ -75,7 +75,9 @@ def main(argv: list[str] | None = None) -> int:
     ca.add_argument("--rotate", action="store_true", help="replace the key already in server/.env")
 
     sv = sub.add_parser("serve")
-    sv.add_argument("--port", type=int, default=8787)
+    sv.add_argument("--port", type=int, default=int(os.environ.get("TRACEFOLD_PORT", "8787")))
+    sv.add_argument("--host", default=os.environ.get("TRACEFOLD_HOST", "127.0.0.1"),
+                    help="address to listen on (default 127.0.0.1; use 0.0.0.0 inside a container or private network)")
 
     o = sub.add_parser("export-openapi")
     o.add_argument("out")
@@ -103,7 +105,10 @@ def main(argv: list[str] | None = None) -> int:
         s = Settings()
         if args.data:
             s.data_dir = Path(args.data).resolve()
-        uvicorn.run(create_app(Engine(s)), host="127.0.0.1", port=args.port, log_level="info")
+        if args.host not in ("127.0.0.1", "localhost", "::1"):
+            print(f"Listening on {args.host}:{args.port}. Every request still needs a client token; keep this "
+                  "port on a private network.", file=sys.stderr)
+        uvicorn.run(create_app(Engine(s)), host=args.host, port=args.port, log_level="info")
         return 0
     e = _engine(args)
     if args.cmd == "init":

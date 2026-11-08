@@ -57,3 +57,21 @@ def test_only_configure_clients_schedule_and_delete_removes_the_copy(env):
     assert folder.is_dir()
     assert env.client.delete(f"{WS}/schedules/{sid}", headers=env.h()).status_code == 204
     assert not folder.exists() and env.client.get(f"{WS}/schedules", headers=env.h()).json()["items"] == []
+
+
+def test_exact_interval_and_start_time(env):
+    from datetime import datetime, timedelta, timezone
+    s = first_scan(env)
+    start = (datetime.now(timezone.utc) + timedelta(hours=2)).replace(microsecond=0)
+    r = schedule(env, s["scan_id"], every=None, interval_seconds=90, start_at=start.isoformat())
+    assert r.status_code == 201, r.text
+    sch = r.json()
+    assert sch["interval_seconds"] == 90 and sch["every"] == "custom"
+    assert sch["next_run_at"].startswith(start.strftime("%Y-%m-%dT%H:%M"))       # first run at the chosen time
+    # A start in the past rolls forward to the next slot on its cadence.
+    past = (datetime.now(timezone.utc) - timedelta(seconds=200)).replace(microsecond=0)
+    r = env.client.patch(f"{WS}/schedules/{sch['schedule_id']}", headers=env.h(), json={"start_at": past.isoformat()})
+    nxt = datetime.fromisoformat(r.json()["next_run_at"].replace("Z", "+00:00"))
+    assert timedelta(0) < nxt - datetime.now(timezone.utc) <= timedelta(seconds=90)
+    assert ((nxt - past).total_seconds()) % 90 == 0
+    assert schedule(env, s["scan_id"], every=None, interval_seconds=5).status_code == 422   # under 10 seconds

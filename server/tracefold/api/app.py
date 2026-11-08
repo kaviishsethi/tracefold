@@ -246,11 +246,13 @@ def create_app(engine: Engine) -> FastAPI:
     @app.post("/v1/workspaces/{ws_id}/schedules", status_code=201, responses=ERRORS)
     def create_schedule(ws_id: str, body: ScheduleIn, p: Principal = Depends(principal)) -> dict:
         """Re-run a scan every hour, day or week (requires `configure`)."""
-        return engine.schedules.create(p, ws_id, scan_id=body.scan_id, every=body.every, public=body.public, name=body.name)
+        return engine.schedules.create(p, ws_id, scan_id=body.scan_id, every=body.every, public=body.public, name=body.name,
+                                       interval_seconds=body.interval_seconds, start_at=body.start_at)
 
     @app.patch("/v1/workspaces/{ws_id}/schedules/{schedule_id}", responses=ERRORS)
     def update_schedule(ws_id: str, schedule_id: str, body: SchedulePatch, p: Principal = Depends(principal)) -> dict:
-        return engine.schedules.update(p, ws_id, schedule_id, enabled=body.enabled, every=body.every, run_now=body.run_now)
+        return engine.schedules.update(p, ws_id, schedule_id, enabled=body.enabled, every=body.every, run_now=body.run_now,
+                                       interval_seconds=body.interval_seconds, start_at=body.start_at)
 
     @app.delete("/v1/workspaces/{ws_id}/schedules/{schedule_id}", status_code=204, responses=ERRORS)
     def delete_schedule(ws_id: str, schedule_id: str, p: Principal = Depends(principal)) -> None:

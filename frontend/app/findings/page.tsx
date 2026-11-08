@@ -76,7 +76,14 @@ export default function Findings() {
           <Note>{state === "open" ? "Nothing open here. Findings from new scans show up as they finish." : "No findings yet."}</Note>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[760px] text-left text-sm">
+            <table className="w-full min-w-[760px] table-fixed text-left text-sm">
+              <colgroup>
+                <col />
+                <col className="w-[220px]" />
+                <col className="w-[120px]" />
+                <col className="w-[120px]" />
+                <col className="w-[100px]" />
+              </colgroup>
               <thead className="text-xs text-faint">
                 <tr className="border-b border-line">
                   {["Finding", "Where", "Found in", "Status", "Last seen"].map((h, i) => (
@@ -97,12 +104,12 @@ export default function Findings() {
                       className="cursor-pointer border-b border-line last:border-0 hover:bg-panel-2"
                     >
                       <td className="px-5 py-3">
-                        <a href={`/findings/${item.finding_id}`} onClick={(e) => e.preventDefault()} className="flex items-center gap-3 text-ink">
+                        <a href={`/findings/${item.finding_id}`} onClick={(e) => e.preventDefault()} className="flex min-w-0 items-center gap-3 text-ink">
                           <Dot severity={item.latest?.severity} />
-                          <span className="truncate">{item.latest?.title ?? item.rule_id ?? "Finding"}</span>
+                          <span className="min-w-0 truncate" title={item.latest?.title}>{item.latest?.title ?? item.rule_id ?? "Finding"}</span>
                         </a>
                       </td>
-                      <td className="max-w-[260px] truncate px-5 py-3 font-mono text-xs text-mute">{findingPlace(item) || "Withheld"}</td>
+                      <td className="truncate px-5 py-3 font-mono text-xs text-mute" title={findingPlace(item)}>{findingPlace(item) || "Withheld"}</td>
                       <td className="px-5 py-3 text-mute">Your files</td>
                       <td className="px-5 py-3">
                         <StatusPill status={item.status} />
@@ -128,13 +135,13 @@ function PageGroupRows({ g, open, onToggle, onOpen }: { g: PageMatch; open: bool
     <>
       <tr onClick={() => (n === 1 ? onOpen(first.finding_id) : onToggle())} className="cursor-pointer border-b border-line last:border-0 hover:bg-panel-2">
         <td className="px-5 py-3">
-          <span className="flex items-center gap-3 text-ink">
+          <span className="flex min-w-0 items-center gap-3 text-ink">
             <Dot severity={first.latest?.severity} />
-            <span className="truncate">{g.title}</span>
+            <span className="min-w-0 truncate" title={g.title}>{g.title}</span>
             {n > 1 && <span className="shrink-0 text-xs text-faint">{n} passages</span>}
           </span>
         </td>
-        <td className="max-w-[260px] truncate px-5 py-3 font-mono text-xs text-mute">{g.path || "Withheld"}</td>
+        <td className="truncate px-5 py-3 font-mono text-xs text-mute" title={g.path}>{g.path || "Withheld"}</td>
         <td className="px-5 py-3 text-mute">Public page</td>
         <td className="px-5 py-3">
           <StatusPill status={allClosed ? first.status : "open"} />

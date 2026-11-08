@@ -291,6 +291,11 @@ MIGRATIONS: list[str] = [
         runs INTEGER NOT NULL DEFAULT 0
     )
     """,
+    # 8: exact schedule intervals and a start time
+    """
+    ALTER TABLE monitors ADD COLUMN interval_seconds INTEGER;
+    ALTER TABLE monitors ADD COLUMN start_at TEXT
+    """,
 ]
 
 

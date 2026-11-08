@@ -7,6 +7,7 @@ import { CONNECT_AWS, CONNECT_AWS_PROMPT, CopyCommand } from "@/components/copy-
 import { useCurrentWorkspace } from "@/components/shell";
 import { H1 } from "@/components/bits";
 import { Select } from "@/components/select";
+import { describeInterval } from "@/components/schedule-button";
 import { Button, ErrorNote, Field, inputClass } from "@/components/ui";
 
 interface Company {
@@ -320,7 +321,8 @@ function ConnectionsCard() {
 interface Schedule {
   schedule_id: string;
   name: string;
-  every: "hour" | "day" | "week";
+  every: string;
+  interval_seconds: number;
   enabled: boolean;
   next_run_at: string;
   last_run_at: string | null;
@@ -361,7 +363,10 @@ function SchedulesCard({ workspaceId, canEdit }: { workspaceId: string; canEdit:
               <span className="min-w-0 flex-1">
                 <span className="block truncate font-mono text-[13px] text-ink">{m.name}</span>
                 <span className="block text-xs text-faint">
-                  Every {m.every}
+                  {(() => {
+                    const d = describeInterval(m.interval_seconds);
+                    return d.charAt(0).toUpperCase() + d.slice(1);
+                  })()}
                   {m.enabled ? ` · next ${when(m.next_run_at)}` : " · paused"}
                   {m.last_scan_id && (
                     <>

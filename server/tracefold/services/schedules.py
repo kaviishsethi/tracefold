@@ -32,7 +32,37 @@ EVERY = {"hour": timedelta(hours=1), "day": timedelta(days=1), "week": timedelta
 
 
 def _parse(ts: str) -> datetime:
-    return datetime.fromisoformat(ts.replace("Z", "+00:00")).astimezone(timezone.utc)
+    d = datetime.fromisoformat(ts.replace("Z", "+00:00"))
+    return (d if d.tzinfo else d.replace(tzinfo=timezone.utc)).astimezone(timezone.utc)
+
+
+def interval_of(m: dict) -> timedelta:
+    return timedelta(seconds=m["interval_seconds"]) if m.get("interval_seconds") else EVERY.get(m["every"], EVERY["day"])
+
+
+def _interval(every: str | None, seconds: int | None) -> tuple[str, int]:
+    if seconds:
+        if not 10 <= seconds <= 31_536_000:
+            raise ApiError(422, "invalid_schedule", "Choose an interval between 10 seconds and a year.")
+        return "custom", seconds
+    every = every or "day"
+    if every not in EVERY:
+        raise ApiError(422, "invalid_schedule", "Choose hour, day or week, or give interval_seconds.")
+    return every, int(EVERY[every].total_seconds())
+
+
+def _first_run(start_at: str | None, step: timedelta) -> datetime:
+    """The requested start, or one interval from now. A start in the past rolls forward to its next slot."""
+    t = now()
+    if not start_at:
+        return t + step
+    try:
+        first = _parse(start_at)
+    except ValueError:
+        raise ApiError(422, "invalid_schedule", "start_at must be an ISO 8601 time.")
+    if first < t:
+        first += step * (int((t - first) / step) + 1)
+    return first
 
 
 class ScheduleService:
@@ -48,14 +78,15 @@ class ScheduleService:
         p.require(ws_id, Capability.read)
         return [self.out(m) for m in self.e.repo.list_monitors(ws_id)]
 
-    def create(self, p: Principal, ws_id: str, *, scan_id: str | None, every: str, public: bool, name: str | None) -> dict:
+    def create(self, p: Principal, ws_id: str, *, scan_id: str | None, every: str | None, public: bool, name: str | None,
+               interval_seconds: int | None = None, start_at: str | None = None) -> dict:
         p.require(ws_id, Capability.configure)
         p.require(ws_id, Capability.submit)
         ws = self.e.repo.get_workspace(ws_id)
         if ws is None:
             raise not_found()
-        if every not in EVERY:
-            raise ApiError(422, "invalid_schedule", "Choose hour, day or week.")
+        every, seconds = _interval(every, interval_seconds)
+        first = _first_run(start_at, timedelta(seconds=seconds))
         mid = new_id("sched")
         files: list[str] = []
         if scan_id:
@@ -84,21 +115,26 @@ class ScheduleService:
         t = now()
         self.e.repo.insert_monitor({
             "id": mid, "workspace_id": ws_id, "client_id": p.client_id, "name": label[:120], "source": source,
-            "source_scan_id": scan_id, "file_names": files, "every": every, "public": int(public), "enabled": 1,
-            "created_at": iso(t), "next_run_at": iso(t + EVERY[every]), "runs": 0,
+            "source_scan_id": scan_id, "file_names": files, "every": every, "interval_seconds": seconds,
+            "start_at": iso(first), "public": int(public), "enabled": 1,
+            "created_at": iso(t), "next_run_at": iso(first), "runs": 0,
         })
         return self.out(self.e.repo.get_monitor(mid))
 
     def update(self, p: Principal, ws_id: str, mid: str, *, enabled: bool | None = None, every: str | None = None,
-               run_now: bool = False) -> dict:
+               run_now: bool = False, interval_seconds: int | None = None, start_at: str | None = None) -> dict:
         p.require(ws_id, Capability.configure)
         m = self._get(ws_id, mid)
         fields: dict = {}
-        if every is not None:
-            if every not in EVERY:
-                raise ApiError(422, "invalid_schedule", "Choose hour, day or week.")
-            fields["every"] = every
-            fields["next_run_at"] = iso(now() + EVERY[every])
+        if every is not None or interval_seconds is not None or start_at is not None:
+            if every is not None or interval_seconds is not None:
+                new_every, seconds = _interval(every, interval_seconds)
+            else:
+                new_every, seconds = m["every"], int(interval_of(m).total_seconds())
+            first = _first_run(start_at, timedelta(seconds=seconds))
+            fields.update(every=new_every, interval_seconds=seconds, next_run_at=iso(first))
+            if start_at:
+                fields["start_at"] = iso(first)
         if enabled is not None:
             fields["enabled"] = int(enabled)
         if run_now:
@@ -117,7 +153,8 @@ class ScheduleService:
 
     def out(self, m: dict) -> dict:
         return {"schedule_id": m["id"], "name": m["name"], "source": m["source"], "files": m["file_names"],
-                "every": m["every"], "public": bool(m["public"]), "enabled": bool(m["enabled"]),
+                "every": m["every"], "interval_seconds": int(interval_of(m).total_seconds()), "start_at": m.get("start_at"),
+                "public": bool(m["public"]), "enabled": bool(m["enabled"]),
                 "created_at": m["created_at"], "next_run_at": m["next_run_at"], "last_run_at": m["last_run_at"],
                 "last_scan_id": m["last_scan_id"], "last_error": m["last_error"], "runs": m["runs"]}
 
@@ -147,7 +184,10 @@ class ScheduleService:
             last = self.e.repo.get_scan(m["last_scan_id"]) if m["last_scan_id"] else None
             if last and last["state"] in (ScanState.queued.value, ScanState.running.value):
                 continue
-            nxt = iso(now() + EVERY.get(m["every"], EVERY["day"]))
+            # Stay on the schedule's own cadence (start + k * interval), skipping slots missed while the engine was off.
+            step = interval_of(m)
+            due = _parse(m["next_run_at"])
+            nxt = iso(due + step * (int((now() - due) / step) + 1))
             try:
                 scan_id = self._run(m)
             except ApiError as ex:

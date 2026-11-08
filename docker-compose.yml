@@ -1,0 +1,36 @@
+# Run Tracefold inside your own network (VPC): web app, engine and a local model.
+# Only the web app port is published. The engine shares Ollama's network so the model stays at 127.0.0.1,
+# which the engine requires before it sends any file text to a model.
+services:
+  ollama:
+    image: ollama/ollama:0.9.5
+    environment:
+      OLLAMA_NO_CLOUD: "1"
+    volumes:
+      - ollama:/root/.ollama
+    expose: ["8787"]            # the engine's port, reachable on this shared network namespace
+
+  engine:
+    build: ./server
+    network_mode: "service:ollama"
+    environment:
+      TRACEFOLD_OLLAMA_URL: http://127.0.0.1:11434
+      TRACEFOLD_OLLAMA_MODEL: qwen2.5:7b-instruct
+    volumes:
+      - tracefold-data:/data    # database, page memory, scheduled file copies, outbox
+    depends_on: [ollama]
+    restart: unless-stopped
+
+  web:
+    build: ./frontend
+    environment:
+      TRACEFOLD_ENGINE_URL: http://ollama:8787   # the engine, on Ollama's network
+      TRACEFOLD_APP_TOKEN: ${TRACEFOLD_APP_TOKEN:?run the quickstart step in docs/DEPLOY.md first}
+    ports:
+      - "3000:3000"
+    depends_on: [engine]
+    restart: unless-stopped
+
+volumes:
+  ollama:
+  tracefold-data:
