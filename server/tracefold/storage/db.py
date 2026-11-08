@@ -270,6 +270,27 @@ MIGRATIONS: list[str] = [
     """
     ALTER TABLE workspaces ADD COLUMN industry TEXT
     """,
+    # 7: optional scheduled checks (schedules). Off until someone adds one.
+    """
+    CREATE TABLE monitors (
+        id TEXT PRIMARY KEY,
+        workspace_id TEXT NOT NULL REFERENCES workspaces(id),
+        client_id TEXT NOT NULL,
+        name TEXT NOT NULL,
+        source TEXT NOT NULL,                -- folder | files
+        source_scan_id TEXT,                 -- files: the scan whose uploaded files are re-checked
+        file_names TEXT NOT NULL DEFAULT '[]',
+        every TEXT NOT NULL,                 -- hour | day | week
+        public INTEGER NOT NULL DEFAULT 1,
+        enabled INTEGER NOT NULL DEFAULT 1,
+        created_at TEXT NOT NULL,
+        next_run_at TEXT NOT NULL,
+        last_run_at TEXT,
+        last_scan_id TEXT,
+        last_error TEXT,
+        runs INTEGER NOT NULL DEFAULT 0
+    )
+    """,
 ]
 
 

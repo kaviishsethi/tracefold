@@ -16,7 +16,7 @@ JSON_COLS = {
     "excludes", "capabilities", "sources", "files", "checks", "public_sources", "stages",
     "coverage", "budget", "versions", "errors", "summary", "data", "payload_summary",
     "target", "draft", "approver", "result",
-    "public_discovery", "public_aliases", "profile", "plan",
+    "public_discovery", "public_aliases", "profile", "plan", "file_names",
 }
 
 
@@ -559,3 +559,31 @@ class Repo:
                 c.execute("DELETE FROM discovery_runs WHERE scan_id=?", (sid,))
                 c.execute("DELETE FROM scans WHERE id=?", (sid,))
             return len(ids)
+
+    # ---------------- monitors (optional scheduled checks) ----------------
+    def insert_monitor(self, m: dict) -> None:
+        cols = list(m)
+        vals = [dumps(v) if k in JSON_COLS and not isinstance(v, str) else v for k, v in m.items()]
+        with self.db.tx() as c:
+            c.execute(f"INSERT INTO monitors({','.join(cols)}) VALUES ({','.join('?' * len(cols))})", vals)
+
+    def get_monitor(self, monitor_id: str) -> dict | None:
+        return _decode(_row(self.db.conn().execute("SELECT * FROM monitors WHERE id=?", (monitor_id,)).fetchone()))
+
+    def list_monitors(self, ws_id: str) -> list[dict]:
+        return [_decode(dict(r)) for r in self.db.conn().execute(
+            "SELECT * FROM monitors WHERE workspace_id=? ORDER BY created_at DESC", (ws_id,))]
+
+    def due_monitors(self, at_iso: str) -> list[dict]:
+        return [_decode(dict(r)) for r in self.db.conn().execute(
+            "SELECT * FROM monitors WHERE enabled=1 AND next_run_at <= ? ORDER BY next_run_at", (at_iso,))]
+
+    def update_monitor(self, monitor_id: str, **fields) -> None:
+        sets = ", ".join(f"{k}=?" for k in fields)
+        vals = [dumps(v) if k in JSON_COLS and not isinstance(v, str) else v for k, v in fields.items()]
+        with self.db.tx() as c:
+            c.execute(f"UPDATE monitors SET {sets} WHERE id=?", (*vals, monitor_id))
+
+    def delete_monitor(self, monitor_id: str) -> None:
+        with self.db.tx() as c:
+            c.execute("DELETE FROM monitors WHERE id=?", (monitor_id,))
