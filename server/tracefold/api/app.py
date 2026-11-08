@@ -12,7 +12,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from ..contracts.enums import Check
 from ..contracts.models import (
     ActionOut, ActionPage, ApproveRequest, EditActionRequest, MarkSubmittedRequest, RejectRequest,
-    CompanyIn, CompanyOut, CompanyProfileIn, SitesIn, SitesOut, CompanyProfileList, CompanyProfileOut, QueryPlanIn, QueryPlanOut, QueryPlanPage, QueryPresetCatalog, SourcePage,
+    CompanyIn, CompanyOut, CompanyProfileIn, ScheduleIn, SchedulePatch, SitesIn, SitesOut, CompanyProfileList, CompanyProfileOut, QueryPlanIn, QueryPlanOut, QueryPlanPage, QueryPresetCatalog, SourcePage,
     CapabilitiesOut, CaptureRequest, ErrorEnvelope, EvidenceOut, FindingDetail, FindingOut, FindingPage, InputOut,
     LedgerPage, ManifestOut, RecheckAccepted, RecheckRequest, ReviewRequest, ScanAccepted, ScanList, ScanOut, ScanRequest, WorkspaceList,
     WorkspaceOut,
@@ -238,6 +238,24 @@ def create_app(engine: Engine) -> FastAPI:
         return engine.remediation.mark_submitted(p, ws_id, action_id, body)
 
     # ---------------- company discovery ----------------
+    # ---------------- scheduled checks (optional) ----------------
+    @app.get("/v1/workspaces/{ws_id}/schedules", responses=ERRORS)
+    def list_schedules(ws_id: str, p: Principal = Depends(principal)) -> dict:
+        return {"items": engine.schedules.list(p, ws_id)}
+
+    @app.post("/v1/workspaces/{ws_id}/schedules", status_code=201, responses=ERRORS)
+    def create_schedule(ws_id: str, body: ScheduleIn, p: Principal = Depends(principal)) -> dict:
+        """Re-run a scan every hour, day or week (requires `configure`)."""
+        return engine.schedules.create(p, ws_id, scan_id=body.scan_id, every=body.every, public=body.public, name=body.name)
+
+    @app.patch("/v1/workspaces/{ws_id}/schedules/{schedule_id}", responses=ERRORS)
+    def update_schedule(ws_id: str, schedule_id: str, body: SchedulePatch, p: Principal = Depends(principal)) -> dict:
+        return engine.schedules.update(p, ws_id, schedule_id, enabled=body.enabled, every=body.every, run_now=body.run_now)
+
+    @app.delete("/v1/workspaces/{ws_id}/schedules/{schedule_id}", status_code=204, responses=ERRORS)
+    def delete_schedule(ws_id: str, schedule_id: str, p: Principal = Depends(principal)) -> None:
+        engine.schedules.delete(p, ws_id, schedule_id)
+
     @app.get("/v1/workspaces/{ws_id}/sites", response_model=SitesOut, responses=ERRORS)
     def get_sites(ws_id: str, p: Principal = Depends(principal)):
         """Pages checked in every public scan, and hosts never fetched."""

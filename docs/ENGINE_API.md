@@ -206,3 +206,15 @@ The accepted scan resolves its plan asynchronously. Inspect `summary.automatic_d
 status, and failure reason, and the source table and ledger for exact outgoing searches. Missing company context
 or a missing local model fails public coverage without suppressing local checks. Identical resolved plans are reused.
 Manual approved-identity discovery and source manifests remain available as explicit alternatives.
+
+
+## Scheduled checks (optional)
+
+| Endpoint | Body | Capability |
+|---|---|---|
+| `GET /workspaces/{ws}/schedules` | | `read` |
+| `POST /workspaces/{ws}/schedules` | `{scan_id?, every: hour\|day\|week, public?, name?}`. With `scan_id`, re-checks that scan's files from a private copy kept in the engine data folder; without it, re-checks the registered folder's uncommitted changes | `configure` + `submit` |
+| `PATCH /workspaces/{ws}/schedules/{id}` | `{enabled?, every?, run_now?}` | `configure` |
+| `DELETE /workspaces/{ws}/schedules/{id}` | deletes the schedule and its file copy | `configure` |
+
+The runner starts due schedules every 30 seconds and never stacks a run while the previous one is queued or running.
