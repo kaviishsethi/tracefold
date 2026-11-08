@@ -139,8 +139,8 @@ class Budget:
         self.max_input = lim.max_model_input_tokens
         self.context = lim.model_context_tokens
         self.max_output = lim.max_model_output_tokens
-        self.requests = 0
-        self.input_bound = 0
+        self.requests = ctx.budget.get("model_requests", 0)
+        self.input_bound = ctx.budget.get("model_input_bytes_bound", 0)
 
     def admit(self, prompt: str) -> bool:
         # UTF-8 byte length is an upper bound on token count for byte-level tokenizers, so this check is conservative.

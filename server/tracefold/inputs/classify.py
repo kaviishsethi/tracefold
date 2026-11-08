@@ -15,6 +15,8 @@ DOCX_EXT = {".docx"}
 def classify(path: str) -> tuple[str | None, str | None]:
     """Return (kind, language) or (None, None) for unsupported."""
     name = PurePosixPath(path).name.lower()
+    if name in {"license", "licence", "readme", "notice", "authors", "copying"}:
+        return "text", None
     if name.endswith(".env.example"):
         return "code", "dotenv"
     suffix = PurePosixPath(name).suffix

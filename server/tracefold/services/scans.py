@@ -27,7 +27,7 @@ def started_from(client_name: str | None) -> str:
         return "assistant"
     if any(n.startswith(h) for h in APP_HINTS):
         return "app"
-    return "other"
+    return "app" if "web" in n else "other"
 
 
 def status_url(ws_id: str, scan_id: str) -> str:
@@ -65,6 +65,10 @@ class ScanService:
             public_sources = {"manifest_id": None, "mode": PublicMode.refresh.value, "snapshot_id": None,
                               "source_ids": None, "explicit_sources": explicit_sources}
         public_discovery = req.public_discovery.model_dump(mode="json") if req.public_discovery else None
+        if req.automatic_discovery:
+            if Check.public_match not in checks or req.public_sources or req.public_discovery:
+                raise ApiError(422, "public_input_conflict", "Automatic discovery requires public_match and no saved source selection.")
+            public_discovery = {"mode": "live", "automatic": True, "query_plan_id": None}
         payload = {"input_id": req.input_id, "checks": [c.value for c in checks],
                    "public_sources": public_sources, "public_discovery": public_discovery,
                    "review_profile": req.review_profile, "model_review": req.model_review, "recheck_of": recheck_of,
@@ -80,7 +84,9 @@ class ScanService:
                 return ScanAccepted(scan_id=prior["id"], state=ScanState(prior["state"]), input_id=prior["input_id"],
                                     status_url=status_url(ws_id, prior["id"]))
         meta, _cap = self.resolve_input(ws_id, req.input_id)
-        if Check.public_match in checks and explicit_sources:
+        if req.automatic_discovery:
+            pass
+        elif Check.public_match in checks and explicit_sources:
             pass
         elif Check.public_match in checks and req.public_discovery is not None:
             if req.public_sources is not None:
