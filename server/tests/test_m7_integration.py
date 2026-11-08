@@ -28,7 +28,7 @@ ROUTES = {
     ("get", "/v1/workspaces/{ws_id}/findings/{finding_id}"), ("get", "/v1/workspaces/{ws_id}/evidence/{evidence_id}"),
     ("post", "/v1/workspaces/{ws_id}/findings/{finding_id}/rechecks"),
     ("patch", "/v1/workspaces/{ws_id}/findings/{finding_id}/review"),
-    ("get", "/v1/workspaces/{ws_id}/scans/{scan_id}/ledger"),
+    ("get", "/v1/workspaces/{ws_id}/scans/{scan_id}/ledger"), ("get", "/v1/workspaces/{ws_id}/manifests/{manifest_id}"),
 }
 
 

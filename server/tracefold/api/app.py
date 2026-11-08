@@ -12,7 +12,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from ..contracts.enums import Check
 from ..contracts.models import (
     CapabilitiesOut, CaptureRequest, ErrorEnvelope, EvidenceOut, FindingDetail, FindingOut, FindingPage, InputOut,
-    LedgerPage, RecheckAccepted, RecheckRequest, ReviewRequest, ScanAccepted, ScanOut, ScanRequest, WorkspaceList,
+    LedgerPage, ManifestOut, RecheckAccepted, RecheckRequest, ReviewRequest, ScanAccepted, ScanOut, ScanRequest, WorkspaceList,
     WorkspaceOut,
 )
 from ..engine import Engine
@@ -118,6 +118,21 @@ def create_app(engine: Engine) -> FastAPI:
                                           capabilities=sorted(g.capabilities, key=lambda c: c.value), disclosure=g.disclosure,
                                           manifests=engine.repo.list_manifests(ws_id)))
         return WorkspaceList(items=items)
+
+    @app.get("/v1/workspaces/{ws_id}/manifests/{manifest_id}", response_model=ManifestOut, responses=ERRORS)
+    def get_manifest(ws_id: str, manifest_id: str, p: Principal = Depends(principal)):
+        from ..contracts.enums import Capability
+        from ..errors import not_found
+        p.require(ws_id, Capability.read)
+        m = engine.repo.get_manifest(ws_id, manifest_id)
+        if m is None:
+            raise not_found()
+        return ManifestOut(
+            manifest_id=m["id"], version=m["version"],
+            sources=[{"source_id": x["source_id"], "url": x["url"], "provider": x["provider"], "mode": x.get("mode", "seeded")}
+                     for x in m["sources"]],
+            outbound_note="Only these approved URLs (and provider authentication) are sent outside the engine; "
+                          "private file text is never used as a query.")
 
     @app.post("/v1/workspaces/{ws_id}/uploads", response_model=InputOut, status_code=201, responses=ERRORS)
     async def upload(ws_id: str, request: Request, p: Principal = Depends(principal)):

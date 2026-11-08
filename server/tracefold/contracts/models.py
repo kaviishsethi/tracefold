@@ -62,6 +62,21 @@ class WorkspaceOut(BaseModel):
     manifests: list[str]
 
 
+class ManifestSourceOut(BaseModel):
+    source_id: str
+    url: str
+    provider: str
+    mode: Literal["seeded", "discovered"]
+
+
+class ManifestOut(BaseModel):
+    schema_version: int = SCHEMA_VERSION
+    manifest_id: str
+    version: int
+    sources: list[ManifestSourceOut]
+    outbound_note: str
+
+
 class WorkspaceList(BaseModel):
     items: list[WorkspaceOut]
 
@@ -177,6 +192,8 @@ class PublicSpanOut(BaseModel):
     retrieved_at: str | None
     freshness: Literal["fresh", "cached"]
     snapshot_id: str
+    mode: Literal["seeded", "discovered"] = "seeded"
+    provider: str | None = None
 
 
 class EvidenceOut(BaseModel):

@@ -136,6 +136,10 @@ def test_public_match_end_to_end(env):
     assert len(pub) == 1 and pub[0]["path"] == "roadmap.md" and pub[0]["status"] == "open"
     ev = pub[0]["latest"]["evidence"][0]
     assert ev["public"]["url"] == "https://forum.example/t/123" and ev["public"]["freshness"] == "fresh"
+    assert ev["public"]["mode"] == "seeded" and ev["public"]["provider"] == "fixture"
+    m = env.client.get("/v1/workspaces/ws_a/manifests/sources_demo", headers=env.h()).json()
+    assert [x["source_id"] for x in m["sources"]] == ["forum", "vendor_blog"] and m["sources"][0]["mode"] == "seeded"
+    assert env.client.get("/v1/workspaces/ws_a/manifests/sources_demo", headers=env.h("other")).status_code == 404
     assert ev["location"]["line_start"] == 5 and ev["matched_tokens"] >= 30
     assert pub[0]["latest"]["title"] == "Matching content found publicly"
     full = env.client.get(f"/v1/workspaces/ws_a/evidence/{ev['evidence_id']}", headers=env.h()).json()
