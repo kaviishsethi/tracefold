@@ -34,83 +34,72 @@ Target length **about 2:45**. The rules say projects without a video are not jud
 
 ## Shot list and voiceover
 
+About 2.5 words per second. Each line fits its slot with room to breathe; word counts are in brackets.
+
 ### 0:00–0:20 What Tracefold is
 
-[SCREEN] Tracefold Scan page, "Drop files to check".
+[SCREEN] Tracefold Scan page.
 
-[VO] "This is Tracefold, a platform that catches, fixes and prevents security risks in a company's files, both in
-documents you upload and in code as you write it, through an MCP server your coding assistant connects to. Scans can
-run on a schedule, so it keeps checking. It finds data breaches of internal files, and sensitive data inside
-them, like API keys, access tokens and Social Security numbers. It searches the web for pages that
-have leaked text from your files, and drafts a takedown request to each site. It disables leaked AWS keys and
-revokes leaked GitHub tokens. And through your coding assistant, it removes secrets from code and rechecks the fix.
-Takedowns and key changes go out after one click of approval. Your files never leave your laptop."
+[VO] "This is Tracefold. It finds your company's documents and code on public websites, flags secrets inside them,
+and fixes what it can. Takedowns and key shut-offs take one click to approve. Your files stay on your machine." [37]
 
 ### 0:20–0:35 Who it's for
 
-[SCREEN] Settings → Company → Edit → open the Industry menu (Financial services, Healthcare, Government and public
-sector, Retail and e-commerce, Technology). Hover Healthcare so the line under it reads "Also checks for: medical
-record numbers, provider NPIs and dates of birth". Cancel.
+[SCREEN] Settings → Company → Edit → open the Industry menu. Hover Healthcare so the line under it reads "Also checks
+for: medical record numbers, provider NPIs and dates of birth". Cancel.
 
-[VO] "It's bought by the head of security, the CISO. Day to day it's used by senior security leaders, like a VP or
-director of security, who are allowed to approve takedowns and key shut-offs for the company. Engineers and coding
-assistants can run scans, but they can't approve anything. Each company picks its industry, like financial services or
-healthcare, and Tracefold adds checks for the regulated data that industry handles, like card numbers or medical
-record numbers."
+[VO] "It's built for the CISO's team. Senior security leads approve takedowns. Engineers and coding assistants can
+scan, but can't approve. Pick your industry, and Tracefold adds checks like card or medical record numbers." [33]
 
-### 0:30–1:10 Uploading a file and finding public copies
+### 0:35–1:10 Finding public copies
 
-[SCREEN] Sample files → Duolingo memo → progress card (sped up) → results: site count, timeline of sites, matches
-grouped by page. Zoom on the "Searched for" line. Click a citation; the live page opens; zoom on the matching sentence.
+[SCREEN] Sample files → Duolingo memo → progress card (sped up) → "3 public sites show text from your documents" →
+timeline. Zoom on "Searched for Duolingo". Open a site's passages, then Open page; zoom on the highlighted sentence.
 
-[VO] "We're uploading a sample file: a Duolingo internal memo whose text was later quoted in the press. The scan is
-sped up here. Tracefold sends search queries to Exa and Tavily. This line shows exactly what was searched: the
-company name, not the file. It downloads the pages that come back and compares them with the file locally. Here are
-the sites that contain text from the memo, and the matching passages. Clicking a result opens the live page, and you
-can see the same sentence."
+[VO] "Here's a sample Duolingo memo, whose text was later quoted in the press. Tracefold searches with Exa or Tavily for the
+company name, never the file itself. It downloads what comes back and compares it on this laptop. Three sites have
+text from the memo. Open one, and there's the same sentence." [52]
 
-### 1:10–1:35 Risks in the files, and approving a takedown
+### 1:10–1:35 Risks in the file, and approving a takedown
 
-[SCREEN] Potential risks section → Approvals page → takedown draft → Approve → "saved as a file, not sent".
+[SCREEN] "In your files" section. Then Approvals → the pastebin.com takedown (from the sample page list; search-found
+pages don't get takedown drafts yet) → See the letter → the approve button reads "Save email" because sending is off.
 
-[VO] "Below that are risks the local model found in the file itself. This runs in Ollama on this laptop. For each
-public copy, Tracefold drafts a takedown request to the site. A person has to approve it. In this demo, approved
-requests are saved to a local folder, not emailed."
+[VO] "It also flags risks inside the file, using a model running on this laptop. When a page copies your file,
+Tracefold drafts a takedown. A person approves it with one click. In this demo, it's saved as a file instead of
+emailed." [42]
 
 ### 1:35–1:45 Scheduled checks
 
-[SCREEN] Finished scan → Schedule → "every day" → Schedule. Cut to Settings → Scheduled checks: the file, "Every day",
-next run, Run now / Pause / Delete.
+[SCREEN] Finished scan → Schedule → "every 1 days", start time → Schedule. Cut to Settings → Scheduled checks.
 
-[VO] "Any scan can run on a schedule, every hour, day or week, like a scheduled task. Tracefold keeps a private copy
-of the files on this machine so it can check them again, and new results show up like any other scan."
+[VO] "Any scan can repeat on a schedule, at any interval, starting whenever you choose." [14]
 
-### 1:45–2:05 The same checks from Claude Code (MCP)
+### 1:45–2:05 Claude Code over MCP
 
-[SCREEN] Claude Code terminal. Paste the scan prompt. Tool calls: `scan_changes` → `get_findings` → edit → `recheck_fix`.
-Cut to the web app showing the same finding marked fixed.
+[SCREEN] Claude Code terminal. Paste the scan prompt. Tool calls: `scan_changes` → `get_findings` → edit →
+`recheck_fix`. Cut to the web app showing the finding fixed.
 
-[VO] "Tracefold runs as an MCP server, so a coding assistant can call it. Here Claude Code scans the uncommitted
-changes in a repo, gets a finding, fixes the code, and rechecks it. The web app shows the same finding, now fixed.
-The assistant can scan and fix code. It can't approve takedowns; only a person can."
+[VO] "Tracefold is also an MCP server. Here Claude Code scans my changes, finds a secret, fixes it, and rechecks. The
+app shows it fixed. The assistant can fix code, but it can't approve anything." [34]
 
-### 2:05–2:30 Wifi off
+### 2:05–2:30 Wi-Fi off
 
-[SCREEN] Turn Wi-Fi off (zoom on the icon). Run a scan. Local review completes. "What didn't finish" lists public search.
+[SCREEN] Turn Wi-Fi off (zoom on the icon). Run a scan. Local checks finish; "What didn't finish" lists the public
+check.
 
-[VO] "Now wifi is off. We scan another file. Parsing, matching and the model review still finish, because they all run
-on this laptop. Public search needs the internet, so it's listed as not finished instead of being reported as clean.
-One limitation: Claude Code is a cloud assistant, so the results it receives go to Anthropic. A fully private setup
-would use a local-model assistant, which we haven't shown here."
+[VO] "Now Wi-Fi is off. The scan still finishes, because matching and the model run on this laptop. Public search
+needs the internet, so it says that check didn't finish, instead of calling the file clean." [35]
 
 ### 2:30–2:45 What's real
 
-[SCREEN] End card. **Working:** file scans, Exa/Tavily search, local matching, Ollama review, industry checks,
-scheduled checks, MCP scan/fix/recheck, approvals saved to a local folder. **Not built yet:** GitHub and Docs
-connectors, a local-model assistant. Sample files are public company documents saved as files.
+[SCREEN] End card. **Working:** file scans, Exa or Tavily search, local matching, Ollama review, industry checks, scheduled
+checks, MCP scan/fix/recheck, takedowns saved to a local folder. **Not built yet:** GitHub and Docs connectors,
+takedown drafts for search-found pages, a local-model coding assistant. **Note:** Claude Code is a cloud assistant,
+so results it reads go to Anthropic. Sample files are public company documents saved as files.
 
-[VO] "Everything shown ran live. The sample files are public company documents saved as files. Connectors for GitHub
-and Docs are not built yet."
+[VO] "Everything here ran live. The sample files are public documents. GitHub and Docs connectors aren't built
+yet." [17]
 
 ## Voiceover recording
 
@@ -120,7 +109,7 @@ and Docs are not built yet."
 - Record each section 2–3 times and keep the best take.
 - No music.
 
-## Time budget (3 hours left)
+## Time budget
 
 | By | Done |
 |---|---|
