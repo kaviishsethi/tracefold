@@ -152,9 +152,13 @@ export function LeakTimeline({ groups }: { groups: PageMatch[] }) {
   return (
     <section className="mb-10">
       <div className="mb-10 rounded-card border border-crit/30 bg-crit/[0.06] px-6 py-8 text-center">
-        <p className="text-5xl font-semibold tracking-[-0.03em] text-crit">{sites}</p>
-        <p className="mt-2 text-lg font-medium text-ink">{sites === 1 ? "site" : "sites"} with text from your files</p>
-        <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-mute">
+        <p className="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 text-ink">
+          <span className="text-5xl font-semibold leading-none tracking-[-0.03em] text-crit">{sites}</span>
+          <span className="text-xl font-medium">
+            identified {sites === 1 ? "site" : "sites"} with likely data breaches of your documents
+          </span>
+        </p>
+        <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-mute">
           Passages from{" "}
           {files.map((f, i) => (
             <span key={f}>
