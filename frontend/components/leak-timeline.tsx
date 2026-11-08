@@ -155,19 +155,18 @@ export function LeakTimeline({ groups }: { groups: PageMatch[] }) {
         <p className="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 text-ink">
           <span className="text-5xl font-semibold leading-none tracking-[-0.03em] text-crit">{sites}</span>
           <span className="text-xl font-medium">
-            identified {sites === 1 ? "site" : "sites"} with likely data breaches of your documents
+            public {sites === 1 ? "site shows" : "sites show"} text from your documents
           </span>
         </p>
         <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-mute">
-          Passages from{" "}
+          From{" "}
           {files.map((f, i) => (
             <span key={f}>
               {i > 0 && (i === files.length - 1 ? " and " : ", ")}
               <span className="font-mono text-[13px] text-ink-2">{f}</span>
             </span>
-          ))}{" "}
-          appear
-          on these public pages. Check each one before asking for a takedown.
+          ))}
+          . Check each one before asking for a takedown.
         </p>
       </div>
 
