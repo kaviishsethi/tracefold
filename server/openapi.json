@@ -4688,7 +4688,8 @@
         "type": "string",
         "enum": [
           "takedown_request",
-          "disable_aws_key"
+          "disable_aws_key",
+          "revoke_github_token"
         ],
         "title": "ActionKind"
       },

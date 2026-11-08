@@ -137,3 +137,9 @@ def make_env(tmp_path):
 @pytest.fixture
 def env(make_env) -> Env:
     return make_env()
+
+
+@pytest.fixture(autouse=True)
+def _no_real_env_file(monkeypatch, tmp_path_factory):
+    """Keep a developer's real server/.env (search or AWS keys) out of every test."""
+    monkeypatch.setenv("TRACEFOLD_ENV_FILE", str(tmp_path_factory.mktemp("noenv") / ".env"))

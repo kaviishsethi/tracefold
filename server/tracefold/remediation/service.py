@@ -7,6 +7,8 @@
 - ``disable_aws_key`` is drafted for every long-term AWS access key ID found in a scanned file. On approval the
   key is set Inactive in IAM using the company's remediation credentials (never the leaked key). No replacement
   key is created.
+- ``revoke_github_token`` is drafted for every GitHub token found in a scanned file. On approval the token is sent
+  to GitHub's public revocation API, which needs no setup. The token is held only in engine memory, never stored.
 
 Coding assistants are not given the ``approve`` capability by default, so they can read actions but not approve them.
 """
@@ -25,7 +27,7 @@ from ..errors import ApiError, not_found
 from ..gateway.gateway import Gateway, mask_secret
 from ..policy.auth import Principal
 from ..util import iso, new_id, now
-from . import aws, mailer, takedown
+from . import aws, github, mailer, takedown
 
 if TYPE_CHECKING:
     from ..engine import Engine
@@ -44,14 +46,24 @@ class RemediationService:
         self.env = env if env is not None else os.environ
         self.gateway = gateway or Gateway()
         self.clock = None  # test seam for AWS request timestamps
+        self.tokens: dict[str, str] = {}  # GitHub tokens awaiting approval, by fingerprint; memory only
 
     @property
     def mail_transport(self) -> str:
         return self.env.get("TRACEFOLD_MAIL_TRANSPORT", "outbox")
 
+    def _aws_creds(self) -> "aws.AwsCredentials | None":
+        creds = aws.AwsCredentials.from_env(self.env)
+        if creds is None and self.env is os.environ:  # `tracefold connect-aws` may have written .env since startup
+            from ..envfile import load_env_file
+            load_env_file()
+            creds = aws.AwsCredentials.from_env(self.env)
+        return creds
+
     def status(self) -> dict[str, str]:
         return {"takedown_delivery": mailer.transport_status(self.mail_transport, self.env),
-                "aws_key_disable": "configured" if aws.AwsCredentials.from_env(self.env) else "not_configured"}
+                "aws_key_disable": "configured" if self._aws_creds() else "not_configured",
+                "github_token_revoke": "available"}
 
     # ---------------- drafting (runs inside a scan, after publication) ----------------
     def draft_for_scan(self, ctx: "ScanContext", published: list[tuple[str, str]]) -> int:
@@ -65,6 +77,13 @@ class RemediationService:
                 key = next((v for v in p.secret_values if aws.ACCESS_KEY_ID.match(v)), None)
                 if key:
                     rec = self._record(ws, finding_id, ActionKind.disable_aws_key, {"access_key_id": key}, {})
+            elif p.rule_id == "secret_literal" and p.meta.get("pattern") == "github_token":
+                token = next((v for v in p.secret_values if github.TOKEN.match(v)), None)
+                if token:
+                    fp = github.fingerprint(token)
+                    self.tokens[fp] = token  # a rescan after a restart puts it back for an existing action
+                    rec = self._record(ws, finding_id, ActionKind.revoke_github_token,
+                                       {"token": github.masked(token), "fingerprint": fp}, {})
             if rec and self.e.repo.insert_action_if_absent(rec):
                 drafted += 1
         return drafted
@@ -131,6 +150,10 @@ class RemediationService:
             f = self.e.repo.get_finding(a["finding_id"])
             if a["status"] in (ActionStatus.submitted.value, ActionStatus.awaiting_manual_submission.value):
                 removal = bool(f and f["status"] == FindingStatus.no_longer_observed.value)
+        elif a["kind"] == ActionKind.revoke_github_token.value:
+            fp = target.pop("fingerprint", None)
+            target["ready"] = fp in self.tokens  # false after an engine restart until the file is scanned again
+            summary = f"Revoke GitHub token {target['token']}"
         else:
             target["access_key_id"] = mask_secret(target["access_key_id"])
             summary = f"Disable AWS access key {target['access_key_id']}"
@@ -207,6 +230,8 @@ class RemediationService:
         approver = {**(req.approver.model_dump() if req.approver else {}), "client": p.name}
         if a["kind"] == ActionKind.takedown_request.value:
             self._approve_takedown(ws_id, a, approver)
+        elif a["kind"] == ActionKind.revoke_github_token.value:
+            self._approve_github(a, approver)
         else:
             self._approve_aws(a, approver)
         return self.out(self.e.repo.get_action(a["id"]), g.disclosure)
@@ -254,7 +279,7 @@ class RemediationService:
             self._persist_ledger(ws_id, before, outbox=self.mail_transport == "outbox", action_id=a["id"])
 
     def _approve_aws(self, a: dict, approver: dict) -> None:
-        creds = aws.AwsCredentials.from_env(self.env)
+        creds = self._aws_creds()
         if creds is None:
             raise ApiError(409, "aws_remediation_not_configured",
                            f"Set {aws.ENV_KEY_ID} and {aws.ENV_SECRET} for a remediation IAM principal on the engine.")
@@ -268,6 +293,26 @@ class RemediationService:
             log.error("aws key disable failed: %s", type(ex).__name__)
             self._finish(a, version, ActionStatus.failed, {"error": {"code": "internal_error", "message": "Disabling failed."}})
         else:
+            self._finish(a, version, ActionStatus.completed, result)
+        finally:
+            self._persist_ledger(a["workspace_id"], before)
+
+    def _approve_github(self, a: dict, approver: dict) -> None:
+        token = self.tokens.get(a["target"]["fingerprint"])
+        if token is None:
+            raise ApiError(409, "token_not_in_memory",
+                           "Tracefold doesn't keep tokens on disk. Scan the file again, then revoke.")
+        version = self._begin(a, approver)
+        before = len(self.gateway.ledger)
+        try:
+            result = github.revoke(self.gateway, token)
+        except github.GithubActionError as ex:
+            self._finish(a, version, ActionStatus.failed, {"error": {"code": ex.code, "message": ex.message}})
+        except Exception as ex:
+            log.error("github revoke failed: %s", type(ex).__name__)
+            self._finish(a, version, ActionStatus.failed, {"error": {"code": "internal_error", "message": "Revoking failed."}})
+        else:
+            self.tokens.pop(a["target"]["fingerprint"], None)
             self._finish(a, version, ActionStatus.completed, result)
         finally:
             self._persist_ledger(a["workspace_id"], before)

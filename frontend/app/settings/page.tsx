@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { api, ws, type ApiError } from "@/lib/api";
+import { api, ws, type ApiError, type Capabilities } from "@/lib/api";
+import { AgentPrompt } from "@/components/agent-prompt";
+import { CONNECT_AWS, CONNECT_AWS_PROMPT, CopyCommand } from "@/components/copy-command";
 import { useCurrentWorkspace } from "@/components/shell";
 import { H1 } from "@/components/bits";
 import { Button, ErrorNote, Field, inputClass } from "@/components/ui";
@@ -128,6 +130,7 @@ export default function SettingsPage() {
         </form>
       )}
       {loaded && workspace && <SitesCard workspaceId={workspace.id} canEdit={canEdit} />}
+      {loaded && <ConnectionsCard />}
     </div>
   );
 }
@@ -238,6 +241,59 @@ function SitesCard({ workspaceId, canEdit }: { workspaceId: string; canEdit: boo
           </div>
         </form>
       )}
+    </section>
+  );
+}
+
+/** What Tracefold can do on its own when it finds a leaked key, and the one step that turns on what's missing. */
+function ConnectionsCard() {
+  const [caps, setCaps] = useState<Capabilities | null>(null);
+  useEffect(() => {
+    const load = () => api<Capabilities>("/capabilities").then(setCaps).catch(() => {});
+    load();
+    const t = setInterval(load, 5000); // shows AWS as connected soon after connect-aws runs
+    return () => clearInterval(t);
+  }, []);
+  if (!caps) return null;
+  const r = caps.remediation ?? {};
+  const aws = r.aws_key_disable === "configured";
+  const Row = ({ label, ok, children }: { label: string; ok: boolean; children: React.ReactNode }) => (
+    <div className="border-t border-line px-5 py-3.5 text-sm first:border-t-0">
+      <div className="flex items-center justify-between gap-6">
+        <span className="text-mute">{label}</span>
+        <span className={`flex items-center gap-2 ${ok ? "text-ink" : "text-faint"}`}>
+          <span className={`size-1.5 rounded-full ${ok ? "bg-local" : "bg-line-strong"}`} />
+          {ok ? "Ready" : "Not connected"}
+        </span>
+      </div>
+      {children}
+    </div>
+  );
+  return (
+    <section className="mt-6 rounded-card border border-line bg-panel">
+      <header className="flex min-h-14 items-center border-b border-line px-5">
+        <h2 className="text-sm font-medium text-ink">Connections</h2>
+      </header>
+      <div>
+        <Row label="GitHub tokens" ok={r.github_token_revoke === "available"}>
+          <p className="mt-1 text-xs text-faint">Revoked through GitHub. Nothing to set up.</p>
+        </Row>
+        <Row label="AWS keys" ok={aws}>
+          {aws ? (
+            <p className="mt-1 text-xs text-faint">Leaked keys are turned off in IAM after you approve.</p>
+          ) : (
+            <div className="mt-3 space-y-2">
+              <p className="text-xs text-faint">Run once. It uses your AWS CLI login and creates a user that can only turn keys off.</p>
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="min-w-[260px] flex-1">
+                  <CopyCommand command={CONNECT_AWS} />
+                </div>
+                <AgentPrompt text={CONNECT_AWS_PROMPT} />
+              </div>
+            </div>
+          )}
+        </Row>
+      </div>
     </section>
   );
 }

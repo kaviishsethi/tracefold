@@ -94,6 +94,7 @@ class PublicMode(StrEnum):
 class ActionKind(StrEnum):
     takedown_request = "takedown_request"
     disable_aws_key = "disable_aws_key"
+    revoke_github_token = "revoke_github_token"
 
 
 class ActionStatus(StrEnum):
