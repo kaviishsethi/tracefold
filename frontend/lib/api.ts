@@ -123,6 +123,9 @@ export interface Scan {
   started_at: string | null;
   finished_at: string | null;
   deadline_at: string | null;
+  /** Which client started it: the coding assistant (MCP), this web app, or something else (CLI, tests). */
+  initiated_by?: string | null;
+  started_from?: "assistant" | "app" | "other";
 }
 
 export interface Location {
@@ -542,6 +545,11 @@ export function rememberScan(s: RecentScan) {
     const all = recentScans().filter((x) => x.scan_id !== s.scan_id);
     localStorage.setItem(SCANS_KEY, JSON.stringify([s, ...all].slice(0, 50)));
   } catch {}
+}
+
+/** Every scan in the workspace from every client, newest first (the web app and the coding assistant share one engine). */
+export function listScans(workspaceId: string, limit = 20) {
+  return api<Page<Scan>>(ws(workspaceId, `/scans?limit=${limit}`));
 }
 
 // ---------- flows ----------

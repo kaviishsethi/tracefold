@@ -62,6 +62,10 @@ class Repo:
     def client_by_name(self, name: str) -> dict | None:
         return _row(self.db.conn().execute("SELECT * FROM clients WHERE name=?", (name,)).fetchone())
 
+    def clients_with_prefix(self, prefix: str) -> list[dict]:
+        rows = self.db.conn().execute("SELECT * FROM clients WHERE substr(name, 1, ?) = ?", (len(prefix), prefix))
+        return [dict(r) for r in rows]
+
     def revoke_client(self, client_id: str) -> None:
         with self.db.tx() as c:
             c.execute("UPDATE clients SET revoked_at=? WHERE id=?", (iso(now()), client_id))
@@ -115,6 +119,18 @@ class Repo:
         vals = [dumps(rec[k]) if k in JSON_COLS and not isinstance(rec[k], (str, type(None))) else rec[k] for k in cols]
         with self.db.tx() as c:
             c.execute(f"INSERT INTO scans({','.join(cols)}) VALUES ({','.join('?' * len(cols))})", vals)
+
+    def list_scans(self, ws_id: str, before: str | None, limit: int) -> list[dict]:
+        q, args = "SELECT * FROM scans WHERE workspace_id=?", [ws_id]
+        if before:
+            q += " AND created_at < ?"
+            args.append(before)
+        q += " ORDER BY created_at DESC, id DESC LIMIT ?"
+        args.append(limit)
+        return [_decode(dict(r)) for r in self.db.conn().execute(q, args)]
+
+    def get_client(self, client_id: str) -> dict | None:
+        return _row(self.db.conn().execute("SELECT * FROM clients WHERE id=?", (client_id,)).fetchone())
 
     def get_scan(self, scan_id: str) -> dict | None:
         return _decode(_row(self.db.conn().execute("SELECT * FROM scans WHERE id=?", (scan_id,)).fetchone()))

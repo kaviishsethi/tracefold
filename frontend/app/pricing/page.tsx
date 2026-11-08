@@ -56,7 +56,7 @@ export default function Pricing() {
                   same scan engine in your own environment.
                 </p>
                 <div className="rise mt-8 flex flex-wrap items-center gap-4" style={{ animationDelay: "200ms" }}>
-                  <LinkButton href="/onboarding">
+                  <LinkButton href="/setup">
                     Get started <ArrowRight className="size-4" aria-hidden />
                   </LinkButton>
                   <span className="text-sm text-mute">Starter is free. No card required.</span>

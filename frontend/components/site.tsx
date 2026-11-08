@@ -55,11 +55,11 @@ export function SiteHeader() {
             </Link>
           ))}
           <span className="ml-3 hidden sm:block">
-            <LinkButton href="/overview" variant="secondary">
+            <LinkButton href="/scan" variant="secondary">
               Open the app
             </LinkButton>
           </span>
-          <LinkButton href="/onboarding" className="ml-2">
+          <LinkButton href="/setup" className="ml-2">
             Get started
           </LinkButton>
         </nav>
@@ -116,7 +116,7 @@ export function Mission() {
             <span className="block text-ink">Tracefold checks whether any of it is already public.</span>
           </h2>
           <div className="mt-8 flex flex-wrap gap-3">
-            <LinkButton href="/onboarding">
+            <LinkButton href="/setup">
               Get started <ArrowRight className="size-4" aria-hidden />
             </LinkButton>
             <LinkButton href="/security" variant="ghost" className="bg-white/[0.06] text-ink hover:bg-white/10">
@@ -126,8 +126,8 @@ export function Mission() {
         </Reveal>
 
         <Reveal delay={120}>
-          <ImageSlot label="Closing art: tracing paper laid over a printed page, lit from below" className="flex aspect-[446/398] items-end justify-center rounded-[24px] border border-line pb-[9%]">
-            <LinkButton href="/onboarding">Run your first check</LinkButton>
+          <ImageSlot label="Closing art" src="/preview/pointillist-hero.webp" position="35% center" className="flex aspect-[446/398] items-end justify-center rounded-[24px] border border-line pb-[9%]">
+            <LinkButton href="/setup">Run your first check</LinkButton>
           </ImageSlot>
         </Reveal>
       </div>
@@ -155,8 +155,8 @@ const FOOTER_NAV = [
   {
     title: "Get started",
     links: [
-      ["Set up Tracefold", "/onboarding"],
-      ["Open the app", "/overview"],
+      ["Set up Tracefold", "/setup"],
+      ["Open the app", "/scan"],
     ],
   },
 ];

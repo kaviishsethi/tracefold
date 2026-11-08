@@ -12,8 +12,8 @@ type Variant = "primary" | "secondary" | "ghost" | "danger";
 type Size = "sm" | "md" | "lg";
 
 const VARIANT: Record<Variant, string> = {
-  primary: "bg-[#fafafa] text-[#0a0a0a] hover:bg-white",
-  secondary: "border border-[#454541] bg-panel-2 text-ink hover:border-[#5a5a55] hover:bg-raised",
+  primary: "bg-[#fafafa] text-[#0a0c0c] hover:bg-white",
+  secondary: "border border-[#414846] bg-panel-2 text-ink hover:border-[#56605d] hover:bg-raised",
   ghost: "text-mute hover:bg-panel-2 hover:text-ink",
   danger: "border border-crit/30 bg-crit/10 text-crit hover:bg-crit/15",
 };
@@ -192,25 +192,41 @@ export function Wordmark({ className }: { className?: string }) {
       <svg viewBox="0 0 16 16" className="size-4" aria-hidden>
         <rect x="1.5" y="2" width="8.5" height="11" rx="0.5" fill="none" stroke="currentColor" strokeWidth="1.4" />
         <path d="M6 5.5h8.5V15H6z" fill="currentColor" />
-        <path d="M8 9h4.5" stroke="#fd802e" strokeWidth="1.6" />
+        <path d="M8 9h4.5" stroke="#4fb8a6" strokeWidth="1.6" />
       </svg>
       Tracefold
     </span>
   );
 }
 
-/** Placeholder for imagery we don't have yet. `label` says what belongs here. */
-export function ImageSlot({ label, className, children }: { label: string; className?: string; children?: ReactNode }) {
+/** Imagery slot. With `src` it shows that image, cropped to fill (`position` picks the crop); without it, a placeholder
+ * that says what belongs here. Preview images live in public/preview/, which git ignores. */
+export function ImageSlot({
+  label,
+  className,
+  children,
+  src,
+  position = "center",
+}: {
+  label: string;
+  className?: string;
+  children?: ReactNode;
+  src?: string;
+  position?: string;
+}) {
   return (
     <div
       className={cx("image-slot overflow-hidden", !className?.includes("absolute") && "relative", className)}
       role="img"
-      aria-label={`Placeholder: ${label}`}
+      aria-label={src ? label : `Placeholder: ${label}`}
+      style={src ? ({ "--slot-img": `url(${src})`, "--slot-pos": position } as React.CSSProperties) : undefined}
     >
-      <span className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1.5 rounded-md bg-black/45 px-2 py-1 text-[11px] text-white/80 backdrop-blur">
-        <ImageIcon className="size-3" aria-hidden />
-        {label}
-      </span>
+      {!src && (
+        <span className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1.5 rounded-md bg-black/45 px-2 py-1 text-[11px] text-white/80 backdrop-blur">
+          <ImageIcon className="size-3" aria-hidden />
+          {label}
+        </span>
+      )}
       {children}
     </div>
   );

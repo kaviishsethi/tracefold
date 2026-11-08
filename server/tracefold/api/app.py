@@ -14,7 +14,7 @@ from ..contracts.models import (
     ActionOut, ActionPage, ApproveRequest, EditActionRequest, MarkSubmittedRequest, RejectRequest,
     CompanyProfileIn, CompanyProfileList, CompanyProfileOut, QueryPlanIn, QueryPlanOut, QueryPlanPage, QueryPresetCatalog, SourcePage,
     CapabilitiesOut, CaptureRequest, ErrorEnvelope, EvidenceOut, FindingDetail, FindingOut, FindingPage, InputOut,
-    LedgerPage, ManifestOut, RecheckAccepted, RecheckRequest, ReviewRequest, ScanAccepted, ScanOut, ScanRequest, WorkspaceList,
+    LedgerPage, ManifestOut, RecheckAccepted, RecheckRequest, ReviewRequest, ScanAccepted, ScanList, ScanOut, ScanRequest, WorkspaceList,
     WorkspaceOut,
 )
 from ..engine import Engine
@@ -159,6 +159,11 @@ def create_app(engine: Engine) -> FastAPI:
     def submit_scan(ws_id: str, body: ScanRequest, p: Principal = Depends(principal),
                     idempotency_key: str | None = Header(default=None)):
         return engine.scans.submit(p, ws_id, body, idempotency_key)
+
+    @app.get("/v1/workspaces/{ws_id}/scans", response_model=ScanList, responses=ERRORS)
+    def list_scans(ws_id: str, cursor: str | None = None, limit: int = Query(default=20, ge=1, le=100),
+                   p: Principal = Depends(principal)):
+        return engine.scans.list(p, ws_id, cursor, limit)
 
     @app.get("/v1/workspaces/{ws_id}/scans/{scan_id}", response_model=ScanOut, responses=ERRORS)
     def get_scan(ws_id: str, scan_id: str, p: Principal = Depends(principal)):
