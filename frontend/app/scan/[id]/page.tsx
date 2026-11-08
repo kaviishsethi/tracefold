@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Check, Loader2, X } from "lucide-react";
 import { api, coverageNote, isTerminal, useScan, ws, type Finding, type FindingKind, type Page, type Scan, type Stage } from "@/lib/api";
 import { relativeTime } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
@@ -12,47 +13,79 @@ import { SourcesPanel } from "@/components/scan-sources";
 import { LedgerPanel } from "@/components/scan-ledger";
 import { ErrorNote, Spinner, cx } from "@/components/ui";
 
-const STAGE_LABEL: Record<string, string> = {
-  parse: "Read files",
-  public_discovery: "Search",
-  public_retrieval: "Fetch pages",
-  public_match: "Compare",
-  local_rules: "Local rules",
-  model_review: "Local model review",
-  publish: "Publish",
+const STAGES: Record<string, { label: string; doing: string; check?: "public_match" | "local_risk" }> = {
+  parse: { label: "Read files", doing: "Extracting text from each file" },
+  public_discovery: { label: "Search", doing: "Looking for public pages that mention the company", check: "public_match" },
+  public_retrieval: { label: "Fetch pages", doing: "Downloading the pages search returned", check: "public_match" },
+  public_match: { label: "Compare", doing: "Checking those pages for passages from your files", check: "public_match" },
+  local_rules: { label: "Local rules", doing: "Scanning for keys, secrets and risky code", check: "local_risk" },
+  model_review: { label: "Local model review", doing: "A model on this machine reviews what the rules flagged", check: "local_risk" },
 };
 
-const STAGE_TONE: Record<Stage["status"], string> = {
-  pending: "bg-line-strong",
-  running: "bg-accent animate-pulse",
-  done: "bg-accent",
-  failed: "bg-crit",
-  skipped: "bg-transparent ring-1 ring-line-strong",
-  cancelled: "bg-med",
-};
+/** Ticks once a second so the elapsed time stays live. */
+function useNow(active: boolean) {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    if (!active) return;
+    const t = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(t);
+  }, [active]);
+  return now;
+}
 
-/** The pipeline as the engine reports it: search, fetch and compare are the public half, rules and model the local half. */
-function Stages({ scan }: { scan: Scan }) {
-  const stages = scan.stages.filter((s) => s.name in STAGE_LABEL && s.name !== "publish");
+function elapsed(from: string | null, now: number) {
+  const ms = from ? now - new Date(from).getTime() : 0;
+  const s = Math.max(0, Math.floor(ms / 1000));
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+}
+
+function StageMark({ status }: { status: Stage["status"] }) {
+  if (status === "done") return <span className="grid size-5 place-content-center rounded-full bg-accent/15"><Check className="size-3 text-accent" strokeWidth={3} aria-hidden /></span>;
+  if (status === "running") return <Loader2 className="size-5 animate-spin text-accent" aria-hidden />;
+  if (status === "failed") return <span className="grid size-5 place-content-center rounded-full bg-crit/15"><X className="size-3 text-crit" strokeWidth={3} aria-hidden /></span>;
+  return <span className="grid size-5 place-content-center"><span className="size-2 rounded-full border border-line-strong" /></span>;
+}
+
+/** Live progress while a scan runs: one row per stage this scan will actually run. */
+function Progress({ scan }: { scan: Scan }) {
+  const now = useNow(true);
+  const stages = scan.stages.filter((s) => {
+    const meta = STAGES[s.name];
+    return meta && s.status !== "skipped" && (!meta.check || scan.checks.includes(meta.check));
+  });
   if (!stages.length) return null;
+  const finished = stages.filter((s) => s.status === "done").length;
+  const pct = Math.round(((finished + (stages.some((s) => s.status === "running") ? 0.5 : 0)) / stages.length) * 100);
   return (
-    <ol className="mb-8 flex flex-wrap items-center gap-2 text-[13px]" aria-label="Scan stages">
-      {stages.map((s) => (
-        <li key={s.name}>
-          <span
-            className={cx(
-              "inline-flex items-center gap-2 rounded-ctl border border-line px-2.5 py-1",
-              s.status === "skipped" ? "text-faint" : s.status === "failed" ? "text-crit" : "text-ink-2",
-            )}
-            title={s.detail ? s.detail.replaceAll("_", " ") : s.status}
-          >
-            <span className={cx("size-1.5 rounded-full", STAGE_TONE[s.status])} />
-            {STAGE_LABEL[s.name]}
-            {s.status === "skipped" && <span className="text-[11px]">skipped</span>}
-          </span>
-        </li>
-      ))}
-    </ol>
+    <section className="mb-8 overflow-hidden rounded-card border border-line bg-panel">
+      <header className="flex min-h-14 items-center justify-between gap-3 border-b border-line pl-4 pr-4">
+        <h2 className="text-sm font-medium text-ink">
+          Step {Math.min(finished + 1, stages.length)} of {stages.length}
+        </h2>
+        <span className="font-mono text-xs tabular-nums text-faint">{elapsed(scan.started_at ?? scan.created_at, now)}</span>
+      </header>
+      <div className="h-0.5 bg-line">
+        <div className="h-full bg-accent transition-[width] duration-700 ease-out" style={{ width: `${pct}%` }} />
+      </div>
+      <ol>
+        {stages.map((s) => {
+          const meta = STAGES[s.name];
+          return (
+            <li key={s.name} className="flex items-center gap-3 border-t border-line px-4 py-3.5 first:border-t-0">
+              <StageMark status={s.status} />
+              <span className="min-w-0 flex-1">
+                <span className={cx("block text-sm", s.status === "pending" ? "text-mute" : s.status === "failed" ? "text-crit" : "text-ink")}>{meta.label}</span>
+                {(s.status === "running" || s.status === "failed") && (
+                  <span className="block truncate text-[13px] text-faint">
+                    {s.status === "failed" && s.detail ? s.detail.replaceAll("_", " ") : meta.doing}
+                  </span>
+                )}
+              </span>
+            </li>
+          );
+        })}
+      </ol>
+    </section>
   );
 }
 
@@ -134,7 +167,8 @@ export default function ScanDetail() {
         </Link>
       )}
 
-      {!done && <Stages scan={scan} />}
+      {!done && <Progress scan={scan} />}
+      {!done && <p className="-mt-5 mb-8 text-xs text-faint">You can leave this page. The scan keeps running and shows up under Scans.</p>}
 
       {auto && <Identified auto={auto} />}
 
@@ -161,7 +195,7 @@ export default function ScanDetail() {
         </div>
       )}
 
-      {(problems.length > 0 || scan.errors.length > 0) && (
+      {done && (problems.length > 0 || scan.errors.length > 0) && (
         <Disclosure label="What didn't finish">
           <ul className="mt-3 space-y-1">
             {problems.map((c) => (

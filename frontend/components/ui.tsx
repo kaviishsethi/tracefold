@@ -200,7 +200,7 @@ export function Wordmark({ className }: { className?: string }) {
 }
 
 /** Imagery slot. With `src` it shows that image, cropped to fill (`position` picks the crop); without it, a placeholder
- * that says what belongs here. Preview images live in public/preview/, which git ignores. */
+ * that says what belongs here. Landing-page images live in public/art/. */
 export function ImageSlot({
   label,
   className,

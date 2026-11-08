@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { ImageSlot, LinkButton, Wordmark, cx } from "./ui";
+import { LANDING_ART } from "@/lib/landing-art";
 import { DotField } from "./dot-field";
 
 const NAV = [
@@ -117,7 +118,7 @@ export function Mission() {
         </Reveal>
 
         <Reveal delay={120}>
-          <ImageSlot label="Closing art" src="/preview/pointillist-hero.webp" position="35% center" className="flex aspect-[446/398] items-end justify-center rounded-[24px] border border-line pb-[9%]">
+          <ImageSlot label="Closing art" src={LANDING_ART.pointillist} position="35% center" className="flex aspect-[446/398] items-end justify-center rounded-[24px] border border-line pb-[9%]">
             <LinkButton href="/scan">Run your first check</LinkButton>
           </ImageSlot>
         </Reveal>

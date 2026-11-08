@@ -5,13 +5,12 @@ import { Mission, Reveal, SiteFooter, SiteHeader } from "@/components/site";
 import { PlatformLogos } from "@/components/platforms";
 import { AgentOnboard } from "@/components/agent-onboard";
 import { ImageSlot, LinkButton, Wordmark, cx } from "@/components/ui";
+import { LANDING_ART } from "@/lib/landing-art";
 
 const EDGE = "px-[max(32px,4vw)]";
 
-// Temporary preview art from 0.security, kept in public/preview/ (git-ignored). Replace with our own before publishing.
-const ART = (name: string) => `/preview/${name}.webp`;
-const LOOP_ART = ["soft-hero", "cloud-field", "workflow-dusk-soft-halftone-v3", "dependency-security-20261020", "pointillist-hero"].map(ART);
-const STEP_ART = ["cloud-dusk", "cloud-field", "workflow-verification-20261030", "workflow-memory-20261030"].map(ART);
+const LOOP_ART = [LANDING_ART.hero, LANDING_ART.field, LANDING_ART.halftone, LANDING_ART.dependencies, LANDING_ART.pointillist];
+const STEP_ART = [LANDING_ART.dusk, LANDING_ART.field, LANDING_ART.verification, LANDING_ART.memory];
 const H2 = "text-[clamp(32px,3.4vw,46px)] leading-[1.14] tracking-[-0.035em]";
 
 // Real limits and rules from the engine, not marketing numbers.
@@ -265,7 +264,7 @@ export default function Landing() {
 
       {/* Hero */}
       <section className="relative isolate flex min-h-[100svh] flex-col">
-        <ImageSlot label="Hero image" src={ART("soft-hero")} className="absolute inset-0 -z-20" />
+        <ImageSlot label="Hero image" src={LANDING_ART.hero} className="absolute inset-0 -z-20" />
         {/* the image dissolves toward the bottom: progressive blur + darkening into the page */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 backdrop-blur-xl [mask-image:linear-gradient(to_top,black_0%,transparent_45%)]" />
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,transparent_22%,rgb(0_0_0/0.2)_42%,rgb(0_0_0/0.73)_68%,#0a0c0c_100%)]" />
@@ -390,7 +389,7 @@ export default function Landing() {
             Set up in minutes.
           </h2>
           <div className="overflow-hidden rounded-[28px] border border-line bg-[#141414]">
-            <ImageSlot label="Band image" src={ART("onboarding-clouds")} className="flex min-h-[clamp(260px,26vw,340px)] items-center justify-center px-5 py-10">
+            <ImageSlot label="Band image" src={LANDING_ART.onboarding} className="flex min-h-[clamp(260px,26vw,340px)] items-center justify-center px-5 py-10">
               <AgentOnboard />
             </ImageSlot>
             <div className="grid items-center gap-6 px-[clamp(24px,5vw,72px)] py-8 lg:grid-cols-[1fr_auto_1fr]">
@@ -487,7 +486,7 @@ export default function Landing() {
               </ul>
             </Reveal>
             <Reveal delay={100}>
-              <ImageSlot label="Integration art" src={ART("workflow-dusk-soft-halftone-v3")} position="30% 20%" className="rounded-[24px] p-[clamp(20px,5%,48px)]">
+              <ImageSlot label="Integration art" src={LANDING_ART.halftone} position="30% 20%" className="rounded-[24px] p-[clamp(20px,5%,48px)]">
                 <div className="space-y-3">
                   <Win title="Assistant">
                     <div className="flex items-center justify-between gap-3">
@@ -559,7 +558,7 @@ export default function Landing() {
             </p>
           </Reveal>
           <Reveal delay={120}>
-            <ImageSlot label="Panel art" src={ART("comparison-open-20261026")} className="rounded-[24px] border border-line p-[clamp(16px,4%,40px)]">
+            <ImageSlot label="Panel art" src={LANDING_ART.ledger} className="rounded-[24px] border border-line p-[clamp(16px,4%,40px)]">
               <div className="overflow-hidden rounded-[10px] border border-[#323837] bg-[#131615] shadow-[0_12px_32px_rgb(0_0_0/0.25)]">
                 <div className="flex flex-wrap items-center gap-x-5 gap-y-1 border-b border-[#262b2a] px-4 py-3 font-mono text-xs">
                   <span className="text-ink">5 events</span>
@@ -618,7 +617,7 @@ export default function Landing() {
       {/* Built for security teams */}
       <section className={cx("pb-10", EDGE)}>
         <Reveal className="mx-auto max-w-[1760px]">
-          <ImageSlot label="Team art" src={ART("cloud-dusk")} position="center 70%" dim={0.55} className="rounded-[24px]">
+          <ImageSlot label="Team art" src={LANDING_ART.dusk} position="center 70%" dim={0.55} className="rounded-[24px]">
             <div className="flex flex-wrap items-start justify-between gap-6 px-[clamp(24px,4vw,56px)] pt-[clamp(40px,6vw,96px)]">
               <div className="max-w-3xl">
                 <h2 className="text-[clamp(34px,4vw,60px)] font-medium leading-[1.05] tracking-[-0.045em] text-white">Built for security teams</h2>
