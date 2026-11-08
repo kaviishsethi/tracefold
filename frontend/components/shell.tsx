@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { CheckCircle2, Globe, LayoutGrid, ScanSearch, ShieldAlert, type LucideIcon } from "lucide-react";
+import { CheckCircle2, LayoutGrid, ScanSearch, Settings, ShieldAlert, type LucideIcon } from "lucide-react";
 import { api, useWorkspace, ws, type Action, type ApiError, type Finding, type Page, type Workspace } from "@/lib/api";
 import { Select } from "./select";
 import { Spinner, Wordmark, cx } from "./ui";
@@ -17,7 +17,6 @@ const NAV: { href: string; label: string; icon: LucideIcon; count?: Count }[] = 
   { href: "/scan", label: "Scan", icon: ScanSearch },
   { href: "/findings", label: "Findings", icon: ShieldAlert, count: "findings" },
   { href: "/actions", label: "Approvals", icon: CheckCircle2, count: "approvals" },
-  { href: "/discovery", label: "Discovery", icon: Globe },
 ];
 
 interface WorkspaceState {
@@ -89,7 +88,6 @@ function AppShell({ path, children }: { path: string; children: ReactNode }) {
   const state = useWorkspace();
   const counts = useCounts(state.current?.id ?? null);
   const active = (href: string) => path === href || path.startsWith(href + "/");
-  const section = NAV.find((n) => active(n.href));
 
   return (
     <WorkspaceCtx.Provider value={state}>
@@ -97,7 +95,7 @@ function AppShell({ path, children }: { path: string; children: ReactNode }) {
         <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-line bg-bg md:flex">
           <div className="flex h-14 shrink-0 items-center px-5">
             <Link href="/" aria-label="Tracefold home">
-              <Wordmark className="text-[12px]" />
+              <Wordmark className="wordmark--header" />
             </Link>
           </div>
 
@@ -107,42 +105,31 @@ function AppShell({ path, children }: { path: string; children: ReactNode }) {
             ))}
           </nav>
 
-          {state.error && (
-            <p className="mt-auto flex items-center gap-2 px-5 py-4 text-xs text-crit">
-              <span className="size-1.5 rounded-full bg-crit" /> Engine not reachable
-            </p>
-          )}
-        </aside>
-
-        <div className="min-w-0 flex-1">
-          <header className="sticky top-0 z-30 hidden h-14 items-center gap-2 border-b border-line bg-bg px-4 text-sm md:flex">
-            {state.list.length > 1 ? (
+          <div className="mt-auto px-2 pb-3">
+            {state.error && (
+              <p className="flex items-center gap-2 px-3 py-3 text-xs text-crit">
+                <span className="size-1.5 rounded-full bg-crit" /> Engine not reachable
+              </p>
+            )}
+            {state.list.length > 1 && (
               <Select
                 label="Workspace"
+                className="mb-1 w-full"
                 value={state.current?.id ?? ""}
                 onChange={(v) => state.select(v)}
                 options={state.list.map((w) => ({ value: w.id, label: w.name }))}
-                className="[&>button]:border-transparent [&>button]:bg-transparent [&>button]:font-medium"
               />
-            ) : (
-              <span className="truncate px-1 font-medium text-ink">{state.current?.name}</span>
             )}
-            {section && path !== section.href && (
-              <>
-                <span className="text-faint" aria-hidden>
-                  /
-                </span>
-                <Link href={section.href} className="truncate text-mute hover:text-ink">
-                  {section.label}
-                </Link>
-              </>
-            )}
-          </header>
+            <NavLink href="/settings" label="Settings" icon={Settings} active={active("/settings")} />
+          </div>
+        </aside>
+
+        <div className="min-w-0 flex-1">
           <header className="sticky top-0 z-30 flex h-14 items-center gap-1 overflow-x-auto border-b border-line bg-bg px-4 md:hidden">
             <Link href="/" className="mr-2 shrink-0">
-              <Wordmark className="text-[11px]" />
+              <Wordmark className="wordmark--header" />
             </Link>
-            {NAV.map(({ href, label }) => (
+            {[...NAV, { href: "/settings", label: "Settings" }].map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
@@ -152,7 +139,7 @@ function AppShell({ path, children }: { path: string; children: ReactNode }) {
               </Link>
             ))}
           </header>
-          <main className="mx-auto w-full max-w-[1248px] px-6 pb-16 pt-8">
+          <main className="mx-auto w-full max-w-[1248px] px-6 pb-16 pt-10">
             {!state.ready ? (
               <div className="flex justify-center py-24">
                 <Spinner />

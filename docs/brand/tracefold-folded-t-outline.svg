@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" fill="none">
+  <title>Tracefold — three-panel folded T</title>
+  <desc>A square-proportioned folded sheet. Two diagonal creases define a broad T-shaped center and two symmetrical side panels.</desc>
+  <g stroke="#161616" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M32 32H224V184L168 224V184H88V224L32 184Z"/>
+    <path d="M32 32L88 80V184M224 32L168 80V184"/>
+  </g>
+</svg>

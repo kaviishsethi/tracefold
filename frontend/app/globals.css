@@ -121,6 +121,24 @@ table {
   text-transform: uppercase;
 }
 
+/* The header name carries the brand at a glance over the full-bleed artwork. */
+.wordmark--header {
+  gap: 8px;
+  font-family: var(--font-brand), sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-transform: none;
+  color: #fff;
+  text-shadow: 0 1px 12px rgb(0 0 0 / 0.25);
+}
+
+.wordmark--header svg {
+  width: 32px;
+  height: 32px;
+}
+
 /* Dotted grain used behind section transitions. */
 .grain {
   background-image: radial-gradient(circle, rgb(47 127 118 / 0.45) 0.8px, transparent 1px);

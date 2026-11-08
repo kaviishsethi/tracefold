@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING
 
 from ..contracts.enums import Capability, ComparisonStatus, CoverageStatus, FetchStatus
 from ..contracts.models import (
-    CompanyProfileIn, CompanyProfileList, CompanyProfileOut, DiscoveryRunOut, QueryPlanIn, QueryPlanOut, QueryPlanPage, QueryPresetCatalog,
+    CompanyIn, CompanyOut, CompanyProfileIn, CompanyProfileList, CompanyProfileOut, DiscoveryRunOut, QueryPlanIn, QueryPlanOut, QueryPlanPage, QueryPresetCatalog,
     SourceOut, SourcePage,
 )
 from ..errors import ApiError, not_found
@@ -64,6 +64,39 @@ class DiscoveryService:
             "id": pid, "workspace_id": ws_id, **clean, "approved_by": p.client_id, "approved_at": iso(now()),
             "privacy_notice_version": identity.PRIVACY_NOTICE_VERSION})
         return self._profile_out(self.e.repo.get_profile(ws_id, pid, version))
+
+    def own_profile(self, ws_id: str) -> dict | None:
+        """The approved identity for the workspace's own company (the takedown signer's name), if one exists."""
+        rem = self.e.repo.get_remediation_profile(ws_id)
+        if not rem:
+            return None
+        name = " ".join(rem["company_name"].split()).casefold()
+        return next((r for r in self.e.repo.list_profiles(ws_id)
+                     if not r["id"].startswith("cauto_") and r["display_name"].casefold() == name), None)
+
+    def get_company(self, p: Principal, ws_id: str) -> CompanyOut:
+        p.require(ws_id, Capability.read)
+        rem = self.e.repo.get_remediation_profile(ws_id)
+        own = self.own_profile(ws_id)
+        return CompanyOut(name=rem["company_name"] if rem else None, website=own["official_domain"] if own else None,
+                          reply_to=rem["reply_to"] if rem else None)
+
+    def put_company(self, p: Principal, ws_id: str, body: CompanyIn) -> CompanyOut:
+        """Set the company once: approves its public name for search and signs takedowns with it."""
+        p.require(ws_id, Capability.configure)
+        if self.e.repo.get_workspace(ws_id) is None:
+            raise not_found()
+        site = (body.website or "").strip().lower()
+        site = site.split("://", 1)[-1].split("/", 1)[0].removeprefix("www.") or None  # accept a pasted URL
+        clean = identity.validate_profile(body.name, site, [])
+        existing = next((r for r in self.e.repo.list_profiles(ws_id)
+                         if not r["id"].startswith("cauto_") and r["display_name"].casefold() == clean["display_name"].casefold()), None)
+        if existing is None or existing["official_domain"] != clean["official_domain"]:
+            self.e.repo.insert_profile_version({
+                "id": existing["id"] if existing else new_id("cprof"), "workspace_id": ws_id, **clean,
+                "approved_by": p.client_id, "approved_at": iso(now()), "privacy_notice_version": identity.PRIVACY_NOTICE_VERSION})
+        self.e.set_remediation_profile(ws_id, body.name.strip(), body.reply_to.strip())
+        return self.get_company(p, ws_id)
 
     def list_profiles(self, p: Principal, ws_id: str) -> CompanyProfileList:
         p.require(ws_id, Capability.read)

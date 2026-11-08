@@ -189,10 +189,9 @@ export function Loading() {
 export function Wordmark({ className }: { className?: string }) {
   return (
     <span className={cx("wordmark inline-flex items-center gap-2.5 text-[13px] text-ink", className)}>
-      <svg viewBox="0 0 16 16" className="size-4" aria-hidden>
-        <rect x="1.5" y="2" width="8.5" height="11" rx="0.5" fill="none" stroke="currentColor" strokeWidth="1.4" />
-        <path d="M6 5.5h8.5V15H6z" fill="currentColor" />
-        <path d="M8 9h4.5" stroke="#4fb8a6" strokeWidth="1.6" />
+      <svg viewBox="0 0 256 256" className="size-6 shrink-0" fill="none" stroke="currentColor" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M32 32H224V184L168 224V184H88V224L32 184Z" />
+        <path d="M32 32L88 80V184M224 32L168 80V184" />
       </svg>
       Tracefold
     </span>

@@ -40,11 +40,10 @@ engine endpoint are in `lib/api.ts`.
 ## Pages
 
 - Site: `/`
-- App: `/overview`, `/scan` (upload or capture, then scan), `/scan/[id]`, `/findings`, `/findings/[id]` (evidence,
-  recheck, review), `/actions` (approve takedowns and AWS key disables), `/egress` (outbound ledger per scan),
-  `/discovery` (approve a public company identity, create query plans and preview the exact searches; needs the
-  `configure` capability), `/sources`, `/settings`, `/onboarding`. `/scan` can use a source list or a discovery plan;
-  `/scan/[id]` lists every page found, fetched and compared.
+- App: `/overview`, `/scan` (add files and scan; public checks search for the company plus names found in the files),
+  `/scan/[id]`, `/findings`, `/findings/[id]`, `/actions` (one-click approval of takedowns and AWS key disables),
+  `/settings` (company name, website and takedown reply-to; needs the `configure` capability). Saved search plans and
+  packs are API/MCP only.
 
 ## Known gaps
 

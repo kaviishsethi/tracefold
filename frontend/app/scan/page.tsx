@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ChevronRight, FileText, Folder, FolderOpen, Upload, X } from "lucide-react";
-import { api, ws, type Page, type QueryPlan, listScans, startScan, uploadFiles, type ApiError, type Check, type Scan } from "@/lib/api";
+import { listScans, startScan, uploadFiles, type ApiError, type Check, type Scan } from "@/lib/api";
 import { bytes } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
 import { Card, H1 } from "@/components/bits";
@@ -53,21 +53,6 @@ export default function ScanPage() {
   const [error, setError] = useState<string | null>(null);
   const [scans, setScans] = useState<Scan[] | null>(null);
 
-  // Public search looks for the company names found in the files. A saved plan is only used when Discovery links here with ?plan=.
-  const [plan, setPlan] = useState<QueryPlan | null>(null);
-  useEffect(() => {
-    if (!workspace) return;
-    const requested = new URLSearchParams(window.location.search).get("plan");
-    setPlan(null);
-    if (!requested) return;
-    let alive = true;
-    api<Page<QueryPlan>>(ws(workspace.id, "/query-plans?limit=100"))
-      .then((p) => alive && setPlan(p.items.find((x) => x.query_plan_id === requested) ?? null))
-      .catch(() => {});
-    return () => {
-      alive = false;
-    };
-  }, [workspace]);
 
   // Every scan from every client, refreshed so coding-assistant scans show up as they happen.
   useEffect(() => {
@@ -149,7 +134,7 @@ export default function ScanPage() {
       const checks: Check[] = publicToo ? ["public_match", "local_risk"] : ["local_risk"];
       const acc = await startScan(
         workspace.id,
-        { input_id: inp.input_id, checks, ...(checks.includes("public_match") ? (plan ? { public_discovery: { query_plan_id: plan.query_plan_id, mode: "live" as const } } : { automatic_discovery: true }) : {}) },
+        { input_id: inp.input_id, checks, ...(checks.includes("public_match") ? { automatic_discovery: true } : {}) },
         files.map((f) => f.name).join(", "),
       );
       router.push(`/scan/${acc.scan_id}`);
@@ -266,14 +251,6 @@ export default function ScanPage() {
               </tbody>
             </table>
             <div className="space-y-3 border-t border-line px-5 py-4">
-              {publicToo && plan && (
-                <p className="flex items-center gap-2 text-sm text-mute">
-                  Searching with the saved {plan.display_name} plan
-                  <button onClick={() => setPlan(null)} className="rounded p-0.5 text-faint hover:bg-raised hover:text-ink" aria-label="Use company names in the files instead">
-                    <X className="size-3.5" aria-hidden />
-                  </button>
-                </p>
-              )}
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <Checkbox checked={publicToo} onChange={setPublicToo}>
                   Also check public pages

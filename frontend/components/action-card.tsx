@@ -19,7 +19,7 @@ function useAwsConnected(): boolean | null {
 
 const HINTS: Record<string, string> = {
   no_takedown_contact: "Add a contact for this site first: uv run tracefold add-takedown-contact <workspace> <host> --email abuse@<host>",
-  remediation_profile_missing: 'Set who signs requests first: uv run tracefold set-remediation-profile <workspace> --company "..." --reply-to legal@...',
+  remediation_profile_missing: "Add your company name and reply-to email in Settings first.",
   aws_remediation_not_configured: "Add AWS remediation credentials to server/.env and restart the engine (see SETUP.md).",
   forbidden: "This app's token can't approve. Re-run tracefold quickstart.",
 };

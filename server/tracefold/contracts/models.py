@@ -127,6 +127,19 @@ class CompanyProfileIn(Strict):
     profile_id: str | None = Field(default=None, max_length=100, description="Revise an existing profile (new version).")
 
 
+class CompanyIn(Strict):
+    """The workspace's own company: searched for in every public check and used to sign takedown requests."""
+    name: str = Field(min_length=2, max_length=80)
+    website: str | None = Field(default=None, max_length=253)
+    reply_to: str = Field(min_length=3, max_length=200, pattern=r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+
+
+class CompanyOut(BaseModel):
+    name: str | None = None
+    website: str | None = None
+    reply_to: str | None = None
+
+
 class CompanyProfileOut(BaseModel):
     schema_version: int = SCHEMA_VERSION
     profile_id: str

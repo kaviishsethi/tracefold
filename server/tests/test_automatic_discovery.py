@@ -94,3 +94,54 @@ def test_preconfigured_attribution_for_nameless_excerpt(env, monkeypatch):
     inp = env.upload({'excerpt.txt': text + b' edited'})
     scan = env.scan(inp['input_id'], checks=['public_match'], automatic_discovery=True, model_review=False)
     assert scan['summary']['automatic_discovery']['reason'] == 'company_not_identified'
+
+
+def test_own_company_is_always_searched(env, monkeypatch):
+    fake_model(env, monkeypatch, ['Apple'])
+    r = env.client.put('/v1/workspaces/ws_a/company', headers=env.h(), json={
+        'name': 'Northwind Relay', 'website': 'https://www.northwindrelay.com/', 'reply_to': 'legal@northwind.example'})
+    assert r.status_code == 200, r.text
+    assert r.json() == {'name': 'Northwind Relay', 'website': 'northwindrelay.com', 'reply_to': 'legal@northwind.example'}
+    assert env.client.get('/v1/workspaces/ws_a/company', headers=env.h()).json()['website'] == 'northwindrelay.com'
+    inp = env.upload({'memo.md': b'Apple staff memo about leaks'})
+    scan = env.scan(inp['input_id'], checks=['public_match'], automatic_discovery=True, model_review=False)
+    assert scan['summary']['automatic_discovery']['companies'] == ['Northwind Relay', 'Apple']
+    # Files with no recognizable company still search for the company itself.
+    fake_model(env, monkeypatch, [])
+    inp = env.upload({'notes.md': b'An anonymous document without a company.'})
+    scan = env.scan(inp['input_id'], checks=['public_match'], automatic_discovery=True, model_review=False)
+    assert scan['summary']['automatic_discovery']['companies'] == ['Northwind Relay']
+    # Saving again with the same details adds no new identity version.
+    env.client.put('/v1/workspaces/ws_a/company', headers=env.h(), json={
+        'name': 'Northwind Relay', 'website': 'https://www.northwindrelay.com/', 'reply_to': 'legal@northwind.example'})
+    own = [p for p in env.engine.repo.list_profiles('ws_a') if not p['id'].startswith('cauto_')]
+    assert len(own) == 1 and own[0]['version'] == 1
+
+
+def test_setting_company_needs_configure(env):
+    r = env.client.put('/v1/workspaces/ws_a/company', headers=env.h('cloud'), json={
+        'name': 'Northwind Relay', 'reply_to': 'legal@northwind.example'})
+    assert r.status_code == 403
+
+
+def test_malformed_model_output_is_retried_once(env, monkeypatch):
+    fake_model(env, monkeypatch, ['Acme'])
+    replies = iter(['{"companies": ["Ac', json.dumps({'companies': ['Acme'], 'kind': 'policy'})])
+    real = env.engine.reviewer.client
+    def client():
+        c = real()
+        c.chat = lambda *a, **k: ChatResult(next(replies), 20, 10)
+        return c
+    monkeypatch.setattr(env.engine.reviewer, 'client', client)
+    inp = env.upload({'policy.md': b'Acme security policy'})
+    scan = env.scan(inp['input_id'], checks=['public_match'], automatic_discovery=True, model_review=False)
+    assert scan['summary']['automatic_discovery']['companies'] == ['Acme']
+
+
+def test_model_down_still_searches_own_company(env, monkeypatch):
+    fake_model(env, monkeypatch, unavailable=True)
+    env.client.put('/v1/workspaces/ws_a/company', headers=env.h(), json={'name': 'Northwind Relay', 'reply_to': 'legal@northwind.example'})
+    inp = env.upload({'notes.md': b'Internal notes.'})
+    scan = env.scan(inp['input_id'], checks=['public_match'], automatic_discovery=True, model_review=False)
+    assert scan['summary']['automatic_discovery']['companies'] == ['Northwind Relay']
+    assert all('Northwind Relay' in q for q in scan['summary']['tested_queries'])
