@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Bot, Check } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 import type { Finding } from "@/lib/api";
 import { where } from "@/lib/format";
 import { cx } from "./ui";
 
 /** Copies a ready-made instruction for the user's coding agent, which reaches Tracefold through its MCP tools. */
-export function AgentPrompt({ text, label = "Copy for your agent", className }: { text: string; label?: string; className?: string }) {
+export function AgentPrompt({ text, label = "Copy prompt", className }: { text: string; label?: string; className?: string }) {
   const [done, setDone] = useState(false);
   return (
     <button
@@ -25,7 +25,7 @@ export function AgentPrompt({ text, label = "Copy for your agent", className }: 
         className,
       )}
     >
-      {done ? <Check className="size-3.5 text-local" aria-hidden /> : <Bot className="size-3.5 text-accent" aria-hidden />}
+      {done ? <Check className="size-3.5 text-local" aria-hidden /> : <Copy className="size-3.5 text-mute" aria-hidden />}
       {done ? "Copied" : label}
     </button>
   );

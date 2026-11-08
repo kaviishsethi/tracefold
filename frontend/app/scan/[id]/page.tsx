@@ -36,10 +36,9 @@ function Stages({ scan }: { scan: Scan }) {
   const stages = scan.stages.filter((s) => s.name in STAGE_LABEL && s.name !== "publish");
   if (!stages.length) return null;
   return (
-    <ol className="mb-8 flex flex-wrap items-center gap-x-1 gap-y-2 text-[13px]" aria-label="Scan stages">
-      {stages.map((s, i) => (
-        <li key={s.name} className="flex items-center gap-1">
-          {i > 0 && <span className="px-1 text-faint" aria-hidden>→</span>}
+    <ol className="mb-8 flex flex-wrap items-center gap-2 text-[13px]" aria-label="Scan stages">
+      {stages.map((s) => (
+        <li key={s.name}>
           <span
             className={cx(
               "inline-flex items-center gap-2 rounded-ctl border border-line px-2.5 py-1",
@@ -67,32 +66,21 @@ interface AutoDiscovery {
 /** Automatic discovery: which company names the local model found in the files, and what that means for privacy. */
 function Identified({ auto }: { auto: AutoDiscovery }) {
   return (
-    <div className="mb-8 rounded-card border border-line bg-panel px-4 py-3 text-[13px]">
+    <p className="mb-8 text-sm text-mute" title={auto.privacy_notice}>
       {auto.status === "ready" ? (
         <>
-          <p className="text-ink">
-            Company identified on this machine:{" "}
-            {(auto.companies ?? []).map((c, i) => (
-              <span key={c}>
-                {i > 0 && ", "}
-                <span className="font-medium">{c}</span>
-              </span>
-            ))}
-          </p>
-          {auto.privacy_notice && <p className="mt-1 text-xs text-mute">{auto.privacy_notice}</p>}
+          Searched for <span className="text-ink">{(auto.companies ?? []).join(", ")}</span>
         </>
       ) : (
-        <p className="text-med">
-          No company could be identified ({(auto.reason ?? "unknown").replaceAll("_", " ")}), so public matching is inconclusive. Local rules still ran.
-        </p>
+        <span className="text-med">No company name found in the files, so public pages weren&apos;t searched.</span>
       )}
-    </div>
+    </p>
   );
 }
 
-const GROUPS: [FindingKind, string][] = [
-  ["public_exposure", "Found on public pages"],
-  ["local_risk", "Risks in your files"],
+const GROUPS: [FindingKind, string, string][] = [
+  ["public_exposure", "On public pages", "public_match"],
+  ["local_risk", "In your files", "local_risk"],
 ];
 
 export default function ScanDetail() {
@@ -118,21 +106,24 @@ export default function ScanDetail() {
     );
 
   const st = scanState(scan);
+  const open = (findings ?? []).filter((f) => f.status === "open").length;
+  const title = !done ? st.text : st.tone === "bad" && scan.state !== "partial" ? st.text : findings === null ? "Done" : open === 0 ? "Nothing found" : `${open} ${open === 1 ? "problem" : "problems"} found`;
+  const requested = (check: string) => scan.coverage.some((c) => c.scope === "check" && c.id === check && c.status !== "not_requested");
   const drafted = typeof scan.summary.actions_drafted === "number" ? scan.summary.actions_drafted : 0;
   const auto = scan.summary.automatic_discovery as AutoDiscovery | undefined;
   const problems = scan.coverage.filter((c) => c.status === "partial" || c.status === "failed");
 
   return (
     <div>
-      <Crumbs trail={[["/scan", "Scans"]]} current={`${source(scan)}, ${relativeTime(scan.created_at)}`} />
+      <Crumbs trail={[["/scan", "Scans"]]} current={relativeTime(scan.created_at)} />
       <div>
         <H1
-          sub={`${source(scan)} · ${relativeTime(scan.created_at)}${scan.recheck_of ? " · recheck" : ""}`}
-          right={done && (findings ?? []).some((f) => f.status === "open") ? <AgentPrompt text={scanPrompt(scan.scan_id)} label="Copy fixes for your agent" /> : undefined}
+          sub={`${source(scan)} · ${relativeTime(scan.created_at)}${scan.recheck_of ? " · recheck" : ""}${scan.state === "partial" ? " · some checks didn't finish" : ""}`}
+          right={done && open > 0 ? <AgentPrompt text={scanPrompt(scan.scan_id)} label="Copy fix prompt" /> : undefined}
         >
           <span className="inline-flex items-center gap-3">
             {st.tone === "busy" && <Spinner className="size-5" />}
-            {st.text}
+            {title}
           </span>
         </H1>
       </div>
@@ -144,12 +135,12 @@ export default function ScanDetail() {
         </Link>
       )}
 
-      <Stages scan={scan} />
+      {!done && <Stages scan={scan} />}
 
       {auto && <Identified auto={auto} />}
 
       {done &&
-        GROUPS.map(([kind, label]) => {
+        GROUPS.filter(([, , check]) => requested(check)).map(([kind, label]) => {
           const items = (findings ?? []).filter((f) => f.kind === kind);
           const note = coverageNote(scan, kind, items.length);
           return (

@@ -7,6 +7,13 @@ import { ArrowRight } from "lucide-react";
 import { ImageSlot, LinkButton, Wordmark, cx } from "./ui";
 import { DotField } from "./dot-field";
 
+const NAV = [
+  { href: "/#problem", label: "Problem" },
+  { href: "/#how", label: "How it works" },
+  { href: "/#egress", label: "Privacy" },
+  { href: "/#limits", label: "Security" },
+];
+
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -37,7 +44,18 @@ export function SiteHeader() {
           <Wordmark className="text-[15px]" />
         </Link>
         <nav className="flex items-center gap-1">
-          <LinkButton href="/overview">Dashboard</LinkButton>
+          {NAV.map((n) => (
+            <Link
+              key={n.href}
+              href={n.href}
+              className="hidden px-3 py-2 text-[15px] text-white transition-transform duration-[240ms] hover:scale-[1.04] lg:inline-block"
+            >
+              {n.label}
+            </Link>
+          ))}
+          <LinkButton href="/overview" className="ml-3">
+            Dashboard
+          </LinkButton>
         </nav>
       </div>
     </header>

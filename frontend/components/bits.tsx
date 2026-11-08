@@ -32,18 +32,18 @@ export function Disclosure({ label, children, className }: { label: ReactNode; c
 }
 
 /** Breadcrumb trail: parent links, then the current page. */
-export function Crumbs({ trail, current }: { trail: [string, string][]; current: ReactNode }) {
+export function Crumbs({ trail, current }: { trail: [string, string][]; current?: ReactNode }) {
   return (
     <nav aria-label="Breadcrumb" className="mb-4 flex min-w-0 items-center gap-2 text-sm">
-      {trail.map(([href, label]) => (
+      {trail.map(([href, label], i) => (
         <span key={href} className="flex items-center gap-2">
           <Link href={href} className="text-mute hover:text-ink">
             {label}
           </Link>
-          <span className="text-faint">/</span>
+          {(current || i < trail.length - 1) && <span className="text-faint">/</span>}
         </span>
       ))}
-      <span className="truncate text-ink-2">{current}</span>
+      {current && <span className="truncate text-ink-2">{current}</span>}
     </nav>
   );
 }

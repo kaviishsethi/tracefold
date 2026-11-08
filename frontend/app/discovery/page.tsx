@@ -8,16 +8,16 @@ import { PlanSearches, StatusTag, searchLabel } from "@/components/discovery";
 import { relativeTime, shortId } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
 import { Select } from "@/components/select";
+import { Checkbox } from "@/components/checkbox";
 import { Button, Empty, ErrorNote, Field, Loading, PageHeader, Panel, cx, inputClass } from "@/components/ui";
 
 const PRIVACY = "Search providers get this name and the queries, never your files. Don't enter secret project names.";
 
 function CheckRow({ checked, onChange, children, disabled }: { checked: boolean; onChange: (v: boolean) => void; children: ReactNode; disabled?: boolean }) {
   return (
-    <label className={cx("flex items-start discovery-check gap-3 text-[13px]", disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer")}>
-      <input type="checkbox" className="mt-0.5 accent-accent" checked={checked} disabled={disabled} onChange={(e) => onChange(e.target.checked)} />
-      <span className="min-w-0">{children}</span>
-    </label>
+    <Checkbox checked={checked} onChange={onChange} disabled={disabled} className="text-[13px]">
+      {children}
+    </Checkbox>
   );
 }
 

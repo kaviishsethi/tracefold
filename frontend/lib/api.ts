@@ -655,6 +655,6 @@ export function coverageNote(scan: Scan, kind: FindingKind, count: number): stri
     return "Some files couldn't be read, so risk review is incomplete. See the skipped files below.";
   if (check.status !== "complete") return `${kind === "public_exposure" ? "Public matching" : "Risk review"} ${check.status}: ${check.reason ?? "see coverage"}.`;
   if (count > 0) return null;
-  if (kind === "public_exposure") return `No match in ${check.counts.sources_ok ?? 0} checked sources.`;
-  return `No potential risks identified by this review (${check.counts.files ?? 0} files covered).`;
+  if (kind === "public_exposure") return `No match in ${check.counts.sources_ok ?? 0} pages checked.`;
+  return `No risks found in ${check.counts.files ?? 0} ${check.counts.files === 1 ? "file" : "files"}.`;
 }

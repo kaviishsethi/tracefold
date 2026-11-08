@@ -8,6 +8,8 @@ import { bytes } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
 import { Card, Disclosure, H1 } from "@/components/bits";
 import { AgentPrompt } from "@/components/agent-prompt";
+import { Checkbox } from "@/components/checkbox";
+import { Select } from "@/components/select";
 import { ScansTable } from "@/components/scans-table";
 import { Button, ErrorNote, cx } from "@/components/ui";
 
@@ -168,10 +170,10 @@ export default function ScanPage() {
   return (
     <div>
       <H1
-        sub="Add files to check them for leaked secrets, risky code and copies on public pages."
+        sub="Check files for leaked secrets, risky code and public copies."
         right={
           <>
-            <AgentPrompt text={AGENT_SCAN} label="Have your agent scan" />
+            <AgentPrompt text={AGENT_SCAN} />
             <Button size="sm" onClick={() => input.current?.click()} className="!bg-accent !text-[#0a0c0c]">
               <Upload className="size-3.5" aria-hidden /> Upload files
             </Button>
@@ -242,31 +244,27 @@ export default function ScanPage() {
             </table>
             <div className="space-y-3 border-t border-line px-5 py-4">
               {publicToo && (
-                <label className="block text-sm text-mute">
-                  Public sources
-                  <select
-                    className="mt-1.5 block w-full rounded-ctl border border-line bg-panel-2 px-3 py-2.5 text-ink"
-                    value={automatic ? "__auto" : planId}
-                    onChange={(e) => {
-                      if (e.target.value === "__auto") setAutomatic(true);
+                <div className="flex flex-wrap items-center gap-3 text-sm text-mute">
+                  Search
+                  <Select
+                    label="Public sources"
+                    size="md"
+                    className="min-w-[260px]"
+                    value={automatic ? "__auto" : planId || "__list"}
+                    onChange={(v) => {
+                      if (v === "__auto") setAutomatic(true);
                       else {
                         setAutomatic(false);
-                        setPlanId(e.target.value);
+                        setPlanId(v === "__list" ? "" : v);
                       }
                     }}
-                  >
-                    <option value="__auto">Automatic: search for company names found in the files</option>
-                    {manifest && <option value="">Registered source list</option>}
-                    {plans.map((p) => (
-                      <option key={p.query_plan_id} value={p.query_plan_id}>
-                        {p.display_name}, {p.pack ?? "discovery"}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              )}
-              {automatic && publicToo && (
-                <p className="text-xs text-faint">Company names are identified locally and used to search public pages. Uploaded passages stay inside the engine.</p>
+                    options={[
+                      { value: "__auto", label: "Company names in the files" },
+                      ...(manifest ? [{ value: "__list", label: "Registered source list" }] : []),
+                      ...plans.map((p) => ({ value: p.query_plan_id, label: `${p.display_name}, ${p.pack ?? "discovery"}` })),
+                    ]}
+                  />
+                </div>
               )}
               {!automatic && plan && publicToo && (
                 <Disclosure label="Preview public searches">
@@ -281,10 +279,9 @@ export default function ScanPage() {
                 </Disclosure>
               )}
               <div className="flex flex-wrap items-center justify-between gap-4">
-                <label className="flex items-center gap-2 text-sm text-ink-2">
-                  <input type="checkbox" checked={publicToo} onChange={(e) => setPublicToo(e.target.checked)} />
-                  Also look for copies on public pages
-                </label>
+                <Checkbox checked={publicToo} onChange={setPublicToo}>
+                  Also check public pages
+                </Checkbox>
                 <Button onClick={run} loading={busy} className="!bg-accent !text-[#0a0c0c]">
                   Check {files.length} {files.length === 1 ? "file" : "files"}
                 </Button>
@@ -295,12 +292,9 @@ export default function ScanPage() {
       </Card>
 
       <section className="mt-6" aria-labelledby="examples-title">
-        <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
-          <h2 id="examples-title" className="text-sm font-medium text-ink">
-            Try an example
-          </h2>
-          <p className="text-xs text-faint">Loads a sample document, then press Check. Automatic search finds the company name in the text and looks for public copies.</p>
-        </div>
+        <h2 id="examples-title" className="mb-3 text-sm font-medium text-ink">
+          Try an example
+        </h2>
         <div className="grid gap-3 md:grid-cols-3">
           {EXAMPLES.map((ex) => {
             const selected = files.length === 1 && files[0].name === ex.file;
@@ -308,7 +302,7 @@ export default function ScanPage() {
               <div
                 key={ex.file}
                 className={cx(
-                  "flex flex-col rounded-card border bg-panel transition-colors",
+                  "flex items-center rounded-card border bg-panel transition-colors",
                   selected ? "border-accent/60" : "border-line hover:border-line-strong",
                 )}
               >
@@ -316,35 +310,23 @@ export default function ScanPage() {
                   onClick={() => loadExample(ex)}
                   disabled={loadingExample !== null}
                   aria-pressed={selected}
-                  className="flex flex-1 flex-col items-start gap-1 px-4 pb-3 pt-4 text-left disabled:cursor-wait"
+                  title={ex.shows}
+                  className="flex min-w-0 flex-1 flex-col items-start px-4 py-3 text-left disabled:cursor-wait"
                 >
-                  <span className="text-[11px] uppercase tracking-wide text-faint">{ex.kind}</span>
-                  <span className="text-[15px] text-ink">{ex.company}</span>
-                  <span className="text-[13px] text-ink-2">{ex.doc}</span>
-                  <span className="mt-1 text-xs leading-relaxed text-mute">{ex.shows}</span>
+                  <span className="text-[15px] text-ink">{loadingExample === ex.file ? "Loading…" : ex.company}</span>
+                  <span className="truncate text-[13px] text-mute">{ex.doc}</span>
                 </button>
-                <div className="flex items-center justify-between gap-3 whitespace-nowrap border-t border-line px-4 py-2.5 text-xs">
-                  <a href={`/examples/${ex.file}`} target="_blank" rel="noreferrer" className="text-mute underline-offset-4 hover:text-ink hover:underline">
-                    Read it
-                  </a>
-                  <button
-                    onClick={() => loadExample(ex)}
-                    disabled={loadingExample !== null}
-                    className={cx("font-medium", selected ? "text-accent" : "text-ink-2 hover:text-ink")}
-                  >
-                    {loadingExample === ex.file ? "Loading…" : selected ? "Loaded ✓" : "Use example"}
-                  </button>
-                </div>
+                <a href={`/examples/${ex.file}`} target="_blank" rel="noreferrer" className="shrink-0 px-4 text-xs text-faint hover:text-ink">
+                  Read
+                </a>
               </div>
             );
           })}
         </div>
-        <p className="mt-2 text-xs text-faint">
-          The CivicActions and PostHog documents are unchanged public company documents, used under their licenses; neither company endorses Tracefold.
-        </p>
+        <p className="mt-2 text-xs text-faint">CivicActions and PostHog documents are public, used under their licenses. Neither endorses Tracefold.</p>
       </section>
 
-      <Card title="Recent scans" className="mt-6" right={<span className="text-xs text-faint">From this app and your coding assistant</span>}>
+      <Card title="Recent scans" className="mt-6">
         <ScansTable scans={scans} empty="No scans yet. Scans from your coding assistant show up here too." />
       </Card>
     </div>
