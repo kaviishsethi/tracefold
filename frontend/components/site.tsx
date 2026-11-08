@@ -7,14 +7,6 @@ import { ArrowRight } from "lucide-react";
 import { ImageSlot, LinkButton, Wordmark, cx } from "./ui";
 import { DotField } from "./dot-field";
 
-const NAV = [
-  { href: "/manifesto", label: "Manifesto" },
-  { href: "/enterprise", label: "Enterprise" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/security", label: "Security" },
-  { href: "/contact", label: "Contact" },
-];
-
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -45,15 +37,6 @@ export function SiteHeader() {
           <Wordmark className="text-[15px]" />
         </Link>
         <nav className="flex items-center gap-1">
-          {NAV.map((n) => (
-            <Link
-              key={n.href}
-              href={n.href}
-              className="hidden px-3 py-2 text-[15px] text-white transition-transform duration-[240ms] hover:scale-[1.04] lg:inline-block"
-            >
-              {n.label}
-            </Link>
-          ))}
           <span className="ml-3 hidden sm:block">
             <LinkButton href="/overview" variant="secondary">
               Open the app
@@ -119,9 +102,6 @@ export function Mission() {
             <LinkButton href="/scan">
               Get started <ArrowRight className="size-4" aria-hidden />
             </LinkButton>
-            <LinkButton href="/security" variant="ghost" className="bg-white/[0.06] text-ink hover:bg-white/10">
-              Read the security model
-            </LinkButton>
           </div>
         </Reveal>
 
@@ -137,24 +117,9 @@ export function Mission() {
 
 const FOOTER_NAV = [
   {
-    title: "Company",
-    links: [
-      ["Manifesto", "/manifesto"],
-      ["Security", "/security"],
-      ["Contact", "/contact"],
-    ],
-  },
-  {
     title: "Product",
     links: [
-      ["How it works", "/enterprise#how"],
-      ["Enterprise", "/enterprise"],
-      ["Pricing", "/pricing"],
-    ],
-  },
-  {
-    title: "Get started",
-    links: [
+      ["How it works", "/#how"],
       ["Open the app", "/overview"],
     ],
   },

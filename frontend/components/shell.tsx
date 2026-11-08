@@ -9,7 +9,7 @@ import { api, useWorkspace, ws, type Action, type ApiError, type Finding, type P
 import { Spinner, Wordmark, cx } from "./ui";
 
 /** Marketing pages: no engine needed, no app chrome. */
-export const PUBLIC_PATHS = ["/", "/manifesto", "/enterprise", "/pricing", "/security", "/contact"];
+export const PUBLIC_PATHS = ["/"];
 
 type Count = "findings" | "approvals";
 const NAV: { href: string; label: string; icon: LucideIcon; count?: Count }[] = [
