@@ -1,5 +1,5 @@
 // Examples of public places copies of company material tend to turn up. Tracefold can fetch any approved public URL,
-// directly or through Exa/Tavily; these logos are illustrative, not a fixed integration list.
+// directly or through Exa/Tavily; the logos show common hosts, not a fixed integration list.
 import {
   siAirtable, siAmazons3, siAtlassian, siBitbucket, siCoda, siCodeberg, siCodepen, siDocker, siFigma, siGitbook, siGithub,
   siGitlab, siGooglecloudstorage, siGoogledocs, siGoogledrive, siHuggingface, siInternetarchive, siMiro, siNotion,

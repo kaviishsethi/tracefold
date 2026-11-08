@@ -1,4 +1,4 @@
-"""Fixed, versioned discovery presets and packs (docs/PRESET_PLAN.md).
+"""Fixed, versioned discovery presets and packs (docs/DISCOVERY.md).
 
 A preset is search intent rendered separately for each provider from the approved public identity only:
 ``{name}`` (display name), ``{alias}`` (first public alias) and ``{domain}`` (official domain). No template reads
@@ -29,7 +29,7 @@ SITE_GROUPS: dict[str, list[str]] = {
 }
 
 # Excluded from results by default (user-visible scope option). Company profile, dictionary and social pages seen as
-# noise in the recorded runs; extend only with measured evidence (docs/PRESET_PLAN.md §6.3).
+# noise in the recorded runs; extend only with measured evidence (docs/DISCOVERY.md).
 NOISE_DOMAINS_VERSION = "noise_v1"
 NOISE_DOMAINS = sorted({
     "linkedin.com", "wikipedia.org", "tavily.com", "crunchbase.com", "trustpilot.com", "glassdoor.com",
@@ -48,7 +48,7 @@ def _p(description, exa, tavily, *, needs=(), sites=None, mode="restrict", statu
 # status: benchmarked (found a benchmark target), experimental (no target found yet; explicit opt-in),
 # legacy (v1/v2 wording kept for comparison and stored-plan compatibility).
 PRESETS: dict[str, dict] = {
-    # --- v3 catalog (docs/PRESET_PLAN.md §4) ---
+    # --- v3 catalog (docs/DISCOVERY.md) ---
     "leak_news": _p("News coverage quoting a leaked internal document.",
                     {"query": "news article quoting a leaked internal memo from {name}", "category": "news"},
                     {"query": '"{name}" leaked internal memo', "topic": "news", "exact_match": True},

@@ -1,8 +1,8 @@
 # Preset benchmark
 
 Cases: [cases.json](cases.json). Script: [server/examples/preset_benchmark.py](../../server/examples/preset_benchmark.py)
-(`record` runs live scans once and skips runs that already have a record; `score` recomputes metrics offline). Plan:
-[PRESET_PLAN.md](../PRESET_PLAN.md).
+(`record` runs live scans once and skips runs that already have a record; `score` recomputes metrics offline). Design:
+[DISCOVERY.md](../DISCOVERY.md).
 
 ## v3 results (live, November 8, 2026 UTC)
 
@@ -22,7 +22,7 @@ uploads matched; no page text, no API keys).
 | PostHog | handbook security page | No: forks never returned | – |
 | Twitch | none (noise only) | n/a | – |
 
-Acceptance checks from the plan:
+Acceptance checks:
 
 | Check | Result |
 |---|---|

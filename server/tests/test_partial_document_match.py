@@ -1,7 +1,6 @@
-"""docs/RECORDING_PLAN.md fallback: the Northstar controlled reconstruction, with the plan's exact text.
+"""Partial document match: a DOCX whose shared passage also appears in a public copy.
 
-The live path additionally needs the Gist published; here the public copy is served by the fixture provider.
-The Nothing-memo live path is rehearsed by examples/rehearsal.py against Exa (article text is not retained).
+The public copy is served by the fixture provider, so the test runs offline.
 """
 from __future__ import annotations
 

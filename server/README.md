@@ -1,8 +1,8 @@
 # Tracefold engine (server)
 
 The shared private scan engine behind the Tracefold upload app and MCP adapter. Both are thin HTTP clients
-of this server; neither parses files, calls the model or keeps its own findings. Design:
-[`docs/SHARED_ENGINE_PLAN.md`](../docs/SHARED_ENGINE_PLAN.md). Client guide: [`docs/ENGINE_API.md`](../docs/ENGINE_API.md).
+of this server; neither parses files, calls the model or keeps its own findings. Architecture:
+[`docs/ARCHITECTURE.md`](../docs/ARCHITECTURE.md). Client guide: [`docs/ENGINE_API.md`](../docs/ENGINE_API.md).
 
 ## Quickstart (local, loopback only)
 
@@ -21,7 +21,7 @@ uv run tracefold serve --port 8787
 Then, in another shell, run the documented flow that exercises every endpoint:
 
 ```bash
-uv run python examples/walkthrough_flow.py --workspace ws_main --app-token "$APP_TOKEN" --mcp-token "$MCP_TOKEN" --workspace-root /path/to/a/local/folder
+uv run python examples/api_flow.py --workspace ws_main --app-token "$APP_TOKEN" --mcp-token "$MCP_TOKEN" --workspace-root /path/to/a/local/folder
 ```
 
 Tokens are printed once; only their SHA-256 hashes are stored. The server binds 127.0.0.1 and rejects
@@ -41,7 +41,7 @@ unexpected `Host`/`Origin` headers.
 ## Tests
 
 ```bash
-uv run pytest -q                                   # offline suite (fixtures, fake loopback model, mock transports)
+uv run pytest -q                                   # offline suite (fixtures, local model double, in-process transports)
 TRACEFOLD_LIVE=1 uv run pytest -q -m live          # real public fetch (+ Exa/Tavily if keys are set)
 TRACEFOLD_OLLAMA=1 uv run pytest -q -m ollama -s   # real local model
 ```
@@ -71,6 +71,6 @@ tracefold/
   storage/    SQLite migrations and repositories (the only SQL)
   policy/     tokens, grants, workspace authorization
   remediation/ approval-gated takedown requests and AWS key disabling (SigV4 via the gateway)
-fixtures/     synthetic public/private test material
-examples/     walkthrough flow and example manifest
+fixtures/     public/private test material
+examples/     end-to-end API client, benchmark tooling and example manifests
 ```

@@ -3,10 +3,10 @@
 It plays both clients against one engine: the upload app (existing material + public sources) and the
 MCP-style assistant (workspace change → findings → fix → recheck). Usage against a running server:
 
-    uv run python examples/walkthrough_flow.py --base http://127.0.0.1:8787 --workspace ws_main \
+    uv run python examples/api_flow.py --base http://127.0.0.1:8787 --workspace ws_main \
         --app-token "$APP_TOKEN" --mcp-token "$MCP_TOKEN" --workspace-root /path/to/registered/root
 
-Everything it writes is synthetic fixture content.
+All content it writes comes from the test fixtures.
 """
 from __future__ import annotations
 

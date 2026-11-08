@@ -1,8 +1,8 @@
-# Tracefold engine API — client handoff
+# Tracefold engine API
 
-For whoever builds the upload app or the MCP adapter. The MCP adapter now exists in [`adapters/mcp/`](../adapters/mcp/README.md) and follows the tool mapping below. The engine is implemented in [`server/`](../server/README.md);
+Reference for clients of the engine, such as the web app in [`frontend/`](../frontend/README.md) and the MCP adapter in [`adapters/mcp/`](../adapters/mcp/README.md). The engine lives in [`server/`](../server/README.md);
 the machine-readable contract is [`server/openapi.json`](../server/openapi.json) (regenerate with
-`uv run tracefold export-openapi openapi.json`). [`server/examples/walkthrough_flow.py`](../server/examples/walkthrough_flow.py)
+`uv run tracefold export-openapi openapi.json`). [`server/examples/api_flow.py`](../server/examples/api_flow.py)
 calls every endpoint and is exercised by the test suite against a real `tracefold serve` process.
 
 Clients must not parse files, call a model, assign severity, or keep their own findings. Render what the engine
@@ -100,8 +100,7 @@ network query from the host.
 ## Remediation actions (approval required)
 
 After every scan the engine drafts remediation **actions** for a person to approve. Nothing is sent or changed
-until someone approves; this keeps the plan's rule that Tracefold never silently sends takedowns or rotates
-credentials ([PLAN.md](../PLAN.md) §"Act").
+until someone approves: Tracefold never sends a takedown or changes a credential on its own.
 
 | Action `kind` | Drafted for | On approval |
 |---|---|---|

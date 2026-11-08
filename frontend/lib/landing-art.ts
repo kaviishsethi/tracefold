@@ -1,5 +1,4 @@
 // Teal adaptations of the landing page's cloud and glass compositions.
-// See public/art/README.md for the asset inventory and generation prompts.
 export const LANDING_ART = {
   hero: "/art/hero-clouds.webp",
   field: "/art/open-sky.webp",

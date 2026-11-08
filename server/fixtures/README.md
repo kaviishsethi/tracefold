@@ -1,4 +1,4 @@
-# Synthetic fixtures
+# Test fixtures
 
 Every file here is synthetic and written for Tracefold tests. Company names (Halyard Freight), plans,
 identifiers and secret-like values are invented; none are real credentials, people or leaked material.
