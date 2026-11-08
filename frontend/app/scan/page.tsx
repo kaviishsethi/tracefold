@@ -6,10 +6,9 @@ import { ChevronRight, FileText, Folder, FolderOpen, Upload, X } from "lucide-re
 import { api, ws, type Page, type QueryPlan, listScans, startScan, uploadFiles, type ApiError, type Check, type Scan } from "@/lib/api";
 import { bytes } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
-import { Card, Disclosure, H1 } from "@/components/bits";
+import { Card, H1 } from "@/components/bits";
 import { AgentPrompt } from "@/components/agent-prompt";
 import { Checkbox } from "@/components/checkbox";
-import { Select } from "@/components/select";
 import { ScansTable } from "@/components/scans-table";
 import { Button, ErrorNote, cx } from "@/components/ui";
 
@@ -54,26 +53,21 @@ export default function ScanPage() {
   const [error, setError] = useState<string | null>(null);
   const [scans, setScans] = useState<Scan[] | null>(null);
 
-  const manifest = workspace?.manifests[0];
-  const [plans, setPlans] = useState<QueryPlan[]>([]);
-  const [planId, setPlanId] = useState("");
-  const [automatic, setAutomatic] = useState(true);
+  // Public search looks for the company names found in the files. A saved plan is only used when Discovery links here with ?plan=.
+  const [plan, setPlan] = useState<QueryPlan | null>(null);
   useEffect(() => {
     if (!workspace) return;
+    const requested = new URLSearchParams(window.location.search).get("plan");
+    setPlan(null);
+    if (!requested) return;
     let alive = true;
-    setPlans([]);
-    setPlanId("");
-    api<Page<QueryPlan>>(ws(workspace.id, "/query-plans?limit=100")).then((p) => {
-      if (!alive) return;
-      setPlans(p.items);
-      const requested = new URLSearchParams(window.location.search).get("plan");
-      const chosen = p.items.find((x) => x.query_plan_id === requested);
-      if (chosen) { setPlanId(chosen.query_plan_id); setAutomatic(false); }
-
-    }).catch(() => {});
-    return () => { alive = false; };
+    api<Page<QueryPlan>>(ws(workspace.id, "/query-plans?limit=100"))
+      .then((p) => alive && setPlan(p.items.find((x) => x.query_plan_id === requested) ?? null))
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
   }, [workspace]);
-  const plan = plans.find((p) => p.query_plan_id === planId);
 
   // Every scan from every client, refreshed so coding-assistant scans show up as they happen.
   useEffect(() => {
@@ -136,7 +130,6 @@ export default function ScanPage() {
       const res = await fetch(`/examples/${ex.file}`);
       if (!res.ok) throw new Error(`Couldn't load the ${ex.company} example.`);
       setFiles([new File([await res.blob()], ex.file, { type: "text/markdown" })]);
-      setAutomatic(true);
       setPublicToo(true);
     } catch (e) {
       setError((e as Error).message);
@@ -150,15 +143,13 @@ export default function ScanPage() {
     setBusy(true);
     setError(null);
     try {
-      const selectedPlan = automatic ? undefined : plan;
-      if (publicToo && !automatic && !selectedPlan && !manifest) throw new Error("Choose saved searches or use automatic search.");
       const inp = await uploadFiles(workspace.id, files);
       const accepted = inp.files.filter((f) => f.status === "captured");
       if (!accepted.length) throw new Error(inp.files.map((f) => `${f.path}: ${f.reason}`).join("; ") || "No files could be read.");
       const checks: Check[] = publicToo ? ["public_match", "local_risk"] : ["local_risk"];
       const acc = await startScan(
         workspace.id,
-        { input_id: inp.input_id, checks, ...(checks.includes("public_match") ? (automatic ? { automatic_discovery: true } : selectedPlan ? { public_discovery: { query_plan_id: selectedPlan.query_plan_id, mode: "live" as const } } : { public_sources: { manifest_id: manifest!, mode: "refresh" as const } }) : {}) },
+        { input_id: inp.input_id, checks, ...(checks.includes("public_match") ? (plan ? { public_discovery: { query_plan_id: plan.query_plan_id, mode: "live" as const } } : { automatic_discovery: true }) : {}) },
         files.map((f) => f.name).join(", "),
       );
       router.push(`/scan/${acc.scan_id}`);
@@ -275,40 +266,13 @@ export default function ScanPage() {
               </tbody>
             </table>
             <div className="space-y-3 border-t border-line px-5 py-4">
-              {publicToo && (
-                <div className="flex flex-wrap items-center gap-3 text-sm text-mute">
-                  Search
-                  <Select
-                    label="Public sources"
-                    size="md"
-                    className="min-w-[260px]"
-                    value={automatic ? "__auto" : planId || "__list"}
-                    onChange={(v) => {
-                      if (v === "__auto") setAutomatic(true);
-                      else {
-                        setAutomatic(false);
-                        setPlanId(v === "__list" ? "" : v);
-                      }
-                    }}
-                    options={[
-                      { value: "__auto", label: "Company names in the files" },
-                      ...(manifest ? [{ value: "__list", label: "Registered source list" }] : []),
-                      ...plans.map((p) => ({ value: p.query_plan_id, label: `${p.display_name}, ${p.pack ?? "discovery"}` })),
-                    ]}
-                  />
-                </div>
-              )}
-              {!automatic && plan && publicToo && (
-                <Disclosure label="Preview public searches">
-                  <ul className="space-y-2">
-                    {plan.searches.map((q) => (
-                      <li key={q.query_id}>
-                        {q.provider}: <span className="text-ink">{q.query}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-3">Only these approved queries are sent to search providers. Search is not exhaustive.</p>
-                </Disclosure>
+              {publicToo && plan && (
+                <p className="flex items-center gap-2 text-sm text-mute">
+                  Searching with the saved {plan.display_name} plan
+                  <button onClick={() => setPlan(null)} className="rounded p-0.5 text-faint hover:bg-raised hover:text-ink" aria-label="Use company names in the files instead">
+                    <X className="size-3.5" aria-hidden />
+                  </button>
+                </p>
               )}
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <Checkbox checked={publicToo} onChange={setPublicToo}>
