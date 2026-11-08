@@ -128,8 +128,10 @@ table {
 }
 
 /* Placeholder for imagery we don't have yet: a dusk-toned field with a label. */
+/* --slot-img is set by <ImageSlot src>; if the file is missing, the placeholder gradient below shows through. */
 .image-slot {
   background:
+    var(--slot-img, none) var(--slot-pos, center) / cover no-repeat,
     linear-gradient(180deg, rgb(10 10 10 / 0) 40%, rgb(10 10 10 / 0.85) 100%),
     radial-gradient(120% 90% at 50% 105%, #6fc3b5 0%, #2e7f76 22%, #173a3a 48%, #101818 72%, #0c1010 100%);
 }

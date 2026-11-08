@@ -199,18 +199,34 @@ export function Wordmark({ className }: { className?: string }) {
   );
 }
 
-/** Placeholder for imagery we don't have yet. `label` says what belongs here. */
-export function ImageSlot({ label, className, children }: { label: string; className?: string; children?: ReactNode }) {
+/** Imagery slot. With `src` it shows that image, cropped to fill (`position` picks the crop); without it, a placeholder
+ * that says what belongs here. Preview images live in public/preview/, which git ignores. */
+export function ImageSlot({
+  label,
+  className,
+  children,
+  src,
+  position = "center",
+}: {
+  label: string;
+  className?: string;
+  children?: ReactNode;
+  src?: string;
+  position?: string;
+}) {
   return (
     <div
       className={cx("image-slot overflow-hidden", !className?.includes("absolute") && "relative", className)}
       role="img"
-      aria-label={`Placeholder: ${label}`}
+      aria-label={src ? label : `Placeholder: ${label}`}
+      style={src ? ({ "--slot-img": `url(${src})`, "--slot-pos": position } as React.CSSProperties) : undefined}
     >
-      <span className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1.5 rounded-md bg-black/45 px-2 py-1 text-[11px] text-white/80 backdrop-blur">
-        <ImageIcon className="size-3" aria-hidden />
-        {label}
-      </span>
+      {!src && (
+        <span className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1.5 rounded-md bg-black/45 px-2 py-1 text-[11px] text-white/80 backdrop-blur">
+          <ImageIcon className="size-3" aria-hidden />
+          {label}
+        </span>
+      )}
       {children}
     </div>
   );
