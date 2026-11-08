@@ -2861,6 +2861,17 @@
             ],
             "title": "Body"
           },
+          "draft_body": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Draft Body"
+          },
           "approver": {
             "anyOf": [
               {
@@ -3358,7 +3369,8 @@
         "required": [
           "expected_version"
         ],
-        "title": "EditActionRequest"
+        "title": "EditActionRequest",
+        "description": "Edit an unsent takedown. ``body`` replaces the draft text (ActionOut.draft_body), not the rendered preview:\nkeep the {company} token and leave the signature off; both are added when the letter is rendered and sent."
       },
       "ErrorBody": {
         "properties": {

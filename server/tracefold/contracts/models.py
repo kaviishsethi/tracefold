@@ -322,7 +322,8 @@ class ActionOut(BaseModel):
     target: dict[str, Any]
     delivery: ActionDelivery | None = None
     subject: str | None = None
-    body: str | None = None
+    body: str | None = None          # rendered preview: company filled in, signature (or placeholder) appended
+    draft_body: str | None = None    # raw editable text for PATCH: keeps the {company} token, no signature
     approver: dict[str, Any] | None = None
     approved_at: str | None = None
     executed_at: str | None = None
@@ -355,6 +356,8 @@ class RejectRequest(Strict):
 
 
 class EditActionRequest(Strict):
+    """Edit an unsent takedown. ``body`` replaces the draft text (ActionOut.draft_body), not the rendered preview:
+    keep the {company} token and leave the signature off; both are added when the letter is rendered and sent."""
     subject: str | None = Field(default=None, min_length=1, max_length=200)
     body: str | None = Field(default=None, min_length=1, max_length=5000)
     expected_version: int

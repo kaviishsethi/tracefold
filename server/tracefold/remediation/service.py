@@ -111,13 +111,14 @@ class RemediationService:
         minimal = disclosure != Disclosure.full
         ws = a["workspace_id"]
         target = dict(a["target"])
-        subject = body = None
+        subject = body = draft_body = None
         removal = None
         if a["kind"] == ActionKind.takedown_request.value:
             summary = f"Ask {target['host']} to remove the copied content"
             profile = self.e.repo.get_remediation_profile(ws)
             if not minimal:
                 subject = a["draft"].get("subject")
+                draft_body = a["draft"].get("body")
                 company = profile["company_name"] if profile else "[company name not set]"
                 reply_to = profile["reply_to"] if profile else "[reply-to not set]"
                 body = takedown.render(a["draft"].get("body", ""), company, reply_to, a.get("approver"))
@@ -135,7 +136,7 @@ class RemediationService:
         return ActionOut(
             action_id=a["id"], workspace_id=ws, finding_id=a["finding_id"], kind=a["kind"], status=a["status"],
             version=a["version"], summary=summary, target=target, delivery=self._delivery(ws, a), subject=subject,
-            body=body, approver=approver, approved_at=a.get("approved_at"), executed_at=a.get("executed_at"),
+            body=body, draft_body=draft_body, approver=approver, approved_at=a.get("approved_at"), executed_at=a.get("executed_at"),
             result=a.get("result") or {}, removal_observed=removal, created_at=a["created_at"], updated_at=a["updated_at"],
         )
 

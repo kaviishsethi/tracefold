@@ -72,10 +72,15 @@ credentials ([PLAN.md](../PLAN.md) §"Act").
 |---|---|---|
 | `GET /workspaces/{ws}/actions?status=&finding_id=&cursor=&limit=` | List actions | `read` |
 | `GET /workspaces/{ws}/actions/{id}` | One action, with the rendered letter (full disclosure only) | `read` |
-| `PATCH /workspaces/{ws}/actions/{id}` | `{subject?, body?, expected_version}`: edit a takedown before it's sent | `approve` |
+| `PATCH /workspaces/{ws}/actions/{id}` | `{subject?, body?, expected_version}`: edit a takedown before it's sent. `body` replaces the **draft** text: edit `draft_body`, not `body` | `approve` |
 | `POST /workspaces/{ws}/actions/{id}/approve` | `{approver: {name, email, title?}, attest_authorized: true, expected_version}`: sign and execute | `approve` |
 | `POST /workspaces/{ws}/actions/{id}/reject` | `{reason, expected_version}` | `approve` |
 | `POST /workspaces/{ws}/actions/{id}/mark-submitted` | `{note?, expected_version}` after filing a host's web form | `approve` |
+
+A takedown action carries two texts. `body` is the rendered preview: company details filled in and the signature
+(or a placeholder before approval) appended. `draft_body` is the editable text: it keeps the literal `{company}`
+token and has no signature. Edit `draft_body` and send it back as `body` in PATCH; the engine adds the company
+details and exactly one signature when it renders and sends the letter. Both are withheld under `minimal` disclosure.
 
 Action `status`: `drafted` → (`awaiting_manual_submission` →) `submitted` for takedowns, `completed` for keys;
 `failed` (can be approved again) or `rejected`. **`submitted` is not removed.** `removal_observed` becomes true only

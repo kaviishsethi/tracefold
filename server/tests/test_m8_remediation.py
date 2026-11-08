@@ -98,7 +98,7 @@ def test_email_approval_sends_once_through_outbox(env):
 def test_minimal_disclosure_hides_letter_and_excerpt(env):
     public_scan(env)
     a = takedown(env, who="cloud")
-    assert a["body"] is None and a["subject"] is None and "excerpt" not in a["target"]
+    assert a["body"] is None and a["draft_body"] is None and a["subject"] is None and "excerpt" not in a["target"]
     assert approve(env, a, who="cloud").status_code == 403  # no approve capability
 
 
@@ -112,6 +112,27 @@ def test_edit_and_reject(env):
                         json={"reason": "Publication was authorized", "expected_version": r.json()["version"]})
     assert r.status_code == 200 and r.json()["status"] == "rejected"
     assert approve(env, r.json()).json()["error"]["code"] == "invalid_state"
+
+
+def test_editing_draft_body_round_trip_signs_once(env):
+    public_scan(env)
+    setup_takedown(env, email="abuse@forum.example")
+    a = takedown(env)
+    # body is the rendered preview; draft_body is the editable text with the {company} token and no signature
+    assert "Northwind Relay, Inc." in a["body"] and "{company}" not in a["body"]
+    assert "{company}" in a["draft_body"] and "[Signed by" not in a["draft_body"] and "Reply to:" not in a["draft_body"]
+    edited = a["draft_body"].replace("Please remove", "Please promptly remove")
+    r = env.client.patch(f"{WS}/actions/{a['action_id']}", headers=env.h(),
+                         json={"body": edited, "expected_version": a["version"]})
+    assert r.status_code == 200, r.text
+    a = r.json()
+    assert a["draft_body"] == edited and "Please promptly remove" in a["body"]
+    assert a["body"].count("Reply to:") == 1 and "{company}" not in a["body"]
+    assert approve(env, a).json()["status"] == "submitted"
+    eml = (env.engine.settings.data_dir / "outbox" / f"{a['action_id']}.eml").read_text()
+    assert "Please promptly remove" in eml and "{company}" not in eml and "[Signed by" not in eml
+    assert eml.count("Reply to: legal@northwind.example") == 1 and eml.count("Dana Ruiz") == 1
+    assert "on behalf of Northwind Relay, Inc." in eml
 
 
 def test_form_host_then_removal_observed_after_fresh_scan(env):
