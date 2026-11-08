@@ -199,6 +199,35 @@ def build_server(config: AdapterConfig, engine: EngineClient | None = None) -> M
         return out
 
     @mcp.tool(annotations=READ)
+    async def list_scans(limit: Annotated[int, Field(ge=1, le=50)] = 10, workspace_id: WorkspaceArg = None) -> dict:
+        """Recent scans in the workspace from every client (this assistant, the web app, the CLI), newest first."""
+        try:
+            page = await eng().scans(workspace_id, limit)
+        except EngineError as e:
+            raise _fail(e) from None
+        return {"scans": [{"scan_id": s["scan_id"], "state": s["state"], "started_from": s.get("started_from"),
+                           "checks": s["checks"], "recheck_of": s.get("recheck_of"),
+                           "findings": (s.get("summary") or {}).get("observations"), "created_at": s["created_at"]}
+                          for s in page["items"]]}
+
+    @mcp.tool(annotations=READ)
+    async def list_approvals(
+        status: Annotated[Literal["drafted", "all"], Field(description="'drafted' = waiting for a person.")] = "drafted",
+        workspace_id: WorkspaceArg = None,
+    ) -> dict:
+        """Takedown requests and AWS key shut-offs Tracefold drafted. Read-only: a person approves them in the
+        Tracefold web app (Approvals). This assistant can't approve or reject them."""
+        try:
+            page = await eng().actions(workspace_id, None if status == "all" else status, 100)
+        except EngineError as e:
+            if e.status == 404:
+                return {"approvals": [], "note": "This engine doesn't have approvals enabled."}
+            raise _fail(e) from None
+        return {"approvals": [{"action_id": a["action_id"], "kind": a["kind"], "summary": a["summary"], "status": a["status"],
+                               "finding_id": a["finding_id"], "created_at": a["created_at"]} for a in page["items"]],
+                "note": "Approve or reject these in the Tracefold web app under Approvals."}
+
+    @mcp.tool(annotations=READ)
     async def explain_finding(
         finding_id: str,
         include_evidence: Annotated[bool, Field(

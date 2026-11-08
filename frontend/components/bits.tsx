@@ -1,16 +1,102 @@
 // Small shared pieces for the app pages. Keep this file tiny.
 import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 import type { ReactNode } from "react";
 import type { Finding, Scan, Severity } from "@/lib/api";
 import { relativeTime, where } from "@/lib/format";
 import { cx } from "./ui";
 
-export function H1({ children, sub }: { children: ReactNode; sub?: ReactNode }) {
+export function H1({ children, sub, right }: { children: ReactNode; sub?: ReactNode; right?: ReactNode }) {
   return (
-    <div className="mb-8">
-      <h1 className="text-2xl tracking-[-0.03em] text-ink">{children}</h1>
-      {sub && <p className="mt-1 text-sm text-mute">{sub}</p>}
+    <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+      <div className="min-w-0">
+        <h1 className="text-[30px] font-medium leading-tight tracking-[-0.035em] text-ink">{children}</h1>
+        {sub && <p className="mt-1.5 text-sm text-mute">{sub}</p>}
+      </div>
+      {right && <div className="flex shrink-0 items-center gap-2">{right}</div>}
     </div>
+  );
+}
+
+/** Collapsible section: a bordered row with a chevron, instead of the browser's default triangle. */
+export function Disclosure({ label, children, className }: { label: ReactNode; children: ReactNode; className?: string }) {
+  return (
+    <details className={cx("group rounded-card border border-line bg-panel", className)}>
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-card px-4 py-3 text-sm text-ink-2 transition-colors hover:bg-panel-2 hover:text-ink [&::-webkit-details-marker]:hidden">
+        {label}
+        <ChevronDown className="size-4 shrink-0 text-faint transition-transform group-open:rotate-180" aria-hidden />
+      </summary>
+      <div className="border-t border-line px-4 py-3 text-sm text-mute">{children}</div>
+    </details>
+  );
+}
+
+/** Breadcrumb trail: parent links, then the current page. */
+export function Crumbs({ trail, current }: { trail: [string, string][]; current: ReactNode }) {
+  return (
+    <nav aria-label="Breadcrumb" className="mb-4 flex min-w-0 items-center gap-2 text-sm">
+      {trail.map(([href, label]) => (
+        <span key={href} className="flex items-center gap-2">
+          <Link href={href} className="text-mute hover:text-ink">
+            {label}
+          </Link>
+          <span className="text-faint">/</span>
+        </span>
+      ))}
+      <span className="truncate text-ink-2">{current}</span>
+    </nav>
+  );
+}
+
+/** A number card, like the KPI rows in finance and IT dashboards. */
+export function Stat({ label, value, sub, href, tone }: { label: string; value: ReactNode; sub?: ReactNode; href?: string; tone?: "accent" | "crit" }) {
+  const body = (
+    <>
+      <p className="text-[13px] text-mute">{label}</p>
+      <p className={cx("mt-3 text-[34px] font-medium leading-none tracking-[-0.03em]", tone === "crit" ? "text-crit" : tone === "accent" ? "text-accent" : "text-ink")}>
+        {value}
+      </p>
+      {sub && <p className="mt-2 text-xs text-faint">{sub}</p>}
+    </>
+  );
+  const cls = "block rounded-card border border-line bg-panel p-5 transition-colors";
+  return href ? (
+    <Link href={href} className={cx(cls, "hover:border-line-strong")}>
+      {body}
+    </Link>
+  ) : (
+    <div className={cls}>{body}</div>
+  );
+}
+
+/** Filter chip row. */
+export function Chips<T extends string>({ value, options, onChange }: { value: T; options: [T, string, number?][]; onChange: (v: T) => void }) {
+  return (
+    <div className="flex flex-wrap gap-1 rounded-ctl border border-line bg-panel p-1">
+      {options.map(([v, label, n]) => (
+        <button
+          key={v}
+          onClick={() => onChange(v)}
+          className={cx("flex h-7 items-center gap-1.5 rounded-[7px] px-3 text-[13px] transition-colors", v === value ? "bg-raised text-ink" : "text-mute hover:text-ink")}
+        >
+          {label}
+          {n !== undefined && <span className="text-faint">{n}</span>}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+/** Card with a quiet header line, used for every panel on the app pages. */
+export function Card({ title, right, children, className }: { title: ReactNode; right?: ReactNode; children: ReactNode; className?: string }) {
+  return (
+    <section className={cx("overflow-hidden rounded-card border border-line bg-panel", className)}>
+      <header className="flex min-h-12 items-center justify-between gap-3 border-b border-line px-5">
+        <h2 className="text-sm font-medium text-ink">{title}</h2>
+        {right}
+      </header>
+      {children}
+    </section>
   );
 }
 

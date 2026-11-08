@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { api, ws, type Action, type ApiError, type Page } from "@/lib/api";
 import { useCurrentWorkspace } from "@/components/shell";
 import { ActionCard } from "@/components/action-card";
-import { H1 } from "@/components/bits";
+import { Disclosure, H1 } from "@/components/bits";
 import { ErrorNote } from "@/components/ui";
 
 export default function Approvals() {
@@ -36,14 +36,13 @@ export default function Approvals() {
         ))}
       </div>
       {done.length > 0 && (
-        <details className="mt-10">
-          <summary className="cursor-pointer text-sm text-mute hover:text-ink">{done.length} done</summary>
+        <Disclosure label={`${done.length} done`} className="mt-10">
           <div className="mt-4 space-y-4">
             {done.map((a) => (
               <ActionCard key={a.action_id} action={a} workspaceId={workspace.id} workspaceName={workspace.name} onChange={update} />
             ))}
           </div>
-        </details>
+        </Disclosure>
       )}
     </div>
   );

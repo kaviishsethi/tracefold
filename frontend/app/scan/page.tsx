@@ -1,13 +1,20 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { FileText, Upload, X } from "lucide-react";
 import { api, ws, type Page, type QueryPlan, listScans, startScan, uploadFiles, type ApiError, type Check, type Scan } from "@/lib/api";
-import { bytes, relativeTime } from "@/lib/format";
+import { bytes } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
-import { Box, H1, Note, scanState, source } from "@/components/bits";
-import { Button, ErrorNote, cx } from "@/components/ui";
+import { Card, Disclosure, H1 } from "@/components/bits";
+import { AgentPrompt } from "@/components/agent-prompt";
+import { ScansTable } from "@/components/scans-table";
+import { Button, ErrorNote } from "@/components/ui";
+
+const AGENT_SCAN =
+  "Call the tracefold tool scan_changes for this repository (changes since HEAD, including untracked files). When it finishes, call get_findings with its scan_id, fix each local risk and call recheck_fix for it, and summarize the outcome. Don't print or test any secret value you see.";
+
+const ext = (name: string) => (name.includes(".") ? name.split(".").pop()!.toUpperCase() : "File");
 
 export default function ScanPage() {
   const { current: workspace } = useCurrentWorkspace();
@@ -53,6 +60,40 @@ export default function ScanPage() {
     };
   }, [workspace]);
 
+  // The whole page accepts dropped files, like a file manager.
+  useEffect(() => {
+    let depth = 0;
+    const hasFiles = (e: DragEvent) => Array.from(e.dataTransfer?.types ?? []).includes("Files");
+    const enter = (e: DragEvent) => {
+      if (!hasFiles(e)) return;
+      depth++;
+      setDragging(true);
+    };
+    const leave = (e: DragEvent) => {
+      if (!hasFiles(e)) return;
+      depth = Math.max(0, depth - 1);
+      if (depth === 0) setDragging(false);
+    };
+    const over = (e: DragEvent) => hasFiles(e) && e.preventDefault();
+    const drop = (e: DragEvent) => {
+      if (!hasFiles(e)) return;
+      e.preventDefault();
+      depth = 0;
+      setDragging(false);
+      add(e.dataTransfer?.files ?? null);
+    };
+    window.addEventListener("dragenter", enter);
+    window.addEventListener("dragleave", leave);
+    window.addEventListener("dragover", over);
+    window.addEventListener("drop", drop);
+    return () => {
+      window.removeEventListener("dragenter", enter);
+      window.removeEventListener("dragleave", leave);
+      window.removeEventListener("dragover", over);
+      window.removeEventListener("drop", drop);
+    };
+  }, []);
+
   const add = (list: FileList | null) => {
     if (!list) return;
     setFiles((prev) => [...prev, ...Array.from(list).filter((f) => !prev.some((p) => p.name === f.name))]);
@@ -81,91 +122,126 @@ export default function ScanPage() {
 
   return (
     <div>
-      <H1 sub="Check files for leaked secrets and risky code, and for copies on public pages.">Scan</H1>
+      <H1
+        sub="Add files to check them for leaked secrets, risky code and copies on public pages."
+        right={
+          <>
+            <AgentPrompt text={AGENT_SCAN} label="Have your agent scan" />
+            <Button size="sm" onClick={() => input.current?.click()} className="!bg-accent !text-[#0a0c0c]">
+              <Upload className="size-3.5" aria-hidden /> Upload files
+            </Button>
+          </>
+        }
+      >
+        Scan
+      </H1>
+      <input ref={input} type="file" multiple hidden onChange={(e) => add(e.target.files)} />
       <ErrorNote error={error} />
 
-      <div
-        onDragOver={(e) => {
-          e.preventDefault();
-          setDragging(true);
-        }}
-        onDragLeave={() => setDragging(false)}
-        onDrop={(e) => {
-          e.preventDefault();
-          setDragging(false);
-          add(e.dataTransfer.files);
-        }}
-        onClick={() => input.current?.click()}
-        className={cx(
-          "flex cursor-pointer flex-col items-center justify-center rounded-card border border-dashed px-6 py-14 text-center transition-colors",
-          dragging ? "border-accent bg-accent/5" : "border-line-strong hover:border-mute",
-        )}
-      >
-        <p className="text-[17px] text-ink">Drop files to check</p>
-        <p className="mt-1 text-sm text-mute">or click to choose. Documents, code and .docx.</p>
-        <input ref={input} type="file" multiple hidden onChange={(e) => add(e.target.files)} />
-      </div>
-
-      {files.length > 0 && (
-        <div className="mt-4">
-          <Box>
-            {files.map((f) => (
-              <div key={f.name} className="flex items-center gap-3 border-t border-line px-4 py-2.5 text-sm first:border-t-0">
-                <span className="min-w-0 flex-1 truncate text-ink">{f.name}</span>
-                <span className="text-faint">{bytes(f.size)}</span>
-                <button onClick={() => setFiles(files.filter((x) => x !== f))} className="text-mute hover:text-ink" aria-label={`Remove ${f.name}`}>
-                  Remove
-                </button>
-              </div>
-            ))}
-          </Box>
-          {plans.length > 0 && <label className="my-4 block text-sm text-mute">Public sources
-            <select className="mt-2 block w-full rounded-ctl border border-line bg-panel px-3 py-3 text-ink" value={planId} onChange={(e) => setPlanId(e.target.value)}>
-              {manifest && <option value="">Registered source list</option>}
-              {plans.map((p) => <option key={p.query_plan_id} value={p.query_plan_id}>{p.display_name} — {p.pack ?? "discovery"}</option>)}
-            </select>
-          </label>}
-          {plan && publicToo && <details className="my-4 text-sm text-mute"><summary className="cursor-pointer">Preview public searches</summary><ul className="mt-3 space-y-2">{plan.searches.map((q) => <li key={q.query_id}>{q.provider}: <span className="text-ink">{q.query}</span></li>)}</ul><p className="mt-3">Only these approved queries are sent to search providers. Search is not exhaustive.</p></details>}
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
-            {manifest || plans.length ? (
-              <label className="flex items-center gap-2 text-sm text-ink-2">
-                <input type="checkbox" checked={publicToo} onChange={(e) => setPublicToo(e.target.checked)} />
-                Also look for copies on public pages
-              </label>
-            ) : (
-              <span className="text-sm text-faint">No public pages registered, so only your files are checked.</span>
-            )}
-            <Button onClick={run} loading={busy}>
-              Check {files.length} {files.length === 1 ? "file" : "files"}
-            </Button>
+      {dragging && (
+        <div className="pointer-events-none fixed inset-0 z-50 flex items-center justify-center bg-bg/80 backdrop-blur-sm">
+          <div className="rounded-card border-2 border-dashed border-accent px-16 py-12 text-center">
+            <Upload className="mx-auto size-6 text-accent" aria-hidden />
+            <p className="mt-3 text-lg text-ink">Drop to add files</p>
           </div>
         </div>
       )}
 
-      <h2 className="mb-3 mt-14 text-sm font-medium text-ink">Recent scans</h2>
-      <Box>
-        {scans === null ? (
-          <Note>Loading…</Note>
-        ) : scans.length === 0 ? (
-          <Note>No scans yet. Scans from your coding assistant show up here too.</Note>
+      <Card
+        title={files.length ? `${files.length} ${files.length === 1 ? "file" : "files"} ready` : "Files"}
+        right={
+          files.length > 0 ? (
+            <button onClick={() => setFiles([])} className="text-xs text-mute hover:text-ink">
+              Clear
+            </button>
+          ) : undefined
+        }
+      >
+        {files.length === 0 ? (
+          <button onClick={() => input.current?.click()} className="flex w-full items-center gap-3 px-5 py-6 text-left text-sm text-mute hover:bg-panel-2">
+            <FileText className="size-5 text-faint" aria-hidden />
+            <span>
+              Drag files anywhere on this page, or <span className="text-ink underline underline-offset-4">choose files</span>. Documents, code and .docx.
+            </span>
+          </button>
         ) : (
-          scans.map((s) => {
-            const st = scanState(s);
-            const n = typeof s.summary.observations === "number" ? s.summary.observations : null;
-            return (
-              <Link key={s.scan_id} href={`/scan/${s.scan_id}`} className="flex items-center gap-3 border-t border-line px-4 py-3 text-sm first:border-t-0 hover:bg-panel-2">
-                <span className={cx("size-2 rounded-full", st.tone === "busy" ? "animate-pulse bg-accent" : st.tone === "done" ? "bg-local" : "bg-med")} />
-                <span className="w-36 shrink-0 text-ink">{source(s)}</span>
-                <span className="min-w-0 flex-1 truncate text-mute">
-                  {s.recheck_of ? "Recheck · " : ""}
-                  {st.tone === "busy" ? st.text : n === null ? st.text : n === 0 ? "Nothing found" : `${n} found`}
-                </span>
-                <span className="shrink-0 text-faint">{relativeTime(s.created_at)}</span>
-              </Link>
-            );
-          })
+          <>
+            <table className="w-full text-left text-sm">
+              <thead className="text-xs text-faint">
+                <tr className="border-b border-line">
+                  <th className="px-5 py-2.5 font-normal">Name</th>
+                  <th className="px-5 py-2.5 font-normal">Type</th>
+                  <th className="px-5 py-2.5 text-right font-normal">Size</th>
+                  <th className="w-12" />
+                </tr>
+              </thead>
+              <tbody>
+                {files.map((f) => (
+                  <tr key={f.name} className="border-b border-line last:border-0">
+                    <td className="px-5 py-2.5">
+                      <span className="flex min-w-0 items-center gap-2.5 text-ink">
+                        <FileText className="size-4 shrink-0 text-faint" aria-hidden />
+                        <span className="truncate">{f.name}</span>
+                      </span>
+                    </td>
+                    <td className="px-5 py-2.5 text-xs text-faint">{ext(f.name)}</td>
+                    <td className="px-5 py-2.5 text-right text-faint">{bytes(f.size)}</td>
+                    <td className="pr-3 text-right">
+                      <button onClick={() => setFiles(files.filter((x) => x !== f))} className="rounded-md p-1 text-faint hover:bg-raised hover:text-ink" aria-label={`Remove ${f.name}`}>
+                        <X className="size-3.5" aria-hidden />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="space-y-3 border-t border-line px-5 py-4">
+              {plans.length > 0 && (
+                <label className="block text-sm text-mute">
+                  Public sources
+                  <select className="mt-1.5 block w-full rounded-ctl border border-line bg-panel-2 px-3 py-2.5 text-ink" value={planId} onChange={(e) => setPlanId(e.target.value)}>
+                    {manifest && <option value="">Registered source list</option>}
+                    {plans.map((p) => (
+                      <option key={p.query_plan_id} value={p.query_plan_id}>
+                        {p.display_name}, {p.pack ?? "discovery"}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              )}
+              {plan && publicToo && (
+                <Disclosure label="Preview public searches">
+                  <ul className="space-y-2">
+                    {plan.searches.map((q) => (
+                      <li key={q.query_id}>
+                        {q.provider}: <span className="text-ink">{q.query}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-3">Only these approved queries are sent to search providers. Search is not exhaustive.</p>
+                </Disclosure>
+              )}
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                {manifest || plans.length ? (
+                  <label className="flex items-center gap-2 text-sm text-ink-2">
+                    <input type="checkbox" checked={publicToo} onChange={(e) => setPublicToo(e.target.checked)} />
+                    Also look for copies on public pages
+                  </label>
+                ) : (
+                  <span className="text-sm text-faint">No public pages registered, so only your files are checked.</span>
+                )}
+                <Button onClick={run} loading={busy} className="!bg-accent !text-[#0a0c0c]">
+                  Check {files.length} {files.length === 1 ? "file" : "files"}
+                </Button>
+              </div>
+            </div>
+          </>
         )}
-      </Box>
+      </Card>
+
+      <Card title="Recent scans" className="mt-6" right={<span className="text-xs text-faint">From this app and your coding assistant</span>}>
+        <ScansTable scans={scans} empty="No scans yet. Scans from your coding assistant show up here too." />
+      </Card>
     </div>
   );
 }

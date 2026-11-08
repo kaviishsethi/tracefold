@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -10,7 +9,8 @@ import {
 import { relativeTime } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
 import { ActionCard } from "@/components/action-card";
-import { Dot, findingPlace } from "@/components/bits";
+import { Crumbs, Disclosure, Dot, findingPlace } from "@/components/bits";
+import { AgentPrompt, findingPrompt } from "@/components/agent-prompt";
 import { Button, ErrorNote, Spinner } from "@/components/ui";
 
 function Text({ label, meta, text }: { label: string; meta?: string; text: string | null }) {
@@ -86,15 +86,16 @@ export default function FindingPage() {
 
   return (
     <div>
-      <Link href="/findings" className="text-sm text-mute hover:text-ink">
-        ← Findings
-      </Link>
+      <Crumbs trail={[["/findings", "Findings"]]} current={o?.title ?? "Finding"} />
 
-      <div className="mb-8 mt-4">
-        <h1 className="flex items-center gap-3 text-2xl tracking-[-0.03em] text-ink">
-          <Dot severity={o?.severity} />
-          {o?.title ?? "Finding"}
-        </h1>
+      <div className="mb-8">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <h1 className="flex items-center gap-3 text-2xl tracking-[-0.03em] text-ink">
+            <Dot severity={o?.severity} />
+            {o?.title ?? "Finding"}
+          </h1>
+          {f.status === "open" && <AgentPrompt text={findingPrompt(f, ev?.public?.url)} />}
+        </div>
         <p className="mt-1 text-sm text-mute">
           {findingPlace(f) || "Location withheld"}
           {f.status !== "open" && <span className="text-local"> · {f.status === "no_longer_observed" ? "No longer found on the page" : "Not found after the fix"}</span>}
@@ -157,8 +158,7 @@ export default function FindingPage() {
       )}
 
       {(o?.conditions || o?.uncertainty) && (
-        <details className="mt-10 text-sm text-mute">
-          <summary className="cursor-pointer text-ink-2">More detail</summary>
+        <Disclosure label="More detail" className="mt-10">
           <div className="mt-3 max-w-2xl space-y-2 leading-relaxed">
             {o?.conditions && <p>{o.conditions}</p>}
             {o?.uncertainty && <p>{o.uncertainty}</p>}
@@ -167,7 +167,7 @@ export default function FindingPage() {
               Seen in {f.observations.length} {f.observations.length === 1 ? "scan" : "scans"}, rechecked {f.rechecks.length} {f.rechecks.length === 1 ? "time" : "times"}.
             </p>
           </div>
-        </details>
+        </Disclosure>
       )}
     </div>
   );

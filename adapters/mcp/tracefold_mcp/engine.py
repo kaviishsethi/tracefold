@@ -87,6 +87,15 @@ class EngineClient:
             params["cursor"] = cursor
         return await self.request("GET", f"{self.ws(ws)}/findings", params=params)
 
+    async def scans(self, ws: str | None, limit: int) -> dict:
+        return await self.request("GET", f"{self.ws(ws)}/scans", params={"limit": limit})
+
+    async def actions(self, ws: str | None, status: str | None, limit: int) -> dict:
+        params: dict[str, Any] = {"limit": limit}
+        if status:
+            params["status"] = status
+        return await self.request("GET", f"{self.ws(ws)}/actions", params=params)
+
     async def finding(self, ws: str | None, finding_id: str) -> dict:
         return await self.request("GET", f"{self.ws(ws)}/findings/{_id(finding_id)}")
 
