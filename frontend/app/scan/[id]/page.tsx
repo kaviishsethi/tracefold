@@ -12,6 +12,7 @@ import { AgentPrompt, scanPrompt } from "@/components/agent-prompt";
 import { SourcesPanel } from "@/components/scan-sources";
 import { LedgerPanel } from "@/components/scan-ledger";
 import { ConfirmButton } from "@/components/confirm-button";
+import { ScheduleButton } from "@/components/schedule-button";
 import { groupByPage, PageMatchRow } from "@/components/page-matches";
 import { LeakTimeline } from "@/components/leak-timeline";
 import { ErrorNote, Spinner, cx } from "@/components/ui";
@@ -211,6 +212,9 @@ export default function ScanDetail() {
           right={
             done ? (
               <>
+                {canDelete && !scan.recheck_of && (
+                  <ScheduleButton workspaceId={workspace!.id} scanId={scan.scan_id} publicCheck={scan.checks.includes("public_match")} />
+                )}
                 {canDelete && (
                   <ConfirmButton
                     label="Delete"

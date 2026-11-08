@@ -39,7 +39,8 @@ Target length **about 2:45**. The rules say projects without a video are not jud
 [SCREEN] Tracefold Scan page, "Drop files to check".
 
 [VO] "This is Tracefold, a platform that catches, fixes and prevents security risks in a company's files, both in
-documents you upload and in code as you write it. It finds data breaches of internal files, and sensitive data inside
+documents you upload and in code as you write it, through an MCP server your coding assistant connects to. Scans can
+run on a schedule, so it keeps checking. It finds data breaches of internal files, and sensitive data inside
 them, like API keys, access tokens and Social Security numbers. It searches the web for pages that
 have leaked text from your files, and drafts a takedown request to each site. It disables leaked AWS keys and
 revokes leaked GitHub tokens. And through your coding assistant, it removes secrets from code and rechecks the fix.
@@ -74,12 +75,20 @@ can see the same sentence."
 public copy, Tracefold drafts a takedown request to the site. A person has to approve it. In this demo, approved
 requests are saved to a local folder, not emailed."
 
-### 1:35–2:05 The same checks from Claude Code (MCP)
+### 1:35–1:45 Scheduled checks
+
+[SCREEN] Finished scan → Schedule → "every day" → Schedule. Cut to Settings → Scheduled checks: the file, "Every day",
+next run, Run now / Pause / Delete.
+
+[VO] "Any scan can run on a schedule, every hour, day or week, like a scheduled task. Tracefold keeps a private copy
+of the files on this machine so it can check them again, and new results show up like any other scan."
+
+### 1:45–2:05 The same checks from Claude Code (MCP)
 
 [SCREEN] Claude Code terminal. Paste the scan prompt. Tool calls: `scan_changes` → `get_findings` → edit → `recheck_fix`.
 Cut to the web app showing the same finding marked fixed.
 
-[VO] "Tracefold also runs as an MCP server, so a coding assistant can call it. Here Claude Code scans the uncommitted
+[VO] "Tracefold runs as an MCP server, so a coding assistant can call it. Here Claude Code scans the uncommitted
 changes in a repo, gets a finding, fixes the code, and rechecks it. The web app shows the same finding, now fixed.
 The assistant can scan and fix code. It can't approve takedowns; only a person can."
 
@@ -94,12 +103,12 @@ would use a local-model assistant, which we haven't shown here."
 
 ### 2:30–2:45 What's real
 
-[SCREEN] End card. **Working:** file scans, Exa/Tavily search, local matching, Ollama review, MCP scan/fix/recheck,
-approvals saved to a local folder. **Not built yet:** GitHub and Docs connectors, continuous monitoring, a local-model
-assistant. Sample files are public company documents saved as files.
+[SCREEN] End card. **Working:** file scans, Exa/Tavily search, local matching, Ollama review, industry checks,
+scheduled checks, MCP scan/fix/recheck, approvals saved to a local folder. **Not built yet:** GitHub and Docs
+connectors, a local-model assistant. Sample files are public company documents saved as files.
 
 [VO] "Everything shown ran live. The sample files are public company documents saved as files. Connectors for GitHub
-and Docs, and continuous monitoring, are not built yet."
+and Docs are not built yet."
 
 ## Voiceover recording
 

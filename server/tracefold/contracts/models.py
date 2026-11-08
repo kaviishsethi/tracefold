@@ -135,6 +135,21 @@ class CompanyIn(Strict):
     industry: Literal["financial", "healthcare", "government", "retail", "technology"] | None = None
 
 
+class ScheduleIn(Strict):
+    """Re-run a scan on a schedule. ``scan_id`` re-checks that scan's uploaded files; omit it to re-check the
+    registered folder's uncommitted changes."""
+    scan_id: str | None = Field(default=None, max_length=100)
+    every: Literal["hour", "day", "week"] = "day"
+    public: bool = True
+    name: str | None = Field(default=None, max_length=120)
+
+
+class SchedulePatch(Strict):
+    enabled: bool | None = None
+    every: Literal["hour", "day", "week"] | None = None
+    run_now: bool = False
+
+
 class SitesIn(Strict):
     """Pages checked in every public scan, and hosts that are never fetched (subdomains included)."""
     always_check: list[str] = Field(default_factory=list, max_length=20)

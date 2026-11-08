@@ -39,6 +39,8 @@ class Engine:
         self.scans = ScanService(self)
         from .services.findings import FindingService
         self.findings = FindingService(self)
+        from .services.schedules import ScheduleService
+        self.schedules = ScheduleService(self)
         self._init_optional()
         self.started = False
 

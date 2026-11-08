@@ -169,6 +169,7 @@ export default function SettingsPage() {
         </form>
       )}
       {loaded && workspace && <SitesCard workspaceId={workspace.id} canEdit={canEdit} />}
+      {loaded && workspace && <SchedulesCard workspaceId={workspace.id} canEdit={canEdit} />}
       {loaded && <ConnectionsCard />}
     </div>
   );
@@ -311,6 +312,84 @@ function ConnectionsCard() {
           </div>
           <AgentPrompt text={CONNECT_AWS_PROMPT} />
         </div>
+      )}
+    </section>
+  );
+}
+
+interface Schedule {
+  schedule_id: string;
+  name: string;
+  every: "hour" | "day" | "week";
+  enabled: boolean;
+  next_run_at: string;
+  last_run_at: string | null;
+  last_scan_id: string | null;
+  last_error: string | null;
+  runs: number;
+}
+
+const when = (ts: string | null) => (ts ? new Date(ts).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "");
+
+/** Optional scheduled checks, like scheduled tasks: each re-runs a scan every hour, day or week. */
+function SchedulesCard({ workspaceId, canEdit }: { workspaceId: string; canEdit: boolean }) {
+  const [items, setItems] = useState<Schedule[] | null>(null);
+  const load = () => api<{ items: Schedule[] }>(ws(workspaceId, "/schedules")).then((r) => setItems(r.items)).catch(() => setItems([]));
+  useEffect(() => {
+    load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [workspaceId]);
+  const patch = async (id: string, json: object) => {
+    await api(ws(workspaceId, `/schedules/${id}`), { method: "PATCH", json }).catch(() => {});
+    load();
+  };
+  const remove = async (id: string) => {
+    await api(ws(workspaceId, `/schedules/${id}`), { method: "DELETE" }).catch(() => {});
+    load();
+  };
+  return (
+    <section className="mt-6 rounded-card border border-line bg-panel">
+      <header className="flex min-h-14 items-center border-b border-line px-5">
+        <h2 className="text-sm font-medium text-ink">Scheduled checks</h2>
+      </header>
+      {items === null ? null : items.length === 0 ? (
+        <p className="px-5 py-4 text-sm text-mute">None. Open a finished scan and choose Schedule to re-run it every hour, day or week.</p>
+      ) : (
+        <ul>
+          {items.map((m) => (
+            <li key={m.schedule_id} className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-line px-5 py-3.5 text-sm first:border-t-0">
+              <span className="min-w-0 flex-1">
+                <span className="block truncate font-mono text-[13px] text-ink">{m.name}</span>
+                <span className="block text-xs text-faint">
+                  Every {m.every}
+                  {m.enabled ? ` · next ${when(m.next_run_at)}` : " · paused"}
+                  {m.last_scan_id && (
+                    <>
+                      {" · "}
+                      <a href={`/scan/${m.last_scan_id}`} className="hover:text-ink">
+                        last run {when(m.last_run_at)}
+                      </a>
+                    </>
+                  )}
+                  {m.last_error && <span className="text-med"> · {m.last_error}</span>}
+                </span>
+              </span>
+              {canEdit && (
+                <span className="flex items-center gap-3 text-xs">
+                  <button type="button" onClick={() => patch(m.schedule_id, { run_now: true })} className="text-mute hover:text-ink">
+                    Run now
+                  </button>
+                  <button type="button" onClick={() => patch(m.schedule_id, { enabled: !m.enabled })} className="text-mute hover:text-ink">
+                    {m.enabled ? "Pause" : "Resume"}
+                  </button>
+                  <button type="button" onClick={() => remove(m.schedule_id)} className="text-mute hover:text-crit">
+                    Delete
+                  </button>
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
       )}
     </section>
   );
