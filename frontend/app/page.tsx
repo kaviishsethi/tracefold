@@ -272,7 +272,7 @@ export default function Landing() {
         <div className={cx("flex flex-1 flex-col justify-end pb-[clamp(40px,8vh,96px)] pt-[104px]", EDGE)}>
           <div className="mx-auto w-full max-w-[1760px]">
             <h1 className="rise max-w-[15ch] text-[clamp(44px,5vw,72px)] font-semibold leading-none tracking-[-0.04em] text-white" style={{ animationDelay: "140ms" }}>
-              Find leaks. Fix them. Stop the next one.
+              Catch, fix and prevent security leaks.
             </h1>
             <p className="rise mt-6 max-w-[66rem] text-[clamp(17px,1.4vw,20px)] leading-[1.5] text-[#c2c3c7]" style={{ animationDelay: "240ms" }}>
               Spots your code and docs on public pages, drafts the takedown, and catches risky changes before they ship.
