@@ -33,6 +33,10 @@ MCP is a first-class entry point. Automatic file watching and editor notificatio
 
 The result is **“matching content found publicly”** or **“no match in the sources checked,”** never a blanket assurance that a company is safe. A separate **Potential risks in your files** section provides preventive feedback even when no public match is found. These are review findings, not proof of a leak or a comprehensive security audit.
 
+## Remediation (approval required)
+
+When a scan finds a public copy, the engine drafts a takedown request; when it finds a long-term AWS access key, it drafts an action to disable that key. A named person approves each one. Approved takedowns are emailed to the host's configured contact (or prepared for the host's own form), and approved keys are set Inactive in IAM. By default emails go to a local outbox and nothing is sent. "Submitted" is tracked separately from "removed". See [docs/ENGINE_API.md](docs/ENGINE_API.md#remediation-actions-approval-required).
+
 ## Isolation from Spillway
 
 This is a standalone repository and a new implementation plan. It does not copy Spillway's application, databases, credentials, Git history, or frozen interfaces. Only the case-study decision record is carried forward as small research metadata. Any future code reuse must be selected and reviewed explicitly.
