@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { api, ws, type Page, type QueryPlan, listScans, startScan, uploadFiles, type ApiError, type Check, type Scan } from "@/lib/api";
 import { bytes } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
-import { Box, Card, H1 } from "@/components/bits";
+import { Box, Card, Disclosure, H1 } from "@/components/bits";
 import { ScansTable } from "@/components/scans-table";
 import { Button, ErrorNote, cx } from "@/components/ui";
 
@@ -125,7 +125,7 @@ export default function ScanPage() {
               {plans.map((p) => <option key={p.query_plan_id} value={p.query_plan_id}>{p.display_name} — {p.pack ?? "discovery"}</option>)}
             </select>
           </label>}
-          {plan && publicToo && <details className="my-4 text-sm text-mute"><summary className="cursor-pointer">Preview public searches</summary><ul className="mt-3 space-y-2">{plan.searches.map((q) => <li key={q.query_id}>{q.provider}: <span className="text-ink">{q.query}</span></li>)}</ul><p className="mt-3">Only these approved queries are sent to search providers. Search is not exhaustive.</p></details>}
+          {plan && publicToo && <Disclosure label="Preview public searches" className="my-4"><ul className="mt-3 space-y-2">{plan.searches.map((q) => <li key={q.query_id}>{q.provider}: <span className="text-ink">{q.query}</span></li>)}</ul><p className="mt-3">Only these approved queries are sent to search providers. Search is not exhaustive.</p></Disclosure>}
           <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
             {manifest || plans.length ? (
               <label className="flex items-center gap-2 text-sm text-ink-2">

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { api, ws, type Action, type ApiError } from "@/lib/api";
 import { relativeTime } from "@/lib/format";
+import { Disclosure } from "./bits";
 import { Button, cx, inputClass } from "./ui";
 
 const ME_KEY = "tracefold.approver";
@@ -175,8 +176,7 @@ export function ActionCard({ action, workspaceId, workspaceName, onChange }: { a
       )}
 
       {a.kind === "takedown_request" && a.body && (
-        <details className="mt-4 text-sm">
-          <summary className="cursor-pointer text-mute hover:text-ink">See the letter</summary>
+        <Disclosure label="See the letter" className="mt-4">
           {letter === null ? (
             <>
               <pre className="mt-3 whitespace-pre-wrap rounded-ctl border border-line bg-bg p-4 font-sans text-[13px] leading-relaxed text-ink-2">{a.body}</pre>
@@ -199,7 +199,7 @@ export function ActionCard({ action, workspaceId, workspaceName, onChange }: { a
               </div>
             </div>
           )}
-        </details>
+        </Disclosure>
       )}
     </div>
   );

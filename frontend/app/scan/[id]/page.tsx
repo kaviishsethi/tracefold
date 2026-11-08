@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { api, coverageNote, isTerminal, useScan, ws, type Finding, type FindingKind, type Page } from "@/lib/api";
 import { relativeTime } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
-import { Box, FindingRow, H1, Note, scanState, source } from "@/components/bits";
+import { Box, Crumbs, Disclosure, FindingRow, H1, Note, scanState, source } from "@/components/bits";
 import { SourcesPanel } from "@/components/scan-sources";
 import { ErrorNote, Spinner } from "@/components/ui";
 
@@ -43,10 +43,8 @@ export default function ScanDetail() {
 
   return (
     <div>
-      <Link href="/scan" className="text-sm text-mute hover:text-ink">
-        ← Scans
-      </Link>
-      <div className="mt-4">
+      <Crumbs trail={[["/scan", "Scans"]]} current={`${source(scan)}, ${relativeTime(scan.created_at)}`} />
+      <div>
         <H1 sub={`${source(scan)} · ${relativeTime(scan.created_at)}${scan.recheck_of ? " · recheck" : ""}`}>
           <span className="inline-flex items-center gap-3">
             {st.tone === "busy" && <Spinner className="size-5" />}
@@ -58,7 +56,7 @@ export default function ScanDetail() {
       {drafted > 0 && (
         <Link href="/actions" className="mb-8 flex items-center justify-between rounded-card border border-accent/40 bg-accent/10 px-4 py-3 text-sm text-ink">
           {drafted} {drafted === 1 ? "fix needs" : "fixes need"} your approval
-          <span className="font-medium">Review →</span>
+          <span className="font-medium underline underline-offset-4">Review</span>
         </Link>
       )}
 
@@ -80,8 +78,7 @@ export default function ScanDetail() {
       {done && workspace && scan.checks.includes("public_match") && <div className="mb-8"><SourcesPanel workspaceId={workspace.id} scan={scan} /></div>}
 
       {(problems.length > 0 || scan.errors.length > 0) && (
-        <details className="text-sm text-mute">
-          <summary className="cursor-pointer text-ink-2">What didn&apos;t finish</summary>
+        <Disclosure label="What didn't finish">
           <ul className="mt-3 space-y-1">
             {problems.map((c) => (
               <li key={c.scope + c.id}>
@@ -93,7 +90,7 @@ export default function ScanDetail() {
               <li key={e.code}>{e.message}</li>
             ))}
           </ul>
-        </details>
+        </Disclosure>
       )}
     </div>
   );

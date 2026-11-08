@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
-import { ArrowRight, Check, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { api, ws, type ApiError, type CompanyProfile, type Page, type PresetCatalog, type QueryPlan } from "@/lib/api";
 import { PlanSearches, StatusTag } from "@/components/discovery";
 import { relativeTime, shortId } from "@/lib/format";
@@ -10,14 +10,7 @@ import { useCurrentWorkspace } from "@/components/shell";
 import { Select } from "@/components/select";
 import { Button, Empty, ErrorNote, Field, Loading, PageHeader, Panel, cx, inputClass } from "@/components/ui";
 
-const PRIVACY =
-  "Search providers see the public company identity and the approved queries. They never receive your uploaded documents. The name and the search intent still leave this machine, so don't enter secret project names.";
-
-const STEPS: [string, string][] = [
-  ["Approve a public identity", "The company's public name, and optionally its domain and up to two public aliases (like a product name)."],
-  ["Create a query plan", "Fixed searches built only from that identity. The plan is saved as-is, so you can see exactly what will be sent."],
-  ["Scan with the plan", "Search returns candidate pages. Unsafe URLs are blocked, every other page is fetched, and your files are compared on this machine."],
-];
+const PRIVACY = "Search providers get this name and the queries, never your files. Don't enter secret project names.";
 
 function CheckRow({ checked, onChange, children, disabled }: { checked: boolean; onChange: (v: boolean) => void; children: ReactNode; disabled?: boolean }) {
   return (
@@ -287,7 +280,7 @@ export default function Discovery() {
         </p>
       )}
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
+      <div className="grid gap-6">
         <div className="min-w-0 space-y-6">
           <Panel
             title="Approved identities"
@@ -363,7 +356,7 @@ export default function Discovery() {
                             {p.scope.exclude_official_domain === false ? "included" : "left out"}
                           </span>
                           <Link href={`/scan?plan=${encodeURIComponent(p.query_plan_id)}`} className="ml-auto inline-flex items-center gap-1 text-ink-2 hover:text-ink">
-                            Scan with this plan <ArrowRight className="size-3.5" aria-hidden />
+                            Scan with this plan
                           </Link>
                         </div>
                       </div>
@@ -389,30 +382,6 @@ export default function Discovery() {
           </Panel>
         </div>
 
-        <div className="space-y-4 xl:sticky xl:top-20 xl:self-start">
-          <Panel title="How discovery works">
-            <ol>
-              {STEPS.map(([t, d], i) => (
-                <li key={t} className="flex gap-3 border-b border-line px-4 py-3 last:border-0">
-                  <span className="w-5 pt-px font-mono text-xs text-accent">{String(i + 1).padStart(2, "0")}</span>
-                  <div>
-                    <p className="text-[13px] font-medium text-ink">{t}</p>
-                    <p className="mt-0.5 text-xs leading-relaxed text-mute">{d}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </Panel>
-          <div className="rounded-card border border-local-line bg-local-bg p-4 text-[13px] leading-relaxed text-ink-2">
-            <p className="flex items-center gap-1.5 font-medium text-local">
-              <Check className="size-3.5" aria-hidden /> What leaves this machine
-            </p>
-            <p className="mt-1.5">{PRIVACY}</p>
-            <p className="mt-2 text-xs text-faint">
-              Search isn&apos;t exhaustive. A scan with no match means no match among the pages returned, not that nothing leaked.
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   );

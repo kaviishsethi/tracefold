@@ -1,5 +1,6 @@
 // Small shared pieces for the app pages. Keep this file tiny.
 import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 import type { ReactNode } from "react";
 import type { Finding, Scan, Severity } from "@/lib/api";
 import { relativeTime, where } from "@/lib/format";
@@ -14,6 +15,36 @@ export function H1({ children, sub, right }: { children: ReactNode; sub?: ReactN
       </div>
       {right && <div className="flex shrink-0 items-center gap-2">{right}</div>}
     </div>
+  );
+}
+
+/** Collapsible section: a bordered row with a chevron, instead of the browser's default triangle. */
+export function Disclosure({ label, children, className }: { label: ReactNode; children: ReactNode; className?: string }) {
+  return (
+    <details className={cx("group rounded-card border border-line bg-panel", className)}>
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-card px-4 py-3 text-sm text-ink-2 transition-colors hover:bg-panel-2 hover:text-ink [&::-webkit-details-marker]:hidden">
+        {label}
+        <ChevronDown className="size-4 shrink-0 text-faint transition-transform group-open:rotate-180" aria-hidden />
+      </summary>
+      <div className="border-t border-line px-4 py-3 text-sm text-mute">{children}</div>
+    </details>
+  );
+}
+
+/** Breadcrumb trail: parent links, then the current page. */
+export function Crumbs({ trail, current }: { trail: [string, string][]; current: ReactNode }) {
+  return (
+    <nav aria-label="Breadcrumb" className="mb-4 flex min-w-0 items-center gap-2 text-sm">
+      {trail.map(([href, label]) => (
+        <span key={href} className="flex items-center gap-2">
+          <Link href={href} className="text-mute hover:text-ink">
+            {label}
+          </Link>
+          <span className="text-faint">/</span>
+        </span>
+      ))}
+      <span className="truncate text-ink-2">{current}</span>
+    </nav>
   );
 }
 

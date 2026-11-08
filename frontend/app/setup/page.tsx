@@ -51,13 +51,16 @@ export default function Setup() {
           status?.ok ? "border-local-line bg-local-bg text-local" : "border-line text-mute",
         )}
       >
-        <span>
-          {status === null
-            ? "Checking…"
-            : status.ok
-              ? `Connected. Protecting ${status.ws?.name}.`
-              : status.err?.message ?? "Connected, but no workspace yet. Run step 1."}
-        </span>
+        {status?.ok ? (
+          <span className="flex items-center gap-3">
+            <span className="flex items-center gap-2 font-medium">
+              <span className="size-2 rounded-full bg-local" /> Connected
+            </span>
+            <span className="text-mute">{status.ws?.name}</span>
+          </span>
+        ) : (
+          <span>{status === null ? "Checking…" : status.err?.message ?? "The engine has no workspace yet. Run step 1."}</span>
+        )}
         {status?.ok ? (
           <Link href="/scan" className="font-medium text-ink underline underline-offset-4">
             Start scanning
