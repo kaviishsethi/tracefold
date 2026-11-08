@@ -1,10 +1,21 @@
 "use client";
 
-import { useState } from "react";
-import { api, ws, type Action, type ApiError } from "@/lib/api";
+import { useEffect, useState } from "react";
+import { api, ws, type Action, type ApiError, type Capabilities } from "@/lib/api";
 import { relativeTime } from "@/lib/format";
 import { Disclosure } from "./bits";
 import { Button, cx, inputClass } from "./ui";
+
+let caps: Promise<Capabilities | null> | null = null;
+/** Whether the engine can turn off AWS keys itself. Fetched once per page load. */
+function useAwsConnected(): boolean | null {
+  const [ok, setOk] = useState<boolean | null>(null);
+  useEffect(() => {
+    caps ??= api<Capabilities>("/capabilities").catch(() => null);
+    caps.then((c) => setOk(c ? c.remediation?.aws_key_disable !== "not_configured" : null));
+  }, []);
+  return ok;
+}
 
 const HINTS: Record<string, string> = {
   no_takedown_contact: "Add a contact for this site first: uv run tracefold add-takedown-contact <workspace> <host> --email abuse@<host>",
@@ -51,6 +62,8 @@ export function ActionCard({ action, workspaceId, onChange }: { action: Action; 
   const [error, setError] = useState<string | null>(null);
   const path = (s: string) => ws(workspaceId, `/actions/${a.action_id}${s}`);
   const open = a.status === "drafted" || a.status === "failed";
+  const awsConnected = useAwsConnected();
+  const blocked = a.kind === "disable_aws_key" && awsConnected === false;
 
   async function call(s: string, method: "POST" | "PATCH", json: unknown) {
     setBusy(true);
@@ -90,11 +103,17 @@ export function ActionCard({ action, workspaceId, onChange }: { action: Action; 
 
       {error && <p className="mt-3 text-sm text-crit">{error}</p>}
 
+      {open && blocked && (
+        <p className="mt-3 text-sm text-med">
+          AWS isn&apos;t connected, so Tracefold can&apos;t turn this key off. Turn it off in the AWS console, or connect AWS (see SETUP.md) and approve it here.
+        </p>
+      )}
+
       {open && mode === "idle" && (
         <div className="mt-4 flex gap-2">
-          <Button size="sm" className="!bg-accent !text-[#0a0c0c]" loading={busy} onClick={() => call("/approve", "POST", { expected_version: a.version })}>
+          {!blocked && <Button size="sm" className="!bg-accent !text-[#0a0c0c]" loading={busy} onClick={() => call("/approve", "POST", { expected_version: a.version })}>
             {a.status === "failed" ? "Try again" : a.kind === "disable_aws_key" ? "Turn off key" : a.delivery?.method === "form" ? "Approve" : "Send request"}
-          </Button>
+          </Button>}
           <Button size="sm" variant="ghost" onClick={() => setMode("reject")}>
             Reject
           </Button>
