@@ -165,6 +165,16 @@ def create_app(engine: Engine) -> FastAPI:
                    p: Principal = Depends(principal)):
         return engine.scans.list(p, ws_id, cursor, limit)
 
+    @app.delete("/v1/workspaces/{ws_id}/scans", responses=ERRORS)
+    def delete_all_scans(ws_id: str, p: Principal = Depends(principal)) -> dict[str, int]:
+        """Delete every finished scan and the findings and actions only they produced (requires `configure`)."""
+        return engine.scans.delete(p, ws_id, None)
+
+    @app.delete("/v1/workspaces/{ws_id}/scans/{scan_id}", responses=ERRORS)
+    def delete_scan(ws_id: str, scan_id: str, p: Principal = Depends(principal)) -> dict[str, int]:
+        """Delete one finished scan and the findings and actions only it produced (requires `configure`)."""
+        return engine.scans.delete(p, ws_id, scan_id)
+
     @app.get("/v1/workspaces/{ws_id}/scans/{scan_id}", response_model=ScanOut, responses=ERRORS)
     def get_scan(ws_id: str, scan_id: str, p: Principal = Depends(principal)):
         return engine.scans.get(p, ws_id, scan_id)

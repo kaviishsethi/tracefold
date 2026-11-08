@@ -6,6 +6,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import { CheckCircle2, LayoutGrid, ScanSearch, Settings, ShieldAlert, type LucideIcon } from "lucide-react";
 import { api, useWorkspace, ws, type Action, type ApiError, type Finding, type Page, type Workspace } from "@/lib/api";
 import { Select } from "./select";
+import { groupByPage } from "./page-matches";
 import { Spinner, Wordmark, cx } from "./ui";
 
 /** Marketing pages: no engine needed, no app chrome. */
@@ -41,7 +42,11 @@ function useCounts(workspaceId: string | null): Record<Count, number> {
     if (!workspaceId) return;
     const load = () => {
       api<Page<Finding>>(ws(workspaceId, "/findings?limit=100"))
-        .then((p) => setCounts((c) => ({ ...c, findings: p.items.filter((f) => f.status === "open").length })))
+        .then((p) => {
+          const open = p.items.filter((f) => f.status === "open");
+          const pages = groupByPage(open.filter((f) => f.kind === "public_exposure")).length; // a page counts once
+          setCounts((c) => ({ ...c, findings: open.filter((f) => f.kind !== "public_exposure").length + pages }));
+        })
         .catch(() => {});
       api<Page<Action>>(ws(workspaceId, "/actions?status=drafted&limit=100"))
         .then((p) => setCounts((c) => ({ ...c, approvals: p.items.length })))

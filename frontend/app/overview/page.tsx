@@ -7,6 +7,7 @@ import { api, listScans, ws, type Action, type ApiError, type Finding, type Page
 import { useCurrentWorkspace } from "@/components/shell";
 import { Card, Dot, H1, Note, Stat, findingPlace } from "@/components/bits";
 import { ScansTable } from "@/components/scans-table";
+import { groupByPage } from "@/components/page-matches";
 import { ErrorNote, LinkButton, cx } from "@/components/ui";
 
 const DAYS = 14;
@@ -95,12 +96,14 @@ export default function Overview() {
 
   if (!workspace) return null;
   const open = (findings ?? []).filter((f) => f.status === "open");
-  const pub = open.filter((f) => f.kind === "public_exposure").length;
-  const local = open.length - pub;
+  const pages = groupByPage(open.filter((f) => f.kind === "public_exposure"));
+  const pub = pages.length; // pages copying a file, not passages
+  const local = open.filter((f) => f.kind !== "public_exposure").length;
   const weekAgo = Date.now() - 7 * 86400_000;
   const week = (scans ?? []).filter((s) => new Date(s.created_at).getTime() >= weekAgo);
   const fromAssistant = week.filter((s) => s.started_from === "assistant").length;
-  const attention = [...open]
+  // One entry per page that copies a file, represented by its first passage.
+  const attention = [...open.filter((f) => f.kind !== "public_exposure"), ...pages.map((g) => g.items[0])]
     .sort((a, b) => (SEV_RANK[a.latest?.severity ?? ""] ?? 3) - (SEV_RANK[b.latest?.severity ?? ""] ?? 3) || (b.latest?.created_at ?? "").localeCompare(a.latest?.created_at ?? ""))
     .slice(0, 6);
   const dash = findings === null ? "–" : undefined;
@@ -119,7 +122,7 @@ export default function Overview() {
       <ErrorNote error={error} />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Stat label="Found on public pages" value={dash ?? pub} tone={pub ? "crit" : undefined} sub="Open copies of your text" href="/findings" />
+        <Stat label="Found on public pages" value={dash ?? pub} tone={pub ? "crit" : undefined} sub="Pages copying your files" href="/findings" />
         <Stat label="Risks in your files" value={dash ?? local} sub="Secrets, logging, markers" href="/findings" />
         <Stat label="Waiting for approval" value={approvals.length} tone={approvals.length ? "accent" : undefined} sub="Takedowns and key shut-offs" href="/actions" />
         <Stat label="Scans this week" value={scans === null ? "–" : week.length} sub={`${fromAssistant} from your coding assistant`} href="/scan" />
@@ -136,8 +139,24 @@ export default function Overview() {
               <Link key={f.finding_id} href={`/findings/${f.finding_id}`} className="flex items-center gap-3 border-t border-line px-5 py-3 first:border-t-0 hover:bg-panel-2">
                 <Dot severity={f.latest?.severity} />
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-sm text-ink">{f.latest?.title ?? "Finding"}</span>
-                  <span className="block truncate text-xs text-faint">{findingPlace(f) || "Location withheld"}</span>
+                  {f.kind === "public_exposure" ? (
+                    (() => {
+                      const g = pages.find((x) => x.items[0] === f)!;
+                      return (
+                        <>
+                          <span className="block truncate text-sm text-ink">{g.title}</span>
+                          <span className="block truncate text-xs text-faint">
+                            {g.path} · {g.items.length} matching {g.items.length === 1 ? "passage" : "passages"}
+                          </span>
+                        </>
+                      );
+                    })()
+                  ) : (
+                    <>
+                      <span className="block truncate text-sm text-ink">{f.latest?.title ?? "Finding"}</span>
+                      <span className="block truncate text-xs text-faint">{findingPlace(f) || "Location withheld"}</span>
+                    </>
+                  )}
                 </span>
                 <span className="shrink-0 text-xs text-faint">{f.kind === "public_exposure" ? "Public page" : "Your files"}</span>
               </Link>
