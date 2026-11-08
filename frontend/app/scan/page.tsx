@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { FileText, Upload, X } from "lucide-react";
+import { ChevronRight, FileText, Folder, FolderOpen, Upload, X } from "lucide-react";
 import { api, ws, type Page, type QueryPlan, listScans, startScan, uploadFiles, type ApiError, type Check, type Scan } from "@/lib/api";
 import { bytes } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
@@ -128,6 +128,7 @@ export default function ScanPage() {
   };
 
   const [loadingExample, setLoadingExample] = useState<string | null>(null);
+  const [samplesOpen, setSamplesOpen] = useState(false);
   async function loadExample(ex: (typeof EXAMPLES)[number]) {
     setLoadingExample(ex.file);
     setError(null);
@@ -205,12 +206,43 @@ export default function ScanPage() {
         }
       >
         {files.length === 0 ? (
-          <button onClick={() => input.current?.click()} className="flex w-full items-center gap-3 px-5 py-6 text-left text-sm text-mute hover:bg-panel-2">
-            <FileText className="size-5 text-faint" aria-hidden />
-            <span>
-              Drag files anywhere on this page, or <span className="text-ink underline underline-offset-4">choose files</span>. Documents, code and .docx.
-            </span>
-          </button>
+          <>
+            <button onClick={() => input.current?.click()} className="flex w-full items-center gap-3 px-5 py-6 text-left text-sm text-mute hover:bg-panel-2">
+              <FileText className="size-5 text-faint" aria-hidden />
+              <span>
+                Drag files anywhere on this page, or <span className="text-ink underline underline-offset-4">choose files</span>. Documents, code and .docx.
+              </span>
+            </button>
+            <button
+              onClick={() => setSamplesOpen((o) => !o)}
+              aria-expanded={samplesOpen}
+              className="flex w-full items-center gap-3 border-t border-line px-5 py-3 text-left text-sm text-ink-2 hover:bg-panel-2"
+            >
+              {samplesOpen ? <FolderOpen className="size-5 text-faint" aria-hidden /> : <Folder className="size-5 text-faint" aria-hidden />}
+              <span className="flex-1">Sample files</span>
+              <span className="text-xs text-faint">{EXAMPLES.length} files</span>
+              <ChevronRight className={cx("size-4 text-faint transition-transform", samplesOpen && "rotate-90")} aria-hidden />
+            </button>
+            {samplesOpen && (
+              <div className="border-t border-line bg-bg/40">
+                {EXAMPLES.map((ex) => (
+                  <div key={ex.file} className="flex items-center gap-3 py-2.5 pl-12 pr-5 text-sm">
+                    <FileText className="size-4 shrink-0 text-faint" aria-hidden />
+                    <button onClick={() => loadExample(ex)} disabled={loadingExample !== null} title={ex.shows} className="min-w-0 flex-1 truncate text-left text-ink hover:underline disabled:cursor-wait">
+                      {loadingExample === ex.file ? "Loading…" : ex.file}
+                    </button>
+                    <span className="hidden truncate text-xs text-faint sm:block">
+                      {ex.company} · {ex.doc}
+                    </span>
+                    <a href={`/examples/${ex.file}`} target="_blank" rel="noreferrer" className="shrink-0 text-xs text-mute hover:text-ink">
+                      Open
+                    </a>
+                  </div>
+                ))}
+                <p className="py-2.5 pl-12 pr-5 text-xs text-faint">CivicActions and PostHog documents are public, used under their licenses. Neither endorses Tracefold.</p>
+              </div>
+            )}
+          </>
         ) : (
           <>
             <table className="w-full text-left text-sm">
@@ -290,41 +322,6 @@ export default function ScanPage() {
           </>
         )}
       </Card>
-
-      <section className="mt-6" aria-labelledby="examples-title">
-        <h2 id="examples-title" className="mb-3 text-sm font-medium text-ink">
-          Try an example
-        </h2>
-        <div className="grid gap-3 md:grid-cols-3">
-          {EXAMPLES.map((ex) => {
-            const selected = files.length === 1 && files[0].name === ex.file;
-            return (
-              <div
-                key={ex.file}
-                className={cx(
-                  "flex items-center rounded-card border bg-panel transition-colors",
-                  selected ? "border-accent/60" : "border-line hover:border-line-strong",
-                )}
-              >
-                <button
-                  onClick={() => loadExample(ex)}
-                  disabled={loadingExample !== null}
-                  aria-pressed={selected}
-                  title={ex.shows}
-                  className="flex min-w-0 flex-1 flex-col items-start px-4 py-3 text-left disabled:cursor-wait"
-                >
-                  <span className="text-[15px] text-ink">{loadingExample === ex.file ? "Loading…" : ex.company}</span>
-                  <span className="truncate text-[13px] text-mute">{ex.doc}</span>
-                </button>
-                <a href={`/examples/${ex.file}`} target="_blank" rel="noreferrer" className="shrink-0 px-4 text-xs text-faint hover:text-ink">
-                  Read
-                </a>
-              </div>
-            );
-          })}
-        </div>
-        <p className="mt-2 text-xs text-faint">CivicActions and PostHog documents are public, used under their licenses. Neither endorses Tracefold.</p>
-      </section>
 
       <Card title="Recent scans" className="mt-6">
         <ScansTable scans={scans} empty="No scans yet. Scans from your coding assistant show up here too." />

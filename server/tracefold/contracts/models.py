@@ -551,8 +551,10 @@ class ApproverIn(Strict):
 
 
 class ApproveRequest(Strict):
-    approver: ApproverIn
-    attest_authorized: bool
+    """Approving needs the ``approve`` capability, which only the company's own app token holds. ``approver`` is optional:
+    without it the action is recorded against that client and takedowns are signed with the company name and reply-to."""
+    approver: ApproverIn | None = None
+    attest_authorized: bool = True
     expected_version: int
 
 
