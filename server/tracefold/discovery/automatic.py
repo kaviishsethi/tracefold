@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import re
 import time
 
@@ -127,13 +128,16 @@ def prepare(ctx) -> bool:
                                [p["display_name"].casefold(), *(a.casefold() for a in p["public_aliases"])]), None)
             identities.append({k: configured[k] for k in ("display_name", "official_domain", "public_aliases")}
                               if configured else {"display_name": name, "official_domain": None, "public_aliases": []})
+        # Only search with providers that have a key; with neither, keep both so the scan says search isn't set up.
+        env = getattr(ctx.engine, "test_env", None) or os.environ
+        providers = [p for p, k in (("exa", "EXA_API_KEY"), ("tavily", "TAVILY_API_KEY")) if env.get(k)] or ["exa", "tavily"]
         parts = []
         for identity in identities:
             configured_presets = next((p.get("presets") for p in attributions if p["display_name"] == identity["display_name"]), None)
             presets = configured_presets or chosen
             if not configured_presets and kind == "memo" and identity["public_aliases"]:
                 presets = ["leak_news", "leak_news_alias"]
-            parts.append(build_plan(identity, presets, None, ["exa", "tavily"],
+            parts.append(build_plan(identity, presets, None, providers,
                                     {"mode": "broad", "exclude_official_domain": False, "exclude_noise": True},
                                     3 if len(names) > 1 else 5))
         plan = parts[0]
