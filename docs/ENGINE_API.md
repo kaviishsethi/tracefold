@@ -138,8 +138,8 @@ Approval errors (409): `remediation_profile_missing`, `no_takedown_contact`, `aw
 Operator setup (CLI only):
 
 ```bash
-uv run tracefold set-remediation-profile ws_main --company "Northwind Relay, Inc." --reply-to legal@northwind.example
-uv run tracefold add-takedown-contact ws_main forum.example --email abuse@forum.example
+uv run tracefold set-remediation-profile ws_main --company "Halyard Freight, Inc." --reply-to legal@halyardfreight.com
+uv run tracefold add-takedown-contact ws_main pastebin.com --email abuse@pastebin.com
 uv run tracefold add-takedown-contact ws_main pastes.example --form-url https://pastes.example/legal/removal
 ```
 

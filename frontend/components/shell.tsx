@@ -95,7 +95,7 @@ function AppShell({ path, children }: { path: string; children: ReactNode }) {
         <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-line bg-bg md:flex">
           <div className="flex h-14 shrink-0 items-center px-5">
             <Link href="/" aria-label="Tracefold home">
-              <Wordmark className="wordmark--header" />
+              <Wordmark className="text-[20px]" />
             </Link>
           </div>
 
@@ -127,7 +127,7 @@ function AppShell({ path, children }: { path: string; children: ReactNode }) {
         <div className="min-w-0 flex-1">
           <header className="sticky top-0 z-30 flex h-14 items-center gap-1 overflow-x-auto border-b border-line bg-bg px-4 md:hidden">
             <Link href="/" className="mr-2 shrink-0">
-              <Wordmark className="wordmark--header" />
+              <Wordmark className="text-[20px]" />
             </Link>
             {[...NAV, { href: "/settings", label: "Settings" }].map(({ href, label }) => (
               <Link

@@ -45,12 +45,12 @@ def main(argv: list[str] | None = None) -> int:
 
     rp = sub.add_parser("set-remediation-profile", help="company details used to sign takedown requests")
     rp.add_argument("workspace")
-    rp.add_argument("--company", required=True, help='legal name, e.g. "Northwind Relay, Inc."')
+    rp.add_argument("--company", required=True, help='legal name, e.g. "Halyard Freight, Inc."')
     rp.add_argument("--reply-to", required=True, help="email the host should reply to")
 
     tc = sub.add_parser("add-takedown-contact", help="where takedown requests for a public host are sent")
     tc.add_argument("workspace")
-    tc.add_argument("host", help="bare hostname, e.g. forum.example")
+    tc.add_argument("host", help="bare hostname, e.g. pastebin.com")
     g = tc.add_mutually_exclusive_group(required=True)
     g.add_argument("--email", help="the host's abuse/legal address (sent automatically on approval)")
     g.add_argument("--form-url", help="the host's own removal form (prefilled request, submitted by a person)")

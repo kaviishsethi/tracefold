@@ -113,12 +113,18 @@ table {
   scrollbar-color: #2e2e2e transparent;
 }
 
-/* Wordmark: wide, tracked caps. Used only for the brand name. */
+/* Wordmark: the brand name in the brand face, tight and bold. Size it with a text-* class; the mark scales with it. */
 .wordmark {
-  font-family: var(--font-geist-mono);
-  font-weight: 600;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
+  gap: 0.32em;
+  font-family: var(--font-brand), sans-serif;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.wordmark svg {
+  width: 1.22em;
+  height: 1.22em;
 }
 
 /* The header name carries the brand at a glance over the full-bleed artwork. */
@@ -150,7 +156,7 @@ table {
 .image-slot {
   background:
     linear-gradient(rgb(18 22 23 / var(--slot-dim, 0)), rgb(18 22 23 / var(--slot-dim, 0))),
-    var(--slot-img, none) var(--slot-pos, center) / cover no-repeat,
+    var(--slot-img, none) var(--slot-pos, center) / var(--slot-size, cover) no-repeat,
     linear-gradient(180deg, rgb(10 10 10 / 0) 40%, rgb(10 10 10 / 0.85) 100%),
     radial-gradient(120% 90% at 50% 105%, #6fc3b5 0%, #2e7f76 22%, #173a3a 48%, #101818 72%, #0c1010 100%);
 }

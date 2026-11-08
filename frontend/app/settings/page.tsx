@@ -61,10 +61,10 @@ export default function SettingsPage() {
       <ErrorNote error={error} />
       <form onSubmit={save} className="space-y-5 rounded-card border border-line bg-panel p-5">
         <Field label="Company name">
-          <input className={inputClass} value={form.name} onChange={set("name")} disabled={!loaded || !canEdit} placeholder="Northwind Relay" required />
+          <input className={inputClass} value={form.name} onChange={set("name")} disabled={!loaded || !canEdit} placeholder="Your company" required />
         </Field>
         <Field label="Website">
-          <input className={inputClass} value={form.website} onChange={set("website")} disabled={!loaded || !canEdit} placeholder="northwindrelay.com" />
+          <input className={inputClass} value={form.website} onChange={set("website")} disabled={!loaded || !canEdit} placeholder="yourcompany.com" />
         </Field>
         <Field label="Reply-to email" hint="Takedown requests are signed with the company name and ask hosts to reply here.">
           <input
@@ -73,7 +73,7 @@ export default function SettingsPage() {
             value={form.reply_to}
             onChange={set("reply_to")}
             disabled={!loaded || !canEdit}
-            placeholder="legal@northwindrelay.com"
+            placeholder="legal@yourcompany.com"
             required
           />
         </Field>
