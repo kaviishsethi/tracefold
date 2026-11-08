@@ -36,13 +36,13 @@ Target length **about 2:45**. The rules say projects without a video are not jud
 
 About 2.5 words per second, in plain spoken English. Word counts are in brackets.
 
-### 0:00–0:20 What Tracefold is
+### 0:00–0:22 What Tracefold is
 
 [SCREEN] Tracefold Scan page.
 
-[VO] "This is Tracefold. It checks if your company's documents or code have ended up on public websites. It also finds secrets, like API keys, inside your files. It can draft takedowns and turn off leaked keys, once someone approves. You can run it on your own computer or on your company's servers." [52]
+[VO] "This is Tracefold. It checks if your company's documents or code have ended up on public websites. It also finds secrets, like API keys, inside your files. It can draft takedowns and turn off leaked keys, once someone approves. You can run it on your own computer or on your company's servers, so your private files and data stay with you." [61]
 
-### 0:20–0:35 Who it's for
+### 0:22–0:35 Who it's for
 
 [SCREEN] Settings → Company → Edit → open the Industry menu. Hover Healthcare so the line under it reads "Also checks
 for: medical record numbers, provider NPIs and dates of birth". Cancel.
@@ -54,7 +54,7 @@ for: medical record numbers, provider NPIs and dates of birth". Cancel.
 [SCREEN] Sample files → Duolingo memo → progress card (sped up) → "3 public sites show text from your documents" →
 timeline. Zoom on "Searched for Duolingo". Open a site's passages, then Open page; zoom on the highlighted sentence.
 
-[VO] "This is a sample memo from Duolingo. Parts of it were quoted in news articles. Tracefold searches the web for the company name, using Exa or Tavily. It doesn't send the file itself. It downloads the pages it finds and compares them with the file on this computer. It found the memo's text on three sites. If I open one, you can see the same sentence highlighted." [67]
+[VO] "This is a sample memo from Duolingo. Parts of it were quoted in news articles. Tracefold searches the web for the company name, using Exa or Tavily. Your files are never sent anywhere. It downloads the pages it finds and compares them with the file on this computer. It found the memo's text on three sites. If I open one, you can see the same sentence highlighted." [67]
 
 ### 1:10–1:35 Risks in the file, and approving a takedown
 
