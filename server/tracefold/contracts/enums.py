@@ -33,6 +33,7 @@ class Capability(StrEnum):
     recheck = "recheck"
     cancel = "cancel"
     review = "review"
+    approve = "approve"  # approve or reject remediation actions (takedowns, credential disabling)
 
 
 class Disclosure(StrEnum):
@@ -87,3 +88,18 @@ class Origin(StrEnum):
 class PublicMode(StrEnum):
     refresh = "refresh"
     snapshot = "snapshot"
+
+
+class ActionKind(StrEnum):
+    takedown_request = "takedown_request"
+    disable_aws_key = "disable_aws_key"
+
+
+class ActionStatus(StrEnum):
+    drafted = "drafted"                                    # waiting for a person to approve
+    awaiting_manual_submission = "awaiting_manual_submission"  # approved; host only accepts its own web form
+    executing = "executing"
+    submitted = "submitted"                                # takedown sent (or marked sent); not the same as removed
+    completed = "completed"                                # credential disabled
+    failed = "failed"                                      # may be approved again
+    rejected = "rejected"

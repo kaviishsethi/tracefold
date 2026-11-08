@@ -160,6 +160,41 @@ MIGRATIONS: list[str] = [
         acquired_at TEXT NOT NULL
     );
     """,
+    # 2: remediation (takedown requests, credential disabling) with human approval
+    """
+    CREATE TABLE remediation_profiles (
+        workspace_id TEXT PRIMARY KEY REFERENCES workspaces(id),
+        company_name TEXT NOT NULL,
+        reply_to TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+    );
+    CREATE TABLE takedown_contacts (
+        workspace_id TEXT NOT NULL REFERENCES workspaces(id),
+        host TEXT NOT NULL,
+        method TEXT NOT NULL,                -- email | form
+        address TEXT NOT NULL,               -- abuse/legal email or form URL (operator-provided)
+        updated_at TEXT NOT NULL,
+        PRIMARY KEY (workspace_id, host)
+    );
+    CREATE TABLE actions (
+        id TEXT PRIMARY KEY,
+        workspace_id TEXT NOT NULL,
+        finding_id TEXT NOT NULL REFERENCES findings(id),
+        kind TEXT NOT NULL,                  -- takedown_request | disable_aws_key
+        status TEXT NOT NULL,
+        version INTEGER NOT NULL DEFAULT 1,
+        target TEXT NOT NULL,                -- public URL/excerpt, or the AWS access key ID (an identifier, not the secret)
+        draft TEXT NOT NULL DEFAULT '{}',
+        approver TEXT,
+        result TEXT NOT NULL DEFAULT '{}',
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        approved_at TEXT,
+        executed_at TEXT,
+        UNIQUE (finding_id, kind)
+    );
+    CREATE INDEX actions_ws ON actions(workspace_id, status, created_at);
+    """,
 ]
 
 

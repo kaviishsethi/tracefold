@@ -6,6 +6,8 @@ from typing import Any, Literal
 from pydantic import BaseModel, ConfigDict, Field
 
 from .enums import (
+    ActionKind,
+    ActionStatus,
     Capability,
     Check,
     CoverageStatus,
@@ -49,6 +51,7 @@ class CapabilitiesOut(BaseModel):
     model: dict[str, Any]
     limits: dict[str, int]
     client_capabilities: dict[str, list[Capability]]
+    remediation: dict[str, str] = {}
 
 
 class WorkspaceOut(BaseModel):
@@ -313,3 +316,70 @@ class LedgerEventOut(BaseModel):
 class LedgerPage(BaseModel):
     items: list[LedgerEventOut]
     next_cursor: str | None
+
+
+# ---------- remediation actions ----------
+
+class ActionDelivery(BaseModel):
+    method: Literal["email", "form", "none"]
+    address: str | None = None        # the host's abuse/legal email, when method=email
+    form_url: str | None = None       # the host's own removal form, when method=form
+    transport: str | None = None      # outbox | resend (email only)
+
+
+class ActionOut(BaseModel):
+    schema_version: int = SCHEMA_VERSION
+    action_id: str
+    workspace_id: str
+    finding_id: str
+    kind: ActionKind
+    status: ActionStatus
+    version: int
+    summary: str
+    target: dict[str, Any]
+    delivery: ActionDelivery | None = None
+    subject: str | None = None
+    body: str | None = None          # rendered preview: company filled in, signature (or placeholder) appended
+    draft_body: str | None = None    # raw editable text for PATCH: keeps the {company} token, no signature
+    approver: dict[str, Any] | None = None
+    approved_at: str | None = None
+    executed_at: str | None = None
+    result: dict[str, Any] = {}
+    removal_observed: bool | None = None
+    created_at: str
+    updated_at: str
+
+
+class ActionPage(BaseModel):
+    items: list[ActionOut]
+    next_cursor: str | None
+
+
+class ApproverIn(Strict):
+    name: str = Field(min_length=1, max_length=120)
+    email: str = Field(min_length=3, max_length=200, pattern=r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+    title: str | None = Field(default=None, max_length=120)
+
+
+class ApproveRequest(Strict):
+    approver: ApproverIn
+    attest_authorized: bool
+    expected_version: int
+
+
+class RejectRequest(Strict):
+    reason: str = Field(min_length=1, max_length=500)
+    expected_version: int
+
+
+class EditActionRequest(Strict):
+    """Edit an unsent takedown. ``body`` replaces the draft text (ActionOut.draft_body), not the rendered preview:
+    keep the {company} token and leave the signature off; both are added when the letter is rendered and sent."""
+    subject: str | None = Field(default=None, min_length=1, max_length=200)
+    body: str | None = Field(default=None, min_length=1, max_length=5000)
+    expected_version: int
+
+
+class MarkSubmittedRequest(Strict):
+    note: str | None = Field(default=None, max_length=500)
+    expected_version: int
