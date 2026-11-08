@@ -34,72 +34,63 @@ Target length **about 2:45**. The rules say projects without a video are not jud
 
 ## Shot list and voiceover
 
-About 2.5 words per second. Each line fits its slot with room to breathe; word counts are in brackets.
+About 2.5 words per second, in plain spoken English. Word counts are in brackets.
 
 ### 0:00–0:20 What Tracefold is
 
 [SCREEN] Tracefold Scan page.
 
-[VO] "This is Tracefold. It finds your company's documents and code on public websites, flags secrets inside them,
-and fixes what it can. Takedowns and key shut-offs take one click to approve. Your files stay on your machine." [37]
+[VO] "This is Tracefold. It checks if your company's documents or code have ended up on public websites. It also finds secrets, like API keys, inside your files. It can draft takedowns and turn off leaked keys, once someone approves. You can run it on your own computer or on your company's servers." [52]
 
 ### 0:20–0:35 Who it's for
 
 [SCREEN] Settings → Company → Edit → open the Industry menu. Hover Healthcare so the line under it reads "Also checks
 for: medical record numbers, provider NPIs and dates of birth". Cancel.
 
-[VO] "It's built for the CISO's team. Senior security leads approve takedowns. Engineers and coding assistants can
-scan, but can't approve. Pick your industry, and Tracefold adds checks like card or medical record numbers." [33]
+[VO] "It's meant for a company's security team. Senior leads approve takedowns. Engineers can run scans, but they can't approve them. You pick your industry, and Tracefold adds checks for it, like medical record numbers for healthcare." [36]
 
 ### 0:35–1:10 Finding public copies
 
 [SCREEN] Sample files → Duolingo memo → progress card (sped up) → "3 public sites show text from your documents" →
 timeline. Zoom on "Searched for Duolingo". Open a site's passages, then Open page; zoom on the highlighted sentence.
 
-[VO] "Here's a sample Duolingo memo, whose text was later quoted in the press. Tracefold searches with Exa or Tavily for the
-company name, never the file itself. It downloads what comes back and compares it on this laptop. Three sites have
-text from the memo. Open one, and there's the same sentence." [52]
+[VO] "This is a sample memo from Duolingo. Parts of it were quoted in news articles. Tracefold searches the web for the company name, using Exa or Tavily. It doesn't send the file itself. It downloads the pages it finds and compares them with the file on this computer. It found the memo's text on three sites. If I open one, you can see the same sentence highlighted." [67]
 
 ### 1:10–1:35 Risks in the file, and approving a takedown
 
 [SCREEN] "In your files" section. Then Approvals → the pastebin.com takedown (from the sample page list; search-found
 pages don't get takedown drafts yet) → See the letter → the approve button reads "Save email" because sending is off.
 
-[VO] "It also flags risks inside the file, using a model running on this laptop. When a page copies your file,
-Tracefold drafts a takedown. A person approves it with one click. In this demo, it's saved as a file instead of
-emailed." [42]
+[VO] "It also checks the file for risky content, using an AI model that runs on this computer. When a page copies your file, Tracefold writes a takedown request. Someone on the security team approves it with one click. In this demo, the request is saved as a file instead of being emailed." [52]
 
 ### 1:35–1:45 Scheduled checks
 
 [SCREEN] Finished scan → Schedule → "every 1 days", start time → Schedule. Cut to Settings → Scheduled checks.
 
-[VO] "Any scan can repeat on a schedule, at any interval, starting whenever you choose." [14]
+[VO] "You can also set any scan to run again on a schedule, as often as you need." [17]
 
 ### 1:45–2:05 Claude Code over MCP
 
 [SCREEN] Claude Code terminal. Paste the scan prompt. Tool calls: `scan_changes` → `get_findings` → edit →
 `recheck_fix`. Cut to the web app showing the finding fixed.
 
-[VO] "Tracefold is also an MCP server. Here Claude Code scans my changes, finds a secret, fixes it, and rechecks. The
-app shows it fixed. The assistant can fix code, but it can't approve anything." [34]
+[VO] "Tracefold also works inside coding tools, through MCP. Here, Claude Code checks my code changes, finds a secret, removes it, and checks again. The app shows it as fixed. Claude Code can fix code, but it can't approve takedowns." [39]
 
 ### 2:05–2:30 Wi-Fi off
 
 [SCREEN] Turn Wi-Fi off (zoom on the icon). Run a scan. Local checks finish; "What didn't finish" lists the public
 check.
 
-[VO] "Now Wi-Fi is off. The scan still finishes, because matching and the model run on this laptop. Public search
-needs the internet, so it says that check didn't finish, instead of calling the file clean." [35]
+[VO] "Now I'll turn Wi-Fi off and scan another file. The scan still finishes, because the matching and the AI model run on this computer. The web search needs internet, so Tracefold says that part didn't finish. It doesn't call the file clean." [42]
 
 ### 2:30–2:45 What's real
 
 [SCREEN] End card. **Working:** file scans, Exa or Tavily search, local matching, Ollama review, industry checks, scheduled
-checks, MCP scan/fix/recheck, takedowns saved to a local folder. **Not built yet:** GitHub and Docs connectors,
-takedown drafts for search-found pages, a local-model coding assistant. **Note:** Claude Code is a cloud assistant,
+checks, MCP scan/fix/recheck, takedowns saved to a local folder. **Not built yet:** takedown drafts for
+search-found pages, a local-model coding assistant. **Note:** Claude Code is a cloud assistant,
 so results it reads go to Anthropic. Sample files are public company documents saved as files.
 
-[VO] "Everything here ran live. The sample files are public documents. GitHub and Docs connectors aren't built
-yet." [17]
+[VO] "Everything in this video ran live. The sample files are public company documents." [13]
 
 ## Voiceover recording
 
