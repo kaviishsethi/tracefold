@@ -53,7 +53,8 @@ About 2.5 words per second, in plain spoken English. Word counts are in brackets
 
 ### 0:00–0:22 What Tracefold is
 
-[SCREEN] Tracefold Scan page.
+[SCREEN] Title card: the Tracefold logo and name in bold, centered, with "Catch, fix and prevent security leaks."
+underneath (clip 01).
 
 [VO] "This is Tracefold. It helps you catch, fix and prevent security leaks. It checks if your company's documents or code have ended up on public websites, finds secrets like API keys, and drafts takedowns and turns off leaked keys once approved. Enterprises can run it in their own VPC or on their own machines, to keep their proprietary data private." [60]
 
@@ -100,10 +101,7 @@ check.
 
 ### 2:30–2:45 What's real
 
-[SCREEN] End card. **Working:** file scans, Exa or Tavily search, local matching, Ollama review, industry checks, scheduled
-checks, MCP scan/fix/recheck, takedowns saved to a local folder. **Not built yet:** takedown drafts for
-search-found pages, a local-model coding assistant. **Note:** Claude Code is a cloud assistant,
-so results it reads go to Anthropic. Sample files are public company documents saved as files.
+[SCREEN] The same title card as the intro (clip 06).
 
 [VO] "Everything in this video ran live. The sample files are public company documents." [13]
 
