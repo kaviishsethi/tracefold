@@ -137,13 +137,13 @@ def test_public_recheck_requires_fresh_retrieval(env):
     rs = env.get_scan(acc["scan_id"])
     assert rs["checks"] == ["public_match"] and rs["public_freshness"] == "fresh retrieval"
     # the copy is removed from the page: only a fresh successful retrieval can show it is no longer observed
-    env.engine.repo.put_manifest("ws_a", "sources_demo", [
+    env.engine.repo.put_manifest("ws_a", "sources_main", [
         {"source_id": "forum", "url": "https://forum.example/t/123", "provider": "fixture", "mode": "seeded",
          "fixture_path": "public/vendor_blog.html"}])
     detail, rc, _ = recheck(env, pub["finding_id"], inp["input_id"])
     assert rc["outcome"] == "not_detected_in_checked_version" and detail["status"] == "no_longer_observed"
     # a failed retrieval cannot establish removal
-    env.engine.repo.put_manifest("ws_a", "sources_demo", [
+    env.engine.repo.put_manifest("ws_a", "sources_main", [
         {"source_id": "forum", "url": "https://forum.example/t/123", "provider": "fixture", "mode": "seeded",
          "fixture_path": "public/missing.html"}])
     env.engine.repo.update_finding(pub["finding_id"], status="open")

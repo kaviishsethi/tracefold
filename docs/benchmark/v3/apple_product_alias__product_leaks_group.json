@@ -1,6 +1,6 @@
 {
-  "case_id": "mock_google_product_alias",
-  "label": "mock_leak_reconstruction",
+  "case_id": "apple_product_alias",
+  "label": "leak_reconstruction",
   "pack": "product_leaks_group",
   "template_version": "company_queries_v3",
   "searches": [
@@ -8,16 +8,16 @@
       "query_id": "q1",
       "template_id": "product_leaks",
       "provider": "exa",
-      "query": "leaked specifications of an upcoming Pixel 11 product",
+      "query": "leaked specifications of an upcoming iPhone 18 Pro product",
       "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
+        "apple.com",
         "crunchbase.com",
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
-        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
@@ -37,16 +37,16 @@
       "query_id": "q2",
       "template_id": "product_leaks",
       "provider": "tavily",
-      "query": "\"Pixel 11\" leaked specs",
+      "query": "\"iPhone 18 Pro\" leaked specs",
       "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
+        "apple.com",
         "crunchbase.com",
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
-        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
@@ -66,16 +66,16 @@
       "query_id": "q3",
       "template_id": "leak_news",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Google",
+      "query": "news article quoting a leaked internal memo from Apple",
       "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
+        "apple.com",
         "crunchbase.com",
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
-        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
@@ -95,16 +95,16 @@
       "query_id": "q4",
       "template_id": "leak_news",
       "provider": "tavily",
-      "query": "\"Google\" leaked internal memo",
+      "query": "\"Apple\" leaked internal memo",
       "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
+        "apple.com",
         "crunchbase.com",
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
-        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
@@ -124,16 +124,16 @@
       "query_id": "q5",
       "template_id": "leak_news_alias",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Pixel 11",
+      "query": "news article quoting a leaked internal memo from iPhone 18 Pro",
       "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
+        "apple.com",
         "crunchbase.com",
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
-        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
@@ -153,16 +153,16 @@
       "query_id": "q6",
       "template_id": "leak_news_alias",
       "provider": "tavily",
-      "query": "\"Pixel 11\" leaked internal memo",
+      "query": "\"iPhone 18 Pro\" leaked internal memo",
       "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
+        "apple.com",
         "crunchbase.com",
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
-        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
@@ -182,16 +182,16 @@
       "query_id": "q7",
       "template_id": "leaked_roadmap",
       "provider": "exa",
-      "query": "leaked Google product roadmap or strategy document",
+      "query": "leaked Apple product roadmap or strategy document",
       "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
+        "apple.com",
         "crunchbase.com",
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
-        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
@@ -211,16 +211,16 @@
       "query_id": "q8",
       "template_id": "leaked_roadmap",
       "provider": "tavily",
-      "query": "\"Google\" leaked roadmap",
+      "query": "\"Apple\" leaked roadmap",
       "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
+        "apple.com",
         "crunchbase.com",
         "dictionary.com",
         "facebook.com",
         "glassdoor.com",
-        "google.com",
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
@@ -239,103 +239,103 @@
   ],
   "omitted_presets": [],
   "scan_state": "partial",
-  "elapsed_seconds": 6.6,
+  "elapsed_seconds": 6.1,
   "provider_requests": 28,
-  "response_bytes": 164449,
+  "response_bytes": 172774,
   "provider_queries": [
     {
       "query_id": "q1",
       "template_id": "product_leaks",
       "provider": "exa",
-      "query": "leaked specifications of an upcoming Pixel 11 product",
+      "query": "leaked specifications of an upcoming iPhone 18 Pro product",
       "status": "ok",
       "error": null,
       "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:51:15.325712Z"
+      "searched_at": "2026-11-08T01:50:50.706338Z"
     },
     {
       "query_id": "q2",
       "template_id": "product_leaks",
       "provider": "tavily",
-      "query": "\"Pixel 11\" leaked specs",
+      "query": "\"iPhone 18 Pro\" leaked specs",
       "status": "ok",
       "error": null,
       "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:51:16.604470Z"
+      "searched_at": "2026-11-08T01:50:51.943562Z"
     },
     {
       "query_id": "q3",
       "template_id": "leak_news",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Google",
+      "query": "news article quoting a leaked internal memo from Apple",
       "status": "ok",
       "error": null,
       "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:51:15.504496Z"
+      "searched_at": "2026-11-08T01:50:50.880107Z"
     },
     {
       "query_id": "q4",
       "template_id": "leak_news",
       "provider": "tavily",
-      "query": "\"Google\" leaked internal memo",
+      "query": "\"Apple\" leaked internal memo",
       "status": "ok",
       "error": null,
       "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:51:15.612008Z"
+      "searched_at": "2026-11-08T01:50:50.998251Z"
     },
     {
       "query_id": "q5",
       "template_id": "leak_news_alias",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Pixel 11",
+      "query": "news article quoting a leaked internal memo from iPhone 18 Pro",
       "status": "ok",
       "error": null,
       "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:51:18.198940Z"
+      "searched_at": "2026-11-08T01:50:52.795653Z"
     },
     {
       "query_id": "q6",
       "template_id": "leak_news_alias",
       "provider": "tavily",
-      "query": "\"Pixel 11\" leaked internal memo",
+      "query": "\"iPhone 18 Pro\" leaked internal memo",
       "status": "ok",
       "error": null,
       "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:51:16.725213Z"
+      "searched_at": "2026-11-08T01:50:52.055073Z"
     },
     {
       "query_id": "q7",
       "template_id": "leaked_roadmap",
       "provider": "exa",
-      "query": "leaked Google product roadmap or strategy document",
+      "query": "leaked Apple product roadmap or strategy document",
       "status": "ok",
       "error": null,
       "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:51:16.893554Z"
+      "searched_at": "2026-11-08T01:50:52.232476Z"
     },
     {
       "query_id": "q8",
       "template_id": "leaked_roadmap",
       "provider": "tavily",
-      "query": "\"Google\" leaked roadmap",
+      "query": "\"Apple\" leaked roadmap",
       "status": "ok",
       "error": null,
       "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:51:17.000050Z"
+      "searched_at": "2026-11-08T01:50:52.344016Z"
     }
   ],
   "sources": [
     {
-      "source_id": "d_b1b8123fe4ca83607e84",
-      "url": "https://www.theverge.com/tech/974238/pixel-11-specs-and-price-leak",
+      "source_id": "d_9786eccd673abb4ad30a",
+      "url": "https://www.macrumors.com/2026/09/03/iphone-18-pro-chip-leak-suggests-improvements/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -345,16 +345,16 @@
           "query_id": "q1",
           "provider": "exa",
           "rank": 1,
-          "title": "Google\u2019s Pixel 11 specs and price leak showing the impact of RAMageddon | The Verge",
-          "returned_url": "https://www.theverge.com/tech/974238/pixel-11-specs-and-price-leak"
+          "title": "iPhone 18 Pro Chip Leak Indicates Major GPU and Memory Bandwidth Improvements - MacRumors",
+          "returned_url": "https://www.macrumors.com/2026/09/03/iphone-18-pro-chip-leak-suggests-improvements/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_721e3739986fca06c4c0",
-      "url": "https://bestforandroid.com/radar/all-four-pixel-11-series-phones-leaked-full-specs-pricing/",
+      "source_id": "d_21e2615862facf3ff1ab",
+      "url": "https://www.idropnews.com/news/iphone-18-pro-specs-leak-tata-electronics/265600/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -364,16 +364,16 @@
           "query_id": "q1",
           "provider": "exa",
           "rank": 2,
-          "title": "All four Pixel 11 series phones leaked in full, specs and pricing included \u2013 BestForAndroid",
-          "returned_url": "https://bestforandroid.com/radar/all-four-pixel-11-series-phones-leaked-full-specs-pricing/"
+          "title": "iPhone 18 Pro Specs Confirmed in Stolen Tata Leaks",
+          "returned_url": "https://www.idropnews.com/news/iphone-18-pro-specs-leak-tata-electronics/265600/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_4eb8325c51ce80583002",
-      "url": "https://www.androidcentral.com/phones/google-pixel/massive-pixel-11-leak-just-revealed-almost-everything-about-googles-next-phones",
+      "source_id": "d_74b8d1afa10f0ce7cf5f",
+      "url": "https://www.macrumors.com/2026/08/17/iphone-18-pro-and-iphone-ultra-rumors/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -383,16 +383,16 @@
           "query_id": "q1",
           "provider": "exa",
           "rank": 3,
-          "title": "Massive Pixel 11 leak just revealed almost everything about Google's next phones | Android Central",
-          "returned_url": "https://www.androidcentral.com/phones/google-pixel/massive-pixel-11-leak-just-revealed-almost-everything-about-googles-next-phones"
+          "title": "iPhone 18 Pro and iPhone Ultra: New Details Leak as Apple Event Nears - MacRumors",
+          "returned_url": "https://www.macrumors.com/2026/08/17/iphone-18-pro-and-iphone-ultra-rumors/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_19a540a45f387b6dc712",
-      "url": "https://www.tiktok.com/@tttechnologyuk/video/7702939893323926816",
+      "source_id": "d_7fc36db11a275165ced1",
+      "url": "https://me.pcmag.com/en/mobile-phones/38532/iphone-18-tipped-to-arrive-next-year-with-bigger-battery-higher-price",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -402,42 +402,42 @@
           "query_id": "q2",
           "provider": "tavily",
           "rank": 1,
-          "title": "Andy Bowyer on TikTok",
-          "returned_url": "https://www.tiktok.com/@tttechnologyuk/video/7702939893323926816"
+          "title": "iPhone 18 Tipped to Arrive Next Year With Bigger Battery, Higher Price",
+          "returned_url": "https://me.pcmag.com/en/mobile-phones/38532/iphone-18-tipped-to-arrive-next-year-with-bigger-battery-higher-price"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_93cc4ee6ece227f55305",
+      "url": "https://www.macworld.com/article/3116701/iphone-18-pro-colors-revealed-exclusive-look-at-apples-2026-models.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "iPhone 18 Pro and Pro Max colors: All the options explained | Macworld",
+          "returned_url": "https://www.macworld.com/article/3116701/iphone-18-pro-colors-revealed-exclusive-look-at-apples-2026-models.html"
         },
         {
           "query_id": "q6",
           "provider": "tavily",
-          "rank": 2,
-          "title": "Andy Bowyer on TikTok",
-          "returned_url": "https://www.tiktok.com/@tttechnologyuk/video/7702939893323926816"
+          "rank": 3,
+          "title": "iPhone 18 Pro and Pro Max colors: All the options explained | Macworld",
+          "returned_url": "https://www.macworld.com/article/3116701/iphone-18-pro-colors-revealed-exclusive-look-at-apples-2026-models.html"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_9eadfe5cf2f00041f82c",
-      "url": "https://thedaycurrent.com/phones/pixel-11-pro",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q2",
-          "provider": "tavily",
-          "rank": 2,
-          "title": "Google Pixel 11 Pro: Specs, Price, and Worth It?",
-          "returned_url": "https://thedaycurrent.com/phones/pixel-11-pro"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_b371492dd2e1312d3277",
-      "url": "https://www.gsmarena.com/google_pixel_11_pro_5g-14801.php",
+      "source_id": "d_db16df96bd7b90785fae",
+      "url": "https://www.cnet.com/tech/mobile/iphone-18-what-we-know-about-apples-spring-lineup",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -447,16 +447,16 @@
           "query_id": "q2",
           "provider": "tavily",
           "rank": 3,
-          "title": "Google Pixel 11 Pro - Full phone specifications",
-          "returned_url": "https://www.gsmarena.com/google_pixel_11_pro_5g-14801.php"
+          "title": "iPhone 18: What We Know About Apple's Spring Lineup - CNET",
+          "returned_url": "https://www.cnet.com/tech/mobile/iphone-18-what-we-know-about-apples-spring-lineup"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_7ea156b4e0ca1b5c1f3b",
-      "url": "https://www.businessinsider.com/google-return-office-buyouts-employees-leaked-memo-2025-6",
+      "source_id": "d_20381d53f392f97ce0ed",
+      "url": "https://www.theverge.com/2018/4/13/17235366/apple-arrests-leak-memo",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -466,16 +466,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 1,
-          "title": "Google Offers Buyouts to US-Based Employees on Marketing, Comms Teams  - Business Insider",
-          "returned_url": "https://www.businessinsider.com/google-return-office-buyouts-employees-leaked-memo-2025-6"
+          "title": "Apple has had 12 people arrested for leaks, it says in a leaked memo | The Verge",
+          "returned_url": "https://www.theverge.com/2018/4/13/17235366/apple-arrests-leak-memo"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_585b79fc0e14c6109896",
-      "url": "https://www.cnn.com/2024/01/18/tech/google-ceo-sundar-pichai-further-layoffs",
+      "source_id": "d_423a9e2d09dd8008e85c",
+      "url": "https://www.macrumors.com/2018/04/13/apple-warns-employees-about-leaking-to-media/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -485,16 +485,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 2,
-          "title": "Google CEO\u2019s internal memo warns of further layoffs ahead | CNN Business",
-          "returned_url": "https://www.cnn.com/2024/01/18/tech/google-ceo-sundar-pichai-further-layoffs"
+          "title": "Leaked Apple Memo Warns Employees About Leaking Info to Media - MacRumors",
+          "returned_url": "https://www.macrumors.com/2018/04/13/apple-warns-employees-about-leaking-to-media/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_8bc9fcf9a9612c80b90c",
-      "url": "https://www.businessinsider.com/google-ends-diversity-hiring-goals-reviews-dei-programs-2025-2",
+      "source_id": "d_27b90366396e545cfa1f",
+      "url": "https://9to5mac.com/2021/09/22/leaked-memo-tim-cook-says-apple-is-cracking-down-on-leakers/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -504,16 +504,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 3,
-          "title": "Google Just Ended Diversity Hiring Goals. Read the Memo. - Business Insider",
-          "returned_url": "https://www.businessinsider.com/google-ends-diversity-hiring-goals-reviews-dei-programs-2025-2"
+          "title": "Leaked memo: Tim Cook says Apple is cracking down on leakers - 9to5Mac",
+          "returned_url": "https://9to5mac.com/2021/09/22/leaked-memo-tim-cook-says-apple-is-cracking-down-on-leakers/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_3e00253f8a18dea4b255",
-      "url": "https://dev.to/leojulieta/deepminds-ai-ban-insider-leak-sparks-global-whistle-blower-wave-2i91",
+      "source_id": "d_87f12cfdd90b45fa0f6d",
+      "url": "https://www.switchingtomac.com/apple-iphone-duo-inner-display-cracking-repair-guidance",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -523,16 +523,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 1,
-          "title": "DeepMind\u2019s AI Ban: Insider Leak Sparks Global Whistle\u2011Blower Wave - DEV Community",
-          "returned_url": "https://dev.to/leojulieta/deepminds-ai-ban-insider-leak-sparks-global-whistle-blower-wave-2i91"
+          "title": "Apple reportedly tells stores how to handle iPhone Duo inner display cracking",
+          "returned_url": "https://www.switchingtomac.com/apple-iphone-duo-inner-display-cracking-repair-guidance"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_7d412d0029f201970fc6",
-      "url": "https://penchan.co/en/market/ai/google/google-ai-leadership",
+      "source_id": "d_261e33f7c5b005ee595c",
+      "url": "https://nypost.com/2026/11/06/us-news/sensitive-man-cries-himself-to-sleep-because-nyt-wont-call-israel-hamas-war-a-genocide",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -542,16 +542,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 2,
-          "title": "Who Actually Runs Google's AI? From a Nobel Laureate to Two Invisible Founders | Penchan",
-          "returned_url": "https://penchan.co/en/market/ai/google/google-ai-leadership"
+          "title": "Sensitive man 'cries himself to sleep' because NYT won't call Israel-Hamas war a 'genocide'",
+          "returned_url": "https://nypost.com/2026/11/06/us-news/sensitive-man-cries-himself-to-sleep-because-nyt-wont-call-israel-hamas-war-a-genocide"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_171ae308afb3aabd8382",
-      "url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products",
+      "source_id": "d_279f53e0b2a198736a5f",
+      "url": "https://www.cnbc.com/2026/10/20/qualcomm-performance-focused-layoffs-reuters.html",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -561,16 +561,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 3,
-          "title": "Proton apologizes to community after internal memo shows force behind proposed AI use in building its privacy products | TechRadar",
-          "returned_url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products"
+          "title": "Qualcomm to cut jobs worldwide in performance-focused layoffs, internal memo shows",
+          "returned_url": "https://www.cnbc.com/2026/10/20/qualcomm-performance-focused-layoffs-reuters.html"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_ceeb61d5357b991548a7",
-      "url": "https://www.notebookcheck.net/Leaked-documents-show-Google-planned-and-then-cut-a-key-Pixel-11-security-feature-for-GrapheneOS.1382732.0.html",
+      "source_id": "d_b5b991be79adcc2c6184",
+      "url": "https://www.phonearena.com/news/iphone-18-pro-iphone-ultra-launch_id182364",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -580,16 +580,16 @@
           "query_id": "q5",
           "provider": "exa",
           "rank": 1,
-          "title": "Leaked documents show Google planned and then cut a key Pixel 11 security feature for GrapheneOS",
-          "returned_url": "https://www.notebookcheck.net/Leaked-documents-show-Google-planned-and-then-cut-a-key-Pixel-11-security-feature-for-GrapheneOS.1382732.0.html"
+          "title": "Leaked Apple memo reveals its iPhone 18 Pro and iPhone Ultra plan - PhoneArena",
+          "returned_url": "https://www.phonearena.com/news/iphone-18-pro-iphone-ultra-launch_id182364"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_a331800a680562342185",
-      "url": "https://techcrunch.com/2025/01/30/google-issues-voluntary-exit-program-for-android-chrome-and-pixel-employees/",
+      "source_id": "d_1c53e6473c7e68b3afcb",
+      "url": "https://www.vietnam.vn/en/apple-ro-ri-ke-hoach-ra-mat-iphone-18-pro-max-va-iphone-ultra",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -599,16 +599,16 @@
           "query_id": "q5",
           "provider": "exa",
           "rank": 2,
-          "title": "Google issues \u2018voluntary exit\u2019 program for Android, Chrome, and Pixel employees | TechCrunch",
-          "returned_url": "https://techcrunch.com/2025/01/30/google-issues-voluntary-exit-program-for-android-chrome-and-pixel-employees/"
+          "title": "Apple leaks plans for the launch of the iPhone 18 Pro Max and iPhone Ultra.",
+          "returned_url": "https://www.vietnam.vn/en/apple-ro-ri-ke-hoach-ra-mat-iphone-18-pro-max-va-iphone-ultra"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_471614df7318f3099f96",
-      "url": "https://www.techspot.com/news/106592-google-offers-voluntary-exit-plan-severance-pay-pixel.html",
+      "source_id": "d_919e970a805a875a9624",
+      "url": "https://timesofindia.indiatimes.com/technology/tech-news/apple-ceo-john-ternus-first-ever-memo-to-employees-as-ceo-also-has-a-message-on-iphone-18-series/articleshow/133701800.cms",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -618,16 +618,16 @@
           "query_id": "q5",
           "provider": "exa",
           "rank": 3,
-          "title": "Google offers \"voluntary exit\" plan with severance pay for Pixel and Android employees | TechSpot",
-          "returned_url": "https://www.techspot.com/news/106592-google-offers-voluntary-exit-plan-severance-pay-pixel.html"
+          "title": "Apple CEO John Ternus first-ever memo to employees as CEO also has a 'message' on iPhone 18 series | - The Times of India",
+          "returned_url": "https://timesofindia.indiatimes.com/technology/tech-news/apple-ceo-john-ternus-first-ever-memo-to-employees-as-ceo-also-has-a-message-on-iphone-18-series/articleshow/133701800.cms"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_a0281ce2b69f2f614f9c",
-      "url": "https://www.cashify.in/news/google-pixel-11-pro-fold-teaser-launched-officially-on-x",
+      "source_id": "d_15ed283be51e638a2289",
+      "url": "https://finance.biggo.com/news/318cb62c-bac1-4cfd-85ab-4b9994a2afae",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -637,16 +637,16 @@
           "query_id": "q6",
           "provider": "tavily",
           "rank": 1,
-          "title": "Google Pixel 11 Pro Fold Teaser Launched Officially On X",
-          "returned_url": "https://www.cashify.in/news/google-pixel-11-pro-fold-teaser-launched-officially-on-x"
+          "title": "Apple's iPhone 18 Leaks Point to Spring Debut, 120Hz Screen and A20 Chip \u2014 BigGo Finance",
+          "returned_url": "https://finance.biggo.com/news/318cb62c-bac1-4cfd-85ab-4b9994a2afae"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_a4d965eeb6b741b35a03",
-      "url": "https://android.gadgethacks.com/news/pixel-11-launch-event-bold-ai-claims-still-need-proof",
+      "source_id": "d_192d42d7ed0d095c60da",
+      "url": "https://appleinsider.com/articles/26/10/14/regular-iphone-18-nears-production-in-large-quanties-says-obvious-leak",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -655,17 +655,17 @@
         {
           "query_id": "q6",
           "provider": "tavily",
-          "rank": 3,
-          "title": "Pixel 11 Launch Event: Bold AI Claims Still Need Proof << Android :: Gadget Hacks",
-          "returned_url": "https://android.gadgethacks.com/news/pixel-11-launch-event-bold-ai-claims-still-need-proof"
+          "rank": 2,
+          "title": "iPhone 18 on schedule to be released in spring 2027",
+          "returned_url": "https://appleinsider.com/articles/26/10/14/regular-iphone-18-nears-production-in-large-quanties-says-obvious-leak"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_d0829ceac1c34fc3f47e",
-      "url": "https://www.androidcentral.com/apps-software/google-leaked-2024-goals",
+      "source_id": "d_56703018134e8459f682",
+      "url": "https://www.techtimes.com/articles/326259/20260901/ternus-bets-apple-wins-ai-through-hardware-not-models-day-one-sets-strategy.htm",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -675,16 +675,16 @@
           "query_id": "q7",
           "provider": "exa",
           "rank": 1,
-          "title": "Google's 2024 goals have leaked, and here's where the company is headed | Android Central",
-          "returned_url": "https://www.androidcentral.com/apps-software/google-leaked-2024-goals"
+          "title": "Ternus Bets Apple Wins AI Through Hardware, Not Models: Day One Sets Strategy",
+          "returned_url": "https://www.techtimes.com/articles/326259/20260901/ternus-bets-apple-wins-ai-through-hardware-not-models-day-one-sets-strategy.htm"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_76e78d29470708d10df7",
-      "url": "https://www.androidauthority.com/google-pixel-11a-pixel-tablet-3-3495273/",
+      "source_id": "d_1dcb8f68181e343bc508",
+      "url": "https://9to5mac.com/2024/10/21/iphone-roadmap-is-most-ambitious-in-the-products-history-per-john-ternus/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -694,16 +694,16 @@
           "query_id": "q7",
           "provider": "exa",
           "rank": 2,
-          "title": "Google considers hobbled Tensor chips for 2027 Pixel 11a and Pixel Tablet 3",
-          "returned_url": "https://www.androidauthority.com/google-pixel-11a-pixel-tablet-3-3495273/"
+          "title": "iPhone roadmap is \u2018most ambitious in the product\u2019s history,\u2019 per John Ternus - 9to5Mac",
+          "returned_url": "https://9to5mac.com/2024/10/21/iphone-roadmap-is-most-ambitious-in-the-products-history-per-john-ternus/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_957b70f1e63dff50cbc7",
-      "url": "https://www.androidauthority.com/google-assistant-llm-3351414/",
+      "source_id": "d_95940a56bba75c5a0b19",
+      "url": "https://www.techspot.com/news/112792-apple-ai-hardware-roadmap-includes-camera-eqipped-airpods.html",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -713,16 +713,16 @@
           "query_id": "q7",
           "provider": "exa",
           "rank": 3,
-          "title": "Leaked memo shows Google Assistant still a top priority - Android Authority",
-          "returned_url": "https://www.androidauthority.com/google-assistant-llm-3351414/"
+          "title": "Apple's AI hardware roadmap: camera-equipped AirPods, smart glasses, and foldable iPhones | TechSpot",
+          "returned_url": "https://www.techspot.com/news/112792-apple-ai-hardware-roadmap-includes-camera-eqipped-airpods.html"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_9d541f07244f82909b3b",
-      "url": "https://www.zdnet.com/article/googles-leaked-product-roadmap-looks-strikingly-familiar",
+      "source_id": "d_263bd6516db82e1323f5",
+      "url": "https://basic-tutorials.com/news/apple-roadmap-leaked-11-new-macs-from-macbook-neo-to-macbook-ultra",
       "fetch_status": "skipped_limit",
       "failure_reason": "page_limit",
       "comparison_status": "not_compared",
@@ -732,16 +732,16 @@
           "query_id": "q8",
           "provider": "tavily",
           "rank": 1,
-          "title": "Google's leaked product roadmap looks strikingly familiar",
-          "returned_url": "https://www.zdnet.com/article/googles-leaked-product-roadmap-looks-strikingly-familiar"
+          "title": "Apple Roadmap Leaked: 11 New Macs, from MacBook Neo to MacBook Ultra - Basic Tutorials",
+          "returned_url": "https://basic-tutorials.com/news/apple-roadmap-leaked-11-new-macs-from-macbook-neo-to-macbook-ultra"
         }
       ],
       "mentions_company": null,
       "matches": []
     },
     {
-      "source_id": "d_a45fe62979b6ecd7f9e2",
-      "url": "https://www.laptopmag.com/news/google-pixel-2025-roadmap-leak",
+      "source_id": "d_2fd14a94a4092e7b04cb",
+      "url": "https://tech.yahoo.com/ai/apple-intelligence/articles/apple-leaked-iphone-roadmap-foldable-193932446.html",
       "fetch_status": "skipped_limit",
       "failure_reason": "page_limit",
       "comparison_status": "not_compared",
@@ -751,16 +751,16 @@
           "query_id": "q8",
           "provider": "tavily",
           "rank": 2,
-          "title": "Google Pixel 2025 roadmap leak: Pixel 8, Pixel Fold, and more | Laptop Mag",
-          "returned_url": "https://www.laptopmag.com/news/google-pixel-2025-roadmap-leak"
+          "title": "Apple\u2019s Leaked iPhone Roadmap: Foldable, Full Overhaul, and a 2027 Wait",
+          "returned_url": "https://tech.yahoo.com/ai/apple-intelligence/articles/apple-leaked-iphone-roadmap-foldable-193932446.html"
         }
       ],
       "mentions_company": null,
       "matches": []
     },
     {
-      "source_id": "d_9d7d742a950435cbadea",
-      "url": "https://www.reddit.com/r/gadgets/comments/zsy0xi/leak_exclusive_heres_googles_entire_20232025",
+      "source_id": "d_3c8cf896f5a8d63c856e",
+      "url": "https://9to5mac.com/2026/09/04/leaked-iphone-roadmap-reveals-plans-for-larger-foldable-biggest-overhaul-more",
       "fetch_status": "skipped_limit",
       "failure_reason": "page_limit",
       "comparison_status": "not_compared",
@@ -770,13 +770,13 @@
           "query_id": "q8",
           "provider": "tavily",
           "rank": 3,
-          "title": "Here's Google's entire 2023-2025 roadmap for Pixel ...",
-          "returned_url": "https://www.reddit.com/r/gadgets/comments/zsy0xi/leak_exclusive_heres_googles_entire_20232025"
+          "title": "Leaked iPhone roadmap reveals plans for larger foldable, \u2018biggest overhaul,\u2019 more - 9to5Mac",
+          "returned_url": "https://9to5mac.com/2026/09/04/leaked-iphone-roadmap-reveals-plans-for-larger-foldable-biggest-overhaul-more"
         }
       ],
       "mentions_company": null,
       "matches": []
     }
   ],
-  "recorded_at": "2026-11-08T01:51:20.054692Z"
+  "recorded_at": "2026-11-08T01:50:54.761274Z"
 }

@@ -1,6 +1,6 @@
 # Company-name discovery for Tracefold
 
-Status: steps 1–5 implemented in `server/tracefold/discovery/` (tests: `server/tests/test_m8_discovery.py`); step 6 ran twice (see `docs/demo-pairs/nothing-memo/README.md`): run 1 missed the target, run 2 with revised generic presets found and matched it. Builds on the existing shared engine. User-approved scope: search using a public company name/domain, retrieve public pages, then compare uploaded documents locally. Preset searches are allowed; predetermined findings are not.
+Status: steps 1–5 implemented in `server/tracefold/discovery/` (tests: `server/tests/test_m8_discovery.py`); step 6 ran twice (see `docs/sample-documents/nothing-memo/README.md`): run 1 missed the target, run 2 with revised generic presets found and matched it. Builds on the existing shared engine. User-approved scope: search using a public company name/domain, retrieve public pages, then compare uploaded documents locally. Preset searches are allowed; predetermined findings are not.
 
 ## Product flow
 
@@ -132,7 +132,7 @@ No new dependency/CVE search or takedown submission is introduced by this featur
 
 Privacy acceptance: place a unique synthetic secret in an upload; prove no document text, marker, filename or hash enters search/extraction requests. Inspect construction and ledger plus runtime isolation, not substring checks alone. Retrieved text with instructions to change queries must remain inert. Model failure cannot produce a fabricated finding or cloud fallback.
 
-Demo dataset status is independent: a public policy proves public availability, not an unauthorized leak; the existing Nothing excerpt is only a short reported-leak reference. Discovery success must be tested separately from prior successful direct-URL extraction. Do not claim those pairs are search-discoverable until the chosen queries actually return them.
+Walkthrough dataset status is independent: a public policy proves public availability, not an unauthorized leak; the existing Nothing excerpt is only a short reported-leak reference. Discovery success must be tested separately from prior successful direct-URL extraction. Do not claim those pairs are search-discoverable until the chosen queries actually return them.
 
 ## References
 

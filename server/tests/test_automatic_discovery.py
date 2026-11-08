@@ -1,4 +1,4 @@
-"""Automatic upload scans must work without demo hashes, profile setup or configure permission."""
+"""Automatic upload scans must work without known-document hashes, profile setup or configure permission."""
 import json
 from types import SimpleNamespace
 
@@ -64,7 +64,7 @@ def test_conflicting_modes_rejected(env):
     inp = env.upload({'policy.txt': b'Example Widgets'})
     r = env.client.post('/v1/workspaces/ws_a/scans', headers=env.h(), json={
         'input_id': inp['input_id'], 'checks': ['public_match'], 'automatic_discovery': True,
-        'public_sources': {'manifest_id': 'sources_demo'}})
+        'public_sources': {'manifest_id': 'sources_main'}})
     assert r.status_code == 422
 
 

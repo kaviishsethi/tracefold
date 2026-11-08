@@ -1,6 +1,6 @@
 {
-  "case_id": "mock_apple_product_alias",
-  "label": "mock_leak_reconstruction",
+  "case_id": "samsung_product_alias",
+  "label": "leak_reconstruction",
   "pack": "leak_watch",
   "template_version": "company_queries_v3",
   "searches": [
@@ -8,12 +8,11 @@
       "query_id": "q1",
       "template_id": "leak_news",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Apple",
+      "query": "news article quoting a leaked internal memo from Samsung Electronics",
       "num_results": 5,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
-        "apple.com",
         "crunchbase.com",
         "dictionary.com",
         "facebook.com",
@@ -21,6 +20,7 @@
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
+        "samsung.com",
         "tavily.com",
         "trustpilot.com",
         "twitter.com",
@@ -37,12 +37,11 @@
       "query_id": "q2",
       "template_id": "leak_news",
       "provider": "tavily",
-      "query": "\"Apple\" leaked internal memo",
+      "query": "\"Samsung Electronics\" leaked internal memo",
       "num_results": 5,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
-        "apple.com",
         "crunchbase.com",
         "dictionary.com",
         "facebook.com",
@@ -50,6 +49,7 @@
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
+        "samsung.com",
         "tavily.com",
         "trustpilot.com",
         "twitter.com",
@@ -66,12 +66,11 @@
       "query_id": "q3",
       "template_id": "leak_news_alias",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from iPhone 18 Pro",
+      "query": "news article quoting a leaked internal memo from Galaxy S27 Ultra",
       "num_results": 5,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
-        "apple.com",
         "crunchbase.com",
         "dictionary.com",
         "facebook.com",
@@ -79,6 +78,7 @@
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
+        "samsung.com",
         "tavily.com",
         "trustpilot.com",
         "twitter.com",
@@ -95,12 +95,11 @@
       "query_id": "q4",
       "template_id": "leak_news_alias",
       "provider": "tavily",
-      "query": "\"iPhone 18 Pro\" leaked internal memo",
+      "query": "\"Galaxy S27 Ultra\" leaked internal memo",
       "num_results": 5,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
-        "apple.com",
         "crunchbase.com",
         "dictionary.com",
         "facebook.com",
@@ -108,6 +107,7 @@
         "instagram.com",
         "linkedin.com",
         "merriam-webster.com",
+        "samsung.com",
         "tavily.com",
         "trustpilot.com",
         "twitter.com",
@@ -123,59 +123,59 @@
   ],
   "omitted_presets": [],
   "scan_state": "completed",
-  "elapsed_seconds": 6.6,
+  "elapsed_seconds": 5.1,
   "provider_requests": 24,
-  "response_bytes": 224761,
+  "response_bytes": 197977,
   "provider_queries": [
     {
       "query_id": "q1",
       "template_id": "leak_news",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Apple",
+      "query": "news article quoting a leaked internal memo from Samsung Electronics",
       "status": "ok",
       "error": null,
       "returned": 5,
       "truncated": false,
-      "searched_at": "2026-11-08T01:50:42.541611Z"
+      "searched_at": "2026-11-08T01:50:55.333872Z"
     },
     {
       "query_id": "q2",
       "template_id": "leak_news",
       "provider": "tavily",
-      "query": "\"Apple\" leaked internal memo",
+      "query": "\"Samsung Electronics\" leaked internal memo",
       "status": "ok",
       "error": null,
       "returned": 5,
       "truncated": false,
-      "searched_at": "2026-11-08T01:50:42.507451Z"
+      "searched_at": "2026-11-08T01:50:55.273753Z"
     },
     {
       "query_id": "q3",
       "template_id": "leak_news_alias",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from iPhone 18 Pro",
+      "query": "news article quoting a leaked internal memo from Galaxy S27 Ultra",
       "status": "ok",
       "error": null,
       "returned": 5,
       "truncated": false,
-      "searched_at": "2026-11-08T01:50:43.980723Z"
+      "searched_at": "2026-11-08T01:50:57.080238Z"
     },
     {
       "query_id": "q4",
       "template_id": "leak_news_alias",
       "provider": "tavily",
-      "query": "\"iPhone 18 Pro\" leaked internal memo",
+      "query": "\"Galaxy S27 Ultra\" leaked internal memo",
       "status": "ok",
       "error": null,
       "returned": 5,
       "truncated": false,
-      "searched_at": "2026-11-08T01:50:46.910184Z"
+      "searched_at": "2026-11-08T01:50:57.822973Z"
     }
   ],
   "sources": [
     {
-      "source_id": "d_20381d53f392f97ce0ed",
-      "url": "https://www.theverge.com/2018/4/13/17235366/apple-arrests-leak-memo",
+      "source_id": "d_eb611d99a650d8a5d8a7",
+      "url": "https://www.businesstimes.com.sg/companies-markets/samsung-bans-use-chatgpt-mobile-appliances-staff",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -185,16 +185,16 @@
           "query_id": "q1",
           "provider": "exa",
           "rank": 1,
-          "title": "Apple has had 12 people arrested for leaks, it says in a leaked memo | The Verge",
-          "returned_url": "https://www.theverge.com/2018/4/13/17235366/apple-arrests-leak-memo"
+          "title": "Samsung bans use of ChatGPT for mobile, appliances staff - The Business Times",
+          "returned_url": "https://www.businesstimes.com.sg/companies-markets/samsung-bans-use-chatgpt-mobile-appliances-staff"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_423a9e2d09dd8008e85c",
-      "url": "https://www.macrumors.com/2018/04/13/apple-warns-employees-about-leaking-to-media/",
+      "source_id": "d_94ff9288a45e8ab09bae",
+      "url": "https://www.theverge.com/2023/5/2/23707796/samsung-ban-chatgpt-generative-ai-bing-bard-employees-security-concerns",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -204,168 +204,168 @@
           "query_id": "q1",
           "provider": "exa",
           "rank": 2,
-          "title": "Leaked Apple Memo Warns Employees About Leaking Info to Media - MacRumors",
-          "returned_url": "https://www.macrumors.com/2018/04/13/apple-warns-employees-about-leaking-to-media/"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_27b90366396e545cfa1f",
-      "url": "https://9to5mac.com/2021/09/22/leaked-memo-tim-cook-says-apple-is-cracking-down-on-leakers/",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q1",
-          "provider": "exa",
-          "rank": 3,
-          "title": "Leaked memo: Tim Cook says Apple is cracking down on leakers - 9to5Mac",
-          "returned_url": "https://9to5mac.com/2021/09/22/leaked-memo-tim-cook-says-apple-is-cracking-down-on-leakers/"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_dac31f789be1c08bbe2e",
-      "url": "https://www.news.com.au/technology/gadgets/leaked-apple-memo-sparks-fears-over-crackdown-on-device-repairs/news-story/80f37d47e67cff7ce0008690baca585f",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q1",
-          "provider": "exa",
-          "rank": 4,
-          "title": "Apple: Internal documents spark fear for future of new iMac, Macbook | news.com.au \u2014 Australia\u2019s leading news site for latest headlines",
-          "returned_url": "https://www.news.com.au/technology/gadgets/leaked-apple-memo-sparks-fears-over-crackdown-on-device-repairs/news-story/80f37d47e67cff7ce0008690baca585f"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_29e498569d1b70ddad3d",
-      "url": "https://www.theguardian.com/technology/2015/apr/07/apple-store-queue-dead-leaked-memo",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q1",
-          "provider": "exa",
-          "rank": 5,
-          "title": "Is the Apple queue dead? A leaked memo suggests it could be | Apple | The Guardian",
-          "returned_url": "https://www.theguardian.com/technology/2015/apr/07/apple-store-queue-dead-leaked-memo"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_87f12cfdd90b45fa0f6d",
-      "url": "https://www.switchingtomac.com/apple-iphone-duo-inner-display-cracking-repair-guidance",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q2",
-          "provider": "tavily",
-          "rank": 1,
-          "title": "Apple reportedly tells stores how to handle iPhone Duo inner display cracking",
-          "returned_url": "https://www.switchingtomac.com/apple-iphone-duo-inner-display-cracking-repair-guidance"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_261e33f7c5b005ee595c",
-      "url": "https://nypost.com/2026/11/06/us-news/sensitive-man-cries-himself-to-sleep-because-nyt-wont-call-israel-hamas-war-a-genocide",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q2",
-          "provider": "tavily",
-          "rank": 2,
-          "title": "Sensitive man 'cries himself to sleep' because NYT won't call Israel-Hamas war a 'genocide'",
-          "returned_url": "https://nypost.com/2026/11/06/us-news/sensitive-man-cries-himself-to-sleep-because-nyt-wont-call-israel-hamas-war-a-genocide"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_279f53e0b2a198736a5f",
-      "url": "https://www.cnbc.com/2026/10/20/qualcomm-performance-focused-layoffs-reuters.html",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q2",
-          "provider": "tavily",
-          "rank": 3,
-          "title": "Qualcomm to cut jobs worldwide in performance-focused layoffs, internal memo shows",
-          "returned_url": "https://www.cnbc.com/2026/10/20/qualcomm-performance-focused-layoffs-reuters.html"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_171ae308afb3aabd8382",
-      "url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q2",
-          "provider": "tavily",
-          "rank": 4,
-          "title": "Proton apologizes to community after internal memo shows force behind proposed AI use in building its privacy products | TechRadar",
-          "returned_url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_0174913676fbf377e3aa",
-      "url": "https://www.aol.com/articles/customer-success-story-leaked-documents-120012000.html",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q2",
-          "provider": "tavily",
-          "rank": 5,
-          "title": "A \u2018customer success story\u2019: leaked documents show Cisco doubled down on Israeli military deals during Gaza war - AOL",
-          "returned_url": "https://www.aol.com/articles/customer-success-story-leaked-documents-120012000.html"
+          "title": "Samsung tells employees not to use AI tools like ChatGPT, citing security concerns | The Verge",
+          "returned_url": "https://www.theverge.com/2023/5/2/23707796/samsung-ban-chatgpt-generative-ai-bing-bard-employees-security-concerns"
         }
       ],
       "mentions_company": false,
       "matches": []
     },
     {
-      "source_id": "d_b5b991be79adcc2c6184",
-      "url": "https://www.phonearena.com/news/iphone-18-pro-iphone-ultra-launch_id182364",
+      "source_id": "d_fe09c7155a22147defe8",
+      "url": "https://m.koreaherald.com/article/3118116",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Samsung bans AI chatbots after leak - The Korea Herald",
+          "returned_url": "https://m.koreaherald.com/article/3118116"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c3ba4852bca67aa8012b",
+      "url": "https://www.theregister.com/software/2023/05/02/samsung-to-ban-staff-from-using-chatgpt-after-code-leak/655856",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 4,
+          "title": "Samsung to ban staff from using ChatGPT after 'code leak'",
+          "returned_url": "https://www.theregister.com/software/2023/05/02/samsung-to-ban-staff-from-using-chatgpt-after-code-leak/655856"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_71a6fcb3581acbdd5149",
+      "url": "https://www.smartcompany.com.au/technology/samsung-staff-memo-leaks-ahead-of-weak-second-quarter-results/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 5,
+          "title": "Samsung staff memo leaks ahead of weak second quarter results - SmartCompany",
+          "returned_url": "https://www.smartcompany.com.au/technology/samsung-staff-memo-leaks-ahead-of-weak-second-quarter-results/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_1610b0330fee8ae5a07a",
+      "url": "https://nhimg.org/samsung-chatgpt-source-code-leak-2023-shadow-ai",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Samsung ChatGPT Source Code Leak 2023: Shadow AI",
+          "returned_url": "https://nhimg.org/samsung-chatgpt-source-code-leak-2023-shadow-ai"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ee3824a8f1022d761154",
+      "url": "https://jazz.security/dlp-explained/dlp-basics/real-examples-of-ai-data-leaks",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Real AI data leak examples and what would have stopped them",
+          "returned_url": "https://jazz.security/dlp-explained/dlp-basics/real-examples-of-ai-data-leaks"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_5eb5773a0a2e0ff09ff9",
+      "url": "https://news.sbs.co.kr/english/article.do?news_id=N1008817557",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Ex-Samsung VP Ahn Seung-ho Sentenced to 3 Years in Prison in Appeal Trial over Trade Secret Leaks",
+          "returned_url": "https://news.sbs.co.kr/english/article.do?news_id=N1008817557"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6df2a6db559b5163bb39",
+      "url": "https://simplywall.st/stocks/kr/tech/kose-a005930/samsung-electronics-shares/news/what-does-samsung-electronics-kosea005930-dram-leak-case-mea",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 4,
+          "title": "What Does Samsung Electronics (KOSE:A005930) DRAM Leak Case Mean For Investors? - Simply Wall St News",
+          "returned_url": "https://simplywall.st/stocks/kr/tech/kose-a005930/samsung-electronics-shares/news/what-does-samsung-electronics-kosea005930-dram-leak-case-mea"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d828ac644698eb302080",
+      "url": "https://www.cnbc.com/2026/11/05/semiconductor-china-korea-talents-rivalry.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 5,
+          "title": "Inside the chip talent war: Trade secrets and rising Chinese rivals",
+          "returned_url": "https://www.cnbc.com/2026/11/05/semiconductor-china-korea-talents-rivalry.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_662e72b18f4333d94dd3",
+      "url": "https://www.notebookcheck.net/Samsung-moves-to-prevent-leaks-for-Galaxy-S27-lineup.1230141.0.html",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -375,16 +375,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 1,
-          "title": "Leaked Apple memo reveals its iPhone 18 Pro and iPhone Ultra plan - PhoneArena",
-          "returned_url": "https://www.phonearena.com/news/iphone-18-pro-iphone-ultra-launch_id182364"
+          "title": "Samsung moves to prevent leaks for Galaxy S27 lineup",
+          "returned_url": "https://www.notebookcheck.net/Samsung-moves-to-prevent-leaks-for-Galaxy-S27-lineup.1230141.0.html"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_1c53e6473c7e68b3afcb",
-      "url": "https://www.vietnam.vn/en/apple-ro-ri-ke-hoach-ra-mat-iphone-18-pro-max-va-iphone-ultra",
+      "source_id": "d_935a01b260eec62e7c85",
+      "url": "https://www.androidauthority.com/samsung-secure-chat-internal-leaks-3642032/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -394,16 +394,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 2,
-          "title": "Apple leaks plans for the launch of the iPhone 18 Pro Max and iPhone Ultra.",
-          "returned_url": "https://www.vietnam.vn/en/apple-ro-ri-ke-hoach-ra-mat-iphone-18-pro-max-va-iphone-ultra"
+          "title": "Love Samsung leaks? They may dry up with the Galaxy S27",
+          "returned_url": "https://www.androidauthority.com/samsung-secure-chat-internal-leaks-3642032/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_919e970a805a875a9624",
-      "url": "https://timesofindia.indiatimes.com/technology/tech-news/apple-ceo-john-ternus-first-ever-memo-to-employees-as-ceo-also-has-a-message-on-iphone-18-series/articleshow/133701800.cms",
+      "source_id": "d_fd2bc7c14a8dcb7c12af",
+      "url": "https://www.trustedreviews.com/news/samsungs-cracking-down-on-galaxy-leaks-ahead-of-foldable-launch-later-this-year",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -413,16 +413,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 3,
-          "title": "Apple CEO John Ternus first-ever memo to employees as CEO also has a 'message' on iPhone 18 series | - The Times of India",
-          "returned_url": "https://timesofindia.indiatimes.com/technology/tech-news/apple-ceo-john-ternus-first-ever-memo-to-employees-as-ceo-also-has-a-message-on-iphone-18-series/articleshow/133701800.cms"
+          "title": "Samsung\u2019s cracking down on Galaxy leaks ahead of foldable launch later this year - Trusted Reviews",
+          "returned_url": "https://www.trustedreviews.com/news/samsungs-cracking-down-on-galaxy-leaks-ahead-of-foldable-launch-later-this-year"
         }
       ],
-      "mentions_company": true,
+      "mentions_company": false,
       "matches": []
     },
     {
-      "source_id": "d_6c61d3babd2dfbc110e8",
-      "url": "https://www.macworld.com/article/3206299/apple-invites-retail-workers-to-pitch-in-with-iphone-event-support.html",
+      "source_id": "d_848f9ea5038db8db3276",
+      "url": "https://www.gsmarena.com/samsung_is_building_exynos_2700powered_galaxy_s27_ultras_insiders_claim-news-74450.php",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -432,16 +432,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 4,
-          "title": "Apple invites retail workers to pitch in with iPhone event support | Macworld",
-          "returned_url": "https://www.macworld.com/article/3206299/apple-invites-retail-workers-to-pitch-in-with-iphone-event-support.html"
+          "title": "Samsung is building Exynos 2700-powered Galaxy S27 Ultras, insiders claim - GSMArena.com news",
+          "returned_url": "https://www.gsmarena.com/samsung_is_building_exynos_2700powered_galaxy_s27_ultras_insiders_claim-news-74450.php"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_c18ce1913dafb346f4b1",
-      "url": "https://news.abplive.com/technology/apple-kicks-off-retail-employee-lottery-for-key-september-product-launch-1860480",
+      "source_id": "d_5f81c970d125fa8303d5",
+      "url": "https://en.etnews.com/20260803200005",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -451,16 +451,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 5,
-          "title": "Apple Kicks Off Retail Employee Lottery For Key September Product Launch",
-          "returned_url": "https://news.abplive.com/technology/apple-kicks-off-retail-employee-lottery-for-key-september-product-launch-1860480"
+          "title": "Galaxy S27 Series to Feature Triple Rear Cameras Across All Models - Electronic Times",
+          "returned_url": "https://en.etnews.com/20260803200005"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_15ed283be51e638a2289",
-      "url": "https://finance.biggo.com/news/318cb62c-bac1-4cfd-85ab-4b9994a2afae",
+      "source_id": "d_a79eee84906206d02824",
+      "url": "https://hothardware.com/news/samsung-galaxy-s27-ultra-rumor-roundup-all-the-renders-specs-and-leaks",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -470,16 +470,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 1,
-          "title": "Apple's iPhone 18 Leaks Point to Spring Debut, 120Hz Screen and A20 Chip \u2014 BigGo Finance",
-          "returned_url": "https://finance.biggo.com/news/318cb62c-bac1-4cfd-85ab-4b9994a2afae"
+          "title": "Samsung Galaxy S27 Ultra Rumor Roundup: All The Renders, Specs And Leaks",
+          "returned_url": "https://hothardware.com/news/samsung-galaxy-s27-ultra-rumor-roundup-all-the-renders-specs-and-leaks"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_192d42d7ed0d095c60da",
-      "url": "https://appleinsider.com/articles/26/10/14/regular-iphone-18-nears-production-in-large-quanties-says-obvious-leak",
+      "source_id": "d_9513b7bd466be2a5e353",
+      "url": "https://mashable.com/tech/samsung-galaxy-s27-ultra-all-we-know",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -489,16 +489,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 2,
-          "title": "iPhone 18 on schedule to be released in spring 2027",
-          "returned_url": "https://appleinsider.com/articles/26/10/14/regular-iphone-18-nears-production-in-large-quanties-says-obvious-leak"
+          "title": "Samsung Galaxy S27 Ultra rumors: Pricing, features, and leaks | Mashable",
+          "returned_url": "https://mashable.com/tech/samsung-galaxy-s27-ultra-all-we-know"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_93cc4ee6ece227f55305",
-      "url": "https://www.macworld.com/article/3116701/iphone-18-pro-colors-revealed-exclusive-look-at-apples-2026-models.html",
+      "source_id": "d_31273713dfed74551f64",
+      "url": "https://samsung.gadgethacks.com/news/samsung-galaxy-s27-ultra-rumors-battery-camera-chip",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -508,16 +508,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 3,
-          "title": "iPhone 18 Pro and Pro Max colors: All the options explained | Macworld",
-          "returned_url": "https://www.macworld.com/article/3116701/iphone-18-pro-colors-revealed-exclusive-look-at-apples-2026-models.html"
+          "title": "Samsung Galaxy S27 Ultra Rumors: Battery, Camera, Chip << Samsung :: Gadget Hacks",
+          "returned_url": "https://samsung.gadgethacks.com/news/samsung-galaxy-s27-ultra-rumors-battery-camera-chip"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_6db2e492821903bfa4f2",
-      "url": "https://shattered.io/iphone-18-bigger-battery-higher-price-2nm-a20-leak-2026",
+      "source_id": "d_30a3940a3c0f94dd968d",
+      "url": "https://tech.yahoo.com/phones/articles/whats-difference-between-galaxy-s27-083000155.html",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -527,16 +527,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 4,
-          "title": "iPhone 18 Price Leak: $1,099, 2nm A20 Chip [2026]",
-          "returned_url": "https://shattered.io/iphone-18-bigger-battery-higher-price-2nm-a20-leak-2026"
+          "title": "What's the difference between Galaxy S27 Ultra and S27 Pro? \u2014 5 key differences (and 3 similarities) based on the leaks",
+          "returned_url": "https://tech.yahoo.com/phones/articles/whats-difference-between-galaxy-s27-083000155.html"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_19b5bd394e7520085b19",
-      "url": "https://www.pcmag.com/opinions/i-tested-the-iphone-18-pro-camera-for-a-week-and-its-best-feature-isnt",
+      "source_id": "d_007f6482674fcae9f4ee",
+      "url": "https://nokiapoweruser.com/galaxy-s27-ultra-redesign-horizontal-camera-bar-leak",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -546,13 +546,13 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 5,
-          "title": "I Tested the iPhone 18 Pro Camera for a Week, and Its Best Feature Isn't What Apple Is Telling You",
-          "returned_url": "https://www.pcmag.com/opinions/i-tested-the-iphone-18-pro-camera-for-a-week-and-its-best-feature-isnt"
+          "title": "Samsung Galaxy S27 Ultra Redesign Leaks: New Camera Bar & Specs- NPowerUser",
+          "returned_url": "https://nokiapoweruser.com/galaxy-s27-ultra-redesign-horizontal-camera-bar-leak"
         }
       ],
       "mentions_company": true,
       "matches": []
     }
   ],
-  "recorded_at": "2026-11-08T01:50:48.807989Z"
+  "recorded_at": "2026-11-08T01:50:59.890410Z"
 }

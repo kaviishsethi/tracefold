@@ -1,7 +1,7 @@
 {
-  "case_id": "mock_apple_memo",
-  "label": "mock_leak_reconstruction",
-  "pack": "memo_group",
+  "case_id": "apple",
+  "label": "leak_reconstruction",
+  "pack": "leak_watch",
   "template_version": "company_queries_v3",
   "searches": [
     {
@@ -64,9 +64,9 @@
     },
     {
       "query_id": "q3",
-      "template_id": "leaked_email",
+      "template_id": "leak_news_alias",
       "provider": "exa",
-      "query": "full text of an internal email sent to Apple employees",
+      "query": "news article quoting a leaked internal memo from iPhone",
       "num_results": 5,
       "include_domains": null,
       "include_domains_mode": null,
@@ -89,13 +89,13 @@
       "category": "news",
       "topic": null,
       "exact_match": null,
-      "preset_status": "experimental"
+      "preset_status": "benchmarked"
     },
     {
       "query_id": "q4",
-      "template_id": "leaked_email",
+      "template_id": "leak_news_alias",
       "provider": "tavily",
-      "query": "\"Apple\" email to employees full text",
+      "query": "\"iPhone\" leaked internal memo",
       "num_results": 5,
       "include_domains": null,
       "include_domains_mode": null,
@@ -116,16 +116,16 @@
         "youtube.com"
       ],
       "category": null,
-      "topic": "general",
+      "topic": "news",
       "exact_match": true,
-      "preset_status": "experimental"
+      "preset_status": "benchmarked"
     }
   ],
   "omitted_presets": [],
   "scan_state": "completed",
-  "elapsed_seconds": 5.1,
-  "provider_requests": 24,
-  "response_bytes": 132959,
+  "elapsed_seconds": 9.2,
+  "provider_requests": 22,
+  "response_bytes": 145937,
   "provider_queries": [
     {
       "query_id": "q1",
@@ -136,7 +136,7 @@
       "error": null,
       "returned": 5,
       "truncated": false,
-      "searched_at": "2026-11-08T01:54:04.697680Z"
+      "searched_at": "2026-11-08T01:49:29.101270Z"
     },
     {
       "query_id": "q2",
@@ -147,29 +147,29 @@
       "error": null,
       "returned": 5,
       "truncated": false,
-      "searched_at": "2026-11-08T01:54:04.668110Z"
+      "searched_at": "2026-11-08T01:49:30.838717Z"
     },
     {
       "query_id": "q3",
-      "template_id": "leaked_email",
+      "template_id": "leak_news_alias",
       "provider": "exa",
-      "query": "full text of an internal email sent to Apple employees",
+      "query": "news article quoting a leaked internal memo from iPhone",
       "status": "ok",
       "error": null,
       "returned": 5,
       "truncated": false,
-      "searched_at": "2026-11-08T01:54:07.422101Z"
+      "searched_at": "2026-11-08T01:49:30.676701Z"
     },
     {
       "query_id": "q4",
-      "template_id": "leaked_email",
+      "template_id": "leak_news_alias",
       "provider": "tavily",
-      "query": "\"Apple\" email to employees full text",
+      "query": "\"iPhone\" leaked internal memo",
       "status": "ok",
       "error": null,
       "returned": 5,
       "truncated": false,
-      "searched_at": "2026-11-08T01:54:06.007845Z"
+      "searched_at": "2026-11-08T01:49:34.498278Z"
     }
   ],
   "sources": [
@@ -216,7 +216,7 @@
       "url": "https://9to5mac.com/2021/09/22/leaked-memo-tim-cook-says-apple-is-cracking-down-on-leakers/",
       "fetch_status": "fetched",
       "failure_reason": null,
-      "comparison_status": "matched",
+      "comparison_status": "no_match",
       "truncated": false,
       "origins": [
         {
@@ -228,18 +228,7 @@
         }
       ],
       "mentions_company": true,
-      "matches": [
-        {
-          "upload": "mock-internal-memo.md",
-          "role": "reference",
-          "tokens": 13
-        },
-        {
-          "upload": "mock-internal-memo.md",
-          "role": "reference",
-          "tokens": 14
-        }
-      ]
+      "matches": []
     },
     {
       "source_id": "d_dac31f789be1c08bbe2e",
@@ -289,6 +278,13 @@
       "origins": [
         {
           "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Apple reportedly tells stores how to handle iPhone Duo inner display cracking",
+          "returned_url": "https://www.switchingtomac.com/apple-iphone-duo-inner-display-cracking-repair-guidance"
+        },
+        {
+          "query_id": "q4",
           "provider": "tavily",
           "rank": 1,
           "title": "Apple reportedly tells stores how to handle iPhone Duo inner display cracking",
@@ -350,6 +346,13 @@
           "rank": 4,
           "title": "Proton apologizes to community after internal memo shows force behind proposed AI use in building its privacy products | TechRadar",
           "returned_url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 4,
+          "title": "Proton apologizes to community after internal memo shows force behind proposed AI use in building its privacy products | TechRadar",
+          "returned_url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products"
         }
       ],
       "mentions_company": true,
@@ -375,38 +378,27 @@
       "matches": []
     },
     {
-      "source_id": "d_0c45eeb58506e39a74ee",
-      "url": "https://www.theverge.com/2021/9/22/22687747/tim-cook-employee-leak-memos-do-not-belong-at-apple",
+      "source_id": "d_1dcb8f68181e343bc508",
+      "url": "https://9to5mac.com/2024/10/21/iphone-roadmap-is-most-ambitious-in-the-products-history-per-john-ternus/",
       "fetch_status": "fetched",
       "failure_reason": null,
-      "comparison_status": "matched",
+      "comparison_status": "no_match",
       "truncated": false,
       "origins": [
         {
           "query_id": "q3",
           "provider": "exa",
           "rank": 1,
-          "title": "Tim Cook says employees who leak memos do not belong at Apple, according to leaked memo | The Verge",
-          "returned_url": "https://www.theverge.com/2021/9/22/22687747/tim-cook-employee-leak-memos-do-not-belong-at-apple"
+          "title": "iPhone roadmap is \u2018most ambitious in the product\u2019s history,\u2019 per John Ternus - 9to5Mac",
+          "returned_url": "https://9to5mac.com/2024/10/21/iphone-roadmap-is-most-ambitious-in-the-products-history-per-john-ternus/"
         }
       ],
       "mentions_company": true,
-      "matches": [
-        {
-          "upload": "mock-internal-memo.md",
-          "role": "reference",
-          "tokens": 13
-        },
-        {
-          "upload": "mock-internal-memo.md",
-          "role": "reference",
-          "tokens": 14
-        }
-      ]
+      "matches": []
     },
     {
-      "source_id": "d_84a5d6c8e02dbcc64429",
-      "url": "https://9to5mac.com/2026/08/31/read-tim-cooks-full-memo-to-apple-employees-on-his-last-day-as-ceo/",
+      "source_id": "d_98e45ad77cc293ad5b54",
+      "url": "https://9to5mac.com/2018/04/13/apple-memo-on-leaks-leaks/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -416,16 +408,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 2,
-          "title": "Read Tim Cook's full memo to Apple employees on his last day as ...",
-          "returned_url": "https://9to5mac.com/2026/08/31/read-tim-cooks-full-memo-to-apple-employees-on-his-last-day-as-ceo/"
+          "title": "Apple ramping up effort to stop leaks with legal action, according to leaked memo - 9to5Mac",
+          "returned_url": "https://9to5mac.com/2018/04/13/apple-memo-on-leaks-leaks/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_65a7c24ca3ce48d28fad",
-      "url": "https://www.buzzfeednews.com/article/johnpaczkowski/read-tim-cooks-email-to-apple-employees-after-donald-trumps",
+      "source_id": "d_43bc38cede05cfbf4e73",
+      "url": "https://www.independent.co.uk/tech/apple-iphone-x-leaks-release-date-mac-latest-next-new-products-a8307541.html",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -435,16 +427,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 3,
-          "title": "Read Tim Cook\u2019s Email To Apple Employees After Donald Trump\u2019s Election",
-          "returned_url": "https://www.buzzfeednews.com/article/johnpaczkowski/read-tim-cooks-email-to-apple-employees-after-donald-trumps"
+          "title": "Apple cracks down on leaks that have revealed future of iPhone and more, leaked memo reveals | The Independent | The Independent",
+          "returned_url": "https://www.independent.co.uk/tech/apple-iphone-x-leaks-release-date-mac-latest-next-new-products-a8307541.html"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_dccd77c29cfb2b58dfb0",
-      "url": "https://arstechnica.com/gadgets/2008/08/steve-jobs-on-mobileme-the-full-e-mail/",
+      "source_id": "d_e90706d3ed948474f2d5",
+      "url": "https://www.thesun.co.uk/tech/6061344/apple-memo-staff-stop-leaking-news/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -454,16 +446,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 4,
-          "title": "Steve Jobs on MobileMe: the full e-mail - Ars Technica",
-          "returned_url": "https://arstechnica.com/gadgets/2008/08/steve-jobs-on-mobileme-the-full-e-mail/"
+          "title": "Apple memo warning staff to stop leaking iPhone secrets has been LEAKED \u2013 read it here",
+          "returned_url": "https://www.thesun.co.uk/tech/6061344/apple-memo-staff-stop-leaking-news/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_634518e7993a997c5c18",
-      "url": "https://www.theverge.com/2016/2/22/11092028/apple-tim-cook-fbi-encryption-internal-memo",
+      "source_id": "d_340273d903a03188b751",
+      "url": "https://www.macobserver.com/news/apple-issues-internal-memo-over-iphone-duo-display-failures/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -473,35 +465,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 5,
-          "title": "Read Tim Cook\u2019s email to Apple employees about its fight against the FBI | The Verge",
-          "returned_url": "https://www.theverge.com/2016/2/22/11092028/apple-tim-cook-fbi-encryption-internal-memo"
+          "title": "Apple Issues Internal Memo Over iPhone Duo Display Failures",
+          "returned_url": "https://www.macobserver.com/news/apple-issues-internal-memo-over-iphone-duo-display-failures/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_650188f0eb25eee80415",
-      "url": "https://www.cbsnews.com/news/new-apple-ceo-tim-cooks-email-to-employees",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q4",
-          "provider": "tavily",
-          "rank": 1,
-          "title": "New Apple CEO Tim Cook's email to employees - CBS News",
-          "returned_url": "https://www.cbsnews.com/news/new-apple-ceo-tim-cooks-email-to-employees"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_bae1c59c4b8cbc01ae38",
-      "url": "https://www.cnet.com/tech/tech-industry/tim-cooks-memo-to-apple-employees-about-jobs",
+      "source_id": "d_feef7f0777cc83612d1b",
+      "url": "https://www.redmondpie.com/apple-confirms-iphone-duo-display-cracking-issue-in-memo-to-its-retail-stores",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -511,16 +484,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 2,
-          "title": "Tim Cook's memo to Apple employees about Jobs - CNET",
-          "returned_url": "https://www.cnet.com/tech/tech-industry/tim-cooks-memo-to-apple-employees-about-jobs"
+          "title": "Apple Confirms iPhone Duo Display Cracking Issue In Memo To Its Retail Stores",
+          "returned_url": "https://www.redmondpie.com/apple-confirms-iphone-duo-display-cracking-issue-in-memo-to-its-retail-stores"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_defa1b2f72d4e5764d5a",
-      "url": "https://9to5mac.com/2026/08/31/read-tim-cooks-full-memo-to-apple-employees-on-his-last-day-as-ceo",
+      "source_id": "d_6109509658b63c64f8c5",
+      "url": "https://www.theapplepost.com/2026/10/31/73764/apple-sends-stores-repair-guidance-for-iphone-duo-display-cracking-issue",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -530,35 +503,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 3,
-          "title": "Read Tim Cook's full memo to Apple employees on his last day as CEO - 9to5Mac",
-          "returned_url": "https://9to5mac.com/2026/08/31/read-tim-cooks-full-memo-to-apple-employees-on-his-last-day-as-ceo"
+          "title": "Apple Issues iPhone Duo Display Cracking Repair Guidance | The Apple Post",
+          "returned_url": "https://www.theapplepost.com/2026/10/31/73764/apple-sends-stores-repair-guidance-for-iphone-duo-display-cracking-issue"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_d2b22fc5a198725de8eb",
-      "url": "https://www.scribd.com/document/10456123/Apple-CEO-Steve-Jobs-E-Mail-to-all-Apple-Employees",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q4",
-          "provider": "tavily",
-          "rank": 4,
-          "title": "Jobs' Medical Leave Announcement to Staff | PDF | Career & Growth | Lifestyle",
-          "returned_url": "https://www.scribd.com/document/10456123/Apple-CEO-Steve-Jobs-E-Mail-to-all-Apple-Employees"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_a0004062c4816c2085a4",
-      "url": "https://medium.com/write-the-1/this-single-email-cost-apple-google-and-adobe-415-million-scandal-a66b50513a6c",
+      "source_id": "d_41529e11b2105361d491",
+      "url": "https://shattered.io/rocket-report-new-glenn-january-2027-china-mini-falcon-heavy-2026",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -568,13 +522,13 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 5,
-          "title": "This single email cost Apple, Google, and Adobe $415 million (scandal)",
-          "returned_url": "https://medium.com/write-the-1/this-single-email-cost-apple-google-and-adobe-415-million-scandal-a66b50513a6c"
+          "title": "Rocket Report: New Glenn Slips to Jan. 2027 [2026]",
+          "returned_url": "https://shattered.io/rocket-report-new-glenn-january-2027-china-mini-falcon-heavy-2026"
         }
       ],
-      "mentions_company": true,
+      "mentions_company": false,
       "matches": []
     }
   ],
-  "recorded_at": "2026-11-08T01:54:09.401978Z"
+  "recorded_at": "2026-11-08T01:49:36.387685Z"
 }

@@ -11,10 +11,10 @@
       ]
     },
     "references": [
-      "docs/demo-pairs/nothing-memo/upload-reference.txt"
+      "docs/sample-documents/nothing-memo/upload-reference.txt"
     ],
     "negatives": [
-      "docs/demo-pairs/nothing-memo/negative-control.txt"
+      "docs/sample-documents/nothing-memo/negative-control.txt"
     ],
     "known_copies": [
       {
@@ -48,10 +48,10 @@
       "public_aliases": []
     },
     "references": [
-      "docs/demo-pairs/civicactions-policy/security-policy.md"
+      "docs/sample-documents/civicactions-policy/security-policy.md"
     ],
     "negatives": [
-      "docs/demo-pairs/civicactions-policy/negative-control.txt"
+      "docs/sample-documents/civicactions-policy/negative-control.txt"
     ],
     "known_copies": [
       {
@@ -81,10 +81,10 @@
       "public_aliases": []
     },
     "references": [
-      "docs/demo-pairs/gitlab-handbook/security-handbook.md"
+      "docs/sample-documents/gitlab-handbook/security-handbook.md"
     ],
     "negatives": [
-      "docs/demo-pairs/gitlab-handbook/negative-control.txt"
+      "docs/sample-documents/gitlab-handbook/negative-control.txt"
     ],
     "known_copies": [
       {
@@ -115,10 +115,10 @@
       "public_aliases": []
     },
     "references": [
-      "docs/demo-pairs/sourcegraph-handbook/security-incident-response.md"
+      "docs/sample-documents/sourcegraph-handbook/security-incident-response.md"
     ],
     "negatives": [
-      "docs/demo-pairs/sourcegraph-handbook/negative-control.txt"
+      "docs/sample-documents/sourcegraph-handbook/negative-control.txt"
     ],
     "known_copies": [
       {
@@ -157,10 +157,10 @@
       "public_aliases": []
     },
     "references": [
-      "docs/demo-pairs/posthog-handbook/security.md"
+      "docs/sample-documents/posthog-handbook/security.md"
     ],
     "negatives": [
-      "docs/demo-pairs/posthog-handbook/negative-control.txt"
+      "docs/sample-documents/posthog-handbook/negative-control.txt"
     ],
     "known_copies": [
       {
@@ -191,10 +191,10 @@
   },
   {
     "case_id": "northstar_planted",
-    "label": "planted_demo",
+    "label": "planted_case",
     "note": "SYNTHETIC: fictional company; the public copy was deliberately published by us as a gist on 2026-11-08. Proves the pipeline can find a known planted page, not that it found a leak. Recorded separately under docs/benchmark/planted/<date>/ (not part of preset scoring); re-check with: record --only northstar_planted --out ../docs/benchmark/planted/<date>.",
     "identity": {
-      "display_name": "Northstar Demo",
+      "display_name": "Northstar Labs",
       "official_domain": null,
       "public_aliases": []
     },
@@ -216,19 +216,19 @@
     ]
   },
   {
-    "case_id": "mock_apple_memo",
-    "label": "mock_leak_reconstruction",
-    "note": "SIMULATED: invented memo containing two short verbatim passages from Tim Cook's September 2021 staff memo about leaks (reported leak, quoted by several outlets). Not real company material.",
+    "case_id": "apple_memo",
+    "label": "leak_reconstruction",
+    "note": "WRITTEN BY US: memo containing two short verbatim passages from Tim Cook's September 2021 staff memo about leaks (reported leak, quoted by several outlets). Not real company material.",
     "identity": {
       "display_name": "Apple",
       "official_domain": "apple.com",
       "public_aliases": []
     },
     "references": [
-      "docs/demo-pairs/mock-leaks/apple_memo/mock-internal-memo.md"
+      "docs/sample-documents/memos/apple_memo/internal-memo.md"
     ],
     "negatives": [
-      "docs/demo-pairs/mock-leaks/apple_memo/negative-control.md"
+      "docs/sample-documents/memos/apple_memo/negative-control.md"
     ],
     "known_copies": [
       {

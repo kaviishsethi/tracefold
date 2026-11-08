@@ -27,7 +27,7 @@ Initial budget: at most 10 candidate leads per scan, one discovery pass per boun
 
 MVP check set: apparent embedded secrets, sensitive logging, explicit unsafe sharing/access configuration, and document content needing redaction for a stated audience. Broader injection/authentication analysis is later work after basic precision is measured. No runtime exploitation, dependency installation, autonomous shell, arbitrary browsing, or automatic patches are introduced by this plan.
 
-## Demonstration and evaluation
+## Walkthrough and evaluation
 
 Use a synthetic unpublished file with a visible sensitive-logging issue. Show no public match, then the source-backed potential-risk finding. Import a corrected version and show the same check no longer flags that pattern. Include a benign lookalike and an incomplete-context case; the latter should remain inconclusive. Use fake secret-like values only.
 

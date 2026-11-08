@@ -11,17 +11,17 @@ cd server
 uv sync
 export TRACEFOLD_DATA=$PWD/data TRACEFOLD_FIXTURES=$PWD/fixtures
 uv run tracefold init
-uv run tracefold add-workspace ws_demo --name "Demo" --root /path/to/a/local/folder
-APP_TOKEN=$(uv run tracefold add-client upload-app --workspace ws_demo)
-MCP_TOKEN=$(uv run tracefold add-client mcp-adapter --workspace ws_demo --caps submit,read,read_evidence,recheck,cancel)
-uv run tracefold add-manifest ws_demo sources_demo examples/manifest.fixture.json
+uv run tracefold add-workspace ws_main --name "Main" --root /path/to/a/local/folder
+APP_TOKEN=$(uv run tracefold add-client upload-app --workspace ws_main)
+MCP_TOKEN=$(uv run tracefold add-client mcp-adapter --workspace ws_main --caps submit,read,read_evidence,recheck,cancel)
+uv run tracefold add-manifest ws_main sources_main examples/manifest.fixture.json
 uv run tracefold serve --port 8787
 ```
 
 Then, in another shell, run the documented flow that exercises every endpoint:
 
 ```bash
-uv run python examples/demo_flow.py --workspace ws_demo --app-token "$APP_TOKEN" --mcp-token "$MCP_TOKEN" --workspace-root /path/to/a/local/folder
+uv run python examples/walkthrough_flow.py --workspace ws_main --app-token "$APP_TOKEN" --mcp-token "$MCP_TOKEN" --workspace-root /path/to/a/local/folder
 ```
 
 Tokens are printed once; only their SHA-256 hashes are stored. The server binds 127.0.0.1 and rejects
@@ -72,5 +72,5 @@ tracefold/
   policy/     tokens, grants, workspace authorization
   remediation/ approval-gated takedown requests and AWS key disabling (SigV4 via the gateway)
 fixtures/     synthetic public/private test material
-examples/     demo flow and example manifest
+examples/     walkthrough flow and example manifest
 ```

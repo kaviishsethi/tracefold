@@ -6,7 +6,7 @@ Decision record: November 7, 2026. Authors of the project: Kaviish Sethi and Aha
 
 **Pitch:** Review existing company material through an upload platform, and catch new risks while working through an MCP integration. Both use one private scan engine for public-exposure matching, preventive risk review, and evidence-backed next steps.
 
-The first user is a security or platform engineer at a small software business. They have a roadmap, proposal, internal engineering document, or code folder and want to know whether distinctive passages appear on public pages. The product has two first-class experiences: an on-demand upload platform for existing material and an MCP integration for developers working in a connected workspace. Both report explicit scan coverage. Continuous whole-web monitoring is a future hypothesis, not the demo promise.
+The first user is a security or platform engineer at a small software business. They have a roadmap, proposal, internal engineering document, or code folder and want to know whether distinctive passages appear on public pages. The product has two first-class experiences: an on-demand upload platform for existing material and an MCP integration for developers working in a connected workspace. Both report explicit scan coverage. Continuous whole-web monitoring is a future hypothesis, not the walkthrough promise.
 
 The product has four useful outputs:
 
@@ -19,11 +19,11 @@ The product does not establish who published the content, whether publication wa
 
 ## 2. Why the original direction changed
 
-Spillway combined a public fingerprint index, hash-prefix lookup, a hash-only vault, verification, and egress auditing. Its recorded experiments demonstrated live ingestion and matching for a planted Gist, but did not establish reliable discovery for arbitrary companies. More search results often meant tutorials and example code, not attributable company exposures.
+Spillway combined a public fingerprint index, hash-prefix lookup, a hash-only vault, verification, and egress auditing. Its recorded experiments showed live ingestion and matching for a planted Gist, but did not establish reliable discovery for arbitrary companies. More search results often meant tutorials and example code, not attributable company exposures.
 
 The recorded broad sweep reported 55 provider-pattern credential candidates across 21 pages, with all of those candidates attributed to Gists in its aggregate report. These were format judgments, not active-credential tests or verified company incidents. The additional Pastebin links were detector hits. Individual GitHub accounts could not be presented as company leaks without separate attribution.
 
-Tracefold changes the starting point from “enter a company and we will find its leaks” to “compare this private material with these public sources.” The user explicitly accepts a retrospective case study and a known source set for the demonstration. The result must still be calculated by the working system; it must not be a hardcoded finding.
+Tracefold changes the starting point from “enter a company and we will find its leaks” to “compare this private material with these public sources.” The user explicitly accepts a retrospective case study and a known source set for the walkthrough. The result must still be calculated by the working system; it must not be a hardcoded finding.
 
 This repo starts clean. No encrypted public bucket service, decoys, manual API-key vault, mocked DNS verification, marketing/pricing pages, cloud-model verification, or broad breach-news dashboard is required for the first build. The old frozen contracts belong to the old repository.
 
@@ -57,7 +57,7 @@ This diagram is the current product architecture. The [original Excalidraw diagr
 
 For the hackathon, the upload UI, scan server, MCP server, private files and Ollama run on one machine, or inside the company's trusted environment. “Upload” means sending the file to that scan server. A vendor-hosted upload server would receive the private material and requires a different, explicitly disclosed privacy claim. A future hosted control dashboard can handle setup and status without automatically receiving document contents.
 
-MCP is also a data boundary: tool results returned to a cloud-backed coding assistant may be sent to its model provider. Running the MCP server locally does not prevent this. The strict-private demo must use a local-model host and inspect tool inputs/outputs. A future cloud-host mode must explicitly disclose what findings, filenames or snippets leave, default to minimal redacted results, and must not claim that private material never reaches a hosted model. Redaction alone is not proof of privacy.
+MCP is also a data boundary: tool results returned to a cloud-backed coding assistant may be sent to its model provider. Running the MCP server locally does not prevent this. The strict-private walkthrough must use a local-model host and inspect tool inputs/outputs. A future cloud-host mode must explicitly disclose what findings, filenames or snippets leave, default to minimal redacted results, and must not claim that private material never reaches a hosted model. Redaction alone is not proof of privacy.
 
 ### Upload platform and connectors
 
@@ -74,7 +74,7 @@ Proposed tools (design names, not frozen implemented interfaces):
 - `explain_finding`: provide supporting evidence, conditions, uncertainty and a suggested correction under the host's data policy.
 - `recheck_fix`: rescan the current file version for the selected issue and report whether it remains, is no longer detected, or could not be checked.
 
-Configure the assistant's working instructions to call checks during work and before reporting completion. This is the required MCP interaction for the demo. It is not a guarantee that every edit is automatically scanned. An optional local watcher/editor hook can trigger checks on saved changes and support editor alerts; it is not required to define the MCP product experience. Do not claim proactive host notifications without demonstrating support in that host.
+Configure the assistant's working instructions to call checks during work and before reporting completion. This is the required MCP interaction for the walkthrough. It is not a guarantee that every edit is automatically scanned. An optional local watcher/editor hook can trigger checks on saved changes and support editor alerts; it is not required to define the MCP product experience. Do not claim proactive host notifications without showing support in that host.
 
 The assistant proposes a patch and applies it only within the user's authorized editing workflow. Tracefold's scanner remains read-only. Store input hashes/baseline revisions with scan results; older in-flight scans must not clear findings for a newer revision. Rechecking a local fix does not close a separately observed public exposure. Share stable finding IDs and status between the two surfaces.
 
@@ -96,10 +96,10 @@ The network-enabled worker receives a public source manifest: approved domains/U
 
 There are two source modes:
 
-- **Seeded mode, required:** fetch known public URLs. Reliable for the controlled demo. This proves retrieval and matching, not independent discovery.
+- **Seeded mode, required:** fetch known public URLs. Reliable for the controlled walkthrough. This proves retrieval and matching, not independent discovery.
 - **Discovery mode, optional:** search selected domains using public company information and predeclared generic terms, then fetch candidate URLs. Show whether a URL was seeded or discovered.
 
-Build the public snapshot beforehand or refresh it at scan time; both are valid. The demo should show at least one fresh retrieval and distinguish it from cached evidence. A failed refresh leaves a stale observation, not proof that content remains live or has been removed.
+Build the public snapshot beforehand or refresh it at scan time; both are valid. The walkthrough should show at least one fresh retrieval and distinguish it from cached evidence. A failed refresh leaves a stale observation, not proof that content remains live or has been removed.
 
 ### Separation that makes the privacy claim plausible
 
@@ -111,7 +111,7 @@ Use a downloaded Ollama model through a loopback endpoint with cloud features di
 
 **What may leave in strict-private mode:** approved public queries, public URLs, provider authentication, scoped connector resource identifiers, normal network metadata, and request timing. Selected URLs and connector resource identifiers may reveal which material interests the user. MCP output follows the separate host policy above; cloud-host mode cannot inherit the strict-private claim. **What must not leave:** private document text, identifying filenames, local snippets, embeddings, fingerprints, or document-derived search terms. Don't claim “nothing leaves the device.”
 
-Rewording or obfuscating a sensitive passage is not a privacy guarantee: its meaning may remain identifiable. The demo avoids that problem by defining retrieval inputs independently of private content. An exact-term blocking test and ledger can support inspection, but neither proves universal resistance to exfiltration.
+Rewording or obfuscating a sensitive passage is not a privacy guarantee: its meaning may remain identifiable. The walkthrough avoids that problem by defining retrieval inputs independently of private content. An exact-term blocking test and ledger can support inspection, but neither proves universal resistance to exfiltration.
 
 ## 4. How detection works, and why
 
@@ -157,7 +157,7 @@ The [0sec source review and adaptation](research/0sec-risk-review.md) specifies 
 
 The reference records pinned upstream sources, a proposed finding schema, evaluation cases and bounded model-call/context budgets. This is a design adaptation, not an installed dependency or tested implementation.
 
-### Why the proposed positive and negative demo should work
+### Why the proposed positive and negative walkthrough should work
 
 If the local reference contains a distinctive passage also returned from a public source, normalization plus span matching can establish the overlap. If a second document contains no qualifying overlap in that same snapshot, the result can correctly report no match **within that snapshot**. A same-topic negative checks that the system isn't simply reporting topical similarity.
 
@@ -169,7 +169,7 @@ This reasoning depends on successful extraction, source coverage, and calibrated
 
 1. **Choose sources:** show URLs/domains, seeded versus discovery mode, limits, and expected external requests.
 2. **Import reference:** document or folder; local extraction preview and unsupported-file errors.
-3. **Check:** show extraction, retrieval, indexing, matching, and local analysis as real steps. No simulated progress disguised as execution.
+3. **Check:** show extraction, retrieval, indexing, matching, and local analysis as real steps. No fake progress disguised as execution.
 4. **Review:** separate public-exposure evidence from potential risks in the local files. Show source citations, side-by-side spans, coverage and freshness for matches; show local locations, conditions, uncertainty and fixes for preventive findings. Offer the local review even when no public match exists.
 5. **Act:** a suggested checklist and recheck button. The system never silently sends takedown notices, rotates credentials, or marks work complete.
 6. **Inspect privacy:** show outbound destinations, approved query/URL payloads, purpose, timing, and masked authentication.
@@ -190,7 +190,7 @@ Actions depend on context: restrict a public document, remove an exposed copy, c
 
 ## 6. Case-study decision and provenance
 
-**CrowdSec is the user's selected fallback. It is not yet a validated demo dataset.** Its [September 18 incident analysis](https://www.crowdsec.net/blog/tanstack-supply-chain-attack-analysis) confirms copied private repositories and a later public archive. The follow-up report also identifies personal information in the archive. Its intentionally open-source engine is not the private-code exposure.
+**CrowdSec is the user's selected fallback. It is not yet a validated walkthrough dataset.** Its [September 18 incident analysis](https://www.crowdsec.net/blog/tanstack-supply-chain-attack-analysis) confirms copied private repositories and a later public archive. The follow-up report also identifies personal information in the archive. Its intentionally open-source engine is not the private-code exposure.
 
 The bounded follow-up search found no stronger alternative satisfying all four gates: smaller company, attributable unintended exposure, currently accessible files, and a verified reference/public-copy pair. The [research record](research/case-study-research.json) preserves the decision and sources.
 
@@ -199,14 +199,14 @@ Alternatives considered:
 - Google and Anthropic: explicitly rejected by the user as obvious giant-company examples.
 - Rabbit: confirmed incident, but no authenticated accessible sample pair verified; do not conflate distinct incidents.
 - TeleMessage: accessible attributable source, but company-published open source does not establish unintended private-code exposure.
-- Geedge: documented exposure; checked research artifacts contain measurements rather than a verified original-file pair for this demo.
+- Geedge: documented exposure; checked research artifacts contain measurements rather than a verified original-file pair for this walkthrough.
 - Proton memo: company-published material could exercise matching, but authorized publication must not be called a leak.
 
 Before using real files, record the attribution evidence, original public location, acquisition time, stable content hash, observed publication history where available, and the exact public counterpart. Review a small non-personal sample; never test credentials. Avoid large archives, user records, and speculative company attribution. A mirror's description alone does not authenticate its contents.
 
-If no usable CrowdSec pair is verified before the demo freeze, present the confirmed incident as motivation and use an explicitly labeled controlled reconstruction. Do not imply that synthetic files are CrowdSec material. A permitted retrospective sample proves matching against a known exposure, not discovery of a previously unknown customer incident.
+If no usable CrowdSec pair is verified before the walkthrough freeze, present the confirmed incident as motivation and use an explicitly labeled controlled reconstruction. Do not imply that synthetic files are CrowdSec material. A permitted retrospective sample proves matching against a known exposure, not discovery of a previously unknown customer incident.
 
-## 7. Three-minute demonstration
+## 7. Three-minute walkthrough
 
 - **0:00–0:20 — Problem and two entry points:** show the upload platform and coding assistant connected to the same trusted scan engine. Label the dataset retrospective or controlled.
 - **0:20–1:10 — Existing material:** upload the reference, live-refresh one monitored public page, and show computed matching spans, URL, scope and retrieval time.
@@ -214,7 +214,7 @@ If no usable CrowdSec pair is verified before the demo freeze, present the confi
 - **2:10–2:40 — Fix and recheck:** apply the reviewed correction through the editor workflow and call `recheck_fix`. Show the updated finding in the platform. The earlier public-copy finding remains open.
 - **2:40–3:00 — Privacy and buyer:** show outbound requests and the local-model MCP host configuration. Name the initial customer, source coverage, and any unimplemented connectors.
 
-Optional memorable beat: publish two controlled copies, remove one, and demonstrate that the remaining occurrence prevents closing the incident. This is a stretch, not a requirement to delay the basic flow.
+Optional memorable beat: publish two controlled copies, remove one, and show that the remaining occurrence prevents closing the incident. This is a stretch, not a requirement to delay the basic flow.
 
 Freeze a reproducible public snapshot for a Wi-Fi-off fallback and label replayed evidence with its original timestamp. Record one backup video after the live path works. Neither should masquerade as fresh retrieval.
 
@@ -222,14 +222,14 @@ Freeze a reproducible public snapshot for a Wi-Fi-off fallback and label replaye
 
 Track descriptions checked November 7 against the [official HACK1984 page](https://claudeneu.com/hackathon/). These assessments are our interpretation, not eligibility approval or predicted judging outcomes. Confirm whether multiple-track entry is allowed with organizers.
 
-| Track | Fit | What our demo must demonstrate |
+| Track | Fit | What our walkthrough must show |
 |---|---|---|
 | Privacy-First | Primary; strongest fit | Local parsing, matching, and model inference; explicit outbound boundary; inspectable requests; no hosted-model fallback. |
 | Surge — Tavily / Exa | Strong if retrieval and verification are central | Real provider retrieval, citations, freshness, and a bounded verification agent choosing from approved public source IDs. A static index alone is a weaker showing. |
 | Most Startup-able | Plausible, unvalidated | A named buyer segment, useful outcome, realistic source coverage, simple onboarding, and a reason to pay. Do not invent customers, revenue, or pricing validation. |
 | Signal-to-Dose — Within3 | Not targeted | This is a life-sciences launch-intelligence track; the current product does not address that workflow. |
 
-The two experiences connect periodic company reviews with everyday development. MCP is an access surface, not by itself evidence of privacy or agent quality; demonstrate a real scan/fix/recheck using the same engine.
+The two experiences connect periodic company reviews with everyday development. MCP is an access surface, not by itself evidence of privacy or agent quality; show a real scan/fix/recheck using the same engine.
 
 The preventive review adds practical value when monitored sources yield no match and strengthens the usefulness story for Privacy-First and Most Startup-able. It does not itself establish Surge fit; that still depends on the public retrieval workflow.
 
@@ -260,11 +260,11 @@ Acceptance criteria: positive evidence appears; negative result names coverage; 
 
 Assignments are a proposal for Kaviish and Ahaan to agree on, not a claim that either has accepted a task.
 
-1. **Agree the demo pair and source manifest.** Kaviish: retrieval/provenance. Ahaan: input/results flow. Decide fixture labels before styling.
+1. **Agree the walkthrough pair and source manifest.** Kaviish: retrieval/provenance. Ahaan: input/results flow. Decide fixture labels before styling.
 2. **Build a CLI vertical slice.** DOCX/text extraction, one public retrieval, local matching, evidence JSON. Start with a tiny source set.
 3. **Enforce the boundary.** Separate worker, gateway, request schema, local model configuration, bounded storage, failure states.
 4. **Add local analysis.** Match explanations constrained to supplied evidence, plus a separate preventive review of private files with validated local references, bounded checks, uncertainty, and suggested fixes. Include the no-public-match path. Pin model after checking available RAM/disk and a small timing pilot.
-5. **Wire both experiences.** Upload platform: import → sources → scan → evidence → next steps → egress. MCP: workspace authorization → change scan → findings → explanation → recheck. Use one versioned findings store. Demonstrate with a local-model host; real state changes, no fake results.
+5. **Wire both experiences.** Upload platform: import → sources → scan → evidence → next steps → egress. MCP: workspace authorization → change scan → findings → explanation → recheck. Use one versioned findings store. Show it with a local-model host; real state changes, no fake results.
 6. **Add the first connector if the core works.** GitHub read-only import with explicit scope, version tracking and revocation. Docs/sites, watcher hooks, scheduling, CVE remediation and takedown submission are later increments.
 7. **Evaluate and rehearse.** Run the small frozen set once, fix meaningful failures, record backup. Avoid repeatedly broadening searches instead of validating the core.
 
@@ -272,9 +272,9 @@ Suggested stack: Python 3.11+ and FastAPI for local backend/worker; SQLite for p
 
 ### Follow-on company workflows
 
-The broader product can connect company sources, review existing material, and check new versions continuously. Known-vulnerability checks should resolve dependency manifests/lockfiles to exact package versions and advisory evidence, then assess applicability and propose testable updates. An LLM search for recent CVEs alone is insufficient. This is follow-on scope, not a current capability or required demo beat.
+The broader product can connect company sources, review existing material, and check new versions continuously. Known-vulnerability checks should resolve dependency manifests/lockfiles to exact package versions and advisory evidence, then assess applicability and propose testable updates. An LLM search for recent CVEs alone is insufficient. This is follow-on scope, not a current capability or required walkthrough beat.
 
-For public exposures, prepare a host-specific removal request and supporting evidence. External submission requires the company's explicit authorization policy and is outside the first demo. Track drafted, approved, submitted and observed-removed separately. Likewise, patches or dependency updates remain proposed until applied and checked; neither a fix nor a takedown guarantees future breach prevention.
+For public exposures, prepare a host-specific removal request and supporting evidence. External submission requires the company's explicit authorization policy and is outside the first walkthrough. Track drafted, approved, submitted and observed-removed separately. Likewise, patches or dependency updates remain proposed until applied and checked; neither a fix nor a takedown guarantees future breach prevention.
 
 ## 11. Storage, cost, and scope limits
 
@@ -290,4 +290,4 @@ This planning repository should stay under 2 MB, excluding Git internals, with n
 - [Exa official contents reference](https://github.com/exa-labs/agent-skills/blob/main/skills/build-with-exa/references/contents.md): retrieving known public pages and freshness controls. Check the current request schema before implementation.
 - [Tavily extraction guide](https://help.tavily.com/articles/3363168593-extracting-web-content-using-tavily): public content extraction. Provider extraction is not evidence of whole-web completeness.
 - [HACK1984](https://claudeneu.com/hackathon/): track descriptions.
-- [CrowdSec incident analysis](https://www.crowdsec.net/blog/tanstack-supply-chain-attack-analysis): fallback incident provenance, not a supplied demo dataset.
+- [CrowdSec incident analysis](https://www.crowdsec.net/blog/tanstack-supply-chain-attack-analysis): fallback incident provenance, not a supplied walkthrough dataset.

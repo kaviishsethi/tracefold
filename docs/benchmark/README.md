@@ -54,28 +54,28 @@ What the numbers say:
 - **Discovery found copies nobody listed:** the Sourcegraph Notion page, and earlier the CivicActions GitHub copy.
 - **The noise metric is approximate** (pages that never mention the display name, alias or domain).
 
-## Mock leak cases: real companies, simulated internal docs (November 8, 2026 UTC)
+## Composed memo cases: real companies, internal-style docs written by us (November 8, 2026 UTC)
 
 Invented internal-style documents for real companies, each containing short (≤ 15 words) passages that are publicly
-available, with sources in `docs/demo-pairs/mock-leaks/*/README.md`. They are simulations, never real company material.
+available, with sources in `docs/sample-documents/memos/*/README.md`. They are written by us, never real company material.
 Source pages were chosen by an independent web search before any discovery run.
 
-> **November 8, 2026:** only the Apple memo mock is still kept (`docs/demo-pairs/mock-leaks/apple_memo`, case
-> `mock_apple_memo`). The spec-sheet mocks and the Google and Samsung memo mocks never matched, so their files and cases
+> **November 8, 2026:** only the Apple memo is still kept (`docs/sample-documents/memos/apple_memo`, case
+> `apple_memo`). The spec sheets and the Google and Samsung memos never matched, so their files and cases
 > were removed; the results below and the `v3/` records for them are kept as history. The GSA TTS pair (0 matches in every run) and the
 > Twitch discovery-only case (no upload, so it cannot match) were removed the same day.
 
-**Spec-sheet mocks (Apple iPhone 18 Pro, Samsung Galaxy S27 Ultra, Google Pixel 11): 0 matches in 12 scans.** Each
+**Spec sheets (Apple iPhone 18 Pro, Samsung Galaxy S27 Ultra, Google Pixel 11): 0 matches in 12 scans.** Each
 quoted one outlet's own prose. With the product name as alias, the new `product_leaks` preset returned exactly on-topic
 leak coverage (MacRumors, Macworld, CNET, The Verge, Android Central, Android Authority; 0–5% noise), but other outlets'
 articles, which use different words. Verbatim matching can only fire on text that is actually repeated.
 
-**Memo mocks: built the realistic way.** A real leaked document spreads as its own sentences quoted across sites, so these
-mocks use passages that ≥ 2 independent outlets quote word for word (found by comparing 13-word sequences across pages):
+**Memos: built the realistic way.** A real leaked document spreads as its own sentences quoted across sites, so these
+memos use passages that ≥ 2 independent outlets quote word for word (found by comparing 13-word sequences across pages):
 
 | Case | Memo | Result |
 |---|---|---|
-| Apple | Tim Cook's 2021 memo on leakers | **Found.** `leak_news` (Exa) returned 9to5Mac's article and `leaked_email` (Exa) returned The Verge's original report, both pages not on the known list; both mock passages matched (13–14 tokens) |
+| Apple | Tim Cook's 2021 memo on leakers | **Found.** `leak_news` (Exa) returned 9to5Mac's article and `leaked_email` (Exa) returned The Verge's original report, both pages not on the known list; both quoted passages matched (13–14 tokens) |
 | Google | Pichai's 2024 goals memo | Not found. Search returned other leaked Google memos (layoffs, hiring slowdown, diversity goals) |
 | Samsung | Jun Young-hyun's 2024 chip memo | Not found. Search returned other Samsung leak stories (ChatGPT ban memo, Q2 staff memo, trade-secret cases) |
 
@@ -86,10 +86,10 @@ The limit this shows: for companies with many leaks, queries built only from the
 leak coverage, not the specific leak. Narrowing further would need words from the document itself, which the privacy
 design forbids sending. Product names as aliases and date windows are the allowed levers.
 
-## Planted demo copy (Northstar Demo)
+## Planted public copy (Northstar Labs)
 
-A synthetic page for the fictional "Northstar Demo" (`server/fixtures/northstar/northstar-demo-public-copy.md`, labelled
-as demo material) was published on 2026-11-08 as
+A synthetic page for the fictional "Northstar Labs" (`server/fixtures/northstar/northstar-public-copy.md`, labelled
+as a fictional company) was published on 2026-11-08 as
 <https://gist.github.com/kaviishsethi/a899f787988efa1f16cbb1fdb6303889>. A run minutes later
 ([planted/2026-11-08/](planted/2026-11-08/)) did **not** return it: providers had not indexed it yet. Re-check later
 with:

@@ -1,4 +1,4 @@
-"""Idempotently provision all demo-company identities and query plans; no provider requests or copied datasets."""
+"""Idempotently provision all benchmark-company identities and query plans; no provider requests or copied datasets."""
 import json
 import hashlib
 from pathlib import Path
@@ -13,15 +13,15 @@ SERVER = Path(__file__).resolve().parent.parent
 
 def configure():
     load_env_file(SERVER / '.env')
-    data = SERVER / 'data/discovery-demo'
-    state = json.loads((data / 'discovery_demo.json').read_text())
+    data = SERVER / 'data/discovery'
+    state = json.loads((data / 'discovery_state.json').read_text())
     settings = Settings(data_dir=data)
     settings.start_runner = False
     settings.allowed_hosts = (*settings.allowed_hosts, 'testserver')
     engine = Engine(settings)
     with TestClient(create_app(engine)) as c:
         h = {'Authorization': 'Bearer ' + state['web_token']}
-        b = '/v1/workspaces/ws_demo'
+        b = '/v1/workspaces/ws_main'
         profiles = c.get(b + '/company-profiles', headers=h).raise_for_status().json()['items']
         plans = c.get(b + '/query-plans?limit=100', headers=h).raise_for_status().json()['items']
         hints = {}
@@ -33,7 +33,7 @@ def configure():
                 profiles.append(profile)
             presets = (['leak_news', 'leaked_email'] if '_memo' in case['case_id'] else
                        ['leak_news', 'leak_news_alias'] if case['case_id'] == 'nothing' else
-                       ['product_leaks'] if case['case_id'].startswith('mock_') else ['security_docs', 'policy_copies'])
+                       ['security_docs', 'policy_copies'])
             for reference in case['references']:
                 path = SERVER.parent / reference
                 if path.is_file():
@@ -48,7 +48,7 @@ def configure():
                 }).raise_for_status().json()
                 plans.append(plan)
             print(case['case_id'], identity['display_name'], 'ready', plan['query_plan_id'])
-        (data / 'input_identity_hints.json').write_text(json.dumps({'ws_demo': hints}, indent=2) + '\n')
+        (data / 'input_identity_hints.json').write_text(json.dumps({'ws_main': hints}, indent=2) + '\n')
 
 if __name__ == '__main__':
     configure()

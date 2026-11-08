@@ -4,7 +4,7 @@ Approves a public company identity, creates a fixed query plan, and runs one rea
 isolated worker: Exa/Tavily search → URL validation → extraction → local matching. Uploads are compared locally only.
 Nothing is injected: whatever the searches actually return is what gets fetched and reported, including zero results.
 
-    cd server && uv run python examples/discovery_rehearsal.py --out ../docs/demo-pairs/nothing-memo/discovery-rehearsal.json
+    cd server && uv run python examples/discovery_rehearsal.py --out ../docs/sample-documents/nothing-memo/discovery-rehearsal.json
 
 Other companies: --name, --domain, --alias (≤2), --presets, --providers, --upload (local files, repeatable) and an
 optional --target URL to report whether search returned it. Defaults reproduce the Nothing run 2.
@@ -22,7 +22,7 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 SERVER = Path(__file__).resolve().parent.parent
-PAIR = SERVER.parent / "docs" / "demo-pairs" / "nothing-memo"
+PAIR = SERVER.parent / "docs" / "sample-documents" / "nothing-memo"
 WS = "ws_discovery_rehearsal"
 
 IDENTITY = {"display_name": "Nothing Technology", "official_domain": "nothing.tech", "public_aliases": ["Nothing Phone"],

@@ -1,6 +1,6 @@
 {
-  "case_id": "mock_apple_memo",
-  "label": "mock_leak_reconstruction",
+  "case_id": "apple_memo",
+  "label": "leak_reconstruction",
   "pack": "leak_watch",
   "template_version": "company_queries_v3",
   "searches": [
@@ -155,12 +155,12 @@
       "mentions_company": true,
       "matches": [
         {
-          "upload": "mock-internal-memo.md",
+          "upload": "internal-memo.md",
           "role": "reference",
           "tokens": 14
         },
         {
-          "upload": "mock-internal-memo.md",
+          "upload": "internal-memo.md",
           "role": "reference",
           "tokens": 13
         }

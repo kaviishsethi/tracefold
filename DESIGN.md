@@ -90,7 +90,7 @@ DM Sans supplies headings, controls, and metadata. System monospace supplies sou
 
 ## Layout
 
-A 64px top bar holds brand, workspace, navigation, and demo label. Main content is capped at 1216px with 48px side padding and 36px top padding. Findings are open horizontal rows; expanded evidence is indented 132px on wide screens. Two source columns share a thin divider and 32px gap. Scan setup is a single column capped at 680px, with checks/privacy behind a disclosure.
+A 64px top bar holds brand, workspace, navigation, and environment label. Main content is capped at 1216px with 48px side padding and 36px top padding. Findings are open horizontal rows; expanded evidence is indented 132px on wide screens. Two source columns share a thin divider and 32px gap. Scan setup is a single column capped at 680px, with checks/privacy behind a disclosure.
 
 At 1000px, the workspace label disappears, page side padding becomes 32px, and evidence loses its indent. At 600px, navigation wraps below the brand, page side padding becomes 20px, and sources stack private before public with a horizontal rule and 24px gap. Tables and code scroll when needed.
 

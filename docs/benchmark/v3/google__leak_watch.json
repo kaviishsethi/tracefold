@@ -1,6 +1,6 @@
 {
-  "case_id": "mock_google_memo",
-  "label": "mock_leak_reconstruction",
+  "case_id": "google",
+  "label": "leak_reconstruction",
   "pack": "leak_watch",
   "template_version": "company_queries_v3",
   "searches": [
@@ -66,7 +66,7 @@
       "query_id": "q3",
       "template_id": "leak_news_alias",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Alphabet",
+      "query": "news article quoting a leaked internal memo from Pixel",
       "num_results": 5,
       "include_domains": null,
       "include_domains_mode": null,
@@ -95,7 +95,7 @@
       "query_id": "q4",
       "template_id": "leak_news_alias",
       "provider": "tavily",
-      "query": "\"Alphabet\" leaked internal memo",
+      "query": "\"Pixel\" leaked internal memo",
       "num_results": 5,
       "include_domains": null,
       "include_domains_mode": null,
@@ -123,9 +123,9 @@
   ],
   "omitted_presets": [],
   "scan_state": "partial",
-  "elapsed_seconds": 6.1,
-  "provider_requests": 23,
-  "response_bytes": 844970,
+  "elapsed_seconds": 10.7,
+  "provider_requests": 24,
+  "response_bytes": 390400,
   "provider_queries": [
     {
       "query_id": "q1",
@@ -136,7 +136,7 @@
       "error": null,
       "returned": 5,
       "truncated": false,
-      "searched_at": "2026-11-08T01:53:29.875721Z"
+      "searched_at": "2026-11-08T01:50:08.693562Z"
     },
     {
       "query_id": "q2",
@@ -147,29 +147,29 @@
       "error": null,
       "returned": 5,
       "truncated": false,
-      "searched_at": "2026-11-08T01:53:29.841975Z"
+      "searched_at": "2026-11-08T01:50:10.523403Z"
     },
     {
       "query_id": "q3",
       "template_id": "leak_news_alias",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Alphabet",
+      "query": "news article quoting a leaked internal memo from Pixel",
       "status": "ok",
       "error": null,
       "returned": 5,
       "truncated": false,
-      "searched_at": "2026-11-08T01:53:31.155233Z"
+      "searched_at": "2026-11-08T01:50:10.327062Z"
     },
     {
       "query_id": "q4",
       "template_id": "leak_news_alias",
       "provider": "tavily",
-      "query": "\"Alphabet\" leaked internal memo",
+      "query": "\"Pixel\" leaked internal memo",
       "status": "ok",
       "error": null,
       "returned": 5,
       "truncated": false,
-      "searched_at": "2026-11-08T01:53:33.465808Z"
+      "searched_at": "2026-11-08T01:50:13.265462Z"
     }
   ],
   "sources": [
@@ -185,13 +185,6 @@
           "query_id": "q1",
           "provider": "exa",
           "rank": 1,
-          "title": "Google Offers Buyouts to US-Based Employees on Marketing, Comms Teams  - Business Insider",
-          "returned_url": "https://www.businessinsider.com/google-return-office-buyouts-employees-leaked-memo-2025-6"
-        },
-        {
-          "query_id": "q3",
-          "provider": "exa",
-          "rank": 5,
           "title": "Google Offers Buyouts to US-Based Employees on Marketing, Comms Teams  - Business Insider",
           "returned_url": "https://www.businessinsider.com/google-return-office-buyouts-employees-leaked-memo-2025-6"
         }
@@ -327,6 +320,13 @@
           "rank": 3,
           "title": "Proton apologizes to community after internal memo shows force behind proposed AI use in building its privacy products | TechRadar",
           "returned_url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Proton apologizes to community after internal memo shows force behind proposed AI use in building its privacy products | TechRadar",
+          "returned_url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products"
         }
       ],
       "mentions_company": true,
@@ -371,8 +371,8 @@
       "matches": []
     },
     {
-      "source_id": "d_21b2eab486819a3633f5",
-      "url": "https://www.businessinsider.com/google-bard-chatbot-googlers-sundar-pichai-2023-2",
+      "source_id": "d_c61644f81e0c0819a338",
+      "url": "https://www.androidpolice.com/internal-memo-suggests-google-wants-to-cut-back-on-its-combined-android-and-pixel-division/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -382,16 +382,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 1,
-          "title": "Googlers Need to Spend 2 to 4 Hours Helping Improve Bard Chatbot - Business Insider",
-          "returned_url": "https://www.businessinsider.com/google-bard-chatbot-googlers-sundar-pichai-2023-2"
+          "title": "Google is giving US hardware and software staff the choice to bow out",
+          "returned_url": "https://www.androidpolice.com/internal-memo-suggests-google-wants-to-cut-back-on-its-combined-android-and-pixel-division/"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_549d2239fb8321601b1c",
-      "url": "https://www.cnbc.com/2023/04/20/alphabet-merges-ai-focused-groups-deepmind-and-google-research.html",
+      "source_id": "d_471614df7318f3099f96",
+      "url": "https://www.techspot.com/news/106592-google-offers-voluntary-exit-plan-severance-pay-pixel.html",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -401,16 +401,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 2,
-          "title": "Alphabet merges A.I.-focused groups DeepMind and Google Brain",
-          "returned_url": "https://www.cnbc.com/2023/04/20/alphabet-merges-ai-focused-groups-deepmind-and-google-research.html"
+          "title": "Google offers \"voluntary exit\" plan with severance pay for Pixel and Android employees | TechSpot",
+          "returned_url": "https://www.techspot.com/news/106592-google-offers-voluntary-exit-plan-severance-pay-pixel.html"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_07a8ae3db1e2cfc69220",
-      "url": "https://www.theverge.com/2022/7/12/23206113/google-ceo-sundar-pichai-memo-hiring-slowdown-2022",
+      "source_id": "d_afae0f7cffbd7978ae6c",
+      "url": "https://www.businesstoday.in/technology/news/story/google-is-asking-some-employees-from-pixel-android-chrome-teams-to-leave-voluntarily-heres-why-462688-2025-01-31",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -420,16 +420,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 3,
-          "title": "Read the memo Google\u2019s CEO sent employees about a hiring slowdown | The Verge",
-          "returned_url": "https://www.theverge.com/2022/7/12/23206113/google-ceo-sundar-pichai-memo-hiring-slowdown-2022"
+          "title": "Google is asking some employees from Pixel, Android, Chrome teams to leave voluntarily; here's why - BusinessToday",
+          "returned_url": "https://www.businesstoday.in/technology/news/story/google-is-asking-some-employees-from-pixel-android-chrome-teams-to-leave-voluntarily-heres-why-462688-2025-01-31"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_b58b5232cf227921ee69",
-      "url": "https://www.theverge.com/2024/2/28/24085445/google-ceo-gemini-ai-diversity-scandal-employee-memo",
+      "source_id": "d_4183ae33fa678b74adb0",
+      "url": "https://www.theverge.com/2020/8/6/21356760/foldable-google-pixel-q4-2021-leaked-internal-document-5-5a-4a-5g",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -439,35 +439,35 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 4,
-          "title": "Google CEO: Gemini AI photo diversity scandal \u2018offended our users\u2019 | The Verge",
-          "returned_url": "https://www.theverge.com/2024/2/28/24085445/google-ceo-gemini-ai-diversity-scandal-employee-memo"
+          "title": "Google plans to release a foldable Pixel in late 2021, according to leaked document | The Verge",
+          "returned_url": "https://www.theverge.com/2020/8/6/21356760/foldable-google-pixel-q4-2021-leaked-internal-document-5-5a-4a-5g"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_1ec36edf04a95128a1a3",
-      "url": "https://staging.elkford.ca/whats-google-really-thinking-decoding-the-algorithm-culture-and-future-of-the-worlds-search-giant",
+      "source_id": "d_50bfa9a941a36d7b0cf9",
+      "url": "https://www.sfchronicle.com/tech/article/google-voluntary-exit-program-buyouts-20066581.php",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
       "truncated": false,
       "origins": [
         {
-          "query_id": "q4",
-          "provider": "tavily",
-          "rank": 1,
-          "title": "What's Google Really Thinking? Decoding the Algorithm, Culture, and Future of the World's Search Giant - District of Elkford",
-          "returned_url": "https://staging.elkford.ca/whats-google-really-thinking-decoding-the-algorithm-culture-and-future-of-the-worlds-search-giant"
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 5,
+          "title": "Google offers buyouts to employees not \u2018deeply committed\u2019",
+          "returned_url": "https://www.sfchronicle.com/tech/article/google-voluntary-exit-program-buyouts-20066581.php"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_2087741922d7dd10b9cc",
-      "url": "https://penchan.co/en/market/ai/google/google-ai-capex",
+      "source_id": "d_a48e48595703d9af44f7",
+      "url": "https://www.bostonglobe.com/2026/10/23/business/mass-general-brigham-layoffs",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -477,16 +477,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 2,
-          "title": "Where Is the $205 Billion in CapEx Going? Google's AI Gamble and the Market's Doubts | Penchan",
-          "returned_url": "https://penchan.co/en/market/ai/google/google-ai-capex"
+          "title": "Mass General Brigham layoffs: What to know",
+          "returned_url": "https://www.bostonglobe.com/2026/10/23/business/mass-general-brigham-layoffs"
         }
       ],
-      "mentions_company": true,
+      "mentions_company": false,
       "matches": []
     },
     {
-      "source_id": "d_e8f2c0a2bb5ce5e4b946",
-      "url": "https://edworkforce.house.gov/uploadedfiles/k12report_3finalrelease_102126.pdf",
+      "source_id": "d_75f6997bf2e50cbe802e",
+      "url": "https://www.notebookcheck.com/Google-Pixel-7-Serie.669517.0.html",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -496,16 +496,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 3,
-          "title": "antisemitism - House Committee on Education and Workforce",
-          "returned_url": "https://edworkforce.house.gov/uploadedfiles/k12report_3finalrelease_102126.pdf"
+          "title": "Google Pixel 7 Serie - Notebookcheck Specs und Testsammlung",
+          "returned_url": "https://www.notebookcheck.com/Google-Pixel-7-Serie.669517.0.html"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_12c727a1714235d9563a",
-      "url": "https://www.nftc.org/wp-content/uploads/2026/10/NFTC-Comments-Regarding-Significant-Foreign-Trade-Barriers-for-the-2027-National-Trade-Estimate-Report.pdf",
+      "source_id": "d_d0c64f38f36818f1850d",
+      "url": "https://www.spacex.com/updates",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "incomplete",
@@ -515,16 +515,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 4,
-          "title": "NFTC-Comments-Regarding-Significant-Foreign-Trade-Barriers-for-the-2027-National-Trade-Estimate-Report.pdf",
-          "returned_url": "https://www.nftc.org/wp-content/uploads/2026/10/NFTC-Comments-Regarding-Significant-Foreign-Trade-Barriers-for-the-2027-National-Trade-Estimate-Report.pdf"
+          "title": "SpaceX",
+          "returned_url": "https://www.spacex.com/updates"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_87a2f848aa25f3f1c05d",
-      "url": "https://www.geekwire.com/2026/microsoft-earnings-preview-employee-buyouts-ai-spending-and-a-new-financial-scorecard",
+      "source_id": "d_044211ffe950bfea0fa5",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -534,13 +534,13 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 5,
-          "title": "Microsoft earnings preview: Employee buyouts, AI spending and a new financial scorecard \u2013 GeekWire",
-          "returned_url": "https://www.geekwire.com/2026/microsoft-earnings-preview-employee-buyouts-ai-spending-and-a-new-financial-scorecard"
+          "title": "Gemini 4 Argon is now available for everyone",
+          "returned_url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon"
         }
       ],
       "mentions_company": true,
       "matches": []
     }
   ],
-  "recorded_at": "2026-11-08T01:53:35.466754Z"
+  "recorded_at": "2026-11-08T01:50:17.392774Z"
 }

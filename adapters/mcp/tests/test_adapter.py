@@ -26,7 +26,7 @@ def anyio_backend():
     return "asyncio"
 
 
-def cfg(engine: Engine, who: str = "mcp", ws: str = "ws_demo") -> AdapterConfig:
+def cfg(engine: Engine, who: str = "mcp", ws: str = "ws_main") -> AdapterConfig:
     return AdapterConfig(base_url=engine.base, token=engine.tokens[who], workspace_id=ws)
 
 
@@ -62,7 +62,7 @@ async def test_change_scan_explain_fix_recheck(engine):
     (engine.root / "billing.py").write_text(RISKY)  # untracked change in the Git workspace
     async with Client(build_server(cfg(engine))) as c:
         ws = await call(c, "list_workspaces")
-        assert ws["default_workspace_id"] == "ws_demo" and [w["id"] for w in ws["items"]] == ["ws_demo"]
+        assert ws["default_workspace_id"] == "ws_main" and [w["id"] for w in ws["items"]] == ["ws_main"]
 
         scan = await until_done(c, await call(c, "scan_changes", {"wait_seconds": 10}))
         assert scan["scan"]["state"] in ("completed", "partial")
@@ -100,7 +100,7 @@ async def test_public_match_through_manifest(engine):
     (engine.root / "roadmap.md").write_text(src.read_text())
     async with Client(build_server(cfg(engine))) as c:
         scan = await until_done(c, await call(c, "scan_changes", {
-            "mode": "files", "paths": ["roadmap.md"], "check_public_sources": "sources_demo", "model_review": False}))
+            "mode": "files", "paths": ["roadmap.md"], "check_public_sources": "sources_main", "model_review": False}))
         found = await call(c, "get_findings", {"scan_id": scan["scan"]["scan_id"]})
         assert [f["path"] for f in found["public_exposure"]] == ["roadmap.md"]
         ex = await call(c, "explain_finding", {"finding_id": found["public_exposure"][0]["finding_id"],
@@ -139,17 +139,17 @@ async def test_engine_error_codes_are_preserved(engine):
         assert "_error" in r or all(f["status"] == "rejected" for f in r["capture"]["files"])
         r = await call(c, "scan_changes", {"baseline": "not-a-ref"})
         assert r["_error"]["code"] == "invalid_baseline"
-    async with Client(build_server(AdapterConfig(engine.base, "tf_wrong", "ws_demo"))) as c:
+    async with Client(build_server(AdapterConfig(engine.base, "tf_wrong", "ws_main"))) as c:
         r = await call(c, "list_workspaces")
         assert r["_error"]["http_status"] == 401
         assert "tf_wrong" not in json.dumps(r)
-    async with Client(build_server(AdapterConfig("http://127.0.0.1:9", engine.tokens["mcp"], "ws_demo"))) as c:
+    async with Client(build_server(AdapterConfig("http://127.0.0.1:9", engine.tokens["mcp"], "ws_main"))) as c:
         r = await call(c, "get_capabilities")
         assert r["_error"]["code"] == "engine_unreachable" and r["_error"]["retryable"] is True
 
 
 async def test_stdio_server_end_to_end(engine, tmp_path):
-    path = write_config(tmp_path / "mcp.json", engine.base, engine.tokens["mcp"] + "\n", "ws_demo")
+    path = write_config(tmp_path / "mcp.json", engine.base, engine.tokens["mcp"] + "\n", "ws_main")
     params = StdioServerParameters(command=sys.executable, args=["-m", "tracefold_mcp.cli", "--config", str(path)],
                                    env={"PATH": os.environ.get("PATH", "")})
     async with Client(params) as c:
@@ -167,7 +167,7 @@ def test_config_requires_loopback_and_private_file(tmp_path):
             validate_base_url(bad)
     assert validate_base_url("http://127.0.0.1:8787/v1/") == "http://127.0.0.1:8787"
 
-    p = write_config(tmp_path / "c" / "mcp.json", "http://localhost:8787", "tf_abc\n", "ws_demo")
+    p = write_config(tmp_path / "c" / "mcp.json", "http://localhost:8787", "tf_abc\n", "ws_main")
     assert oct(p.stat().st_mode & 0o777) == "0o600"
     c = load_config(p)
     assert c.token == "tf_abc" and "tf_abc" not in repr(c)
@@ -183,7 +183,7 @@ def test_config_requires_loopback_and_private_file(tmp_path):
 
 
 async def test_list_scans_and_approvals_are_read_only(engine):
-    (engine.root / "keys.py").write_text('AWS_ACCESS_KEY_ID = "AKIAQX7TFOLDDEMO2K4Z"\n')
+    (engine.root / "keys.py").write_text('AWS_ACCESS_KEY_ID = "AKIAQX7TFOLDRUNX2K4Z"\n')
     async with Client(build_server(cfg(engine))) as c:
         scan = await until_done(c, await call(c, "scan_changes", {"mode": "files", "paths": ["keys.py"], "model_review": False}))
         listed = await call(c, "list_scans", {"limit": 5})

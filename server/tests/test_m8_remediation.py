@@ -13,7 +13,7 @@ from tracefold.gateway.gateway import Gateway
 from .conftest import PUBLIC, fx
 
 WS = "/v1/workspaces/ws_a"
-LEAKED = "AKIAQX7TFOLDDEMO2K4Z"
+LEAKED = "AKIAQX7TFOLDRUNX2K4Z"
 REMEDIATION_KEY = "AKIAREMEDIATIONK3Y9Z"
 APPROVER = {"name": "Dana Ruiz", "email": "dana@northwind.example", "title": "General Counsel"}
 IAM_NS = "https://iam.amazonaws.com/doc/2010-05-08/"
@@ -149,7 +149,7 @@ def test_form_host_then_removal_observed_after_fresh_scan(env):
                         json={"expected_version": r["version"], "note": "Filed via host form"})
     assert r.status_code == 200 and r.json()["status"] == "submitted" and r.json()["removal_observed"] is False
     # the page drops the passage: only a fresh successful scan marks the finding no longer observed
-    env.engine.repo.put_manifest("ws_a", "sources_demo", [
+    env.engine.repo.put_manifest("ws_a", "sources_main", [
         {"source_id": "forum", "url": "https://forum.example/t/123", "provider": "fixture", "mode": "seeded",
          "fixture_path": "public/vendor_blog.html"}])
     public_scan(env)

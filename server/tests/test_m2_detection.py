@@ -137,9 +137,9 @@ def test_public_match_end_to_end(env):
     ev = pub[0]["latest"]["evidence"][0]
     assert ev["public"]["url"] == "https://forum.example/t/123" and ev["public"]["freshness"] == "fresh"
     assert ev["public"]["mode"] == "seeded" and ev["public"]["provider"] == "fixture"
-    m = env.client.get("/v1/workspaces/ws_a/manifests/sources_demo", headers=env.h()).json()
+    m = env.client.get("/v1/workspaces/ws_a/manifests/sources_main", headers=env.h()).json()
     assert [x["source_id"] for x in m["sources"]] == ["forum", "vendor_blog"] and m["sources"][0]["mode"] == "seeded"
-    assert env.client.get("/v1/workspaces/ws_a/manifests/sources_demo", headers=env.h("other")).status_code == 404
+    assert env.client.get("/v1/workspaces/ws_a/manifests/sources_main", headers=env.h("other")).status_code == 404
     assert ev["location"]["line_start"] == 5 and ev["matched_tokens"] >= 30
     assert pub[0]["latest"]["title"] == "Matching content found publicly"
     full = env.client.get(f"/v1/workspaces/ws_a/evidence/{ev['evidence_id']}", headers=env.h()).json()
@@ -214,14 +214,14 @@ def test_snapshot_mode_reuses_and_labels_cached(env):
     s1 = env.scan(inp["input_id"], checks=["public_match"], public_sources=PUBLIC)
     snap = s1["public_snapshot_id"]
     s2 = env.scan(inp["input_id"], checks=["public_match"],
-                  public_sources={"manifest_id": "sources_demo", "mode": "snapshot", "snapshot_id": snap})
+                  public_sources={"manifest_id": "sources_main", "mode": "snapshot", "snapshot_id": snap})
     assert s2["public_snapshot_id"] == snap and s2["public_freshness"].startswith("cached snapshot")
     f = env.findings(s2["scan_id"])[0]
     assert f["latest"]["evidence"][0]["public"]["freshness"] == "cached"
     assert f["latest"]["title"] == "Matching content in cached public evidence"
     r = env.client.post("/v1/workspaces/ws_a/scans", headers=env.h(), json={
         "input_id": inp["input_id"], "checks": ["public_match"],
-        "public_sources": {"manifest_id": "sources_demo", "mode": "snapshot"}})
+        "public_sources": {"manifest_id": "sources_main", "mode": "snapshot"}})
     assert r.status_code == 422 and r.json()["error"]["code"] == "snapshot_required"
 
 
@@ -229,5 +229,5 @@ def test_unknown_source_ids_rejected(env):
     inp = env.upload({"roadmap.md": fx("roadmap.md")})
     r = env.client.post("/v1/workspaces/ws_a/scans", headers=env.h(), json={
         "input_id": inp["input_id"], "checks": ["public_match"],
-        "public_sources": {"manifest_id": "sources_demo", "source_ids": ["https://evil.example"]}})
+        "public_sources": {"manifest_id": "sources_main", "source_ids": ["https://evil.example"]}})
     assert r.status_code == 422 and r.json()["error"]["code"] == "unknown_source"

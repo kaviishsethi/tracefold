@@ -82,7 +82,7 @@ Only storage code performs SQL. Only the gateway performs HTTP, including loopba
 
 Provision workspaces and client grants through local operator configuration/CLI in the first build. A client cannot register an arbitrary filesystem root or escalate its own permissions through scan arguments. Generate high-entropy client tokens, keep their hashes server-side, and load secrets from local protected configuration. Token values never appear in URLs, tool output, source control or logs.
 
-Each client grant binds allowed workspace IDs, capabilities (`submit`, `read`, `read_evidence`, `recheck`, `cancel`, `review`) and disclosure policy. Check ownership through all nested IDs: a scan ID, document ID or evidence ID from another workspace must not bypass access control. Return a non-enumerating not-found response for inaccessible resources. The demo has one company, but test two isolated workspaces.
+Each client grant binds allowed workspace IDs, capabilities (`submit`, `read`, `read_evidence`, `recheck`, `cancel`, `review`) and disclosure policy. Check ownership through all nested IDs: a scan ID, document ID or evidence ID from another workspace must not bypass access control. Return a non-enumerating not-found response for inaccessible resources. The first release has one company, but test two isolated workspaces.
 
 Bind loopback, reject unexpected Host and browser Origin values, and configure an explicit browser-origin allowlist. Require authorization on reads and mutations, including the ledger. CORS alone is not authentication. Never accept caller-provided provider credentials, raw arbitrary fetch URLs, model endpoints or shell commands in a scan body. Public manifests are operator-approved resources.
 
@@ -170,14 +170,14 @@ Scan request example (illustrative IDs):
 
 ```json
 {
-  "input_id": "input_demo",
+  "input_id": "input_example",
   "checks": ["public_match", "local_risk"],
-  "public_sources": {"manifest_id": "sources_demo", "mode": "refresh"},
+  "public_sources": {"manifest_id": "sources_main", "mode": "refresh"},
   "review_profile": "data_exposure_v1"
 }
 ```
 
-Response: `{ "scan_id": "scan_demo", "state": "queued", "input_id": "input_demo", "status_url": "/v1/workspaces/ws_demo/scans/scan_demo" }`.
+Response: `{ "scan_id": "scan_example", "state": "queued", "input_id": "input_example", "status_url": "/v1/workspaces/ws_main/scans/scan_example" }`.
 
 For a local-risk-only request, omit public sources and report public exposure as `not_requested`, not “no match.” `refresh` and `snapshot` modes are explicit; snapshot mode requires a known snapshot ID. Failed refresh must not silently claim cached evidence is fresh.
 

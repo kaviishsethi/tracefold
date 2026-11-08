@@ -1,13 +1,13 @@
-"""Rehearse docs/DEMO_PLAN.md against a running engine, step by step.
+"""Rehearse docs/RECORDING_PLAN.md against a running engine, step by step.
 
     # 1. one-time setup (workspace, git repo for the "unpublished change", tokens, source lists)
-    uv run python examples/demo_rehearsal.py setup --data demo-data --repo demo-repo
+    uv run python examples/rehearsal.py setup --data rehearsal-data --repo rehearsal-repo
     # 2. start the engine with the same data dir (provider keys from server/.env)
-    TRACEFOLD_DATA=demo-data uv run tracefold serve --port 8787
+    TRACEFOLD_DATA=rehearsal-data uv run tracefold serve --port 8787
     # 3. rehearse (exits non-zero if any beat does not produce what the plan expects)
-    uv run python examples/demo_rehearsal.py run --data demo-data --repo demo-repo
+    uv run python examples/rehearsal.py run --data rehearsal-data --repo rehearsal-repo
 
-Uses the verified Nothing memo pair (docs/demo-pairs/nothing-memo) for the public beats and a small
+Uses the verified Nothing memo pair (docs/sample-documents/nothing-memo) for the public beats and a small
 synthetic service.py for the MCP beats. Nothing here is hardcoded: every result is computed by the engine.
 """
 from __future__ import annotations
@@ -23,8 +23,8 @@ from pathlib import Path
 import httpx
 
 SERVER = Path(__file__).resolve().parent.parent
-PAIR = SERVER.parent / "docs" / "demo-pairs" / "nothing-memo"
-WS = "ws_demo"
+PAIR = SERVER.parent / "docs" / "sample-documents" / "nothing-memo"
+WS = "ws_main"
 
 SERVICE_BASE = '''import logging
 
@@ -56,7 +56,7 @@ SERVICE_FIXED = SERVICE_RISKY.replace(
 
 # ---------------------------------------------------------------- setup
 def git(repo: Path, *args: str) -> None:
-    subprocess.run(["git", "-c", "user.name=Tracefold Demo", "-c", "user.email=demo@example.invalid",
+    subprocess.run(["git", "-c", "user.name=Tracefold", "-c", "user.email=rehearsal@example.invalid",
                     "-c", "commit.gpgsign=false", *args], cwd=repo, check=True, capture_output=True)
 
 
@@ -74,16 +74,16 @@ def setup(data: Path, repo: Path) -> None:
         git(repo, "add", "service.py")
         git(repo, "commit", "-q", "-m", "Partner export service (published baseline)")
     if e.repo.get_workspace(WS) is None:
-        e.add_workspace(WS, "Tracefold demo workspace", str(repo.resolve()))
+        e.add_workspace(WS, "Tracefold workspace", str(repo.resolve()))
     sources = json.loads((PAIR / "sources.json").read_text())
     e.add_manifest(WS, "nothing_live", [{**x, "mode": "seeded"} for x in sources])
     e.add_manifest(WS, "nothing_tavily", [{"source_id": "nothing_tavily", "url": sources[0]["url"], "provider": "tavily",
                                            "mode": "seeded"}])
-    tokens_file = data / "demo_tokens.json"
+    tokens_file = data / "rehearsal_tokens.json"
     if not tokens_file.exists():
         tokens = {
-            "app": e.add_client("demo-upload-app", {WS: (["submit", "read", "read_evidence", "recheck", "cancel", "review"], "full")}),
-            "mcp": e.add_client("demo-mcp-adapter", {WS: (["submit", "read", "read_evidence", "recheck", "cancel"], "full")}),
+            "app": e.add_client("rehearsal-upload-app", {WS: (["submit", "read", "read_evidence", "recheck", "cancel", "review"], "full")}),
+            "mcp": e.add_client("rehearsal-mcp-adapter", {WS: (["submit", "read", "read_evidence", "recheck", "cancel"], "full")}),
         }
         tokens_file.write_text(json.dumps(tokens))
         tokens_file.chmod(0o600)
@@ -116,7 +116,7 @@ def cov(scan: dict, scope: str, id_: str) -> dict:
 
 
 def run(base: str, data: Path, repo: Path) -> int:
-    tok = json.loads((data / "demo_tokens.json").read_text())
+    tok = json.loads((data / "rehearsal_tokens.json").read_text())
     app = {"Authorization": f"Bearer {tok['app']}"}
     mcp = {"Authorization": f"Bearer {tok['mcp']}"}
     b = f"/v1/workspaces/{WS}"
@@ -229,7 +229,7 @@ def run(base: str, data: Path, repo: Path) -> int:
                "failed retrieval is reported as failed, not 'no match'")
 
     (repo / "service.py").write_text(SERVICE_BASE)  # reset the working tree for the next rehearsal
-    print(f"\nAll demo beats passed in {time.time() - t0:.1f}s.")
+    print(f"\nAll rehearsal steps passed in {time.time() - t0:.1f}s.")
     return 0
 
 
@@ -238,8 +238,8 @@ def main() -> int:
     sub = ap.add_subparsers(dest="cmd", required=True)
     for name in ("setup", "run"):
         p = sub.add_parser(name)
-        p.add_argument("--data", default="demo-data")
-        p.add_argument("--repo", default="demo-repo")
+        p.add_argument("--data", default="rehearsal-data")
+        p.add_argument("--repo", default="rehearsal-repo")
         if name == "run":
             p.add_argument("--base", default="http://127.0.0.1:8787")
     a = ap.parse_args()

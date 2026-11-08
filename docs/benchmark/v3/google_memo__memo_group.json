@@ -1,7 +1,7 @@
 {
-  "case_id": "mock_google",
-  "label": "mock_leak_reconstruction",
-  "pack": "leak_watch",
+  "case_id": "google_memo",
+  "label": "leak_reconstruction",
+  "pack": "memo_group",
   "template_version": "company_queries_v3",
   "searches": [
     {
@@ -9,7 +9,7 @@
       "template_id": "leak_news",
       "provider": "exa",
       "query": "news article quoting a leaked internal memo from Google",
-      "num_results": 5,
+      "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
@@ -38,7 +38,7 @@
       "template_id": "leak_news",
       "provider": "tavily",
       "query": "\"Google\" leaked internal memo",
-      "num_results": 5,
+      "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
@@ -66,8 +66,8 @@
       "query_id": "q3",
       "template_id": "leak_news_alias",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Pixel",
-      "num_results": 5,
+      "query": "news article quoting a leaked internal memo from Alphabet",
+      "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
@@ -95,8 +95,8 @@
       "query_id": "q4",
       "template_id": "leak_news_alias",
       "provider": "tavily",
-      "query": "\"Pixel\" leaked internal memo",
-      "num_results": 5,
+      "query": "\"Alphabet\" leaked internal memo",
+      "num_results": 3,
       "include_domains": null,
       "include_domains_mode": null,
       "exclude_domains": [
@@ -119,13 +119,71 @@
       "topic": "news",
       "exact_match": true,
       "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Google employees",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "google.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Google\" email to employees full text",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "google.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
     }
   ],
   "omitted_presets": [],
-  "scan_state": "partial",
-  "elapsed_seconds": 10.7,
+  "scan_state": "completed",
+  "elapsed_seconds": 6.1,
   "provider_requests": 24,
-  "response_bytes": 390400,
+  "response_bytes": 184805,
   "provider_queries": [
     {
       "query_id": "q1",
@@ -134,9 +192,9 @@
       "query": "news article quoting a leaked internal memo from Google",
       "status": "ok",
       "error": null,
-      "returned": 5,
+      "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:50:08.693562Z"
+      "searched_at": "2026-11-08T01:53:35.933811Z"
     },
     {
       "query_id": "q2",
@@ -145,31 +203,53 @@
       "query": "\"Google\" leaked internal memo",
       "status": "ok",
       "error": null,
-      "returned": 5,
+      "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:50:10.523403Z"
+      "searched_at": "2026-11-08T01:53:35.899720Z"
     },
     {
       "query_id": "q3",
       "template_id": "leak_news_alias",
       "provider": "exa",
-      "query": "news article quoting a leaked internal memo from Pixel",
+      "query": "news article quoting a leaked internal memo from Alphabet",
       "status": "ok",
       "error": null,
-      "returned": 5,
+      "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:50:10.327062Z"
+      "searched_at": "2026-11-08T01:53:37.649051Z"
     },
     {
       "query_id": "q4",
       "template_id": "leak_news_alias",
       "provider": "tavily",
-      "query": "\"Pixel\" leaked internal memo",
+      "query": "\"Alphabet\" leaked internal memo",
       "status": "ok",
       "error": null,
-      "returned": 5,
+      "returned": 3,
       "truncated": false,
-      "searched_at": "2026-11-08T01:50:13.265462Z"
+      "searched_at": "2026-11-08T01:53:36.062464Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Google employees",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:53:38.690498Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Google\" email to employees full text",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:53:39.481701Z"
     }
   ],
   "sources": [
@@ -231,44 +311,6 @@
       "matches": []
     },
     {
-      "source_id": "d_18d5836f522ea1ca3b43",
-      "url": "https://www.businessinsider.com/google-memo-that-meant-google-was-kept-quiet-2018-10",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q1",
-          "provider": "exa",
-          "rank": 4,
-          "title": "Google Memo That Meant Google+ Was Kept Quiet - Business Insider",
-          "returned_url": "https://www.businessinsider.com/google-memo-that-meant-google-was-kept-quiet-2018-10"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_56b9cabf9fe22568fe7a",
-      "url": "https://www.nbcnews.com/tech/tech-news/leaked-google-engineer-memo-warns-big-tech-lose-ai-race-little-guys-rcna83146",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q1",
-          "provider": "exa",
-          "rank": 5,
-          "title": "Leaked Google engineer memo warns that Big Tech could lose AI race to the little guys",
-          "returned_url": "https://www.nbcnews.com/tech/tech-news/leaked-google-engineer-memo-warns-big-tech-lose-ai-race-little-guys-rcna83146"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
       "source_id": "d_3e00253f8a18dea4b255",
       "url": "https://dev.to/leojulieta/deepminds-ai-ban-insider-leak-sparks-global-whistle-blower-wave-2i91",
       "fetch_status": "fetched",
@@ -320,59 +362,14 @@
           "rank": 3,
           "title": "Proton apologizes to community after internal memo shows force behind proposed AI use in building its privacy products | TechRadar",
           "returned_url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products"
-        },
-        {
-          "query_id": "q4",
-          "provider": "tavily",
-          "rank": 1,
-          "title": "Proton apologizes to community after internal memo shows force behind proposed AI use in building its privacy products | TechRadar",
-          "returned_url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_6439f9a040e636c97749",
-      "url": "https://mezha.net/eng/news/mezha-9bd1175d294b8f70f4ae5455_proton_apologizes_after",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q2",
-          "provider": "tavily",
-          "rank": 4,
-          "title": "Proton apologizes after internal memo spells out AI expectations for engineers | \u041c\u0435\u0436\u0430",
-          "returned_url": "https://mezha.net/eng/news/mezha-9bd1175d294b8f70f4ae5455_proton_apologizes_after"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_ee3824a8f1022d761154",
-      "url": "https://jazz.security/dlp-explained/dlp-basics/real-examples-of-ai-data-leaks",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q2",
-          "provider": "tavily",
-          "rank": 5,
-          "title": "Real AI data leak examples and what would have stopped them",
-          "returned_url": "https://jazz.security/dlp-explained/dlp-basics/real-examples-of-ai-data-leaks"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_c61644f81e0c0819a338",
-      "url": "https://www.androidpolice.com/internal-memo-suggests-google-wants-to-cut-back-on-its-combined-android-and-pixel-division/",
+      "source_id": "d_21b2eab486819a3633f5",
+      "url": "https://www.businessinsider.com/google-bard-chatbot-googlers-sundar-pichai-2023-2",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -382,16 +379,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 1,
-          "title": "Google is giving US hardware and software staff the choice to bow out",
-          "returned_url": "https://www.androidpolice.com/internal-memo-suggests-google-wants-to-cut-back-on-its-combined-android-and-pixel-division/"
+          "title": "Googlers Need to Spend 2 to 4 Hours Helping Improve Bard Chatbot - Business Insider",
+          "returned_url": "https://www.businessinsider.com/google-bard-chatbot-googlers-sundar-pichai-2023-2"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_471614df7318f3099f96",
-      "url": "https://www.techspot.com/news/106592-google-offers-voluntary-exit-plan-severance-pay-pixel.html",
+      "source_id": "d_549d2239fb8321601b1c",
+      "url": "https://www.cnbc.com/2023/04/20/alphabet-merges-ai-focused-groups-deepmind-and-google-research.html",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -401,16 +398,16 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 2,
-          "title": "Google offers \"voluntary exit\" plan with severance pay for Pixel and Android employees | TechSpot",
-          "returned_url": "https://www.techspot.com/news/106592-google-offers-voluntary-exit-plan-severance-pay-pixel.html"
+          "title": "Alphabet merges A.I.-focused groups DeepMind and Google Brain",
+          "returned_url": "https://www.cnbc.com/2023/04/20/alphabet-merges-ai-focused-groups-deepmind-and-google-research.html"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_afae0f7cffbd7978ae6c",
-      "url": "https://www.businesstoday.in/technology/news/story/google-is-asking-some-employees-from-pixel-android-chrome-teams-to-leave-voluntarily-heres-why-462688-2025-01-31",
+      "source_id": "d_07a8ae3db1e2cfc69220",
+      "url": "https://www.theverge.com/2022/7/12/23206113/google-ceo-sundar-pichai-memo-hiring-slowdown-2022",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -420,54 +417,35 @@
           "query_id": "q3",
           "provider": "exa",
           "rank": 3,
-          "title": "Google is asking some employees from Pixel, Android, Chrome teams to leave voluntarily; here's why - BusinessToday",
-          "returned_url": "https://www.businesstoday.in/technology/news/story/google-is-asking-some-employees-from-pixel-android-chrome-teams-to-leave-voluntarily-heres-why-462688-2025-01-31"
+          "title": "Read the memo Google\u2019s CEO sent employees about a hiring slowdown | The Verge",
+          "returned_url": "https://www.theverge.com/2022/7/12/23206113/google-ceo-sundar-pichai-memo-hiring-slowdown-2022"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_4183ae33fa678b74adb0",
-      "url": "https://www.theverge.com/2020/8/6/21356760/foldable-google-pixel-q4-2021-leaked-internal-document-5-5a-4a-5g",
+      "source_id": "d_1ec36edf04a95128a1a3",
+      "url": "https://staging.elkford.ca/whats-google-really-thinking-decoding-the-algorithm-culture-and-future-of-the-worlds-search-giant",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
       "truncated": false,
       "origins": [
         {
-          "query_id": "q3",
-          "provider": "exa",
-          "rank": 4,
-          "title": "Google plans to release a foldable Pixel in late 2021, according to leaked document | The Verge",
-          "returned_url": "https://www.theverge.com/2020/8/6/21356760/foldable-google-pixel-q4-2021-leaked-internal-document-5-5a-4a-5g"
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "What's Google Really Thinking? Decoding the Algorithm, Culture, and Future of the World's Search Giant - District of Elkford",
+          "returned_url": "https://staging.elkford.ca/whats-google-really-thinking-decoding-the-algorithm-culture-and-future-of-the-worlds-search-giant"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_50bfa9a941a36d7b0cf9",
-      "url": "https://www.sfchronicle.com/tech/article/google-voluntary-exit-program-buyouts-20066581.php",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "no_match",
-      "truncated": false,
-      "origins": [
-        {
-          "query_id": "q3",
-          "provider": "exa",
-          "rank": 5,
-          "title": "Google offers buyouts to employees not \u2018deeply committed\u2019",
-          "returned_url": "https://www.sfchronicle.com/tech/article/google-voluntary-exit-program-buyouts-20066581.php"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_a48e48595703d9af44f7",
-      "url": "https://www.bostonglobe.com/2026/10/23/business/mass-general-brigham-layoffs",
+      "source_id": "d_2087741922d7dd10b9cc",
+      "url": "https://penchan.co/en/market/ai/google/google-ai-capex",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -477,16 +455,16 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 2,
-          "title": "Mass General Brigham layoffs: What to know",
-          "returned_url": "https://www.bostonglobe.com/2026/10/23/business/mass-general-brigham-layoffs"
+          "title": "Where Is the $205 Billion in CapEx Going? Google's AI Gamble and the Market's Doubts | Penchan",
+          "returned_url": "https://penchan.co/en/market/ai/google/google-ai-capex"
         }
       ],
-      "mentions_company": false,
+      "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_75f6997bf2e50cbe802e",
-      "url": "https://www.notebookcheck.com/Google-Pixel-7-Serie.669517.0.html",
+      "source_id": "d_e8f2c0a2bb5ce5e4b946",
+      "url": "https://edworkforce.house.gov/uploadedfiles/k12report_3finalrelease_102126.pdf",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
@@ -496,51 +474,127 @@
           "query_id": "q4",
           "provider": "tavily",
           "rank": 3,
-          "title": "Google Pixel 7 Serie - Notebookcheck Specs und Testsammlung",
-          "returned_url": "https://www.notebookcheck.com/Google-Pixel-7-Serie.669517.0.html"
+          "title": "antisemitism - House Committee on Education and Workforce",
+          "returned_url": "https://edworkforce.house.gov/uploadedfiles/k12report_3finalrelease_102126.pdf"
         }
       ],
       "mentions_company": true,
       "matches": []
     },
     {
-      "source_id": "d_d0c64f38f36818f1850d",
-      "url": "https://www.spacex.com/updates",
-      "fetch_status": "fetched",
-      "failure_reason": null,
-      "comparison_status": "incomplete",
-      "truncated": true,
-      "origins": [
-        {
-          "query_id": "q4",
-          "provider": "tavily",
-          "rank": 4,
-          "title": "SpaceX",
-          "returned_url": "https://www.spacex.com/updates"
-        }
-      ],
-      "mentions_company": true,
-      "matches": []
-    },
-    {
-      "source_id": "d_044211ffe950bfea0fa5",
-      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon",
+      "source_id": "d_b6a19d37997b3338277d",
+      "url": "https://blog.google/company-news/outreach-and-initiatives/diversity/note-employees-ceo-sundar-pichai/",
       "fetch_status": "fetched",
       "failure_reason": null,
       "comparison_status": "no_match",
       "truncated": false,
       "origins": [
         {
-          "query_id": "q4",
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Note to employees from CEO Sundar Pichai",
+          "returned_url": "https://blog.google/company-news/outreach-and-initiatives/diversity/note-employees-ceo-sundar-pichai/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_09f0c9036a5f62357229",
+      "url": "https://blog.google/company-news/inside-google/company-announcements/note-our-employees/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "A note to our employees",
+          "returned_url": "https://blog.google/company-news/inside-google/company-announcements/note-our-employees/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_76adbec801b070b05fdd",
+      "url": "https://www.theverge.com/2017/5/22/15666672/google-lawsuit-email-stop-leaks",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "An internal Google email shows how the company cracks down on leaks | The Verge",
+          "returned_url": "https://www.theverge.com/2017/5/22/15666672/google-lawsuit-email-stop-leaks"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_1ed5f0a72362a4aa907e",
+      "url": "https://www.businessinsider.com/google-layoffs-job-cuts-sundar-pichai-reassures-remaining-employees-2023-1",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
           "provider": "tavily",
-          "rank": 5,
-          "title": "Gemini 4 Argon is now available for everyone",
-          "returned_url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon"
+          "rank": 1,
+          "title": "Google Layoffs: Sundar Pichai's Memo Reassures Remaining Employees - Business Insider",
+          "returned_url": "https://www.businessinsider.com/google-layoffs-job-cuts-sundar-pichai-reassures-remaining-employees-2023-1"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_42ddd94e68fd2143bbc1",
+      "url": "https://blog.google/company-news/inside-google/message-ceo/january-update",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "A difficult decision to set us up for the future",
+          "returned_url": "https://blog.google/company-news/inside-google/message-ceo/january-update"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_1bcf383ca2ad2be77c9a",
+      "url": "https://bulksignature.com/blog/manage-gmail-signatures-for-all-employees",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Set Up Company-Wide Email Signatures in Google Workspace",
+          "returned_url": "https://bulksignature.com/blog/manage-gmail-signatures-for-all-employees"
         }
       ],
       "mentions_company": true,
       "matches": []
     }
   ],
-  "recorded_at": "2026-11-08T01:50:17.392774Z"
+  "recorded_at": "2026-11-08T01:53:41.345665Z"
 }
