@@ -249,3 +249,11 @@ html {
     scroll-behavior: auto;
   }
 }
+
+/* App shell geometry (measured against Vercel's dashboard): 8px cards, 6px controls. Landing page keeps its own radii. */
+.app .rounded-card {
+  border-radius: 8px;
+}
+.app .rounded-ctl {
+  border-radius: 6px;
+}

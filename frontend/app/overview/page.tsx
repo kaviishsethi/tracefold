@@ -108,7 +108,6 @@ export default function Overview() {
   return (
     <div>
       <H1
-        sub={workspace.name}
         right={
           <LinkButton href="/scan" size="sm" className="!bg-accent !text-[#0a0c0c]">
             <Upload className="size-3.5" aria-hidden /> New scan

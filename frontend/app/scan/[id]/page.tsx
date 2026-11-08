@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { api, coverageNote, isTerminal, useScan, ws, type Finding, type FindingKind, type Page, type Scan, type Stage } from "@/lib/api";
 import { relativeTime } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
-import { Box, Crumbs, Disclosure, FindingRow, H1, Note, scanState, source } from "@/components/bits";
+import { Box, Disclosure, FindingRow, H1, Note, scanState, source } from "@/components/bits";
 import { AgentPrompt, scanPrompt } from "@/components/agent-prompt";
 import { SourcesPanel } from "@/components/scan-sources";
 import { LedgerPanel } from "@/components/scan-ledger";
@@ -115,7 +115,6 @@ export default function ScanDetail() {
 
   return (
     <div>
-      <Crumbs trail={[["/scan", "Scans"]]} current={relativeTime(scan.created_at)} />
       <div>
         <H1
           sub={`${source(scan)} · ${relativeTime(scan.created_at)}${scan.recheck_of ? " · recheck" : ""}${scan.state === "partial" ? " · some checks didn't finish" : ""}`}

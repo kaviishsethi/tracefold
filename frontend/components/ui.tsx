@@ -91,7 +91,7 @@ export function Panel({
   return (
     <section className={cx("ui-panel overflow-hidden rounded-card border border-line bg-panel shadow-[0_12px_32px_rgb(0_0_0/0.2)]", className)}>
       {(title || meta || actions) && (
-        <header className="flex min-h-11 items-center justify-between gap-3 border-b border-line px-4 py-2">
+        <header className="flex min-h-14 items-center justify-between gap-3 border-b border-line py-2 pl-4 pr-3">
           <div className="flex min-w-0 items-center gap-2.5">
             {title && <h2 className="truncate text-[13px] font-medium tracking-normal text-ink">{title}</h2>}
             {meta && <span className="truncate text-xs text-faint">{meta}</span>}

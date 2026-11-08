@@ -10,7 +10,7 @@ import {
 import { relativeTime } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
 import { ActionCard } from "@/components/action-card";
-import { Crumbs, Disclosure, Dot, findingPlace } from "@/components/bits";
+import { Disclosure, Dot, findingPlace } from "@/components/bits";
 import { AgentPrompt, findingPrompt } from "@/components/agent-prompt";
 import { Upload } from "lucide-react";
 import { Button, ErrorNote, Spinner } from "@/components/ui";
@@ -128,7 +128,6 @@ export default function FindingPage() {
 
   return (
     <div>
-      <Crumbs trail={[["/findings", "Findings"]]} />
 
       <div className="mb-8">
         <h1 className="flex items-center gap-3 text-2xl tracking-[-0.03em] text-ink">
