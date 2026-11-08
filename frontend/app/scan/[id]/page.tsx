@@ -110,11 +110,9 @@ function Identified({ auto }: { auto: AutoDiscovery }) {
             ? "No company name found in the files, so public pages weren't searched."
             : auto.reason === "invalid_identity_output"
               ? "The local model's answer couldn't be read, so public pages weren't searched."
-              : "The local model isn't running, so public pages weren't searched."}{" "}
-          <Link href="/settings" className="underline underline-offset-4">
-            Add your company
-          </Link>{" "}
-          to always search for it.
+              : auto.reason === "identity_step_failed"
+                ? "Something went wrong reading the company name, so public pages weren't searched. Scan again."
+                : "The local model isn't running, so public pages weren't searched."}
         </span>
       )}
     </p>

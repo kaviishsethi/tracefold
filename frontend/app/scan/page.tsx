@@ -15,21 +15,21 @@ import { Button, ErrorNote, cx } from "@/components/ui";
 const AGENT_SCAN =
   "Call the tracefold tool scan_changes for this repository (changes since HEAD, including untracked files). When it finishes, call get_findings with its scan_id, fix each local risk and call recheck_fix for it, and summarize the outcome. Don't print or test any secret value you see.";
 
-/** Ready-made documents from docs/sample-documents, served from public/examples, one per company. Each was checked end to end with automatic search. */
+/** Sample files served from public/examples, one per company. */
 const EXAMPLES = [
   {
-    company: "Apple",
-    file: "apple-internal-memo.md",
-    doc: "Staff memo on leaks",
+    company: "Duolingo",
+    file: "duolingo-internal-memo.md",
+    doc: "All-hands follow-up memo",
     kind: "Internal memo",
-    shows: "Includes two sentences from Apple's 2021 staff memo that the press quoted word for word. Search finds that coverage.",
+    shows: "Original text around lines from Duolingo's 2025 AI-first email that the press quoted word for word. Search finds that coverage.",
   },
   {
-    company: "CivicActions",
-    file: "civicactions-security-policy.md",
-    doc: "Security policy",
+    company: "GitLab",
+    file: "gitlab-data-classification.md",
+    doc: "Data classification standard",
     kind: "Published company document",
-    shows: "An unchanged company policy. Search finds the public guidebook page that carries the same text.",
+    shows: "An unchanged page from GitLab's public handbook. Search finds the live handbook page with the same text.",
   },
   {
     company: "PostHog",
@@ -215,7 +215,7 @@ export default function ScanPage() {
                     </a>
                   </div>
                 ))}
-                <p className="py-2.5 pl-12 pr-5 text-xs text-faint">CivicActions and PostHog documents are public, used under their licenses. Neither endorses Tracefold.</p>
+                <p className="py-2.5 pl-12 pr-5 text-xs text-faint">The GitLab page (CC BY-SA 4.0) and PostHog page are public documents used under their licenses. Neither company endorses Tracefold.</p>
               </div>
             )}
           </>
