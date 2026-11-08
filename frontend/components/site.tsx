@@ -37,14 +37,7 @@ export function SiteHeader() {
           <Wordmark className="text-[15px]" />
         </Link>
         <nav className="flex items-center gap-1">
-          <span className="ml-3 hidden sm:block">
-            <LinkButton href="/overview" variant="secondary">
-              Open the app
-            </LinkButton>
-          </span>
-          <LinkButton href="/scan" className="ml-2">
-            Get started
-          </LinkButton>
+          <LinkButton href="/overview">Dashboard</LinkButton>
         </nav>
       </div>
     </header>
@@ -120,7 +113,7 @@ const FOOTER_NAV = [
     title: "Product",
     links: [
       ["How it works", "/#how"],
-      ["Open the app", "/overview"],
+      ["Dashboard", "/overview"],
     ],
   },
 ];

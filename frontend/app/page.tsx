@@ -271,21 +271,25 @@ export default function Landing() {
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,transparent_22%,rgb(0_0_0/0.2)_42%,rgb(0_0_0/0.73)_68%,#0a0c0c_100%)]" />
         <div className={cx("flex flex-1 flex-col justify-end pb-[clamp(40px,8vh,96px)] pt-[104px]", EDGE)}>
           <div className="mx-auto w-full max-w-[1760px]">
-            <h1 className="rise max-w-[15ch] text-[clamp(44px,5vw,72px)] font-semibold leading-none tracking-[-0.04em] text-white" style={{ animationDelay: "140ms" }}>
+            <h1 className="rise max-w-[15ch] text-[clamp(44px,5vw,72px)] font-semibold leading-none tracking-[-0.04em] text-white" style={{ animationDelay: "300ms" }}>
               Catch, fix and prevent security leaks.
             </h1>
-            <p className="rise mt-6 max-w-[66rem] text-[clamp(17px,1.4vw,20px)] leading-[1.5] text-[#c2c3c7]" style={{ animationDelay: "240ms" }}>
+            <p className="rise mt-6 max-w-[66rem] text-[clamp(17px,1.4vw,20px)] leading-[1.5] text-[#c2c3c7]" style={{ animationDelay: "400ms" }}>
               Spots your code and docs on public pages, drafts the takedown, and catches risky changes before they ship.
             </p>
-            <div className="rise mt-8 flex flex-wrap items-center gap-3" style={{ animationDelay: "340ms" }}>
-              <LinkButton href="/scan" size="lg">
-                Get started <ArrowRight className="size-4" aria-hidden />
-              </LinkButton>
-              <LinkButton href="#how" variant="secondary" size="lg">
-                How it works
-              </LinkButton>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <span className="rise" style={{ animationDelay: "500ms" }}>
+                <LinkButton href="/scan" size="lg">
+                  Get started <ArrowRight className="size-4" aria-hidden />
+                </LinkButton>
+              </span>
+              <span className="rise" style={{ animationDelay: "600ms" }}>
+                <LinkButton href="#how" variant="secondary" size="lg">
+                  How it works
+                </LinkButton>
+              </span>
             </div>
-            <div className="rise mt-[clamp(56px,10vh,120px)]" style={{ animationDelay: "480ms" }}>
+            <div className="rise mt-[clamp(56px,10vh,120px)]" style={{ animationDelay: "700ms" }}>
               <p className="mb-6 text-center text-[13px] text-mute">Checks any public page you approve, including</p>
               <PlatformLogos />
             </div>
@@ -623,7 +627,7 @@ export default function Landing() {
                 </p>
               </div>
               <LinkButton href="/overview" variant="secondary" className="border-white/20 bg-black/30 backdrop-blur">
-                Open the app <ArrowRight className="size-4" aria-hidden />
+                Dashboard <ArrowRight className="size-4" aria-hidden />
               </LinkButton>
             </div>
             <div className="mt-[clamp(40px,6vw,96px)] grid gap-4 px-4 md:grid-cols-3">
