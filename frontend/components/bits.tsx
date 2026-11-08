@@ -135,7 +135,7 @@ export function findingPlace(f: Finding): string {
 
 export function FindingRow({ f, href }: { f: Finding; href: string }) {
   return (
-    <Link href={href} className="flex items-center gap-3 border-t border-line px-4 py-3 first:border-t-0 hover:bg-panel-2">
+    <Link href={href} className="app-finding-row flex items-center gap-3 border-t border-line px-4 py-3 first:border-t-0 hover:bg-panel-2">
       <Dot severity={f.latest?.severity} />
       <span className="min-w-0 flex-1">
         <span className="block truncate text-[15px] text-ink">{f.latest?.title ?? f.rule_id ?? "Finding"}</span>

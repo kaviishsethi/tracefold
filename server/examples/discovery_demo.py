@@ -191,19 +191,89 @@ def run(data: Path, url: str | None) -> int:
             c.__exit__(None, None, None)
 
 
+# ---------------------------------------------------------------- agent (MCP segment)
+# A synthetic code change for the coding-assistant beat: an uncommitted edit that logs an API key. The assistant scans
+# it with scan_changes, proposes the fix, the edit is applied in the editor, and recheck_fix checks that one problem.
+AGENT_BASE = '''"""Billing client used by the checkout service (synthetic Tracefold demo code)."""
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+def charge(customer_id: str, amount_cents: int, api_key: str) -> dict:
+    logger.info("charging %s for %d cents", customer_id, amount_cents)
+    return {"customer": customer_id, "amount": amount_cents}
+'''
+AGENT_CHANGE = AGENT_BASE.replace(
+    '    logger.info("charging %s for %d cents", customer_id, amount_cents)\n',
+    '    logger.info("charging %s for %d cents", customer_id, amount_cents)\n'
+    '    logger.debug("billing request for %s using key %s", customer_id, api_key)\n',
+)
+MCP_CAPS = ["submit", "read", "read_evidence", "recheck", "cancel"]  # never approve or configure
+
+
+def agent(data: Path, mcp_config: Path, port: int) -> None:
+    """Register a small Git project as the demo workspace's folder, reset its uncommitted risky change, and point the
+    MCP adapter at this engine so the app and the assistant share one finding history. Run with the engine stopped."""
+    import subprocess
+
+    from tracefold.config import Settings
+    from tracefold.engine import Engine
+    proj = (data / "agent-project").resolve()
+    src = proj / "billing" / "client.py"
+    git = ["git", "-C", str(proj), "-c", "user.name=Tracefold demo", "-c", "user.email=demo@example.invalid"]
+    if not (proj / ".git").exists():
+        src.parent.mkdir(parents=True, exist_ok=True)
+        src.write_text(AGENT_BASE)
+        subprocess.run([*git[:3], "init", "-q"], check=True)
+        subprocess.run([*git, "add", "."], check=True)
+        subprocess.run([*git, "commit", "-qm", "Billing client"], check=True)
+    src.write_text(AGENT_CHANGE)  # reset the demo: the risky line is back as an uncommitted change
+
+    e = Engine(Settings(data_dir=data.resolve()))
+    if e.repo.get_workspace(WS) is None:
+        raise SystemExit("Run `setup` first.")
+    with e.repo.db.tx() as c:
+        c.execute("UPDATE workspaces SET source_type='local_dir', root=? WHERE id=?", (str(proj), WS))
+    st = json.loads(_state(data).read_text())
+    if "mcp_token" not in st:
+        st["mcp_token"] = e.add_client("discovery-demo-assistant", {WS: (MCP_CAPS, "full")})
+        _state(data).write_text(json.dumps(st, indent=2))
+        _state(data).chmod(0o600)
+
+    mcp_config.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    backup = mcp_config.with_suffix(".json.bak")
+    if mcp_config.exists() and not backup.exists():
+        backup.write_bytes(mcp_config.read_bytes())
+        backup.chmod(0o600)
+    cfg = {"base_url": f"http://127.0.0.1:{port}", "token": st["mcp_token"], "workspace_id": WS}
+    mcp_config.write_text(json.dumps(cfg, indent=2) + "\n")
+    mcp_config.chmod(0o600)
+    print(f"Workspace {WS} now reads {proj}; billing/client.py has the uncommitted risky change.")
+    print(f"MCP adapter config written to {mcp_config} (engine 127.0.0.1:{port}, {WS})."
+          + (f" Previous config kept at {backup}." if backup.exists() else ""))
+    print("Restart your coding assistant so it reconnects, then ask it to run scan_changes.")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for n in ("setup", "run"):
+    for n in ("setup", "run", "agent"):
         p = sub.add_parser(n)
         p.add_argument("--data", default="data/discovery-demo")
         if n == "run":
             p.add_argument("--url", help="running engine base URL; omit to run in-process")
+        if n == "agent":
+            p.add_argument("--mcp-config", default=str(Path.home() / ".config" / "tracefold" / "mcp.json"))
+            p.add_argument("--port", type=int, default=8790)
     a = ap.parse_args()
     data = Path(a.data)
     if a.cmd == "setup":
         data.mkdir(parents=True, exist_ok=True)
         setup(data)
+        return 0
+    if a.cmd == "agent":
+        agent(data, Path(a.mcp_config).expanduser(), a.port)
         return 0
     return run(data, a.url)
 

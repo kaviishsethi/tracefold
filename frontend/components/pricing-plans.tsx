@@ -17,7 +17,7 @@ const TIERS = [
     price: { annual: "Free", monthly: "Free" },
     unit: "",
     note: { annual: "Free forever", monthly: "Free forever" },
-    cta: { label: "Get started", href: "/setup" },
+    cta: { label: "Get started", href: "/scan" },
     key: ["Upload platform and MCP integration", "Local model review with Ollama", "Community support"],
     included: [
       "Exact passage matching against public sources you approve",
@@ -33,7 +33,7 @@ const TIERS = [
     price: { annual: "$199", monthly: "$239" },
     unit: "/ month",
     note: { annual: "Billed annually at $2,388", monthly: "Billed monthly" },
-    cta: { label: "Start with Team", href: "/setup" },
+    cta: { label: "Start with Team", href: "/scan" },
     key: ["Takedown requests and AWS key actions", "Approval by named, authorized people", "Email support, 1 business day"],
     included: [
       "Everything in Starter",

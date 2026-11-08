@@ -568,6 +568,7 @@ export async function startScan(
     public_sources?: { manifest_id: string; mode?: "refresh" | "snapshot" };
     public_discovery?: { query_plan_id: string; mode?: "live" | "snapshot"; snapshot_id?: string };
     model_review?: boolean;
+    automatic_discovery?: boolean;
   },
   label: string,
 ): Promise<ScanAccepted> {
@@ -646,6 +647,12 @@ export function coverageNote(scan: Scan, kind: FindingKind, count: number): stri
   if (kind === "public_exposure" && check.reason === "no_candidate_sources_found")
     return "Search returned no candidate pages for the approved queries. That's not a \"no leak\" result.";
   if (kind === "public_exposure" && check.reason === "discovery_search_failed") return "Search failed, so public matching is inconclusive.";
+  if (kind === "public_exposure" && check.reason === "company_not_identified")
+    return "Public search couldn't identify a company in these files. Local checks still ran; public matching is inconclusive.";
+  if (kind === "public_exposure" && scan.summary.automatic_discovery && check.status === "failed")
+    return "Automatic public search couldn't finish. See the incomplete checks below for the cause.";
+  if (kind === "local_risk" && check.reason === "some_files_not_reviewed")
+    return "Some files couldn't be read, so risk review is incomplete. See the skipped files below.";
   if (check.status !== "complete") return `${kind === "public_exposure" ? "Public matching" : "Risk review"} ${check.status}: ${check.reason ?? "see coverage"}.`;
   if (count > 0) return null;
   if (kind === "public_exposure") return `No match in ${check.counts.sources_ok ?? 0} checked sources.`;

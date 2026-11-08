@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
 import { api, ws, type ApiError, type CompanyProfile, type Page, type PresetCatalog, type QueryPlan } from "@/lib/api";
-import { PlanSearches, StatusTag } from "@/components/discovery";
+import { PlanSearches, StatusTag, searchLabel } from "@/components/discovery";
 import { relativeTime, shortId } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
 import { Select } from "@/components/select";
@@ -14,8 +14,8 @@ const PRIVACY = "Search providers get this name and the queries, never your file
 
 function CheckRow({ checked, onChange, children, disabled }: { checked: boolean; onChange: (v: boolean) => void; children: ReactNode; disabled?: boolean }) {
   return (
-    <label className={cx("flex items-start gap-2.5 text-[13px]", disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer")}>
-      <input type="checkbox" className="mt-0.5 accent-[#81c8d5]" checked={checked} disabled={disabled} onChange={(e) => onChange(e.target.checked)} />
+    <label className={cx("flex items-start discovery-check gap-3 text-[13px]", disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer")}>
+      <input type="checkbox" className="mt-0.5 accent-accent" checked={checked} disabled={disabled} onChange={(e) => onChange(e.target.checked)} />
       <span className="min-w-0">{children}</span>
     </label>
   );
@@ -54,7 +54,7 @@ function IdentityForm({ workspaceId, onCreated }: { workspaceId: string; onCreat
   }
 
   return (
-    <div className="space-y-4 border-t border-line p-4">
+    <div className="space-y-6 border-t border-line p-5">
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Public company name">
           <input className={inputClass} value={name} onChange={(e) => setName(e.target.value)} placeholder="Acme" maxLength={80} />
@@ -130,7 +130,7 @@ function PlanForm({
   }
 
   return (
-    <div className="space-y-4 border-t border-line p-4">
+    <div className="space-y-6 border-t border-line p-5">
       <div className="flex flex-wrap items-center gap-3">
         <Select
           label="Identity"
@@ -138,17 +138,16 @@ function PlanForm({
           onChange={setProfileId}
           options={profiles.map((p) => ({ value: p.profile_id, label: `${p.display_name}${p.official_domain ? ` · ${p.official_domain}` : ""}` }))}
         />
-        <div role="tablist" aria-label="Plan type" className="flex gap-1">
+        <div role="group" aria-label="Plan type" className="flex gap-1">
           {(
             [
-              ["pack", "Pack"],
-              ["presets", "Pick presets"],
+              ["pack", "Search packs"],
+              ["presets", "Choose searches"],
             ] as const
           ).map(([v, l]) => (
             <button
               key={v}
-              role="tab"
-              aria-selected={mode === v}
+              aria-pressed={mode === v}
               onClick={() => setMode(v)}
               className={cx("h-8 rounded-md px-2.5 text-xs font-medium transition-colors", mode === v ? "bg-raised text-ink" : "text-mute hover:text-ink")}
             >
@@ -161,17 +160,17 @@ function PlanForm({
       {mode === "pack" ? (
         <div className="space-y-2">
           {catalog.packs.map((p) => (
-            <label key={p.pack_id} className={cx("flex cursor-pointer gap-3 rounded-ctl border p-3", pack === p.pack_id ? "border-line-strong bg-raised" : "border-line hover:bg-panel-2")}>
-              <input type="radio" name="pack" className="mt-0.5 accent-[#81c8d5]" checked={pack === p.pack_id} onChange={() => setPack(p.pack_id)} />
+            <label key={p.pack_id} className={cx("discovery-pack flex cursor-pointer gap-3 rounded-ctl border p-4", pack === p.pack_id ? "border-line-strong bg-raised" : "border-line hover:bg-panel-2")}>
+              <input type="radio" name="pack" className="mt-0.5 accent-accent" checked={pack === p.pack_id} onChange={() => setPack(p.pack_id)} />
               <span className="min-w-0">
                 <span className="block text-[13px] font-medium text-ink">
-                  {p.pack_id} <span className="font-mono text-xs font-normal text-faint">{p.shape}</span>
+                  {searchLabel(p.pack_id)}
                 </span>
                 <span className="block text-xs text-mute">{p.description}</span>
-                <span className="mt-1 flex flex-wrap gap-1.5">
+                <span className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
                   {p.presets.map((id) => (
-                    <span key={id} className="inline-flex items-center gap-1 font-mono text-[11px] text-ink-2">
-                      {id} <StatusTag status={catalog.presets.find((x) => x.preset_id === id)?.status} />
+                    <span key={id} className="inline-flex items-center gap-2 text-xs text-ink-2" title={id}>
+                      {searchLabel(id)}{catalog.presets.find((x) => x.preset_id === id)?.status === "experimental" && <StatusTag status="experimental" />}
                     </span>
                   ))}
                 </span>
@@ -179,8 +178,8 @@ function PlanForm({
             </label>
           ))}
           <CheckRow checked={experimental} onChange={setExperimental}>
-            <span className="text-ink-2">Include experimental presets</span>
-            <span className="block text-xs text-faint">Experimental presets haven&apos;t found a benchmark copy yet. Without this, packs use benchmarked presets only.</span>
+            <span className="text-ink-2">Include experimental searches</span>
+            <span className="block text-xs text-faint">Experimental searches haven&apos;t found a known copy in testing. By default, packs include only searches that have.</span>
           </CheckRow>
         </div>
       ) : (
@@ -191,8 +190,8 @@ function PlanForm({
               <li key={p.preset_id}>
                 <CheckRow checked={chosen.includes(p.preset_id)} onChange={(v) => setChosen((c) => toggle(c, p.preset_id, v))} disabled={!!missing}>
                   <span className="inline-flex flex-wrap items-center gap-1.5">
-                    <span className="font-mono text-xs text-ink">{p.preset_id}</span>
-                    <StatusTag status={p.status} />
+                    <span className="text-[13px] text-ink" title={p.preset_id}>{searchLabel(p.preset_id)}</span>
+                    {p.status !== "benchmarked" && <StatusTag status={p.status} />}
                   </span>
                   <span className="block text-xs text-mute">{missing ? `Needs a public ${missing}.` : p.description}</span>
                 </CheckRow>
@@ -271,7 +270,7 @@ export default function Discovery() {
     <div>
       <PageHeader
         title="Company discovery"
-        subtitle="Find public pages that may contain your files, starting from the company's public name instead of a fixed list of URLs."
+        subtitle="Find possible copies of your files using your company’s public name"
       />
       {!canConfigure && (
         <p className="mb-4 rounded-ctl border border-med/25 bg-med/10 px-3.5 py-2.5 text-sm text-med">
@@ -320,7 +319,7 @@ export default function Discovery() {
             )}
           </Panel>
 
-          <Panel title="Query plans" meta={`${plans.length} · template ${catalog.template_version}`}>
+          <Panel title="Query plans" meta={`${plans.length}`}>
             {plans.length === 0 ? (
               <p className="px-4 py-4 text-[13px] text-mute">No plans yet.</p>
             ) : (
@@ -335,10 +334,10 @@ export default function Discovery() {
                       <ChevronRight className={cx("size-4 shrink-0 text-faint transition-transform", open === p.query_plan_id && "rotate-90")} aria-hidden />
                       <span className="font-medium text-ink">{p.display_name}</span>
                       <span className="min-w-0 flex-1 truncate text-mute">
-                        {p.pack ?? [...new Set(p.searches.map((s) => s.template_id))].join(", ")} · {p.searches.length}{" "}
+                        {p.pack ? searchLabel(p.pack) : [...new Set(p.searches.map((s) => searchLabel(s.template_id)))].join(", ")} · {p.searches.length}{" "}
                         {p.searches.length === 1 ? "search" : "searches"}
                       </span>
-                      <span className="font-mono text-xs text-faint">{shortId(p.query_plan_id)}</span>
+                      <span className="hidden font-mono text-xs text-faint sm:inline" title={p.query_plan_id}>{shortId(p.query_plan_id)}</span>
                       <span className="shrink-0 text-xs text-faint">{relativeTime(p.created_at)}</span>
                     </button>
                     {open === p.query_plan_id && (

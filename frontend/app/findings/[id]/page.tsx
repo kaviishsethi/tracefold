@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   RECHECK_LABEL, api, isTerminal, uploadFiles, ws, type Action, type ApiError, type Evidence, type FindingDetail, type Page, type Recheck,
   type RecheckAccepted, type Scan,
@@ -21,6 +22,55 @@ function Text({ label, meta, text }: { label: string; meta?: string; text: strin
         {meta && <span className="shrink-0">{meta}</span>}
       </div>
       <pre className="max-h-72 overflow-auto whitespace-pre-wrap px-4 py-3 font-mono text-[13px] leading-relaxed text-ink-2">{text ?? "Not available."}</pre>
+    </div>
+  );
+}
+
+/** The facts behind a finding: how much matched, how the page was found and retrieved, and which scan saw it. */
+function EvidenceFacts({ ev, scanId }: { ev: Evidence; scanId?: string }) {
+  const p = ev.public;
+  const origin = p?.discovery_origins?.[0];
+  const facts: [string, ReactNode][] = [];
+  if (ev.kind === "public_match") {
+    if (ev.matched_tokens != null)
+      facts.push([
+        "Overlap",
+        `${ev.matched_tokens} matching words${ev.segment_coverage != null ? `, ${Math.round(ev.segment_coverage * 100)}% of the passage` : ""}`,
+      ]);
+    if (p)
+      facts.push([
+        "Found by",
+        origin ? `Search · ${origin.provider} ${origin.query_id} · result #${origin.rank}` : p.mode === "discovered" ? "Search" : "Registered source list",
+      ]);
+    if (p)
+      facts.push([
+        "Retrieved",
+        `${p.retrieved_at ? relativeTime(p.retrieved_at) : "time unknown"}${p.provider ? ` via ${p.provider}` : ""} · ${p.freshness === "cached" ? "saved snapshot" : "live request during the scan"}`,
+      ]);
+  } else if (ev.rule_id) {
+    facts.push(["Rule", ev.rule_id.replaceAll("_", " ")]);
+  }
+  if (scanId)
+    facts.push([
+      "Scan",
+      <Link key="scan" href={`/scan/${scanId}`} className="text-ink underline underline-offset-4">
+        View scan and what left this machine
+      </Link>,
+    ]);
+  if (!facts.length) return null;
+  return (
+    <div className="mt-4">
+      <dl className="grid gap-x-6 gap-y-1.5 text-[13px] sm:grid-cols-[120px_1fr]">
+        {facts.map(([k, v]) => (
+          <div key={k} className="contents">
+            <dt className="text-faint">{k}</dt>
+            <dd className="text-ink-2">{v}</dd>
+          </div>
+        ))}
+      </dl>
+      {ev.kind === "public_match" && (
+        <p className="mt-3 text-xs text-faint">A match shows this text is publicly available on that page. It doesn&apos;t show the publication was unauthorized.</p>
+      )}
     </div>
   );
 }
@@ -107,10 +157,18 @@ export default function FindingPage() {
 
       {ev && (
         <div className={isPublic ? "grid gap-3 md:grid-cols-2" : ""}>
-          <Text label={`Your file${ev.location.path ? ` · ${ev.location.path}` : ""}`} text={ev.availability === "withheld_by_policy" ? "Hidden for this client." : ev.local_text} />
+          <Text label={`Your file${ev.location.path ? ` · ${ev.location.path}` : ""}`} text={
+              ev.availability === "withheld_by_policy"
+                ? "Hidden for this client."
+                : ev.availability === "evidence_unavailable"
+                  ? "Uploaded text is held only in the engine's memory and isn't kept on disk. The engine has restarted since this scan, so the text is gone. Scan the file again to compare side by side."
+                  : ev.local_text
+            } />
           {isPublic && ev.public && <Text label={ev.public.url} meta={`fetched ${relativeTime(ev.public.retrieved_at)}`} text={ev.public_text} />}
         </div>
       )}
+
+      {ev && <EvidenceFacts ev={ev} scanId={o?.scan_id} />}
 
       {o?.suggested_fix && (
         <section className="mt-8">

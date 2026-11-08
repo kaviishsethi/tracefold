@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import "./app-polish.css";
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { CheckCircle2, Globe, LayoutGrid, ScanSearch, Settings2, ShieldAlert, type LucideIcon } from "lucide-react";
+import { CheckCircle2, Globe, LayoutGrid, ScanSearch, ShieldAlert, type LucideIcon } from "lucide-react";
 import { api, useWorkspace, ws, type Action, type ApiError, type Finding, type Page, type Workspace } from "@/lib/api";
 import { Spinner, Wordmark, cx } from "./ui";
 
@@ -90,7 +91,6 @@ function NavLink({ href, label, icon: Icon, count, active }: { href: string; lab
 function AppShell({ path, children }: { path: string; children: ReactNode }) {
   const state = useWorkspace();
   const counts = useCounts(state.current?.id ?? null);
-  const setupPage = path.startsWith("/setup");
   const active = (href: string) => path === href || path.startsWith(href + "/");
 
   return (
@@ -101,39 +101,41 @@ function AppShell({ path, children }: { path: string; children: ReactNode }) {
             <Wordmark className="text-[12px]" />
           </Link>
 
-          <div className="mt-6 rounded-ctl border border-line bg-panel px-3 py-2.5">
-            <p className="text-[11px] text-faint">Workspace</p>
-            {state.list.length > 1 ? (
-              <select
-                aria-label="Workspace"
-                value={state.current?.id}
-                onChange={(e) => state.select(e.target.value)}
-                className="-ml-1 mt-0.5 w-full bg-transparent text-sm font-medium text-ink outline-none"
-              >
-                {state.list.map((w) => (
-                  <option key={w.id} value={w.id}>
-                    {w.name}
-                  </option>
-                ))}
-              </select>
-            ) : (
-              <p className="mt-0.5 truncate text-sm font-medium text-ink">{state.current?.name ?? "Not connected"}</p>
-            )}
-          </div>
-
-          <nav className="mt-5 flex flex-col gap-0.5" aria-label="Main">
+          <nav className="mt-6 flex flex-col gap-0.5" aria-label="Main">
             {NAV.map((n) => (
               <NavLink key={n.href} {...n} count={n.count ? counts[n.count] : undefined} active={active(n.href)} />
             ))}
           </nav>
 
-          <div className="mt-auto flex flex-col gap-0.5 border-t border-line pt-3">
-            {state.error && (
-              <p className="flex items-center gap-2 px-3 py-1.5 text-xs text-crit">
+          <div className="mt-auto border-t border-line px-3 pt-3 text-xs">
+            {state.error ? (
+              <p className="flex items-center gap-2 text-crit">
                 <span className="size-1.5 rounded-full bg-crit" /> Engine not reachable
               </p>
+            ) : (
+              <>
+                <p className="flex items-center gap-2 text-mute">
+                  <span className="size-1.5 rounded-full bg-accent" /> Local engine connected
+                </p>
+                {state.list.length > 1 ? (
+                  <select
+                    aria-label="Workspace"
+                    value={state.current?.id}
+                    onChange={(e) => state.select(e.target.value)}
+                    className="-ml-1 mt-1 w-full bg-transparent text-[13px] text-ink-2 outline-none"
+                  >
+                    {state.list.map((w) => (
+                      <option key={w.id} value={w.id}>
+                        {w.name}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <p className="mt-1 truncate text-[13px] text-ink-2">{state.current?.name}</p>
+                )}
+                <p className="mt-0.5 text-faint">Shared with your coding assistant</p>
+              </>
             )}
-            <NavLink href="/setup" label="Setup" icon={Settings2} active={active("/setup")} />
           </div>
         </aside>
 
@@ -157,7 +159,7 @@ function AppShell({ path, children }: { path: string; children: ReactNode }) {
               <div className="flex justify-center py-24">
                 <Spinner />
               </div>
-            ) : state.error && !setupPage ? (
+            ) : state.error ? (
               <NotConnected error={state.error} />
             ) : (
               children
@@ -169,14 +171,29 @@ function AppShell({ path, children }: { path: string; children: ReactNode }) {
   );
 }
 
+const START = [
+  ["Engine", "cd server && uv run tracefold serve --port 8787"],
+  ["Web app", "cd frontend && npm run dev"],
+];
+
 function NotConnected({ error }: { error: ApiError }) {
   return (
-    <div className="mx-auto max-w-md py-16 text-center">
-      <h1 className="text-xl text-ink">Tracefold isn&apos;t set up yet</h1>
+    <div className="mx-auto max-w-xl py-16">
+      <h1 className="text-xl text-ink">The engine isn&apos;t reachable</h1>
       <p className="mt-2 text-sm text-mute">{error.message}</p>
-      <Link href="/setup" className="mt-6 inline-flex h-10 items-center rounded-ctl bg-[#fafafa] px-4 text-sm font-medium text-[#0a0c0c]">
-        Set up
-      </Link>
+      <p className="mt-6 text-sm text-ink-2">Start it from the repository root, then reload this page:</p>
+      <ol className="mt-3 space-y-2">
+        {START.map(([label, cmd]) => (
+          <li key={label} className="rounded-card border border-line bg-panel px-4 py-3">
+            <p className="text-xs text-faint">{label}</p>
+            <code className="mt-1 block overflow-x-auto whitespace-nowrap font-mono text-[13px] text-ink-2">{cmd}</code>
+          </li>
+        ))}
+      </ol>
+      <p className="mt-4 text-sm text-mute">
+        First time? <code className="font-mono text-ink-2">uv run tracefold quickstart --root &lt;your project&gt;</code> creates the workspace and tokens. Full steps are in{" "}
+        <code className="font-mono text-ink-2">SETUP.md</code>.
+      </p>
     </div>
   );
 }

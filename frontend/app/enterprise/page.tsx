@@ -236,7 +236,7 @@ export default function Enterprise() {
                 <LinkButton href="/contact?topic=enterprise" variant="secondary">
                   Book a walkthrough
                 </LinkButton>
-                <Link href="/setup" className="inline-flex h-10 items-center gap-1.5 px-2 text-sm text-ink hover:underline hover:underline-offset-4">
+                <Link href="/scan" className="inline-flex h-10 items-center gap-1.5 px-2 text-sm text-ink hover:underline hover:underline-offset-4">
                   Start free <ArrowRight className="size-4" aria-hidden />
                 </Link>
               </div>

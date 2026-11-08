@@ -1,0 +1,51 @@
+/* App craft pass following unslop by Damir Sokolovsky (@heydamir), CC BY 4.0.
+   Existing palette, type, navigation and section order are preserved. */
+.app-polish { min-height: 100vh; }
+.app-polish .text-faint { color: #949c99; }
+.app-polish .ui-panel { box-shadow: none; }
+.app-polish main h1 { font-size: 28px; line-height: 1.2; letter-spacing: -.02em; }
+.app-polish main h1 + p { margin-top: 8px; line-height: 1.6; }
+.app-polish main h2 { letter-spacing: 0; }
+.app-polish .ui-panel > header { padding: 12px 20px; }
+.app-polish .ui-panel > header h2 { font-size: 14px; }
+.app-polish .ui-panel > header > div { gap: 8px; }
+.app-polish .ui-button { min-height: 40px; transition-duration: 160ms; }
+.app-polish button, .app-polish summary { cursor: pointer; }
+.app-polish button:disabled { cursor: not-allowed; }
+.app-polish input:not([type=checkbox]):not([type=radio]):not([type=file]), .app-polish select { min-height: 40px; }
+.app-polish input[type=checkbox], .app-polish input[type=radio] { accent-color: #4fb8a6; }
+.app-polish :focus-visible { outline: 2px solid #4fb8a6; outline-offset: 3px; }
+.app-polish main :is(p, label) { text-wrap: pretty; overflow-wrap: anywhere; }
+.app-polish main .text-xs { line-height: 1.6; }
+.app-polish main [class~="text-[11px]"] { font-size: 12px; }
+.app-polish main [class~="text-[11.5px]"] { font-size: 12px; }
+.app-polish main [class~="tracking-[-0.03em]"]:not(h1) { letter-spacing: 0; }
+.app-polish main pre { line-height: 1.8; overflow-wrap: anywhere; }
+.app-polish nav[aria-label=Main] > a { min-height: 36px; }
+.app-polish nav[aria-label=Main] > a > span { background: transparent; color: #9aa3a1; font-size: 12px; padding: 0; min-width: auto; }
+.app-polish .discovery-pack { border-color: transparent; border-radius: 8px; }
+.app-polish .discovery-pack:has(input:checked) { border-color: rgb(255 255 255 / .16); }
+.app-polish .discovery-check { min-height: 32px; padding-block: 4px; }
+.app-polish .discovery-status { white-space: nowrap; }
+.app-polish .discovery-guide .ui-panel { border: 0; background: transparent; }
+.app-polish .discovery-guide .ui-panel > header { padding: 0 0 12px; }
+.app-polish .discovery-guide .ui-panel li { padding: 16px 0; }
+.app-polish .discovery-guide p { line-height: 1.7; }
+.app-polish .app-finding-row { min-height: 76px; padding: 16px 20px; }
+.app-polish .app-finding-row > span:nth-child(2) > span + span { margin-top: 4px; }
+.app-polish details > summary { min-height: 40px; align-content: center; }
+@media (max-width: 640px) {
+  .app-polish > header > div { height: auto; min-height: 56px; flex-wrap: wrap; gap: 8px 16px; padding-block: 12px; }
+  .app-polish nav[aria-label=Main] { width: 100%; justify-content: space-between; }
+  .app-polish nav[aria-label=Main] > a { min-height: 44px; padding-inline: 12px; }
+  .app-polish .ui-button, .app-polish input:not([type=checkbox]):not([type=radio]):not([type=file]) { min-height: 44px; }
+  .app-polish main { padding-top: 32px; }
+  .app-polish main h1 { font-size: 26px; }
+  .app-polish .ui-panel > header { padding: 12px 16px; }
+  .app-polish .app-finding-row { flex-wrap: wrap; gap: 8px 12px; padding: 16px; }
+  .app-polish .app-finding-row > span:nth-child(2) { flex-basis: calc(100% - 24px); }
+  .app-polish .app-finding-row > span:last-child { margin-left: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .app-polish *, .app-polish *::before, .app-polish *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

@@ -193,3 +193,16 @@ result.
 - The model endpoint must be loopback. Model text is scrubbed of secrets and long verbatim echoes before storage.
 - None of this makes the deployment private on its own. Strict-private mode still requires an observed
   network-denial test of the private runtime and a local-model MCP host.
+
+## Automatic upload discovery
+
+Submit `POST /v1/workspaces/{ws_id}/scans` with `automatic_discovery: true`, `input_id` and checks
+`["public_match", "local_risk"]`. Do not supply `public_sources` or `public_discovery` simultaneously. This mode
+requires submit permission, not configure permission. Company names are inferred locally from a bounded sample
+of parsed input; only grounded, validated names fill fixed search templates. Inferred names are sent externally.
+This mode does not assert that an inferred name is public or that the whole web was checked.
+
+The accepted scan resolves its plan asynchronously. Inspect `summary.automatic_discovery` for inferred companies,
+status, and failure reason, and the source table and ledger for exact outgoing searches. Missing company context
+or a missing local model fails public coverage without suppressing local checks. Identical resolved plans are reused.
+Manual approved-identity discovery and source manifests remain available as explicit alternatives.

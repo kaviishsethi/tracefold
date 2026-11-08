@@ -3,13 +3,92 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { api, coverageNote, isTerminal, useScan, ws, type Finding, type FindingKind, type Page } from "@/lib/api";
+import { api, coverageNote, isTerminal, useScan, ws, type Finding, type FindingKind, type Page, type Scan, type Stage } from "@/lib/api";
 import { relativeTime } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
 import { Box, Crumbs, Disclosure, FindingRow, H1, Note, scanState, source } from "@/components/bits";
 import { AgentPrompt, scanPrompt } from "@/components/agent-prompt";
 import { SourcesPanel } from "@/components/scan-sources";
-import { ErrorNote, Spinner } from "@/components/ui";
+import { LedgerPanel } from "@/components/scan-ledger";
+import { ErrorNote, Spinner, cx } from "@/components/ui";
+
+const STAGE_LABEL: Record<string, string> = {
+  parse: "Read files",
+  public_discovery: "Search",
+  public_retrieval: "Fetch pages",
+  public_match: "Compare",
+  local_rules: "Local rules",
+  model_review: "Local model review",
+  publish: "Publish",
+};
+
+const STAGE_TONE: Record<Stage["status"], string> = {
+  pending: "bg-line-strong",
+  running: "bg-accent animate-pulse",
+  done: "bg-accent",
+  failed: "bg-crit",
+  skipped: "bg-transparent ring-1 ring-line-strong",
+  cancelled: "bg-med",
+};
+
+/** The pipeline as the engine reports it: search, fetch and compare are the public half, rules and model the local half. */
+function Stages({ scan }: { scan: Scan }) {
+  const stages = scan.stages.filter((s) => s.name in STAGE_LABEL && s.name !== "publish");
+  if (!stages.length) return null;
+  return (
+    <ol className="mb-8 flex flex-wrap items-center gap-x-1 gap-y-2 text-[13px]" aria-label="Scan stages">
+      {stages.map((s, i) => (
+        <li key={s.name} className="flex items-center gap-1">
+          {i > 0 && <span className="px-1 text-faint" aria-hidden>→</span>}
+          <span
+            className={cx(
+              "inline-flex items-center gap-2 rounded-ctl border border-line px-2.5 py-1",
+              s.status === "skipped" ? "text-faint" : s.status === "failed" ? "text-crit" : "text-ink-2",
+            )}
+            title={s.detail ? s.detail.replaceAll("_", " ") : s.status}
+          >
+            <span className={cx("size-1.5 rounded-full", STAGE_TONE[s.status])} />
+            {STAGE_LABEL[s.name]}
+            {s.status === "skipped" && <span className="text-[11px]">skipped</span>}
+          </span>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+interface AutoDiscovery {
+  status: "ready" | "unavailable";
+  companies?: string[];
+  privacy_notice?: string;
+  reason?: string;
+}
+
+/** Automatic discovery: which company names the local model found in the files, and what that means for privacy. */
+function Identified({ auto }: { auto: AutoDiscovery }) {
+  return (
+    <div className="mb-8 rounded-card border border-line bg-panel px-4 py-3 text-[13px]">
+      {auto.status === "ready" ? (
+        <>
+          <p className="text-ink">
+            Company identified on this machine:{" "}
+            {(auto.companies ?? []).map((c, i) => (
+              <span key={c}>
+                {i > 0 && ", "}
+                <span className="font-medium">{c}</span>
+              </span>
+            ))}
+          </p>
+          {auto.privacy_notice && <p className="mt-1 text-xs text-mute">{auto.privacy_notice}</p>}
+        </>
+      ) : (
+        <p className="text-med">
+          No company could be identified ({(auto.reason ?? "unknown").replaceAll("_", " ")}), so public matching is inconclusive. Local rules still ran.
+        </p>
+      )}
+    </div>
+  );
+}
 
 const GROUPS: [FindingKind, string][] = [
   ["public_exposure", "Found on public pages"],
@@ -40,6 +119,7 @@ export default function ScanDetail() {
 
   const st = scanState(scan);
   const drafted = typeof scan.summary.actions_drafted === "number" ? scan.summary.actions_drafted : 0;
+  const auto = scan.summary.automatic_discovery as AutoDiscovery | undefined;
   const problems = scan.coverage.filter((c) => c.status === "partial" || c.status === "failed");
 
   return (
@@ -64,6 +144,10 @@ export default function ScanDetail() {
         </Link>
       )}
 
+      <Stages scan={scan} />
+
+      {auto && <Identified auto={auto} />}
+
       {done &&
         GROUPS.map(([kind, label]) => {
           const items = (findings ?? []).filter((f) => f.kind === kind);
@@ -80,6 +164,12 @@ export default function ScanDetail() {
         })}
 
       {done && workspace && scan.checks.includes("public_match") && <div className="mb-8"><SourcesPanel workspaceId={workspace.id} scan={scan} /></div>}
+
+      {done && workspace && (
+        <div className="mb-8">
+          <LedgerPanel workspaceId={workspace.id} scanId={scan.scan_id} />
+        </div>
+      )}
 
       {(problems.length > 0 || scan.errors.length > 0) && (
         <Disclosure label="What didn't finish">

@@ -21,7 +21,7 @@ const SIZE: Record<Size, string> = { sm: "h-8 px-3 text-[13px]", md: "h-10 px-4 
 
 function buttonClass(variant: Variant, size: Size, className?: string) {
   return cx(
-    "inline-flex shrink-0 items-center justify-center gap-2 rounded-ctl font-medium whitespace-nowrap",
+    "ui-button inline-flex shrink-0 items-center justify-center gap-2 rounded-ctl font-medium whitespace-nowrap",
     "transition-[background-color,border-color,color,transform] duration-200 ease-out-expo active:translate-y-px",
     "disabled:pointer-events-none disabled:opacity-45",
     VARIANT[variant],
@@ -89,7 +89,7 @@ export function Panel({
   bodyClassName?: string;
 }) {
   return (
-    <section className={cx("overflow-hidden rounded-card border border-line bg-panel shadow-[0_12px_32px_rgb(0_0_0/0.2)]", className)}>
+    <section className={cx("ui-panel overflow-hidden rounded-card border border-line bg-panel shadow-[0_12px_32px_rgb(0_0_0/0.2)]", className)}>
       {(title || meta || actions) && (
         <header className="flex min-h-11 items-center justify-between gap-3 border-b border-line px-4 py-2">
           <div className="flex min-w-0 items-center gap-2.5">

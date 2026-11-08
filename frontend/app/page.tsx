@@ -278,7 +278,7 @@ export default function Landing() {
               See exactly where they&apos;re public, then approve the takedown. Runs on your machine.
             </p>
             <div className="rise mt-8 flex flex-wrap items-center gap-3" style={{ animationDelay: "340ms" }}>
-              <LinkButton href="/setup" size="lg">
+              <LinkButton href="/scan" size="lg">
                 Get started <ArrowRight className="size-4" aria-hidden />
               </LinkButton>
               <LinkButton href="#how" variant="secondary" size="lg">
@@ -395,7 +395,7 @@ export default function Landing() {
                 <ArrowRight className="size-[1.05em] text-mute" aria-hidden />
                 First scan in minutes
               </p>
-              <LinkButton href="/setup" className="justify-self-start lg:justify-self-center">
+              <LinkButton href="/scan" className="justify-self-start lg:justify-self-center">
                 Get started
               </LinkButton>
               <p className="text-[clamp(18px,1.6vw,24px)] font-medium leading-snug tracking-[-0.02em] text-ink lg:justify-self-end">

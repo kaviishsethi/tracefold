@@ -60,6 +60,11 @@ Invented internal-style documents for real companies, each containing short (≤
 available, with sources in `docs/demo-pairs/mock-leaks/*/README.md`. They are simulations, never real company material.
 Source pages were chosen by an independent web search before any discovery run.
 
+> **November 8, 2026:** only the Apple memo mock is still kept (`docs/demo-pairs/mock-leaks/apple_memo`, case
+> `mock_apple_memo`). The spec-sheet mocks and the Google and Samsung memo mocks never matched, so their files and cases
+> were removed; the results below and the `v3/` records for them are kept as history. The GSA TTS pair (0 matches in every run) and the
+> Twitch discovery-only case (no upload, so it cannot match) were removed the same day.
+
 **Spec-sheet mocks (Apple iPhone 18 Pro, Samsung Galaxy S27 Ultra, Google Pixel 11): 0 matches in 12 scans.** Each
 quoted one outlet's own prose. With the product name as alias, the new `product_leaks` preset returned exactly on-topic
 leak coverage (MacRumors, Macworld, CNET, The Verge, Android Central, Android Authority; 0–5% noise), but other outlets'
