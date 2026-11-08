@@ -29,18 +29,22 @@ function day(ts: string | undefined) {
   return { month: d.toLocaleString("en", { month: "short" }), day: d.getDate(), year: d.getFullYear() };
 }
 
-/** The site's own favicon, or its first letter when there isn't one. */
+/** The icon the site declares (served by /api/icon, which drops empty placeholders), or its first letter. */
 function SiteIcon({ url, site }: { url: string; site: string }) {
   const [failed, setFailed] = useState(false);
-  let origin = "";
-  try {
-    origin = new URL(url).origin;
-  } catch {}
+  const h = host(url);
   return (
-    <span className="grid size-10 shrink-0 place-content-center overflow-hidden rounded-[8px] border border-line bg-raised">
-      {!failed && origin ? (
+    <span className={cx("grid size-10 shrink-0 place-content-center overflow-hidden rounded-[8px] border", !failed && h ? "border-transparent bg-white" : "border-line bg-raised")}>
+      {!failed && h ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={`${origin}/favicon.ico`} alt="" referrerPolicy="no-referrer" className="size-6" onError={() => setFailed(true)} />
+        <img
+          src={`/api/icon?host=${encodeURIComponent(h)}`}
+          alt=""
+          referrerPolicy="no-referrer"
+          className="size-6"
+          onError={() => setFailed(true)}
+          onLoad={(e) => e.currentTarget.naturalWidth < 8 && setFailed(true)}
+        />
       ) : (
         <span className="text-sm font-semibold text-ink-2">{site.charAt(0).toUpperCase()}</span>
       )}
@@ -48,10 +52,32 @@ function SiteIcon({ url, site }: { url: string; site: string }) {
   );
 }
 
-function SiteCard({ g }: { g: PageMatch }) {
+/** One public page with its passages from every file in the scan. */
+interface Site {
+  key: string;
+  url: string;
+  title: string;
+  files: PageMatch[]; // one per file, each with that file's passages
+  latestAt: string | undefined;
+}
+
+function bySite(groups: PageMatch[]): Site[] {
+  const out = new Map<string, Site>();
+  for (const g of groups) {
+    const s = out.get(g.url);
+    if (s) {
+      s.files.push(g);
+      if ((g.latestAt ?? "") > (s.latestAt ?? "")) s.latestAt = g.latestAt;
+    } else out.set(g.url, { key: g.url, url: g.url, title: g.title, files: [g], latestAt: g.latestAt });
+  }
+  return [...out.values()];
+}
+
+function SiteCard({ g }: { g: Site }) {
   const [open, setOpen] = useState(false);
   const { site, headline } = split(g.title, g.url);
-  const n = g.items.length;
+  const items = g.files.flatMap((f) => f.items);
+  const n = items.length;
   return (
     <div className="rounded-card border border-line bg-panel p-5">
       <div className="flex items-center gap-3">
@@ -63,11 +89,25 @@ function SiteCard({ g }: { g: PageMatch }) {
       </div>
       <p className="mt-4 text-sm leading-relaxed text-ink-2">{headline}</p>
       <p className="mt-3 text-[13px] text-mute">
-        {n} {n === 1 ? "passage" : "passages"} from <span className="font-mono text-[12px] text-ink-2">{g.path}</span>
+        {g.files.length === 1 ? (
+          <>
+            {n} {n === 1 ? "passage" : "passages"} from <span className="font-mono text-[12px] text-ink-2">{g.files[0].path}</span>
+          </>
+        ) : (
+          <>
+            {n} passages from {g.files.length} files:{" "}
+            {g.files.map((f, i) => (
+              <span key={f.key}>
+                {i > 0 && ", "}
+                <span className="font-mono text-[12px] text-ink-2">{f.path}</span> ({f.items.length})
+              </span>
+            ))}
+          </>
+        )}
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         {n === 1 ? (
-          <Link href={`/findings/${g.items[0].finding_id}`} className="inline-flex h-8 items-center rounded-ctl border border-line-strong px-3 text-[13px] text-ink hover:bg-panel-2">
+          <Link href={`/findings/${items[0].finding_id}`} className="inline-flex h-8 items-center rounded-ctl border border-line-strong px-3 text-[13px] text-ink hover:bg-panel-2">
             View passage
           </Link>
         ) : (
@@ -85,10 +125,11 @@ function SiteCard({ g }: { g: PageMatch }) {
       </div>
       {open && (
         <ul className="mt-3 border-t border-line pt-2">
-          {g.items.map((f) => (
+          {items.map((f) => (
             <li key={f.finding_id}>
               <Link href={`/findings/${f.finding_id}`} className="flex items-center justify-between rounded-[6px] px-2 py-1.5 text-[13px] text-ink-2 hover:bg-panel-2 hover:text-ink">
                 <span>
+                  {g.files.length > 1 && <span className="mr-2 font-mono text-[12px] text-faint">{f.path}</span>}
                   {passageLabel(f)}
                   {f.latest?.title?.startsWith("Edited") && <span className="ml-2 text-xs text-faint">edited</span>}
                 </span>
@@ -103,16 +144,25 @@ function SiteCard({ g }: { g: PageMatch }) {
 
 /** A count of sites, then one card per site along a line, alternating sides on wide screens. */
 export function LeakTimeline({ groups }: { groups: PageMatch[] }) {
-  const sites = new Set(groups.map((g) => host(g.url))).size;
+  const merged = bySite(groups);
+  const sites = new Set(merged.map((g) => host(g.url))).size;
   const files = [...new Set(groups.map((g) => g.path))];
-  const ordered = [...groups].sort((a, b) => (b.latestAt ?? "").localeCompare(a.latestAt ?? "") || b.items.length - a.items.length);
+  const count = (g: Site) => g.files.reduce((n, f) => n + f.items.length, 0);
+  const ordered = merged.sort((a, b) => (b.latestAt ?? "").localeCompare(a.latestAt ?? "") || count(b) - count(a));
   return (
     <section className="mb-10">
       <div className="mb-10 rounded-card border border-crit/30 bg-crit/[0.06] px-6 py-8 text-center">
         <p className="text-5xl font-semibold tracking-[-0.03em] text-crit">{sites}</p>
         <p className="mt-2 text-lg font-medium text-ink">{sites === 1 ? "site" : "sites"} with text from your files</p>
         <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-mute">
-          Passages from {files.length === 1 ? <span className="font-mono text-[13px] text-ink-2">{files[0]}</span> : `${files.length} files`} appear
+          Passages from{" "}
+          {files.map((f, i) => (
+            <span key={f}>
+              {i > 0 && (i === files.length - 1 ? " and " : ", ")}
+              <span className="font-mono text-[13px] text-ink-2">{f}</span>
+            </span>
+          ))}{" "}
+          appear
           on these public pages. Check each one before asking for a takedown.
         </p>
       </div>

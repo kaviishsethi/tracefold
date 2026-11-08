@@ -19,7 +19,7 @@ class Limits:
     scan_deadline_seconds: int = 5 * 60
     max_public_pages: int = 20
     max_public_text_per_page: int = 200 * 1024
-    max_public_raw_bytes_per_page: int = 2 * 1024 * 1024
+    max_public_raw_bytes_per_page: int = 6 * 1024 * 1024  # article pages are mostly markup; text stays capped below
     max_provider_requests: int = 40
     max_public_cache_bytes: int = 50 * 1024 * 1024
     public_http_concurrency: int = 2
