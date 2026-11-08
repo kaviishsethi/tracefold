@@ -147,3 +147,12 @@ def test_model_down_still_searches_own_company(env, monkeypatch):
     scan = env.scan(inp['input_id'], checks=['public_match'], automatic_discovery=True, model_review=False)
     assert scan['summary']['automatic_discovery']['companies'] == ['Northwind Relay']
     assert all('Northwind Relay' in q for q in scan['summary']['tested_queries'])
+
+
+def test_plan_uses_only_providers_with_keys(env, monkeypatch):
+    fake_model(env, monkeypatch, ['Acme'])
+    env.engine.test_env = {'TAVILY_API_KEY': 'tvly-test-key-abcdef'}
+    inp = env.upload({'policy.md': b'Acme security policy'})
+    scan = env.scan(inp['input_id'], checks=['public_match'], automatic_discovery=True, model_review=False)
+    plan = env.engine.repo.get_query_plan(scan['public_discovery']['query_plan_id'])['plan']
+    assert {q['provider'] for q in plan['searches']} == {'tavily'}
