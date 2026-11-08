@@ -35,7 +35,9 @@ Target length **about 2:45**. The rules say projects without a video are not jud
 ## Recording the web clips automatically
 
 `demo/record.mjs` drives the real app and saves the web shots as 1080p clips in `demo/out/` (01 intro, 02 industry,
-03 public copies, 04 risks and takedown, 05 schedule, 06 end card). Record the Claude Code and Wi-Fi-off shots by hand.
+03 public copies, 04 risks and takedown, 05 schedule, 06 Claude Code, 06b fixed in the app, 08 end card). Record the
+Wi-Fi-off shot (07) by hand. Clip 06 runs the real Claude Code CLI in a terminal page against a practice repo
+(`DEMO_REPO`, a git repo with an uncommitted fake key) with Tracefold connected for that run only (`DEMO_MCP_CONFIG`).
 
 ```bash
 cd demo && npm install && npx playwright install chromium
@@ -86,10 +88,12 @@ Speed up 6s–19s (the scan running) to about 4 seconds and put "sped up" on scr
 
 [VO] "You can also set any scan to run again on a schedule, starting whenever you want."
 
-### 1:48–2:08 · Claude Code over MCP (to record)
+### 1:48–2:08 · Clips 06 and 06b · Claude Code over MCP
 
-[SCREEN] Claude Code in a terminal, running the app's scan prompt: `scan_changes` → `get_findings` → edits the file →
-`recheck_fix`. Cut to Findings showing "Not detected in checked version".
+[SCREEN] Clip 06 (sped up about 5×): Claude Code in ~/halyard-api gets the app's scan prompt, calls Tracefold, shows
+its edit to config/storage.py (hardcoded keys out, `os.environ.get` in), then calls Tracefold again to recheck. Clip
+06b: Findings with "All, including closed", where both config/storage.py secrets read "Not detected in checked
+version".
 
 [VO] "Tracefold also works inside coding tools through MCP. Here, Claude Code checks my code changes, finds an AWS key,
 moves it out of the code, and checks again. Claude Code can fix code, but it can't approve takedowns."
@@ -102,7 +106,7 @@ finish; "What didn't finish" lists the public check.
 [VO] "Now Wi-Fi is off. The scan still finishes, because the matching and the AI model run on this computer. The web
 search needs internet, so Tracefold says that part didn't finish. It doesn't call the file clean."
 
-### 2:33–2:48 · Clip 06 · Title card
+### 2:33–2:48 · Clip 08 · Title card
 
 [VO] "Everything in this video ran live. The sample files are public company documents."
 

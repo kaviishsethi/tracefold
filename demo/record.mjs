@@ -4,8 +4,9 @@
 //   node record.mjs 03 05          # only some clips
 // Needs the engine, web app and Ollama running, and a search key for clip 03. Output: demo/out/NN-name.mp4
 import { chromium } from "playwright";
+import { startTerminal } from "./terminal.mjs";
 import { execFileSync } from "node:child_process";
-import { mkdirSync, readFileSync, renameSync, rmSync } from "node:fs";
+import { mkdirSync, readFileSync, renameSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -18,6 +19,19 @@ const SAMPLES = join(HERE, "..", "frontend", "public", "examples");
 const FIXTURES = join(HERE, "..", "server", "fixtures", "private");
 // Pages are laid out and recorded at 1280x720, then scaled to 1080p by ffmpeg, so the interface reads large on video.
 const SIZE = { width: 1280, height: 720 };
+
+// The practice repo's uncommitted change for the Claude Code clip. Made-up credentials, not real keys.
+const PRACTICE_FILE = `"""Upload storage settings."""
+import boto3
+
+AWS_ACCESS_KEY_ID = "AKIAQ7TRACEFOLDDEMOX"
+AWS_SECRET_ACCESS_KEY = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYDEMOKEY12"
+BUCKET = "halyard-uploads"
+
+
+def client():
+    return boto3.client("s3", aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+`;
 
 // ---------- engine API, through the web app's proxy ----------
 async function api(path, init = {}) {
@@ -254,8 +268,78 @@ const CLIPS = {
     await moveTo(page, page.getByRole("heading", { name: "Scheduled checks" }), { pause: 3000 });
   },
 
+  // 1:45–2:05 Claude Code over MCP (sped up in the edit). Runs the real Claude Code CLI in a terminal page, with
+  // Tracefold connected for this run only (--mcp-config); it may use the Tracefold tools and read/edit files, nothing else.
+  "06-claude-code": async (page, mark) => {
+    const repo = process.env.DEMO_REPO, mcp = process.env.DEMO_MCP_CONFIG;
+    if (!repo || !mcp) throw new Error("set DEMO_REPO (a git repo with an uncommitted secret) and DEMO_MCP_CONFIG (claude --mcp-config file)");
+    // Put the fake key back so every take starts from the same uncommitted change.
+    writeFileSync(join(repo, "config", "storage.py"), PRACTICE_FILE);
+    const tools = ["scan_changes", "get_scan", "get_findings", "explain_finding", "recheck_fix"].map((t) => `mcp__tracefold__${t}`);
+    const term = await startTerminal({
+      cmd: "claude", cwd: repo, env: { PWD: repo },
+      args: ["--mcp-config", mcp, "--strict-mcp-config", "--permission-mode", "acceptEdits",
+        "--allowedTools", ...tools, "Read", "Edit", "--disallowedTools", "Bash", "WebFetch", "WebSearch"],
+    });
+    try {
+      await page.goto(term.url);
+      const text = () => page.evaluate(() => window.__text());
+      const until = async (re, ms) => { const end = Date.now() + ms; while (Date.now() < end) { if (re.test(await text())) return true; await sleep(500); } return false; };
+      await until(/trust|Welcome|>/i, 30_000);
+      await sleep(1500);
+      await page.locator(".xterm-helper-textarea").focus();
+      if (/trust this folder/i.test(await text())) {
+        // The highlighted default is "No, exit": move to "Yes, I trust this folder" first.
+        await page.keyboard.press("ArrowDown"); await sleep(400);
+        await page.keyboard.press("Enter");
+        await until(/for shortcuts|\? for|>\s/i, 30_000);
+        await sleep(2000);
+      }
+      mark();
+      await sleep(1200);
+      await page.locator(".xterm-helper-textarea").focus();
+      await page.keyboard.insertText("Call the tracefold tool scan_changes for this repository (changes since HEAD, including untracked files). "
+        + "When it finishes, call get_findings with its scan_id, fix each local risk and call recheck_fix for it, and summarize the outcome. "
+        + "Don't print or test any secret value you see.");
+      await sleep(1500);
+      await page.keyboard.press("Enter");
+      // Done when the engine has the assistant's rechecks, and Claude Code has stopped writing its summary.
+      const started = new Date(Date.now() - 5000).toISOString();
+      const end = Date.now() + 300_000;
+      let rechecked = false;
+      while (Date.now() < end && !rechecked) {
+        const scans = (await api("/scans?limit=20")).items.filter((x) => x.created_at >= started && x.started_from === "assistant");
+        rechecked = scans.some((x) => !x.recheck_of) && scans.some((x) => x.recheck_of && !["queued", "running"].includes(x.state));
+        await sleep(2000);
+      }
+      if (!rechecked) console.warn("  No recheck from Claude Code within 5 minutes; the clip shows how far it got.");
+      let last = "", quiet = 0;
+      while (quiet < 8 && Date.now() < end + 90_000) {
+        const t = await text();
+        quiet = t === last ? quiet + 1 : 0;
+        last = t;
+        await sleep(1000);
+      }
+      await sleep(2000);
+    } finally {
+      term.close();
+    }
+  },
+
+  // Right after the Claude Code clip: the same finding in the web app, now marked fixed.
+  "06b-fixed-in-app": async (page, mark) => {
+    await page.goto(`${APP}/findings`);
+    await ready(page);
+    mark();
+    const all = page.getByRole("button", { name: /All, including closed/ });
+    if (await all.count()) await click(page, all, { after: 1200 });
+    const fixed = page.getByText(/Not detected in checked version/i).first();
+    if (await fixed.count()) await moveTo(page, fixed, { pause: 4500 });
+    else await sleep(3000);
+  },
+
   // 2:30–2:45 End card
-  "06-end-card": (page, mark) => titleCard(page, mark, 15),
+  "08-end-card": (page, mark) => titleCard(page, mark, 15),
 };
 
 const FRESH = process.argv.includes("--fresh");
