@@ -7,6 +7,7 @@ import { api, coverageNote, isTerminal, useScan, ws, type Finding, type FindingK
 import { relativeTime } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
 import { Box, Crumbs, Disclosure, FindingRow, H1, Note, scanState, source } from "@/components/bits";
+import { AgentPrompt, scanPrompt } from "@/components/agent-prompt";
 import { SourcesPanel } from "@/components/scan-sources";
 import { ErrorNote, Spinner } from "@/components/ui";
 
@@ -45,7 +46,10 @@ export default function ScanDetail() {
     <div>
       <Crumbs trail={[["/scan", "Scans"]]} current={`${source(scan)}, ${relativeTime(scan.created_at)}`} />
       <div>
-        <H1 sub={`${source(scan)} · ${relativeTime(scan.created_at)}${scan.recheck_of ? " · recheck" : ""}`}>
+        <H1
+          sub={`${source(scan)} · ${relativeTime(scan.created_at)}${scan.recheck_of ? " · recheck" : ""}`}
+          right={done && (findings ?? []).some((f) => f.status === "open") ? <AgentPrompt text={scanPrompt(scan.scan_id)} label="Copy fixes for your agent" /> : undefined}
+        >
           <span className="inline-flex items-center gap-3">
             {st.tone === "busy" && <Spinner className="size-5" />}
             {st.text}

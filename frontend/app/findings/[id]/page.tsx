@@ -10,6 +10,7 @@ import { relativeTime } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
 import { ActionCard } from "@/components/action-card";
 import { Crumbs, Disclosure, Dot, findingPlace } from "@/components/bits";
+import { AgentPrompt, findingPrompt } from "@/components/agent-prompt";
 import { Button, ErrorNote, Spinner } from "@/components/ui";
 
 function Text({ label, meta, text }: { label: string; meta?: string; text: string | null }) {
@@ -88,10 +89,13 @@ export default function FindingPage() {
       <Crumbs trail={[["/findings", "Findings"]]} current={o?.title ?? "Finding"} />
 
       <div className="mb-8">
-        <h1 className="flex items-center gap-3 text-2xl tracking-[-0.03em] text-ink">
-          <Dot severity={o?.severity} />
-          {o?.title ?? "Finding"}
-        </h1>
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <h1 className="flex items-center gap-3 text-2xl tracking-[-0.03em] text-ink">
+            <Dot severity={o?.severity} />
+            {o?.title ?? "Finding"}
+          </h1>
+          {f.status === "open" && <AgentPrompt text={findingPrompt(f, ev?.public?.url)} />}
+        </div>
         <p className="mt-1 text-sm text-mute">
           {findingPlace(f) || "Location withheld"}
           {f.status !== "open" && <span className="text-local"> · {f.status === "no_longer_observed" ? "No longer found on the page" : "Not found after the fix"}</span>}
