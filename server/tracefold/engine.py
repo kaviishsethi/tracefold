@@ -45,8 +45,10 @@ class Engine:
     def _init_optional(self) -> None:
         from .retrieval.service import RetrievalService
         from .analysis.review import ModelReviewer
+        from .remediation.service import RemediationService
         self.retrieval = RetrievalService(self)
         self.reviewer = ModelReviewer(self)
+        self.remediation = RemediationService(self)
         from .checks.gitleaks import GitleaksScanner
         self.secret_scanner = GitleaksScanner(self.settings)
 
@@ -94,3 +96,30 @@ class Engine:
     def add_manifest(self, ws_id: str, manifest_id: str, sources: list[dict]) -> int:
         from .retrieval.manifest import validate_sources
         return self.repo.put_manifest(ws_id, manifest_id, validate_sources(sources))
+
+    def set_remediation_profile(self, ws_id: str, company_name: str, reply_to: str) -> None:
+        """Company details used to sign takedown requests."""
+        if self.repo.get_workspace(ws_id) is None:
+            raise ValueError(f"unknown workspace {ws_id}")
+        if "@" not in reply_to or not company_name.strip():
+            raise ValueError("company name and a reply-to email are required")
+        self.repo.put_remediation_profile(ws_id, company_name.strip(), reply_to.strip())
+
+    def add_takedown_contact(self, ws_id: str, host: str, email: str | None = None, form_url: str | None = None) -> None:
+        """Where takedown requests for a public host go: its abuse/legal email, or its own removal web form."""
+        from urllib.parse import urlsplit
+        if self.repo.get_workspace(ws_id) is None:
+            raise ValueError(f"unknown workspace {ws_id}")
+        if bool(email) == bool(form_url):
+            raise ValueError("give exactly one of email or form_url")
+        host = host.strip().lower()
+        if not host or "/" in host or ":" in host:
+            raise ValueError("host must be a bare hostname like forum.example")
+        if email:
+            if "@" not in email or any(c.isspace() for c in email):
+                raise ValueError("invalid email")
+            self.repo.put_takedown_contact(ws_id, host, "email", email.strip())
+        else:
+            if urlsplit(form_url).scheme != "https":
+                raise ValueError("form_url must be an https URL")
+            self.repo.put_takedown_contact(ws_id, host, "form", form_url.strip())

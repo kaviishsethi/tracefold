@@ -11,6 +11,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from ..contracts.enums import Check
 from ..contracts.models import (
+    ActionOut, ActionPage, ApproveRequest, EditActionRequest, MarkSubmittedRequest, RejectRequest,
     CapabilitiesOut, CaptureRequest, ErrorEnvelope, EvidenceOut, FindingDetail, FindingOut, FindingPage, InputOut,
     LedgerPage, ManifestOut, RecheckAccepted, RecheckRequest, ReviewRequest, ScanAccepted, ScanOut, ScanRequest, WorkspaceList,
     WorkspaceOut,
@@ -106,6 +107,7 @@ def create_app(engine: Engine) -> FastAPI:
                     "scan_deadline_seconds": lim.scan_deadline_seconds, "max_public_pages": lim.max_public_pages,
                     "capture_ttl_seconds": lim.capture_ttl_seconds, "max_model_requests": lim.max_model_requests},
             client_capabilities={ws: sorted(g.capabilities, key=lambda c: c.value) for ws, g in p.grants.items()},
+            remediation=engine.remediation.status(),
         )
 
     @app.get("/v1/workspaces", response_model=WorkspaceList, responses=ERRORS)
@@ -192,5 +194,31 @@ def create_app(engine: Engine) -> FastAPI:
     def ledger(ws_id: str, scan_id: str, cursor: str | None = None, limit: int = Query(default=50, ge=1, le=100),
                p: Principal = Depends(principal)):
         return engine.scans.ledger(p, ws_id, scan_id, cursor, limit)
+
+    # ---------------- remediation actions (approval-gated) ----------------
+    @app.get("/v1/workspaces/{ws_id}/actions", response_model=ActionPage, responses=ERRORS)
+    def list_actions(ws_id: str, status: str | None = None, finding_id: str | None = None, cursor: str | None = None,
+                     limit: int = Query(default=50, ge=1, le=100), p: Principal = Depends(principal)):
+        return engine.remediation.list(p, ws_id, status, finding_id, cursor, limit)
+
+    @app.get("/v1/workspaces/{ws_id}/actions/{action_id}", response_model=ActionOut, responses=ERRORS)
+    def get_action(ws_id: str, action_id: str, p: Principal = Depends(principal)):
+        return engine.remediation.get(p, ws_id, action_id)
+
+    @app.patch("/v1/workspaces/{ws_id}/actions/{action_id}", response_model=ActionOut, responses=ERRORS)
+    def edit_action(ws_id: str, action_id: str, body: EditActionRequest, p: Principal = Depends(principal)):
+        return engine.remediation.edit(p, ws_id, action_id, body)
+
+    @app.post("/v1/workspaces/{ws_id}/actions/{action_id}/approve", response_model=ActionOut, responses=ERRORS)
+    def approve_action(ws_id: str, action_id: str, body: ApproveRequest, p: Principal = Depends(principal)):
+        return engine.remediation.approve(p, ws_id, action_id, body)
+
+    @app.post("/v1/workspaces/{ws_id}/actions/{action_id}/reject", response_model=ActionOut, responses=ERRORS)
+    def reject_action(ws_id: str, action_id: str, body: RejectRequest, p: Principal = Depends(principal)):
+        return engine.remediation.reject(p, ws_id, action_id, body)
+
+    @app.post("/v1/workspaces/{ws_id}/actions/{action_id}/mark-submitted", response_model=ActionOut, responses=ERRORS)
+    def mark_submitted(ws_id: str, action_id: str, body: MarkSubmittedRequest, p: Principal = Depends(principal)):
+        return engine.remediation.mark_submitted(p, ws_id, action_id, body)
 
     return app

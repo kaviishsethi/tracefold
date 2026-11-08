@@ -34,6 +34,8 @@ unexpected `Host`/`Origin` headers.
 | Gitleaks secret leads | `brew install gitleaks`. Runs offline inside a network/write sandbox with an empty environment; `TRACEFOLD_GITLEAKS` (`auto`, `required` or `off`). See [`docs/GITLEAKS.md`](../docs/GITLEAKS.md). | Built-in secret rules only; `gitleaks_secret` rule coverage reports `gitleaks_not_installed`. |
 | Local model review | Install Ollama, pull a model, set `TRACEFOLD_OLLAMA_MODEL` (default `qwen2.5:7b-instruct`) and optionally `TRACEFOLD_OLLAMA_URL` (must be loopback). Set `OLLAMA_NO_CLOUD=1` for the Ollama service. | Rule findings are published with `risk_review: unavailable`. |
 | Exa / Tavily extraction | `EXA_API_KEY` / `TAVILY_API_KEY` in the environment or in `server/.env` (gitignored, loaded by `tracefold` commands); manifest entries with `"provider": "exa"` or `"tavily"` — see `examples/manifest.live.example.json`. | Those sources report `provider_not_configured`. `direct` and `fixture` providers still work. |
+| Takedown email | Default `TRACEFOLD_MAIL_TRANSPORT=outbox` writes approved requests to `$TRACEFOLD_DATA/outbox/*.eml` and sends nothing. For real sending set `TRACEFOLD_MAIL_TRANSPORT=resend`, `RESEND_API_KEY` and `TRACEFOLD_MAIL_FROM` (a sender on a domain verified with Resend). | Approved takedowns land in the outbox. |
+| AWS key disabling | `TRACEFOLD_AWS_REMEDIATION_ACCESS_KEY_ID` / `TRACEFOLD_AWS_REMEDIATION_SECRET_ACCESS_KEY` (optional `TRACEFOLD_AWS_REMEDIATION_SESSION_TOKEN`) for an IAM principal allowed only `iam:GetAccessKeyLastUsed` and `iam:UpdateAccessKey`. | Approving `disable_aws_key` returns 409 `aws_remediation_not_configured`. |
 
 ## Tests
 
@@ -41,6 +43,13 @@ unexpected `Host`/`Origin` headers.
 uv run pytest -q                                   # offline suite (fixtures, fake loopback model, mock transports)
 TRACEFOLD_LIVE=1 uv run pytest -q -m live          # real public fetch (+ Exa/Tavily if keys are set)
 TRACEFOLD_OLLAMA=1 uv run pytest -q -m ollama -s   # real local model
+```
+
+Minimal IAM policy for the remediation principal:
+
+```json
+{"Version": "2012-10-17", "Statement": [{"Effect": "Allow",
+  "Action": ["iam:GetAccessKeyLastUsed", "iam:UpdateAccessKey"], "Resource": "*"}]}
 ```
 
 ## Layout
@@ -59,6 +68,7 @@ tracefold/
   gateway/    the only outbound HTTP path, with a redacted ledger
   storage/    SQLite migrations and repositories (the only SQL)
   policy/     tokens, grants, workspace authorization
+  remediation/ approval-gated takedown requests and AWS key disabling (SigV4 via the gateway)
 fixtures/     synthetic public/private test material
 examples/     demo flow and example manifest
 ```

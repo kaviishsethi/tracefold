@@ -111,11 +111,15 @@ class Gateway:
 
     def request(self, method: str, url: str, policy: Policy, *, source_id: str | None = None,
                 headers: dict[str, str] | None = None, json_body: Any = None, summary: dict[str, Any] | None = None,
-                deadline: float | None = None) -> Response:
-        """Perform one logical request (following allowed redirects). ``summary`` must already be redacted."""
+                deadline: float | None = None, content: bytes | None = None, content_type: str | None = None) -> Response:
+        """Perform one logical request (following allowed redirects). ``summary`` must already be redacted.
+
+        Pass ``json_body`` for JSON, or ``content`` plus ``content_type`` for any other already-encoded body."""
         import json as _json
         started = time.monotonic()
-        body = _json.dumps(json_body).encode() if json_body is not None else None
+        if json_body is not None and content is not None:
+            raise ValueError("pass json_body or content, not both")
+        body = _json.dumps(json_body).encode() if json_body is not None else content
         summary = dict(summary or {})
         summary.setdefault("method", method)
         host = urlsplit(url).hostname or "?"
@@ -124,7 +128,7 @@ class Gateway:
             raise GatewayDenied("request_too_large")
         hdrs = {"User-Agent": "tracefold-retrieval/0.1", **(headers or {})}
         if body is not None:
-            hdrs["Content-Type"] = "application/json"
+            hdrs.setdefault("Content-Type", content_type or "application/json")
         current = url
         hops = 0
         try:

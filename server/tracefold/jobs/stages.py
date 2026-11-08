@@ -233,6 +233,12 @@ def publish_stage(ctx: "ScanContext") -> None:
         ctx.summary["rejected_candidates"] = rejected
     published = ctx.engine.store.publish(ctx.scan, ctx.candidates)
     ctx.summary["observations"] = len(published)
+    try:  # draft takedowns / key-disable actions for a person to approve; never executes anything
+        ctx.summary["actions_drafted"] = ctx.engine.remediation.draft_for_scan(ctx, published)
+    except Exception as ex:  # drafting must never cost the scan its findings
+        import logging
+        logging.getLogger("tracefold.remediation").error("drafting failed: %s", type(ex).__name__)
+        ctx.summary["actions_drafted"] = "failed"
     ctx.summary["published"] = [{"finding_id": f, "observation_id": o} for f, o in published]
     _update_public_absence(ctx, {f for f, _ in published})
 
