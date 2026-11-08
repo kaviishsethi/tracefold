@@ -3,13 +3,14 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ChevronRight, FileText, Folder, FolderOpen, Upload, X } from "lucide-react";
-import { listScans, startScan, uploadFiles, type ApiError, type Check, type Scan } from "@/lib/api";
+import { api, ws, listScans, startScan, uploadFiles, type ApiError, type Check, type Scan } from "@/lib/api";
 import { bytes } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
 import { Card, H1 } from "@/components/bits";
 import { AgentPrompt } from "@/components/agent-prompt";
 import { Checkbox } from "@/components/checkbox";
 import { ScansTable } from "@/components/scans-table";
+import { ConfirmButton } from "@/components/confirm-button";
 import { Button, ErrorNote, cx } from "@/components/ui";
 
 const AGENT_SCAN =
@@ -264,8 +265,36 @@ export default function ScanPage() {
         )}
       </Card>
 
-      <Card title="Recent scans" className="mt-6">
-        <ScansTable scans={scans} empty="No scans yet. Scans from your coding assistant show up here too." />
+      <Card
+        title="Recent scans"
+        className="mt-6"
+        right={
+          scans && scans.length > 0 && workspace?.capabilities.includes("configure") ? (
+            <ConfirmButton
+              label="Clear all"
+              question={`Delete ${scans.length} ${scans.length === 1 ? "scan" : "scans"} and their findings?`}
+              onConfirm={async () => {
+                await api(ws(workspace.id, "/scans"), { method: "DELETE" });
+                setScans((list) => (list ?? []).filter((s) => s.state === "queued" || s.state === "running"));
+                window.dispatchEvent(new Event("tracefold:actions-changed"));
+              }}
+            />
+          ) : undefined
+        }
+      >
+        <ScansTable
+          scans={scans}
+          empty="No scans yet. Scans from your coding assistant show up here too."
+          onDelete={
+            workspace?.capabilities.includes("configure")
+              ? async (id) => {
+                  await api(ws(workspace.id, `/scans/${id}`), { method: "DELETE" }).catch(() => {});
+                  setScans((list) => (list ?? []).filter((s) => s.scan_id !== id));
+                  window.dispatchEvent(new Event("tracefold:actions-changed"));
+                }
+              : undefined
+          }
+        />
       </Card>
     </div>
   );

@@ -163,6 +163,24 @@ class ScanService:
         return ScanList(items=[self.to_out(r) for r in rows[:limit]],
                         next_cursor=rows[limit - 1]["created_at"] if len(rows) > limit else None)
 
+    def delete(self, p: Principal, ws_id: str, scan_id: str | None) -> dict[str, int]:
+        """Delete one finished scan, or every finished scan when ``scan_id`` is None. Needs ``configure``, which
+        coding assistants don't get, so an assistant can't erase history."""
+        p.require(ws_id, Capability.configure)
+        if scan_id is not None:
+            s = self._scan_in_ws(ws_id, scan_id)
+            if s["state"] in (ScanState.queued.value, ScanState.running.value):
+                raise ApiError(409, "scan_running", "This scan is still running. Cancel it first.")
+            return self.e.repo.delete_scans(ws_id, [s["id"]])
+        ids, cursor = [], None
+        while True:
+            rows = self.e.repo.list_scans(ws_id, cursor, 200)
+            ids += [r["id"] for r in rows if r["state"] not in (ScanState.queued.value, ScanState.running.value)]
+            if len(rows) < 200:
+                break
+            cursor = rows[-1]["created_at"]
+        return self.e.repo.delete_scans(ws_id, ids)
+
     def get(self, p: Principal, ws_id: str, scan_id: str) -> ScanOut:
         p.require(ws_id, Capability.read)
         return self.to_out(self._scan_in_ws(ws_id, scan_id))

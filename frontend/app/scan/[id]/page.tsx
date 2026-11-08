@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Check, Loader2, X } from "lucide-react";
 import { api, coverageNote, isTerminal, useScan, ws, type Finding, type FindingKind, type Page, type Scan, type Stage } from "@/lib/api";
@@ -11,6 +11,8 @@ import { Box, Crumbs, Disclosure, FindingRow, H1, Note, scanState, source } from
 import { AgentPrompt, scanPrompt } from "@/components/agent-prompt";
 import { SourcesPanel } from "@/components/scan-sources";
 import { LedgerPanel } from "@/components/scan-ledger";
+import { ConfirmButton } from "@/components/confirm-button";
+import { groupByPage, PageMatchRow } from "@/components/page-matches";
 import { ErrorNote, Spinner, cx } from "@/components/ui";
 
 const STAGES: Record<string, { label: string; doing: string; check?: "public_match" | "local_risk" }> = {
@@ -146,6 +148,7 @@ const GROUPS: [FindingKind, string, string][] = [
 export default function ScanDetail() {
   const { id } = useParams<{ id: string }>();
   const { current: workspace } = useCurrentWorkspace();
+  const router = useRouter();
   const { scan, error } = useScan(workspace?.id ?? null, id);
   const [findings, setFindings] = useState<Finding[] | null>(null);
   const done = scan ? isTerminal(scan.state) : false;
@@ -166,7 +169,10 @@ export default function ScanDetail() {
     );
 
   const st = scanState(scan);
-  const open = (findings ?? []).filter((f) => f.status === "open").length;
+  const canDelete = workspace?.capabilities.includes("configure") ?? false;
+  const openFindings = (findings ?? []).filter((f) => f.status === "open");
+  // A page that copies a file counts once, however many passages match.
+  const open = openFindings.filter((f) => f.kind !== "public_exposure").length + groupByPage(openFindings.filter((f) => f.kind === "public_exposure")).length;
   const title = !done ? st.text : st.tone === "bad" && scan.state !== "partial" ? st.text : findings === null ? "Done" : open === 0 ? "Nothing found" : `${open} ${open === 1 ? "problem" : "problems"} found`;
   const requested = (check: string) => scan.coverage.some((c) => c.scope === "check" && c.id === check && c.status !== "not_requested");
   const drafted = typeof scan.summary.actions_drafted === "number" ? scan.summary.actions_drafted : 0;
@@ -179,7 +185,25 @@ export default function ScanDetail() {
       <div>
         <H1
           sub={`${source(scan)} · ${relativeTime(scan.created_at)}${scan.recheck_of ? " · recheck" : ""}${scan.state === "partial" ? " · some checks didn't finish" : ""}`}
-          right={done && open > 0 ? <AgentPrompt text={scanPrompt(scan.scan_id)} label="Copy fix prompt" /> : undefined}
+          right={
+            done ? (
+              <>
+                {canDelete && (
+                  <ConfirmButton
+                    label="Delete"
+                    question="Delete this scan and its findings?"
+                    onConfirm={async () => {
+                      await api(ws(workspace!.id, `/scans/${scan.scan_id}`), { method: "DELETE" });
+                      window.dispatchEvent(new Event("tracefold:actions-changed"));
+                      router.push("/scan");
+                    }}
+                    className="mr-2"
+                  />
+                )}
+                {open > 0 && <AgentPrompt text={scanPrompt(scan.scan_id)} label="Copy fix prompt" />}
+              </>
+            ) : undefined
+          }
         >
           <span className="inline-flex items-center gap-3">
             {st.tone === "busy" && <Spinner className="size-5" />}
@@ -210,7 +234,13 @@ export default function ScanDetail() {
             <section key={kind} className="mb-8">
               <h2 className="mb-3 text-sm font-medium text-ink">{label}</h2>
               <Box>
-                {findings === null ? <Note>Loading…</Note> : items.map((f) => <FindingRow key={f.finding_id} f={f} href={`/findings/${f.finding_id}`} />)}
+                {findings === null ? (
+                  <Note>Loading…</Note>
+                ) : kind === "public_exposure" ? (
+                  groupByPage(items).map((g) => <PageMatchRow key={g.key} g={g} />)
+                ) : (
+                  items.map((f) => <FindingRow key={f.finding_id} f={f} href={`/findings/${f.finding_id}`} />)
+                )}
                 {findings !== null && note && <Note>{note}</Note>}
               </Box>
             </section>

@@ -132,6 +132,39 @@ class Repo:
     def get_client(self, client_id: str) -> dict | None:
         return _row(self.db.conn().execute("SELECT * FROM clients WHERE id=?", (client_id,)).fetchone())
 
+    def delete_scans(self, ws_id: str, scan_ids: list[str]) -> dict[str, int]:
+        """Delete finished scans and everything only they produced. Findings still seen by another scan stay;
+        findings left with no observation go, with their rechecks and actions."""
+        if not scan_ids:
+            return {"scans": 0, "findings": 0}
+        with self.db.tx() as c:
+            q = ",".join("?" * len(scan_ids))
+            ids = [r[0] for r in c.execute(f"SELECT id FROM scans WHERE workspace_id=? AND id IN ({q})", (ws_id, *scan_ids))]
+            if not ids:
+                return {"scans": 0, "findings": 0}
+            q = ",".join("?" * len(ids))
+            touched = [r[0] for r in c.execute(f"SELECT DISTINCT finding_id FROM observations WHERE scan_id IN ({q})", ids)]
+            snaps = [r[0] for r in c.execute(f"SELECT DISTINCT public_snapshot_id FROM scans WHERE id IN ({q}) AND public_snapshot_id IS NOT NULL", ids)]
+            inputs = [r[0] for r in c.execute(f"SELECT DISTINCT input_id FROM scans WHERE id IN ({q})", ids)]
+            runs = [r[0] for r in c.execute(f"SELECT id FROM discovery_runs WHERE scan_id IN ({q})", ids)]
+            for table in ("observations", "evidence", "rechecks", "ledger", "discovery_sources"):
+                c.execute(f"DELETE FROM {table} WHERE scan_id IN ({q})", ids)
+            if runs:
+                c.execute(f"DELETE FROM discovery_runs WHERE id IN ({','.join('?' * len(runs))})", runs)
+            c.execute(f"DELETE FROM scans WHERE id IN ({q})", ids)
+            orphans = [f for f in touched if c.execute("SELECT 1 FROM observations WHERE finding_id=? LIMIT 1", (f,)).fetchone() is None]
+            for f in orphans:
+                c.execute("DELETE FROM actions WHERE finding_id=?", (f,))
+                c.execute("DELETE FROM rechecks WHERE finding_id=?", (f,))
+                c.execute("DELETE FROM findings WHERE id=?", (f,))
+            for s in snaps:
+                if c.execute("SELECT 1 FROM scans WHERE public_snapshot_id=? LIMIT 1", (s,)).fetchone() is None:
+                    c.execute("DELETE FROM public_snapshots WHERE id=? AND manifest_id LIKE 'discovery:%'", (s,))
+            for i in inputs:
+                if c.execute("SELECT 1 FROM scans WHERE input_id=? LIMIT 1", (i,)).fetchone() is None:
+                    c.execute("DELETE FROM inputs WHERE id=?", (i,))
+            return {"scans": len(ids), "findings": len(orphans)}
+
     def get_scan(self, scan_id: str) -> dict | None:
         return _decode(_row(self.db.conn().execute("SELECT * FROM scans WHERE id=?", (scan_id,)).fetchone()))
 
