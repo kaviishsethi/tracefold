@@ -126,7 +126,7 @@ export function Mission() {
         </Reveal>
 
         <Reveal delay={120}>
-          <ImageSlot label="Closing art: tracing paper laid over a printed page, lit from below" className="flex aspect-[446/398] items-end justify-center rounded-[24px] border border-line pb-[9%]">
+          <ImageSlot label="Closing art" src="/preview/pointillist-hero.webp" position="35% center" className="flex aspect-[446/398] items-end justify-center rounded-[24px] border border-line pb-[9%]">
             <LinkButton href="/setup">Run your first check</LinkButton>
           </ImageSlot>
         </Reveal>

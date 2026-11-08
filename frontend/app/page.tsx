@@ -7,6 +7,12 @@ import { AgentOnboard } from "@/components/agent-onboard";
 import { ImageSlot, LinkButton, Wordmark, cx } from "@/components/ui";
 
 const EDGE = "px-[max(32px,4vw)]";
+
+// Temporary preview art from 0.security, kept in public/preview/ (git-ignored). Replace with our own before publishing.
+const ART = (name: string) => `/preview/${name}.webp`;
+const LOOP_ART = ["soft-hero", "cloud-field", "workflow-dusk-soft-halftone-v3", "dependency-security-20261020", "pointillist-hero"].map(ART);
+const STEP_ART = ["cloud-dusk", "cloud-field", "workflow-verification-20261030", "workflow-memory-20261030"].map(ART);
+const COMPARE_ART = ["comparison-impact-20261026", "comparison-discovery-20261026", "comparison-stack-20261026", "comparison-fixes-20261026"].map(ART);
 const H2 = "text-[clamp(32px,3.4vw,46px)] leading-[1.14] tracking-[-0.035em]";
 
 // What the engine's checks flag today (server/tracefold/checks/rules.py and the passage matcher).
@@ -274,7 +280,7 @@ export default function Landing() {
 
       {/* Hero */}
       <section className="relative isolate flex min-h-[100svh] flex-col">
-        <ImageSlot label="Hero image: tracing paper over a printed document, full bleed" className="absolute inset-0 -z-20" />
+        <ImageSlot label="Hero image" src={ART("soft-hero")} className="absolute inset-0 -z-20" />
         {/* the image dissolves toward the bottom: progressive blur + darkening into the page */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 backdrop-blur-xl [mask-image:linear-gradient(to_top,black_0%,transparent_45%)]" />
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,transparent_22%,rgb(0_0_0/0.2)_42%,rgb(0_0_0/0.73)_68%,#0a0c0c_100%)]" />
@@ -367,7 +373,7 @@ export default function Landing() {
       {/* Premise */}
       <section className="mx-auto w-[calc(100%-2*max(32px,4vw))] max-w-[1400px] pb-[clamp(80px,9vw,120px)] pt-16">
         <Reveal>
-          <ImageSlot label="Premise art: a carbon copy lifting off a page" className="rounded-[28px] px-[clamp(24px,6vw,96px)] py-[clamp(56px,8vw,112px)] text-center">
+          <ImageSlot label="Premise art" src={ART("cloud-field")} position="center 40%" className="rounded-[28px] px-[clamp(24px,6vw,96px)] py-[clamp(56px,8vw,112px)] text-center">
             <p className="mx-auto max-w-[44rem] text-[20px] leading-[1.5] tracking-[-0.02em] text-[#b9babf]">
               Roadmaps get pasted into forums. Keys end up in public code. Proposals turn up on a vendor&apos;s blog.
             </p>
@@ -389,10 +395,10 @@ export default function Landing() {
             </h2>
           }
         >
-          {LOOP.map((c) => (
+          {LOOP.map((c, i) => (
             <CarouselItem key={c.title}>
               <article className="relative isolate flex h-full flex-col overflow-hidden rounded-[24px] border border-line bg-[#090a0c]">
-                <ImageSlot label="Card art" className="absolute inset-0 -z-20" />
+                <ImageSlot label="Card art" src={LOOP_ART[i % LOOP_ART.length]} className="absolute inset-0 -z-20" />
                 <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,transparent_25%,rgb(9_10_12/0.19)_44%,rgb(9_10_12/0.91)_65%,#090a0c_79%)]" />
                 <div className="flex h-[clamp(300px,24vw,350px)] items-center justify-center">
                   <div className="h-[80%] w-[86%] [&>*]:h-full">{c.win}</div>
@@ -414,7 +420,7 @@ export default function Landing() {
             Set up in minutes.
           </h2>
           <div className="overflow-hidden rounded-[28px] border border-line bg-[#141414]">
-            <ImageSlot label="Band image: stacked documents under a desk lamp" className="flex min-h-[clamp(260px,26vw,340px)] items-center justify-center px-5 py-10">
+            <ImageSlot label="Band image" src={ART("onboarding-clouds")} className="flex min-h-[clamp(260px,26vw,340px)] items-center justify-center px-5 py-10">
               <AgentOnboard />
             </ImageSlot>
             <div className="grid items-center gap-6 px-[clamp(24px,5vw,72px)] py-8 lg:grid-cols-[1fr_auto_1fr]">
@@ -449,7 +455,7 @@ export default function Landing() {
               {STEPS.map((s, i) => (
                 <li key={s.n} className="row-span-4 grid grid-rows-subgrid gap-y-4">
                   <Reveal delay={i * 80} className="row-span-4 grid grid-rows-subgrid gap-y-4">
-                    <ImageSlot label="Step art" className="flex aspect-[1.2/1] items-center justify-center rounded-2xl p-[7%]">
+                    <ImageSlot label="Step art" src={STEP_ART[i]} className="flex aspect-[1.2/1] items-center justify-center rounded-2xl p-[7%]">
                       <div className="h-full w-full [&>*]:h-full">{s.win}</div>
                     </ImageSlot>
                     <p className="font-mono text-xs tracking-[0.08em] text-rust">STEP {s.n}</p>
@@ -511,7 +517,7 @@ export default function Landing() {
               </ul>
             </Reveal>
             <Reveal delay={100}>
-              <ImageSlot label="Workflow art: a code editor beside a document" className="rounded-[24px] p-[clamp(20px,5%,48px)]">
+              <ImageSlot label="Integration art" src={ART("workflow-dusk-soft-halftone-v3")} position="30% 20%" className="rounded-[24px] p-[clamp(20px,5%,48px)]">
                 <div className="space-y-3">
                   <Win title="Assistant">
                     <div className="flex items-center justify-between gap-3">
@@ -575,10 +581,10 @@ export default function Landing() {
       {/* Traditional vs Tracefold */}
       <section className="pb-[clamp(80px,9vw,130px)]">
         <Carousel heading={<h2 className={cx(H2, "text-ink")}>How Tracefold differs from a typical secret scanner.</h2>}>
-          {COMPARE.map(([trad, ours]) => (
+          {COMPARE.map(([trad, ours], i) => (
             <CarouselItem key={trad}>
               <article className="relative isolate flex min-h-[440px] flex-col justify-between overflow-hidden rounded-[24px] border border-line bg-[#0c0d10] p-8">
-                <ImageSlot label="Card art" className="absolute inset-0 -z-20 opacity-70" />
+                <ImageSlot label="Card art" src={COMPARE_ART[i]} className="absolute inset-0 -z-20 opacity-70" />
                 <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(12_13_16/0.92)_0%,rgb(12_13_16/0.55)_45%,rgb(12_13_16/0.92)_100%)]" />
                 <div>
                   <p className="text-sm text-faint">Traditional</p>
@@ -605,7 +611,7 @@ export default function Landing() {
             </p>
           </Reveal>
           <Reveal delay={120}>
-            <ImageSlot label="Panel art: a ledger book, open" className="rounded-[24px] border border-line p-[clamp(16px,4%,40px)]">
+            <ImageSlot label="Panel art" src={ART("comparison-open-20261026")} className="rounded-[24px] border border-line p-[clamp(16px,4%,40px)]">
               <div className="overflow-hidden rounded-[10px] border border-[#323837] bg-[#131615] shadow-[0_12px_32px_rgb(0_0_0/0.25)]">
                 <div className="flex flex-wrap items-center gap-x-5 gap-y-1 border-b border-[#262b2a] px-4 py-3 font-mono text-xs">
                   <span className="text-ink">5 events</span>
@@ -664,7 +670,7 @@ export default function Landing() {
       {/* Built for security teams */}
       <section className={cx("pb-10", EDGE)}>
         <Reveal className="mx-auto max-w-[1760px]">
-          <ImageSlot label="Team art: a review table covered in marked-up pages" className="rounded-[24px]">
+          <ImageSlot label="Team art" src={ART("cloud-dusk")} position="center 70%" className="rounded-[24px]">
             <div className="flex flex-wrap items-start justify-between gap-6 px-[clamp(24px,4vw,56px)] pt-[clamp(40px,6vw,96px)]">
               <div className="max-w-3xl">
                 <h2 className="text-[clamp(34px,4vw,60px)] font-medium leading-[1.05] tracking-[-0.045em] text-white">Built for security teams</h2>
