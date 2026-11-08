@@ -9,7 +9,7 @@ Tracefold is a new HACK1984 project with two experiences sharing one private sca
 
 The strict-private deployment keeps the scan server and Ollama inside the trusted environment and uses a local-model MCP host. Uploading to a vendor server or returning private findings to a cloud-backed assistant changes that privacy boundary. GitHub is the first planned remote connector; Docs and sites follow later.
 
-**Status: the shared engine (milestones 1–7 of the [shared engine plan](docs/SHARED_ENGINE_PLAN.md)) is implemented in [`server/`](server/README.md) and passes its offline test suite. The MCP adapter is implemented in [`adapters/mcp/`](adapters/mcp/README.md) (eight tools over the engine API, tested against a real engine process); the upload app is not built yet. The client contract is in [docs/ENGINE_API.md](docs/ENGINE_API.md). Model review has been run against a real local `qwen2.5:7b-instruct`; Exa/Tavily calls have not been run against live services yet.**
+**Status: the shared engine (milestones 1–7 of the [shared engine plan](docs/SHARED_ENGINE_PLAN.md)) is implemented in [`server/`](server/README.md) and passes its offline test suite. The MCP adapter is implemented in [`adapters/mcp/`](adapters/mcp/README.md) (eight tools over the engine API, tested against a real engine process), and the upload platform is in [`frontend/`](frontend/README.md) (Next.js, talks to the engine through a token-holding proxy). The client contract is in [docs/ENGINE_API.md](docs/ENGINE_API.md). Model review has been run against a real local `qwen2.5:7b-instruct`; Exa/Tavily calls have not been run against live services yet.**
 
 - [Shared engine implementation plan — build this first](docs/SHARED_ENGINE_PLAN.md)
 - [Engine API handoff for the app and MCP adapter](docs/ENGINE_API.md)
@@ -29,7 +29,7 @@ The [current two-experience architecture](PLAN.md#3-proposed-architecture) is in
 4. Review a suggested correction, apply it through the editor workflow, and recheck through MCP.
 5. Show the same updated finding in the platform, the still-open public exposure, and the outbound ledger.
 
-MCP is a first-class entry point. Automatic file watching and editor notifications are optional follow-ons; the first demo shows explicit assistant tool calls. The engine and the MCP adapter are implemented; the upload platform is not. The adapter has not yet been run inside a local-model MCP host, which the strict-private demo requires.
+MCP is a first-class entry point. Automatic file watching and editor notifications are optional follow-ons; the first demo shows explicit assistant tool calls. The engine, the MCP adapter and the upload platform are implemented. The adapter has not yet been run inside a local-model MCP host, which the strict-private demo requires.
 
 The result is **“matching content found publicly”** or **“no match in the sources checked,”** never a blanket assurance that a company is safe. A separate **Potential risks in your files** section provides preventive feedback even when no public match is found. These are review findings, not proof of a leak or a comprehensive security audit.
 
