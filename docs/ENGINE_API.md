@@ -1,6 +1,6 @@
 # Tracefold engine API — client handoff
 
-For whoever builds the upload app or the MCP adapter. The engine is implemented in [`server/`](../server/README.md);
+For whoever builds the upload app or the MCP adapter. The MCP adapter now exists in [`adapters/mcp/`](../adapters/mcp/README.md) and follows the tool mapping below. The engine is implemented in [`server/`](../server/README.md);
 the machine-readable contract is [`server/openapi.json`](../server/openapi.json) (regenerate with
 `uv run tracefold export-openapi openapi.json`). [`server/examples/demo_flow.py`](../server/examples/demo_flow.py)
 calls every endpoint and is exercised by the test suite against a real `tracefold serve` process.
