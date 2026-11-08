@@ -1,0 +1,31 @@
+[project]
+name = "tracefold-mcp"
+version = "0.1.0"
+description = "Thin MCP stdio adapter that forwards tool calls to the Tracefold engine HTTP API"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.27",
+    "mcp>=1.9",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "tracefold",
+]
+
+[project.scripts]
+tracefold-mcp = "tracefold_mcp.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["tracefold_mcp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.uv.sources]
+tracefold = { path = "../../server", editable = true }

@@ -9,7 +9,7 @@ Tracefold is a new HACK1984 project with two experiences sharing one private sca
 
 The strict-private deployment keeps the scan server and Ollama inside the trusted environment and uses a local-model MCP host. Uploading to a vendor server or returning private findings to a cloud-backed assistant changes that privacy boundary. GitHub is the first planned remote connector; Docs and sites follow later.
 
-**Status: the shared engine (milestones 1–7 of the [shared engine plan](docs/SHARED_ENGINE_PLAN.md)) is implemented in [`server/`](server/README.md) and passes its offline test suite. The upload app and MCP adapter are not built yet; their contract is in [docs/ENGINE_API.md](docs/ENGINE_API.md). Model review has been run against a real local `qwen2.5:7b-instruct`; Exa/Tavily calls have not been run against live services yet.**
+**Status: the shared engine (milestones 1–7 of the [shared engine plan](docs/SHARED_ENGINE_PLAN.md)) is implemented in [`server/`](server/README.md) and passes its offline test suite. The MCP adapter is implemented in [`adapters/mcp/`](adapters/mcp/README.md) (eight tools over the engine API, tested against a real engine process); the upload app is not built yet. The client contract is in [docs/ENGINE_API.md](docs/ENGINE_API.md). Model review has been run against a real local `qwen2.5:7b-instruct`; Exa/Tavily calls have not been run against live services yet.**
 
 - [Shared engine implementation plan — build this first](docs/SHARED_ENGINE_PLAN.md)
 - [Engine API handoff for the app and MCP adapter](docs/ENGINE_API.md)
@@ -29,9 +29,13 @@ The [current two-experience architecture](PLAN.md#3-proposed-architecture) is in
 4. Review a suggested correction, apply it through the editor workflow, and recheck through MCP.
 5. Show the same updated finding in the platform, the still-open public exposure, and the outbound ledger.
 
-MCP is a first-class entry point. Automatic file watching and editor notifications are optional follow-ons; the first demo shows explicit assistant tool calls. Neither client surface is implemented yet; the engine they share is.
+MCP is a first-class entry point. Automatic file watching and editor notifications are optional follow-ons; the first demo shows explicit assistant tool calls. The engine and the MCP adapter are implemented; the upload platform is not. The adapter has not yet been run inside a local-model MCP host, which the strict-private demo requires.
 
 The result is **“matching content found publicly”** or **“no match in the sources checked,”** never a blanket assurance that a company is safe. A separate **Potential risks in your files** section provides preventive feedback even when no public match is found. These are review findings, not proof of a leak or a comprehensive security audit.
+
+## Remediation (approval required)
+
+When a scan finds a public copy, the engine drafts a takedown request; when it finds a long-term AWS access key, it drafts an action to disable that key. A named person approves each one. Approved takedowns are emailed to the host's configured contact (or prepared for the host's own form), and approved keys are set Inactive in IAM. By default emails go to a local outbox and nothing is sent. "Submitted" is tracked separately from "removed". See [docs/ENGINE_API.md](docs/ENGINE_API.md#remediation-actions-approval-required).
 
 ## Isolation from Spillway
 
