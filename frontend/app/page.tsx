@@ -71,8 +71,8 @@ const LIMITS = [
 // ---------- small product windows used as illustrations ----------
 function Win({ title, children, className }: { title: string; children: React.ReactNode; className?: string }) {
   return (
-    <div className={cx("flex w-full flex-col overflow-hidden rounded-[10px] border border-[#353532] bg-[#141413] text-[12px] shadow-[0_12px_32px_rgb(0_0_0/0.25)]", className)}>
-      <div className="flex items-center justify-between border-b border-[#2a2a28] px-3.5 py-2.5 text-[11.5px]">
+    <div className={cx("flex w-full flex-col overflow-hidden rounded-[10px] border border-[#323837] bg-[#131615] text-[12px] shadow-[0_12px_32px_rgb(0_0_0/0.25)]", className)}>
+      <div className="flex items-center justify-between border-b border-[#262b2a] px-3.5 py-2.5 text-[11.5px]">
         <span className="font-medium text-ink">Tracefold</span>
         <span className="text-faint">{title}</span>
       </div>
@@ -277,7 +277,7 @@ export default function Landing() {
         <ImageSlot label="Hero image: tracing paper over a printed document, full bleed" className="absolute inset-0 -z-20" />
         {/* the image dissolves toward the bottom: progressive blur + darkening into the page */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 backdrop-blur-xl [mask-image:linear-gradient(to_top,black_0%,transparent_45%)]" />
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,transparent_22%,rgb(0_0_0/0.2)_42%,rgb(0_0_0/0.73)_68%,#0a0a0a_100%)]" />
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,transparent_22%,rgb(0_0_0/0.2)_42%,rgb(0_0_0/0.73)_68%,#0a0c0c_100%)]" />
         <div className={cx("flex flex-1 flex-col justify-end pb-[clamp(40px,8vh,96px)] pt-[104px]", EDGE)}>
           <div className="mx-auto w-full max-w-[1760px]">
             <h1 className="rise max-w-[15ch] text-[clamp(44px,5vw,72px)] font-semibold leading-none tracking-[-0.04em] text-white" style={{ animationDelay: "140ms" }}>
@@ -288,7 +288,7 @@ export default function Landing() {
               before they ship, and drafts the takedown for you to approve. The engine and the model run in your environment.
             </p>
             <div className="rise mt-8 flex flex-wrap items-center gap-3" style={{ animationDelay: "340ms" }}>
-              <LinkButton href="/onboarding" size="lg">
+              <LinkButton href="/setup" size="lg">
                 Get started <ArrowRight className="size-4" aria-hidden />
               </LinkButton>
               <LinkButton href="#how" variant="secondary" size="lg">
@@ -410,7 +410,7 @@ export default function Landing() {
       {/* Onboarding band */}
       <section className="mx-auto w-[calc(100%-2*max(20px,3vw))] max-w-[1300px] pb-9 pt-3">
         <Reveal>
-          <h2 className="mx-auto mb-10 max-w-[1050px] text-center text-[clamp(34px,4.6vw,64px)] font-medium leading-[1.1] tracking-[-0.045em] text-[#f4f2ea]">
+          <h2 className="mx-auto mb-10 max-w-[1050px] text-center text-[clamp(34px,4.6vw,64px)] font-medium leading-[1.1] tracking-[-0.045em] text-[#eef3f1]">
             Set up in minutes.
           </h2>
           <div className="overflow-hidden rounded-[28px] border border-line bg-[#141414]">
@@ -423,7 +423,7 @@ export default function Landing() {
                 <ArrowRight className="size-[1.05em] text-mute" aria-hidden />
                 First scan in minutes
               </p>
-              <LinkButton href="/onboarding" className="justify-self-start lg:justify-self-center">
+              <LinkButton href="/setup" className="justify-self-start lg:justify-self-center">
                 Get started
               </LinkButton>
               <p className="text-[clamp(18px,1.6vw,24px)] font-medium leading-snug tracking-[-0.02em] text-ink lg:justify-self-end">
@@ -478,7 +478,7 @@ export default function Landing() {
               <div className="overflow-hidden rounded-[24px] border border-paper-line">
                 {COMPARE_SELF.map(([you, us], i) => (
                   <div key={you} className={cx("grid grid-cols-[minmax(0,0.65fr)_minmax(0,1fr)]", i > 0 && "border-t border-paper-line")}>
-                    <p className="flex items-center bg-[#efece7] px-5 py-6 text-[15px] leading-snug text-paper-mute sm:px-9 sm:py-7 sm:text-[17px]">{you}</p>
+                    <p className="flex items-center bg-[#e9efed] px-5 py-6 text-[15px] leading-snug text-paper-mute sm:px-9 sm:py-7 sm:text-[17px]">{you}</p>
                     <p className="flex items-center bg-paper-card px-5 py-6 text-[15px] leading-[1.6] text-paper-ink sm:px-9 sm:py-7 sm:text-[17px]">{us}</p>
                   </div>
                 ))}
@@ -522,7 +522,7 @@ export default function Landing() {
                           <span className="block text-[11px] text-faint">billing.py · line 7 · from scan_changes</span>
                         </span>
                       </span>
-                      <span className="inline-flex h-7 items-center gap-1.5 rounded-md bg-[#fafafa] px-2.5 text-[11.5px] font-medium text-[#0a0a0a]">
+                      <span className="inline-flex h-7 items-center gap-1.5 rounded-md bg-[#fafafa] px-2.5 text-[11.5px] font-medium text-[#0a0c0c]">
                         <Bot className="size-3.5" aria-hidden /> recheck_fix
                       </span>
                     </div>
@@ -606,8 +606,8 @@ export default function Landing() {
           </Reveal>
           <Reveal delay={120}>
             <ImageSlot label="Panel art: a ledger book, open" className="rounded-[24px] border border-line p-[clamp(16px,4%,40px)]">
-              <div className="overflow-hidden rounded-[10px] border border-[#353532] bg-[#141413] shadow-[0_12px_32px_rgb(0_0_0/0.25)]">
-                <div className="flex flex-wrap items-center gap-x-5 gap-y-1 border-b border-[#2a2a28] px-4 py-3 font-mono text-xs">
+              <div className="overflow-hidden rounded-[10px] border border-[#323837] bg-[#131615] shadow-[0_12px_32px_rgb(0_0_0/0.25)]">
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-1 border-b border-[#262b2a] px-4 py-3 font-mono text-xs">
                   <span className="text-ink">5 events</span>
                   <span className="text-local">0 private files sent</span>
                   <span className="text-crit">1 denied</span>
@@ -615,7 +615,7 @@ export default function Landing() {
                 <table className="w-full text-left text-xs">
                   <tbody className="font-mono">
                     {EGRESS.map(([m, d, p, dec], i) => (
-                      <tr key={i} className={cx("border-b border-[#222220] last:border-0", dec === "DENIED" && "bg-crit/[0.06]")}>
+                      <tr key={i} className={cx("border-b border-[#1f2423] last:border-0", dec === "DENIED" && "bg-crit/[0.06]")}>
                         <td className="px-4 py-2.5 text-faint">{m}</td>
                         <td className="max-w-[220px] truncate py-2.5 pr-3 text-ink">{d}</td>
                         <td className="hidden py-2.5 pr-3 font-sans text-mute sm:table-cell">{p}</td>
@@ -626,7 +626,7 @@ export default function Landing() {
                     ))}
                   </tbody>
                 </table>
-                <p className="border-t border-[#2a2a28] px-4 py-3 text-xs text-mute">
+                <p className="border-t border-[#262b2a] px-4 py-3 text-xs text-mute">
                   Denied: the page redirected to <span className="text-ink">tracker.example</span>, which isn&apos;t on the approved list. Nothing was fetched from it.
                 </p>
               </div>
@@ -672,7 +672,7 @@ export default function Landing() {
                   Run it in your own environment, review every finding with its evidence, and approve each takedown or key change yourself.
                 </p>
               </div>
-              <LinkButton href="/overview" variant="secondary" className="border-white/20 bg-black/30 backdrop-blur">
+              <LinkButton href="/scan" variant="secondary" className="border-white/20 bg-black/30 backdrop-blur">
                 Open the app <ArrowRight className="size-4" aria-hidden />
               </LinkButton>
             </div>

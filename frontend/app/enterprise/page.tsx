@@ -57,7 +57,7 @@ export default function Enterprise() {
       {/* Opening */}
       <section className="relative isolate flex min-h-[86svh] flex-col">
         <ImageSlot label="Enterprise hero: tracing paper over documents on a light table, full bleed" className="absolute inset-0 -z-20" />
-        <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,transparent_25%,rgb(0_0_0/0.35)_50%,#0a0a0a_100%)]" />
+        <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,transparent_25%,rgb(0_0_0/0.35)_50%,#0a0c0c_100%)]" />
         <div className={cx("flex flex-1 flex-col justify-end pb-14 pt-[120px]", EDGE)}>
           <div className="mx-auto w-full max-w-[1760px]">
             <h1 className="rise max-w-[16ch] text-[clamp(42px,5vw,72px)] font-semibold leading-[1.02] tracking-[-0.045em] text-white">
@@ -236,7 +236,7 @@ export default function Enterprise() {
                 <LinkButton href="/contact?topic=enterprise" variant="secondary">
                   Book a walkthrough
                 </LinkButton>
-                <Link href="/onboarding" className="inline-flex h-10 items-center gap-1.5 px-2 text-sm text-ink hover:underline hover:underline-offset-4">
+                <Link href="/setup" className="inline-flex h-10 items-center gap-1.5 px-2 text-sm text-ink hover:underline hover:underline-offset-4">
                   Start free <ArrowRight className="size-4" aria-hidden />
                 </Link>
               </div>

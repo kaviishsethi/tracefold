@@ -11,6 +11,7 @@ The strict-private deployment keeps the scan server and Ollama inside the truste
 
 **Status: the shared engine (milestones 1–7 of the [shared engine plan](docs/SHARED_ENGINE_PLAN.md)) is implemented in [`server/`](server/README.md) and passes its offline test suite. The MCP adapter is implemented in [`adapters/mcp/`](adapters/mcp/README.md) (eight tools over the engine API, tested against a real engine process), and the upload platform is in [`frontend/`](frontend/README.md) (Next.js, talks to the engine through a token-holding proxy). The client contract is in [docs/ENGINE_API.md](docs/ENGINE_API.md). Model review has been run against a real local `qwen2.5:7b-instruct`, and live Exa and Tavily extraction calls pass through the isolated worker.**
 
+- [Set up Tracefold (people and coding agents): one command, then two servers](SETUP.md)
 - [Shared engine implementation plan — build this first](docs/SHARED_ENGINE_PLAN.md)
 - [Engine API handoff for the app and MCP adapter](docs/ENGINE_API.md)
 - [Complete product, architecture, demo, and track plan](PLAN.md)

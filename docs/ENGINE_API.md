@@ -45,6 +45,7 @@ Long operations always return 202. Don't hold a request (or an MCP tool call) op
 | `POST /workspaces/{ws}/uploads` | multipart `file` parts → `InputOut` | app only |
 | `POST /workspaces/{ws}/captures` | `{"mode":"files","paths":[…]}` or `{"mode":"changes","baseline":"HEAD","include_untracked":true}` | inside `scan_changes` |
 | `POST /workspaces/{ws}/scans` | Queue a scan (`Idempotency-Key` supported) | `scan_changes` = capture + submit |
+| `GET /workspaces/{ws}/scans?cursor=&limit=` | Recent scans from every client, newest first. Each scan has `initiated_by` (client name) and `started_from` (`assistant` / `app` / `other`), so coding-assistant activity shows in the app | – |
 | `GET /workspaces/{ws}/scans/{id}` | State, stages, coverage, budget, versions, errors | `get_scan` |
 | `POST /workspaces/{ws}/scans/{id}/cancel` | Cooperative cancellation | `cancel_scan` |
 | `GET /workspaces/{ws}/findings?scan_id=&cursor=&limit=` | Paginated (default 50, max 100) | `get_findings` |

@@ -12,8 +12,8 @@ type Variant = "primary" | "secondary" | "ghost" | "danger";
 type Size = "sm" | "md" | "lg";
 
 const VARIANT: Record<Variant, string> = {
-  primary: "bg-[#fafafa] text-[#0a0a0a] hover:bg-white",
-  secondary: "border border-[#454541] bg-panel-2 text-ink hover:border-[#5a5a55] hover:bg-raised",
+  primary: "bg-[#fafafa] text-[#0a0c0c] hover:bg-white",
+  secondary: "border border-[#414846] bg-panel-2 text-ink hover:border-[#56605d] hover:bg-raised",
   ghost: "text-mute hover:bg-panel-2 hover:text-ink",
   danger: "border border-crit/30 bg-crit/10 text-crit hover:bg-crit/15",
 };
@@ -192,7 +192,7 @@ export function Wordmark({ className }: { className?: string }) {
       <svg viewBox="0 0 16 16" className="size-4" aria-hidden>
         <rect x="1.5" y="2" width="8.5" height="11" rx="0.5" fill="none" stroke="currentColor" strokeWidth="1.4" />
         <path d="M6 5.5h8.5V15H6z" fill="currentColor" />
-        <path d="M8 9h4.5" stroke="#fd802e" strokeWidth="1.6" />
+        <path d="M8 9h4.5" stroke="#4fb8a6" strokeWidth="1.6" />
       </svg>
       Tracefold
     </span>

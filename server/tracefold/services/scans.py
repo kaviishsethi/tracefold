@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 
 from ..contracts.enums import Capability, Check, PublicMode, ScanState
 from ..contracts.models import (
-    CoverageEntry, ErrorBody, LedgerEventOut, LedgerPage, ScanAccepted, ScanOut, ScanRequest, StageOut,
+    CoverageEntry, ErrorBody, LedgerEventOut, LedgerPage, ScanAccepted, ScanList, ScanOut, ScanRequest, StageOut,
 )
 from ..errors import ApiError, not_found
 from ..policy.auth import Principal
@@ -14,6 +14,20 @@ from ..util import canonical, iso, new_id, now, sha256
 
 if TYPE_CHECKING:
     from ..engine import Engine
+
+
+ASSISTANT_HINTS = ("assistant", "mcp")
+APP_HINTS = ("web-app", "upload-app", "app")
+
+
+def started_from(client_name: str | None) -> str:
+    """Where a scan came from, by the client's provisioned name (quickstart: web-app-*, coding-assistant-*)."""
+    n = (client_name or "").lower()
+    if any(h in n for h in ASSISTANT_HINTS):
+        return "assistant"
+    if any(n.startswith(h) for h in APP_HINTS):
+        return "app"
+    return "other"
 
 
 def status_url(ws_id: str, scan_id: str) -> str:
@@ -106,6 +120,8 @@ class ScanService:
         return ScanAccepted(scan_id=scan_id, state=ScanState.queued, input_id=req.input_id, status_url=status_url(ws_id, scan_id))
 
     def to_out(self, s: dict) -> ScanOut:
+        client = self.e.repo.get_client(s["initiator"]) if s.get("initiator") else None
+        name = client["name"] if client else None
         return ScanOut(
             scan_id=s["id"], workspace_id=s["workspace_id"], input_id=s["input_id"], state=ScanState(s["state"]),
             checks=[Check(c) for c in s["checks"]], recheck_of=s["recheck_of"],
@@ -114,7 +130,16 @@ class ScanService:
             budget=s["budget"], versions=s["versions"], errors=[ErrorBody(**x) for x in s["errors"]],
             summary=s["summary"], created_at=s["created_at"], started_at=s["started_at"],
             finished_at=s["finished_at"], deadline_at=s["deadline_at"],
+            initiated_by=name, started_from=started_from(name),
         )
+
+    def list(self, p: Principal, ws_id: str, cursor: str | None, limit: int) -> ScanList:
+        """Recent scans in the workspace from every client (web app, coding assistant, CLI), newest first."""
+        p.require(ws_id, Capability.read)
+        limit = max(1, min(limit, self.e.settings.limits.page_size_max))
+        rows = self.e.repo.list_scans(ws_id, cursor, limit + 1)
+        return ScanList(items=[self.to_out(r) for r in rows[:limit]],
+                        next_cursor=rows[limit - 1]["created_at"] if len(rows) > limit else None)
 
     def get(self, p: Principal, ws_id: str, scan_id: str) -> ScanOut:
         p.require(ws_id, Capability.read)
