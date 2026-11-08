@@ -42,6 +42,10 @@ class Providers:
         self.rec = Recorder(self.handle)
 
     def handle(self, r: httpx.Request) -> httpx.Response:
+        if r.method == "GET":  # a direct page fetch (always-check pages)
+            text = self.pages.get(str(r.url))
+            return httpx.Response(200, text=f"<html><body><p>{text}</p></body></html>", headers={"content-type": "text/html"}) \
+                if text else httpx.Response(404)
         body = json.loads(r.content) if r.content else {}
         if r.url.path == "/search":
             if self.search_status != 200:
@@ -589,3 +593,47 @@ def test_candidate_url_blocklist_covers_shorthand_ips_and_reserved_names(url):
     from tracefold.discovery.urls import check_url
     assert check_url(url) in ("ip_literal_not_allowed", "private_destination")
     assert check_url("https://123.example.com/page") is None              # digits in a real hostname are fine
+
+
+
+# ---------------- site lists ----------------
+def sites(env, who="app", **body):
+    return env.client.put("/v1/workspaces/ws_a/sites", headers=env.h(who), json=body)
+
+
+def test_site_lists_validate_and_need_configure(env):
+    r = sites(env, always_check=["Forum.Example/t/123", "https://forum.example/t/123"], never_fetch=["https://www.Vendor.Example/x"])
+    assert r.status_code == 200, r.text
+    assert r.json() == {"always_check": [FORUM_CANON], "never_fetch": ["vendor.example"]}
+    assert env.client.get("/v1/workspaces/ws_a/sites", headers=env.h()).json()["never_fetch"] == ["vendor.example"]
+    assert sites(env, always_check=["http://127.0.0.1/admin"]).status_code == 422
+    assert sites(env, never_fetch=["not a host"]).status_code == 422
+    assert sites(env, who="cloud", never_fetch=["vendor.example"]).status_code == 403
+
+
+def test_never_fetch_skips_matching_results(env):
+    prov = Providers(results=default_results()).install(env)
+    sites(env, never_fetch=["vendor.example"])
+    p = approved_plan(env)
+    inp = env.upload({"roadmap.md": fx("roadmap.md")})
+    s = discover(env, inp["input_id"], p["query_plan_id"])
+    by = {x["original_url"]: x for x in sources(env, s["scan_id"])["items"]}
+    assert by[VENDOR]["fetch_status"] == "blocked" and by[VENDOR]["failure_reason"] == "never_fetch"
+    assert not any(VENDOR in (r.content or b"").decode() for r in prov.rec.seen if r.url.path != "/search")
+    assert by[FORUM]["comparison_status"] == "matched"
+
+
+def test_always_check_pages_are_compared_even_when_search_fails(env):
+    prov = Providers(results=default_results(), search_status=503,
+                     pages={FORUM_CANON: FORUM_TEXT}).install(env)
+    sites(env, always_check=[FORUM_CANON])
+    p = approved_plan(env)
+    inp = env.upload({"roadmap.md": fx("roadmap.md")})
+    s = discover(env, inp["input_id"], p["query_plan_id"])
+    cov = {(c["scope"], c["id"]): c for c in s["coverage"]}
+    assert cov[("check", "public_match")]["status"] == "partial"
+    assert cov[("check", "public_match")]["reason"] == "discovery_search_failed"
+    by = {x["original_url"]: x for x in sources(env, s["scan_id"])["items"]}
+    assert by[FORUM_CANON]["fetch_status"] == "fetched" and by[FORUM_CANON]["comparison_status"] == "matched"
+    assert any(r.method == "GET" and r.url.host == "forum.example" for r in prov.rec.seen)
+    assert [f for f in env.findings(s["scan_id"]) if f["kind"] == "public_exposure"]

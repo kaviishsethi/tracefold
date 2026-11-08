@@ -20,7 +20,7 @@ export function SourcesPanel({ workspaceId, scan }: { workspaceId: string; scan:
   if (!page) return <Loading />;
   const d = page.discovery;
   const unconfigured = !!d && d.provider_queries.length > 0 && d.provider_queries.every((q) => `${q.error ?? ""} ${q.status}`.includes("not_configured"));
-  if (unconfigured)
+  if (unconfigured && page.items.length === 0)
     return (
       <section className="rounded-card border border-med/30 bg-med/[0.06] px-4 py-3.5 text-sm">
         <p className="font-medium text-ink">Public search isn&apos;t set up</p>
