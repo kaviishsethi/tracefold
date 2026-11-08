@@ -315,8 +315,9 @@ def test_privacy_identical_outbound_for_different_uploads(env):
     n = len(prov.rec.seen)
     discover(env, b["input_id"], p["query_plan_id"])
     second = prov.searches()[len(first):]
-    assert first == second                                                # same approved plan → same outbound search
-    assert [q["query"] for q in first] == [s["query"] for s in p["searches"]]
+    canon = lambda bodies: sorted(json.dumps(b, sort_keys=True) for b in bodies)  # noqa: E731  (threads: order varies)
+    assert canon(first) == canon(second)                                  # same approved plan → same outbound search
+    assert sorted(q["query"] for q in first) == sorted(s["query"] for s in p["searches"])
     dump = prov.rec.dump()
     assert MARKER not in dump and "Bluefin" not in dump and "roadmap" not in dump.lower()
     # extraction requests carry only validated candidate URLs (from search results), never private material
@@ -545,7 +546,9 @@ def test_v3_fields_reach_providers_and_are_identical_across_uploads(env):
     discover(env, env.upload({"roadmap.md": fx("roadmap.md")})["input_id"], p["query_plan_id"])
     first = prov.searches()
     discover(env, env.upload({f"{MARKER}.md": MARKER.encode()})["input_id"], p["query_plan_id"])
-    assert prov.searches()[len(first):] == first and MARKER not in prov.rec.dump()
+    # Searches run on two worker threads, so arrival order varies; the requests themselves must be identical.
+    canon = lambda bodies: sorted(json.dumps(b, sort_keys=True) for b in bodies)  # noqa: E731
+    assert canon(prov.searches()[len(first):]) == canon(first) and MARKER not in prov.rec.dump()
     exa = next(b for b in first if "numResults" in b and b["query"].startswith("news"))
     assert exa["category"] == "news" and "excludeDomains" in exa and "includeDomains" not in exa
     tav = next(b for b in first if "max_results" in b and b["query"].startswith('"Northstar'))
