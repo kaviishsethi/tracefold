@@ -12,6 +12,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from ..contracts.enums import Check
 from ..contracts.models import (
     ActionOut, ActionPage, ApproveRequest, EditActionRequest, MarkSubmittedRequest, RejectRequest,
+    CompanyProfileIn, CompanyProfileList, CompanyProfileOut, QueryPlanIn, QueryPlanOut, QueryPlanPage, QueryPresetCatalog, SourcePage,
     CapabilitiesOut, CaptureRequest, ErrorEnvelope, EvidenceOut, FindingDetail, FindingOut, FindingPage, InputOut,
     LedgerPage, ManifestOut, RecheckAccepted, RecheckRequest, ReviewRequest, ScanAccepted, ScanOut, ScanRequest, WorkspaceList,
     WorkspaceOut,
@@ -220,5 +221,50 @@ def create_app(engine: Engine) -> FastAPI:
     @app.post("/v1/workspaces/{ws_id}/actions/{action_id}/mark-submitted", response_model=ActionOut, responses=ERRORS)
     def mark_submitted(ws_id: str, action_id: str, body: MarkSubmittedRequest, p: Principal = Depends(principal)):
         return engine.remediation.mark_submitted(p, ws_id, action_id, body)
+
+    # ---------------- company discovery ----------------
+    @app.post("/v1/workspaces/{ws_id}/company-profiles", response_model=CompanyProfileOut, status_code=201, responses=ERRORS)
+    def create_company_profile(ws_id: str, body: CompanyProfileIn, p: Principal = Depends(principal)):
+        """Approve a public company identity (requires the `configure` capability). Creates a new immutable version
+        when `profile_id` is given."""
+        return engine.discovery.create_profile(p, ws_id, body)
+
+    @app.get("/v1/workspaces/{ws_id}/company-profiles", response_model=CompanyProfileList, responses=ERRORS)
+    def list_company_profiles(ws_id: str, p: Principal = Depends(principal)):
+        """Approved public identities (latest version of each)."""
+        return engine.discovery.list_profiles(p, ws_id)
+
+    @app.get("/v1/workspaces/{ws_id}/company-profiles/{profile_id}", response_model=CompanyProfileOut, responses=ERRORS)
+    def get_company_profile(ws_id: str, profile_id: str, p: Principal = Depends(principal)):
+        return engine.discovery.get_profile(p, ws_id, profile_id)
+
+    @app.get("/v1/query-presets", response_model=QueryPresetCatalog, responses=ERRORS)
+    def query_presets(p: Principal = Depends(principal)):
+        """Fixed preset catalog: per-provider templates, status (benchmarked/experimental/legacy), packs, site groups,
+        noise domains and budget shapes."""
+        return engine.discovery.preset_catalog(p)
+
+    @app.post("/v1/workspaces/{ws_id}/query-plans", response_model=QueryPlanOut, status_code=201, responses=ERRORS)
+    def create_query_plan(ws_id: str, body: QueryPlanIn, p: Principal = Depends(principal)):
+        """Create an immutable plan of exact outbound searches from an approved profile, fixed presets, providers and
+        a public-site scope (requires `configure`)."""
+        return engine.discovery.create_plan(p, ws_id, body)
+
+    @app.get("/v1/workspaces/{ws_id}/query-plans", response_model=QueryPlanPage, responses=ERRORS)
+    def list_query_plans(ws_id: str, cursor: str | None = None, limit: int = Query(default=50, ge=1, le=100),
+                         p: Principal = Depends(principal)):
+        return engine.discovery.list_plans(p, ws_id, cursor, limit)
+
+    @app.get("/v1/workspaces/{ws_id}/query-plans/{plan_id}", response_model=QueryPlanOut, responses=ERRORS)
+    def get_query_plan(ws_id: str, plan_id: str, p: Principal = Depends(principal)):
+        """Preview the exact outbound queries, providers, domain scope and budget."""
+        return engine.discovery.get_plan(p, ws_id, plan_id)
+
+    @app.get("/v1/workspaces/{ws_id}/scans/{scan_id}/sources", response_model=SourcePage, responses=ERRORS)
+    def scan_sources(ws_id: str, scan_id: str, cursor: str | None = None, limit: int = Query(default=50, ge=1, le=100),
+                     p: Principal = Depends(principal)):
+        """Complete source list for a scan, including no-match, failed, blocked and skipped candidates, with
+        discovery provenance."""
+        return engine.discovery.sources(p, ws_id, scan_id, cursor, limit)
 
     return app

@@ -1,0 +1,738 @@
+{
+  "case_id": "twitch",
+  "label": "discovery_only",
+  "pack": "broad_triage",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Twitch",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitch.tv",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Twitch\" leaked internal memo",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitch.tv",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Twitch employees",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitch.tv",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Twitch\" email to employees full text",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitch.tv",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "Twitch employee handbook or company policy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitch.tv",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"Twitch\" policy handbook procedure",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitch.tv",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from Twitch",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"Twitch\"",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 14.7,
+  "provider_requests": 28,
+  "response_bytes": 829980,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Twitch",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:30:30.520285Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Twitch\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:30:34.817740Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Twitch employees",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:30:33.761451Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Twitch\" email to employees full text",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:30:35.224297Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "Twitch employee handbook or company policy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:30:36.716941Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"Twitch\" policy handbook procedure",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:30:37.797928Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from Twitch",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:30:38.377013Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"Twitch\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:30:40.342857Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_467a34685442faf6287d",
+      "url": "https://www.businessinsider.com/twitch-not-following-amazon-rto-policy-2024-9",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Leaked Email Shows Twitch Is Not Following Amazon's New RTO Policy - Business Insider",
+          "returned_url": "https://www.businessinsider.com/twitch-not-following-amazon-rto-policy-2024-9"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_f1e4ff9a50d9c5d102eb",
+      "url": "https://www.businessinsider.com/twitch-ceo-layoffs-read-email-employees-dan-clancy-disappointed-amazon-2024-1",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Read Twitch CEO's 6 a.m. Email to Staff Announcing 500 Job Cuts - Business Insider",
+          "returned_url": "https://www.businessinsider.com/twitch-ceo-layoffs-read-email-employees-dan-clancy-disappointed-amazon-2024-1"
+        },
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Read Twitch CEO's 6 a.m. Email to Staff Announcing 500 Job Cuts - Business Insider",
+          "returned_url": "https://www.businessinsider.com/twitch-ceo-layoffs-read-email-employees-dan-clancy-disappointed-amazon-2024-1"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Read Twitch CEO's 6 a.m. Email to Staff Announcing 500 Job Cuts - Business Insider",
+          "returned_url": "https://www.businessinsider.com/twitch-ceo-layoffs-read-email-employees-dan-clancy-disappointed-amazon-2024-1"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6411ccae4503b93b17de",
+      "url": "https://www.businessinsider.com/read-twitch-staff-memo-about-streamer-pay-change-controversy-2022-9",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Read Twitch's Staff Email About Its Controversial Streamer Pay Changes - Business Insider",
+          "returned_url": "https://www.businessinsider.com/read-twitch-staff-memo-about-streamer-pay-change-controversy-2022-9"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Read Twitch's Staff Email About Its Controversial Streamer Pay Changes - Business Insider",
+          "returned_url": "https://www.businessinsider.com/read-twitch-staff-memo-about-streamer-pay-change-controversy-2022-9"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_937a0a2616d301b3251f",
+      "url": "https://sources.news/p/metamates-become-training-data",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Meta employees freak out at training their replacements - Sources | Alex Heath",
+          "returned_url": "https://sources.news/p/metamates-become-training-data"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_1332f28da99f8a46efd8",
+      "url": "https://kotaku.com/microsoft-ai-scout-addictive-satya-nadella-404-media-copilot-2000702924",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Leak Reveals Microsoft Wants Its AI To Be \u2018Addictive,\u2019 CEO Satya Nadella Feigns Astonishment - Kotaku",
+          "returned_url": "https://kotaku.com/microsoft-ai-scout-addictive-satya-nadella-404-media-copilot-2000702924"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_ce35b64478d77c128c69",
+      "url": "https://www.reuters.com/world/meta-scales-back-ai-mouse-clicks-tool-citing-employee-concerns-2026-06-02/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Exclusive: Meta scales back plan for internal mouse-tracking tech, citing staff concerns - Reuters",
+          "returned_url": "https://www.reuters.com/world/meta-scales-back-ai-mouse-clicks-tool-citing-employee-concerns-2026-06-02/"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_ddbeb521932df10e2263",
+      "url": "https://archive.is/pNEHf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "A Difficult Update about our Workforce",
+          "returned_url": "https://archive.is/pNEHf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_bce44db443afbdfb3cb4",
+      "url": "https://www.businessinsider.com/email-shows-twitch-ceo-disappointed-by-handling-of-amazon-layoffs-2023-4",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Email Shows Twitch CEO Disappointed by Handling of Amazon's Layoffs - Business Insider",
+          "returned_url": "https://www.businessinsider.com/email-shows-twitch-ceo-disappointed-by-handling-of-amazon-layoffs-2023-4"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_580a2b7cb69d6dfbe0a7",
+      "url": "https://www.cnbc.com/2024/01/10/amazon-layoffs-company-cuts-over-500-twitch-employees.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Amazon layoffs: Company cuts over 500 Twitch employees",
+          "returned_url": "https://www.cnbc.com/2024/01/10/amazon-layoffs-company-cuts-over-500-twitch-employees.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_aa3faeb518c5c00f4330",
+      "url": "https://careers.twitch.com/en/leadershipprinciples/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Careers @ Twitch",
+          "returned_url": "https://careers.twitch.com/en/leadershipprinciples/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_84834fdf35e7dc13ff64",
+      "url": "https://careers.twitch.com/en/inclusion-culture/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Careers @ Twitch",
+          "returned_url": "https://careers.twitch.com/en/inclusion-culture/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_24d648b33f397ce76852",
+      "url": "https://venturebeat.com/games/twitch-ceo-describes-values-to-drive-the-company-onward/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Twitch CEO describes values driving the company",
+          "returned_url": "https://venturebeat.com/games/twitch-ceo-describes-values-to-drive-the-company-onward/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ef25c5146170c23b47dd",
+      "url": "https://policyreview.info/articles/analysis/new-frontier-platform-policy",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "The new frontier of platform policy | Internet Policy Review",
+          "returned_url": "https://policyreview.info/articles/analysis/new-frontier-platform-policy"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_20bca60cb288dd53e15d",
+      "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2020.586975/full",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Frontiers | Live Streams on Twitch Help Viewers Cope With Difficult Periods in Life",
+          "returned_url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2020.586975/full"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6e04cb61d80a73145357",
+      "url": "https://www.rcc.edu/assets/documents/academic/nursing/2026-2027/VN-Student-Handbook-26-27.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "incomplete",
+      "truncated": true,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "VN STUDENT HANDBOOK",
+          "returned_url": "https://www.rcc.edu/assets/documents/academic/nursing/2026-2027/VN-Student-Handbook-26-27.pdf"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_456691aa659b1b7bb780",
+      "url": "https://github.com/twitchdev/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Twitch Developers",
+          "returned_url": "https://github.com/twitchdev/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d09af8c70d3aaca3bdf2",
+      "url": "https://github.com/twitchtv",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Twitch",
+          "returned_url": "https://github.com/twitchtv"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_81ab8dd228a9dcf2aeeb",
+      "url": "https://github.com/orgs/twitchtv/repositories",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Twitch",
+          "returned_url": "https://github.com/orgs/twitchtv/repositories"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_25d4f8f8598cf191018e",
+      "url": "https://github.com/Matsuuu/twitch-stream",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "GitHub - Matsuuu/twitch-stream: Twitch Stream is a Web Component used to incorporate a twitch stream with chat onto a web page \u00b7 GitHub",
+          "returned_url": "https://github.com/Matsuuu/twitch-stream"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ba930c5a0a6028d8b429",
+      "url": "https://github.com/gethomepage/homepage/discussions/2770",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "[Feature Request] Twitch Integration - show live status, maybe viewer count \u00b7 gethomepage/homepage \u00b7 Discussion #2770 \u00b7 GitHub",
+          "returned_url": "https://github.com/gethomepage/homepage/discussions/2770"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_87d65a0839d72d32d4d2",
+      "url": "https://github.com/streamlink/streamlink-twitch-gui",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitHub - streamlink/streamlink-twitch-gui: A multi platform Twitch.tv browser for Streamlink \u00b7 GitHub",
+          "returned_url": "https://github.com/streamlink/streamlink-twitch-gui"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:30:43.210562Z"
+}

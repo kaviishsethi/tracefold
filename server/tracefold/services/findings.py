@@ -196,15 +196,26 @@ class FindingService:
         else:
             target = obs_all[-1]
         public_sources = None
+        explicit = None
         if f["kind"] == FindingKind.public_exposure.value:
             prior = self.e.repo.get_scan(target["scan_id"])
-            ps = prior["public_sources"]
-            public_sources = PublicSourcesIn(manifest_id=ps["manifest_id"], mode=PublicMode.refresh,
-                                             source_ids=[target["data"]["source_id"]])
+            ps = prior["public_sources"] or {}
+            sid = target["data"]["source_id"]
+            if prior.get("public_discovery") or ps.get("explicit_sources"):
+                # Discovered exposure: recheck fetches the previously cited URL explicitly. Current search results
+                # are not consulted, so omission from search cannot resolve it.
+                snap = self.e.repo.get_snapshot(prior["public_snapshot_id"]) if prior["public_snapshot_id"] else None
+                src = next((x for x in (snap or {}).get("sources", []) if x["source_id"] == sid), None)
+                if src is None:
+                    raise ApiError(409, "recheck_source_unavailable", "The cited public source is no longer recorded.")
+                explicit = [{"source_id": sid, "url": src["url"], "provider": src.get("provider") or "direct",
+                             "mode": "discovered"}]
+            else:
+                public_sources = PublicSourcesIn(manifest_id=ps["manifest_id"], mode=PublicMode.refresh, source_ids=[sid])
         rid = new_id("rck")
         sreq = ScanRequest(input_id=req.input_id, checks=[Check(f["check_id"])], public_sources=public_sources, model_review=False)
         acc = self.e.scans.submit(p, ws_id, sreq, idem_key, recheck_of=f["id"], recheck_id=rid,
-                                  scope_paths=[f["path"]])
+                                  scope_paths=[f["path"]], explicit_sources=explicit)
         if self.e.repo.get_recheck(rid) is None:
             prior_scan = self.e.repo.get_scan(acc.scan_id)
             rid = prior_scan["recheck_id"]  # idempotent replay

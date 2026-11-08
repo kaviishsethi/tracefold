@@ -10,6 +10,8 @@ from .enums import (
     ActionStatus,
     Capability,
     Check,
+    ComparisonStatus,
+    FetchStatus,
     CoverageStatus,
     Disclosure,
     FindingKind,
@@ -114,6 +116,174 @@ class CaptureRequest(Strict):
     include_untracked: bool = False
 
 
+# ---------- company discovery ----------
+
+class CompanyProfileIn(Strict):
+    display_name: str = Field(min_length=2, max_length=80)
+    official_domain: str | None = Field(default=None, max_length=253)
+    public_aliases: list[str] = Field(default_factory=list, max_length=2)
+    confirm_public: Literal[True] = Field(
+        description="Confirms this identity is public and may be sent to the selected search providers.")
+    profile_id: str | None = Field(default=None, max_length=100, description="Revise an existing profile (new version).")
+
+
+class CompanyProfileOut(BaseModel):
+    schema_version: int = SCHEMA_VERSION
+    profile_id: str
+    workspace_id: str
+    version: int
+    display_name: str
+    official_domain: str | None
+    public_aliases: list[str]
+    approved_by: str
+    approved_at: str
+    privacy_notice_version: str
+    privacy_notice: str
+
+
+class CompanyProfileList(BaseModel):
+    items: list[CompanyProfileOut]
+
+
+class QueryScopeIn(Strict):
+    mode: Literal["broad", "selected"] = "broad"
+    site_groups: list[str] = Field(default_factory=list, max_length=6)
+    exclude_official_domain: bool = Field(default=True, description="Leave the company's own site out of results.")
+    exclude_noise: bool = Field(default=True, description="Leave the versioned noise-domain list out of results.")
+
+
+class QueryPlanIn(Strict):
+    """Exactly one of `presets` or `pack`."""
+    profile_id: str = Field(max_length=100)
+    profile_version: int | None = None
+    presets: list[str] | None = Field(default=None, min_length=1, max_length=8)
+    pack: str | None = Field(default=None, max_length=50)
+    providers: list[Literal["exa", "tavily"]] = Field(default_factory=lambda: ["exa", "tavily"], min_length=1, max_length=2)
+    scope: QueryScopeIn = Field(default_factory=QueryScopeIn)
+    results_per_query: int | None = Field(default=None, ge=1, le=5, description="Default: the budget shape's maximum.")
+    include_experimental: bool = Field(default=False, description="Let a pack use presets without a benchmark target yet.")
+
+
+class PlannedSearchOut(BaseModel):
+    query_id: str
+    template_id: str
+    provider: str
+    query: str
+    num_results: int
+    include_domains: list[str] | None
+    include_domains_mode: str | None = None
+    exclude_domains: list[str] | None = None
+    category: str | None = None
+    topic: str | None = None
+    exact_match: bool | None = None
+    preset_status: str | None = None
+
+
+class QueryPlanOut(BaseModel):
+    schema_version: int = SCHEMA_VERSION
+    query_plan_id: str
+    workspace_id: str
+    profile_id: str
+    profile_version: int
+    display_name: str
+    official_domain: str | None
+    template_version: str
+    pack: str | None = None
+    omitted_presets: list[dict[str, str]] = []
+    searches: list[PlannedSearchOut]
+    scope: dict[str, Any]
+    budget: dict[str, Any]
+    privacy_notice: str
+    created_by: str
+    created_at: str
+
+
+class QueryPresetCatalog(BaseModel):
+    schema_version: int = SCHEMA_VERSION
+    template_version: str
+    noise_domains_version: str
+    benchmark_version: str
+    noise_domains: list[str]
+    site_groups: dict[str, list[str]]
+    presets: list[dict[str, Any]]
+    packs: list[dict[str, Any]]
+    shapes: dict[str, dict[str, int]]
+
+
+class QueryPlanPage(BaseModel):
+    items: list[QueryPlanOut]
+    next_cursor: str | None
+
+
+class DiscoveryOriginOut(BaseModel):
+    query_id: str
+    provider: str
+    rank: int
+    title: str | None
+    returned_url: str
+
+
+class ProviderQueryOut(BaseModel):
+    query_id: str
+    provider: str
+    query: str
+    status: Literal["pending", "ok", "failed", "skipped"]
+    error: str | None = None
+    returned: int = 0
+    truncated: bool = False
+    searched_at: str | None = None
+
+
+class DiscoveryRunOut(BaseModel):
+    run_id: str
+    query_plan_id: str
+    profile_version: int
+    mode: Literal["live", "snapshot"]
+    state: Literal["searching", "fetching", "comparing", "done", "failed"]
+    outcome: str | None
+    started_at: str
+    finished_at: str | None
+    provider_queries: list[ProviderQueryOut]
+    search_errors: list[str]
+    returned_count: int
+    unique_count: int
+    fetch_attempted_count: int
+    fetched_count: int
+    skipped_count: int
+    truncated: bool
+    note: str
+
+
+class SourceOut(BaseModel):
+    source_id: str
+    original_url: str
+    final_url: str | None = None
+    title: str | None = None
+    mode: Literal["seeded", "discovered"]
+    discovery_origins: list[DiscoveryOriginOut] = []
+    discovery_provider: str | None = None
+    extraction_provider: str | None = None
+    search_rank: int | None = None
+    fetch_status: FetchStatus
+    failure_reason: str | None = None
+    retrieved_at: str | None = None
+    retrieval_note: str | None = None
+    provider_content_timestamp: str | None = None
+    content_hash: str | None = None
+    truncated: bool = False
+    comparison_status: ComparisonStatus
+    match_count: int = 0
+    freshness: Literal["fresh", "cached"] | None = None
+
+
+class SourcePage(BaseModel):
+    schema_version: int = SCHEMA_VERSION
+    scan_id: str
+    discovery: DiscoveryRunOut | None
+    items: list[SourceOut]
+    next_cursor: str | None
+
+
 # ---------- scans ----------
 
 class PublicSourcesIn(Strict):
@@ -123,10 +293,18 @@ class PublicSourcesIn(Strict):
     source_ids: list[str] | None = Field(default=None, max_length=50)
 
 
+class PublicDiscoveryIn(Strict):
+    """Select an already approved query plan. No company name, query or document-derived field is accepted."""
+    query_plan_id: str = Field(max_length=100)
+    mode: Literal["live", "snapshot"] = "live"
+    snapshot_id: str | None = Field(default=None, max_length=100)
+
+
 class ScanRequest(Strict):
     input_id: str = Field(max_length=100)
     checks: list[Check] = Field(min_length=1, max_length=2)
     public_sources: PublicSourcesIn | None = None
+    public_discovery: PublicDiscoveryIn | None = None
     review_profile: Literal["data_exposure_v1"] = "data_exposure_v1"
     model_review: bool = True
 
@@ -163,6 +341,7 @@ class ScanOut(BaseModel):
     recheck_of: str | None = None
     public_snapshot_id: str | None = None
     public_freshness: str | None = None
+    public_discovery: dict[str, Any] | None = None
     stages: list[StageOut]
     coverage: list[CoverageEntry]
     budget: dict[str, int]
@@ -197,6 +376,8 @@ class PublicSpanOut(BaseModel):
     snapshot_id: str
     mode: Literal["seeded", "discovered"] = "seeded"
     provider: str | None = None
+    discovery_run_id: str | None = None
+    discovery_origins: list[DiscoveryOriginOut] | None = None
 
 
 class EvidenceOut(BaseModel):

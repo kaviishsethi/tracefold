@@ -1,0 +1,734 @@
+{
+  "case_id": "gitlab",
+  "label": "public_policy",
+  "pack": "code_exposure",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from GitLab",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"GitLab\"",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "code_hosts_domain",
+      "provider": "exa",
+      "query": "configuration file referencing gitlab.com",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "code_hosts_domain",
+      "provider": "tavily",
+      "query": "\"gitlab.com\" config",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": false,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "paste_sites",
+      "provider": "exa",
+      "query": "GitLab gitlab.com",
+      "num_results": 3,
+      "include_domains": [
+        "ghostbin.cloud",
+        "paste.ee",
+        "pastebin.com",
+        "rentry.co"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "paste_sites",
+      "provider": "tavily",
+      "query": "\"GitLab\" gitlab.com",
+      "num_results": 3,
+      "include_domains": [
+        "ghostbin.cloud",
+        "paste.ee",
+        "pastebin.com",
+        "rentry.co"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": false,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "breach_coverage",
+      "provider": "exa",
+      "query": "report on a data breach or source code leak at GitLab",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "gitlab.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "breach_coverage",
+      "provider": "tavily",
+      "query": "\"GitLab\" breach source code leak",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "gitlab.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 12.2,
+  "provider_requests": 28,
+  "response_bytes": 343233,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from GitLab",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:33:00.384927Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"GitLab\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:33:00.728245Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "code_hosts_domain",
+      "provider": "exa",
+      "query": "configuration file referencing gitlab.com",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:33:01.559135Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "code_hosts_domain",
+      "provider": "tavily",
+      "query": "\"gitlab.com\" config",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:33:02.781301Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "paste_sites",
+      "provider": "exa",
+      "query": "GitLab gitlab.com",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:33:03.162866Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "paste_sites",
+      "provider": "tavily",
+      "query": "\"GitLab\" gitlab.com",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:33:04.711598Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "breach_coverage",
+      "provider": "exa",
+      "query": "report on a data breach or source code leak at GitLab",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:33:04.732452Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "breach_coverage",
+      "provider": "tavily",
+      "query": "\"GitLab\" breach source code leak",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:33:07.884557Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_bdb6058efd87c014baba",
+      "url": "https://docs.gitlab.com/user/project/repository/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Repository | GitLab Docs",
+          "returned_url": "https://docs.gitlab.com/user/project/repository/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_78c4e557a80cbe9d6e6e",
+      "url": "https://docs.gitlab.com/topics/git/clone/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Clone a Git repository to your local computer | GitLab Docs",
+          "returned_url": "https://docs.gitlab.com/topics/git/clone/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_43dc8cbfee8bc24b7abe",
+      "url": "https://docs.gitlab.com/cli/repo/clone/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "glab repo clone | GitLab Docs",
+          "returned_url": "https://docs.gitlab.com/cli/repo/clone/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_0041c8a226dee7a5e2a9",
+      "url": "https://about.gitlab.com/jobs",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Join GitLab",
+          "returned_url": "https://about.gitlab.com/jobs"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6f824014054e0b215fd6",
+      "url": "https://gitlab.com/gitlab-org/gitlab",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitLab.org / GitLab \u00b7 GitLab",
+          "returned_url": "https://gitlab.com/gitlab-org/gitlab"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_45938b6b54e2a64b7946",
+      "url": "https://about.gitlab.com",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitLab - Speed with control for agentic software engineering",
+          "returned_url": "https://about.gitlab.com"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_fab9541230b92976f2af",
+      "url": "https://docs.gitlab.com/cli/connection/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Connect to your GitLab instance | GitLab Docs",
+          "returned_url": "https://docs.gitlab.com/cli/connection/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_572c286d242c0783106a",
+      "url": "https://github.com/Roche/gitlab-configuration-as-code/blob/master/examples/gitlab.cfg",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "examples/gitlab.cfg at master \u00b7 Roche/gitlab-configuration-as-code",
+          "returned_url": "https://github.com/Roche/gitlab-configuration-as-code/blob/master/examples/gitlab.cfg"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_40a6d9c8f72d979b9a7c",
+      "url": "https://docs.gitlab.com/omnibus/settings/configuration/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Configuration options for Linux package installations | GitLab Docs",
+          "returned_url": "https://docs.gitlab.com/omnibus/settings/configuration/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c148529d7c31770cdf59",
+      "url": "https://docs.gitlab.com/user/gitlab_com",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "GitLab.com settings | GitLab Docs",
+          "returned_url": "https://docs.gitlab.com/user/gitlab_com"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_022d7106d77e4491e691",
+      "url": "https://docs.gitlab.com/omnibus/settings/configuration",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Configuration options for Linux package installations | GitLab Docs",
+          "returned_url": "https://docs.gitlab.com/omnibus/settings/configuration"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_f2de153bb367dc89a799",
+      "url": "https://docs.gitlab.com/runner/configuration/advanced-configuration",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Advanced configuration",
+          "returned_url": "https://docs.gitlab.com/runner/configuration/advanced-configuration"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_76c41b8b1970a905478b",
+      "url": "https://pastebin.com/TpypCP9c",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": ".gitlab-ci.yml",
+          "returned_url": "https://pastebin.com/TpypCP9c"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c1fecb71cc6f14ebc57d",
+      "url": "https://pastebin.com/FcCHgLT8",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "gitlab - Pastebin.com",
+          "returned_url": "https://pastebin.com/FcCHgLT8"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_f30ce833267053047d51",
+      "url": "https://pastebin.com/nXF45Scf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "GitLab UI not working",
+          "returned_url": "https://pastebin.com/nXF45Scf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_58b58cb33d240accc604",
+      "url": "https://pastebin.com/SyixAyms",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "git lab_console - Pastebin.com",
+          "returned_url": "https://pastebin.com/SyixAyms"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_fd51bd6223baba55d29b",
+      "url": "https://pastebin.com/PNNCFhrb",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Running with gitlab-runner 14.6.0 (5316d4ac) on 66bit-runner ACFgSXPCPrepar - Pastebin.com",
+          "returned_url": "https://pastebin.com/PNNCFhrb"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e47433457191c9438a45",
+      "url": "https://pastebin.com/PiYZxgnb",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "SwitchToSceneViewOnPlay - Pastebin.com",
+          "returned_url": "https://pastebin.com/PiYZxgnb"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_92886c91c445e1f0282a",
+      "url": "https://www.bleepingcomputer.com/news/security/europcar-gitlab-breach-exposes-data-of-up-to-200-000-customers/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Europcar GitLab breach exposes data of up to 200,000 customers",
+          "returned_url": "https://www.bleepingcomputer.com/news/security/europcar-gitlab-breach-exposes-data-of-up-to-200-000-customers/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e28dade2492d51fc285d",
+      "url": "https://www.redhat.com/en/blog/security-update-incident-related-red-hat-consulting-gitlab-instance",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Security update: Incident related to Red Hat Consulting GitLab instance",
+          "returned_url": "https://www.redhat.com/en/blog/security-update-incident-related-red-hat-consulting-gitlab-instance"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_fb0204b7d366bf59c67c",
+      "url": "https://www.cybersecuritydive.com/news/red-hat-jack-customer-data-crimson-collective/802121/",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Hackers steal sensitive Red Hat customer data after breaching GitLab repository | Cybersecurity Dive",
+          "returned_url": "https://www.cybersecuritydive.com/news/red-hat-jack-customer-data-crimson-collective/802121/"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_cb78967f741742d7cc46",
+      "url": "https://blackkite.com/blog/tprm-insights-php2shell-plex2shell-pan-os-drupal-core-gitlab-oracle-weblogic-beyondtrust-remote-support-fortinet-apache-tomcat",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "TPRM Insights: php2shell, Plex2Shell, PAN-OS, Drupal Core, GitLab, Oracle WebLogic, BeyondTrust Remote Support, Fortinet, Apache Tomcat",
+          "returned_url": "https://blackkite.com/blog/tprm-insights-php2shell-plex2shell-pan-os-drupal-core-gitlab-oracle-weblogic-beyondtrust-remote-support-fortinet-apache-tomcat"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_d74daebd895796917c84",
+      "url": "https://cycode.com/blog/top-source-code-leaks-2020-2026",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Top Source Code Leaks, 2020-2026 - Cycode",
+          "returned_url": "https://cycode.com/blog/top-source-code-leaks-2020-2026"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_ffc4ca3464f272832197",
+      "url": "https://www.bleepingcomputer.com/news/security/gitlab-warns-of-new-max-severity-code-execution-vulnerability",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitLab warns of new max severity code execution vulnerability",
+          "returned_url": "https://www.bleepingcomputer.com/news/security/gitlab-warns-of-new-max-severity-code-execution-vulnerability"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:33:11.109969Z"
+}

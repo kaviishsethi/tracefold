@@ -1,0 +1,293 @@
+{
+  "case_id": "posthog",
+  "label": "public_policy",
+  "pack": "leak_watch",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from PostHog",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "posthog.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"PostHog\" leaked internal memo",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "posthog.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    }
+  ],
+  "omitted_presets": [
+    {
+      "preset": "leak_news_alias",
+      "reason": "needs a public alias"
+    }
+  ],
+  "scan_state": "completed",
+  "elapsed_seconds": 6.1,
+  "provider_requests": 12,
+  "response_bytes": 372061,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from PostHog",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:15.676734Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"PostHog\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:42:17.466395Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_e30c73e04ed47bbb3f2a",
+      "url": "https://news.ycombinator.com/item?id=46305321",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Inside PostHog: SSRF, ClickHouse SQL Escape and Default Postgres Creds to RCE | Hacker News",
+          "returned_url": "https://news.ycombinator.com/item?id=46305321"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_171ae308afb3aabd8382",
+      "url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Proton apologizes to community after internal memo shows force behind proposed AI use in building its privacy products | TechRadar",
+          "returned_url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_944e2a172b3994d033df",
+      "url": "https://www.businessinsider.com/leaked-wapo-memo-reveals-big-changes-coming-to-bezos-newsroom-2025-3",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Leaked WaPo Memo Reveals Big Changes Coming to Bezos' Newsroom - Business Insider",
+          "returned_url": "https://www.businessinsider.com/leaked-wapo-memo-reveals-big-changes-coming-to-bezos-newsroom-2025-3"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_34d7e6329da7a672f6ee",
+      "url": "https://digiday.com/media/washington-post-growing-business/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 4,
+          "title": "The Washington Post: 'We are a growing business' - Digiday",
+          "returned_url": "https://digiday.com/media/washington-post-growing-business/"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_65fbeca878dfd5fac6d2",
+      "url": "https://www.businessinsider.com/leaked-memo-news-corp-ceo-journal-post-staff-work-office-2023-1",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 5,
+          "title": "Leaked News Corp Memo: CEO Wants WSJ, NY Post Staff Back in Office - Business Insider",
+          "returned_url": "https://www.businessinsider.com/leaked-memo-news-corp-ceo-journal-post-staff-work-office-2023-1"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_1290cd2b7dc4ee74d543",
+      "url": "https://reflex.dev/docs/changelog",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Reflex Changelog \u00b7 Reflex Docs",
+          "returned_url": "https://reflex.dev/docs/changelog"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_230dceb844711a4b91e9",
+      "url": "https://wangchujiang.com/github-rank/repos.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitHub Repositories Ranking",
+          "returned_url": "https://wangchujiang.com/github-rank/repos.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_4d48dd25c9c1e6c89809",
+      "url": "https://thisweekinreact.com/newsletter/304",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "This Week In React #304: Next.js, Compiler, Redux Toolkit, Suspense, Resizable Panels, Preact, Redact | RN 0.89 RC, Vega OS, Screens, Hermes, WebView, Unistyles, tgfx, Pager View | Node.js, Parcel, Rspack, Actions, Vitest, jsdom, HTML-in-Canvas | This Week In React",
+          "returned_url": "https://thisweekinreact.com/newsletter/304"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_a9d7ed490ba078f9d192",
+      "url": "https://www.roastmyapp.co/app-growth-consultant",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 4,
+          "title": "App Growth Consultant: Paywall, Monetization & Onboarding CRO",
+          "returned_url": "https://www.roastmyapp.co/app-growth-consultant"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_242cbaf295fc6b2bcebe",
+      "url": "https://www.bettermadehosting.com/apps",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 5,
+          "title": "Managed Apps | BetterMade Hosting",
+          "returned_url": "https://www.bettermadehosting.com/apps"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:42:19.324030Z"
+}

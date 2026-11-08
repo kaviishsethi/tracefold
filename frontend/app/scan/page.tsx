@@ -14,8 +14,11 @@ import {
   type Capabilities,
   type Check as CheckId,
   type Input,
+  type Page,
+  type QueryPlan,
   type RecentScan,
 } from "@/lib/api";
+import { searchFilters } from "@/components/discovery";
 import { bytes, relativeTime, shortId } from "@/lib/format";
 import { useCurrentWorkspace } from "@/components/shell";
 import { Select } from "@/components/select";
@@ -24,7 +27,7 @@ import { Button, Empty, ErrorNote, Loading, PageHeader, Panel, Spinner, cx, inpu
 const STEPS = [
   ["Capture", "Your files are read into the engine's memory. Nothing is written to disk, and a capture expires on its own."],
   ["Parse", "Text, code and .docx files are split into passages with stable line or paragraph locations."],
-  ["Fetch approved pages", "Only for public exposure: a separate worker fetches the URLs in the source list you pick. It never sees your files."],
+  ["Find and fetch public pages", "Only for public exposure: a separate worker fetches the URLs in a source list, or searches with an approved discovery plan and fetches the results. It never sees your files."],
   ["Compare", "Your passages are matched against the fetched public text."],
   ["Local rules", "Deterministic rules look for secrets, personal data and risky code in your files."],
   ["Model review", "Optional. A local model reviews rule hits and explains them. It only runs on loopback."],
@@ -139,6 +142,9 @@ export default function NewScan() {
   const [localRisk, setLocalRisk] = useState(true);
   const [publicMatch, setPublicMatch] = useState(false);
   const [manifest, setManifest] = useState("");
+  const [plans, setPlans] = useState<QueryPlan[]>([]);
+  const [publicKind, setPublicKind] = useState<"list" | "discovery">("list");
+  const [planId, setPlanId] = useState("");
   const [modelReview, setModelReview] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -150,6 +156,28 @@ export default function NewScan() {
       .then(setCaps)
       .catch((e: ApiError) => setCapsError(e.message));
   }, []);
+
+  useEffect(() => {
+    if (!current) return;
+    let alive = true;
+    api<Page<QueryPlan>>(ws(current.id, "/query-plans?limit=100"))
+      .then(({ items }) => {
+        if (!alive) return;
+        const sorted = [...items].sort((a, b) => b.created_at.localeCompare(a.created_at));
+        setPlans(sorted);
+        const wanted = new URLSearchParams(window.location.search).get("plan");
+        const pick = sorted.find((p) => p.query_plan_id === wanted) ?? sorted[0];
+        setPlanId(pick?.query_plan_id ?? "");
+        if (wanted && pick?.query_plan_id === wanted) {
+          setPublicMatch(true);
+          setPublicKind("discovery");
+        } else if (!current.manifests.length && sorted.length) setPublicKind("discovery");
+      })
+      .catch(() => alive && setPlans([]));
+    return () => {
+      alive = false;
+    };
+  }, [current]);
 
   useEffect(() => {
     setRecent(current ? recentScans(current.id) : []);
@@ -184,7 +212,9 @@ export default function NewScan() {
   const checks: CheckId[] = [];
   if (localRisk) checks.push("local_risk");
   if (publicMatch) checks.push("public_match");
-  const ready = !!input && accepted > 0 && checks.length > 0 && (!publicMatch || !!manifest) && canSubmit;
+  const plan = plans.find((p) => p.query_plan_id === planId) ?? null;
+  const publicReady = publicKind === "list" ? !!manifest : !!plan;
+  const ready = !!input && accepted > 0 && checks.length > 0 && (!publicMatch || publicReady) && canSubmit;
 
   async function upload(list: File[]) {
     if (!current) return;
@@ -248,7 +278,11 @@ export default function NewScan() {
         {
           input_id: input.input_id,
           checks,
-          ...(publicMatch ? { public_sources: { manifest_id: manifest, mode: "refresh" as const } } : {}),
+          ...(publicMatch
+            ? publicKind === "list"
+              ? { public_sources: { manifest_id: manifest, mode: "refresh" as const } }
+              : { public_discovery: { query_plan_id: planId, mode: "live" as const } }
+            : {}),
           model_review: localRisk && modelReview,
         },
         label,
@@ -428,25 +462,90 @@ export default function NewScan() {
             <Toggle
               checked={publicMatch}
               onChange={setPublicMatch}
-              disabled={current.manifests.length === 0}
+              disabled={current.manifests.length === 0 && plans.length === 0}
               title="Public exposure"
               hint={
-                current.manifests.length === 0 ? (
+                current.manifests.length === 0 && plans.length === 0 ? (
                   <>
-                    This workspace has no approved source list yet.{" "}
-                    <Link href="/sources" className="text-ink-2 underline-offset-4 hover:underline">
-                      How to add one
+                    This workspace has no approved source list or discovery plan yet.{" "}
+                    <Link href="/discovery" className="text-ink-2 underline-offset-4 hover:underline">
+                      Set up discovery
                     </Link>
                   </>
                 ) : (
-                  "Fetch the pages in an approved source list now and look for your passages on them."
+                  "Look for your passages on public pages: a fixed source list, or pages found by searching the company's public name."
                 )
               }
             >
               {publicMatch && (
-                <div className="flex flex-wrap items-center gap-3">
-                  <Select label="Source list" value={manifest} onChange={setManifest} options={current.manifests.map((m) => ({ value: m, label: m }))} />
-                  <span className="text-xs text-faint">Fresh fetch, up to {caps.limits.max_public_pages ?? 20} pages</span>
+                <div className="space-y-3">
+                  <div role="tablist" aria-label="Public pages" className="flex gap-1">
+                    {(
+                      [
+                        ["list", "Source list", current.manifests.length > 0],
+                        ["discovery", "Company discovery", plans.length > 0],
+                      ] as const
+                    ).map(([v, l, enabled]) => (
+                      <button
+                        key={v}
+                        role="tab"
+                        aria-selected={publicKind === v}
+                        disabled={!enabled}
+                        onClick={() => setPublicKind(v)}
+                        className={cx(
+                          "h-7 rounded-md px-2.5 text-xs font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50",
+                          publicKind === v ? "bg-raised text-ink" : "text-mute hover:text-ink",
+                        )}
+                      >
+                        {l}
+                      </button>
+                    ))}
+                  </div>
+                  {publicKind === "list" ? (
+                    <div className="flex flex-wrap items-center gap-3">
+                      <Select label="Source list" value={manifest} onChange={setManifest} options={current.manifests.map((m) => ({ value: m, label: m }))} />
+                      <span className="text-xs text-faint">Fresh fetch, up to {caps.limits.max_public_pages ?? 20} pages</span>
+                    </div>
+                  ) : plan ? (
+                    <div className="space-y-2">
+                      <div className="flex flex-wrap items-center gap-3">
+                        <Select
+                          label="Discovery plan"
+                          value={planId}
+                          onChange={setPlanId}
+                          options={plans.map((p) => ({
+                            value: p.query_plan_id,
+                            label: `${p.display_name} · ${p.pack ?? [...new Set(p.searches.map((x) => x.template_id))].join(", ")}`,
+                          }))}
+                        />
+                        <Link href="/discovery" className="text-xs text-mute hover:text-ink">
+                          Manage plans
+                        </Link>
+                      </div>
+                      <div className="rounded-ctl border border-line bg-panel-2/60">
+                        <p className="border-b border-line px-3 py-2 text-xs text-faint">Sent to the search providers, nothing else:</p>
+                        <ul className="divide-y divide-line">
+                          {plan.searches.map((q) => (
+                            <li key={q.query_id} className="flex flex-wrap items-baseline gap-x-2 px-3 py-1.5 text-xs">
+                              <span className="w-12 shrink-0 font-mono text-faint">{q.provider}</span>
+                              <span className="font-mono text-ink-2">{q.query}</span>
+                              <span className="text-faint">{searchFilters(q)}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <p className="text-xs text-faint">
+                        Up to {caps.limits.max_public_pages ?? 20} returned pages are fetched and compared on this machine. Search isn&apos;t exhaustive.
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="text-xs text-mute">
+                      No discovery plan yet.{" "}
+                      <Link href="/discovery" className="text-ink-2 underline-offset-4 hover:underline">
+                        Create one
+                      </Link>
+                    </p>
+                  )}
                 </div>
               )}
             </Toggle>

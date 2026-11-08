@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
-import { CheckSquare, ChevronRight, ChevronsUpDown, Database, LayoutGrid, Radar, ScanSearch, Settings2, ShieldAlert, Upload } from "lucide-react";
+import { CheckSquare, ChevronRight, ChevronsUpDown, Database, Globe, LayoutGrid, Radar, ScanSearch, Settings2, ShieldAlert, Upload } from "lucide-react";
 import { api, useWorkspace, ws, type Action, type ApiError, type Capabilities, type Finding, type Page, type Workspace } from "@/lib/api";
 import { LinkButton, Spinner, cx } from "./ui";
 
@@ -16,6 +16,7 @@ const NAV = [
   { href: "/actions", label: "Approvals", icon: CheckSquare },
   { href: "/scan", label: "Scans", icon: ScanSearch },
   { href: "/egress", label: "Egress", icon: Radar },
+  { href: "/discovery", label: "Discovery", icon: Globe },
   { href: "/sources", label: "Sources", icon: Database },
   { href: "/settings", label: "Settings", icon: Settings2 },
 ];

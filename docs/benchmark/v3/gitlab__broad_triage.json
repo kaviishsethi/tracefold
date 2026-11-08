@@ -1,0 +1,774 @@
+{
+  "case_id": "gitlab",
+  "label": "public_policy",
+  "pack": "broad_triage",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from GitLab",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "gitlab.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"GitLab\" leaked internal memo",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "gitlab.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to GitLab employees",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "gitlab.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"GitLab\" email to employees full text",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "gitlab.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "GitLab employee handbook or company policy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "gitlab.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"GitLab\" policy handbook procedure",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "gitlab.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from GitLab",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"GitLab\"",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 5.6,
+  "provider_requests": 28,
+  "response_bytes": 342295,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from GitLab",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:33:13.127905Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"GitLab\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:33:11.464403Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to GitLab employees",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:33:13.170305Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"GitLab\" email to employees full text",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:33:14.483424Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "GitLab employee handbook or company policy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:33:13.366674Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"GitLab\" policy handbook procedure",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:33:13.487704Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from GitLab",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:33:13.650684Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"GitLab\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:33:13.779818Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_462405d102249db12884",
+      "url": "https://www.businessinsider.com/gitlab-layoffs-memo-2026-5",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "GitLab Employees Face Layoffs Limbo. Read the Memo. - Business Insider",
+          "returned_url": "https://www.businessinsider.com/gitlab-layoffs-memo-2026-5"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_4885509739844b7da597",
+      "url": "https://www.ragan.com/the-week-in-comms-linkedin-gm-gitlab/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "LinkedIn CEO cites need for strategy shift in layoff memo; GM employees decry how their layoffs were communicated - Ragan Communications",
+          "returned_url": "https://www.ragan.com/the-week-in-comms-linkedin-gm-gitlab/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_bef3fd24f792082a186c",
+      "url": "https://www.bloomberg.com/news/articles/2026-05-11/gitlab-says-will-cut-jobs-to-spend-on-growth-in-agentic-era",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "GitLab to Cut Jobs, Reinvest Savings in AI Agent Growth Strategy - Bloomberg",
+          "returned_url": "https://www.bloomberg.com/news/articles/2026-05-11/gitlab-says-will-cut-jobs-to-spend-on-growth-in-agentic-era"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_cd6cbce66c7e21215ff4",
+      "url": "https://securityonline.info/cve-watchtower/cve-2026-97229",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "CVE-2026-97229 - Critical Severity Vulnerability (Actively Exploited) | CVE Watchtower",
+          "returned_url": "https://securityonline.info/cve-watchtower/cve-2026-97229"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_609b906e7c3e167f377d",
+      "url": "https://www.cloudzero.com/blog/ai-tokens",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "What are AI tokens? The unit your AI bill is written in",
+          "returned_url": "https://www.cloudzero.com/blog/ai-tokens"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_e685d7a1909c18dbc355",
+      "url": "https://github.com/bigbodycobain/shadowbroker",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitHub - BigBodyCobain/Shadowbroker: Open-source intelligence for the global theater. Track everything from the corporate/private jets of the wealthy, and spy satellites, to seismic events in one unified interface. Hook an AI agent up to have it parse through data and find previously unseen correlat",
+          "returned_url": "https://github.com/bigbodycobain/shadowbroker"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_7465532bd883a08332e4",
+      "url": "https://www.sec.gov/Archives/edgar/data/1653482/000165348226000095/exhibit991-letterfromwilla.htm",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Document",
+          "returned_url": "https://www.sec.gov/Archives/edgar/data/1653482/000165348226000095/exhibit991-letterfromwilla.htm"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6afb0c9e66a0909037a9",
+      "url": "https://www.marketscreener.com/quote/stock/GITLAB-INC-128192404/news/GitLab-Earlier-today-GitLab-CEO-Sid-Sijbrandij-sent-the-following-note-to-GitLab-team-members-42943540/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "GitLab : Earlier today, GitLab CEO Sid Sijbrandij sent the following note to GitLab team members",
+          "returned_url": "https://www.marketscreener.com/quote/stock/GITLAB-INC-128192404/news/GitLab-Earlier-today-GitLab-CEO-Sid-Sijbrandij-sent-the-following-note-to-GitLab-team-members-42943540/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_424390893a0d816d4337",
+      "url": "https://www.cnbc.com/2023/02/09/gitlab-layoffs-company-to-cut-7percent-of-staff-or-about-130-employees.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "GitLab layoffs: Company to cut 7% of staff, or about 130 employees",
+          "returned_url": "https://www.cnbc.com/2023/02/09/gitlab-layoffs-company-to-cut-7percent-of-staff-or-about-130-employees.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_a1bbc5c3f0b6a41005d3",
+      "url": "https://redcanary.com/news/gitlab-runs-phishing-test-against-employees-and-20-handed-over-credentials",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "GitLab runs phishing test against employees \u2013 and 20% handed over credentials | Red Canary",
+          "returned_url": "https://redcanary.com/news/gitlab-runs-phishing-test-against-employees-and-20-handed-over-credentials"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e7e5f073fde6a8d2228c",
+      "url": "https://textbolt.com/integration/gitlab-ci-email-to-text-alerts",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitLab Pipeline Failure Notifications as Text Alerts",
+          "returned_url": "https://textbolt.com/integration/gitlab-ci-email-to-text-alerts"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_9b1f762a876f60a78d9c",
+      "url": "https://www.neo.tax/help-center/ticketing/gitlab",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Connect GitLab | Neo.Tax Help Center",
+          "returned_url": "https://www.neo.tax/help-center/ticketing/gitlab"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_1042b854b9955b624201",
+      "url": "https://gitlab-com.gitlab.io/content-sites/handbook/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "The GitLab Handbook",
+          "returned_url": "https://gitlab-com.gitlab.io/content-sites/handbook/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_f6fb2279d6468d94d4b4",
+      "url": "https://kocielnik.gitlab.io/gitlab_handbook_takeaway/about-the-handbook.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "3 About the Handbook | GitLab Communication",
+          "returned_url": "https://kocielnik.gitlab.io/gitlab_handbook_takeaway/about-the-handbook.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_fde5d67fa11a8b744b66",
+      "url": "https://qz.com/work/1191601/our-1000-page-employee-handbook-actually-makes-things-easier",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Our 1,000-page employee handbook actually makes things easier",
+          "returned_url": "https://qz.com/work/1191601/our-1000-page-employee-handbook-actually-makes-things-easier"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_55377f8183f144efcead",
+      "url": "https://www.archbee.com/blog/how-to-organize-an-employee-handbook",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "How to Organize Your Employee Handbook",
+          "returned_url": "https://www.archbee.com/blog/how-to-organize-an-employee-handbook"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d3e3b6ec8988703314bd",
+      "url": "https://s204.q4cdn.com/984476563/files/doc_downloads/govdoc/GitLab-Code-of-Business-Conduct-Ethics-2024-06-25.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitLab - Code of Business Conduct & Ethics.docx - Google Docs",
+          "returned_url": "https://s204.q4cdn.com/984476563/files/doc_downloads/govdoc/GitLab-Code-of-Business-Conduct-Ethics-2024-06-25.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8596b632f63942a87cb9",
+      "url": "https://blissbook.com/blog/employee-handbook-examples",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "11 Employee Handbook Examples & Samples (2026)",
+          "returned_url": "https://blissbook.com/blog/employee-handbook-examples"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_bdb6058efd87c014baba",
+      "url": "https://docs.gitlab.com/user/project/repository/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Repository | GitLab Docs",
+          "returned_url": "https://docs.gitlab.com/user/project/repository/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_78c4e557a80cbe9d6e6e",
+      "url": "https://docs.gitlab.com/topics/git/clone/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Clone a Git repository to your local computer | GitLab Docs",
+          "returned_url": "https://docs.gitlab.com/topics/git/clone/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_43dc8cbfee8bc24b7abe",
+      "url": "https://docs.gitlab.com/cli/repo/clone/",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "glab repo clone | GitLab Docs",
+          "returned_url": "https://docs.gitlab.com/cli/repo/clone/"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_0041c8a226dee7a5e2a9",
+      "url": "https://about.gitlab.com/jobs",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Join GitLab",
+          "returned_url": "https://about.gitlab.com/jobs"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_6f824014054e0b215fd6",
+      "url": "https://gitlab.com/gitlab-org/gitlab",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitLab.org / GitLab \u00b7 GitLab",
+          "returned_url": "https://gitlab.com/gitlab-org/gitlab"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_45938b6b54e2a64b7946",
+      "url": "https://about.gitlab.com",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitLab - Speed with control for agentic software engineering",
+          "returned_url": "https://about.gitlab.com"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:33:16.658358Z"
+}

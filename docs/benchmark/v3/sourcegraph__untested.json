@@ -1,0 +1,741 @@
+{
+  "case_id": "sourcegraph",
+  "label": "public_policy",
+  "pack": "untested",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Sourcegraph employees",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" email to employees full text",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_roadmap",
+      "provider": "exa",
+      "query": "leaked Sourcegraph product roadmap or strategy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_roadmap",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" leaked roadmap",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "employee_forums",
+      "provider": "exa",
+      "query": "Sourcegraph employee discussion about internal documents",
+      "num_results": 3,
+      "include_domains": [
+        "news.ycombinator.com",
+        "reddit.com",
+        "teamblind.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "employee_forums",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" employees internal",
+      "num_results": 3,
+      "include_domains": [
+        "news.ycombinator.com",
+        "reddit.com",
+        "teamblind.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "financial_filings",
+      "provider": "exa",
+      "query": "Sourcegraph financial report",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "financial report",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "financial_filings",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" annual report internal",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "finance",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 10.0,
+  "provider_requests": 28,
+  "response_bytes": 1493249,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Sourcegraph employees",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:08.509674Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" email to employees full text",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:08.470876Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_roadmap",
+      "provider": "exa",
+      "query": "leaked Sourcegraph product roadmap or strategy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:11.747188Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_roadmap",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" leaked roadmap",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:10.072469Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "employee_forums",
+      "provider": "exa",
+      "query": "Sourcegraph employee discussion about internal documents",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:11.282408Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "employee_forums",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" employees internal",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:14.777519Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "financial_filings",
+      "provider": "exa",
+      "query": "Sourcegraph financial report",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:13.644429Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "financial_filings",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" annual report internal",
+      "status": "ok",
+      "error": null,
+      "returned": 2,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:14.724525Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_b221f0529dbfd0d4dc07",
+      "url": "https://slab.com/blog/at-sourcegraph-writing-outweighs-the-water-cooler-mythos/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "At Sourcegraph, writing outweighs the \u201cwater-cooler mythos\u201d - Knock Down Silos by Slab",
+          "returned_url": "https://slab.com/blog/at-sourcegraph-writing-outweighs-the-water-cooler-mythos/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_42d5acadd06ef0b850d0",
+      "url": "https://www.infoq.com/podcasts/zoomcations-fully-remote/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Quinn Slack of Sourcegraph on Moving to Fully Remote and Zoomcations - InfoQ",
+          "returned_url": "https://www.infoq.com/podcasts/zoomcations-fully-remote/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_00ac2234beabe9f61712",
+      "url": "https://github.com/sourcegraph/handbook/commit/c69cb2e365e75ac30180877b61cec6c3a03b20bd",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Adding impact award letter template (#6258) \u00b7 c69cb2e \u00b7 sourcegraph/handbook",
+          "returned_url": "https://github.com/sourcegraph/handbook/commit/c69cb2e365e75ac30180877b61cec6c3a03b20bd"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e464600ccf52571932b7",
+      "url": "https://github.com/sourcegraph/handbook/blob/main/content/team/ceo/index.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "handbook/content/team/ceo/index.md at main \u00b7 sourcegraph/handbook \u00b7 GitHub",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/team/ceo/index.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c448201b1bb6a1924b0f",
+      "url": "http://job-boards.greenhouse.io/sourcegraph91",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Jobs at Sourcegraph",
+          "returned_url": "http://job-boards.greenhouse.io/sourcegraph91"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_a14a02050a5ca4df0c1e",
+      "url": "https://newsletter.pragmaticengineer.com/p/inside-sourcegraphs-engineering-culture",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Inside Sourcegraph\u2019s Engineering Culture: Part 1",
+          "returned_url": "https://newsletter.pragmaticengineer.com/p/inside-sourcegraphs-engineering-culture"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_fb0fd897765fc2241120",
+      "url": "https://sdtimes.com/os/sd-times-open-source-project-of-the-week-sourcegraph/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "SD Times Open-Source Project of the Week: Sourcegraph - SD Times",
+          "returned_url": "https://sdtimes.com/os/sd-times-open-source-project-of-the-week-sourcegraph/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6b997ad994f6bd8b50f4",
+      "url": "https://research.contrary.com/report/quinn-slack-everything-downstream-of-the-coding-agent",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Transcript: Interview with Sourcegraph CEO Quinn Slack | Contrary Research",
+          "returned_url": "https://research.contrary.com/report/quinn-slack-everything-downstream-of-the-coding-agent"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_7c59ab69f16eab99d5c2",
+      "url": "https://sourceforge.net/articles/the-most-powerful-accurate-ai-coding-assistant-sourcegraph-cody-sourceforge-podcast-episode-23/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "The Most Powerful & Accurate AI Coding Assistant: Sourcegraph Cody | SourceForge Podcast, episode #23",
+          "returned_url": "https://sourceforge.net/articles/the-most-powerful-accurate-ai-coding-assistant-sourcegraph-cody-sourceforge-podcast-episode-23/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_79e7d8affe33ea2bf94c",
+      "url": "https://github.com/sourcegraph/sourcegraph-public-snapshot/issues/871",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Gerrit integration roadmap \u00b7 Issue #871 \u00b7 sourcegraph/sourcegraph-public-snapshot \u00b7 GitHub",
+          "returned_url": "https://github.com/sourcegraph/sourcegraph-public-snapshot/issues/871"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_a9ebb7e83dadbdb98de8",
+      "url": "https://dev.to/om_shree_0709/anthropic-claude-code-source-code-leaked-what-happened-why-it-matters-and-what-comes-next-53cc",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Anthropic Claude Code Source Code Leaked: What Happened, Why It Matters, and What Comes Next - DEV Community",
+          "returned_url": "https://dev.to/om_shree_0709/anthropic-claude-code-source-code-leaked-what-happened-why-it-matters-and-what-comes-next-53cc"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8a6a3ce4c91337f75431",
+      "url": "https://news.ycombinator.com/item?id=18117755",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "incomplete",
+      "truncated": true,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Sourcegraph is now open source | Hacker News",
+          "returned_url": "https://news.ycombinator.com/item?id=18117755"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_45d14bdd125fcaba6d86",
+      "url": "https://news.ycombinator.com/item?id=41297794",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "I used to always point to Sourcegraph as a company that really understood dev cu... | Hacker News",
+          "returned_url": "https://news.ycombinator.com/item?id=41297794"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8bc7ea7924ccd1ed5fd4",
+      "url": "https://news.ycombinator.com/item?id=41298641",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Sourcegraph CEO here. We made our main internal ...",
+          "returned_url": "https://news.ycombinator.com/item?id=41298641"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8c5fb8425f5ba8a60cb4",
+      "url": "https://news.ycombinator.com/item?id=41296481",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Sourcegraph went dark | Hacker News",
+          "returned_url": "https://news.ycombinator.com/item?id=41296481"
+        },
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Sourcegraph went dark | Hacker News",
+          "returned_url": "https://news.ycombinator.com/item?id=41296481"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ae78b39f38bb37e0fe24",
+      "url": "https://www.teamblind.com/company/Sourcegraph/reviews",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Sourcegraph Company Reviews : What's it like to work at Sourcegraph? - Blind",
+          "returned_url": "https://www.teamblind.com/company/Sourcegraph/reviews"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_1d381b9b5a13765f5f41",
+      "url": "https://news.ycombinator.com/item?id=36584656",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "incomplete",
+      "truncated": true,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Sourcegraph is no longer open source | Hacker News",
+          "returned_url": "https://news.ycombinator.com/item?id=36584656"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_6c2899157c33a27d21ec",
+      "url": "https://www.sec.gov/Archives/edgar/data/1861449/000119312521342266/d257904d424b3.htm",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "424B3",
+          "returned_url": "https://www.sec.gov/Archives/edgar/data/1861449/000119312521342266/d257904d424b3.htm"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_bd5a85ba027928a9f242",
+      "url": "https://www.sec.gov/Archives/edgar/data/1861449/000095012322006570/filename1.htm",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "DRS",
+          "returned_url": "https://www.sec.gov/Archives/edgar/data/1861449/000095012322006570/filename1.htm"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_d9872bf60fe21e2d7d2a",
+      "url": "https://www.sec.gov/Archives/edgar/data/1861449/000186144922000061/brds2022proxystatement.htm",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Proxy Statement",
+          "returned_url": "https://www.sec.gov/Archives/edgar/data/1861449/000186144922000061/brds2022proxystatement.htm"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_138adb756532d0a56a94",
+      "url": "https://finance.yahoo.com/news/hackerrank-launches-two-solutions-help-120000915.html",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "HackerRank Launches Two New Solutions to Help Companies Become GenAI Ready",
+          "returned_url": "https://finance.yahoo.com/news/hackerrank-launches-two-solutions-help-120000915.html"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_4b55850a63d5a17fea78",
+      "url": "https://www.forbes.com/councils/forbestechcouncil/2023/09/07/how-ai-is-influencing-the-it-outsourcing-business",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "How AI Is Influencing The IT Outsourcing Business",
+          "returned_url": "https://www.forbes.com/councils/forbestechcouncil/2023/09/07/how-ai-is-influencing-the-it-outsourcing-business"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:41:17.736171Z"
+}

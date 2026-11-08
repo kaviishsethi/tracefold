@@ -154,7 +154,14 @@ function EvidenceBlock({ workspaceId, refEv }: { workspaceId: string; refEv: Evi
           </span>
           {e.matched_tokens != null && <span>{e.matched_tokens} matching tokens</span>}
           {e.segment_coverage != null && <span>{Math.round(e.segment_coverage * 100)}% of the passage</span>}
-          <span>Source {pub.source_id}</span>
+          {pub.mode === "discovered" && pub.discovery_origins?.length ? (
+            <span>
+              Found by search: {pub.discovery_origins.map((o) => `${o.provider} ${o.query_id} #${o.rank}`).join(", ")}
+              {pub.provider ? ` · fetched via ${pub.provider}` : ""}
+            </span>
+          ) : (
+            <span>Source {pub.source_id}</span>
+          )}
         </p>
       </div>
     );

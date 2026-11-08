@@ -1,0 +1,293 @@
+{
+  "case_id": "civicactions",
+  "label": "public_policy",
+  "pack": "leak_watch",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from CivicActions",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "civicactions.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"CivicActions\" leaked internal memo",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "civicactions.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [
+    {
+      "preset": "leak_news_alias",
+      "reason": "needs a public alias"
+    }
+  ],
+  "scan_state": "completed",
+  "elapsed_seconds": 9.1,
+  "provider_requests": 12,
+  "response_bytes": 131090,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from CivicActions",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:05.606662Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"CivicActions\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:06.665225Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_53eb060571eeb6224989",
+      "url": "https://www.theglobeandmail.com/news/toronto/civicaction-a-look-back-at-decade-of-city-shaping-in-toronto/article5859545/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "CivicAction: A look back at decade of city-shaping in Toronto",
+          "returned_url": "https://www.theglobeandmail.com/news/toronto/civicaction-a-look-back-at-decade-of-city-shaping-in-toronto/article5859545/"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_19cd6930f4a24f79cc97",
+      "url": "https://www.newswire.ca/news-releases/media-advisory---follow-the-leader-at-metronext-civicaction-celebrates-the-next-generation-of-civic-leaders-and-presents-the-hon-david-crombie-with-a-lifetime-achievement-award-516434281.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Media Advisory - Follow the Leader at MetroNext: CivicAction Celebrates the Next Generation of Civic Leaders and Presents the Hon. David Crombie with a Lifetime Achievement Award",
+          "returned_url": "https://www.newswire.ca/news-releases/media-advisory---follow-the-leader-at-metronext-civicaction-celebrates-the-next-generation-of-civic-leaders-and-presents-the-hon-david-crombie-with-a-lifetime-achievement-award-516434281.html"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_9e91289813b18f6939e3",
+      "url": "https://ottawa.citynews.ca/2020/01/28/documents-released-that-prompted-ouster-of-lawmaker/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Documents released that prompted ouster of lawmaker",
+          "returned_url": "https://ottawa.citynews.ca/2020/01/28/documents-released-that-prompted-ouster-of-lawmaker/"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_725cb23e284605a398c6",
+      "url": "https://www.buzzfeednews.com/article/zahrahirji/sunrise-movement-climate-change-black-activists",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 4,
+          "title": "Sunrise Movement Black Activists Allege Being \"Tokenized\"",
+          "returned_url": "https://www.buzzfeednews.com/article/zahrahirji/sunrise-movement-climate-change-black-activists"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_93a867748dafe4645187",
+      "url": "https://www.axios.com/2018/02/28/dccc-messaging-2018-midterm-election",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 5,
+          "title": "The DCCC's messaging woes",
+          "returned_url": "https://www.axios.com/2018/02/28/dccc-messaging-2018-midterm-election"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_198e787899075b79bb40",
+      "url": "https://www.govexec.com/management/2026/03/interior-renews-campaign-employees-snitch-dei-discrimination-department/412255/?oref=ge-featured-river-top",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Interior renews campaign for employees to snitch on \u2018DEI discrimination\u2019 in the department - Government Executive",
+          "returned_url": "https://www.govexec.com/management/2026/03/interior-renews-campaign-employees-snitch-dei-discrimination-department/412255/?oref=ge-featured-river-top"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_937a0a2616d301b3251f",
+      "url": "https://sources.news/p/metamates-become-training-data",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Meta employees freak out at training their replacements - Sources | Alex Heath",
+          "returned_url": "https://sources.news/p/metamates-become-training-data"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_50ff5603b901074a2aed",
+      "url": "https://nypost.com/2026/04/17/business/anthropic-ceo-dario-amodei-set-to-meet-white-house-chief-of-staff-susie-wiles-amid-ai-fight-reports/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Anthropic CEO Dario Amodei set to meet White House Chief of Staff Susie Wiles amid AI fight: reports - New York Post",
+          "returned_url": "https://nypost.com/2026/04/17/business/anthropic-ceo-dario-amodei-set-to-meet-white-house-chief-of-staff-susie-wiles-amid-ai-fight-reports/"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_48c1f6b4ae7ccd8e6fb3",
+      "url": "https://www.cnn.com/2026/08/14/us/minnesota-immigration-protests-dhs-operation-hnk",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 4,
+          "title": "Documents show federal surveillance operation in Minnesota targeted progressive groups, unions - CNN",
+          "returned_url": "https://www.cnn.com/2026/08/14/us/minnesota-immigration-protests-dhs-operation-hnk"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_545c86b3905e11f67208",
+      "url": "https://apnews.com/article/minnesota-immigration-enforcement-progressive-groups-investigated-5e6e554e79980553c3a02ca199593a7d",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 5,
+          "title": "Documents show federal surveillance operation in Minnesota targeted progressive groups, unions - AP News",
+          "returned_url": "https://apnews.com/article/minnesota-immigration-enforcement-progressive-groups-investigated-5e6e554e79980553c3a02ca199593a7d"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:32:12.532639Z"
+}

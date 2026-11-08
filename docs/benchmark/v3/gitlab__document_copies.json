@@ -1,0 +1,785 @@
+{
+  "case_id": "gitlab",
+  "label": "public_policy",
+  "pack": "document_copies",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_deck",
+      "provider": "exa",
+      "query": "internal presentation slides from GitLab",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "gitlab.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_deck",
+      "provider": "tavily",
+      "query": "\"GitLab\" internal presentation slides",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": "prefer",
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "gitlab.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "doc_sharing",
+      "provider": "exa",
+      "query": "document published by GitLab",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "doc_sharing",
+      "provider": "tavily",
+      "query": "\"GitLab\"",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "GitLab employee handbook or company policy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "gitlab.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"GitLab\" policy handbook procedure",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "gitlab.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "security_docs",
+      "provider": "exa",
+      "query": "GitLab security policy or incident response plan document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "gitlab.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "security_docs",
+      "provider": "tavily",
+      "query": "\"GitLab\" security policy incident response",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "gitlab.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 10.7,
+  "provider_requests": 28,
+  "response_bytes": 299321,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_deck",
+      "provider": "exa",
+      "query": "internal presentation slides from GitLab",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:49.772009Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_deck",
+      "provider": "tavily",
+      "query": "\"GitLab\" internal presentation slides",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:49.966461Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "doc_sharing",
+      "provider": "exa",
+      "query": "document published by GitLab",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:51.868906Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "doc_sharing",
+      "provider": "tavily",
+      "query": "\"GitLab\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:52.636925Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "GitLab employee handbook or company policy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:53.338152Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"GitLab\" policy handbook procedure",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:54.426278Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "security_docs",
+      "provider": "exa",
+      "query": "GitLab security policy or incident response plan document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:54.418720Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "security_docs",
+      "provider": "tavily",
+      "query": "\"GitLab\" security policy incident response",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:32:55.648178Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_a9bf4de26951b8b9c938",
+      "url": "https://static.sched.com/hosted_files/agilecampportland2019/ec/Global%20Agility%20at%20GitLab%20Preso.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Global Agility: How a remote-only workforce stays agile",
+          "returned_url": "https://static.sched.com/hosted_files/agilecampportland2019/ec/Global%20Agility%20at%20GitLab%20Preso.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_b9c7825241e8b8d0754f",
+      "url": "https://slides.com/filipalacerda/deck",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "An overVue - a tale of speed an maintainability",
+          "returned_url": "https://slides.com/filipalacerda/deck"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_fcf9be35b07c14e7676a",
+      "url": "https://www.slideshare.net/slideshow/gitlab-product-roadmap-and-approach/75882861",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "GitLab Product Roadmap and Approach | PPTX",
+          "returned_url": "https://www.slideshare.net/slideshow/gitlab-product-roadmap-and-approach/75882861"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_27a5cded3f9f7c06407d",
+      "url": "https://www.sec.gov/Archives/edgar/data/1653482/000165348226000145/exhibit991-businessupdat.htm",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "exhibit991-businessupdat",
+          "returned_url": "https://www.sec.gov/Archives/edgar/data/1653482/000165348226000145/exhibit991-businessupdat.htm"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_1a5472b4645ad4238477",
+      "url": "https://s204.q4cdn.com/984476563/files/doc_financials/2024/q4/Gitlab-Q4-FY24-Investor-Presentation.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "[PDF] Gitlab-Q4-FY24-Investor-Presentation.pdf",
+          "returned_url": "https://s204.q4cdn.com/984476563/files/doc_financials/2024/q4/Gitlab-Q4-FY24-Investor-Presentation.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_993a280df85b6870eb93",
+      "url": "https://www.slideshare.net/slideshow/how-gitlab-and-hackerone-help-organizations-innovate-faster-without-compromising-security/76276836",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "How GitLab and HackerOne help organizations innovate faster without compromising security | PDF",
+          "returned_url": "https://www.slideshare.net/slideshow/how-gitlab-and-hackerone-help-organizations-innovate-faster-without-compromising-security/76276836"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_64e5d28bd2078668a403",
+      "url": "https://speakerdeck.com/gitlab/product-marketing-focus-areas",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Product Marketing Focus Areas - Speaker Deck",
+          "returned_url": "https://speakerdeck.com/gitlab/product-marketing-focus-areas"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_73019dd382cd1b9c60af",
+      "url": "https://speakerdeck.com/cynthiang/a-public-handbook-building-trust-with-the-team-customers-and-beyond",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "A Public Handbook: Building trust with the team, customers, and beyond - Speaker Deck",
+          "returned_url": "https://speakerdeck.com/cynthiang/a-public-handbook-building-trust-with-the-team-customers-and-beyond"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_f7fe5e39b292cae46d88",
+      "url": "https://www.slideshare.net/slideshow/gitlab-86-release-webcast/60019110",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "GitLab 8.6 - Release Webcast  | PPTX",
+          "returned_url": "https://www.slideshare.net/slideshow/gitlab-86-release-webcast/60019110"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_52f1c2d64b5066e157b5",
+      "url": "https://www.slideshare.net/slideshow/git-gitlab-92008034/92008034",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Git & GitLab | PPTX",
+          "returned_url": "https://www.slideshare.net/slideshow/git-gitlab-92008034/92008034"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_61fbcfdf89b268d79629",
+      "url": "https://www.slideshare.net/slideshow/difference-between-github-vs-gitlab-vs-bitbucket/254847986",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Difference between Github vs Gitlab vs Bitbucket | PPTX",
+          "returned_url": "https://www.slideshare.net/slideshow/difference-between-github-vs-gitlab-vs-bitbucket/254847986"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8a8a5da8902dbe595ee5",
+      "url": "https://www.scribd.com/document/911374208/Gitlab-Ceo",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitLab's All-Remote Success Strategies | PDF | Business",
+          "returned_url": "https://www.scribd.com/document/911374208/Gitlab-Ceo"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_1042b854b9955b624201",
+      "url": "https://gitlab-com.gitlab.io/content-sites/handbook/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "The GitLab Handbook",
+          "returned_url": "https://gitlab-com.gitlab.io/content-sites/handbook/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_f6fb2279d6468d94d4b4",
+      "url": "https://kocielnik.gitlab.io/gitlab_handbook_takeaway/about-the-handbook.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "3 About the Handbook | GitLab Communication",
+          "returned_url": "https://kocielnik.gitlab.io/gitlab_handbook_takeaway/about-the-handbook.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_fde5d67fa11a8b744b66",
+      "url": "https://qz.com/work/1191601/our-1000-page-employee-handbook-actually-makes-things-easier",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Our 1,000-page employee handbook actually makes things easier",
+          "returned_url": "https://qz.com/work/1191601/our-1000-page-employee-handbook-actually-makes-things-easier"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_55377f8183f144efcead",
+      "url": "https://www.archbee.com/blog/how-to-organize-an-employee-handbook",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "How to Organize Your Employee Handbook",
+          "returned_url": "https://www.archbee.com/blog/how-to-organize-an-employee-handbook"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d3e3b6ec8988703314bd",
+      "url": "https://s204.q4cdn.com/984476563/files/doc_downloads/govdoc/GitLab-Code-of-Business-Conduct-Ethics-2024-06-25.pdf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitLab - Code of Business Conduct & Ethics.docx - Google Docs",
+          "returned_url": "https://s204.q4cdn.com/984476563/files/doc_downloads/govdoc/GitLab-Code-of-Business-Conduct-Ethics-2024-06-25.pdf"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8596b632f63942a87cb9",
+      "url": "https://blissbook.com/blog/employee-handbook-examples",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "11 Employee Handbook Examples & Samples (2026)",
+          "returned_url": "https://blissbook.com/blog/employee-handbook-examples"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_9ca9347a20afb237bc5c",
+      "url": "https://mycyberresources.com/gitlab-open-source-ir-playbooks/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "GitLab\u2019s Open Source IR Playbooks - MyCyberResources",
+          "returned_url": "https://mycyberresources.com/gitlab-open-source-ir-playbooks/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_eb8d899229457d95b376",
+      "url": "https://gitlab-org.gitlab.io/release/docs/general/security/security-engineer/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "GitLab Security Patch Release Process",
+          "returned_url": "https://gitlab-org.gitlab.io/release/docs/general/security/security-engineer/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_68c2d8fe52d258d19453",
+      "url": "https://gl-handbook-ja.page/handbook/security/security-operations/sirt/security-incident-communication-plan/",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "\u30bb\u30ad\u30e5\u30ea\u30c6\u30a3\u30a4\u30f3\u30b7\u30c7\u30f3\u30c8\u30b3\u30df\u30e5\u30cb\u30b1\u30fc\u30b7\u30e7\u30f3\u8a08\u753b | GitLab \u30cf\u30f3\u30c9\u30d6\u30c3\u30af (\u975e\u516c\u5f0f\u65e5\u672c\u8a9e\u8a33)",
+          "returned_url": "https://gl-handbook-ja.page/handbook/security/security-operations/sirt/security-incident-communication-plan/"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_bfd84fe755fe75060579",
+      "url": "https://microfluidics.utoronto.ca/gitlab/help/security/responding_to_security_incidents.md",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Responding to security incidents \u00b7 Security \u00b7 Help \u00b7 GitLab",
+          "returned_url": "https://microfluidics.utoronto.ca/gitlab/help/security/responding_to_security_incidents.md"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_2b7245128d81ce332af4",
+      "url": "https://aviatrix.ai/threat-research-center/cisa-gitlab-cve-2026-85706-path-traversal-attacks",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "CISA Warns of Active GitLab CVE-2026-85706 Path Traversal Exploitation",
+          "returned_url": "https://aviatrix.ai/threat-research-center/cisa-gitlab-cve-2026-85706-path-traversal-attacks"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_a6ebd9b7841baec3831c",
+      "url": "https://gitprotect.io/blog/gitlab-vulnerabilities-and-security-incidents-2023-in-review",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitLab Vulnerabilities And Security Incidents: 2023 In Review - Blog | GitProtect.io",
+          "returned_url": "https://gitprotect.io/blog/gitlab-vulnerabilities-and-security-incidents-2023-in-review"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:32:58.806724Z"
+}

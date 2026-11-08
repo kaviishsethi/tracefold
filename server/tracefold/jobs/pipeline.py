@@ -47,6 +47,7 @@ class ScanContext:
     candidates: list = field(default_factory=list)      # ProposedObservation
     public_snapshot: dict | None = None
     public_texts: dict[str, str] = field(default_factory=dict)  # source_id -> text
+    discovery: dict | None = None                       # company-discovery run state (search provenance)
     ledger: list[dict] = field(default_factory=list)
 
     @property
@@ -111,6 +112,8 @@ def plan_stages(scan: dict) -> list[str]:
     checks = set(scan["checks"])
     names = ["parse"]
     if Check.public_match.value in checks:
+        if (scan.get("public_discovery") or {}).get("mode") == "live":
+            names += ["public_discovery"]
         names += ["public_retrieval", "public_match"]
     if Check.local_risk.value in checks:
         names += ["local_rules"]
@@ -157,6 +160,7 @@ def run_scan(engine: "Engine", scan: dict) -> None:
     final: ScanState | None = None
     steps: list[tuple[str, Callable[[ScanContext], None]]] = [
         ("parse", S.parse_stage),
+        ("public_discovery", S.public_discovery_stage),
         ("public_retrieval", S.public_retrieval_stage),
         ("public_match", S.public_match_stage),
         ("local_rules", S.local_rules_stage),

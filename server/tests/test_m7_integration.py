@@ -29,6 +29,10 @@ ROUTES = {
     ("post", "/v1/workspaces/{ws_id}/findings/{finding_id}/rechecks"),
     ("patch", "/v1/workspaces/{ws_id}/findings/{finding_id}/review"),
     ("get", "/v1/workspaces/{ws_id}/scans/{scan_id}/ledger"), ("get", "/v1/workspaces/{ws_id}/manifests/{manifest_id}"),
+    ("post", "/v1/workspaces/{ws_id}/company-profiles"), ("get", "/v1/workspaces/{ws_id}/company-profiles/{profile_id}"),
+    ("post", "/v1/workspaces/{ws_id}/query-plans"), ("get", "/v1/workspaces/{ws_id}/query-plans"),
+    ("get", "/v1/workspaces/{ws_id}/query-plans/{plan_id}"), ("get", "/v1/query-presets"),
+    ("get", "/v1/workspaces/{ws_id}/company-profiles"), ("get", "/v1/workspaces/{ws_id}/scans/{scan_id}/sources"),
 }
 
 

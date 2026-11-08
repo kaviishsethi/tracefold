@@ -59,9 +59,9 @@ class RetrievalService:
             "fixture_root": str(self.e.settings.fixture_root) if self.e.settings.fixture_root else None,
         }
 
-    def fetch(self, ctx: "ScanContext", sources: list[dict]) -> list[dict]:
+    def call_worker(self, ctx: "ScanContext", req: dict) -> dict:
+        """Run one worker operation (fetch or search) in the isolated worker; record its ledger and request spend."""
         from .worker import run_request, run_subprocess
-        req = self.build_request(ctx, sources)
         if self.e.settings.retrieval_in_process:
             resp = run_request(req, transport=getattr(self.e, "test_transport", None),
                                resolver=getattr(self.e, "test_resolver", None), env=getattr(self.e, "test_env", None))
@@ -74,12 +74,19 @@ class RetrievalService:
         for ev in resp.get("ledger", []):
             ctx.ledger.append({**ev, "scan_id": ctx.scan_id, "workspace_id": ctx.scan["workspace_id"]})
         ctx.spend("provider_requests", resp.get("requests", 0))
-        return resp["results"]
+        return resp
+
+    def fetch(self, ctx: "ScanContext", sources: list[dict]) -> list[dict]:
+        return self.call_worker(ctx, self.build_request(ctx, sources))["results"]
 
     def run(self, ctx: "ScanContext") -> None:
         ps = ctx.scan["public_sources"]
         ws_id = ctx.scan["workspace_id"]
-        manifest = self.e.repo.get_manifest(ws_id, ps["manifest_id"])
+        if ps.get("explicit_sources"):
+            # Recheck of a discovered exposure: fetch the previously cited URL explicitly (never via a new search).
+            manifest = {"id": f"recheck:{ctx.scan_id}", "version": 1, "sources": ps["explicit_sources"]}
+        else:
+            manifest = self.e.repo.get_manifest(ws_id, ps["manifest_id"])
         if manifest is None:
             raise RuntimeError("manifest missing")
         wanted = ps.get("source_ids")
@@ -107,6 +114,8 @@ class RetrievalService:
                          "provider": r.get("provider"), "status": r["status"], "error": r.get("error"),
                          "retrieved_at": r.get("retrieved_at"), "truncated": r.get("truncated", False),
                          "content_hash": None, "chars": 0, "freshness": "fresh", "mode": "seeded"}
+                if ps.get("explicit_sources"):
+                    entry.update(mode="discovered", recheck=True)
                 if r["status"] == "ok":
                     entry["content_hash"] = self.blobs.put(r["text"])
                     entry["chars"] = len(r["text"])

@@ -1,0 +1,782 @@
+{
+  "case_id": "mock_google_product_alias",
+  "label": "mock_leak_reconstruction",
+  "pack": "product_leaks_group",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "product_leaks",
+      "provider": "exa",
+      "query": "leaked specifications of an upcoming Pixel 11 product",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "google.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "product_leaks",
+      "provider": "tavily",
+      "query": "\"Pixel 11\" leaked specs",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "google.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Google",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "google.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Google\" leaked internal memo",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "google.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "leak_news_alias",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Pixel 11",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "google.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "leak_news_alias",
+      "provider": "tavily",
+      "query": "\"Pixel 11\" leaked internal memo",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "google.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "leaked_roadmap",
+      "provider": "exa",
+      "query": "leaked Google product roadmap or strategy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "google.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "leaked_roadmap",
+      "provider": "tavily",
+      "query": "\"Google\" leaked roadmap",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "google.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 6.6,
+  "provider_requests": 28,
+  "response_bytes": 164449,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "product_leaks",
+      "provider": "exa",
+      "query": "leaked specifications of an upcoming Pixel 11 product",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:51:15.325712Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "product_leaks",
+      "provider": "tavily",
+      "query": "\"Pixel 11\" leaked specs",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:51:16.604470Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Google",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:51:15.504496Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Google\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:51:15.612008Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "leak_news_alias",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Pixel 11",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:51:18.198940Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "leak_news_alias",
+      "provider": "tavily",
+      "query": "\"Pixel 11\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:51:16.725213Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "leaked_roadmap",
+      "provider": "exa",
+      "query": "leaked Google product roadmap or strategy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:51:16.893554Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "leaked_roadmap",
+      "provider": "tavily",
+      "query": "\"Google\" leaked roadmap",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:51:17.000050Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_b1b8123fe4ca83607e84",
+      "url": "https://www.theverge.com/tech/974238/pixel-11-specs-and-price-leak",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Google\u2019s Pixel 11 specs and price leak showing the impact of RAMageddon | The Verge",
+          "returned_url": "https://www.theverge.com/tech/974238/pixel-11-specs-and-price-leak"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_721e3739986fca06c4c0",
+      "url": "https://bestforandroid.com/radar/all-four-pixel-11-series-phones-leaked-full-specs-pricing/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "All four Pixel 11 series phones leaked in full, specs and pricing included \u2013 BestForAndroid",
+          "returned_url": "https://bestforandroid.com/radar/all-four-pixel-11-series-phones-leaked-full-specs-pricing/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_4eb8325c51ce80583002",
+      "url": "https://www.androidcentral.com/phones/google-pixel/massive-pixel-11-leak-just-revealed-almost-everything-about-googles-next-phones",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Massive Pixel 11 leak just revealed almost everything about Google's next phones | Android Central",
+          "returned_url": "https://www.androidcentral.com/phones/google-pixel/massive-pixel-11-leak-just-revealed-almost-everything-about-googles-next-phones"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_19a540a45f387b6dc712",
+      "url": "https://www.tiktok.com/@tttechnologyuk/video/7702939893323926816",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Andy Bowyer on TikTok",
+          "returned_url": "https://www.tiktok.com/@tttechnologyuk/video/7702939893323926816"
+        },
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Andy Bowyer on TikTok",
+          "returned_url": "https://www.tiktok.com/@tttechnologyuk/video/7702939893323926816"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_9eadfe5cf2f00041f82c",
+      "url": "https://thedaycurrent.com/phones/pixel-11-pro",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Google Pixel 11 Pro: Specs, Price, and Worth It?",
+          "returned_url": "https://thedaycurrent.com/phones/pixel-11-pro"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_b371492dd2e1312d3277",
+      "url": "https://www.gsmarena.com/google_pixel_11_pro_5g-14801.php",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Google Pixel 11 Pro - Full phone specifications",
+          "returned_url": "https://www.gsmarena.com/google_pixel_11_pro_5g-14801.php"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_7ea156b4e0ca1b5c1f3b",
+      "url": "https://www.businessinsider.com/google-return-office-buyouts-employees-leaked-memo-2025-6",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Google Offers Buyouts to US-Based Employees on Marketing, Comms Teams  - Business Insider",
+          "returned_url": "https://www.businessinsider.com/google-return-office-buyouts-employees-leaked-memo-2025-6"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_585b79fc0e14c6109896",
+      "url": "https://www.cnn.com/2024/01/18/tech/google-ceo-sundar-pichai-further-layoffs",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Google CEO\u2019s internal memo warns of further layoffs ahead | CNN Business",
+          "returned_url": "https://www.cnn.com/2024/01/18/tech/google-ceo-sundar-pichai-further-layoffs"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8bc9fcf9a9612c80b90c",
+      "url": "https://www.businessinsider.com/google-ends-diversity-hiring-goals-reviews-dei-programs-2025-2",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Google Just Ended Diversity Hiring Goals. Read the Memo. - Business Insider",
+          "returned_url": "https://www.businessinsider.com/google-ends-diversity-hiring-goals-reviews-dei-programs-2025-2"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_3e00253f8a18dea4b255",
+      "url": "https://dev.to/leojulieta/deepminds-ai-ban-insider-leak-sparks-global-whistle-blower-wave-2i91",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "DeepMind\u2019s AI Ban: Insider Leak Sparks Global Whistle\u2011Blower Wave - DEV Community",
+          "returned_url": "https://dev.to/leojulieta/deepminds-ai-ban-insider-leak-sparks-global-whistle-blower-wave-2i91"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_7d412d0029f201970fc6",
+      "url": "https://penchan.co/en/market/ai/google/google-ai-leadership",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Who Actually Runs Google's AI? From a Nobel Laureate to Two Invisible Founders | Penchan",
+          "returned_url": "https://penchan.co/en/market/ai/google/google-ai-leadership"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_171ae308afb3aabd8382",
+      "url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Proton apologizes to community after internal memo shows force behind proposed AI use in building its privacy products | TechRadar",
+          "returned_url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ceeb61d5357b991548a7",
+      "url": "https://www.notebookcheck.net/Leaked-documents-show-Google-planned-and-then-cut-a-key-Pixel-11-security-feature-for-GrapheneOS.1382732.0.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Leaked documents show Google planned and then cut a key Pixel 11 security feature for GrapheneOS",
+          "returned_url": "https://www.notebookcheck.net/Leaked-documents-show-Google-planned-and-then-cut-a-key-Pixel-11-security-feature-for-GrapheneOS.1382732.0.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_a331800a680562342185",
+      "url": "https://techcrunch.com/2025/01/30/google-issues-voluntary-exit-program-for-android-chrome-and-pixel-employees/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Google issues \u2018voluntary exit\u2019 program for Android, Chrome, and Pixel employees | TechCrunch",
+          "returned_url": "https://techcrunch.com/2025/01/30/google-issues-voluntary-exit-program-for-android-chrome-and-pixel-employees/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_471614df7318f3099f96",
+      "url": "https://www.techspot.com/news/106592-google-offers-voluntary-exit-plan-severance-pay-pixel.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Google offers \"voluntary exit\" plan with severance pay for Pixel and Android employees | TechSpot",
+          "returned_url": "https://www.techspot.com/news/106592-google-offers-voluntary-exit-plan-severance-pay-pixel.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_a0281ce2b69f2f614f9c",
+      "url": "https://www.cashify.in/news/google-pixel-11-pro-fold-teaser-launched-officially-on-x",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Google Pixel 11 Pro Fold Teaser Launched Officially On X",
+          "returned_url": "https://www.cashify.in/news/google-pixel-11-pro-fold-teaser-launched-officially-on-x"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_a4d965eeb6b741b35a03",
+      "url": "https://android.gadgethacks.com/news/pixel-11-launch-event-bold-ai-claims-still-need-proof",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Pixel 11 Launch Event: Bold AI Claims Still Need Proof << Android :: Gadget Hacks",
+          "returned_url": "https://android.gadgethacks.com/news/pixel-11-launch-event-bold-ai-claims-still-need-proof"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d0829ceac1c34fc3f47e",
+      "url": "https://www.androidcentral.com/apps-software/google-leaked-2024-goals",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Google's 2024 goals have leaked, and here's where the company is headed | Android Central",
+          "returned_url": "https://www.androidcentral.com/apps-software/google-leaked-2024-goals"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_76e78d29470708d10df7",
+      "url": "https://www.androidauthority.com/google-pixel-11a-pixel-tablet-3-3495273/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Google considers hobbled Tensor chips for 2027 Pixel 11a and Pixel Tablet 3",
+          "returned_url": "https://www.androidauthority.com/google-pixel-11a-pixel-tablet-3-3495273/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_957b70f1e63dff50cbc7",
+      "url": "https://www.androidauthority.com/google-assistant-llm-3351414/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Leaked memo shows Google Assistant still a top priority - Android Authority",
+          "returned_url": "https://www.androidauthority.com/google-assistant-llm-3351414/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_9d541f07244f82909b3b",
+      "url": "https://www.zdnet.com/article/googles-leaked-product-roadmap-looks-strikingly-familiar",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Google's leaked product roadmap looks strikingly familiar",
+          "returned_url": "https://www.zdnet.com/article/googles-leaked-product-roadmap-looks-strikingly-familiar"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_a45fe62979b6ecd7f9e2",
+      "url": "https://www.laptopmag.com/news/google-pixel-2025-roadmap-leak",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Google Pixel 2025 roadmap leak: Pixel 8, Pixel Fold, and more | Laptop Mag",
+          "returned_url": "https://www.laptopmag.com/news/google-pixel-2025-roadmap-leak"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_9d7d742a950435cbadea",
+      "url": "https://www.reddit.com/r/gadgets/comments/zsy0xi/leak_exclusive_heres_googles_entire_20232025",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Here's Google's entire 2023-2025 roadmap for Pixel ...",
+          "returned_url": "https://www.reddit.com/r/gadgets/comments/zsy0xi/leak_exclusive_heres_googles_entire_20232025"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:51:20.054692Z"
+}

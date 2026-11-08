@@ -1,0 +1,293 @@
+{
+  "case_id": "sourcegraph",
+  "label": "public_policy",
+  "pack": "leak_watch",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Sourcegraph",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" leaked internal memo",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    }
+  ],
+  "omitted_presets": [
+    {
+      "preset": "leak_news_alias",
+      "reason": "needs a public alias"
+    }
+  ],
+  "scan_state": "completed",
+  "elapsed_seconds": 5.1,
+  "provider_requests": 12,
+  "response_bytes": 398960,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Sourcegraph",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:33.279906Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:35.401284Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_86edc3feff79a33225e2",
+      "url": "https://www.devclass.com/development/2024/08/21/sourcegraph-makes-core-repository-private-co-founder-complains-open-source-means-extra-work-and-risk/1623688",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Sourcegraph makes core repository private, co-founder complains open source means 'extra work and risk'",
+          "returned_url": "https://www.devclass.com/development/2024/08/21/sourcegraph-makes-core-repository-private-co-founder-complains-open-source-means-extra-work-and-risk/1623688"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_b221f0529dbfd0d4dc07",
+      "url": "https://slab.com/blog/at-sourcegraph-writing-outweighs-the-water-cooler-mythos/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "At Sourcegraph, writing outweighs the \u201cwater-cooler mythos\u201d - Knock Down Silos by Slab",
+          "returned_url": "https://slab.com/blog/at-sourcegraph-writing-outweighs-the-water-cooler-mythos/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d284b154eaf4119a6865",
+      "url": "https://arstechnica.com/security/2023/09/pii-leaked-after-sourcegraph-an-ai-driven-service-for-code-development-is-hacked/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Hacker gains admin control of Sourcegraph and gives free access to the masses - Ars Technica",
+          "returned_url": "https://arstechnica.com/security/2023/09/pii-leaked-after-sourcegraph-an-ai-driven-service-for-code-development-is-hacked/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d80f5ca5d60a96a542bf",
+      "url": "https://www.bleepingcomputer.com/news/security/sourcegraph-website-breached-using-leaked-admin-access-token/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 4,
+          "title": "Sourcegraph website breached using leaked admin access token",
+          "returned_url": "https://www.bleepingcomputer.com/news/security/sourcegraph-website-breached-using-leaked-admin-access-token/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c56fc72fa5aab51311e4",
+      "url": "https://www.securityweek.com/sourcegraph-discloses-data-breach-following-access-token-leak/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 5,
+          "title": "Sourcegraph Discloses Data Breach Following Access Token Leak - SecurityWeek",
+          "returned_url": "https://www.securityweek.com/sourcegraph-discloses-data-breach-following-access-token-leak/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_29e2efa56c0a3cbc5e45",
+      "url": "https://grugnotes.com/changelog",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Changelog | Grug Notes",
+          "returned_url": "https://grugnotes.com/changelog"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_1ced62a4bdf297833056",
+      "url": "https://zuplo.com/blog/malicious-ai-traffic-types",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "7 Types of Malicious AI Traffic to Watch Out For - Zuplo",
+          "returned_url": "https://zuplo.com/blog/malicious-ai-traffic-types"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_789cc5375176e680bede",
+      "url": "https://www.perplexity.ai/hub/blog/llm-security",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "What Is LLM Security? How to Mitigate the OWASP Top 10",
+          "returned_url": "https://www.perplexity.ai/hub/blog/llm-security"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_cd04a7389a5555b50930",
+      "url": "https://github.com/BerriAI/litellm/issues/47826",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 4,
+          "title": "[SECURITY] litellm 1.107.0 compromised (PyPI removed; Docker latest/main-stable removed): cook.pth credential stealer + sitecustomize RCE loader, built from lookalike repo Berri-AI/litellm \u00b7 Issue #47826 \u00b7 BerriAI/litellm \u00b7 GitHub",
+          "returned_url": "https://github.com/BerriAI/litellm/issues/47826"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_a51f589eab478e94355f",
+      "url": "https://pi.dev/packages/billion-context",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 5,
+          "title": "billion-context \u00b7 Packages \u00b7 Pi",
+          "returned_url": "https://pi.dev/packages/billion-context"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:40:36.747278Z"
+}

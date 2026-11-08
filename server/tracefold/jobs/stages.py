@@ -59,8 +59,19 @@ def parse_stage(ctx: "ScanContext") -> None:
 
 
 # ---------------- public exposure ----------------
+def public_discovery_stage(ctx: "ScanContext") -> None:
+    """Search the approved public query plan. Inputs come only from the stored plan, never from ctx.docs."""
+    ctx.engine.discovery.search(ctx)
+
+
 def public_retrieval_stage(ctx: "ScanContext") -> None:
-    ctx.engine.retrieval.run(ctx)
+    pd = ctx.scan.get("public_discovery")
+    if pd and pd.get("mode") == "snapshot":
+        ctx.engine.discovery.replay(ctx)
+    elif pd:
+        ctx.engine.discovery.fetch(ctx)
+    else:
+        ctx.engine.retrieval.run(ctx)
 
 
 def _doc_location(doc: ParsedDoc, start: int, end: int) -> dict:
@@ -73,6 +84,7 @@ def public_match_stage(ctx: "ScanContext") -> None:
     found = 0
     skipped = 0
     compared: list[tuple[str, str]] = []  # (path, source_id) pairs with complete comparison
+    per_source: dict[str, int] = {}
     for doc in ctx.docs:
         policy = matcher.policy_for(doc.kind)
         for sid, text in ctx.public_texts.items():
@@ -84,6 +96,7 @@ def public_match_stage(ctx: "ScanContext") -> None:
                 compared.append((doc.file.path, sid))
             for m in res.matches:
                 found += 1
+                per_source[sid] = per_source.get(sid, 0) + 1
                 loc = _doc_location(doc, m.local_start, m.local_end)
                 cov = matcher.segment_coverage(doc.text, m, policy)
                 ev = {
@@ -91,7 +104,8 @@ def public_match_stage(ctx: "ScanContext") -> None:
                     "public": {"source_id": sid, "url": src["url"], "start": m.public_start, "end": m.public_end,
                                "retrieved_at": src.get("retrieved_at"), "freshness": src.get("freshness", "fresh"),
                                "snapshot_id": snap["id"], "mode": src.get("mode", "seeded"),
-                               "provider": src.get("provider")},
+                               "provider": src.get("provider"), "discovery_run_id": src.get("discovery_run_id"),
+                               "discovery_origins": src.get("discovery_origins")},
                     "public_blob": src.get("content_hash"), "matched_tokens": m.tokens, "segment_coverage": cov,
                     "normalization": policy,
                 }
@@ -119,6 +133,7 @@ def public_match_stage(ctx: "ScanContext") -> None:
     ctx.summary["public_matches"] = found
     ctx.summary["boilerplate_skipped"] = skipped
     ctx.summary["public_compared"] = compared
+    ctx.summary["public_source_matches"] = per_source
     req = ctx.summary.get("public_sources_requested", 0)
     ok = ctx.summary.get("public_sources_ok", 0)
     if req == 0 or ok == 0:
@@ -127,8 +142,12 @@ def public_match_stage(ctx: "ScanContext") -> None:
         status, reason = CoverageStatus.partial, "some_sources_failed_or_truncated"
     else:
         status, reason = CoverageStatus.complete, None
+    if ctx.discovery:
+        status, reason = ctx.engine.discovery.coverage_override(ctx, status, reason)
     if not ctx.docs:
         status, reason = CoverageStatus.failed, "no_parsed_input"
+    if ctx.discovery:
+        ctx.engine.discovery.record_comparison(ctx, per_source)
     ctx.cover("check", Check.public_match.value, status, reason, sources_ok=ok, sources_requested=req, matches=found,
               boilerplate_skipped=skipped)
 
@@ -203,8 +222,9 @@ def model_review_stage(ctx: "ScanContext") -> None:
 
 # ---------------- failure handling ----------------
 def on_stage_failure(ctx: "ScanContext", name: str) -> None:
-    if name in ("public_retrieval", "public_match"):
+    if name in ("public_discovery", "public_retrieval", "public_match"):
         ctx.cover("check", Check.public_match.value, CoverageStatus.failed, f"{name}_failed")
+        ctx.engine.discovery.fail(ctx, f"{name}_failed")
     elif name == "local_rules":
         ctx.cover("check", Check.local_risk.value, CoverageStatus.failed, "local_rules_failed")
     elif name == "model_review":
@@ -248,6 +268,10 @@ def _update_public_absence(ctx: "ScanContext", detected: set[str]) -> None:
     that occurrence 'no longer observed at this URL'. Failures, truncation and cached snapshots never do."""
     if Check.public_match.value not in ctx.checks or not ctx.public_snapshot:
         return
+    if ctx.scan.get("public_discovery"):
+        # Search results change; omission or re-observation through discovery never resolves an exposure.
+        # Only an explicit recheck of the cited URL can.
+        return
     fresh_ok = {s["source_id"] for s in ctx.public_snapshot["sources"]
                 if s.get("freshness") == "fresh" and s.get("status") == "ok" and not s.get("truncated")}
     compared = {tuple(x) for x in ctx.summary.get("public_compared", [])}
@@ -262,6 +286,8 @@ def _update_public_absence(ctx: "ScanContext", detected: set[str]) -> None:
 
 
 def after_scan(ctx: "ScanContext", final) -> None:
+    if ctx.discovery and ctx.discovery["run"]["data"]["state"] not in ("done", "failed"):
+        ctx.engine.discovery.fail(ctx, f"scan_{final.value}")
     if ctx.scan.get("recheck_id"):
         from ..services.rechecks import resolve_recheck
         resolve_recheck(ctx, final)

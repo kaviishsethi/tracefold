@@ -53,6 +53,45 @@ Long operations always return 202. Don't hold a request (or an MCP tool call) op
 | `POST /workspaces/{ws}/findings/{id}/rechecks` | `{input_id}` → scoped recheck scan | `recheck_fix` |
 | `PATCH /workspaces/{ws}/findings/{id}/review` | `{state, reason?, expected_version}`; dismissal needs a reason | later |
 | `GET /workspaces/{ws}/scans/{id}/ledger` | Redacted outbound-request accounting | app |
+| `POST /workspaces/{ws}/company-profiles` | Approve a public company identity `{display_name, official_domain?, public_aliases≤2, confirm_public:true, profile_id?}` (needs `configure`) | app only (never MCP) |
+| `GET /workspaces/{ws}/company-profiles[/{id}]` | Approved identities (latest version of each) / one identity | app |
+| `POST /workspaces/{ws}/query-plans` | Immutable plan `{profile_id, presets, providers, scope:{mode, site_groups}, results_per_query≤5}` (needs `configure`) | app only |
+| `GET /workspaces/{ws}/query-plans[/{id}]` | List plans / preview exact outbound queries, scope and budget | `list_query_plans` (select an approved plan) |
+| `GET /workspaces/{ws}/scans/{id}/sources` | Complete source list: matched, no-match, failed, blocked, skipped; discovery provenance | `get_sources` |
+
+## Company-name discovery
+
+Scan with `"public_discovery": {"query_plan_id": "qplan_…"}` instead of `public_sources` (exactly one of the two
+when `public_match` is requested). The scan request carries no company name, query or document-derived field.
+Stages run `public_discovery → public_retrieval → public_match`. Replay offline with
+`{"query_plan_id", "mode": "snapshot", "snapshot_id"}`; everything is labeled cached and no search runs.
+
+- Presets (template version `company_queries_v3`): `GET /v1/query-presets` returns the catalog with per-provider
+  templates, status (`benchmarked`, `experimental`, `legacy`), benchmark evidence, packs, site groups, noise domains and
+  budget shapes. Create a plan with either `presets` or a `pack` (`leak_watch`, `document_copies`, `code_exposure`,
+  `broad_triage`). Packs use only benchmarked presets unless `include_experimental: true`; skipped presets are listed in
+  `omitted_presets`. Budget shapes: up to 4 searches × 5 results, or 8 × 3.
+- Scope: `{mode: "broad" | "selected", site_groups, exclude_official_domain: true, exclude_noise: true}`. Site groups:
+  `github`, `reddit`, `paste`, `code`, `documents`, `forums`. A preset with its own sites is intersected with a selected
+  scope; no overlap is a 422. Show exclusions in the plan preview: the company's own site is left out by default, so
+  first-party copies won't appear unless the user turns that off.
+- Each planned search shows exactly what is sent: `query`, `include_domains` (+ Tavily `include_domains_mode`),
+  `exclude_domains`, Exa `category`, Tavily `topic` and `exact_match`.
+- Privacy wording to show before approval: "Search providers see the public company identity and approved queries.
+  They do not receive uploaded document contents." The `configure` capability is required to approve identities or
+  plans; don't grant it to the MCP adapter.
+- Display order: identity → exact queries/scope (plan preview) → search progress (`scan.public_discovery`) →
+  source table (`/sources`) → match evidence. Show every source, not just matches.
+- Outcomes (`public_discovery.outcome`): `search_failed` → "Search failed; discovery is inconclusive" (coverage
+  `discovery_search_failed`). `no_candidates` → "No candidate sources found", never "no leak" (coverage
+  `no_candidate_sources_found`). `partial_search` / `candidates_found` → compare fetched sources and show coverage.
+- Source `fetch_status`: `fetched` / `failed` / `blocked` (unsafe URL, never sent anywhere) / `skipped_limit`.
+  `comparison_status`: `matched` / `no_match` / `incomplete` (truncated: "no match in the retrieved portion") /
+  `not_compared`. A URL returned by several queries is one source with several `discovery_origins`.
+- `retrieved_at` is API retrieval during this scan, not origin publication time; provider caches are possible.
+  `provider_content_timestamp` is the provider-reported date, shown as such.
+- A discovered exposure is never resolved because a later search omits it. Its recheck fetches the cited URL
+  directly (no search).
 
 The MCP adapter holds its own token in local config. It must not accept a server URL, token, workspace root or
 network query from the host.
@@ -136,7 +175,7 @@ Every error uses one shape: `{"error": {"code", "message", "retryable"}, "reques
 | 409 | `idempotency_conflict`, `version_conflict`, `capture_conflict` (file changed while being captured) |
 | 410 | `input_expired`: capture again |
 | 413 | Size or file-count limit |
-| 422 | Invalid contract (`invalid_request`, `invalid_baseline`, `public_sources_required`, `unknown_source`, …) |
+| 422 | Invalid contract (`invalid_request`, `invalid_baseline`, `public_sources_required`, `unknown_source`, `invalid_profile`, `invalid_query_plan`, `public_input_conflict`, …) |
 | 429 | `queue_full`, `capture_capacity` (retryable) |
 
 Failures in a stage or provider show up in the scan's `errors` and `coverage`. They never appear as an HTTP 200 "clean"
@@ -146,7 +185,8 @@ result.
 
 - Private bytes stay in an in-memory registry: no disk spooling, and a restart drops them. The database holds IDs,
   hashes, locations and sanitized text. Secret values are masked in evidence and never persisted.
-- Public retrieval runs in a separate process. It receives only manifest entries (source ID, URL, provider). On
+- Public retrieval runs in a separate process. It receives only manifest entries (source ID, URL, provider), or for
+  discovery, the rendered queries of an approved plan and then validated candidate URLs. On
   macOS it is sandboxed from the data directory and workspace roots. Scan `summary.retrieval_isolation` reports the
   mode (`…_partial` means a root could not be denied because it contains the engine itself).
 - The model endpoint must be loopback. Model text is scrubbed of secrets and long verbatim echoes before storage.

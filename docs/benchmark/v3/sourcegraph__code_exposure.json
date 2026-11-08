@@ -1,0 +1,698 @@
+{
+  "case_id": "sourcegraph",
+  "label": "public_policy",
+  "pack": "code_exposure",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from Sourcegraph",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\"",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "code_hosts_domain",
+      "provider": "exa",
+      "query": "configuration file referencing sourcegraph.com",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "code_hosts_domain",
+      "provider": "tavily",
+      "query": "\"sourcegraph.com\" config",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": false,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "paste_sites",
+      "provider": "exa",
+      "query": "Sourcegraph sourcegraph.com",
+      "num_results": 3,
+      "include_domains": [
+        "ghostbin.cloud",
+        "paste.ee",
+        "pastebin.com",
+        "rentry.co"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "paste_sites",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" sourcegraph.com",
+      "num_results": 3,
+      "include_domains": [
+        "ghostbin.cloud",
+        "paste.ee",
+        "pastebin.com",
+        "rentry.co"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": false,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "breach_coverage",
+      "provider": "exa",
+      "query": "report on a data breach or source code leak at Sourcegraph",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "breach_coverage",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" breach source code leak",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 14.3,
+  "provider_requests": 28,
+  "response_bytes": 404332,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from Sourcegraph",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:48.827746Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:49.705551Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "code_hosts_domain",
+      "provider": "exa",
+      "query": "configuration file referencing sourcegraph.com",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:50.816514Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "code_hosts_domain",
+      "provider": "tavily",
+      "query": "\"sourcegraph.com\" config",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:51.706415Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "paste_sites",
+      "provider": "exa",
+      "query": "Sourcegraph sourcegraph.com",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:52.250712Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "paste_sites",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" sourcegraph.com",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:52.942442Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "breach_coverage",
+      "provider": "exa",
+      "query": "report on a data breach or source code leak at Sourcegraph",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:53.982276Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "breach_coverage",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" breach source code leak",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:57.866805Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_3de713715c996ef284e7",
+      "url": "https://github.com/sourcegraph/sourcegraph/tree/master",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Search code, repositories, users, issues, pull requests...",
+          "returned_url": "https://github.com/sourcegraph/sourcegraph/tree/master"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_087f7728d28a1fafbaa4",
+      "url": "https://github.com/sourcegraph",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Sourcegraph",
+          "returned_url": "https://github.com/sourcegraph"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_86954a00d587ba392c4d",
+      "url": "https://github.com/sourcegraph/sourcegraph-public-snapshot",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "sourcegraph/sourcegraph-public-snapshot",
+          "returned_url": "https://github.com/sourcegraph/sourcegraph-public-snapshot"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitHub - sourcegraph/sourcegraph-public-snapshot: Code AI platform with Code Search & Cody \u00b7 GitHub",
+          "returned_url": "https://github.com/sourcegraph/sourcegraph-public-snapshot"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_7286dca4b85d1a73ea4f",
+      "url": "https://github.com/sourcegraph/cody-vs",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "GitHub - sourcegraph/cody-vs: Cody for Visual Studio - an AI code assistant that uses advanced search and codebase context to help you write and fix code. \u00b7 GitHub",
+          "returned_url": "https://github.com/sourcegraph/cody-vs"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_30bad84617021c989035",
+      "url": "https://github.com/nmpowell/sourcegraph",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitHub - nmpowell/sourcegraph: Universal code search (self-hosted) \u00b7 GitHub",
+          "returned_url": "https://github.com/nmpowell/sourcegraph"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e5ac631ed06d7e551d2a",
+      "url": "https://docs.gitlab.com/integration/sourcegraph",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Sourcegraph | GitLab Docs",
+          "returned_url": "https://docs.gitlab.com/integration/sourcegraph"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_1b1fde561281baf7d847",
+      "url": "https://github.com/alyssahardy/sourcegraph/blob/main/doc/cli/explanations/env.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "doc/cli/explanations/env.md",
+          "returned_url": "https://github.com/alyssahardy/sourcegraph/blob/main/doc/cli/explanations/env.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_76704d88b3be9954451e",
+      "url": "https://github.com/sourcegraph/sourcegraph-public-snapshot/blob/main/sg.config.yaml",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "sg.config.yaml",
+          "returned_url": "https://github.com/sourcegraph/sourcegraph-public-snapshot/blob/main/sg.config.yaml"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "sourcegraph-public-snapshot/sg.config.yaml at main \u00b7 sourcegraph/sourcegraph-public-snapshot \u00b7 GitHub",
+          "returned_url": "https://github.com/sourcegraph/sourcegraph-public-snapshot/blob/main/sg.config.yaml"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ae8b1af100b1b1a42af7",
+      "url": "https://github.com/beyang/sgbl",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "beyang/sgbl",
+          "returned_url": "https://github.com/beyang/sgbl"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_bccc72361443cf244830",
+      "url": "https://github.com/sourcegraph/src-cli",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "GitHub - sourcegraph/src-cli: Sourcegraph CLI \u00b7 GitHub",
+          "returned_url": "https://github.com/sourcegraph/src-cli"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_aca89d714005c0a420ac",
+      "url": "https://pastebin.com/U8bPPdzC",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "fix - Pastebin.com",
+          "returned_url": "https://pastebin.com/U8bPPdzC"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_4cffff6625bfde3d537f",
+      "url": "https://pastebin.com/BVuksJBY",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "curl  -X POST -H \"Content-Type: application/json\" -H \"Authorization: token sgp_y - Pastebin.com",
+          "returned_url": "https://pastebin.com/BVuksJBY"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8abfb4e9683ca95c81a6",
+      "url": "https://rentry.co/DevBeta",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "\u25baDeveloper Tools",
+          "returned_url": "https://rentry.co/DevBeta"
+        },
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "\u25baDeveloper Tools",
+          "returned_url": "https://rentry.co/DevBeta"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_02f9728098d43b699c49",
+      "url": "https://rentry.co/ahofwhaiwhfoa",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "- 8.8.8.8:53",
+          "returned_url": "https://rentry.co/ahofwhaiwhfoa"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_aa6b7bd360081563c50e",
+      "url": "https://pastebin.com/diff/h4dmuHYf",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "View difference between Paste ID: <a href=\"/h4dmuHYf\">h4dmuHYf ...",
+          "returned_url": "https://pastebin.com/diff/h4dmuHYf"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_d80f5ca5d60a96a542bf",
+      "url": "https://www.bleepingcomputer.com/news/security/sourcegraph-website-breached-using-leaked-admin-access-token/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Sourcegraph website breached using leaked admin access token",
+          "returned_url": "https://www.bleepingcomputer.com/news/security/sourcegraph-website-breached-using-leaked-admin-access-token/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c56fc72fa5aab51311e4",
+      "url": "https://www.securityweek.com/sourcegraph-discloses-data-breach-following-access-token-leak/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Sourcegraph Discloses Data Breach Following Access Token Leak - SecurityWeek",
+          "returned_url": "https://www.securityweek.com/sourcegraph-discloses-data-breach-following-access-token-leak/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d284b154eaf4119a6865",
+      "url": "https://arstechnica.com/security/2023/09/pii-leaked-after-sourcegraph-an-ai-driven-service-for-code-development-is-hacked/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Hacker gains admin control of Sourcegraph and gives free access to the masses - Ars Technica",
+          "returned_url": "https://arstechnica.com/security/2023/09/pii-leaked-after-sourcegraph-an-ai-driven-service-for-code-development-is-hacked/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d74daebd895796917c84",
+      "url": "https://cycode.com/blog/top-source-code-leaks-2020-2026",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Top Source Code Leaks, 2020-2026 - Cycode",
+          "returned_url": "https://cycode.com/blog/top-source-code-leaks-2020-2026"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_e00b0d29d8c34d7ca410",
+      "url": "https://thehackernews.com/2026/10/threatsday-ai-secrets-leak-pingcap.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "ThreatsDay: AI Secrets Leak, PingCAP Source Theft, Signal Hang-Up Flaw, Laravel Auth Bypass + 21 More",
+          "returned_url": "https://thehackernews.com/2026/10/threatsday-ai-secrets-leak-pingcap.html"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_6f7cbb8c57e64f2d2afc",
+      "url": "https://www.microsoft.com/en-us/security/blog/2026/11/05/threat-actors-use-agentic-ai-tooling-to-find-and-abuse-exposed-secrets",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Threat actors use agentic AI tooling to find and abuse exposed secrets | Microsoft Security Blog",
+          "returned_url": "https://www.microsoft.com/en-us/security/blog/2026/11/05/threat-actors-use-agentic-ai-tooling-to-find-and-abuse-exposed-secrets"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:41:01.551286Z"
+}

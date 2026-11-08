@@ -16,6 +16,7 @@ JSON_COLS = {
     "excludes", "capabilities", "sources", "files", "checks", "public_sources", "stages",
     "coverage", "budget", "versions", "errors", "summary", "data", "payload_summary",
     "target", "draft", "approver", "result",
+    "public_discovery", "public_aliases", "profile", "plan",
 }
 
 
@@ -303,6 +304,83 @@ class Repo:
                     out.add(src["content_hash"])
         return out
 
+    # ---------------- company discovery ----------------
+    def insert_profile_version(self, rec: dict) -> int:
+        """Create a profile (version 1) or a new immutable version of an existing one."""
+        with self.db.tx() as c:
+            r = c.execute("SELECT MAX(version) FROM company_profiles WHERE id=? AND workspace_id=?",
+                          (rec["id"], rec["workspace_id"])).fetchone()
+            version = (r[0] or 0) + 1
+            c.execute(
+                "INSERT INTO company_profiles(id,workspace_id,version,display_name,official_domain,public_aliases,approved_by,"
+                "approved_at,privacy_notice_version) VALUES (?,?,?,?,?,?,?,?,?)",
+                (rec["id"], rec["workspace_id"], version, rec["display_name"], rec["official_domain"],
+                 dumps(rec["public_aliases"]), rec["approved_by"], rec["approved_at"], rec["privacy_notice_version"]))
+        return version
+
+    def get_profile(self, ws_id: str, profile_id: str, version: int | None = None) -> dict | None:
+        q = "SELECT * FROM company_profiles WHERE workspace_id=? AND id=?"
+        args: list[Any] = [ws_id, profile_id]
+        if version is not None:
+            q += " AND version=?"
+            args.append(version)
+        q += " ORDER BY version DESC LIMIT 1"
+        return _decode(_row(self.db.conn().execute(q, args).fetchone()))
+
+    def list_profiles(self, ws_id: str) -> list[dict]:
+        """Latest version of each approved profile in a workspace."""
+        rows = self.db.conn().execute(
+            "SELECT p.* FROM company_profiles p WHERE p.workspace_id=? AND p.version = "
+            "(SELECT MAX(version) FROM company_profiles q WHERE q.id=p.id AND q.workspace_id=p.workspace_id) "
+            "ORDER BY p.approved_at DESC", (ws_id,)).fetchall()
+        return [_decode(dict(r)) for r in rows]
+
+    def profile_exists(self, profile_id: str) -> bool:
+        return self.db.conn().execute("SELECT 1 FROM company_profiles WHERE id=?", (profile_id,)).fetchone() is not None
+
+    def insert_query_plan(self, rec: dict) -> None:
+        with self.db.tx() as c:
+            c.execute("INSERT INTO query_plans(id,workspace_id,profile_id,profile_version,profile,plan,created_by,created_at)"
+                      " VALUES (?,?,?,?,?,?,?,?)",
+                      (rec["id"], rec["workspace_id"], rec["profile_id"], rec["profile_version"], dumps(rec["profile"]),
+                       dumps(rec["plan"]), rec["created_by"], rec["created_at"]))
+
+    def get_query_plan(self, plan_id: str) -> dict | None:
+        return _decode(_row(self.db.conn().execute("SELECT * FROM query_plans WHERE id=?", (plan_id,)).fetchone()))
+
+    def list_query_plans(self, ws_id: str, after: str | None, limit: int) -> list[dict]:
+        q, args = "SELECT * FROM query_plans WHERE workspace_id=?", [ws_id]
+        if after:
+            q += " AND id > ?"
+            args.append(after)
+        q += " ORDER BY id LIMIT ?"
+        args.append(limit)
+        return [_decode(dict(r)) for r in self.db.conn().execute(q, args)]
+
+    def upsert_discovery_run(self, rec: dict) -> None:
+        with self.db.tx() as c:
+            c.execute(
+                "INSERT INTO discovery_runs(id,workspace_id,scan_id,query_plan_id,profile_version,data,started_at,finished_at)"
+                " VALUES (?,?,?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET data=excluded.data, finished_at=excluded.finished_at",
+                (rec["id"], rec["workspace_id"], rec["scan_id"], rec["query_plan_id"], rec["profile_version"],
+                 dumps(rec["data"]), rec["started_at"], rec.get("finished_at")))
+
+    def discovery_run_for_scan(self, scan_id: str) -> dict | None:
+        return _decode(_row(self.db.conn().execute("SELECT * FROM discovery_runs WHERE scan_id=?", (scan_id,)).fetchone()))
+
+    def replace_discovery_sources(self, run_id: str, scan_id: str, sources: list[dict]) -> None:
+        with self.db.tx() as c:
+            c.execute("DELETE FROM discovery_sources WHERE run_id=?", (run_id,))
+            for i, s in enumerate(sources):
+                c.execute("INSERT INTO discovery_sources(run_id,scan_id,ordinal,source_id,data) VALUES (?,?,?,?,?)",
+                          (run_id, scan_id, i, s["source_id"], dumps(s)))
+
+    def discovery_sources(self, scan_id: str, after: int, limit: int) -> list[tuple[int, dict]]:
+        rows = self.db.conn().execute(
+            "SELECT ordinal, data FROM discovery_sources WHERE scan_id=? AND ordinal > ? ORDER BY ordinal LIMIT ?",
+            (scan_id, after, limit)).fetchall()
+        return [(r[0], loads(r[1])) for r in rows]
+
     # ---------------- ledger ----------------
     def insert_ledger(self, events: list[dict]) -> None:
         if not events:
@@ -393,5 +471,7 @@ class Repo:
                 "AND NOT EXISTS (SELECT 1 FROM rechecks r WHERE r.scan_id=scans.id)", (keep, older_than_iso))]
             for sid in ids:
                 c.execute("DELETE FROM ledger WHERE scan_id=?", (sid,))
+                c.execute("DELETE FROM discovery_sources WHERE scan_id=?", (sid,))
+                c.execute("DELETE FROM discovery_runs WHERE scan_id=?", (sid,))
                 c.execute("DELETE FROM scans WHERE id=?", (sid,))
             return len(ids)

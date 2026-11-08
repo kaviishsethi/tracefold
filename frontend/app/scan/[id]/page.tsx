@@ -5,7 +5,11 @@ import { useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ArrowUpRight, Check, ChevronRight, Minus, X } from "lucide-react";
 import {
+  COMPARISON_LABEL,
+  DISCOVERY_OUTCOME,
+  FETCH_LABEL,
   STATE_MEANING,
+  allSources,
   api,
   coverageNote,
   isTerminal,
@@ -18,15 +22,19 @@ import {
   type FindingKind,
   type Page,
   type Scan,
+  type SourcePage,
+  type SourceRow,
   type Stage,
 } from "@/lib/api";
+import { host as hostOf } from "@/lib/format";
 import { relativeTime, shortId } from "@/lib/format";
 import { Button, ErrorNote, LinkButton, Loading, PageHeader, Panel, SeverityBadge, Spinner, StatusPill, cx } from "@/components/ui";
 import { useCrumb, useCurrentWorkspace } from "@/components/shell";
 
 const STAGE_LABEL: Record<string, string> = {
   parse: "Read and parse files",
-  public_retrieval: "Fetch approved public pages",
+  public_discovery: "Search for candidate pages",
+  public_retrieval: "Fetch public pages",
   public_match: "Compare with public pages",
   local_rules: "Run local risk rules",
   model_review: "Local model review",
@@ -85,6 +93,118 @@ function logLines(scan: Scan): { text: string; tone: string }[] {
   for (const e of scan.errors) out.push({ text: `error ${e.code}: ${e.message}${e.retryable ? " (retryable)" : ""}`, tone: "text-crit" });
   if (scan.finished_at) out.push({ text: `finished ${new Date(scan.finished_at).toLocaleTimeString([], { hour12: false })} · ${scan.state}`, tone: "text-ink-2" });
   return out;
+}
+
+const COMPARISON_TONE: Record<SourceRow["comparison_status"], string> = {
+  matched: "text-accent",
+  no_match: "text-mute",
+  incomplete: "text-med",
+  not_compared: "text-faint",
+};
+
+/** Every public page this scan looked at: matches, no-matches, failures and blocked URLs, with how each was found. */
+function SourcesPanel({ workspaceId, scan }: { workspaceId: string; scan: Scan }) {
+  const [page, setPage] = useState<SourcePage | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  useEffect(() => {
+    let alive = true;
+    allSources(workspaceId, scan.scan_id)
+      .then((p) => alive && setPage(p))
+      .catch((e: ApiError) => alive && setError(e.message));
+    return () => {
+      alive = false;
+    };
+  }, [workspaceId, scan.scan_id]);
+  if (error) return <ErrorNote error={error} />;
+  if (!page) return <Loading />;
+  const d = page.discovery;
+  const rows = [...page.items].sort(
+    (a, b) => Number(b.comparison_status === "matched") - Number(a.comparison_status === "matched") || b.match_count - a.match_count,
+  );
+  const matched = rows.filter((r) => r.comparison_status === "matched").length;
+  return (
+    <Panel
+      title={d ? "Pages found by search" : "Public pages checked"}
+      meta={`${rows.length} ${rows.length === 1 ? "page" : "pages"} · ${matched} matched`}
+    >
+      {d && (
+        <div className="space-y-2 border-b border-line px-4 py-3">
+          <p className={cx("text-[13px]", d.outcome === "search_failed" || d.outcome === "no_candidates" ? "text-med" : "text-ink-2")}>
+            {DISCOVERY_OUTCOME[d.outcome ?? ""] ?? d.outcome}
+          </p>
+          <ul className="space-y-0.5 text-xs">
+            {d.provider_queries.map((q) => (
+              <li key={q.query_id} className="flex flex-wrap gap-x-2">
+                <span className="w-12 shrink-0 font-mono text-faint">{q.provider}</span>
+                <span className="font-mono text-ink-2">{q.query}</span>
+                <span className={q.status === "ok" ? "text-faint" : "text-crit"}>
+                  {q.status === "ok" ? `${q.returned} returned${q.truncated ? " (extra results dropped)" : ""}` : `${q.status}${q.error ? ` · ${q.error}` : ""}`}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="text-xs text-faint">{d.note}</p>
+        </div>
+      )}
+      {rows.length === 0 ? (
+        <p className="px-4 py-6 text-[13px] text-mute">No public pages were fetched in this scan.</p>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[720px] text-left text-[13px]">
+            <thead className="text-xs text-faint">
+              <tr className="border-b border-line">
+                {["Page", d ? "Found by" : "Source", "Fetch", "Comparison"].map((h) => (
+                  <th key={h} className="px-4 py-2.5 font-normal">
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((r) => {
+                const o = r.discovery_origins[0];
+                return (
+                  <tr key={r.source_id} className={cx("border-b border-line align-top last:border-0", r.comparison_status === "matched" && "bg-accent/[0.05]")}>
+                    <td className="max-w-[420px] px-4 py-2.5">
+                      {r.fetch_status === "blocked" ? (
+                        <span className="block truncate font-mono text-xs text-faint" title={r.original_url}>
+                          {r.original_url}
+                        </span>
+                      ) : (
+                        <a href={r.original_url} target="_blank" rel="noreferrer noopener" className="group block min-w-0">
+                          <span className="block truncate text-ink group-hover:underline">{r.title ?? hostOf(r.original_url)}</span>
+                          <span className="block truncate font-mono text-[11px] text-faint">{r.original_url}</span>
+                        </a>
+                      )}
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-2.5 text-xs text-mute">
+                      {o ? (
+                        <>
+                          {o.provider} · {o.query_id} · #{o.rank}
+                          {r.discovery_origins.length > 1 && <span className="text-faint"> +{r.discovery_origins.length - 1}</span>}
+                        </>
+                      ) : (
+                        <span className="font-mono">{r.source_id}</span>
+                      )}
+                    </td>
+                    <td className={cx("whitespace-nowrap px-4 py-2.5 text-xs", r.fetch_status === "fetched" ? "text-mute" : "text-med")} title={r.failure_reason ?? undefined}>
+                      {FETCH_LABEL[r.fetch_status]}
+                      {r.failure_reason && r.fetch_status !== "fetched" ? ` · ${r.failure_reason}` : ""}
+                      {r.freshness === "cached" ? " · cached" : ""}
+                    </td>
+                    <td className={cx("whitespace-nowrap px-4 py-2.5 text-xs font-medium", COMPARISON_TONE[r.comparison_status])}>
+                      {COMPARISON_LABEL[r.comparison_status]}
+                      {r.match_count > 0 ? ` · ${r.match_count} ${r.match_count === 1 ? "passage" : "passages"}` : ""}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </Panel>
+  );
 }
 
 function Results({ workspaceId, scan }: { workspaceId: string; scan: Scan }) {
@@ -208,7 +328,7 @@ export default function ScanView() {
   const counters: [string, number | null, string?][] = [
     ["Files parsed", sum("files_parsed")],
     [
-      "Public sources fetched",
+      scan.public_discovery ? "Pages found and fetched" : "Public sources fetched",
       scan.checks.includes("public_match") ? sum("public_sources_ok") : null,
       sum("public_sources_requested") != null ? `of ${sum("public_sources_requested")} requested` : scan.checks.includes("public_match") ? undefined : "not requested",
     ],
@@ -219,6 +339,9 @@ export default function ScanView() {
   const details: [string, string][] = [
     ["Created", relativeTime(scan.created_at)],
     ...(scan.finished_at ? ([["Finished", relativeTime(scan.finished_at)]] as [string, string][]) : []),
+    ...(scan.public_discovery
+      ? ([["Discovery plan", `${shortId(scan.public_discovery.query_plan_id)} · ${scan.public_discovery.mode}`]] as [string, string][])
+      : []),
     ...(scan.public_freshness ? ([["Public pages", scan.public_freshness]] as [string, string][]) : []),
     ...(isolation ? ([["Retrieval isolation", label(isolation)]] as [string, string][]) : []),
     ...(modelReview?.status
@@ -392,6 +515,12 @@ export default function ScanView() {
           )}
         </Panel>
       </div>
+
+      {terminal && scan.checks.includes("public_match") && (
+        <div className="mt-6">
+          <SourcesPanel workspaceId={workspaceId} scan={scan} />
+        </div>
+      )}
 
       {terminal && (
         <div className="mt-6">

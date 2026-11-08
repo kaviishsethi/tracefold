@@ -1,0 +1,304 @@
+{
+  "case_id": "mock_apple_memo",
+  "label": "mock_leak_reconstruction",
+  "pack": "leak_watch",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Apple",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "apple.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Apple\" leaked internal memo",
+      "num_results": 5,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "apple.com",
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    }
+  ],
+  "omitted_presets": [
+    {
+      "preset": "leak_news_alias",
+      "reason": "needs a public alias"
+    }
+  ],
+  "scan_state": "completed",
+  "elapsed_seconds": 1.5,
+  "provider_requests": 12,
+  "response_bytes": 85713,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Apple",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:53:28.313911Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Apple\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 5,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:53:28.275270Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_20381d53f392f97ce0ed",
+      "url": "https://www.theverge.com/2018/4/13/17235366/apple-arrests-leak-memo",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Apple has had 12 people arrested for leaks, it says in a leaked memo | The Verge",
+          "returned_url": "https://www.theverge.com/2018/4/13/17235366/apple-arrests-leak-memo"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_423a9e2d09dd8008e85c",
+      "url": "https://www.macrumors.com/2018/04/13/apple-warns-employees-about-leaking-to-media/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Leaked Apple Memo Warns Employees About Leaking Info to Media - MacRumors",
+          "returned_url": "https://www.macrumors.com/2018/04/13/apple-warns-employees-about-leaking-to-media/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_27b90366396e545cfa1f",
+      "url": "https://9to5mac.com/2021/09/22/leaked-memo-tim-cook-says-apple-is-cracking-down-on-leakers/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "matched",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Leaked memo: Tim Cook says Apple is cracking down on leakers - 9to5Mac",
+          "returned_url": "https://9to5mac.com/2021/09/22/leaked-memo-tim-cook-says-apple-is-cracking-down-on-leakers/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": [
+        {
+          "upload": "mock-internal-memo.md",
+          "role": "reference",
+          "tokens": 14
+        },
+        {
+          "upload": "mock-internal-memo.md",
+          "role": "reference",
+          "tokens": 13
+        }
+      ]
+    },
+    {
+      "source_id": "d_dac31f789be1c08bbe2e",
+      "url": "https://www.news.com.au/technology/gadgets/leaked-apple-memo-sparks-fears-over-crackdown-on-device-repairs/news-story/80f37d47e67cff7ce0008690baca585f",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 4,
+          "title": "Apple: Internal documents spark fear for future of new iMac, Macbook | news.com.au \u2014 Australia\u2019s leading news site for latest headlines",
+          "returned_url": "https://www.news.com.au/technology/gadgets/leaked-apple-memo-sparks-fears-over-crackdown-on-device-repairs/news-story/80f37d47e67cff7ce0008690baca585f"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_29e498569d1b70ddad3d",
+      "url": "https://www.theguardian.com/technology/2015/apr/07/apple-store-queue-dead-leaked-memo",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 5,
+          "title": "Is the Apple queue dead? A leaked memo suggests it could be | Apple | The Guardian",
+          "returned_url": "https://www.theguardian.com/technology/2015/apr/07/apple-store-queue-dead-leaked-memo"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_87f12cfdd90b45fa0f6d",
+      "url": "https://www.switchingtomac.com/apple-iphone-duo-inner-display-cracking-repair-guidance",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Apple reportedly tells stores how to handle iPhone Duo inner display cracking",
+          "returned_url": "https://www.switchingtomac.com/apple-iphone-duo-inner-display-cracking-repair-guidance"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_261e33f7c5b005ee595c",
+      "url": "https://nypost.com/2026/11/06/us-news/sensitive-man-cries-himself-to-sleep-because-nyt-wont-call-israel-hamas-war-a-genocide",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Sensitive man 'cries himself to sleep' because NYT won't call Israel-Hamas war a 'genocide'",
+          "returned_url": "https://nypost.com/2026/11/06/us-news/sensitive-man-cries-himself-to-sleep-because-nyt-wont-call-israel-hamas-war-a-genocide"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_279f53e0b2a198736a5f",
+      "url": "https://www.cnbc.com/2026/10/20/qualcomm-performance-focused-layoffs-reuters.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Qualcomm to cut jobs worldwide in performance-focused layoffs, internal memo shows",
+          "returned_url": "https://www.cnbc.com/2026/10/20/qualcomm-performance-focused-layoffs-reuters.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_171ae308afb3aabd8382",
+      "url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 4,
+          "title": "Proton apologizes to community after internal memo shows force behind proposed AI use in building its privacy products | TechRadar",
+          "returned_url": "https://www.techradar.com/vpn/vpn-services/proton-apologizes-to-community-after-internal-memo-shows-force-behind-proposed-ai-use-in-building-its-privacy-products"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_0174913676fbf377e3aa",
+      "url": "https://www.aol.com/articles/customer-success-story-leaked-documents-120012000.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 5,
+          "title": "A \u2018customer success story\u2019: leaked documents show Cisco doubled down on Israeli military deals during Gaza war - AOL",
+          "returned_url": "https://www.aol.com/articles/customer-success-story-leaked-documents-120012000.html"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:53:29.320453Z"
+}

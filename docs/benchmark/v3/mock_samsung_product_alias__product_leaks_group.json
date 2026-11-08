@@ -1,0 +1,770 @@
+{
+  "case_id": "mock_samsung_product_alias",
+  "label": "mock_leak_reconstruction",
+  "pack": "product_leaks_group",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "product_leaks",
+      "provider": "exa",
+      "query": "leaked specifications of an upcoming Galaxy S27 Ultra product",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "samsung.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "product_leaks",
+      "provider": "tavily",
+      "query": "\"Galaxy S27 Ultra\" leaked specs",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "samsung.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Samsung Electronics",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "samsung.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Samsung Electronics\" leaked internal memo",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "samsung.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "leak_news_alias",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Galaxy S27 Ultra",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "samsung.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "leak_news_alias",
+      "provider": "tavily",
+      "query": "\"Galaxy S27 Ultra\" leaked internal memo",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "samsung.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "leaked_roadmap",
+      "provider": "exa",
+      "query": "leaked Samsung Electronics product roadmap or strategy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "samsung.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "leaked_roadmap",
+      "provider": "tavily",
+      "query": "\"Samsung Electronics\" leaked roadmap",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "samsung.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 6.6,
+  "provider_requests": 28,
+  "response_bytes": 212534,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "product_leaks",
+      "provider": "exa",
+      "query": "leaked specifications of an upcoming Galaxy S27 Ultra product",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:51:01.621664Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "product_leaks",
+      "provider": "tavily",
+      "query": "\"Galaxy S27 Ultra\" leaked specs",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:51:04.181603Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Samsung Electronics",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:51:01.805861Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Samsung Electronics\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:51:01.933969Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "leak_news_alias",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Galaxy S27 Ultra",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:51:03.407128Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "leak_news_alias",
+      "provider": "tavily",
+      "query": "\"Galaxy S27 Ultra\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:51:03.518130Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "leaked_roadmap",
+      "provider": "exa",
+      "query": "leaked Samsung Electronics product roadmap or strategy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:51:03.707694Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "leaked_roadmap",
+      "provider": "tavily",
+      "query": "\"Samsung Electronics\" leaked roadmap",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:51:03.828786Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_9bd487b4a377cb4fb2e2",
+      "url": "https://www.tomsguide.com/phones/samsung-phones/samsung-galaxy-s27-ultra-rumors-release-display-upgrades-and-everything-we-know-so-far",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Samsung Galaxy S27 Ultra rumors \u2014 release, display upgrades and everything we know so far | Tom's Guide",
+          "returned_url": "https://www.tomsguide.com/phones/samsung-phones/samsung-galaxy-s27-ultra-rumors-release-display-upgrades-and-everything-we-know-so-far"
+        },
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Samsung Galaxy S27 Ultra rumors \u2014 release, display upgrades and everything we know so far | Tom's Guide",
+          "returned_url": "https://www.tomsguide.com/phones/samsung-phones/samsung-galaxy-s27-ultra-rumors-release-display-upgrades-and-everything-we-know-so-far"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d1c2954c44a8f64e8776",
+      "url": "https://www.androidauthority.com/samsung-galaxy-s27-pro-ultra-charging-speed-battery-3712786/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Galaxy S27 Pro, S27 Ultra charging and battery specs just leaked, and it's good news",
+          "returned_url": "https://www.androidauthority.com/samsung-galaxy-s27-pro-ultra-charging-speed-battery-3712786/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_13f8ac2731b7cd0e166f",
+      "url": "https://www.androidauthority.com/samsung-galaxy-s27-ultra-camera-processing-hp6-leak-3716533/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Galaxy S27 Ultra camera leak reveals major upgrades",
+          "returned_url": "https://www.androidauthority.com/samsung-galaxy-s27-ultra-camera-processing-hp6-leak-3716533/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8272dbface3db6770ddb",
+      "url": "https://www.ndtvprofit.com/technology/galaxy-s27-ultra-s27-pro-s27-and-s27-specs-tipped-bigger-batteries-upgraded-cameras-magnetic-charging-12191969",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Galaxy S27 Ultra, S27 Pro, S27+ And S27 Specs Tipped: Bigger Batteries, Upgraded Cameras, Magnetic Charging",
+          "returned_url": "https://www.ndtvprofit.com/technology/galaxy-s27-ultra-s27-pro-s27-and-s27-specs-tipped-bigger-batteries-upgraded-cameras-magnetic-charging-12191969"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_9513b7bd466be2a5e353",
+      "url": "https://mashable.com/tech/samsung-galaxy-s27-ultra-all-we-know",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Samsung Galaxy S27 Ultra rumors: Pricing, features, and leaks | Mashable",
+          "returned_url": "https://mashable.com/tech/samsung-galaxy-s27-ultra-all-we-know"
+        },
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Samsung Galaxy S27 Ultra rumors: Pricing, features, and leaks | Mashable",
+          "returned_url": "https://mashable.com/tech/samsung-galaxy-s27-ultra-all-we-know"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_eb611d99a650d8a5d8a7",
+      "url": "https://www.businesstimes.com.sg/companies-markets/samsung-bans-use-chatgpt-mobile-appliances-staff",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Samsung bans use of ChatGPT for mobile, appliances staff - The Business Times",
+          "returned_url": "https://www.businesstimes.com.sg/companies-markets/samsung-bans-use-chatgpt-mobile-appliances-staff"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_94ff9288a45e8ab09bae",
+      "url": "https://www.theverge.com/2023/5/2/23707796/samsung-ban-chatgpt-generative-ai-bing-bard-employees-security-concerns",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Samsung tells employees not to use AI tools like ChatGPT, citing security concerns | The Verge",
+          "returned_url": "https://www.theverge.com/2023/5/2/23707796/samsung-ban-chatgpt-generative-ai-bing-bard-employees-security-concerns"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_c090c477d9a1f1973a47",
+      "url": "https://www.businessinsider.com/samsung-chatgpt-bard-data-leak-bans-employee-use-report-2023-5",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Samsung Bans Staff From Using AI Like ChatGPT, Bard After Data Leak - Business Insider",
+          "returned_url": "https://www.businessinsider.com/samsung-chatgpt-bard-data-leak-bans-employee-use-report-2023-5"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_1610b0330fee8ae5a07a",
+      "url": "https://nhimg.org/samsung-chatgpt-source-code-leak-2023-shadow-ai",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Samsung ChatGPT Source Code Leak 2023: Shadow AI",
+          "returned_url": "https://nhimg.org/samsung-chatgpt-source-code-leak-2023-shadow-ai"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_ee3824a8f1022d761154",
+      "url": "https://jazz.security/dlp-explained/dlp-basics/real-examples-of-ai-data-leaks",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Real AI data leak examples and what would have stopped them",
+          "returned_url": "https://jazz.security/dlp-explained/dlp-basics/real-examples-of-ai-data-leaks"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_5eb5773a0a2e0ff09ff9",
+      "url": "https://news.sbs.co.kr/english/article.do?news_id=N1008817557",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Ex-Samsung VP Ahn Seung-ho Sentenced to 3 Years in Prison in Appeal Trial over Trade Secret Leaks",
+          "returned_url": "https://news.sbs.co.kr/english/article.do?news_id=N1008817557"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_662e72b18f4333d94dd3",
+      "url": "https://www.notebookcheck.net/Samsung-moves-to-prevent-leaks-for-Galaxy-S27-lineup.1230141.0.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Samsung moves to prevent leaks for Galaxy S27 lineup",
+          "returned_url": "https://www.notebookcheck.net/Samsung-moves-to-prevent-leaks-for-Galaxy-S27-lineup.1230141.0.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_935a01b260eec62e7c85",
+      "url": "https://www.androidauthority.com/samsung-secure-chat-internal-leaks-3642032/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Love Samsung leaks? They may dry up with the Galaxy S27",
+          "returned_url": "https://www.androidauthority.com/samsung-secure-chat-internal-leaks-3642032/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_fd2bc7c14a8dcb7c12af",
+      "url": "https://www.trustedreviews.com/news/samsungs-cracking-down-on-galaxy-leaks-ahead-of-foldable-launch-later-this-year",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Samsung\u2019s cracking down on Galaxy leaks ahead of foldable launch later this year - Trusted Reviews",
+          "returned_url": "https://www.trustedreviews.com/news/samsungs-cracking-down-on-galaxy-leaks-ahead-of-foldable-launch-later-this-year"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_a79eee84906206d02824",
+      "url": "https://hothardware.com/news/samsung-galaxy-s27-ultra-rumor-roundup-all-the-renders-specs-and-leaks",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Samsung Galaxy S27 Ultra Rumor Roundup: All The Renders, Specs And Leaks",
+          "returned_url": "https://hothardware.com/news/samsung-galaxy-s27-ultra-rumor-roundup-all-the-renders-specs-and-leaks"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_31273713dfed74551f64",
+      "url": "https://samsung.gadgethacks.com/news/samsung-galaxy-s27-ultra-rumors-battery-camera-chip",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Samsung Galaxy S27 Ultra Rumors: Battery, Camera, Chip << Samsung :: Gadget Hacks",
+          "returned_url": "https://samsung.gadgethacks.com/news/samsung-galaxy-s27-ultra-rumors-battery-camera-chip"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c90d904782a3f0dbd609",
+      "url": "https://www.notebookcheck.net/Samsung-Galaxy-Tab-S8-Series-Galaxy-Watch5-Buds-Pro2-and-Buds-Live2-tipped-to-launch-next-year-in-2022-roadmap-leak.581061.0.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Samsung Galaxy Tab S8 Series, Galaxy Watch5, Buds Pro2, and Buds Live2 tipped to launch next year in 2022 roadmap leak",
+          "returned_url": "https://www.notebookcheck.net/Samsung-Galaxy-Tab-S8-Series-Galaxy-Watch5-Buds-Pro2-and-Buds-Live2-tipped-to-launch-next-year-in-2022-roadmap-leak.581061.0.html"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_93e50f90f3d662ed1fdb",
+      "url": "https://www.notebookcheck.net/Samsung-s-new-4-4-plan-for-2027-expected-to-bring-8-Galaxy-flagships-including-the-TriFold-2.1352368.0.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": null,
+          "returned_url": "https://www.notebookcheck.net/Samsung-s-new-4-4-plan-for-2027-expected-to-bring-8-Galaxy-flagships-including-the-TriFold-2.1352368.0.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_b87af535eb35bfebc643",
+      "url": "https://www.newmobile.com/news/rumors/samsung-galaxy-roadmap-for-2022-leaked",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Samsung Galaxy roadmap for 2022 leaked - NewMobile",
+          "returned_url": "https://www.newmobile.com/news/rumors/samsung-galaxy-roadmap-for-2022-leaked"
+        }
+      ],
+      "mentions_company": false,
+      "matches": []
+    },
+    {
+      "source_id": "d_beb2f7df9d2cfda7e504",
+      "url": "https://www.thelec.net/news/articleView.html?idxno=11849",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "\u200bSamsung Reaffirms 1.4nm Mass Production in 2029, Sets SF1.4+ for 2030 < Semiconductor < \uae30\uc0ac\ubcf8\ubb38 - The Elec Inc.",
+          "returned_url": "https://www.thelec.net/news/articleView.html?idxno=11849"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_9e6c7a101eb8670c793c",
+      "url": "https://finance.biggo.com/news/aef68f7b-3fed-4321-8a4b-631a0d6d947b",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Samsung Galaxy S27 Leak Hints at Three-Model Lineup, No Pro Variant, and a 2027 Roadmap Crowded With Foldables \u2014 BigGo Finance",
+          "returned_url": "https://finance.biggo.com/news/aef68f7b-3fed-4321-8a4b-631a0d6d947b"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_8dd7685bd0403f9bf861",
+      "url": "https://tech-insider.org/samsung-cxmt-chip-leak-five-years-chip-talent-war-2026",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Chip Talent War: Samsung Leaker Gets 5 Years [2026]",
+          "returned_url": "https://tech-insider.org/samsung-cxmt-chip-leak-five-years-chip-talent-war-2026"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:51:06.358060Z"
+}

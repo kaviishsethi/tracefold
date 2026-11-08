@@ -1,0 +1,774 @@
+{
+  "case_id": "sourcegraph",
+  "label": "public_policy",
+  "pack": "broad_triage",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Sourcegraph",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" leaked internal memo",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "news",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Sourcegraph employees",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": "news",
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" email to employees full text",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "Sourcegraph employee handbook or company policy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" policy handbook procedure",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from Sourcegraph",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\"",
+      "num_results": 3,
+      "include_domains": [
+        "bitbucket.org",
+        "gist.github.com",
+        "github.com",
+        "gitlab.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "partial",
+  "elapsed_seconds": 6.2,
+  "provider_requests": 28,
+  "response_bytes": 287307,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leak_news",
+      "provider": "exa",
+      "query": "news article quoting a leaked internal memo from Sourcegraph",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:03.876925Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leak_news",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" leaked internal memo",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:02.271807Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "leaked_email",
+      "provider": "exa",
+      "query": "full text of an internal email sent to Sourcegraph employees",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:03.720603Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "leaked_email",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" email to employees full text",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:05.013755Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "Sourcegraph employee handbook or company policy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:04.043780Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" policy handbook procedure",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:04.184477Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "code_hosts_name",
+      "provider": "exa",
+      "query": "source code repository from Sourcegraph",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:04.382044Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "code_hosts_name",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:41:04.513035Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_86edc3feff79a33225e2",
+      "url": "https://www.devclass.com/development/2024/08/21/sourcegraph-makes-core-repository-private-co-founder-complains-open-source-means-extra-work-and-risk/1623688",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Sourcegraph makes core repository private, co-founder complains open source means 'extra work and risk'",
+          "returned_url": "https://www.devclass.com/development/2024/08/21/sourcegraph-makes-core-repository-private-co-founder-complains-open-source-means-extra-work-and-risk/1623688"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d284b154eaf4119a6865",
+      "url": "https://arstechnica.com/security/2023/09/pii-leaked-after-sourcegraph-an-ai-driven-service-for-code-development-is-hacked/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Hacker gains admin control of Sourcegraph and gives free access to the masses - Ars Technica",
+          "returned_url": "https://arstechnica.com/security/2023/09/pii-leaked-after-sourcegraph-an-ai-driven-service-for-code-development-is-hacked/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d80f5ca5d60a96a542bf",
+      "url": "https://www.bleepingcomputer.com/news/security/sourcegraph-website-breached-using-leaked-admin-access-token/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Sourcegraph website breached using leaked admin access token",
+          "returned_url": "https://www.bleepingcomputer.com/news/security/sourcegraph-website-breached-using-leaked-admin-access-token/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_29e2efa56c0a3cbc5e45",
+      "url": "https://grugnotes.com/changelog",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Changelog | Grug Notes",
+          "returned_url": "https://grugnotes.com/changelog"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_1ced62a4bdf297833056",
+      "url": "https://zuplo.com/blog/malicious-ai-traffic-types",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "7 Types of Malicious AI Traffic to Watch Out For - Zuplo",
+          "returned_url": "https://zuplo.com/blog/malicious-ai-traffic-types"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_789cc5375176e680bede",
+      "url": "https://www.perplexity.ai/hub/blog/llm-security",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "What Is LLM Security? How to Mitigate the OWASP Top 10",
+          "returned_url": "https://www.perplexity.ai/hub/blog/llm-security"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_b221f0529dbfd0d4dc07",
+      "url": "https://slab.com/blog/at-sourcegraph-writing-outweighs-the-water-cooler-mythos/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "At Sourcegraph, writing outweighs the \u201cwater-cooler mythos\u201d - Knock Down Silos by Slab",
+          "returned_url": "https://slab.com/blog/at-sourcegraph-writing-outweighs-the-water-cooler-mythos/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_42d5acadd06ef0b850d0",
+      "url": "https://www.infoq.com/podcasts/zoomcations-fully-remote/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Quinn Slack of Sourcegraph on Moving to Fully Remote and Zoomcations - InfoQ",
+          "returned_url": "https://www.infoq.com/podcasts/zoomcations-fully-remote/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_00ac2234beabe9f61712",
+      "url": "https://github.com/sourcegraph/handbook/commit/c69cb2e365e75ac30180877b61cec6c3a03b20bd",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Adding impact award letter template (#6258) \u00b7 c69cb2e \u00b7 sourcegraph/handbook",
+          "returned_url": "https://github.com/sourcegraph/handbook/commit/c69cb2e365e75ac30180877b61cec6c3a03b20bd"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_e464600ccf52571932b7",
+      "url": "https://github.com/sourcegraph/handbook/blob/main/content/team/ceo/index.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "handbook/content/team/ceo/index.md at main \u00b7 sourcegraph/handbook \u00b7 GitHub",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/team/ceo/index.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_c448201b1bb6a1924b0f",
+      "url": "http://job-boards.greenhouse.io/sourcegraph91",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Jobs at Sourcegraph",
+          "returned_url": "http://job-boards.greenhouse.io/sourcegraph91"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_a14a02050a5ca4df0c1e",
+      "url": "https://newsletter.pragmaticengineer.com/p/inside-sourcegraphs-engineering-culture",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Inside Sourcegraph\u2019s Engineering Culture: Part 1",
+          "returned_url": "https://newsletter.pragmaticengineer.com/p/inside-sourcegraphs-engineering-culture"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_5b15a6da106f817ca1c6",
+      "url": "https://github.com/sourcegraph/handbook/blob/main/content/handbook/index.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "content/handbook/index.md",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/handbook/index.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_bb44f7bea5f663be5490",
+      "url": "https://github.com/sourcegraph/handbook/blob/main/content/index.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "content/index.md",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/index.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_716924d8191fa9de7346",
+      "url": "https://github.com/sourcegraph/handbook/blob/main/content/company-info-and-process/respectful-workplace-policy.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "content/company-info-and-process/respectful-workplace-policy.md at main \u00b7 sourcegraph/handbook",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/company-info-and-process/respectful-workplace-policy.md"
+        },
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "handbook/content/company-info-and-process/respectful-workplace-policy.md at main \u00b7 sourcegraph/handbook \u00b7 GitHub",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/company-info-and-process/respectful-workplace-policy.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_b403c975b08aaa519358",
+      "url": "https://github.com/sourcegraph/handbook/blob/main/content/company-info-and-process/policies/information-security-policy.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "matched",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "handbook/content/company-info-and-process/policies/information-security-policy.md at main \u00b7 sourcegraph/handbook \u00b7 GitHub",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/company-info-and-process/policies/information-security-policy.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": [
+        {
+          "upload": "security-incident-response.md",
+          "role": "reference",
+          "tokens": 32
+        }
+      ]
+    },
+    {
+      "source_id": "d_c68372bb540aae410051",
+      "url": "https://github.com/sourcegraph/handbook/blob/main/content/company-info-and-process/policies/third-party-management-policy.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "matched",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "handbook/content/company-info-and-process/policies/third-party-management-policy.md at main \u00b7 sourcegraph/handbook \u00b7 GitHub",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/company-info-and-process/policies/third-party-management-policy.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": [
+        {
+          "upload": "security-incident-response.md",
+          "role": "reference",
+          "tokens": 34
+        }
+      ]
+    },
+    {
+      "source_id": "d_3de713715c996ef284e7",
+      "url": "https://github.com/sourcegraph/sourcegraph/tree/master",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Search code, repositories, users, issues, pull requests...",
+          "returned_url": "https://github.com/sourcegraph/sourcegraph/tree/master"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_087f7728d28a1fafbaa4",
+      "url": "https://github.com/sourcegraph",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Sourcegraph",
+          "returned_url": "https://github.com/sourcegraph"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_86954a00d587ba392c4d",
+      "url": "https://github.com/sourcegraph/sourcegraph-public-snapshot",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "sourcegraph/sourcegraph-public-snapshot",
+          "returned_url": "https://github.com/sourcegraph/sourcegraph-public-snapshot"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_7286dca4b85d1a73ea4f",
+      "url": "https://github.com/sourcegraph/cody-vs",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "GitHub - sourcegraph/cody-vs: Cody for Visual Studio - an AI code assistant that uses advanced search and codebase context to help you write and fix code. \u00b7 GitHub",
+          "returned_url": "https://github.com/sourcegraph/cody-vs"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_30bad84617021c989035",
+      "url": "https://github.com/nmpowell/sourcegraph",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "GitHub - nmpowell/sourcegraph: Universal code search (self-hosted) \u00b7 GitHub",
+          "returned_url": "https://github.com/nmpowell/sourcegraph"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    },
+    {
+      "source_id": "d_e5ac631ed06d7e551d2a",
+      "url": "https://docs.gitlab.com/integration/sourcegraph",
+      "fetch_status": "skipped_limit",
+      "failure_reason": "page_limit",
+      "comparison_status": "not_compared",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Sourcegraph | GitLab Docs",
+          "returned_url": "https://docs.gitlab.com/integration/sourcegraph"
+        }
+      ],
+      "mentions_company": null,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:41:07.734673Z"
+}

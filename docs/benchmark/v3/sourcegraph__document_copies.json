@@ -1,0 +1,766 @@
+{
+  "case_id": "sourcegraph",
+  "label": "public_policy",
+  "pack": "document_copies",
+  "template_version": "company_queries_v3",
+  "searches": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_deck",
+      "provider": "exa",
+      "query": "internal presentation slides from Sourcegraph",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_deck",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" internal presentation slides",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": "prefer",
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "doc_sharing",
+      "provider": "exa",
+      "query": "document published by Sourcegraph",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": null,
+      "exclude_domains": null,
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "doc_sharing",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\"",
+      "num_results": 3,
+      "include_domains": [
+        "docdroid.net",
+        "issuu.com",
+        "scribd.com",
+        "slideshare.net",
+        "speakerdeck.com",
+        "yumpu.com"
+      ],
+      "include_domains_mode": "restrict",
+      "exclude_domains": null,
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "Sourcegraph employee handbook or company policy document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" policy handbook procedure",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "experimental"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "security_docs",
+      "provider": "exa",
+      "query": "Sourcegraph security policy or incident response plan document",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": null,
+      "exact_match": null,
+      "preset_status": "benchmarked"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "security_docs",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" security policy incident response",
+      "num_results": 3,
+      "include_domains": null,
+      "include_domains_mode": null,
+      "exclude_domains": [
+        "crunchbase.com",
+        "dictionary.com",
+        "facebook.com",
+        "glassdoor.com",
+        "instagram.com",
+        "linkedin.com",
+        "merriam-webster.com",
+        "sourcegraph.com",
+        "tavily.com",
+        "trustpilot.com",
+        "twitter.com",
+        "wikipedia.org",
+        "x.com",
+        "youtube.com"
+      ],
+      "category": null,
+      "topic": "general",
+      "exact_match": true,
+      "preset_status": "benchmarked"
+    }
+  ],
+  "omitted_presets": [],
+  "scan_state": "completed",
+  "elapsed_seconds": 10.7,
+  "provider_requests": 28,
+  "response_bytes": 240970,
+  "provider_queries": [
+    {
+      "query_id": "q1",
+      "template_id": "leaked_deck",
+      "provider": "exa",
+      "query": "internal presentation slides from Sourcegraph",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:39.067454Z"
+    },
+    {
+      "query_id": "q2",
+      "template_id": "leaked_deck",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" internal presentation slides",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:38.537455Z"
+    },
+    {
+      "query_id": "q3",
+      "template_id": "doc_sharing",
+      "provider": "exa",
+      "query": "document published by Sourcegraph",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:40.744796Z"
+    },
+    {
+      "query_id": "q4",
+      "template_id": "doc_sharing",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\"",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:40.971130Z"
+    },
+    {
+      "query_id": "q5",
+      "template_id": "policy_copies",
+      "provider": "exa",
+      "query": "Sourcegraph employee handbook or company policy document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:42.924484Z"
+    },
+    {
+      "query_id": "q6",
+      "template_id": "policy_copies",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" policy handbook procedure",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:42.442940Z"
+    },
+    {
+      "query_id": "q7",
+      "template_id": "security_docs",
+      "provider": "exa",
+      "query": "Sourcegraph security policy or incident response plan document",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:44.158592Z"
+    },
+    {
+      "query_id": "q8",
+      "template_id": "security_docs",
+      "provider": "tavily",
+      "query": "\"Sourcegraph\" security policy incident response",
+      "status": "ok",
+      "error": null,
+      "returned": 3,
+      "truncated": false,
+      "searched_at": "2026-11-08T01:40:44.305978Z"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "d_f35ff647c350a53a25f0",
+      "url": "https://github.com/sourcegraph/talks/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 1,
+          "title": "sourcegraph/talks",
+          "returned_url": "https://github.com/sourcegraph/talks/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_57de7edc117d95afd809",
+      "url": "https://conffab.com/presentation/the-future-belongs-to-people-who-can-just-do-things-2/",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 2,
+          "title": "The future belongs to people who can just do things \u2013 Conffab",
+          "returned_url": "https://conffab.com/presentation/the-future-belongs-to-people-who-can-just-do-things-2/"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_4b202b41e478df3748b9",
+      "url": "https://github.com/sourcegraph/handbook/blob/main/content/departments/engineering/demo-day.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q1",
+          "provider": "exa",
+          "rank": 3,
+          "title": "content/departments/engineering/demo-day.md",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/departments/engineering/demo-day.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_8561a5409e50f9a6eb41",
+      "url": "https://www.anygen.io/showcase/sourcegraph-cody/index.html",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Sourcegraph Cody: Status, Features & Migration | AnyGen",
+          "returned_url": "https://www.anygen.io/showcase/sourcegraph-cody/index.html"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_be264202467911549e1a",
+      "url": "https://skywork.ai/slide/en/autonomous-ai-coding-2044314087912210432",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Amp (Sourcegraph): The Future of Autonomous AI Coding",
+          "returned_url": "https://skywork.ai/slide/en/autonomous-ai-coding-2044314087912210432"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_d548d241ea4d8b5b8b61",
+      "url": "https://hackernoon.com/sourcegraph-spins-out-amp-to-chase-the-ai-coding-frontier",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q2",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Sourcegraph Spins Out Amp to Chase the AI Coding Frontier",
+          "returned_url": "https://hackernoon.com/sourcegraph-spins-out-amp-to-chase-the-ai-coding-frontier"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_9003fa6630e3bfa9292e",
+      "url": "https://www.scribd.com/document/896470783/Source-Graph",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 1,
+          "title": "Sourcegraph API Tool Overview | PDF | Computer File | Software Engineering",
+          "returned_url": "https://www.scribd.com/document/896470783/Source-Graph"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_3882a893fa35feca27ec",
+      "url": "https://speakerdeck.com/unicodeveloper/optimizing-developer-workflow-with-sourcegraph",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 2,
+          "title": "Optimizing Developer Workflow with Sourcegraph - Speaker Deck",
+          "returned_url": "https://speakerdeck.com/unicodeveloper/optimizing-developer-workflow-with-sourcegraph"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_7868db333b37055c7514",
+      "url": "https://speakerdeck.com/unicodeveloper/code-search-with-laravel-and-sourcegraph",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q3",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Code Search with Laravel and Sourcegraph - Speaker Deck",
+          "returned_url": "https://speakerdeck.com/unicodeveloper/code-search-with-laravel-and-sourcegraph"
+        },
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "Code Search with Laravel and Sourcegraph",
+          "returned_url": "https://speakerdeck.com/unicodeveloper/code-search-with-laravel-and-sourcegraph"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_689ec3b7d46af1b05f0e",
+      "url": "https://speakerdeck.com/beyang/meteor-1-dot-0-emily-stark-talks-at-sourcegraph",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "Meteor 1.0, Emily Stark (Talks at Sourcegraph)",
+          "returned_url": "https://speakerdeck.com/beyang/meteor-1-dot-0-emily-stark-talks-at-sourcegraph"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_4dab93324ac41a403125",
+      "url": "https://speakerdeck.com/jbenet/ipfs-the-permanent-web-at-sourcegraph",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q4",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "IPFS - The Permanent Web - at Sourcegraph",
+          "returned_url": "https://speakerdeck.com/jbenet/ipfs-the-permanent-web-at-sourcegraph"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_5b15a6da106f817ca1c6",
+      "url": "https://github.com/sourcegraph/handbook/blob/main/content/handbook/index.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 1,
+          "title": "content/handbook/index.md",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/handbook/index.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_bb44f7bea5f663be5490",
+      "url": "https://github.com/sourcegraph/handbook/blob/main/content/index.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 2,
+          "title": "content/index.md",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/index.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_716924d8191fa9de7346",
+      "url": "https://github.com/sourcegraph/handbook/blob/main/content/company-info-and-process/respectful-workplace-policy.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q5",
+          "provider": "exa",
+          "rank": 3,
+          "title": "content/company-info-and-process/respectful-workplace-policy.md at main \u00b7 sourcegraph/handbook",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/company-info-and-process/respectful-workplace-policy.md"
+        },
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "handbook/content/company-info-and-process/respectful-workplace-policy.md at main \u00b7 sourcegraph/handbook \u00b7 GitHub",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/company-info-and-process/respectful-workplace-policy.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_b403c975b08aaa519358",
+      "url": "https://github.com/sourcegraph/handbook/blob/main/content/company-info-and-process/policies/information-security-policy.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "matched",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "handbook/content/company-info-and-process/policies/information-security-policy.md at main \u00b7 sourcegraph/handbook \u00b7 GitHub",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/company-info-and-process/policies/information-security-policy.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": [
+        {
+          "upload": "security-incident-response.md",
+          "role": "reference",
+          "tokens": 32
+        }
+      ]
+    },
+    {
+      "source_id": "d_c68372bb540aae410051",
+      "url": "https://github.com/sourcegraph/handbook/blob/main/content/company-info-and-process/policies/third-party-management-policy.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "matched",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q6",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "handbook/content/company-info-and-process/policies/third-party-management-policy.md at main \u00b7 sourcegraph/handbook \u00b7 GitHub",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/company-info-and-process/policies/third-party-management-policy.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": [
+        {
+          "upload": "security-incident-response.md",
+          "role": "reference",
+          "tokens": 34
+        }
+      ]
+    },
+    {
+      "source_id": "d_3e4d5604fae1196e6581",
+      "url": "https://github.com/sourcegraph/handbook/blob/main/content/departments/security/security-incident-response.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "matched",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 1,
+          "title": "security-incident-response.md",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/departments/security/security-incident-response.md"
+        },
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 1,
+          "title": "handbook/content/departments/security/security-incident-response.md at main \u00b7 sourcegraph/handbook \u00b7 GitHub",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/departments/security/security-incident-response.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": [
+        {
+          "upload": "security-incident-response.md",
+          "role": "reference",
+          "tokens": 1121
+        }
+      ]
+    },
+    {
+      "source_id": "d_c026cd41625d666fb650",
+      "url": "https://github.com/sourcegraph/handbook/blob/main/content/departments/security/security-incident-response-process.md",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 2,
+          "title": "content/departments/security/security-incident-response-process.md",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/departments/security/security-incident-response-process.md"
+        },
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 2,
+          "title": "handbook/content/departments/security/security-incident-response-process.md at main \u00b7 sourcegraph/handbook \u00b7 GitHub",
+          "returned_url": "https://github.com/sourcegraph/handbook/blob/main/content/departments/security/security-incident-response-process.md"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    },
+    {
+      "source_id": "d_1ab364e0325ec8d27722",
+      "url": "https://sourcegraph.notion.site/Security-Incident-Response-Policy-1537d1e4212d4c288f4b4bb4a7118578",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "matched",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q7",
+          "provider": "exa",
+          "rank": 3,
+          "title": "Security Incident Response Policy | Notion",
+          "returned_url": "https://sourcegraph.notion.site/Security-Incident-Response-Policy-1537d1e4212d4c288f4b4bb4a7118578"
+        }
+      ],
+      "mentions_company": true,
+      "matches": [
+        {
+          "upload": "security-incident-response.md",
+          "role": "reference",
+          "tokens": 228
+        },
+        {
+          "upload": "security-incident-response.md",
+          "role": "reference",
+          "tokens": 141
+        }
+      ]
+    },
+    {
+      "source_id": "d_45acb9ce9bd4a73347cd",
+      "url": "https://goauthentik.io/blog/2023-08-11-sourcegraph-security-incident",
+      "fetch_status": "fetched",
+      "failure_reason": null,
+      "comparison_status": "no_match",
+      "truncated": false,
+      "origins": [
+        {
+          "query_id": "q8",
+          "provider": "tavily",
+          "rank": 3,
+          "title": "Sourcegraph security incident: the good, the bad, and the dangers of access tokens | authentik",
+          "returned_url": "https://goauthentik.io/blog/2023-08-11-sourcegraph-security-incident"
+        }
+      ],
+      "mentions_company": true,
+      "matches": []
+    }
+  ],
+  "recorded_at": "2026-11-08T01:40:47.719140Z"
+}
