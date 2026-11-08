@@ -13,6 +13,7 @@ import { SourcesPanel } from "@/components/scan-sources";
 import { LedgerPanel } from "@/components/scan-ledger";
 import { ConfirmButton } from "@/components/confirm-button";
 import { groupByPage, PageMatchRow } from "@/components/page-matches";
+import { LeakTimeline } from "@/components/leak-timeline";
 import { ErrorNote, Spinner, cx } from "@/components/ui";
 
 const STAGES: Record<string, { label: string; doing: string; check?: "public_match" | "local_risk" }> = {
@@ -106,24 +107,20 @@ function Identified({ auto }: { auto: AutoDiscovery }) {
     <p className="mb-8 text-sm text-mute" title={auto.privacy_notice}>
       {auto.status === "ready" ? (
         <>
-          {auto.found_in_files ? (
-            auto.found_in_files.length ? (
+          {(() => {
+            const names = auto.found_in_files ? [...(auto.own_company ? [auto.own_company] : []), ...auto.found_in_files] : auto.companies ?? [];
+            return (
               <>
-                Company in these files: <span className="text-ink">{auto.found_in_files.join(", ")}</span>
+                Searched for{" "}
+                {names.map((n, i) => (
+                  <span key={n}>
+                    {i > 0 && (i === names.length - 1 ? " and " : ", ")}
+                    <span className="text-ink">{n}</span>
+                  </span>
+                ))}
               </>
-            ) : (
-              "No other company named in these files"
-            )
-          ) : (
-            <>
-              Company in these files: <span className="text-ink">{(auto.companies ?? []).join(", ")}</span>
-            </>
-          )}
-          {auto.own_company && (
-            <>
-              {" · "}Also searched for your company, <span className="text-ink">{auto.own_company}</span>
-            </>
-          )}
+            );
+          })()}
         </>
       ) : (
         <span className="text-med">
@@ -179,7 +176,10 @@ export default function ScanDetail() {
     sites ? `Likely leaked on ${sites} ${sites === 1 ? "site" : "sites"}` : "",
     risks ? `${risks} ${risks === 1 ? "risk" : "risks"} in your files` : "",
   ].filter(Boolean).join(" · ");
-  const title = !done ? st.text : st.tone === "bad" && scan.state !== "partial" ? st.text : findings === null ? "Done" : result || "Nothing found";
+  const leakGroups = groupByPage(openFindings.filter((f) => f.kind === "public_exposure"));
+  const files = [...new Set((findings ?? []).map((f) => f.path).filter(Boolean))] as string[];
+  const title = !done ? st.text : st.tone === "bad" && scan.state !== "partial" ? st.text : findings === null ? "Done"
+    : sites ? (files.length === 1 ? files[0] : `${files.length} files`) : result || "Nothing found";
   const reused = (scan.public_discovery as { outcome?: string } | null | undefined)?.outcome === "reused_recent_results";
   const requested = (check: string) => scan.coverage.some((c) => c.scope === "check" && c.id === check && c.status !== "not_requested");
   const drafted = typeof scan.summary.actions_drafted === "number" ? scan.summary.actions_drafted : 0;
@@ -237,6 +237,7 @@ export default function ScanDetail() {
           const note = coverageNote(scan, kind, items.length);
           const searchFailed = scan.coverage.some((c) => c.scope === "check" && c.id === "public_match" && c.reason === "discovery_search_failed");
           if (kind === "public_exposure" && items.length === 0 && (searchFailed || auto?.status === "unavailable")) return null; // explained elsewhere
+          if (kind === "public_exposure" && findings !== null && leakGroups.length > 0) return <LeakTimeline key={kind} groups={leakGroups} />;
           return (
             <section key={kind} className="mb-8">
               <h2 className="mb-3 text-sm font-medium text-ink">{label}</h2>
