@@ -40,7 +40,7 @@ About 2.5 words per second, in plain spoken English. Word counts are in brackets
 
 [SCREEN] Tracefold Scan page.
 
-[VO] "This is Tracefold. It checks if your company's documents or code have ended up on public websites. It also finds secrets, like API keys, inside your files. It can draft takedowns and turn off leaked keys, once someone approves. You can run it on your own computer or on your company's servers, so your private files and data stay with you." [61]
+[VO] "This is Tracefold. It checks if your company's documents or code have ended up on public websites. It also finds secrets, like API keys, inside your files. It can draft takedowns and turn off leaked keys, once someone approves. You can run it on your own computer or in your company's VPC, so your private files and data stay with you." [61]
 
 ### 0:22–0:35 Who it's for
 
