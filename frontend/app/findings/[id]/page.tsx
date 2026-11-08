@@ -15,14 +15,27 @@ import { AgentPrompt, findingPrompt } from "@/components/agent-prompt";
 import { Upload } from "lucide-react";
 import { Button, ErrorNote, Spinner } from "@/components/ui";
 
-function Text({ label, meta, text }: { label: string; meta?: string; text: string | null }) {
+function Text({ label, meta, text, highlight }: { label: string; meta?: string; text: string | null; highlight?: number[] | null }) {
+  const [s, e] = highlight && text ? [Math.max(0, highlight[0]), Math.min(text.length, highlight[1])] : [0, 0];
   return (
     <div className="min-w-0 rounded-card border border-line bg-panel">
       <div className="flex justify-between gap-3 border-b border-line px-4 py-2 text-xs text-faint">
         <span className="truncate">{label}</span>
         {meta && <span className="shrink-0">{meta}</span>}
       </div>
-      <pre className="max-h-72 overflow-auto whitespace-pre-wrap px-4 py-3 font-mono text-[13px] leading-relaxed text-ink-2">{text ?? "Not available."}</pre>
+      <pre className="max-h-72 overflow-auto whitespace-pre-wrap px-4 py-3 font-mono text-[13px] leading-relaxed text-faint">
+        {text == null ? (
+          "Not available."
+        ) : e > s ? (
+          <>
+            {text.slice(0, s)}
+            <mark className="rounded-[3px] bg-crit/20 px-0.5 text-ink">{text.slice(s, e)}</mark>
+            {text.slice(e)}
+          </>
+        ) : (
+          <span className="text-ink-2">{text}</span>
+        )}
+      </pre>
     </div>
   );
 }
@@ -41,7 +54,15 @@ function EvidenceFacts({ ev }: { ev: Evidence }) {
     if (p)
       facts.push([
         "Found by",
-        origin ? `Search · ${origin.provider} ${origin.query_id} · result #${origin.rank}` : p.mode === "discovered" ? "Search" : "Registered source list",
+        origin?.query_id === "remembered"
+          ? "Checked again because an earlier scan of this file found it"
+          : origin?.query_id === "always_check"
+            ? "Your Always check list"
+            : origin
+              ? `${origin.provider === "exa" ? "Exa" : origin.provider === "tavily" ? "Tavily" : origin.provider} search, result #${origin.rank}`
+              : p.mode === "discovered"
+                ? "Search"
+                : "Registered source list",
       ]);
     if (p)
       facts.push([
@@ -157,10 +178,10 @@ export default function FindingPage() {
               ev.availability === "withheld_by_policy"
                 ? "Hidden for this client."
                 : ev.availability === "evidence_unavailable"
-                  ? "Uploaded text is held only in the engine's memory and isn't kept on disk. The engine has restarted since this scan, so the text is gone. Scan the file again to compare side by side."
+                  ? "Uploaded files aren't kept after the engine restarts. Scan the file again to see this side."
                   : ev.local_text
-            } />
-          {isPublic && ev.public && <Text label={ev.public.url} text={ev.public_text} />}
+            } highlight={ev.local_highlight} />
+          {isPublic && ev.public && <Text label={ev.public.url} text={ev.public_text} highlight={ev.public_highlight} />}
         </div>
       )}
 

@@ -6121,6 +6121,34 @@
               }
             ],
             "title": "Public Text"
+          },
+          "local_highlight": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Local Highlight"
+          },
+          "public_highlight": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Public Highlight"
           }
         },
         "type": "object",
