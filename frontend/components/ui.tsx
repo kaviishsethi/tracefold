@@ -207,19 +207,22 @@ export function ImageSlot({
   children,
   src,
   position = "center",
+  dim,
 }: {
   label: string;
   className?: string;
   children?: ReactNode;
   src?: string;
   position?: string;
+  /** 0–1: a grey wash over the image, to mute busy art behind text. */
+  dim?: number;
 }) {
   return (
     <div
       className={cx("image-slot overflow-hidden", !className?.includes("absolute") && "relative", className)}
       role="img"
       aria-label={src ? label : `Placeholder: ${label}`}
-      style={src ? ({ "--slot-img": `url(${src})`, "--slot-pos": position } as React.CSSProperties) : undefined}
+      style={src ? ({ "--slot-img": `url(${src})`, "--slot-pos": position, ...(dim ? { "--slot-dim": dim } : {}) } as React.CSSProperties) : undefined}
     >
       {!src && (
         <span className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1.5 rounded-md bg-black/45 px-2 py-1 text-[11px] text-white/80 backdrop-blur">

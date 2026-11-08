@@ -131,6 +131,7 @@ table {
 /* --slot-img is set by <ImageSlot src>; if the file is missing, the placeholder gradient below shows through. */
 .image-slot {
   background:
+    linear-gradient(rgb(18 22 23 / var(--slot-dim, 0)), rgb(18 22 23 / var(--slot-dim, 0))),
     var(--slot-img, none) var(--slot-pos, center) / cover no-repeat,
     linear-gradient(180deg, rgb(10 10 10 / 0) 40%, rgb(10 10 10 / 0.85) 100%),
     radial-gradient(120% 90% at 50% 105%, #6fc3b5 0%, #2e7f76 22%, #173a3a 48%, #101818 72%, #0c1010 100%);
