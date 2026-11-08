@@ -57,6 +57,50 @@ Long operations always return 202. Don't hold a request (or an MCP tool call) op
 The MCP adapter holds its own token in local config. It must not accept a server URL, token, workspace root or
 network query from the host.
 
+## Remediation actions (approval required)
+
+After every scan the engine drafts remediation **actions** for a person to approve. Nothing is sent or changed
+until someone approves; this keeps the plan's rule that Tracefold never silently sends takedowns or rotates
+credentials ([PLAN.md](../PLAN.md) §"Act").
+
+| Action `kind` | Drafted for | On approval |
+|---|---|---|
+| `takedown_request` | every `public_exposure` finding | Emailed to the host's configured abuse/legal address, or, if the host only takes its own web form, moved to `awaiting_manual_submission` with the form link and the prefilled text. |
+| `disable_aws_key` | every long-term AWS access key ID (`AKIA…`) found in a scanned file | The key is set **Inactive** in IAM using the company's remediation credentials. The leaked key is never used, and no replacement key is created. |
+
+| Endpoint | Purpose | Capability |
+|---|---|---|
+| `GET /workspaces/{ws}/actions?status=&finding_id=&cursor=&limit=` | List actions | `read` |
+| `GET /workspaces/{ws}/actions/{id}` | One action, with the rendered letter (full disclosure only) | `read` |
+| `PATCH /workspaces/{ws}/actions/{id}` | `{subject?, body?, expected_version}`: edit a takedown before it's sent | `approve` |
+| `POST /workspaces/{ws}/actions/{id}/approve` | `{approver: {name, email, title?}, attest_authorized: true, expected_version}`: sign and execute | `approve` |
+| `POST /workspaces/{ws}/actions/{id}/reject` | `{reason, expected_version}` | `approve` |
+| `POST /workspaces/{ws}/actions/{id}/mark-submitted` | `{note?, expected_version}` after filing a host's web form | `approve` |
+
+Action `status`: `drafted` → (`awaiting_manual_submission` →) `submitted` for takedowns, `completed` for keys;
+`failed` (can be approved again) or `rejected`. **`submitted` is not removed.** `removal_observed` becomes true only
+after a later fresh public scan no longer finds the passage at that URL.
+
+`approve` is a separate capability. `tracefold add-client` grants every capability by default, so give assistants
+an explicit `--caps` list without it (the MCP adapter setup already does). Takedown letters contain only the public
+URL, the copied text as it appears there (secret-shaped values masked) and the company's details. They never
+include the private file's name or other private text. Under `minimal` disclosure the letter and excerpt are
+withheld and AWS key IDs are always shown masked.
+
+Approval errors (409): `remediation_profile_missing`, `no_takedown_contact`, `aws_remediation_not_configured`,
+`invalid_state`, `version_conflict`. Missing attestation is 422 `attestation_required`.
+
+Operator setup (CLI only):
+
+```bash
+uv run tracefold set-remediation-profile ws_demo --company "Northwind Relay, Inc." --reply-to legal@northwind.example
+uv run tracefold add-takedown-contact ws_demo forum.example --email abuse@forum.example
+uv run tracefold add-takedown-contact ws_demo pastes.example --form-url https://pastes.example/legal/removal
+```
+
+There is no built-in directory of host contacts: an operator adds each one. `GET /capabilities` reports
+`remediation.takedown_delivery` (`outbox`, `resend`, `resend_not_configured`) and `remediation.aws_key_disable`.
+
 ## Vocabulary to render (never invent "safe")
 
 | Field | Values | Show as |

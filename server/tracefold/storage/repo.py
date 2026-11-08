@@ -15,6 +15,7 @@ def _row(r: sqlite3.Row | None) -> dict[str, Any] | None:
 JSON_COLS = {
     "excludes", "capabilities", "sources", "files", "checks", "public_sources", "stages",
     "coverage", "budget", "versions", "errors", "summary", "data", "payload_summary",
+    "target", "draft", "approver", "result",
 }
 
 
@@ -326,6 +327,61 @@ class Repo:
 
     def all_ledger(self) -> list[dict]:
         return [_decode(dict(r)) for r in self.db.conn().execute("SELECT * FROM ledger ORDER BY at")]
+
+    # ---------------- remediation ----------------
+    def put_remediation_profile(self, ws_id: str, company_name: str, reply_to: str) -> None:
+        with self.db.tx() as c:
+            c.execute("INSERT INTO remediation_profiles(workspace_id,company_name,reply_to,updated_at) VALUES (?,?,?,?) "
+                      "ON CONFLICT(workspace_id) DO UPDATE SET company_name=excluded.company_name, "
+                      "reply_to=excluded.reply_to, updated_at=excluded.updated_at", (ws_id, company_name, reply_to, iso(now())))
+
+    def get_remediation_profile(self, ws_id: str) -> dict | None:
+        return _row(self.db.conn().execute("SELECT * FROM remediation_profiles WHERE workspace_id=?", (ws_id,)).fetchone())
+
+    def put_takedown_contact(self, ws_id: str, host: str, method: str, address: str) -> None:
+        with self.db.tx() as c:
+            c.execute("INSERT INTO takedown_contacts(workspace_id,host,method,address,updated_at) VALUES (?,?,?,?,?) "
+                      "ON CONFLICT(workspace_id,host) DO UPDATE SET method=excluded.method, address=excluded.address, "
+                      "updated_at=excluded.updated_at", (ws_id, host, method, address, iso(now())))
+
+    def get_takedown_contact(self, ws_id: str, host: str) -> dict | None:
+        return _row(self.db.conn().execute("SELECT * FROM takedown_contacts WHERE workspace_id=? AND host=?",
+                                           (ws_id, host)).fetchone())
+
+    def insert_action_if_absent(self, rec: dict) -> bool:
+        cols = list(rec)
+        vals = [dumps(rec[k]) if k in JSON_COLS and not isinstance(rec[k], str) else rec[k] for k in cols]
+        with self.db.tx() as c:
+            cur = c.execute(f"INSERT OR IGNORE INTO actions({','.join(cols)}) VALUES ({','.join('?' * len(cols))})", vals)
+            return cur.rowcount == 1
+
+    def get_action(self, action_id: str) -> dict | None:
+        return _decode(_row(self.db.conn().execute("SELECT * FROM actions WHERE id=?", (action_id,)).fetchone()))
+
+    def list_actions(self, ws_id: str, status: str | None, finding_id: str | None, after: str | None, limit: int) -> list[dict]:
+        q, args = "SELECT * FROM actions WHERE workspace_id=?", [ws_id]
+        if status:
+            q += " AND status=?"
+            args.append(status)
+        if finding_id:
+            q += " AND finding_id=?"
+            args.append(finding_id)
+        if after:
+            q += " AND id > ?"
+            args.append(after)
+        q += " ORDER BY id LIMIT ?"
+        args.append(limit)
+        return [_decode(dict(r)) for r in self.db.conn().execute(q, args)]
+
+    def update_action(self, action_id: str, expected_version: int, **fields) -> bool:
+        """Version-guarded update; bumps the version. Returns False if someone else changed the action first."""
+        fields["updated_at"] = iso(now())
+        sets = ", ".join(f"{k}=?" for k in fields)
+        vals = [dumps(v) if k in JSON_COLS and not isinstance(v, str) else v for k, v in fields.items()]
+        with self.db.tx() as c:
+            cur = c.execute(f"UPDATE actions SET {sets}, version = version + 1 WHERE id=? AND version=?",
+                            (*vals, action_id, expected_version))
+            return cur.rowcount == 1
 
     # ---------------- retention ----------------
     def prune_scans(self, keep: int, older_than_iso: str) -> int:
