@@ -118,7 +118,7 @@ export function Mission() {
         </Reveal>
 
         <Reveal delay={120}>
-          <ImageSlot label="Closing art" src={LANDING_ART.pointillist} position="center" className="flex aspect-[16/9] items-center justify-center rounded-[24px] border border-line">
+          <ImageSlot label="Closing art" src={LANDING_ART.verification} position="center" className="flex aspect-[16/9] items-center justify-center rounded-[24px] border border-line">
             <LinkButton href="/scan">Run your first check</LinkButton>
           </ImageSlot>
         </Reveal>
