@@ -61,11 +61,17 @@ def parse_stage(ctx: "ScanContext") -> None:
 # ---------------- public exposure ----------------
 def public_discovery_stage(ctx: "ScanContext") -> None:
     """Search the approved public query plan. Inputs come only from the stored plan, never from ctx.docs."""
+    if (ctx.scan.get("public_discovery") or {}).get("automatic"):
+        from ..discovery.automatic import prepare
+        if not prepare(ctx):
+            return
     ctx.engine.discovery.search(ctx)
 
 
 def public_retrieval_stage(ctx: "ScanContext") -> None:
     pd = ctx.scan.get("public_discovery")
+    if pd and pd.get("automatic") and not pd.get("query_plan_id"):
+        return
     if pd and pd.get("mode") == "snapshot":
         ctx.engine.discovery.replay(ctx)
     elif pd:
@@ -79,6 +85,8 @@ def _doc_location(doc: ParsedDoc, start: int, end: int) -> dict:
 
 
 def public_match_stage(ctx: "ScanContext") -> None:
+    if (ctx.scan.get("public_discovery") or {}).get("automatic") and not ctx.scan["public_discovery"].get("query_plan_id"):
+        return  # retain the actual identity failure; zero sources is not a completed public check
     snap = ctx.public_snapshot or {"id": None, "sources": []}
     by_id = {s["source_id"]: s for s in snap["sources"]}
     found = 0

@@ -305,6 +305,7 @@ class ScanRequest(Strict):
     checks: list[Check] = Field(min_length=1, max_length=2)
     public_sources: PublicSourcesIn | None = None
     public_discovery: PublicDiscoveryIn | None = None
+    automatic_discovery: bool = False
     review_profile: Literal["data_exposure_v1"] = "data_exposure_v1"
     model_review: bool = True
 
