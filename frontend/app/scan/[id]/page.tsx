@@ -102,7 +102,7 @@ function Identified({ auto }: { auto: AutoDiscovery }) {
     <p className="mb-8 text-sm text-mute" title={auto.privacy_notice}>
       {auto.status === "ready" ? (
         <>
-          Searched for <span className="text-ink">{(auto.companies ?? []).join(", ")}</span>
+          Company in these files: <span className="text-ink">{(auto.companies ?? []).join(", ")}</span>
         </>
       ) : (
         <span className="text-med">No company name found in the files, so public pages weren&apos;t searched.</span>
@@ -176,6 +176,8 @@ export default function ScanDetail() {
         GROUPS.filter(([, , check]) => requested(check)).map(([kind, label]) => {
           const items = (findings ?? []).filter((f) => f.kind === kind);
           const note = coverageNote(scan, kind, items.length);
+          const searchFailed = scan.coverage.some((c) => c.scope === "check" && c.id === "public_match" && c.reason === "discovery_search_failed");
+          if (kind === "public_exposure" && items.length === 0 && searchFailed) return null; // the sources panel explains why
           return (
             <section key={kind} className="mb-8">
               <h2 className="mb-3 text-sm font-medium text-ink">{label}</h2>

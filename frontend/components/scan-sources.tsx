@@ -19,6 +19,17 @@ export function SourcesPanel({ workspaceId, scan }: { workspaceId: string; scan:
   if (error) return <ErrorNote error={error} />;
   if (!page) return <Loading />;
   const d = page.discovery;
+  const unconfigured = !!d && d.provider_queries.length > 0 && d.provider_queries.every((q) => `${q.error ?? ""} ${q.status}`.includes("not_configured"));
+  if (unconfigured)
+    return (
+      <section className="rounded-card border border-med/30 bg-med/[0.06] px-4 py-3.5 text-sm">
+        <p className="font-medium text-ink">Public search isn&apos;t set up</p>
+        <p className="mt-1 text-mute">
+          Add <code className="font-mono text-[13px] text-ink-2">EXA_API_KEY</code> or <code className="font-mono text-[13px] text-ink-2">TAVILY_API_KEY</code> to{" "}
+          <code className="font-mono text-[13px] text-ink-2">server/.env</code>, restart the engine, and scan again.
+        </p>
+      </section>
+    );
   const rows = [...page.items].sort(
     (a, b) => Number(b.comparison_status === "matched") - Number(a.comparison_status === "matched") || b.match_count - a.match_count,
   );
@@ -44,7 +55,6 @@ export function SourcesPanel({ workspaceId, scan }: { workspaceId: string; scan:
               </li>
             ))}
           </ul>
-          <p className="text-xs text-faint">{d.note}</p>
         </div>
       )}
       {rows.length === 0 ? (
