@@ -684,3 +684,17 @@ def test_clear_all_forgets_remembered_pages(env):
     n = len(prov.searches())
     discover(env, env.upload({"roadmap.md": fx("roadmap.md")})["input_id"], p["query_plan_id"])
     assert len(prov.searches()) > n
+
+
+def test_evidence_includes_highlight_offsets(env):
+    Providers(results=default_results()).install(env)
+    p = approved_plan(env)
+    s = discover(env, env.upload({"roadmap.md": fx("roadmap.md")})["input_id"], p["query_plan_id"])
+    f = next(f for f in env.findings(s["scan_id"]) if f["kind"] == "public_exposure")
+    eid = f["latest"]["evidence"][0]["evidence_id"]
+    ev = env.client.get(f"/v1/workspaces/ws_a/evidence/{eid}", headers=env.h()).json()
+    ls, le = ev["local_highlight"]
+    ps, pe = ev["public_highlight"]
+    norm = lambda t: " ".join(t.split()).lower()
+    assert norm(ev["local_text"][ls:le]) == norm(ev["public_text"][ps:pe])   # same passage on both sides
+    assert le - ls > 40

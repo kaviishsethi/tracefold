@@ -338,6 +338,8 @@ export interface Evidence {
   availability: "available" | "evidence_unavailable" | "withheld_by_policy" | null;
   local_text: string | null;
   public_text: string | null;
+  local_highlight?: number[] | null;
+  public_highlight?: number[] | null;
 }
 
 export interface Observation {

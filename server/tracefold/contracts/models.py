@@ -428,6 +428,9 @@ class EvidenceOut(BaseModel):
     availability: Literal["available", "evidence_unavailable", "withheld_by_policy"] | None = None
     local_text: str | None = None
     public_text: str | None = None
+    # [start, end) of the matched passage inside local_text / public_text, for highlighting
+    local_highlight: list[int] | None = None
+    public_highlight: list[int] | None = None
 
 
 class ObservationOut(BaseModel):

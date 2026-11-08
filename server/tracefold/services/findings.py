@@ -21,6 +21,9 @@ if TYPE_CHECKING:
 MASK = "•"
 
 
+CONTEXT = 80  # characters of surrounding text shown on each side of a cited span
+
+
 def mask_text(text: str, spans: list[list[int]], base: int) -> str:
     chars = list(text)
     for s, e in spans:
@@ -63,6 +66,13 @@ class FindingService:
                 out.local_text = local
                 out.public_text = self._public_text(d)
                 out.availability = "available" if local is not None else "evidence_unavailable"
+                s, e = loc["start"], loc["end"]
+                if local is not None:
+                    out.local_highlight = [s - max(0, s - CONTEXT), e - max(0, s - CONTEXT)]
+                pub = d.get("public")
+                if out.public_text is not None and pub:
+                    ps = max(0, pub["start"] - CONTEXT)
+                    out.public_highlight = [pub["start"] - ps, min(pub["end"], ps + len(out.public_text)) - ps]
         return out
 
     def _local_text(self, ev: dict) -> str | None:
@@ -99,7 +109,7 @@ class FindingService:
         else:
             doc = parse_text(cf)
         s, e = loc["start"], loc["end"]
-        cs, ce = max(0, s - 80), min(len(doc.text), e + 80)
+        cs, ce = max(0, s - CONTEXT), min(len(doc.text), e + CONTEXT)
         return mask_text(doc.text[cs:ce], d.get("mask_spans", []), cs)
 
     def _public_text(self, d: dict) -> str | None:
@@ -109,7 +119,7 @@ class FindingService:
         text = self.e.retrieval.blobs.read(d["public_blob"])
         if text is None:
             return None
-        return text[max(0, pub["start"] - 80): pub["end"] + 80]
+        return text[max(0, pub["start"] - CONTEXT): pub["end"] + CONTEXT]
 
     def obs_out(self, o: dict, disclosure: Disclosure) -> ObservationOut:
         d = o["data"]
