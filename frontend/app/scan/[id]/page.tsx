@@ -16,6 +16,18 @@ import { groupByPage, PageMatchRow } from "@/components/page-matches";
 import { LeakTimeline } from "@/components/leak-timeline";
 import { ErrorNote, Spinner, cx } from "@/components/ui";
 
+const QUIET_REASONS = new Set(["some_sources_failed_or_truncated", "no_candidate_sources_found", "some_searches_failed"]);
+const REASON_TEXT: Record<string, string> = {
+  discovery_search_failed: "search didn't work, so only remembered and listed pages were checked",
+  company_not_identified: "no company name was found in the files",
+  model_not_installed: "the local model isn't installed",
+  invalid_identity_output: "the local model's answer couldn't be read",
+  identity_step_failed: "something went wrong reading the company name",
+  no_public_source_retrieved: "no public page could be downloaded",
+  some_files_not_reviewed: "some files couldn't be read",
+  discovery_budget_exhausted: "the scan's request budget ran out before searching",
+};
+
 const STAGES: Record<string, { label: string; doing: string; check?: "public_match" | "local_risk" }> = {
   parse: { label: "Read files", doing: "Extracting text from each file" },
   public_discovery: { label: "Search", doing: "Looking for public pages that mention the company", check: "public_match" },
@@ -179,19 +191,23 @@ export default function ScanDetail() {
   const leakGroups = groupByPage(openFindings.filter((f) => f.kind === "public_exposure"));
   const files = [...new Set((findings ?? []).map((f) => f.path).filter(Boolean))] as string[];
   const title = !done ? st.text : st.tone === "bad" && scan.state !== "partial" ? st.text : findings === null ? "Done"
-    : sites ? (files.length === 1 ? files[0] : `${files.length} files`) : result || "Nothing found";
+    : sites ? (files.length === 1 ? files[0] : files.length === 2 ? `${files[0]} and ${files[1]}` : `${files[0]} and ${files.length - 1} more`) : result || "Nothing found";
   const reused = (scan.public_discovery as { outcome?: string } | null | undefined)?.outcome === "reused_recent_results";
   const requested = (check: string) => scan.coverage.some((c) => c.scope === "check" && c.id === check && c.status !== "not_requested");
   const drafted = typeof scan.summary.actions_drafted === "number" ? scan.summary.actions_drafted : 0;
   const auto = scan.summary.automatic_discovery as AutoDiscovery | undefined;
-  const problems = scan.coverage.filter((c) => c.status === "partial" || c.status === "failed");
+  // Only checks that actually didn't run as asked. Individual result pages that were long or unreachable aren't
+  // something to act on, so they're left out.
+  const problems = scan.coverage.filter(
+    (c) => c.scope === "check" && (c.status === "partial" || c.status === "failed") && !QUIET_REASONS.has(c.reason ?? ""),
+  );
 
   return (
     <div>
       <Crumbs trail={[["/scan", "Scans"]]} />
       <div>
         <H1
-          sub={`${source(scan)} · ${relativeTime(scan.created_at)}${scan.recheck_of ? " · recheck" : ""}${reused ? " · reused recent search results" : ""}${scan.state === "partial" ? " · some checks didn't finish" : ""}`}
+          sub={`${source(scan)} · ${relativeTime(scan.created_at)}${scan.recheck_of ? " · recheck" : ""}${reused ? " · reused recent search results" : ""}${problems.length || scan.errors.length ? " · some checks didn't finish" : ""}`}
           right={
             done ? (
               <>
@@ -272,8 +288,9 @@ export default function ScanDetail() {
           <ul className="mt-3 space-y-1">
             {problems.map((c) => (
               <li key={c.scope + c.id}>
-                {c.id}: {c.status}
-                {c.reason ? ` (${c.reason.replaceAll("_", " ")})` : ""}
+                {c.id === "public_match" ? "Public check" : c.id === "local_risk" ? "Risk review in your files" : c.id}
+                {": "}
+                {REASON_TEXT[c.reason ?? ""] ?? (c.reason ?? c.status).replaceAll("_", " ")}
               </li>
             ))}
             {scan.errors.map((e) => (

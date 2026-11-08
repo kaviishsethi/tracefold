@@ -1,10 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none">
   <title>Tracefold</title>
-  <style>
-    svg { color: #161616; }
-    @media (prefers-color-scheme: dark) { svg { color: #eef2f1; } }
-  </style>
-  <g stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+  <rect width="256" height="256" rx="60" fill="#000"/>
+  <g transform="translate(128 128) scale(0.68) translate(-128 -128)" stroke="#fff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
     <path d="M32 32H224V184L168 224V184H88V224L32 184Z"/>
     <path d="M32 32L88 80V184M224 32L168 80V184"/>
   </g>
