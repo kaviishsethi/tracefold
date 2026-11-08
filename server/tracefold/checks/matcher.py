@@ -147,3 +147,94 @@ def segment_coverage(text: str, m: Match, policy: str) -> float:
     s, e = segment_bounds(text, m.local_start, m.local_end)
     total = len(tokenize(text[s:e], policy)) or 1
     return round(min(1.0, m.tokens / total), 3)
+
+
+# ---------------- near-duplicate paragraphs (lightly edited copies) ----------------
+FUZZY_VERSION = "similar_v1"
+
+
+@dataclass(frozen=True)
+class SimilarConfig:
+    shingle: int = 3            # word 3-grams survive edits (a word swapped every few words) that break exact runs
+    min_tokens: int = 30        # only paragraphs long enough to be distinctive
+    min_containment: float = 0.4  # unrelated security policies and same-topic rewrites measured at 7% or less
+    min_shared: int = 10
+
+
+SIMILAR = SimilarConfig()
+
+
+@dataclass
+class Similar:
+    local_start: int
+    local_end: int
+    public_start: int
+    public_end: int
+    containment: float   # share of the paragraph's word 5-grams found on the page
+    tokens: int          # tokens in the paragraph
+    normalized: str      # normalized paragraph text (anchor material; private)
+
+
+def _paragraphs(text: str) -> list[tuple[int, int]]:
+    out, pos = [], 0
+    for block in re.split(r"\n\s*\n", text):
+        start = text.find(block, pos)
+        if block.strip():
+            out.append((start, start + len(block)))
+        pos = start + len(block)
+    return out
+
+
+def find_similar(local_text: str, public_text: str, exact: list[Match], cfg: SimilarConfig = SIMILAR) -> list[Similar]:
+    """Paragraphs most of whose wording appears on the page with small changes (reordered clauses, a few words
+    swapped). Paragraphs already covered by an exact match are skipped, so each passage is reported once."""
+    k = cfg.shingle
+    P = tokenize(public_text, "text_v1")
+    if len(P) < k:
+        return []
+    page: dict[tuple[str, ...], list[int]] = {}
+    for j in range(len(P) - k + 1):
+        page.setdefault(tuple(t.norm for t in P[j:j + k]), []).append(j)
+    boiler = boilerplate_shingles("text_v1")
+    out: list[Similar] = []
+    for s, e in _paragraphs(local_text):
+        toks = tokenize(local_text[s:e], "text_v1")
+        if len(toks) < cfg.min_tokens:
+            continue
+        covered = sum(m.tokens for m in exact if m.local_start < e and m.local_end > s)
+        if covered >= 0.4 * len(toks):  # mostly reported by the exact matcher already
+            continue
+        shs = [tuple(t.norm for t in toks[i:i + k]) for i in range(len(toks) - k + 1)]
+        uniq = set(shs)
+        if sum(1 for x in uniq if x in boiler) / len(uniq) >= 0.5:
+            continue
+        hits = [x for x in uniq if x in page]
+        containment = len(hits) / len(uniq)
+        if len(hits) < cfg.min_shared or containment < cfg.min_containment:
+            continue
+        # Locate the copy: the densest window of matching positions on the page.
+        positions = sorted(j for x in hits for j in page[x])
+        span = len(toks) * 2
+        best = (0, positions[0], positions[0])
+        lo = 0
+        for hi in range(len(positions)):
+            while positions[hi] - positions[lo] > span:
+                lo += 1
+            if hi - lo + 1 > best[0]:
+                best = (hi - lo + 1, positions[lo], positions[hi])
+        _, j0, j1 = best
+        out.append(Similar(local_start=s + toks[0].start, local_end=s + toks[-1].end,
+                           public_start=P[j0].start, public_end=P[min(j1 + k - 1, len(P) - 1)].end,
+                           containment=round(containment, 3), tokens=len(toks),
+                           normalized=" ".join(t.norm for t in toks)))
+    return out
+
+
+def containment(local_text: str, public_text: str, cfg: SimilarConfig = SIMILAR) -> float:
+    """Share of the local text's word 3-grams that also appear in the public text."""
+    k = cfg.shingle
+    a = [t.norm for t in tokenize(local_text, "text_v1")]
+    b = [t.norm for t in tokenize(public_text, "text_v1")]
+    A = {tuple(a[i:i + k]) for i in range(len(a) - k + 1)}
+    B = {tuple(b[i:i + k]) for i in range(len(b) - k + 1)}
+    return len(A & B) / len(A) if A else 0.0

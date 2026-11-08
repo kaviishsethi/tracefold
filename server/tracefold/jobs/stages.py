@@ -90,6 +90,7 @@ def public_match_stage(ctx: "ScanContext") -> None:
     snap = ctx.public_snapshot or {"id": None, "sources": []}
     by_id = {s["source_id"]: s for s in snap["sources"]}
     found = 0
+    similar_found = 0
     skipped = 0
     compared: list[tuple[str, str]] = []  # (path, source_id) pairs with complete comparison
     per_source: dict[str, int] = {}
@@ -138,7 +139,42 @@ def public_match_stage(ctx: "ScanContext") -> None:
                                        "requires human context.",
                     meta={"fresh": fresh},
                 ))
+            if policy != "text_v1":
+                continue
+            for m in matcher.find_similar(doc.text, text, res.matches):
+                similar_found += 1
+                per_source[sid] = per_source.get(sid, 0) + 1
+                loc = _doc_location(doc, m.local_start, m.local_end)
+                pct = int(m.containment * 100)
+                ev = {
+                    "kind": "public_match", "location": loc, "file_sha256": doc.file.sha256, "file_kind": doc.kind,
+                    "public": {"source_id": sid, "url": src["url"], "start": m.public_start, "end": m.public_end,
+                               "retrieved_at": src.get("retrieved_at"), "freshness": src.get("freshness", "fresh"),
+                               "snapshot_id": snap["id"], "mode": src.get("mode", "seeded"),
+                               "provider": src.get("provider"), "discovery_run_id": src.get("discovery_run_id"),
+                               "discovery_origins": src.get("discovery_origins")},
+                    "public_blob": src.get("content_hash"), "matched_tokens": None, "segment_coverage": m.containment,
+                    "normalization": "text_v1", "similarity": m.containment,
+                }
+                fresh = src.get("freshness", "fresh") == "fresh"
+                ctx.candidates.append(Proposed(
+                    kind=FindingKind.public_exposure.value, check_id=Check.public_match.value,
+                    check_version=matcher.FUZZY_VERSION, rule_id=None, origin=Origin.matcher.value, file=doc.file,
+                    anchor=_anchor_hash("similar:" + m.normalized),
+                    title="Edited copy found publicly" if fresh else "Edited copy in cached public evidence",
+                    evidence=[ev], source_id=sid,
+                    claim=f"About {pct}% of this paragraph's wording appears on the page with small changes.",
+                    conditions="The overlap was observed at the cited URL at the retrieval time shown.",
+                    uncertainty="Similar wording can be coincidence or paraphrase; compare the two passages before acting.",
+                    suggested_fix="Compare the two passages. If this is your text republished without permission, restrict or "
+                                  "remove the public copy, contact the host or owner, then recheck the source.",
+                    verification_step="Run a fresh public recheck of this source.",
+                    severity="medium",
+                    severity_rationale="Edited copies are reported at medium until a person confirms them.",
+                    meta={"fresh": fresh, "similar": True},
+                ))
     ctx.summary["public_matches"] = found
+    ctx.summary["public_similar"] = similar_found
     ctx.summary["boilerplate_skipped"] = skipped
     ctx.summary["public_compared"] = compared
     ctx.summary["public_source_matches"] = per_source

@@ -7,6 +7,8 @@ search is never evidence that a public copy disappeared.
 """
 from __future__ import annotations
 
+import os
+from datetime import datetime
 from typing import TYPE_CHECKING
 from urllib.parse import urlsplit
 
@@ -17,7 +19,7 @@ from ..contracts.models import (
 )
 from ..errors import ApiError, not_found
 from ..policy.auth import Principal
-from ..util import iso, new_id, now
+from ..util import canonical, iso, new_id, now, sha256
 from . import identity, presets
 from .urls import canonicalize, check_url, source_id_for
 
@@ -32,6 +34,16 @@ RUN_NOTE = ("Discovery shows what the approved queries returned at search time. 
 # Fetch errors that are budget/deadline exhaustion (shown as skipped_limit, never retried).
 LIMIT_ERRORS = {"request_budget_exhausted", "deadline_exceeded", "worker_timeout"}
 SEARCH_RESPONSE_BYTES = 1024 * 1024
+
+
+REUSE_HOURS = float(os.environ.get("TRACEFOLD_SEARCH_REUSE_HOURS", "24"))
+
+
+def _age_hours(ts: str) -> float:
+    try:
+        return (now() - datetime.fromisoformat(ts.replace("Z", "+00:00"))).total_seconds() / 3600
+    except (TypeError, ValueError):
+        return float("inf")
 
 
 def _other(provider: str) -> str:
@@ -258,13 +270,18 @@ class DiscoveryService:
         data, plan, ws_id = d["run"]["data"], d["plan"], ctx.scan["workspace_id"]
         lim = self.e.settings.limits
         rules = self.e.repo.get_site_rules(ws_id)
+        # Page memory: the pages this exact set of files was compared against before.
+        doc_key = sha256(canonical(sorted(doc.file.sha256 for doc in ctx.docs)))[:32] if ctx.docs else None
+        d["doc_key"] = doc_key
+        remembered = self.e.repo.recall_pages(ws_id, doc_key) if doc_key else []
+        reuse = bool(remembered) and min(_age_hours(r["last_seen_at"]) for r in remembered) < REUSE_HOURS
         # Reserve extraction capacity before issuing searches.
         remaining = lim.max_provider_requests - ctx.budget.get("provider_requests", 0)
         allowed = max(0, remaining - lim.max_public_pages)
         searches = plan["plan"]["searches"]
-        runnable = searches[:allowed]
+        runnable = [] if reuse else searches[:allowed]  # same files scanned recently: no new searches
         for q in data["provider_queries"][len(runnable):]:
-            q["status"], q["error"] = "skipped", "budget_reserved_for_extraction"
+            q["status"], q["error"] = "skipped", "reused_recent_results" if reuse else "budget_reserved_for_extraction"
         results: dict[str, dict] = {}
         if runnable:
             req = {"op": "search",
@@ -320,6 +337,23 @@ class DiscoveryService:
                     by_sid[sid] = self._new_source(sid, item, origin, q["provider"], canon)
                     cand.update(disposition="source", source_id=sid)
                 data["candidates"].append(cand)
+        # Remembered pages: all of them when reusing recent results, otherwise the ones that matched before (so a
+        # takedown can be confirmed even if search stops ranking the page). Fetched directly first; the provider that
+        # extracted them last time is the fallback.
+        for i, row in enumerate(remembered, 1):
+            if not reuse and not row["matched"]:
+                continue
+            url = row["url"]
+            if check_url(url) or self._never((urlsplit(url).hostname or "").removeprefix("www."), rules["never"]):
+                continue
+            sid = source_id_for(ws_id, url)
+            origin = {"query_id": "remembered", "provider": "direct", "rank": i, "title": row.get("title"), "returned_url": url}
+            if sid in by_sid:
+                by_sid[sid]["discovery_origins"].append(origin)
+                continue
+            by_sid[sid] = self._new_source(sid, {"url": url, "title": row.get("title")}, origin, "direct", url)
+            by_sid[sid]["fallback_provider"] = row.get("provider") if row.get("provider") not in (None, "direct") else None
+            data["remembered_count"] = data.get("remembered_count", 0) + 1
         # Pages the company asked to check every time, fetched directly even when search found nothing or failed.
         for i, url in enumerate(rules["always"], 1):
             if self._never((urlsplit(url).hostname or "").removeprefix("www."), rules["never"]):
@@ -336,12 +370,14 @@ class DiscoveryService:
         data["unique_count"] = len(fetchable)
         ran = [q for q in data["provider_queries"] if q["status"] in ("ok", "failed")]
         ok = [q for q in ran if q["status"] == "ok"]
-        if not ran and data["provider_queries"]:
+        if reuse:
+            data["outcome"] = "reused_recent_results"
+        elif not ran and data["provider_queries"]:
             data["outcome"] = "budget_exhausted"   # nothing was searched, so nothing failed either
         elif not ok:
             data["outcome"] = "search_failed"
-        elif not fetchable:
-            data["outcome"] = "no_candidates"
+        elif not [s for s in fetchable if s["discovery_origins"][0]["query_id"] not in ("remembered", "always_check")]:
+            data["outcome"] = "no_candidates"  # about what search returned; remembered and listed pages are still checked
         elif len(ok) < len(data["provider_queries"]):
             data["outcome"] = "partial_search"
         else:
@@ -349,7 +385,7 @@ class DiscoveryService:
         data["state"] = "fetching"
         st = next(s for s in ctx.stages if s["name"] == "public_discovery")
         st["detail"] = data["outcome"]
-        status = (CoverageStatus.failed if not ok else
+        status = (CoverageStatus.complete if reuse else CoverageStatus.failed if not ok else
                   CoverageStatus.complete if len(ok) == len(data["provider_queries"]) else CoverageStatus.partial)
         ctx.cover("stage", "public_discovery", status, None if status == CoverageStatus.complete else data["outcome"],
                   searches=len(data["provider_queries"]), searches_ok=len(ok), returned=data["returned_count"],
@@ -399,7 +435,7 @@ class DiscoveryService:
                 break
             batch = []
             for s in queue:
-                prov = s["discovery_provider"] if attempt == 1 else _other(s["extraction_provider"] or s["discovery_provider"])
+                prov = s["discovery_provider"] if attempt == 1 else (s.get("fallback_provider") or _other(s["extraction_provider"] or s["discovery_provider"]))
                 batch.append({"source_id": s["source_id"], "url": s["canonical_url"], "provider": prov})
             req = self.e.retrieval.build_request(ctx, batch)
             req["limits"]["max_requests"] = remaining
@@ -531,6 +567,11 @@ class DiscoveryService:
                 s["comparison_status"] = ComparisonStatus.incomplete.value  # no match in the retrieved portion only
             else:
                 s["comparison_status"] = ComparisonStatus.no_match.value
+        if d.get("doc_key"):
+            self.e.repo.remember_pages(ctx.scan["workspace_id"], d["doc_key"], [
+                {"url": s["canonical_url"], "provider": s.get("extraction_provider"), "title": s.get("title"),
+                 "matched": s["match_count"] > 0}
+                for s in d["sources"] if s["fetch_status"] == FetchStatus.fetched.value and s.get("canonical_url")])
         d["run"]["data"]["state"] = "done"
         d["run"]["finished_at"] = iso(now())
         self._persist(ctx)

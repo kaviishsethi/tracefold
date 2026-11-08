@@ -88,7 +88,10 @@ export function PageMatchRow({ g }: { g: PageMatch }) {
           {g.items.map((f) => (
             <li key={f.finding_id}>
               <Link href={`/findings/${f.finding_id}`} className="flex items-center justify-between gap-3 py-2 pl-9 pr-4 text-[13px] text-ink-2 hover:bg-panel-2 hover:text-ink">
-                <span>{passageLabel(f)}</span>
+                <span>
+                  {passageLabel(f)}
+                  {f.latest?.title?.startsWith("Edited") && <span className="ml-2 text-xs text-faint">edited</span>}
+                </span>
                 {f.status !== "open" && <span className="text-xs text-local">No longer found</span>}
               </Link>
             </li>

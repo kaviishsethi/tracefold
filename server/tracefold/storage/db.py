@@ -253,6 +253,19 @@ MIGRATIONS: list[str] = [
         PRIMARY KEY (workspace_id, kind, value)
     )
     """,
+    # 5: pages each document was compared against, so repeat scans can skip search and recheck known pages
+    """
+    CREATE TABLE page_memory (
+        workspace_id TEXT NOT NULL REFERENCES workspaces(id),
+        doc_key TEXT NOT NULL,
+        url TEXT NOT NULL,
+        provider TEXT,
+        title TEXT,
+        matched INTEGER NOT NULL DEFAULT 0,
+        last_seen_at TEXT NOT NULL,
+        PRIMARY KEY (workspace_id, doc_key, url)
+    )
+    """,
 ]
 
 
