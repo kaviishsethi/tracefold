@@ -25,6 +25,7 @@ class RuleInfo:
 RULES: dict[str, RuleInfo] = {
     "py_sensitive_logging": RuleInfo("py_sensitive_logging", "1", "python", "Potential sensitive value written to logs"),
     "secret_literal": RuleInfo("secret_literal", "1", "text, code, docx", "Apparent embedded secret"),
+    "gitleaks_secret": RuleInfo("gitleaks_secret", "1", "text, code, docx", "Apparent embedded secret (Gitleaks rule)"),
     "doc_confidential_marker": RuleInfo("doc_confidential_marker", "1", "text, docx", "Document marked confidential"),
     "doc_personal_identifier": RuleInfo("doc_personal_identifier", "1", "text, docx", "Apparent personal identifier"),
 }
@@ -263,6 +264,71 @@ def secret_literals(doc: ParsedDoc) -> list[Hit]:
     for m in _ASSIGN.finditer(doc.text):
         add("assigned_secret", m.start(2), m.end(2), m.group(1)[-60:])
     return hits
+
+
+def gitleaks_hits(doc: ParsedDoc, leaks: list, existing: list[Hit]) -> tuple[list[Hit], int]:
+    """Turn sandboxed Gitleaks leads into hits. Overlaps with a built-in ``secret_literal`` hit are merged into
+    that hit (its masking widens to cover the Gitleaks span) instead of producing a duplicate finding.
+    Returns (new hits, number of leads that could not be located in our own text)."""
+    from .gitleaks import locate
+
+    builtin = [h for h in existing if h.rule_id == "secret_literal"]
+    taken: set[tuple[int, int]] = set()
+    out: list[Hit] = []
+    unlocated = 0
+    for leak in leaks:
+        sp = locate(doc.text, doc.line_starts, leak, taken)
+        if sp is None:
+            unlocated += 1
+            continue
+        vstart, vend = sp
+        value = doc.text[vstart:vend]
+        if _PLACEHOLDER.search(value):
+            continue
+        taken.add(sp)
+        merged = False
+        for h in builtin + out:
+            if h.start < vend and vstart < h.end:
+                if value not in h.secret_values:
+                    h.secret_values.append(value)
+                if [vstart, vend] not in h.mask_spans:
+                    h.mask_spans.append([vstart, vend])
+                h.meta.setdefault("gitleaks_rules", [])
+                if leak.rule not in h.meta["gitleaks_rules"]:
+                    h.meta["gitleaks_rules"].append(leak.rule)
+                merged = True
+                break
+        if merged:
+            continue
+        ls = doc.text.rfind("\n", 0, vstart) + 1
+        le = doc.text.find("\n", vend)
+        le = len(doc.text) if le < 0 else le
+        line_masked = doc.text[ls:vstart] + "<value>" + doc.text[vend:le]
+        out.append(Hit(
+            rule_id="gitleaks_secret", start=vstart, end=vend,
+            anchor=f"gitleaks|{leak.rule}|" + _norm_anchor(line_masked),
+            title=RULES["gitleaks_secret"].title,
+            claim=f"A value matching the Gitleaks rule {leak.rule!r} is embedded in this file [{_mask_value(value)}].",
+            conditions="Risk arises if this file is shared, committed to a repository others can read, or published, and the value "
+                       "is a real, active credential.",
+            missing_context="Whether the value is real, active, or scoped is unknown; neither Tracefold nor its sandboxed Gitleaks "
+                            "run tests credentials.",
+            suggested_fix="Move the value to a secret manager or environment configuration excluded from source control; if it "
+                          "may have been exposed, have its owner rotate it.",
+            verification_step="Re-run the recheck for this finding and confirm the value no longer appears; separately confirm "
+                              "rotation with the credential's owner if exposure is possible.",
+            severity="high",
+            severity_rationale="An embedded live credential can grant direct access to the system it belongs to.",
+            uncertainty="Format- and entropy-based detection by Gitleaks; the value may be a test value or already revoked.",
+            mask_spans=[[vstart, vend]], secret_values=[value],
+            meta={"pattern": leak.rule, "detector": "gitleaks", **({"entropy": leak.entropy} if leak.entropy is not None else {})},
+        ))
+    return out, unlocated
+
+
+def check_version(rule_id: str, gitleaks_version: str | None = None) -> str:
+    base = f"{RULES_VERSION}/{rule_id}@{RULES[rule_id].version}"
+    return f"{base}+{gitleaks_version}" if rule_id == "gitleaks_secret" else base
 
 
 # ---------------- document checks ----------------

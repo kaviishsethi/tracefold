@@ -47,6 +47,8 @@ class Engine:
         from .analysis.review import ModelReviewer
         self.retrieval = RetrievalService(self)
         self.reviewer = ModelReviewer(self)
+        from .checks.gitleaks import GitleaksScanner
+        self.secret_scanner = GitleaksScanner(self.settings)
 
     # ---------- lifecycle ----------
     def startup(self) -> None:

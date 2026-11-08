@@ -50,6 +50,13 @@ class Settings:
     retrieval_in_process: bool = False  # tests may run the worker in-process with a mock transport
     fixture_root: Path | None = field(default_factory=lambda: Path(os.environ["TRACEFOLD_FIXTURES"]).resolve()
                                       if os.environ.get("TRACEFOLD_FIXTURES") else None)
+    # Gitleaks secret scanning (sandboxed, offline). auto = use when installed; off; required = partial coverage if missing.
+    gitleaks: str = field(default_factory=lambda: os.environ.get("TRACEFOLD_GITLEAKS", "auto"))
+    gitleaks_path: str | None = field(default_factory=lambda: os.environ.get("TRACEFOLD_GITLEAKS_PATH") or None)
+    gitleaks_sha256: str | None = field(default_factory=lambda: os.environ.get("TRACEFOLD_GITLEAKS_SHA256") or None)
+    gitleaks_timeout_seconds: float = 30.0
+    gitleaks_allow_unsandboxed: bool = field(
+        default_factory=lambda: os.environ.get("TRACEFOLD_GITLEAKS_ALLOW_UNSANDBOXED") == "1")
     limits: Limits = field(default_factory=Limits)
 
     @property

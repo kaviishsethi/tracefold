@@ -31,6 +31,7 @@ unexpected `Host`/`Origin` headers.
 
 | Service | How to enable | Without it |
 |---|---|---|
+| Gitleaks secret leads | `brew install gitleaks`. Runs offline inside a network/write sandbox with an empty environment; `TRACEFOLD_GITLEAKS` (`auto`, `required` or `off`). See [`docs/GITLEAKS.md`](../docs/GITLEAKS.md). | Built-in secret rules only; `gitleaks_secret` rule coverage reports `gitleaks_not_installed`. |
 | Local model review | Install Ollama, pull a model, set `TRACEFOLD_OLLAMA_MODEL` (default `qwen2.5:7b-instruct`) and optionally `TRACEFOLD_OLLAMA_URL` (must be loopback). Set `OLLAMA_NO_CLOUD=1` for the Ollama service. | Rule findings are published with `risk_review: unavailable`. |
 | Exa / Tavily extraction | `EXA_API_KEY` / `TAVILY_API_KEY` in the environment or in `server/.env` (gitignored, loaded by `tracefold` commands); manifest entries with `"provider": "exa"` or `"tavily"` — see `examples/manifest.live.example.json`. | Those sources report `provider_not_configured`. `direct` and `fixture` providers still work. |
 
@@ -52,7 +53,7 @@ tracefold/
   jobs/       single runner, pipeline, stages
   inputs/     upload parsing, safe filesystem reader, Git change capture, in-memory capture registry
   parsing/    text/code and DOCX extraction with stable locations
-  checks/     exact matcher and deterministic rules
+  checks/     exact matcher, deterministic rules, sandboxed Gitleaks adapter
   analysis/   Ollama client, model review, evidence validation, output scrubbing
   retrieval/  isolated worker (direct/Exa/Tavily/fixture), snapshots, blob store
   gateway/    the only outbound HTTP path, with a redacted ledger

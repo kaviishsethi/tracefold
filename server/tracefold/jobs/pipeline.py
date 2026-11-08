@@ -150,7 +150,7 @@ def run_scan(engine: "Engine", scan: dict) -> None:
 
     ctx = ScanContext(engine=engine, scan=scan, capture=capture, deadline=deadline, summary=dict(scan.get("summary") or {}))
     ctx.stages = [{"name": n, "status": "pending", "detail": None} for n in plan_stages(scan)]
-    ctx.versions = {"engine": ENGINE_VERSION, **S.versions()}
+    ctx.versions = {"engine": ENGINE_VERSION, **S.versions(engine)}
     for chk in (Check.public_match, Check.local_risk):
         if chk.value not in ctx.checks:
             ctx.cover("check", chk.value, CoverageStatus.not_requested)

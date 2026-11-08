@@ -43,9 +43,9 @@ def _outcome(ctx: "ScanContext", final: ScanState) -> tuple[RecheckOutcome, str]
     if target is not None:
         old_ver = target["data"]["check_version"]
         from ..checks import matcher
-        from ..checks.rules import RULES, RULES_VERSION
+        from ..checks.rules import RULES, check_version
         if f["kind"] == FindingKind.local_risk.value and f["rule_id"] in RULES:
-            new_ver = f"{RULES_VERSION}/{f['rule_id']}@{RULES[f['rule_id']].version}"
+            new_ver = check_version(f["rule_id"], ctx.engine.secret_scanner.check_version())
         else:
             new_ver = matcher.MATCHER_VERSION
         if old_ver != new_ver:
